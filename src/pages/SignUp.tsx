@@ -11,30 +11,17 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
-// min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required("Enter your firstname"),
-  lastName: Yup.string().required("enter your lastname"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup
-    .string()
-    .min(5)
-    .matches(passwordRules, { message: "Password must include letters and numbers" })
-    .required("Enter your password"),
-  confirmPassword: Yup
-    .string()
-    .oneOf([Yup.ref("password"), undefined], "Passwords must match")
-    .required("Confirm your password"),
-});
-const SignUp = () => {
-  const initialValues = {
-    firstName: "dddd",
-    lastName: "d",
+import { SignUpSchema } from "../schemas";
+const initialValues = {
+    firstName: "peter",
+    lastName: "adedokun",
     email: "d@gmail.com",
-    password: "kkkk",
-    confirmPassword: "ssssss",
+    password: "Peter12",
+    confirmPassword: "Peter12",
   };
+const SignUp = () => {
+    const [showPassword, setShowPassword] = React.useState<boolean>(false)
+    const handleClick = () => setShow(!show)
     const handleSubmit = (values: typeof initialValues) => {
       console.log(values);
       console.log("sucessfull");
@@ -51,7 +38,7 @@ const SignUp = () => {
       <Box mx="15px" rowGap={"20px"}>
         <Formik
           initialValues={initialValues}
-          validationSchema={validationSchema}
+          validationSchema={SignUpSchema}
           onSubmit={ handleSubmit}
           //   onSubmit={handleSubmit}
         >
@@ -141,6 +128,7 @@ const SignUp = () => {
                 colorScheme="blue"
                 width="100%"
                 onClick={() => handleSubmit()}
+                mt={5}
               >
                 Button
               </Button>
