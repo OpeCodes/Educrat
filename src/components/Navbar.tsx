@@ -13,6 +13,13 @@ import {
   DrawerContent,
   useDisclosure,
   DrawerCloseButton,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
@@ -49,6 +56,7 @@ const links = [
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: modalOpen , onOpen: onModalOpen, onClose:onModalClose } = useDisclosure();
   return (
     <Stack>
       <Flex
@@ -92,7 +100,7 @@ const Navbar = () => {
           ))}
         </Flex>
         <Flex align={"center"} columnGap={5} color="white">
-          <Text cursor={"pointer"}>
+          <Text cursor={"pointer"} onClick={()=> onModalOpen()}>
             <FiSearch fontSize={"25px"} />
           </Text>
           <Box position="relative">
@@ -175,6 +183,24 @@ const Navbar = () => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
+      <Modal onClose={onModalClose} size={"full"} isOpen={modalOpen}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {/* <Lorem count={2} /> */}
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi,
+            atque? Sunt cum nobis accusamus impedit, vero asperiores amet
+            voluptate dolore explicabo quam fugit nam, in alias reiciendis
+            architecto? Quisquam aliquid voluptatum cupiditate nobis in.
+            Similique animi ipsa itaque aut!
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onModalClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Stack>
   );
 };
