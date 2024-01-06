@@ -18,6 +18,7 @@ import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../assets/backimage.webp";
 import { SignUpSchema } from "../schemas";
+import {Link} from "react-router-dom"
 const initialValues = {
   firstName: "peter",
   lastName: "adedokun",
@@ -37,7 +38,7 @@ const SignUp = () => {
     console.log("sucessfull");
   };
   return (
-    <Stack >
+    <Stack>
       
       <Grid templateColumns={{lg: "repeat(2, 1fr)"}} columnGap={5}>
       <GridItem w='100%' bg={"#140342"} maxHeight={"100vh"}  >
@@ -210,6 +211,10 @@ const SignUp = () => {
               </Flex>
             )}
           </Formik>
+          <Flex columnGap={1}>
+            <Text>Already have an account?</Text>
+            <Text fontWeight={"600"} color={"#00FF84"}  as={Link} to="/sign-in">Login Here</Text>
+          </Flex>
         </Box>
         </GridItem>
       </Grid>

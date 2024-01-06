@@ -4,7 +4,7 @@ const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
 export const SignUpSchema = Yup.object().shape({
   firstName: Yup.string().required("Enter your firstname"),
-  lastName: Yup.string().required("enter your lastname"),
+  lastName: Yup.string().required("Enter your lastname"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .min(5)
@@ -15,4 +15,14 @@ export const SignUpSchema = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), undefined], "Passwords must match")
     .required("Confirm your password"),
+});
+
+export const SignInSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string()
+    .min(5)
+    .matches(passwordRules, {
+      message: "Password must include letters and numbers",
+    })
+    .required("Enter your password"),
 });

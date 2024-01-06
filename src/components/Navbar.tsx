@@ -14,7 +14,7 @@ import {
   useDisclosure,
   DrawerCloseButton,
 } from "@chakra-ui/react";
-import { NavLink,Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { FiSearch } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
@@ -124,6 +124,8 @@ const Navbar = () => {
             color="#ffffff"
             variant="link"
             display={{ base: "none", md: "flex" }}
+            as={Link}
+            to={"/sign-in"}
           >
             Log In
           </Button>
