@@ -14,7 +14,7 @@ import {
   useDisclosure,
   DrawerCloseButton,
 } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { FiSearch } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
@@ -136,6 +136,8 @@ const Navbar = () => {
             borderColor={"white"}
             borderWidth={2}
             _hover={{ background: "#140342", color: "white" }}
+            as={Link}
+            to={"/sign-up"}
           >
             Sign Up
           </Button>

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Error, Home } from "./pages";
+import { Error, Home,SignUp } from "./pages";
 import { HomeLayout } from "./components";
 import "./App.css";
 
@@ -15,6 +15,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/sign-up",
+    element: <SignUp/>
+  }
 ]);
 
 function App() {
