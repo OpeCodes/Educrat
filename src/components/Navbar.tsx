@@ -219,6 +219,7 @@ const Navbar = () => {
                         color: isActive ? "blue" : "black",
                       };
                     }}
+                    onClick={onClose}
                   >
                     {name}
                   </NavLink>
