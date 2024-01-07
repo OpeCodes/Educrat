@@ -20,6 +20,9 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,Input
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
@@ -56,7 +59,11 @@ const links = [
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: modalOpen , onOpen: onModalOpen, onClose:onModalClose } = useDisclosure();
+  const {
+    isOpen: modalOpen,
+    onOpen: onModalOpen,
+    onClose: onModalClose,
+  } = useDisclosure();
   return (
     <Stack>
       <Flex
@@ -100,7 +107,7 @@ const Navbar = () => {
           ))}
         </Flex>
         <Flex align={"center"} columnGap={5} color="white">
-          <Text cursor={"pointer"} onClick={()=> onModalOpen()}>
+          <Text cursor={"pointer"} onClick={() => onModalOpen()}>
             <FiSearch fontSize={"25px"} />
           </Text>
           <Box position="relative">
@@ -185,20 +192,30 @@ const Navbar = () => {
       </Drawer>
       <Modal onClose={onModalClose} size={"full"} isOpen={modalOpen}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
+        <ModalContent pt={20}>
+          <ModalHeader>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                color="gray.300"
+                fontSize="1.2em"
+              >
+                 <FiSearch fontSize={"25px"} />
+              </InputLeftElement>
+              <Input placeholder="What do you want to learn?"  variant='flushed'/>
+              <InputRightElement pb={10}>
+              <Box bg="white" >
+          <ModalCloseButton   borderRadius={"100%"} />
+        </Box>
+              </InputRightElement>
+            </InputGroup>
+          </ModalHeader>
           <ModalBody>
-            {/* <Lorem count={2} /> */}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi,
-            atque? Sunt cum nobis accusamus impedit, vero asperiores amet
-            voluptate dolore explicabo quam fugit nam, in alias reiciendis
-            architecto? Quisquam aliquid voluptatum cupiditate nobis in.
-            Similique animi ipsa itaque aut!
+                <Text>Popular Right now</Text>
           </ModalBody>
-          <ModalFooter>
+          {/* <ModalFooter>
             <Button onClick={onModalClose}>Close</Button>
-          </ModalFooter>
+          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </Stack>
