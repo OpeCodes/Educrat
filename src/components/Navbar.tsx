@@ -21,7 +21,8 @@ import {
   ModalCloseButton,
   InputGroup,
   InputLeftElement,
-  InputRightElement,Input,
+  InputRightElement,
+  Input,
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
@@ -175,18 +176,57 @@ const Navbar = () => {
           <DrawerHeader
             borderBottomWidth="1px"
             display={"flex"}
-            justifyContent={"space-between"}
+            columnGap={"10px"}
+            fontSize={"15px"}
           >
-            <Text>Basic side</Text>
+            <Text as={Link} to="/sign-in">
+              Login
+            </Text>
+            <Text as={Link} to="/sign-up">
+              Sign Up
+            </Text>
             <Box display={{ base: "block", md: "none" }}>
               <DrawerCloseButton bg="white" borderRadius={"100%"} />
             </Box>
           </DrawerHeader>
 
-          <DrawerBody>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+          <DrawerBody
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"space-between"}
+          >
+            <Box>
+              {links.map(({ id, name, href }) => (
+                <Box
+                  paddingX={"10px"}
+                  borderRadius={5}
+                  paddingY={"2px"}
+                  //   _hover={{ background: "blue" ,}}
+                  transition={"all"}
+                  my={13}
+                  key={id}
+                >
+                  <NavLink
+                    to={href}
+                    style={({ isActive }) => {
+                      return {
+                        fontWeight: isActive ? "bold" : "",
+                        color: isActive ? "blue" : "black",
+                      };
+                    }}
+                  >
+                    {name}
+                  </NavLink>
+                </Box>
+              ))}
+            </Box>
+            <Flex rowGap={"25px"} flexDirection={"column"}>
+              <Text>Call Us</Text>
+              <Text>08145885175</Text>
+              <Text>Abule oja</Text>
+              <Text>Yaba lagos</Text>
+              <Text>adedokunpeter11@gmail.com</Text>
+            </Flex>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
@@ -200,18 +240,21 @@ const Navbar = () => {
                 color="gray.300"
                 fontSize="1.2em"
               >
-                 <FiSearch fontSize={"25px"} />
+                <FiSearch fontSize={"25px"} />
               </InputLeftElement>
-              <Input placeholder="What do you want to learn?"  variant='flushed'/>
+              <Input
+                placeholder="What do you want to learn?"
+                variant="flushed"
+              />
               <InputRightElement pb={10}>
-              <Box bg="white" >
-          <ModalCloseButton   borderRadius={"100%"} />
-        </Box>
+                <Box bg="white">
+                  <ModalCloseButton borderRadius={"100%"} />
+                </Box>
               </InputRightElement>
             </InputGroup>
           </ModalHeader>
           <ModalBody>
-                <Text>Popular Right now</Text>
+            <Text>Popular Right now</Text>
           </ModalBody>
           {/* <ModalFooter>
             <Button onClick={onModalClose}>Close</Button>
