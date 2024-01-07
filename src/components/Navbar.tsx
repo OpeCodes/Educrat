@@ -23,6 +23,7 @@ import {
   InputLeftElement,
   InputRightElement,
   Input,
+  Divider,
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
@@ -224,6 +225,7 @@ const Navbar = () => {
                 </Box>
               ))}
             </Box>
+            <Divider orientation='horizontal' />
             <Flex rowGap={"25px"} flexDirection={"column"}>
               <Text>Call Us</Text>
               <Text>08145885175</Text>
