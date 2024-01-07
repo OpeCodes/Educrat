@@ -43,7 +43,7 @@ const links = [
   {
     id: 2,
     name: "Course",
-    href: "/course",
+    href: "/courses",
   },
   {
     id: 3,
@@ -237,7 +237,7 @@ const Navbar = () => {
             <FaFacebookF  />
             <FaTwitter />
             <FaInstagram />
-          <  FaLinkedinIn />
+            <FaLinkedinIn />
             </Flex>
 
           </DrawerBody>

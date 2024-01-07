@@ -16,8 +16,8 @@ import {
 import { Formik } from "formik";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import backgroundImg from "../assets/backimage.webp";
-import { SignInSchema } from "../schemas";
+import backgroundImg from "../../assets/backimage.webp";
+import { SignInSchema } from "../../schemas";
 import { Link } from "react-router-dom";
 const initialValues = {
   email: "d@gmail.com",
