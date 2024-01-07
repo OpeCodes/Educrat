@@ -17,12 +17,11 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   InputGroup,
   InputLeftElement,
-  InputRightElement,Input
+  InputRightElement,Input,
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
@@ -59,6 +58,7 @@ const links = [
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const {
     isOpen: modalOpen,
     onOpen: onModalOpen,
