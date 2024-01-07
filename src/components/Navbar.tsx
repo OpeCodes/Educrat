@@ -29,6 +29,10 @@ import logo from "../assets/logo.svg";
 import { FiSearch } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
+import { FaFacebookF } from "react-icons/fa";
+import { FaTwitter , FaInstagram , FaLinkedinIn } from "react-icons/fa6";
+
+
 const links = [
   {
     id: 1,
@@ -227,6 +231,13 @@ const Navbar = () => {
               <Text>Yaba lagos</Text>
               <Text>adedokunpeter11@gmail.com</Text>
             </Flex>
+            <Flex mb="15px" columnGap={7} cursor={"pointer"}>
+            <FaFacebookF  />
+            <FaTwitter />
+            <FaInstagram />
+          <  FaLinkedinIn />
+            </Flex>
+
           </DrawerBody>
         </DrawerContent>
       </Drawer>
