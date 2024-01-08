@@ -33,7 +33,6 @@ const Login = () => {
   const { isLoading } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const handleSubmit = (values: typeof initialValues) => {
-    console.log(values);
     dispatch(loginUser(values));
   };
   return (

@@ -39,17 +39,10 @@ const SignUp = () => {
     setShowConfirmPassword(!showConfirmPassword);
   const { isLoading } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
-
-  // const { user, isLoading } = useSelector((store) => store.user);
-
   const handleSubmit = (values: typeof initialValues) => {
     const { firstName, lastName, username, email, password } = values;
-    // toast.success("User Updated");
     dispatch(registerUser({ firstName, lastName, username, email, password }));
   };
-
-  console.log(isLoading);
-
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
