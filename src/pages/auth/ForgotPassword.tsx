@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 const initialValues = {
   email: "",
 };
-const ResetPassword = () => {
+const ForgotPassword = () => {
   const { isLoading } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const handleSubmit = (values: typeof initialValues) => {
@@ -134,4 +134,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ForgotPassword;

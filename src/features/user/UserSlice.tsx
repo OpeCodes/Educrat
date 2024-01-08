@@ -3,6 +3,7 @@ import { customFetch } from "../../utils/axios";
 import { toast } from "react-toastify";
 interface UserState {
   isLoading: boolean;
+  verificationStatus: "idle" | "loading" | "succeeded" | "failed",
   user: null; // Replace 'any' with the actual type of your user data
 }
 
@@ -10,11 +11,16 @@ interface UserState {
 //   user: null; // Replace 'any' with the actual type of your user data
 // }
 
-const initialState: UserState = {
+// const initialState: UserState = {
+//   isLoading: false,
+//   user: null,
+//   verificationStatus: string,
+// };
+const initialState = {
   isLoading: false,
   user: null,
+  verificationStatus: "idle",
 };
-
 export const registerUser = createAsyncThunk(
   "user/loginUser",
   async (user, thunkAPI) => {
@@ -53,6 +59,19 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+export const verifyAccountThunk = createAsyncThunk(
+  "user/verifyAccount", async(user, thunkAPI) =>{
+    try {
+      const resp = await customFetch.post("auth/verification", user);
+      return resp.data
+    } catch (error: any) {
+      toast.error(error.response.data.error)  
+      return thunkAPI.rejectWithValue(error.response.data.error);
+      
+    }
+  }
+)
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -94,7 +113,19 @@ const userSlice = createSlice({
       .addCase(resetPassword.rejected, (state) => {
         // toast.error(action.payload);
         state.isLoading = false;
-      });
+      })
+      .addCase(verifyAccountThunk.pending, (state) => {
+        state.verificationStatus = 'loading';
+      })
+      .addCase(verifyAccountThunk.fulfilled, (state) => {
+        state.verificationStatus = 'succeeded';
+        // Handle successful verification if needed
+      })
+      .addCase(verifyAccountThunk.rejected, (state) => {
+        state.verificationStatus = 'failed';
+        // Handle rejection or errors
+      })
+  
   },
 });
 

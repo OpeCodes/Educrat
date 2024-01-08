@@ -1,5 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Error, SignUp, Login, ResetPassword } from "./pages/auth";
+import {
+  Error,
+  SignUp,
+  Login,
+  ForgotPassword ,
+  VerifyAccount,
+} from "./pages/auth";
 import { HomeLayout } from "./components";
 import "./App.css";
 import Home from "./pages/Home";
@@ -18,8 +24,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/courses",
-        element: <Courses/>
-      }
+        element: <Courses />,
+      },
     ],
   },
   {
@@ -32,8 +38,12 @@ const router = createBrowserRouter([
   },
   {
     path: "reset-password",
-    element: <ResetPassword />,
-  }
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/verify-account/:code/:token",
+    element: <VerifyAccount />,
+  },
 ]);
 
 function App() {
