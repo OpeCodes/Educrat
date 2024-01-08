@@ -67,7 +67,7 @@ const userSlice = createSlice({
         state.user = action.payload;
         toast.success("Successfull ");
       })
-      .addCase(registerUser.rejected, (state) => {
+      .addCase(registerUser.rejected, (state,action) => {
         // toast.error(action.payload);
         state.isLoading = false;
       })

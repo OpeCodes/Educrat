@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Error, SignUp, Login } from "./pages/auth";
+import { Error, SignUp, Login, ResetPassword } from "./pages/auth";
 import { HomeLayout } from "./components";
 import "./App.css";
 import Home from "./pages/Home";
@@ -30,6 +30,10 @@ const router = createBrowserRouter([
     path: "sign-in",
     element: <Login />,
   },
+  {
+    path: "reset-password",
+    element: <ResetPassword />,
+  }
 ]);
 
 function App() {

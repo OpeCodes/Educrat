@@ -48,7 +48,7 @@ const Login = () => {
           mx={{ base: "15px", lg: "20px" }}
           display="flex"
           flexDirection={"column"}
-          justifyContent={{base: "none", md: "center"}}
+          justifyContent={{ base: "none", md: "center" }}
         >
           <Box textAlign="center" mt={5}>
             <Text fontSize={"4xl"} fontWeight={"bold"}>
@@ -127,7 +127,17 @@ const Login = () => {
                       </Text>
                     )}
                   </FormControl>
-
+                  <Button
+                    color={"#00FF84"}
+                    as={Link}
+                    to="/reset-password"
+                    variant="link"
+                    display={"flex"}
+                    fontSize="14px"
+                    justifyContent={"end"}
+                  >
+                    Forgot Password?
+                  </Button>
                   <Button
                     bg={"#00FF84"}
                     isLoading={isLoading}
