@@ -41,6 +41,18 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const resetPassword = createAsyncThunk(
+  "user/resetPassword",
+  async (user, thunkAPI) => {
+    try {
+      const resp = await customFetch.post("auth/password/forgot", user);
+      return resp.data;
+    } catch (error: any) {
+      toast.error(error.response.data.error);
+      return thunkAPI.rejectWithValue(error.response.data.error);
+    }
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -55,7 +67,7 @@ const userSlice = createSlice({
         state.user = action.payload;
         toast.success("Successfull ");
       })
-      .addCase(registerUser.rejected, (state,) => {
+      .addCase(registerUser.rejected, (state) => {
         // toast.error(action.payload);
         state.isLoading = false;
       })
@@ -67,12 +79,23 @@ const userSlice = createSlice({
         state.user = action.payload;
         toast.success("Successfull ");
       })
-      .addCase(loginUser.rejected, (state, ) => {
+      .addCase(loginUser.rejected, (state) => {
+        // toast.error(action.payload);
+        state.isLoading = false;
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+        toast.success("Successfull ");
+      })
+      .addCase(resetPassword.rejected, (state) => {
         // toast.error(action.payload);
         state.isLoading = false;
       });
   },
-
 });
 
 export default userSlice.reducer;
