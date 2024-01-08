@@ -4,7 +4,8 @@ import { HomeLayout } from "./components";
 import "./App.css";
 import Home from "./pages/Home";
 import { Courses } from "./pages/course";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +36,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer position="top-right" />
     </>
   );
 }

@@ -19,17 +19,21 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
 import { SignInSchema } from "../../schemas";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser } from "../../features/user/UserSlice";
 const initialValues = {
-  email: "d@gmail.com",
+  credential: "d@gmail.com",
   password: "Peter12",
 };
-const handleSubmit = (values: typeof initialValues) => {
-  console.log(values);
-  console.log("sucessfull");
-};
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
+  const dispatch = useDispatch();
+  const handleSubmit = (values: typeof initialValues) => {
+    console.log(values);
+    dispatch(loginUser(values));
+  };
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
@@ -66,21 +70,21 @@ const Login = () => {
                   pb={5}
                 >
                   <FormControl isRequired>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Username or email</FormLabel>
                     <Input
-                      type="email"
+                      type="text"
                       variant="filled"
-                      placeholder="Email"
-                      value={values.email}
-                      name="email"
+                      placeholder="username or email"
+                      value={values.credential}
+                      name="credential"
                       onChange={handleChange}
                     />
-                    {errors.email && (
+                    {errors.credential && (
                       <Text
                         style={{ color: "red", marginTop: 5 }}
                         fontSize="14px"
                       >
-                        {errors.email}
+                        {errors.credential}
                       </Text>
                     )}
                   </FormControl>
@@ -138,7 +142,12 @@ const Login = () => {
                 </Flex>
               )}
             </Formik>
-            <Flex columnGap={1} flexWrap={"wrap"} textAlign="center" justify={"center"}>
+            <Flex
+              columnGap={1}
+              flexWrap={"wrap"}
+              textAlign="center"
+              justify={"center"}
+            >
               <Text>Don't have an account yet?</Text>
               <Text
                 fontWeight={"600"}

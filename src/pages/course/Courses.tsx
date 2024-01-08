@@ -48,6 +48,7 @@ const courses = [
   },
 ];
 const Courses = () => {
+    
   return (
     <Stack>
       <Box padding={{ base: 5, lg: 20 }}>
