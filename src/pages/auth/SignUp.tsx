@@ -46,9 +46,9 @@ const SignUp = () => {
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
-        <GridItem w="100%" bg={"#140342"} maxHeight={"100vh"}>
-          <Box boxSize="sm" display={{ base: "none", lg: "block" }}>
-            <Image src={backgroundImg} alt="Dan Abramov" />
+        <GridItem w="100%"    >
+          <Box boxSize="sm" w="50%" h="100vh" bg={"#140342"} display={{ base: "none", lg: "block" }} position={"fixed"}>
+            <Image src={backgroundImg} alt="opeyemi" />
           </Box>
         </GridItem>
         <GridItem height="100vh" mx={{ base: "15px", lg: "20px" }}>
@@ -68,8 +68,6 @@ const SignUp = () => {
                 <Flex
                   rowGap={"5px"}
                   flexDirection="column"
-                  maxHeight={{ base: "100%", lg: "530px" }}
-                  overflowY={"auto"}
                   pb={5}
                 >
                   <FormControl isRequired>
@@ -244,7 +242,7 @@ const SignUp = () => {
                 </Flex>
               )}
             </Formik>
-            <Flex columnGap={1}>
+            <Flex columnGap={1} mt={"-3"} justify={"center"} pb={4}>
               <Text>Already have an account?</Text>
               <Text
                 fontWeight={"600"}

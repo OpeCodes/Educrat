@@ -38,9 +38,16 @@ const Login = () => {
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
-        <GridItem w="100%" bg={"#140342"} maxHeight={"100vh"}>
-          <Box boxSize="sm" display={{ base: "none", lg: "block" }}>
-            <Image src={backgroundImg} alt="Dan Abramov" />
+        <GridItem w="100%">
+          <Box
+            boxSize="sm"
+            w="50%"
+            h="100vh"
+            bg={"#140342"}
+            display={{ base: "none", lg: "block" }}
+            position={"fixed"}
+          >
+            <Image src={backgroundImg} alt="opeyemi" />
           </Box>
         </GridItem>
         <GridItem

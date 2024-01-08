@@ -67,7 +67,7 @@ const userSlice = createSlice({
         state.user = action.payload;
         toast.success("Successfull ");
       })
-      .addCase(registerUser.rejected, (state,action) => {
+      .addCase(registerUser.rejected, (state) => {
         // toast.error(action.payload);
         state.isLoading = false;
       })
@@ -89,7 +89,7 @@ const userSlice = createSlice({
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
-        toast.success("Successfull ");
+        toast.success("password reset link sent");
       })
       .addCase(resetPassword.rejected, (state) => {
         // toast.error(action.payload);

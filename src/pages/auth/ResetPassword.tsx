@@ -26,14 +26,25 @@ const ResetPassword = () => {
   const { isLoading } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const handleSubmit = (values: typeof initialValues) => {
-    dispatch(resetPassword(values));
+    // dispatch(resetPassword(values));
+    // const data = await dispatch(
+    //     changePassword({ data: { oldPassword, newPassword }, token })
+    //   );
+    // changePassword({ data: { oldPassword, newPassword }, token })
   };
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
-        <GridItem w="100%" bg={"#140342"} maxHeight={"100vh"}>
-          <Box boxSize="sm" display={{ base: "none", lg: "block" }}>
-            <Image src={backgroundImg} alt="Dan Abramov" />
+        <GridItem w="100%">
+          <Box
+            boxSize="sm"
+            w="50%"
+            h="100vh"
+            bg={"#140342"}
+            display={{ base: "none", lg: "block" }}
+            position={"fixed"}
+          >
+            <Image src={backgroundImg} alt="opeyemi" />
           </Box>
         </GridItem>
         <GridItem
@@ -45,9 +56,11 @@ const ResetPassword = () => {
         >
           <Box textAlign="center" mt={5}>
             <Text fontSize={"4xl"} fontWeight={"bold"}>
-            Request Password Reset
+              Request Password Reset
             </Text>
-            <Text fontSize={"18px"}>Enter your email to receive reset instructions.</Text>
+            <Text fontSize={"18px"}>
+              Enter your email to receive reset instructions.
+            </Text>
           </Box>
           <Box>
             <Formik
@@ -104,7 +117,7 @@ const ResetPassword = () => {
               )}
             </Formik>
             <Flex columnGap={1} justify={"center"}>
-              <Text>Don't haave an account?</Text>
+              <Text>Don't have an account?</Text>
               <Text
                 fontWeight={"600"}
                 color={"#00FF84"}
