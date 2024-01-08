@@ -5,6 +5,7 @@ import {
   Login,
   ForgotPassword ,
   VerifyAccount,
+  ResetPassword,
 } from "./pages/auth";
 import { HomeLayout } from "./components";
 import "./App.css";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/verify-account/:code/:token",
     element: <VerifyAccount />,
+  },
+  {
+    path: "/reset-password/:code/:token",
+    element: <ResetPassword />,
   },
 ]);
 

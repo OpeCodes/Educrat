@@ -47,8 +47,8 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const resetPassword = createAsyncThunk(
-  "user/resetPassword",
+export const forgotPassword = createAsyncThunk(
+  "user/forgotPassword",
   async (user, thunkAPI) => {
     try {
       const resp = await customFetch.post("auth/password/forgot", user);
@@ -64,6 +64,18 @@ export const verifyAccountThunk = createAsyncThunk(
   "user/verifyAccount", async(user, thunkAPI) =>{
     try {
       const resp = await customFetch.post("auth/verification", user);
+      return resp.data
+    } catch (error: any) {
+      toast.error(error.response.data.error)  
+      return thunkAPI.rejectWithValue(error.response.data.error);
+      
+    }
+  }
+)
+export const resetPasswordThunk = createAsyncThunk(
+  "user/resetPassword", async(user, thunkAPI) =>{
+    try {
+      const resp = await customFetch.post("auth/password/reset", user);
       return resp.data
     } catch (error: any) {
       toast.error(error.response.data.error)  
@@ -102,18 +114,33 @@ const userSlice = createSlice({
         // toast.error(action.payload);
         state.isLoading = false;
       })
-      .addCase(resetPassword.pending, (state) => {
+      .addCase(forgotPassword.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(resetPassword.fulfilled, (state, action) => {
+      .addCase(forgotPassword.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
         toast.success("password reset link sent");
       })
-      .addCase(resetPassword.rejected, (state) => {
+      .addCase(forgotPassword.rejected, (state) => {
         // toast.error(action.payload);
         state.isLoading = false;
       })
+      // start
+      .addCase(resetPasswordThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(resetPasswordThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+        toast.success("password reset link sent");
+      })
+      .addCase(resetPasswordThunk.rejected, (state) => {
+        // toast.error(action.payload);
+        state.isLoading = false;
+      })
+      //stop
+
       .addCase(verifyAccountThunk.pending, (state) => {
         state.verificationStatus = 'loading';
       })

@@ -12,25 +12,28 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
+import { useState } from "react";
 import backgroundImg from "../../assets/backimage.webp";
-import { forgotPasswordSchema } from "../../schemas";
+import { resetPasswordSchema } from "../../schemas";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../store/store";
-import { forgotPassword } from "../../features/user/UserSlice";
-import { Link } from "react-router-dom";
+import { resetPasswordThunk } from "../../features/user/UserSlice";
 
 const initialValues = {
-  email: "",
+  password: "",
+  confirmPassword: "",
 };
-const ForgotPassword = () => {
-  const { isLoading } = useSelector((state: RootState) => state.user);
+const ResetPassword = () => {
+  const { code, token } = useParams();
   const dispatch = useDispatch();
+  const { verificationStatus, isLoading } = useSelector(
+    (state: RootState) => state.user
+  );
   const handleSubmit = (values: typeof initialValues) => {
-    dispatch(forgotPassword(values));
-    // const data = await dispatch(
-    //     changePassword({ data: { oldPassword, newPassword }, token })
-    //   );
-    // changePassword({ data: { oldPassword, newPassword }, token })
+    // dispatch(loginUser(values));
+    const { password } = values;
+    dispatch(resetPasswordThunk({ code, token, password }));
   };
   return (
     <Stack>
@@ -56,16 +59,16 @@ const ForgotPassword = () => {
         >
           <Box textAlign="center" mt={5}>
             <Text fontSize={"4xl"} fontWeight={"bold"}>
-              Request Password Reset
+            Password Reset
             </Text>
             <Text fontSize={"18px"}>
-              Enter your email to receive reset instructions.
+            Please provide a secure but memorable password
             </Text>
           </Box>
           <Box>
             <Formik
               initialValues={initialValues}
-              validationSchema={forgotPasswordSchema}
+              validationSchema={resetPasswordSchema}
               onSubmit={handleSubmit}
             >
               {({ handleChange, handleSubmit, values, errors }) => (
@@ -77,25 +80,43 @@ const ForgotPassword = () => {
                   pb={5}
                 >
                   <FormControl isRequired>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>New Password</FormLabel>
                     <Input
                       type="text"
                       variant="filled"
-                      placeholder="email"
-                      value={values.email}
-                      name="email"
+                      placeholder="password"
+                      value={values.password}
+                      name="password"
                       onChange={handleChange}
                     />
-                    {errors.email && (
+                    {errors.password && (
                       <Text
                         style={{ color: "red", marginTop: 5 }}
                         fontSize="14px"
                       >
-                        {errors.email}
+                        {errors.password}
                       </Text>
                     )}
                   </FormControl>
-
+                  <FormControl isRequired>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <Input
+                      type="text"
+                      variant="filled"
+                      placeholder="confirmPassword"
+                      value={values.confirmPassword}
+                      name="confirmPassword"
+                      onChange={handleChange}
+                    />
+                    {errors.confirmPassword && (
+                      <Text
+                        style={{ color: "red", marginTop: 5 }}
+                        fontSize="14px"
+                      >
+                        {errors.confirmPassword}
+                      </Text>
+                    )}
+                  </FormControl>
                   <Button
                     bg={"#00FF84"}
                     isLoading={isLoading}
@@ -134,4 +155,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

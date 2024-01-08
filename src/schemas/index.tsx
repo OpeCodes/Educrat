@@ -8,7 +8,7 @@ export const SignUpSchema = Yup.object().shape({
   username: Yup.string().required("Enter your username"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
-    .min(5)
+    .min(8)
     .matches(passwordRules, {
       message: "Password must include letters and numbers",
     })
@@ -28,6 +28,19 @@ export const SignInSchema = Yup.object().shape({
     .required("Enter your password"),
 });
 
+
 export const resetPasswordSchema = Yup.object().shape({
+  password: Yup.string()
+    .min(8)
+    .matches(passwordRules, {
+      message: "Password must include letters and numbers",
+    })
+    .required("Enter your password"),
+    confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), undefined], "Passwords must match")
+    .required("Confirm your password"),
+});
+
+export const forgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
 });
