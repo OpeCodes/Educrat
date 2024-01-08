@@ -22,7 +22,6 @@ export const registerUser = createAsyncThunk(
       const resp = await customFetch.post("auth/register", user);
       return resp.data;
     } catch (error: any) {
-      console.log(error);
       toast.error(error.response.data.error);
       return thunkAPI.rejectWithValue(error.response.data.error);
     }
@@ -36,7 +35,6 @@ export const loginUser = createAsyncThunk(
       const resp = await customFetch.post("auth/login", user);
       return resp.data;
     } catch (error: any) {
-      console.log(error);
       toast.error(error.response.data.error);
       return thunkAPI.rejectWithValue(error.response.data.error);
     }
@@ -57,7 +55,7 @@ const userSlice = createSlice({
         state.user = action.payload;
         toast.success("Successfull ");
       })
-      .addCase(registerUser.rejected, (state, action) => {
+      .addCase(registerUser.rejected, (state,) => {
         // toast.error(action.payload);
         state.isLoading = false;
       })
@@ -69,7 +67,7 @@ const userSlice = createSlice({
         state.user = action.payload;
         toast.success("Successfull ");
       })
-      .addCase(loginUser.rejected, (state, action) => {
+      .addCase(loginUser.rejected, (state, ) => {
         // toast.error(action.payload);
         state.isLoading = false;
       });

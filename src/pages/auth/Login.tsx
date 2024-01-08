@@ -20,15 +20,17 @@ import backgroundImg from "../../assets/backimage.webp";
 import { SignInSchema } from "../../schemas";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import type { RootState } from "../../store/store";
 import { loginUser } from "../../features/user/UserSlice";
 const initialValues = {
   credential: "d@gmail.com",
-  password: "Peter12",
+  password: "Peter12wwww",
 };
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
+  const { isLoading } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const handleSubmit = (values: typeof initialValues) => {
     console.log(values);
@@ -47,7 +49,7 @@ const Login = () => {
           mx={{ base: "15px", lg: "20px" }}
           display="flex"
           flexDirection={"column"}
-          justifyContent={"center"}
+          justifyContent={{base: "none", md: "center"}}
         >
           <Box textAlign="center" mt={5}>
             <Text fontSize={"4xl"} fontWeight={"bold"}>
@@ -129,6 +131,11 @@ const Login = () => {
 
                   <Button
                     bg={"#00FF84"}
+                    isLoading={isLoading}
+                    loadingText="Loading"
+                    colorScheme="teal"
+                    variant="outline"
+                    spinnerPlacement="end"
                     width="100%"
                     onClick={() => handleSubmit()}
                     mt={3}
