@@ -17,7 +17,7 @@ import { forgotPasswordSchema } from "../../schemas";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../store/store";
 import { forgotPassword } from "../../features/user/UserSlice";
-import { Link } from "react-router-dom";
+import { Link , Navigate} from "react-router-dom";
 
 const initialValues = {
   email: "",

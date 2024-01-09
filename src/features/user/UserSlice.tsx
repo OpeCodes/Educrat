@@ -75,7 +75,7 @@ export const verifyAccountThunk = createAsyncThunk(
 export const resetPasswordThunk = createAsyncThunk(
   "user/resetPassword", async(user, thunkAPI) =>{
     try {
-      const resp = await customFetch.post("auth/password/reset", user);
+      const resp = await customFetch.patch("auth/password/reset", user);
       return resp.data
     } catch (error: any) {
       toast.error(error.response.data.error)  

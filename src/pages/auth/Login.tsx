@@ -18,13 +18,13 @@ import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
 import { SignInSchema } from "../../schemas";
-import { Link } from "react-router-dom";
+import { Link , Navigate} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../store/store";
 import { loginUser } from "../../features/user/UserSlice";
 const initialValues = {
-  credential: "d@gmail.com",
-  password: "Peter12wwww",
+  credential: "peteradedokun2003@gmail.com",
+  password: "Peter12111",
 };
 
 const Login = () => {
@@ -34,6 +34,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const handleSubmit = (values: typeof initialValues) => {
     dispatch(loginUser(values));
+    <Navigate  to={"/"}/>
   };
   return (
     <Stack>
