@@ -71,7 +71,6 @@ const SignUp = () => {
     const { firstName, lastName, username, email, password } = values;
     registerUser({ firstName, lastName, username, email, password });
   };
-
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
