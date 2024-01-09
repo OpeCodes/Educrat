@@ -1,21 +1,39 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { verifyAccountThunk } from "../../features/user/UserSlice";
-import type { RootState } from "../../store/store";
+import { useToast } from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
+import { customFetch } from "../../utils/axios";
 const VerifyAccount = () => {
   const { code, token } = useParams();
-  const dispatch = useDispatch();
-  const { verificationStatus } = useSelector((state: RootState) => state.user);
+  const toast = useToast();
+  const { mutate: verifyAccount } = useMutation({
+    mutationFn: (user: any) => customFetch.post("user/verifyAccount", user),
+    onSuccess: () => {
+      toast({
+        title: `verification successful`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
   useEffect(() => {
-    dispatch(verifyAccountThunk({ code, token }));
-  }, [dispatch, code, token]);
-  return <div>
-       <h1>Account Verification Page</h1>
-      {verificationStatus === 'loading' && <p>Verifying...</p>}
-      {verificationStatus === 'succeeded' && <p>Verification succeeded!</p>}
-      {verificationStatus === 'failed' && <p>Verification failed!</p>}
-  </div>;
+    verifyAccount({ code, token });
+  }, [code, token]);
+  return (
+    <div>
+      <h1>Account Verification Page</h1>
+    </div>
+  );
 };
 
 export default VerifyAccount;

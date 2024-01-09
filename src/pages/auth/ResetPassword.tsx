@@ -29,9 +29,9 @@ const ResetPassword = () => {
 
   const { mutate: resetPassword, isPending } = useMutation({
     mutationFn: (user: any) => customFetch.patch("auth/password/reset", user),
-    onSuccess: (user) => {
+    onSuccess: () => {
       toast({
-        title: `welcome ${user.data.user.firstName}`,
+        title: `Password set successfully`,
         status: "success",
         duration: 5000,
         isClosable: true,

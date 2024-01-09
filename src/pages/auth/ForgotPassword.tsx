@@ -15,10 +15,7 @@ import {
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
 import { forgotPasswordSchema } from "../../schemas";
-import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../../store/store";
-import { forgotPassword } from "../../features/user/UserSlice";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { customFetch } from "../../utils/axios";
 
@@ -27,12 +24,11 @@ const initialValues = {
 };
 const ForgotPassword = () => {
   const toast = useToast();
-  const dispatch = useDispatch();
   const { mutate: forgotPassword, isPending } = useMutation({
     mutationFn: (user) => customFetch.post("auth/password/forgot", user),
-    onSuccess: (user) => {
+    onSuccess: () => {
       toast({
-        title: `welcome ${user.data.user.firstName}`,
+        title: `password reset link sent`,
         status: "success",
         duration: 5000,
         isClosable: true,

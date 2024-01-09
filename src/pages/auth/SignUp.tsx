@@ -49,9 +49,9 @@ const SignUp = () => {
   const toast = useToast();
   const { mutate: registerUser, isPending } = useMutation({
     mutationFn: (user: any) => customFetch.post("auth/register", user),
-    onSuccess: (user) => {
+    onSuccess: () => {
       toast({
-        title: `welcome ${user.data.user.firstName}`,
+        title: `jj`,
         status: "success",
         duration: 5000,
         isClosable: true,
