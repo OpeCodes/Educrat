@@ -27,16 +27,16 @@ const initialValues = {
   password: "Favour@2003",
 };
 
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
   const toast = useToast();
-  // const queryClient = useQueryClient();
   const { mutate: loginUser, isPending } = useMutation({
     mutationFn: (user) => customFetch.post("/auth/login", user),
-    onSuccess: () => {
+    onSuccess: (user) => {
       toast({
-        title: `Login in Successfully`,
+        title: `welcome ${user.data.user.firstName}`,
         status: "success",
         duration: 5000,
         isClosable: true,

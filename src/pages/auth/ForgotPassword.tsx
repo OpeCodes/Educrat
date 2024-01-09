@@ -10,6 +10,7 @@ import {
   Image,
   Grid,
   GridItem,
+  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
@@ -17,20 +18,38 @@ import { forgotPasswordSchema } from "../../schemas";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../store/store";
 import { forgotPassword } from "../../features/user/UserSlice";
-import { Link , Navigate} from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { customFetch } from "../../utils/axios";
 
 const initialValues = {
   email: "",
 };
 const ForgotPassword = () => {
-  const { isLoading } = useSelector((state: RootState) => state.user);
+  const toast = useToast();
   const dispatch = useDispatch();
-  const handleSubmit = (values: typeof initialValues) => {
-    dispatch(forgotPassword(values));
-    // const data = await dispatch(
-    //     changePassword({ data: { oldPassword, newPassword }, token })
-    //   );
-    // changePassword({ data: { oldPassword, newPassword }, token })
+  const { mutate: forgotPassword, isPending } = useMutation({
+    mutationFn: (user) => customFetch.post("auth/password/forgot", user),
+    onSuccess: (user) => {
+      toast({
+        title: `welcome ${user.data.user.firstName}`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  const handleSubmit = (values: any): void => {
+    forgotPassword(values);
   };
   return (
     <Stack>
@@ -98,7 +117,7 @@ const ForgotPassword = () => {
 
                   <Button
                     bg={"#00FF84"}
-                    isLoading={isLoading}
+                    isLoading={isPending}
                     loadingText="Loading"
                     colorScheme="teal"
                     variant="outline"

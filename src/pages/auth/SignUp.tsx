@@ -12,6 +12,7 @@ import {
   Image,
   Grid,
   GridItem,
+  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { useState } from "react";
@@ -19,11 +20,19 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
 import { SignUpSchema } from "../../schemas";
 import { Link } from "react-router-dom";
-import type { RootState } from "../../store/store";
-import { useSelector, useDispatch } from "react-redux";
-import { registerUser } from "../../features/user/UserSlice";
-const initialValues = {
-  firstName: "peter",
+import { useMutation } from "@tanstack/react-query";
+import { customFetch } from "../../utils/axios";
+
+interface User {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+const initialValues: User = {
+  firstName: "opepe",
   lastName: "adedokun",
   username: "opeyemi1111",
   email: "d@gmail.com",
@@ -37,17 +46,44 @@ const SignUp = () => {
   const handlePasswordClick = () => setShowPassword(!showPassword);
   const handleConfirmPasswordClick = () =>
     setShowConfirmPassword(!showConfirmPassword);
-  const { isLoading } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
-  const handleSubmit = (values: typeof initialValues) => {
+  const toast = useToast();
+  const { mutate: registerUser, isPending } = useMutation({
+    mutationFn: (user: any) => customFetch.post("auth/register", user),
+    onSuccess: (user) => {
+      toast({
+        title: `welcome ${user.data.user.firstName}`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  const handleSubmit = (values: any) => {
     const { firstName, lastName, username, email, password } = values;
-    dispatch(registerUser({ firstName, lastName, username, email, password }));
+    registerUser({ firstName, lastName, username, email, password });
   };
+
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
-        <GridItem w="100%"    >
-          <Box boxSize="sm" w="50%" h="100vh" bg={"#140342"} display={{ base: "none", lg: "block" }} position={"fixed"}>
+        <GridItem w="100%">
+          <Box
+            boxSize="sm"
+            w="50%"
+            h="100vh"
+            bg={"#140342"}
+            display={{ base: "none", lg: "block" }}
+            position={"fixed"}
+          >
             <Image src={backgroundImg} alt="opeyemi" />
           </Box>
         </GridItem>
@@ -65,11 +101,7 @@ const SignUp = () => {
               onSubmit={handleSubmit}
             >
               {({ handleChange, handleSubmit, values, errors }) => (
-                <Flex
-                  rowGap={"5px"}
-                  flexDirection="column"
-                  pb={5}
-                >
+                <Flex rowGap={"5px"} flexDirection="column" pb={5}>
                   <FormControl isRequired>
                     <FormLabel>First Name</FormLabel>
                     <Input
@@ -224,7 +256,7 @@ const SignUp = () => {
                   </FormControl>
                   <Button
                     bg={"#00FF84"}
-                    isLoading={isLoading}
+                    isLoading={isPending}
                     loadingText="Loading"
                     colorScheme="teal"
                     variant="outline"

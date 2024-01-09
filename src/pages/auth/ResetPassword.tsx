@@ -10,15 +10,14 @@ import {
   Image,
   Grid,
   GridItem,
+  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
-import { useState } from "react";
 import backgroundImg from "../../assets/backimage.webp";
 import { resetPasswordSchema } from "../../schemas";
 import { Link, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../../store/store";
-import { resetPasswordThunk } from "../../features/user/UserSlice";
+import { useMutation } from "@tanstack/react-query";
+import { customFetch } from "../../utils/axios";
 
 const initialValues = {
   password: "",
@@ -26,14 +25,31 @@ const initialValues = {
 };
 const ResetPassword = () => {
   const { code, token } = useParams();
-  const dispatch = useDispatch();
-  const { verificationStatus, isLoading } = useSelector(
-    (state: RootState) => state.user
-  );
+  const toast = useToast();
+
+  const { mutate: resetPassword, isPending } = useMutation({
+    mutationFn: (user: any) => customFetch.patch("auth/password/reset", user),
+    onSuccess: (user) => {
+      toast({
+        title: `welcome ${user.data.user.firstName}`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
   const handleSubmit = (values: typeof initialValues) => {
-    // dispatch(loginUser(values));
     const { password } = values;
-    dispatch(resetPasswordThunk({ code, token, password }));
+    resetPassword({ code, token, password });
   };
   return (
     <Stack>
@@ -59,10 +75,10 @@ const ResetPassword = () => {
         >
           <Box textAlign="center" mt={5}>
             <Text fontSize={"4xl"} fontWeight={"bold"}>
-            Password Reset
+              Password Reset
             </Text>
             <Text fontSize={"18px"}>
-            Please provide a secure but memorable password
+              Please provide a secure but memorable password
             </Text>
           </Box>
           <Box>
@@ -119,7 +135,7 @@ const ResetPassword = () => {
                   </FormControl>
                   <Button
                     bg={"#00FF84"}
-                    isLoading={isLoading}
+                    isLoading={isPending}
                     loadingText="Loading"
                     colorScheme="teal"
                     variant="outline"
