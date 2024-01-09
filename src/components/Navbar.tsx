@@ -24,6 +24,7 @@ import {
   InputRightElement,
   Input,
   Divider,
+  Avatar,
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
@@ -31,8 +32,7 @@ import { FiSearch } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
-import { FaTwitter , FaInstagram , FaLinkedinIn } from "react-icons/fa6";
-
+import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 
 const links = [
   {
@@ -64,7 +64,7 @@ const links = [
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const user = false;
   const {
     isOpen: modalOpen,
     onOpen: onModalOpen,
@@ -113,6 +113,12 @@ const Navbar = () => {
           ))}
         </Flex>
         <Flex align={"center"} columnGap={5} color="white">
+          {user && (
+            <Text fontSize="15px" cursor={"pointer"}>
+              Instructor
+            </Text>
+          ) }
+
           <Text cursor={"pointer"} onClick={() => onModalOpen()}>
             <FiSearch fontSize={"25px"} />
           </Text>
@@ -141,29 +147,42 @@ const Navbar = () => {
           >
             <BiMenuAltRight />
           </Box>
-          <Button
-            color="#ffffff"
-            variant="link"
-            display={{ base: "none", md: "flex" }}
-            as={Link}
-            to={"/sign-in"}
-          >
-            Log In
-          </Button>
-          <Button
-            display={{ base: "none", md: "flex" }}
-            px={8}
-            bg="white"
-            color="black"
-            variant="solid"
-            borderColor={"white"}
-            borderWidth={2}
-            _hover={{ background: "#140342", color: "white" }}
-            as={Link}
-            to={"/sign-up"}
-          >
-            Sign Up
-          </Button>
+          {user ? (
+            <Avatar
+              name="Adedokun Peter"
+              size="sm"
+              fontWeight="bold"
+              bg="white"
+              color="#140342"
+              cursor="pointer"
+            />
+          ) : (
+            <>
+              <Button
+                color="#ffffff"
+                variant="link"
+                display={{ base: "none", md: "flex" }}
+                as={Link}
+                to={"/sign-in"}
+              >
+                Log In
+              </Button>
+              <Button
+                display={{ base: "none", md: "flex" }}
+                px={8}
+                bg="white"
+                color="black"
+                variant="solid"
+                borderColor={"white"}
+                borderWidth={2}
+                _hover={{ background: "#140342", color: "white" }}
+                as={Link}
+                to={"/sign-up"}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
         </Flex>
       </Flex>
       <Drawer
@@ -226,7 +245,7 @@ const Navbar = () => {
                 </Box>
               ))}
             </Box>
-            <Divider orientation='horizontal' />
+            <Divider orientation="horizontal" />
             <Flex rowGap={"25px"} flexDirection={"column"}>
               <Text>Call Us</Text>
               <Text>08145885175</Text>
@@ -235,12 +254,11 @@ const Navbar = () => {
               <Text>adedokunpeter11@gmail.com</Text>
             </Flex>
             <Flex mb="15px" columnGap={7} cursor={"pointer"}>
-            <FaFacebookF  />
-            <FaTwitter />
-            <FaInstagram />
-            <FaLinkedinIn />
+              <FaFacebookF />
+              <FaTwitter />
+              <FaInstagram />
+              <FaLinkedinIn />
             </Flex>
-
           </DrawerBody>
         </DrawerContent>
       </Drawer>
