@@ -1,4 +1,4 @@
-import {  createSlice } from "@reduxjs/toolkit";
+// import {  createSlice } from "@reduxjs/toolkit";
 // interface UserState {
 //   isLoading: boolean;
 //   user: null; // Replace 'any' with the actual type of your user data
@@ -13,14 +13,14 @@ import {  createSlice } from "@reduxjs/toolkit";
 //   user: null,
 //   verificationStatus: string,
 // };
-const initialState = {
-  user: null,
-  verificationStatus: "idle",
-};
-const userSlice = createSlice({
-  name: "user",
-  initialState,
-  reducers: {},
-});
+// const initialState = {
+//   user: null,
+//   verificationStatus: "idle",
+// };
+// const userSlice = createSlice({
+//   name: "user",
+//   initialState,
+//   reducers: {},
+// });
 
-export default userSlice.reducer;
+// export default userSlice.reducer;
