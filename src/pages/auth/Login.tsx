@@ -12,30 +12,50 @@ import {
   Image,
   Grid,
   GridItem,
+  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
 import { SignInSchema } from "../../schemas";
-import { Link , Navigate} from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../../store/store";
-import { loginUser } from "../../features/user/UserSlice";
+import { Link } from "react-router-dom";
+import { useMutation, } from "@tanstack/react-query";
+import { customFetch } from "../../utils/axios";
 const initialValues = {
   credential: "peteradedokun2003@gmail.com",
-  password: "Peter12111",
+  password: "Favour@2003",
 };
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
-  const { isLoading } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
-  const handleSubmit = (values: typeof initialValues) => {
-    dispatch(loginUser(values));
-    <Navigate  to={"/"}/>
+  const toast = useToast();
+  // const queryClient = useQueryClient();
+  const { mutate: loginUser, isPending } = useMutation({
+    mutationFn: (user) => customFetch.post("/auth/login", user),
+    onSuccess: () => {
+      toast({
+        title: `Login in Successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error)
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  const handleSubmit = (values: any): void => {
+    loginUser(values);
   };
+
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
@@ -148,7 +168,7 @@ const Login = () => {
                   </Button>
                   <Button
                     bg={"#00FF84"}
-                    isLoading={isLoading}
+                    isLoading={isPending}
                     loadingText="Loading"
                     colorScheme="teal"
                     variant="outline"
