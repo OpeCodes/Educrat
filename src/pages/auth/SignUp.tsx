@@ -51,7 +51,7 @@ const SignUp = () => {
     mutationFn: (user: any) => customFetch.post("auth/register", user),
     onSuccess: () => {
       toast({
-        title: `jj`,
+        title: `check your email to verify your account`,
         status: "success",
         duration: 5000,
         isClosable: true,
