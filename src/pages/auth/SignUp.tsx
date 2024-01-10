@@ -21,7 +21,8 @@ import backgroundImg from "../../assets/backimage.webp";
 import { SignUpSchema } from "../../schemas";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { customFetch } from "../../utils/axios";
+import  customFetch  from "../../utils/axios";
+
 
 interface User {
   firstName: string;

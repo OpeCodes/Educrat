@@ -17,7 +17,7 @@ import backgroundImg from "../../assets/backimage.webp";
 import { resetPasswordSchema } from "../../schemas";
 import { Link, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { customFetch } from "../../utils/axios";
+import  customFetch  from "../../utils/axios";
 
 const initialValues = {
   password: "",

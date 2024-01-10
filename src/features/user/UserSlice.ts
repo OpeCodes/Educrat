@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getUserLocalStorage } from "../../store/localStorage";
+import { getUserLocalStorage, removeUserFromLocalStorage } from "../../store/localStorage";
 
 interface UserState {
   user: any;
@@ -7,6 +7,7 @@ interface UserState {
 
 const initialState: UserState = {
   user: getUserLocalStorage(),
+// user: null
 };
 
 const userSlice = createSlice({
@@ -16,10 +17,14 @@ const userSlice = createSlice({
     setUser: (state: UserState, action: PayloadAction<any>) => {
       state.user = action.payload;
     },
+    logoutUser: (state: UserState) =>{
+        state.user = null;
+        removeUserFromLocalStorage();
+    }
     // Add more reducers as needed
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, logoutUser } = userSlice.actions;
 export const selectData = (state: { data: UserState }) => state.data.user;
 export default userSlice.reducer;

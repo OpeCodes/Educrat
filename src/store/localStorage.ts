@@ -9,3 +9,4 @@ export const getUserLocalStorage = () => {
   const user = result ? JSON.parse(result) : null;
   return user;
 };
+

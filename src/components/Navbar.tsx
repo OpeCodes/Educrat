@@ -35,6 +35,8 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../features/user/UserSlice";
 
 const links = [
   {
@@ -65,14 +67,15 @@ const links = [
 ];
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: modalOpen,
     onOpen: onModalOpen,
     onClose: onModalClose,
   } = useDisclosure();
+
   const { user } = useSelector((store: RootState) => store.user);
-  console.log(user)
   return (
     <Stack>
       <Flex
@@ -117,10 +120,14 @@ const Navbar = () => {
         </Flex>
         <Flex align={"center"} columnGap={5} color="white">
           {user && (
-            <Text fontSize="15px" cursor={"pointer"}>
+            <Text
+              fontSize="15px"
+              cursor={"pointer"}
+              onClick={() => dispatch(logoutUser())}
+            >
               Instructor
             </Text>
-          ) }
+          )}
 
           <Text cursor={"pointer"} onClick={() => onModalOpen()}>
             <FiSearch fontSize={"25px"} />

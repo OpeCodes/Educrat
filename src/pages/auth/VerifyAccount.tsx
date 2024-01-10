@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
-import { customFetch } from "../../utils/axios";
+import  customFetch  from "../../utils/axios";
 const VerifyAccount = () => {
   const { code, token } = useParams();
   const toast = useToast();

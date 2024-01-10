@@ -17,7 +17,7 @@ import backgroundImg from "../../assets/backimage.webp";
 import { forgotPasswordSchema } from "../../schemas";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { customFetch } from "../../utils/axios";
+import  customFetch  from "../../utils/axios";
 
 const initialValues = {
   email: "",
