@@ -16,6 +16,7 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  Button,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
@@ -111,7 +112,7 @@ const BecomeInstructor = () => {
                       </FormControl>
                     </GridItem>
                     <GridItem w="100%">
-                      <FormControl >
+                      <FormControl>
                         <FormLabel>Website</FormLabel>
                         <Input
                           type="text"
@@ -132,11 +133,38 @@ const BecomeInstructor = () => {
                       </FormControl>
                     </GridItem>
                     <GridItem w="100%">
-                      <FormControl >
+                      <FormControl>
                         <FormLabel>Twitter</FormLabel>
                         <InputGroup>
                           <InputLeftAddon>
                             http://www.twitter.com/
+                          </InputLeftAddon>
+                          <Input
+                            type="text"
+                            variant="filled"
+                            placeholder="username"
+                            value={values.twitter}
+                            name="twitter"
+                            onChange={handleChange}
+                          />
+                        </InputGroup>
+
+                        {errors.twitter && (
+                          <Text
+                            style={{ color: "red", marginTop: 5 }}
+                            fontSize="14px"
+                          >
+                            {errors.twitter}
+                          </Text>
+                        )}
+                      </FormControl>
+                    </GridItem>
+                    <GridItem w="100%">
+                      <FormControl>
+                        <FormLabel>Facebook</FormLabel>
+                        <InputGroup>
+                          <InputLeftAddon>
+                            http://www.facebook.com/
                           </InputLeftAddon>
                           <Input
                             type="text"
@@ -158,11 +186,85 @@ const BecomeInstructor = () => {
                         )}
                       </FormControl>
                     </GridItem>
-                    <GridItem w="100%" h="10" bg="blue.500" />
-                    <GridItem w="100%" h="10" bg="blue.500" />
-                    <GridItem w="100%" h="10" bg="blue.500" />
-                    <GridItem w="100%" h="10" bg="blue.500" />
+                    <GridItem w="100%">
+                      <FormControl>
+                        <FormLabel>LinkedIn</FormLabel>
+                        <InputGroup>
+                          <InputLeftAddon>
+                            http://www.linkedin.com/
+                          </InputLeftAddon>
+                          <Input
+                            type="text"
+                            variant="filled"
+                            placeholder="resource ID"
+                            value={values.linkedin}
+                            name="linkedin"
+                            onChange={handleChange}
+                          />
+                        </InputGroup>
+
+                        {errors.linkedin && (
+                          <Text
+                            style={{ color: "red", marginTop: 5 }}
+                            fontSize="14px"
+                          >
+                            {errors.linkedin}
+                          </Text>
+                        )}
+                      </FormControl>
+                    </GridItem>
+                    <GridItem w="100%">
+                      <FormControl>
+                        <FormLabel>Youtube</FormLabel>
+                        <InputGroup>
+                          <InputLeftAddon>
+                            http://www.youtube.com/
+                          </InputLeftAddon>
+                          <Input
+                            type="text"
+                            variant="filled"
+                            placeholder="username"
+                            value={values.linkedin}
+                            name="youtube"
+                            onChange={handleChange}
+                          />
+                        </InputGroup>
+
+                        {errors.youtube && (
+                          <Text
+                            style={{ color: "red", marginTop: 5 }}
+                            fontSize="14px"
+                          >
+                            {errors.youtube}
+                          </Text>
+                        )}
+                      </FormControl>
+                    </GridItem>
+                    <GridItem>
+                    <Box display={"block"} mt={5}>
+                      <Button
+                        bg={"#00FF84"}
+                        // isLoading={isPending}
+                        loadingText="Loading"
+                        colorScheme="teal"
+                        variant="outline"
+                        spinnerPlacement="end"
+                        width="100%"
+                        onClick={() => handleSubmit()}
+                        mt={3}
+                        borderWidth={2}
+                        py={3}
+                        borderColor={"#00FF84"}
+                        _hover={{ background: "none", color: "#00FF84" }}
+                      >
+                        Save
+                      </Button>
+                    </Box>
+                    </GridItem>
+                    
+                    
                   </Grid>
+                  
                 )}
               </Formik>
             </TabPanel>
