@@ -47,4 +47,17 @@ export const forgotPasswordSchema = Yup.object().shape({
 export const instructorProfileSchema = Yup.object().shape({
   headline: Yup.string().required("Pls include headline"),
   biography: Yup.string().required("Pls include biography"),
+  website: Yup.string(),
+  twitter: Yup.string(),
+  facebook: Yup.string(),
+  linkedin: Yup.string(),
+  youtube: Yup.string()
 })
+
+// headline: "",
+// Biography: "",
+// website: "",
+// twitter: "",
+// facebook: "",
+// linkedin: "",
+// youtube: "",
