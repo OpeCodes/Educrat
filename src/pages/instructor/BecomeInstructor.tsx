@@ -20,7 +20,7 @@ import { instructorProfileSchema } from "../../schemas";
 
 const initialValues = {
   headline: "",
-  Biography: "",
+  biography: "",
   website: "",
   twitter: "",
   facebook: "",
@@ -29,7 +29,7 @@ const initialValues = {
 };
 const BecomeInstructor = () => {
   const handleSubmit = (values: any) => {
-    console.log(values)
+    console.log(values);
   };
   return (
     <Stack>
@@ -87,7 +87,27 @@ const BecomeInstructor = () => {
                         )}
                       </FormControl>
                     </GridItem>
-                    <GridItem w="100%" h="10" bg="blue.500" />
+                    <GridItem w="100%">
+                      <FormControl isRequired>
+                        <FormLabel>Biography</FormLabel>
+                        <Input
+                          type="text"
+                          variant="filled"
+                          placeholder="headline"
+                          value={values.biography}
+                          name="biography"
+                          onChange={handleChange}
+                        />
+                        {errors.biography && (
+                          <Text
+                            style={{ color: "red", marginTop: 5 }}
+                            fontSize="14px"
+                          >
+                            {errors.biography}
+                          </Text>
+                        )}
+                      </FormControl>
+                    </GridItem>
                     <GridItem w="100%" h="10" bg="blue.500" />
                     <GridItem w="100%" h="10" bg="blue.500" />
                     <GridItem w="100%" h="10" bg="blue.500" />
