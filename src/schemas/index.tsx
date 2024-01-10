@@ -44,3 +44,7 @@ export const resetPasswordSchema = Yup.object().shape({
 export const forgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
 });
+export const instructorProfileSchema = Yup.object().shape({
+  headline: Yup.string().required("Pls include headline"),
+  biography: Yup.string().required("Pls include biography"),
+})
