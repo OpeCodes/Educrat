@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import { Courses } from "./pages/course";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
     path: "/reset-password/:code/:token",
     element: <ResetPassword />,
   },
+  //instructor
+  {
+    path: "/become-instructor",
+    element : <BecomeInstructor/>
+  }
 ]);
 
 function App() {

@@ -123,9 +123,10 @@ const Navbar = () => {
             <Text
               fontSize="15px"
               cursor={"pointer"}
-              onClick={() => dispatch(logoutUser())}
+              as={Link}
+              to="/become-instructor"
             >
-              Instructor
+            Become an Instructor
             </Text>
           )}
 
