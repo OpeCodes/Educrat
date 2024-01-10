@@ -37,7 +37,7 @@ const BecomeInstructor = () => {
   return (
     <Stack>
       <InstructorNavbar />
-      <Stack ml={16} mr={10}>
+      <Stack ml={{ base: 6, lg: 16 }} mr={{ base: 5, lg: 10 }}>
         <Box mt={3}>
           <Text fontSize={"4xl"} fontWeight={"bold"}>
             Sign Up
@@ -50,7 +50,6 @@ const BecomeInstructor = () => {
               Educrat Profile
             </Tab>
             <Tab fontWeight={"bold"}>Profile Picture</Tab>
-            <Tab fontWeight={"bold"}>Three</Tab>
           </TabList>
           <TabIndicator
             mt="-1.5px"
@@ -241,39 +240,39 @@ const BecomeInstructor = () => {
                       </FormControl>
                     </GridItem>
                     <GridItem>
-                    <Box display={"block"} mt={5}>
-                      <Button
-                        bg={"#00FF84"}
-                        // isLoading={isPending}
-                        loadingText="Loading"
-                        colorScheme="teal"
-                        variant="outline"
-                        spinnerPlacement="end"
-                        width="100%"
-                        onClick={() => handleSubmit()}
-                        mt={3}
-                        borderWidth={2}
-                        py={3}
-                        borderColor={"#00FF84"}
-                        _hover={{ background: "none", color: "#00FF84" }}
-                      >
-                        Save
-                      </Button>
-                    </Box>
+                      <Box display={"block"} mt={5}>
+                        <Button
+                          bg={"#00FF84"}
+                          // isLoading={isPending}
+                          loadingText="Loading"
+                          colorScheme="teal"
+                          variant="outline"
+                          spinnerPlacement="end"
+                          width="100%"
+                          onClick={() => handleSubmit()}
+                          mt={3}
+                          borderWidth={2}
+                          py={3}
+                          borderColor={"#00FF84"}
+                          _hover={{ background: "none", color: "#00FF84" }}
+                        >
+                          Save
+                        </Button>
+                      </Box>
                     </GridItem>
-                    
-                    
                   </Grid>
-                  
                 )}
               </Formik>
             </TabPanel>
             <TabPanel>
-              <p>two!</p>
+              <Stack>
+                <Text fontWeight={"bold"}>Image Preview</Text>
+                <Text fontSize="12px">
+                  Minimum 200x200 pixels, Maximum 6000x6000 pixels
+                </Text>
+              </Stack>
             </TabPanel>
-            <TabPanel>
-              <p>three!</p>
-            </TabPanel>
+          
           </TabPanels>
         </Tabs>
       </Stack>
@@ -282,3 +281,8 @@ const BecomeInstructor = () => {
 };
 
 export default BecomeInstructor;
+
+// 1. ceg lab report
+// 2. pgg lab report
+// 3. pgg notes and test
+// 4. 
