@@ -33,6 +33,8 @@ import { IoCartOutline } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
+import { RootState } from "../store/store";
+import { useSelector } from "react-redux";
 
 const links = [
   {
@@ -64,12 +66,13 @@ const links = [
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const user = false;
   const {
     isOpen: modalOpen,
     onOpen: onModalOpen,
     onClose: onModalClose,
   } = useDisclosure();
+  const { user } = useSelector((store: RootState) => store.user);
+  console.log(user)
   return (
     <Stack>
       <Flex

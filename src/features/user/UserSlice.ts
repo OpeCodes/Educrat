@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getUserLocalStorage } from "../../store/localStorage";
 
 interface UserState {
   user: any;
 }
 
 const initialState: UserState = {
-  user: null,
+  user: getUserLocalStorage(),
 };
 
 const userSlice = createSlice({
