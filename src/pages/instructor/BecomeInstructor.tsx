@@ -14,6 +14,8 @@ import {
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputLeftAddon,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
@@ -108,8 +110,54 @@ const BecomeInstructor = () => {
                         )}
                       </FormControl>
                     </GridItem>
-                    <GridItem w="100%" h="10" bg="blue.500" />
-                    <GridItem w="100%" h="10" bg="blue.500" />
+                    <GridItem w="100%">
+                      <FormControl >
+                        <FormLabel>Website</FormLabel>
+                        <Input
+                          type="text"
+                          variant="filled"
+                          placeholder="website"
+                          value={values.website}
+                          name="website"
+                          onChange={handleChange}
+                        />
+                        {errors.website && (
+                          <Text
+                            style={{ color: "red", marginTop: 5 }}
+                            fontSize="14px"
+                          >
+                            {errors.website}
+                          </Text>
+                        )}
+                      </FormControl>
+                    </GridItem>
+                    <GridItem w="100%">
+                      <FormControl >
+                        <FormLabel>Twitter</FormLabel>
+                        <InputGroup>
+                          <InputLeftAddon>
+                            http://www.twitter.com/
+                          </InputLeftAddon>
+                          <Input
+                            type="text"
+                            variant="filled"
+                            placeholder="username"
+                            value={values.facebook}
+                            name="facebook"
+                            onChange={handleChange}
+                          />
+                        </InputGroup>
+
+                        {errors.facebook && (
+                          <Text
+                            style={{ color: "red", marginTop: 5 }}
+                            fontSize="14px"
+                          >
+                            {errors.facebook}
+                          </Text>
+                        )}
+                      </FormControl>
+                    </GridItem>
                     <GridItem w="100%" h="10" bg="blue.500" />
                     <GridItem w="100%" h="10" bg="blue.500" />
                     <GridItem w="100%" h="10" bg="blue.500" />
