@@ -22,6 +22,11 @@ import { SignInSchema } from "../../schemas";
 import { Link } from "react-router-dom";
 import { useMutation, } from "@tanstack/react-query";
 import { customFetch } from "../../utils/axios";
+// import { useDispatch } from "react-redux";
+import { setUser } from "../../features/user/UserSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 const initialValues = {
   credential: "peteradedokun2003@gmail.com",
   password: "Favour@2003",
@@ -32,9 +37,12 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
   const toast = useToast();
+  const dispatch = useDispatch()
+  const { user } = useSelector((store: RootState) => store.user);
   const { mutate: loginUser, isPending } = useMutation({
     mutationFn: (user) => customFetch.post("/auth/login", user),
     onSuccess: (user) => {
+      dispatch(setUser(user.data.user))
       toast({
         title: `welcome ${user.data.user.firstName}`,
         status: "success",
@@ -55,7 +63,7 @@ const Login = () => {
   const handleSubmit = (values: any): void => {
     loginUser(values);
   };
-
+  console.log(user)
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
