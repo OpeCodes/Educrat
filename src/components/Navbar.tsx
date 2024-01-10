@@ -35,8 +35,6 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../features/user/UserSlice";
 
 const links = [
   {
@@ -67,7 +65,6 @@ const links = [
 ];
 
 const Navbar = () => {
-  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: modalOpen,

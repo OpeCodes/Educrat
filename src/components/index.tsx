@@ -1,3 +1,4 @@
 import HomeLayout from "./HomeLayout";
 import Navbar from "./Navbar";
-export { HomeLayout, Navbar };
+import InstructorNavbar from "./InstructorNavbar";
+export { HomeLayout, Navbar , InstructorNavbar};
