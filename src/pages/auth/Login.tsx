@@ -27,6 +27,7 @@ import { setUser } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { addUserLocalStorage } from "../../store/localStorage";
 const initialValues = {
   credential: "peteradedokun2003@gmail.com",
   password: "Favour@2003",
@@ -43,6 +44,7 @@ const Login = () => {
     mutationFn: (user) => customFetch.post("/auth/login", user),
     onSuccess: (user) => {
       dispatch(setUser(user.data.user))
+      addUserLocalStorage(user.data.user);
       toast({
         title: `welcome ${user.data.user.firstName}`,
         status: "success",
