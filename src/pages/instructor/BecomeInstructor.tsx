@@ -1,4 +1,4 @@
-import { InstructorNavbar } from "../../components";
+import { FileUploadComponent, InstructorNavbar } from "../../components";
 import {
   Box,
   Stack,
@@ -21,9 +21,6 @@ import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
 import { useMutation } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
-
-
-
 
 const initialValues = {
   headline: "",
@@ -63,6 +60,10 @@ const {mutate: becomeInstructor} = useMutation({
   const handleSubmit = (values: any) => {
     console.log(values);
     becomeInstructor(values)
+  };
+  const handleImageUpload = (file: File) => {
+    // Handle the file as needed (e.g., upload to a server)
+    console.log('Uploaded file:', file);
   };
   return (
     <Stack>
@@ -192,6 +193,7 @@ const {mutate: becomeInstructor} = useMutation({
                 <Text fontSize="12px">
                   Minimum 200x200 pixels, Maximum 6000x6000 pixels
                 </Text>
+                <FileUploadComponent onImageUpload={handleImageUpload} />
               </Stack>
             </TabPanel>
           </TabPanels>
