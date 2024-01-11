@@ -35,7 +35,7 @@ const initialValues = {
 
 const BecomeInstructor = () => {
   const toast= useToast();
-const {mutate: becomeInstructor} = useMutation({
+const {mutate: becomeInstructor,isPending} = useMutation({
   mutationFn: (user) => customFetch.put("/user/instructor", user),
   onSuccess: () => {
     toast({
@@ -165,7 +165,7 @@ const {mutate: becomeInstructor} = useMutation({
                       <Box display={"block"} mt={5}>
                         <Button
                           bg={"#00FF84"}
-                          // isLoading={isPending}
+                          isLoading={isPending}
                           loadingText="Loading"
                           colorScheme="teal"
                           variant="outline"

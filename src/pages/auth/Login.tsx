@@ -30,7 +30,7 @@ const initialValues = {
   credential: "",
   password: "",
 };
-// myPassword = Favour@2003
+// myPassword = Peter12111
 
 
 const Login = () => {
@@ -51,7 +51,6 @@ const Login = () => {
       });
     },
     onError: (error: any) => {
-      console.log(error)
       toast({
         title: `${error.response.data.error}`,
         status: "error",
