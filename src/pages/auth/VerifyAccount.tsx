@@ -7,7 +7,7 @@ const VerifyAccount = () => {
   const { code, token } = useParams();
   const toast = useToast();
   const { mutate: verifyAccount } = useMutation({
-    mutationFn: (user: any) => customFetch.post("user/verifyAccount", user),
+    mutationFn: (user: any) => customFetch.post("auth/verification", user),
     onSuccess: () => {
       toast({
         title: `verification successful`,
