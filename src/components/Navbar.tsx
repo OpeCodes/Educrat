@@ -35,6 +35,8 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
+import { logoutUser } from "../features/user/UserSlice";
+import { useDispatch } from "react-redux";
 
 const links = [
   {
@@ -71,7 +73,7 @@ const Navbar = () => {
     onOpen: onModalOpen,
     onClose: onModalClose,
   } = useDisclosure();
-
+  const dispatch = useDispatch()
   const { user } = useSelector((store: RootState) => store.user);
   return (
     <Stack>
@@ -115,6 +117,7 @@ const Navbar = () => {
             </Box>
           ))}
         </Flex>
+        <Text color="white" onClick={() =>  dispatch(logoutUser())}>logout</Text>
         <Flex align={"center"} columnGap={5} color="white">
           {user && (
             <Text

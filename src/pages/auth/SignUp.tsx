@@ -33,12 +33,12 @@ interface User {
   confirmPassword: string;
 }
 const initialValues: User = {
-  firstName: "opepe",
-  lastName: "adedokun",
-  username: "opeyemi1111",
-  email: "d@gmail.com",
-  password: "Peter12111",
-  confirmPassword: "Peter12111",
+  firstName: "",
+  lastName: "",
+  username: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
 };
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);

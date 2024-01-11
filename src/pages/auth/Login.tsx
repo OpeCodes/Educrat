@@ -25,11 +25,12 @@ import  customFetch  from "../../utils/axios";
 // import { useDispatch } from "react-redux";
 import { setUser } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
-import { addUserLocalStorage } from "../../store/localStorage";
+import { addUserLocalStorage, } from "../../store/localStorage";
 const initialValues = {
-  credential: "peteradedokun2003@gmail.com",
-  password: "Favour@2003",
+  credential: "",
+  password: "",
 };
+// myPassword = Favour@2003
 
 
 const Login = () => {
@@ -62,6 +63,7 @@ const Login = () => {
   const handleSubmit = (values: any): void => {
     loginUser(values);
   };
+ 
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
