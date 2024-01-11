@@ -1,10 +1,7 @@
-
-import React, { ChangeEvent, useState } from "react";
-import { Box, Progress, Input, Image, Button } from "@chakra-ui/react";
+import React, { ChangeEvent, useState ,} from "react";
+import { Box, Progress, Input, Image, Button,useToast } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
-// import { FileUploadComponent } from ".";
-// import { useQueryClient } from 'react-query';
-
+import imagePlaceholder from "../assets/image-placeholder.png";
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
 }
@@ -13,7 +10,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [fileToUpload, setFileToUpload] = useState<File | null>(null);
-  //   const queryClient = useQueryClient();
+  const toast = useToast();
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -60,22 +57,40 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         }
       );
 
-      // Do something with the response, e.g., update state or trigger a callback
       console.log("Upload completed:", response.data);
-
-      // Invalidate any queries that depend on the upload state
-      //   queryClient.invalidateQueries('uploads');
+      toast({
+        title: `Profile picture uploaded`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     } catch (error) {
-      // Handle error
+      toast({
+        title: `${error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       console.error("Upload failed:", error);
     }
-
     // Callback to parent component
     onImageUpload(uploadedFile);
   };
 
   return (
     <Box>
+      <Box mb={4}>
+        {selectedImage ? (
+          <Image
+            src={selectedImage}
+            boxSize="200px"
+            alt="Uploaded Image"
+            mt={4}
+          />
+        ) : (
+          <Image src={imagePlaceholder} />
+        )}
+      </Box>
       <Input type="file" accept="image/*" onChange={handleImageChange} />
       <Button onClick={handleUploadClick} mt={2} disabled={!fileToUpload}>
         Upload
@@ -83,12 +98,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
       {uploadProgress > 0 && uploadProgress < 100 && (
         <Progress value={uploadProgress} size="sm" mt={2} />
       )}
-      {selectedImage ? (
-        <Image src={selectedImage} alt="Uploaded Image" mt={4} />
-      ) : (
-        <Image src="https://via.placeholder.com/150" />
-      )}
-      {/* <Image src={selectedImage} alt="uploadimage" fallbackSrc='https://via.placeholder.com/150' /> */}
+
     </Box>
   );
 };

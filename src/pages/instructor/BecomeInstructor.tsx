@@ -21,7 +21,6 @@ import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
 import { useMutation } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
-
 const initialValues = {
   headline: "",
   biography: "",
@@ -190,9 +189,6 @@ const {mutate: becomeInstructor} = useMutation({
             <TabPanel>
               <Stack>
                 <Text fontWeight={"bold"}>Image Preview</Text>
-                <Text fontSize="12px">
-                  Minimum 200x200 pixels, Maximum 6000x6000 pixels
-                </Text>
                 <FileUploadComponent onImageUpload={handleImageUpload} />
               </Stack>
             </TabPanel>
