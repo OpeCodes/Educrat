@@ -14,25 +14,55 @@ import {
   FormControl,
   FormLabel,
   Input,
-  InputGroup,
-  InputLeftAddon,
   Button,
+  useToast
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
+import { useMutation } from "@tanstack/react-query";
+import customFetch from "../../utils/axios";
+
+
+
 
 const initialValues = {
   headline: "",
   biography: "",
-  website: "",
-  twitter: "",
-  facebook: "",
-  linkedin: "",
-  youtube: "",
+  socials: [
+    { type: "facebook", url: "" },
+    { type: "linkedin", url: "" },
+    { type: "twitter", url: "" },
+    { type: "website", url: "" },
+    { type: "youtube", url: "" },
+  ],
 };
+
 const BecomeInstructor = () => {
+  const toast= useToast();
+const {mutate: becomeInstructor} = useMutation({
+  mutationFn: (user) => customFetch.put("/user/instructor", user),
+  onSuccess: () => {
+    toast({
+      title: `You are now an instructor`,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  },
+  onError: (error: any) => {
+    console.log(error)
+    toast({
+      title: `${error.response.data.error}`,
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+    });
+  },
+
+})
   const handleSubmit = (values: any) => {
     console.log(values);
+    becomeInstructor(values)
   };
   return (
     <Stack>
@@ -110,135 +140,27 @@ const BecomeInstructor = () => {
                         )}
                       </FormControl>
                     </GridItem>
-                    <GridItem w="100%">
-                      <FormControl>
-                        <FormLabel>Website</FormLabel>
-                        <Input
-                          type="text"
-                          variant="filled"
-                          placeholder="website"
-                          value={values.website}
-                          name="website"
-                          onChange={handleChange}
-                        />
-                        {errors.website && (
-                          <Text
-                            style={{ color: "red", marginTop: 5 }}
-                            fontSize="14px"
-                          >
-                            {errors.website}
-                          </Text>
-                        )}
-                      </FormControl>
-                    </GridItem>
-                    <GridItem w="100%">
-                      <FormControl>
-                        <FormLabel>Twitter</FormLabel>
-                        <InputGroup>
-                          <InputLeftAddon>
-                            http://www.twitter.com/
-                          </InputLeftAddon>
+                    {values.socials.map((social, index) => (
+                      <GridItem w="100%">
+                        <FormControl isRequired>
+                          <FormLabel>{`${social.type
+                            .charAt(0)
+                            .toUpperCase()}${social.type.slice(
+                            1
+                          )} URL:`}</FormLabel>
                           <Input
                             type="text"
                             variant="filled"
-                            placeholder="username"
-                            value={values.twitter}
-                            name="twitter"
+                            placeholder="headline"
+                            name={`socials[${index}].url`}
+                            value={values.socials[index].url}
                             onChange={handleChange}
                           />
-                        </InputGroup>
+                          
+                        </FormControl>
+                      </GridItem>
+                    ))}
 
-                        {errors.twitter && (
-                          <Text
-                            style={{ color: "red", marginTop: 5 }}
-                            fontSize="14px"
-                          >
-                            {errors.twitter}
-                          </Text>
-                        )}
-                      </FormControl>
-                    </GridItem>
-                    <GridItem w="100%">
-                      <FormControl>
-                        <FormLabel>Facebook</FormLabel>
-                        <InputGroup>
-                          <InputLeftAddon>
-                            http://www.facebook.com/
-                          </InputLeftAddon>
-                          <Input
-                            type="text"
-                            variant="filled"
-                            placeholder="username"
-                            value={values.facebook}
-                            name="facebook"
-                            onChange={handleChange}
-                          />
-                        </InputGroup>
-
-                        {errors.facebook && (
-                          <Text
-                            style={{ color: "red", marginTop: 5 }}
-                            fontSize="14px"
-                          >
-                            {errors.facebook}
-                          </Text>
-                        )}
-                      </FormControl>
-                    </GridItem>
-                    <GridItem w="100%">
-                      <FormControl>
-                        <FormLabel>LinkedIn</FormLabel>
-                        <InputGroup>
-                          <InputLeftAddon>
-                            http://www.linkedin.com/
-                          </InputLeftAddon>
-                          <Input
-                            type="text"
-                            variant="filled"
-                            placeholder="resource ID"
-                            value={values.linkedin}
-                            name="linkedin"
-                            onChange={handleChange}
-                          />
-                        </InputGroup>
-
-                        {errors.linkedin && (
-                          <Text
-                            style={{ color: "red", marginTop: 5 }}
-                            fontSize="14px"
-                          >
-                            {errors.linkedin}
-                          </Text>
-                        )}
-                      </FormControl>
-                    </GridItem>
-                    <GridItem w="100%">
-                      <FormControl>
-                        <FormLabel>Youtube</FormLabel>
-                        <InputGroup>
-                          <InputLeftAddon>
-                            http://www.youtube.com/
-                          </InputLeftAddon>
-                          <Input
-                            type="text"
-                            variant="filled"
-                            placeholder="username"
-                            value={values.linkedin}
-                            name="youtube"
-                            onChange={handleChange}
-                          />
-                        </InputGroup>
-
-                        {errors.youtube && (
-                          <Text
-                            style={{ color: "red", marginTop: 5 }}
-                            fontSize="14px"
-                          >
-                            {errors.youtube}
-                          </Text>
-                        )}
-                      </FormControl>
-                    </GridItem>
                     <GridItem>
                       <Box display={"block"} mt={5}>
                         <Button
@@ -272,7 +194,6 @@ const BecomeInstructor = () => {
                 </Text>
               </Stack>
             </TabPanel>
-          
           </TabPanels>
         </Tabs>
       </Stack>
@@ -285,4 +206,4 @@ export default BecomeInstructor;
 // 1. ceg lab report
 // 2. pgg lab report
 // 3. pgg notes and test
-// 4. 
+// 4.
