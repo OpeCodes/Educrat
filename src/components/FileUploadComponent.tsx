@@ -5,7 +5,7 @@ import imagePlaceholder from "../assets/image-placeholder.png";
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
 }
-
+const MAX_FILE_SIZE_MB = 5;
 const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
@@ -15,11 +15,21 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
 
+    
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedImage(imageUrl);
-      setFileToUpload(file);
-    }
+        if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        toast({
+            title: `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          const imageUrl = URL.createObjectURL(file);
+          setSelectedImage(imageUrl);
+          setFileToUpload(file);
+        }
+      }
   };
 
   const handleUploadClick = () => {
