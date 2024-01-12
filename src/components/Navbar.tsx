@@ -37,8 +37,7 @@ import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
 import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
-import { useQuery } from "@tanstack/react-query";
-import customFetch from "../utils/axios";
+import { useGetUser } from "../hooks";
 
 const links = [
   {
@@ -78,12 +77,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store.user);
 
-  const { data } = useQuery({
-    queryKey: ["user"],
-    queryFn: () => customFetch.get("/user"),
-  });
-  // console.log(data)
-  console.log(user.user);
+  const {data} = useGetUser();
+
   return (
     <Stack>
       <Flex
