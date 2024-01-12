@@ -1,15 +1,14 @@
 // Sidebar.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Icon, VStack, Text } from '@chakra-ui/react';
 import { AiOutlineDashboard, AiOutlineBook } from 'react-icons/ai';
 
 interface SidebarProps {
+  isExpanded: boolean;
   onHover: (isHovered: boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onHover }) => {
-  const [isExpanded, setExpanded] = useState(false);
-
+const Sidebar: React.FC<SidebarProps> = ({ isExpanded, onHover }) => {
   return (
     <Box
       w={isExpanded ? '250px' : '50px'}
@@ -17,14 +16,8 @@ const Sidebar: React.FC<SidebarProps> = ({ onHover }) => {
       p="4"
       h="100vh"
       transition="width 0.3s"
-      onMouseEnter={() => {
-        setExpanded(true);
-        onHover(true);
-      }}
-      onMouseLeave={() => {
-        setExpanded(false);
-        onHover(false);
-      }}
+      onMouseEnter={() => onHover(true)}
+      onMouseLeave={() => onHover(false)}
     >
       <VStack spacing={4} align="left">
         <Box>
