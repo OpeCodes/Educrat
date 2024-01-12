@@ -149,3 +149,29 @@ export const useVerifyAccount = () => {
   });
   return { verifyAccount, };
 };
+export const useBecomeInstructor = () => {
+    const toast = useToast();
+    const { mutate:becomeInstructor , isPending  } = useMutation({
+      mutationFn: (user: any) => {
+        return customFetch.patch("/user/instructor", user);
+      },
+      onSuccess: () => {
+        toast({
+            title: `You are now an instructor`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+      onError: (error: any) => {
+        console.log(error);
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+    });
+    return { becomeInstructor,isPending };
+  };

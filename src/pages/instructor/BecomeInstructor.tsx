@@ -15,12 +15,10 @@ import {
   FormLabel,
   Input,
   Button,
-  useToast
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
-import { useMutation } from "@tanstack/react-query";
-import customFetch from "../../utils/axios";
+import { useBecomeInstructor } from "../../hooks";
 const initialValues = {
   headline: "",
   biography: "",
@@ -34,28 +32,7 @@ const initialValues = {
 };
 
 const BecomeInstructor = () => {
-  const toast= useToast();
-const {mutate: becomeInstructor,isPending} = useMutation({
-  mutationFn: (user) => customFetch.put("/user/instructor", user),
-  onSuccess: () => {
-    toast({
-      title: `You are now an instructor`,
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
-  },
-  onError: (error: any) => {
-    console.log(error)
-    toast({
-      title: `${error.response.data.error}`,
-      status: "error",
-      duration: 5000,
-      isClosable: true,
-    });
-  },
-
-})
+ const {becomeInstructor,isPending} = useBecomeInstructor();
   const handleSubmit = (values: any) => {
     console.log(values);
     becomeInstructor(values)

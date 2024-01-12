@@ -78,7 +78,7 @@ const Navbar = () => {
   const { user } = useSelector((store: RootState) => store.user);
 
   const {data} = useGetUser();
-
+  console.log(data)
   return (
     <Stack>
       <Flex
@@ -171,7 +171,7 @@ const Navbar = () => {
               fontWeight="bold"
               bg="white"
               color="#140342"
-              src={data?.data.profilePicture}
+              src={data?.profilePicture}
               cursor="pointer"
             />
           ) : (
