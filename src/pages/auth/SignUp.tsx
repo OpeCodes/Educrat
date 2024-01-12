@@ -12,7 +12,6 @@ import {
   Image,
   Grid,
   GridItem,
-  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { useState } from "react";
@@ -20,9 +19,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
 import { SignUpSchema } from "../../schemas";
 import { Link } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import  customFetch  from "../../utils/axios";
-
+import { useRegisterUser } from "../../hooks";
 
 interface User {
   firstName: string;
@@ -47,27 +44,8 @@ const SignUp = () => {
   const handlePasswordClick = () => setShowPassword(!showPassword);
   const handleConfirmPasswordClick = () =>
     setShowConfirmPassword(!showConfirmPassword);
-  const toast = useToast();
-  const { mutate: registerUser, isPending } = useMutation({
-    mutationFn: (user: any) => customFetch.post("auth/register", user),
-    onSuccess: () => {
-      toast({
-        title: `check your email to verify your account`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-    },
-    onError: (error: any) => {
-      console.log(error);
-      toast({
-        title: `${error.response.data.error}`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    },
-  });
+  const { registerUser, isPending } = useRegisterUser();
+
   const handleSubmit = (values: any) => {
     const { firstName, lastName, username, email, password } = values;
     registerUser({ firstName, lastName, username, email, password });

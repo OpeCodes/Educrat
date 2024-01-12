@@ -42,3 +42,29 @@ export const useLoginUser = () => {
   });
   return { isPending, loginUser };
 };
+
+export const useRegisterUser = () => {
+  const toast = useToast();
+  const { mutate: registerUser, isPending } = useMutation({
+    mutationFn: (user: any) => {
+      return customFetch.post("/auth/register", user);
+    },
+    onSuccess: () => {
+      toast({
+        title: `check your email to verify your account`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { isPending, registerUser };
+};
