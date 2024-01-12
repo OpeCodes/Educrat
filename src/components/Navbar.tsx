@@ -37,6 +37,8 @@ import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
 import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
+import customFetch from "../utils/axios";
 
 const links = [
   {
@@ -73,8 +75,15 @@ const Navbar = () => {
     onOpen: onModalOpen,
     onClose: onModalClose,
   } = useDisclosure();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store.user);
+
+  const { data } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => customFetch.get("/user"),
+  });
+  // console.log(data)
+  console.log(user.user);
   return (
     <Stack>
       <Flex
@@ -117,7 +126,9 @@ const Navbar = () => {
             </Box>
           ))}
         </Flex>
-        <Text color="white" onClick={() =>  dispatch(logoutUser())}>logout</Text>
+        <Text color="white" onClick={() => dispatch(logoutUser())}>
+          logout
+        </Text>
         <Flex align={"center"} columnGap={5} color="white">
           {user && (
             <Text
@@ -126,7 +137,7 @@ const Navbar = () => {
               as={Link}
               to="/become-instructor"
             >
-            Become an Instructor
+              Become an Instructor
             </Text>
           )}
 
@@ -160,11 +171,12 @@ const Navbar = () => {
           </Box>
           {user ? (
             <Avatar
-              name="Adedokun Peter"
+              name={`${user.user.firstName} ${user.user.lastName}`}
               size="sm"
               fontWeight="bold"
               bg="white"
               color="#140342"
+              src={data?.data.profilePicture}
               cursor="pointer"
             />
           ) : (
@@ -299,9 +311,6 @@ const Navbar = () => {
           <ModalBody>
             <Text>Popular Right now</Text>
           </ModalBody>
-          {/* <ModalFooter>
-            <Button onClick={onModalClose}>Close</Button>
-          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </Stack>
