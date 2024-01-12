@@ -122,3 +122,30 @@ export const useForgotPassword = () => {
   });
   return { forgotPassword, isPending };
 };
+
+export const useVerifyAccount = () => {
+  const toast = useToast();
+  const { mutate: verifyAccount,  } = useMutation({
+    mutationFn: (user: any) => {
+      return customFetch.patch("auth/verification", user);
+    },
+    onSuccess: () => {
+      toast({
+        title: `verification successful`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { verifyAccount, };
+};

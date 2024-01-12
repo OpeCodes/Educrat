@@ -10,21 +10,18 @@ import {
   Image,
   Grid,
   GridItem,
-  useToast,
+  
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
 import { forgotPasswordSchema } from "../../schemas";
 import { Link } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import customFetch from "../../utils/axios";
 import { useForgotPassword } from "../../hooks";
 
 const initialValues = {
   email: "",
 };
 const ForgotPassword = () => {
-  const toast = useToast();
   const { forgotPassword, isPending } = useForgotPassword();
   const handleSubmit = (values: any): void => {
     forgotPassword(values);
