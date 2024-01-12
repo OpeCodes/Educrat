@@ -78,7 +78,6 @@ const Navbar = () => {
   const { user } = useSelector((store: RootState) => store.user);
 
   const {data} = useGetUser();
-  console.log(data)
   return (
     <Stack>
       <Flex

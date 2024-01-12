@@ -47,7 +47,7 @@ const courses = [
     Duration: "20 hours",
   },
 ];
-const Courses = () => {
+const StudentCourse = () => {
     
   return (
     <Stack>
@@ -153,4 +153,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default StudentCourse;

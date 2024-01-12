@@ -1,2 +1,2 @@
-import Courses from "./Courses";
-export {Courses}
+import StudentCourse from "./StudentCourse";
+export {StudentCourse}

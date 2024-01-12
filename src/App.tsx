@@ -7,13 +7,14 @@ import {
   VerifyAccount,
   ResetPassword,
 } from "./pages/auth";
-import { HomeLayout } from "./components";
+import { HomeLayout, InstructorDashboardLayout } from "./components";
 import "./App.css";
 import Home from "./pages/Home";
-import { Courses } from "./pages/course";
+import { StudentCourse } from "./pages/course";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
+import { Courses } from "./pages/instructor/courses";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/courses",
-        element: <Courses />,
+        element: <StudentCourse />,
       },
     ],
   },
@@ -54,6 +55,17 @@ const router = createBrowserRouter([
   {
     path: "/become-instructor",
     element : <BecomeInstructor/>
+  },
+  //instructor dashboard
+  {
+    path: "/instructor",
+    element: <InstructorDashboardLayout/>,
+    children: [
+      {
+        path: "courses",
+        element: <Courses/>
+      }
+    ]
   }
 ]);
 
