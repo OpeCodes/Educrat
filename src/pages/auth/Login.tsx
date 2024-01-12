@@ -26,16 +26,15 @@ const initialValues = {
 };
 // myPassword = Peter12111
 
-
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
-  
-  const {isPending,loginUser} = useLoginUser()
+
+  const { isPending, loginUser } = useLoginUser();
   const handleSubmit = (values: any): void => {
     loginUser(values);
   };
- 
+
   return (
     <Stack>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>

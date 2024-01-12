@@ -68,3 +68,30 @@ export const useRegisterUser = () => {
   });
   return { isPending, registerUser };
 };
+
+export const useResetPassword = () =>{
+    const toast = useToast();
+    const{ mutate: resetPassword, isPending} = useMutation({
+        mutationFn: (user: any) =>{
+            return  customFetch.patch("auth/password/reset", user)
+        },
+        onSuccess: () => {
+            toast({
+              title: `Password set successfully`,
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
+          },
+          onError: (error: any) => {
+            console.log(error);
+            toast({
+              title: `${error.response.data.error}`,
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+            });
+          },
+    })
+    return {resetPassword,isPending}
+}

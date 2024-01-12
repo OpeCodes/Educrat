@@ -18,6 +18,7 @@ import { resetPasswordSchema } from "../../schemas";
 import { Link, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import  customFetch  from "../../utils/axios";
+import { useResetPassword } from "../../hooks";
 
 const initialValues = {
   password: "",
@@ -27,26 +28,7 @@ const ResetPassword = () => {
   const { code, token } = useParams();
   const toast = useToast();
 
-  const { mutate: resetPassword, isPending } = useMutation({
-    mutationFn: (user: any) => customFetch.patch("auth/password/reset", user),
-    onSuccess: () => {
-      toast({
-        title: `Password set successfully`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-    },
-    onError: (error: any) => {
-      console.log(error);
-      toast({
-        title: `${error.response.data.error}`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    },
-  });
+ const {resetPassword,isPending} = useResetPassword();
   const handleSubmit = (values: typeof initialValues) => {
     const { password } = values;
     resetPassword({ code, token, password });
