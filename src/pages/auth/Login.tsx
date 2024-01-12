@@ -12,7 +12,6 @@ import {
   Image,
   Grid,
   GridItem,
-  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { useState } from "react";
@@ -20,15 +19,10 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
 import { SignInSchema } from "../../schemas";
 import { Link } from "react-router-dom";
-import { useMutation, } from "@tanstack/react-query";
-import  customFetch  from "../../utils/axios";
-// import { useDispatch } from "react-redux";
-import { setUser } from "../../features/user/UserSlice";
-import { useDispatch } from "react-redux";
-import { addUserLocalStorage, } from "../../store/localStorage";
+import { useLoginUser } from "../../hooks";
 const initialValues = {
   credential: "",
-  password: "",
+  password: "Peter12111",
 };
 // myPassword = Peter12111
 
@@ -36,29 +30,8 @@ const initialValues = {
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
-  const toast = useToast();
-  const dispatch = useDispatch()
-  const { mutate: loginUser, isPending } = useMutation({
-    mutationFn: (user) => customFetch.post("/auth/login", user),
-    onSuccess: (user) => {
-      dispatch(setUser(user.data))
-      addUserLocalStorage(user.data);
-      toast({
-        title: `welcome ${user.data.user.firstName}`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        title: `${error.response.data.error}`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    },
-  });
+  
+  const {isPending,loginUser} = useLoginUser()
   const handleSubmit = (values: any): void => {
     loginUser(values);
   };
