@@ -69,29 +69,56 @@ export const useRegisterUser = () => {
   return { isPending, registerUser };
 };
 
-export const useResetPassword = () =>{
-    const toast = useToast();
-    const{ mutate: resetPassword, isPending} = useMutation({
-        mutationFn: (user: any) =>{
-            return  customFetch.patch("auth/password/reset", user)
-        },
-        onSuccess: () => {
-            toast({
-              title: `Password set successfully`,
-              status: "success",
-              duration: 5000,
-              isClosable: true,
-            });
-          },
-          onError: (error: any) => {
-            console.log(error);
-            toast({
-              title: `${error.response.data.error}`,
-              status: "error",
-              duration: 5000,
-              isClosable: true,
-            });
-          },
-    })
-    return {resetPassword,isPending}
-}
+export const useResetPassword = () => {
+  const toast = useToast();
+  const { mutate: resetPassword, isPending } = useMutation({
+    mutationFn: (user: any) => {
+      return customFetch.patch("auth/password/reset", user);
+    },
+    onSuccess: () => {
+      toast({
+        title: `Password set successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { resetPassword, isPending };
+};
+
+export const useForgotPassword = () => {
+  const toast = useToast();
+  const { mutate: forgotPassword, isPending } = useMutation({
+    mutationFn: (user: any) => {
+      return customFetch.patch("auth/password/forgot", user);
+    },
+    onSuccess: () => {
+      toast({
+        title: `password reset link sent`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { forgotPassword, isPending };
+};

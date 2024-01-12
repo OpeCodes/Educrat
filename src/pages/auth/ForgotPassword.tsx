@@ -17,33 +17,15 @@ import backgroundImg from "../../assets/backimage.webp";
 import { forgotPasswordSchema } from "../../schemas";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import  customFetch  from "../../utils/axios";
+import customFetch from "../../utils/axios";
+import { useForgotPassword } from "../../hooks";
 
 const initialValues = {
   email: "",
 };
 const ForgotPassword = () => {
   const toast = useToast();
-  const { mutate: forgotPassword, isPending } = useMutation({
-    mutationFn: (user) => customFetch.post("auth/password/forgot", user),
-    onSuccess: () => {
-      toast({
-        title: `password reset link sent`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-    },
-    onError: (error: any) => {
-      console.log(error);
-      toast({
-        title: `${error.response.data.error}`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    },
-  });
+  const { forgotPassword, isPending } = useForgotPassword();
   const handleSubmit = (values: any): void => {
     forgotPassword(values);
   };

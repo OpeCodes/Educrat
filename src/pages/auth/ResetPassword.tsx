@@ -10,14 +10,11 @@ import {
   Image,
   Grid,
   GridItem,
-  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
 import { resetPasswordSchema } from "../../schemas";
 import { Link, useParams } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import  customFetch  from "../../utils/axios";
 import { useResetPassword } from "../../hooks";
 
 const initialValues = {
@@ -26,7 +23,6 @@ const initialValues = {
 };
 const ResetPassword = () => {
   const { code, token } = useParams();
-  const toast = useToast();
 
  const {resetPassword,isPending} = useResetPassword();
   const handleSubmit = (values: typeof initialValues) => {
