@@ -39,8 +39,7 @@ const InstructorDashboard: React.FC = () => {
           </Flex>
         </Flex>
 
-        <Box p="4">
-          <p>Welcome to your Udemy Dashboard!</p>
+        <Box p="5">
           <Outlet />
         </Box>
       </Box>

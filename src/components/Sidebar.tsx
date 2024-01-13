@@ -1,22 +1,23 @@
-import React from 'react';
-import { Box,  VStack,  } from '@chakra-ui/react';
+import React from "react";
+import { Box, VStack } from "@chakra-ui/react";
 interface SidebarProps {
   isExpanded: boolean;
   onHover: (isHovered: boolean) => void;
 }
 import {
-  MdInsertChart,
   MdPayment,
   MdOutlineNotificationsNone,
 } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
-import { NavItem } from './NavItem';
+import { NavItem } from "./NavItem";
+import { FaYoutube } from "react-icons/fa6";
 
 const links = [
   {
-    name: "Dashboard",
+    name: "courses",
     href: "courses",
-    icon: MdInsertChart,
+    icon: FaYoutube ,
+    
   },
   {
     name: "Payment",
@@ -38,7 +39,7 @@ const links = [
 const Sidebar: React.FC<SidebarProps> = ({ isExpanded, onHover }) => {
   return (
     <Box
-      w={isExpanded ? '250px' : '50px'}
+      w={isExpanded ? "250px" : "50px"}
       bg="gray.200"
       p="4"
       h="100vh"
@@ -47,30 +48,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isExpanded, onHover }) => {
       onMouseLeave={() => onHover(false)}
     >
       <VStack spacing={4} align="left">
-        {/* <Box>
-          <Icon as={AiOutlineDashboard} boxSize={6} />
-          {isExpanded && <Text>Dashboard</Text>}
+        <Box >
+          {links.map((link, i) => (
+            <Box key={i}>
+              <NavItem to={link.href} icon={link.icon} key={i}>
+                {isExpanded && <> {link.name}</>}
+              </NavItem>
+            </Box>
+          ))}
         </Box>
-        <Box>
-          <Icon as={AiOutlineBook} boxSize={6} />
-          {isExpanded && <Text>Courses</Text>}
-        </Box> */}
-        {/* Add more sidebar items as needed */}
-        <Box
-            width={"94%"}
-          >
-            {links.map((link, i) => (
-              <Box key={i}>
-                <NavItem to={link.href} icon={link.icon} key={i}>
-                  {
-                    isExpanded && <> {link.name}</>
-                  }
-                  
-                 
-                </NavItem>
-              </Box>
-            ))}
-          </Box>
       </VStack>
     </Box>
   );
