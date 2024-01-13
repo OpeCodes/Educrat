@@ -8,7 +8,7 @@ import { InstructorNavbar } from ".";
 
 const InstructorDashboard: React.FC = () => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
-  const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
+  const [isSmallerScreen] = useMediaQuery("(max-width: 100px)");
 
   const toggleSidebar = () => {
     setSidebarExpanded(!isSidebarExpanded);
@@ -55,6 +55,8 @@ const InstructorDashboard: React.FC = () => {
           right="4"
         />
       )}
+      
+
     </Flex>
   );
 };
