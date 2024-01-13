@@ -1,9 +1,10 @@
 // InstructorDashboard.tsx
 import React, { useState } from 'react';
-import { Flex, Box, Heading, IconButton, useMediaQuery } from '@chakra-ui/react';
+import { Flex, Box,  IconButton, useMediaQuery } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { Outlet } from 'react-router-dom';
+import { InstructorNavbar } from '.';
 const InstructorDashboard: React.FC = () => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
   const [isSmallerScreen] = useMediaQuery('(max-width: 768px)');
@@ -23,9 +24,9 @@ const InstructorDashboard: React.FC = () => {
       )}
 
       {/* Main Content */}
-      <Box flex="1" p="4">
+      <Box flex="1">
         {/* Header with Toggle Button */}
-        <Flex align="center" justify="space-between" p="4" bg="teal.500">
+        <Flex align="center" justify="space-between"  >
           {isSmallerScreen && (
             <IconButton
               icon={<AiOutlineMenu />}
@@ -34,7 +35,11 @@ const InstructorDashboard: React.FC = () => {
               display={{ base: 'block', md: 'none' }}
             />
           )}
-          <Heading color="white">Instructor Dashboard</Heading>
+          {/* <Heading color="white">Instructor Dashbossssard</Heading> */}
+          <Flex width={"100%"} justify={"flex-end"}>
+          <InstructorNavbar/>
+
+          </Flex>
         </Flex>
 
         {/* Courses or other main content */}
