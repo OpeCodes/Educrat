@@ -14,6 +14,7 @@ export const NavItem = ({ icon, children, to }: IProps) => {
   const resolvedPath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedPath?.pathname, end: true });
   return (
+    <Box _before={{background: "red"}}>
     <Box
       as={Link}
       to={to}
@@ -24,21 +25,31 @@ export const NavItem = ({ icon, children, to }: IProps) => {
       textAlign={"left"}
       justifyContent={"space-between"}
       color={isActive ? "#7B58F4" : "#808080"}
-      _after={{
-        content: '""',
-        height: `${isActive ? "2px" : ""}`,
-        borderStyle: `${isActive ? "solid" : ""}`,
-        borderWidth: `${isActive ? "10px 0 10px 7px" : ""}`,
-        borderColor: `${
-          isActive ? "transparent transparent transparent #7B58F4" : ""
-        }`,
-        transform: "scaleX(-1)",
-      }}
+
+
+      // _after={{
+      //   content: '""',
+      //   height: `${isActive ? "2px" : ""}`,
+      //   borderStyle: `${isActive ? "solid" : ""}`,
+      //   borderWidth: `${isActive ? "10px 0 10px 7px" : ""}`,
+      //   borderColor: `${
+      //     isActive ? "transparent transparent transparent #7B58F4" : ""
+      //   }`,
+      //   transform: "scaleX(-1)",
+      // }}
+      // _before={{
+      //   content: '""',
+      //   height: "100%",
+      //   background: "red",
+      //   transform: "scaleX(1)",
+
+      // }}
     >
       <Box display={"flex"}>
         <Icon as={icon} boxSize={6} mr={"1.5rem"} />
         {children}
       </Box>
+    </Box>
     </Box>
   );
 };
