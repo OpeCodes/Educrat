@@ -5,35 +5,7 @@ import Sidebar from "./Sidebar";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Outlet } from "react-router-dom";
 import { InstructorNavbar } from ".";
-import {
-  MdInsertChart,
-  MdPayment,
-  MdOutlineNotificationsNone,
-  MdPersonOutline,
-  MdLogout,
-} from "react-icons/md";
-const links = [
-  {
-    name: "Dashboard",
-    href: "/",
-    icon: MdInsertChart,
-  },
-  {
-    name: "Payment",
-    href: "/payment",
-    icon: MdPayment,
-  },
-  {
-    name: "Notification",
-    href: "/notification",
-    icon: MdOutlineNotificationsNone,
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    icon: IoSettingsOutline,
-  },
-];
+
 const InstructorDashboard: React.FC = () => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
   const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
