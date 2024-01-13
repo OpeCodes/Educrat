@@ -1,44 +1,44 @@
-// Sidebar.tsx
-import React, { useState } from 'react';
-import { Box, Icon, VStack, Text } from '@chakra-ui/react';
-import { AiOutlineDashboard, AiOutlineBook } from 'react-icons/ai';
+import { Box, Icon } from "@chakra-ui/react";
+import { ReactNode } from "react";
+import { IconType } from "react-icons";
 
-interface SidebarProps {
-  onHover: (isHovered: boolean) => void;
+import { Link, useResolvedPath, useMatch } from "react-router-dom";
+
+interface IProps {
+  icon?: IconType | ReactNode | any;
+  children: any;
+  to: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onHover }) => {
-  const [isExpanded, setExpanded] = useState(false);
-
+export const NavItem = ({ icon, children, to }: IProps) => {
+  const resolvedPath = useResolvedPath(to);
+  const isActive = useMatch({ path: resolvedPath?.pathname, end: true });
   return (
     <Box
-      w={isExpanded ? '250px' : '50px'}
-      bg="gray.200"
-      p="4"
-      h="100vh"
-      transition="width 0.3s"
-      onMouseEnter={() => {
-        setExpanded(true);
-        onHover(true);
-      }}
-      onMouseLeave={() => {
-        setExpanded(false);
-        onHover(false);
+      as={Link}
+      to={to}
+      display={"flex"}
+      alignItems={"center"}
+      mb="30px"
+      w="full"
+      textAlign={"left"}
+      justifyContent={"space-between"}
+      color={isActive ? "#7B58F4" : "#808080"}
+      _after={{
+        content: '""',
+        height: `${isActive ? "2px" : ""}`,
+        borderStyle: `${isActive ? "solid" : ""}`,
+        borderWidth: `${isActive ? "10px 0 10px 7px" : ""}`,
+        borderColor: `${
+          isActive ? "transparent transparent transparent #7B58F4" : ""
+        }`,
+        transform: "scaleX(-1)",
       }}
     >
-      <VStack spacing={4} align="left">
-        <Box display="flex">
-          <Icon as={AiOutlineDashboard} boxSize={6} />
-          {isExpanded && <Text>Dashboard</Text>}
-        </Box>
-        <Box>
-          <Icon as={AiOutlineBook} boxSize={6} />
-          {isExpanded && <Text>Courses</Text>}
-        </Box>
-        {/* Add more sidebar items as needed */}
-      </VStack>
+      <Box display={"flex"}>
+        <Icon as={icon} boxSize={6} mr={"1.5rem"} />
+        {children}
+      </Box>
     </Box>
   );
 };
-
-export default Sidebar;
