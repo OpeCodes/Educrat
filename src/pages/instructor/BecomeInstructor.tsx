@@ -15,6 +15,7 @@ import {
   FormLabel,
   Input,
   Button,
+  Textarea,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
@@ -99,14 +100,12 @@ const BecomeInstructor = () => {
                     <GridItem w="100%">
                       <FormControl isRequired>
                         <FormLabel>Biography</FormLabel>
-                        <Input
-                          type="text"
-                          variant="filled"
-                          placeholder="headline"
-                          value={values.biography}
-                          name="biography"
-                          onChange={handleChange}
-                        />
+                       <Textarea 
+                        variant="filled"
+                        placeholder="biography"
+                        value={values.biography}
+                        name="biography"
+                        onChange={handleChange} />
                         {errors.biography && (
                           <Text
                             style={{ color: "red", marginTop: 5 }}
@@ -128,7 +127,7 @@ const BecomeInstructor = () => {
                           <Input
                             type="text"
                             variant="filled"
-                            placeholder="headline"
+                            placeholder=""
                             name={`socials[${index}].url`}
                             value={values.socials[index].url}
                             onChange={handleChange}

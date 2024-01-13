@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Flex, Box, Heading, IconButton, useMediaQuery } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
 import { AiOutlineMenu } from 'react-icons/ai';
-
+import { Outlet } from 'react-router-dom';
 const InstructorDashboard: React.FC = () => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
   const [isSmallerScreen] = useMediaQuery('(max-width: 768px)');
@@ -41,6 +41,7 @@ const InstructorDashboard: React.FC = () => {
         <Box p="4">
           {/* Your main content goes here */}
           <p>Welcome to your Udemy Dashboard!</p>
+          <Outlet/>
         </Box>
       </Box>
 

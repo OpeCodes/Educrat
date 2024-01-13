@@ -2,7 +2,6 @@
 import React from 'react';
 import { Box, Icon, VStack, Text } from '@chakra-ui/react';
 import { AiOutlineDashboard, AiOutlineBook } from 'react-icons/ai';
-
 interface SidebarProps {
   isExpanded: boolean;
   onHover: (isHovered: boolean) => void;
