@@ -10,7 +10,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Input,
+  Divider,
 } from "@chakra-ui/react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
@@ -108,9 +108,17 @@ const InstructorNavbar = () => {
           </Box>
               </Flex>
             </DrawerHeader>
-
+      <Divider/>
             <DrawerBody>
-              <Input placeholder="Type here..." />
+            <Box p={5}>
+            {links.map((link, i) => (
+              <Box key={i}>
+                <NavItem to={link.href} icon={link.icon} key={i}>
+                  {link.name}
+                </NavItem>
+              </Box>
+            ))}
+          </Box>
             </DrawerBody>
           </DrawerContent>
         </Drawer>
