@@ -23,11 +23,10 @@ const StepCourse2 = () => {
     console.log(values);
   };
   const { data } = useCourseCategory();
-  // console.log(data)
 
   return (
     <Stack>
-      <CreateCourseNavBar step={2} progressValue={40} />
+      <CreateCourseNavBar step={2} progressValue={100} />
       second step
       <Stack justify={"center"} align={"center"} mt={"7rem"}>
         <Text fontSize={"2.5rem"} fontWeight={"bold"}>
