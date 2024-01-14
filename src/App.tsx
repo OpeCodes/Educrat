@@ -14,7 +14,7 @@ import { StudentCourse } from "./pages/course";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
-import { Courses } from "./pages/instructor/courses";
+import { Courses, StepCourse1 } from "./pages/instructor/courses";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -66,6 +66,11 @@ const router = createBrowserRouter([
         element: <Courses/>
       }
     ]
+  },
+  {
+    path: "/course/create/1",
+    element: <StepCourse1/>,
+    
   }
 ]);
 

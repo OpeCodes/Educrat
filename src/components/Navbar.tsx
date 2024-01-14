@@ -89,7 +89,7 @@ const Navbar = () => {
       >
         <Flex justify={"space-between"} align={"center"}>
           <Box width={"160px"}>
-            <Image src={logo} alt="Dan Abramov" />
+            <Image src={logo} alt="logo" />
           </Box>
         </Flex>
         <Flex

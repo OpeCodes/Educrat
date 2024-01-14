@@ -4,4 +4,13 @@ import InstructorNavbar from "./InstructorNavbar";
 import FileUploadComponent from "./FileUploadComponent";
 import InstructorDashboardLayout from "./InstructorDashboardLayout";
 import Sidebar from "./Sidebar";
-export { HomeLayout, Navbar , InstructorNavbar,FileUploadComponent, InstructorDashboardLayout, Sidebar};
+import CreateCourseNavBar from "./CreateCourseNavBar";
+export {
+  HomeLayout,
+  Navbar,
+  InstructorNavbar,
+  FileUploadComponent,
+  InstructorDashboardLayout,
+  Sidebar,
+  CreateCourseNavBar,
+};

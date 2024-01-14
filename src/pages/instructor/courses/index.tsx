@@ -1,2 +1,3 @@
 import Courses from "./Courses";
-export {Courses}
+import StepCourse1 from "./StepCourse1";
+export {Courses,StepCourse1}
