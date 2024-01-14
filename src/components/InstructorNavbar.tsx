@@ -20,6 +20,7 @@ import { MdPayment, MdOutlineNotificationsNone } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { NavItem } from "./NavItem";
 import { FaYoutube } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const links = [
   {
@@ -66,7 +67,7 @@ const InstructorNavbar = () => {
           <MdMenu fontSize={35} />
         </Box>
         <Flex align={"center"} columnGap={4}>
-          <Text as={"button"} fontWeight={"500"}>
+          <Text as={Link} to="/" fontWeight={"500"}>
             Student
           </Text>
           <Box cursor={"pointer"}>

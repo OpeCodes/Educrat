@@ -1,4 +1,4 @@
-import { FileUploadComponent, InstructorNavbar } from "../../components";
+import { FileUploadComponent,  } from "../../components";
 import {
   Box,
   Stack,
@@ -44,11 +44,11 @@ const BecomeInstructor = () => {
   };
   return (
     <Stack>
-      <InstructorNavbar />
-      <Stack ml={{ base: 6, lg: 16 }} mr={{ base: 5, lg: 10 }}>
+      {/* <InstructorNavbar /> */}
+      <Stack ml={{ base: 6, lg: 16 }} mr={{ base: 5, lg: 10 }} mt={10}>
         <Box mt={3}>
           <Text fontSize={"4xl"} fontWeight={"bold"}>
-            Sign Up
+            Become an instructor
           </Text>
           <Text fontSize={"18px"}>Your impacting journey begins here!</Text>
         </Box>
