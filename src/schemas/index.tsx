@@ -53,11 +53,8 @@ export const instructorProfileSchema = Yup.object().shape({
   linkedin: Yup.string(),
   youtube: Yup.string()
 })
+export const createCourseSchema = Yup.object().shape({
+  title: Yup.string().required("title is required"),
+  category: Yup.string().required("Select category"),
+});
 
-// headline: "",
-// Biography: "",
-// website: "",
-// twitter: "",
-// facebook: "",
-// linkedin: "",
-// youtube: "",

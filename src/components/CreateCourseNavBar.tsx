@@ -27,7 +27,7 @@ const CreateCourseNavBar = ({ step, progressValue }: StepNumber) => {
           </Box>
         </Flex>
         <Box>
-          <Text as={Link} to="/instructor/courses">
+          <Text as={Link} fontWeight={"bold"} to="/instructor/courses">
             Exit
           </Text>
         </Box>
