@@ -14,6 +14,7 @@ export const useGetUser = () => {
   });
   return { data };
 };
+
 export const useLoginUser = () => {
   const toast = useToast();
   const dispatch = useDispatch();
@@ -154,6 +155,43 @@ export const useBecomeInstructor = () => {
   const { mutate: becomeInstructor, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.patch("/user/instructor", user);
+    },
+    onSuccess: () => {
+      toast({
+        title: `You are now an instructor`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { becomeInstructor, isPending };
+};
+export const useCourseCategory = () => {
+  const { data } = useQuery({
+    queryKey: ["courseCategory"],
+    queryFn: async () => {
+      const { data } = await customFetch.get("/course/category");
+      return data;
+    },
+  });
+  return { data };
+};
+
+export const useCreateCourse = () => {
+  const toast = useToast();
+  const { mutate: becomeInstructor, isPending } = useMutation({
+    mutationFn: (user: any) => {
+      return customFetch.post("/course", user);
     },
     onSuccess: () => {
       toast({

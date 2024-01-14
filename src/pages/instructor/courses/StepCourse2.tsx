@@ -6,10 +6,12 @@ import {
   Stack,
   Text,
   Box,
+  Select,
 } from "@chakra-ui/react";
 import { CreateCourseNavBar } from "../../../components";
 import { Formik } from "formik";
 import { createCourseSchema } from "../../../schemas";
+import { useCourseCategory } from "../../../hooks";
 
 const initialValues = {
   title: "",
@@ -20,6 +22,9 @@ const StepCourse2 = () => {
     // loginUser(values);
     console.log(values);
   };
+  const { data } = useCourseCategory();
+  // console.log(data)
+
   return (
     <Stack>
       <CreateCourseNavBar step={2} progressValue={40} />
@@ -62,7 +67,25 @@ const StepCourse2 = () => {
                   </Text>
                 )}
               </FormControl>
-
+              <Select
+                placeholder="Select Category"
+                name="category"
+                onChange={handleChange}
+                mt={6}
+                variant="filled"
+                value={values.category}
+              >
+                {data?.map((values: any) => (
+                  <option key={values.id} id={values.id} value={values.name}>
+                    {values.name}
+                  </option>
+                ))}
+              </Select>
+              {errors.category && (
+                <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
+                  {errors.category}
+                </Text>
+              )}
               <Button
                 bg={"#00FF84"}
                 // isLoading={isPending}
@@ -83,7 +106,6 @@ const StepCourse2 = () => {
             </Flex>
           )}
         </Formik>
-       
       </Box>
     </Stack>
   );
