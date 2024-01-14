@@ -16,7 +16,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
 import { useGetUser } from "../hooks";
 import React from "react";
-import { MdPayment, MdOutlineNotificationsNone,  } from "react-icons/md";
+import { MdPayment, MdOutlineNotificationsNone } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { NavItem } from "./NavItem";
 import { FaYoutube } from "react-icons/fa6";
@@ -82,43 +82,42 @@ const InstructorNavbar = () => {
             cursor="pointer"
           />
         </Flex>
-        <Drawer
-          isOpen={isOpen}
-          placement="left"
-          onClose={onClose}
-          // finalFocusRef={btnRef}
-        >
+        <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton />
             <DrawerHeader>
               <Flex columnGap={4} mt={4}>
-              <Avatar
-            name={`${data?.firstName} ${data?.lastName}`}
-            size="md"
-            fontWeight="bold"
-            bg="white"
-            color="#140342"
-            src={data?.profilePicture}
-            cursor="pointer"
-          />
-          <Box>
-            <Text fontWeight={"bold"} fontSize={"18px"}>Hi, {data?.firstName} {data?.lastName}</Text>
-            <Text fontWeight={"400"} fontSize="14px">Welcome back</Text>
-          </Box>
+                <Avatar
+                  name={`${data?.firstName} ${data?.lastName}`}
+                  size="md"
+                  fontWeight="bold"
+                  bg="white"
+                  color="#140342"
+                  src={data?.profilePicture}
+                  cursor="pointer"
+                />
+                <Box>
+                  <Text fontWeight={"bold"} fontSize={"18px"}>
+                    Hi, {data?.firstName} {data?.lastName}
+                  </Text>
+                  <Text fontWeight={"400"} fontSize="14px">
+                    Welcome back
+                  </Text>
+                </Box>
               </Flex>
             </DrawerHeader>
-      <Divider/>
+            <Divider />
             <DrawerBody>
-            <Box p={5}>
-            {links.map((link, i) => (
-              <Box key={i}>
-                <NavItem to={link.href} icon={link.icon} key={i}>
-                  {link.name}
-                </NavItem>
+              <Box p={5}>
+                {links.map((link, i) => (
+                  <Box key={i} onClick={onClose}>
+                    <NavItem to={link.href} icon={link.icon} key={i}>
+                      {link.name}
+                    </NavItem>
+                  </Box>
+                ))}
               </Box>
-            ))}
-          </Box>
             </DrawerBody>
           </DrawerContent>
         </Drawer>
