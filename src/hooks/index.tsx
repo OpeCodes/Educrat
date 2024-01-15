@@ -84,12 +84,14 @@ export const useResetPassword = () => {
     },
     onSuccess: () => {
       toast({
-        title: `Password set successfully`,
+        title: `Password set successfully redirecting you in few seconds`,
         status: "success",
         duration: 5000,
         isClosable: true,
       });
-      navigate("/sign-in")
+      setTimeout(() => {
+        navigate("/sign-up")
+      }, 3000);
     },
     onError: (error: any) => {
       console.log(error);
