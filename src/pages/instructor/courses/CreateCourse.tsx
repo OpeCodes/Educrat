@@ -19,7 +19,7 @@ const initialValues = {
   category: "",
 };
 const CreateCourse = () => {
-  const { createCourse } = useCreateCourse();
+  const { createCourse, isPending : loading } = useCreateCourse();
   const handleSubmit = (values: any): void => {
     createCourse(values);
   };
@@ -93,7 +93,7 @@ const CreateCourse = () => {
               <Box position="fixed" bottom="4" right="4" p="4">
                 <Button
                   bg={"#00FF84"}
-                  // isLoading={isPending}
+                  isLoading={loading}
                   loadingText="Loading"
                   colorScheme="teal"
                   variant="outline"
