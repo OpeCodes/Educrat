@@ -177,14 +177,14 @@ export const useBecomeInstructor = () => {
   return { becomeInstructor, isPending };
 };
 export const useCourseCategory = () => {
-  const { data } = useQuery({
+  const { data ,isPending} = useQuery({
     queryKey: ["courseCategory"],
     queryFn: async () => {
       const { data } = await customFetch.get("/course/category");
       return data;
     },
   });
-  return { data };
+  return { data, isPending };
 };
 
 export const useCreateCourse = () => {

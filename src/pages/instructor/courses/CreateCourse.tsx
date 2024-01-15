@@ -7,6 +7,7 @@ import {
   Text,
   Box,
   Select,
+  Spinner,
 } from "@chakra-ui/react";
 import { CreateCourseNavBar } from "../../../components";
 import { Formik } from "formik";
@@ -18,11 +19,11 @@ const initialValues = {
   category: "",
 };
 const CreateCourse = () => {
- const {createCourse} = useCreateCourse();
+  const { createCourse } = useCreateCourse();
   const handleSubmit = (values: any): void => {
-    createCourse(values)
+    createCourse(values);
   };
-  const { data } = useCourseCategory();
+  const { data, isPending } = useCourseCategory();
 
   return (
     <Stack>
@@ -37,7 +38,7 @@ const CreateCourse = () => {
           change it later.
         </Text>
       </Stack>
-      <Box maxW={{base : "90%", lg: "50%"}} mx="auto" w="100%" mt={5}>
+      <Box maxW={{ base: "90%", lg: "50%" }} mx="auto" w="100%" mt={5}>
         <Formik
           initialValues={initialValues}
           validationSchema={createCourseSchema}
@@ -74,47 +75,45 @@ const CreateCourse = () => {
                 variant="filled"
                 value={values.category}
               >
-                {data?.map((values: any) => (
-                  <option key={values.id} id={values.id} value={values.id}>
-                    {values.name}
-                  </option>
-                ))}
+                {data?.map((values: any) =>
+                  isPending ? (
+                    <Spinner />
+                  ) : (
+                    <option key={values.id} id={values.id} value={values.id}>
+                      {values.name}
+                    </option>
+                  )
+                )}
               </Select>
               {errors.category && (
                 <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
                   {errors.category}
                 </Text>
               )}
-                 <Box
-        position="fixed"
-        bottom="4"
-        right="4"
-        p="4"
-      >
-              <Button
-                bg={"#00FF84"}
-                // isLoading={isPending}
-                loadingText="Loading"
-                colorScheme="teal"
-                variant="outline"
-                spinnerPlacement="end"
-                width="100%"
-                onClick={() => handleSubmit()}
-                mt={3}
-                borderWidth={2}
-                py={3}
-                borderColor={"#00FF84"}
-                _hover={{ background: "none", color: "#00FF84" }}
-                isDisabled={!initialValues.title && !initialValues.category}
-              >
-                Continue
-              </Button>
+              <Box position="fixed" bottom="4" right="4" p="4">
+                <Button
+                  bg={"#00FF84"}
+                  // isLoading={isPending}
+                  loadingText="Loading"
+                  colorScheme="teal"
+                  variant="outline"
+                  spinnerPlacement="end"
+                  width="100%"
+                  onClick={() => handleSubmit()}
+                  mt={3}
+                  borderWidth={2}
+                  py={3}
+                  borderColor={"#00FF84"}
+                  _hover={{ background: "none", color: "#00FF84" }}
+                  isDisabled={!initialValues.title && !initialValues.category}
+                >
+                  Continue
+                </Button>
               </Box>
             </Flex>
           )}
         </Formik>
       </Box>
-      
     </Stack>
   );
 };
