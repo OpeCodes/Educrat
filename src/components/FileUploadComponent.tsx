@@ -83,7 +83,6 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
       });
       console.error("Upload failed:", error);
     }
-    // Callback to parent component
     onImageUpload(uploadedFile);
   };
 

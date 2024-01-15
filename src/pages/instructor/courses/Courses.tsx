@@ -38,7 +38,6 @@ const Courses = () => {
           colorScheme="teal"
           variant="outline"
           spinnerPlacement="end"
-          // onClick={() => handleSubmit()}
           mt={3}
           borderWidth={2}
           py={3}

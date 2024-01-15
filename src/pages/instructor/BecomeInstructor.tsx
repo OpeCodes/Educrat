@@ -39,7 +39,6 @@ const BecomeInstructor = () => {
     becomeInstructor(values)
   };
   const handleImageUpload = (file: File) => {
-    // Handle the file as needed (e.g., upload to a server)
     console.log('Uploaded file:', file);
   };
   return (
@@ -177,7 +176,3 @@ const BecomeInstructor = () => {
 
 export default BecomeInstructor;
 
-// 1. ceg lab report
-// 2. pgg lab report
-// 3. pgg notes and test
-// 4.

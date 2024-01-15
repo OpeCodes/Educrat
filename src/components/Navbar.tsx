@@ -70,7 +70,6 @@ const links = [
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [hover, setHover] = useBoolean();
-  // const [hover, setHover] = useState(false);
 
   const {
     isOpen: modalOpen,
@@ -82,7 +81,6 @@ const Navbar = () => {
 
   const { data } = useGetUser();
   console.log(data?.roles);
-  // const role = data.roles.find((role) => role.name === "instructor" );
   const hasStudentRole = data?.roles.some(
     (role: any) => role?.name === "student"
   );
@@ -104,6 +102,7 @@ const Navbar = () => {
             <Image src={logo} alt="logo" />
           </Box>
         </Flex>
+
         <Flex
           columnGap={4}
           color={"white"}
@@ -134,33 +133,33 @@ const Navbar = () => {
         </Flex>
 
         <Flex align={"center"} columnGap={5} color="white">
-        
-          <Box>
-            {hasStudentRole && !hasInstructorRole && (
-              <Text
-                fontSize="15px"
-                cursor={"pointer"}
-                as={Link}
-                to="/become-instructor"
-              >
-                Teach on Educrat
-              </Text>
-            )}
-            {!hasStudentRole && hasInstructorRole && (
-              <p>This is content for instructors.</p>
-            )}
-            {hasStudentRole && hasInstructorRole && (
-              <Text
-                fontSize="15px"
-                cursor={"pointer"}
-                as={Link}
-                to="/instructor/courses"
-              >
-                Instructor
-              </Text>
-            )}
-          </Box>
-          
+          {user && (
+            <Box display={{ base: "none", md: "flex" }}>
+              {hasStudentRole && !hasInstructorRole && (
+                <Text
+                  fontSize="15px"
+                  cursor={"pointer"}
+                  as={Link}
+                  to="/become-instructor"
+                >
+                  Teach on Educrat
+                </Text>
+              )}
+              {!hasStudentRole && hasInstructorRole && (
+                <p>This is content for instructors.</p>
+              )}
+              {hasStudentRole && hasInstructorRole && (
+                <Text
+                  fontSize="15px"
+                  cursor={"pointer"}
+                  as={Link}
+                  to="/instructor/courses"
+                >
+                  Instructor
+                </Text>
+              )}
+            </Box>
+          )}
 
           <Text cursor={"pointer"} onClick={() => onModalOpen()}>
             <FiSearch fontSize={"25px"} />
@@ -191,7 +190,11 @@ const Navbar = () => {
             <BiMenuAltRight />
           </Box>
           {user ? (
-            <Box pos="relative" onClick={setHover.toggle}>
+            <Box
+              pos="relative"
+              onClick={setHover.toggle}
+              display={{ base: "none", md: "flex" }}
+            >
               <Avatar
                 name={`${user.user.firstName} ${user.user.lastName}`}
                 size="sm"
@@ -316,13 +319,45 @@ const Navbar = () => {
             display={"flex"}
             columnGap={"10px"}
             fontSize={"15px"}
+            p={2}
           >
-            <Text as={Link} to="/sign-in" _hover={{textDecoration:"none"}}>
-              Login
-            </Text>
-            <Text as={Link} to="/sign-up">
-              Sign Up
-            </Text>
+            {user ? (
+              <>
+                {" "}
+                <Flex align={"center"} columnGap={3} mb={2} pr="10">
+                  <Avatar
+                    name={`${user.user.firstName} ${user.user.lastName}`}
+                    size="md"
+                    fontWeight="bold"
+                    bg="white"
+                    color="#140342"
+                    src={data?.profilePicture}
+                    cursor="pointer"
+                  />
+                  <Box p={0}>
+                    <Text color="black" fontWeight={"bold"}>
+                      {user.user.firstName} {user.user.lastName}
+                    </Text>
+                    <Text color={"gray"} fontSize={"14px"}>
+                      {user.user.email}
+                    </Text>
+                  </Box>
+                </Flex>
+              </>
+            ) : (
+              <>
+                <Text
+                  as={Link}
+                  to="/sign-in"
+                  _hover={{ textDecoration: "none" }}
+                >
+                  Login
+                </Text>
+                <Text as={Link} to="/sign-up">
+                  Sign Up
+                </Text>
+              </>
+            )}
             <Box display={{ base: "block", md: "none" }}>
               <DrawerCloseButton bg="white" borderRadius={"100%"} />
             </Box>
@@ -333,6 +368,22 @@ const Navbar = () => {
             flexDirection={"column"}
             justifyContent={"space-between"}
           >
+            {user && (
+              <>
+                {hasStudentRole && hasInstructorRole && (
+                  <Text
+                    fontSize="15px"
+                    cursor={"pointer"}
+                    as={Link}
+                    to="/instructor/courses"
+                    color="blue"
+                  >
+                    Switch to instructor view
+                  </Text>
+                )}
+              </>
+            )}
+
             <Box>
               {links.map(({ id, name, href }) => (
                 <Box

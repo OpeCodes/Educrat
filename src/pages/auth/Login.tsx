@@ -21,15 +21,13 @@ import { SignInSchema } from "../../schemas";
 import { Link } from "react-router-dom";
 import { useLoginUser } from "../../hooks";
 const initialValues = {
-  credential: "",
+  credential: "peteradedokun2003@gmail.com",
   password: "Peter12111",
 };
 // instructor
 //peteradedokun2003@gmail.com
 // myPassword = Peter12111
-//student
-//oludedolapo@gmail.com
-//
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
