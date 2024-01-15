@@ -189,13 +189,13 @@ export const useCourseCategory = () => {
 
 export const useCreateCourse = () => {
   const toast = useToast();
-  const { mutate: becomeInstructor, isPending } = useMutation({
+  const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);
     },
     onSuccess: () => {
       toast({
-        title: `You are now an instructor`,
+        title: `course create successfully`,
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -211,5 +211,5 @@ export const useCreateCourse = () => {
       });
     },
   });
-  return { becomeInstructor, isPending };
+  return { createCourse, isPending };
 };

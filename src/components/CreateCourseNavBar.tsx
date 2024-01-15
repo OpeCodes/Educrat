@@ -17,17 +17,17 @@ const CreateCourseNavBar = ({ step, progressValue }: StepNumber) => {
         align={"center"}
       >
         <Flex align={"center"}>
-          <Box width={"160px"}>
+          <Box width={{base: "110px", md: "160px"}}>
             <Image src={logo} alt="logo" />
           </Box>
 
-          <Text height={"60px"} w="1px" bg="white" />
+          <Text height={"60px"} w="1px" bg="white" ml ={4}  />
           <Box ml={5}>
-            <Text fontSize={18}>Step {step} of 2</Text>
+            <Text fontSize={{base: 14, md: 18}}>Step {step} of 2</Text>
           </Box>
         </Flex>
         <Box>
-          <Text as={Link} fontWeight={"bold"} to="/instructor/courses">
+          <Text as={Link} fontWeight={{base: "500", md: "bold"}} to="/instructor/courses">
             Exit
           </Text>
         </Box>

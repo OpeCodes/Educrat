@@ -11,16 +11,16 @@ import {
 import { CreateCourseNavBar } from "../../../components";
 import { Formik } from "formik";
 import { createCourseSchema } from "../../../schemas";
-import { useCourseCategory } from "../../../hooks";
+import { useCourseCategory, useCreateCourse } from "../../../hooks";
 
 const initialValues = {
   title: "",
   category: "",
 };
 const StepCourse2 = () => {
+ const {createCourse} = useCreateCourse();
   const handleSubmit = (values: any): void => {
-    // loginUser(values);
-    console.log(values);
+    createCourse(values)
   };
   const { data } = useCourseCategory();
 
@@ -29,15 +29,15 @@ const StepCourse2 = () => {
       <CreateCourseNavBar step={2} progressValue={100} />
       second step
       <Stack justify={"center"} align={"center"} mt={"7rem"}>
-        <Text fontSize={"2.5rem"} fontWeight={"bold"}>
+        <Text fontSize={"2.5rem"} fontWeight={"bold"} textAlign={"center"}>
           Create your course
         </Text>
-        <Text>
+        <Text textAlign={"center"}>
           It's ok if you can't think of a good title and category now. You can
           change it later.
         </Text>
       </Stack>
-      <Box maxW={"50%"} mx="auto" w="100%" mt={5}>
+      <Box maxW={{base : "90%", md: "50%"}} mx="auto" w="100%" mt={5}>
         <Formik
           initialValues={initialValues}
           validationSchema={createCourseSchema}
@@ -75,7 +75,7 @@ const StepCourse2 = () => {
                 value={values.category}
               >
                 {data?.map((values: any) => (
-                  <option key={values.id} id={values.id} value={values.name}>
+                  <option key={values.id} id={values.id} value={values.id}>
                     {values.name}
                   </option>
                 ))}
