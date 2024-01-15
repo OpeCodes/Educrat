@@ -10,21 +10,30 @@ import {
   Image,
   Grid,
   GridItem,
+  InputRightElement,
+  InputGroup,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
 import { resetPasswordSchema } from "../../schemas";
 import { Link, useParams } from "react-router-dom";
 import { useResetPassword } from "../../hooks";
-
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import { useState } from "react";
 const initialValues = {
   password: "",
   confirmPassword: "",
 };
 const ResetPassword = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
+  const handlePasswordClick = () => setShowPassword(!showPassword);
+  const handleConfirmPasswordClick = () =>
+    setShowConfirmPassword(!showConfirmPassword);
   const { code, token } = useParams();
 
- const {resetPassword,isPending} = useResetPassword();
+  const { resetPassword, isPending } = useResetPassword();
   const handleSubmit = (values: typeof initialValues) => {
     const { password } = values;
     resetPassword({ code, token, password });
@@ -74,6 +83,44 @@ const ResetPassword = () => {
                   pb={5}
                 >
                   <FormControl isRequired>
+                    <FormLabel>Password</FormLabel>
+                    <InputGroup size="md">
+                      <Input
+                        pr="4.5rem"
+                        type={showPassword ? "text" : "password"}
+                        variant="filled"
+                        placeholder="password"
+                        value={values.password}
+                        name="password"
+                        onChange={handleChange}
+                      />
+                      <InputRightElement width="4.5rem">
+                        <Button
+                          h="1.75rem"
+                          size="sm"
+                          onClick={handlePasswordClick}
+                          backgroundColor={"none"}
+                          _hover={{ background: "none" }}
+                        >
+                          {showPassword ? (
+                            <IoIosEye fontSize="20px" />
+                          ) : (
+                            <IoIosEyeOff fontSize="20px" />
+                          )}
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
+
+                    {errors.password && (
+                      <Text
+                        style={{ color: "red", marginTop: 5 }}
+                        fontSize="14px"
+                      >
+                        {errors.password}
+                      </Text>
+                    )}
+                  </FormControl>
+                  {/* <FormControl isRequired>
                     <FormLabel>New Password</FormLabel>
                     <Input
                       type="text"
@@ -91,17 +138,35 @@ const ResetPassword = () => {
                         {errors.password}
                       </Text>
                     )}
-                  </FormControl>
+                  </FormControl> */}
                   <FormControl isRequired>
                     <FormLabel>Confirm Password</FormLabel>
-                    <Input
-                      type="text"
-                      variant="filled"
-                      placeholder="confirmPassword"
-                      value={values.confirmPassword}
-                      name="confirmPassword"
-                      onChange={handleChange}
-                    />
+                    <InputGroup size="md">
+                      <Input
+                        pr="4.5rem"
+                        type={showConfirmPassword ? "text" : "password"}
+                        variant="filled"
+                        placeholder="Confirm Password"
+                        value={values.confirmPassword}
+                        name="confirmPassword"
+                        onChange={handleChange}
+                      />
+                      <InputRightElement width="4.5rem">
+                        <Button
+                          h="1.75rem"
+                          size="md"
+                          onClick={handleConfirmPasswordClick}
+                          _hover={{ background: "none" }}
+                        >
+                          {showConfirmPassword ? (
+                            <IoIosEye fontSize="20px" />
+                          ) : (
+                            <IoIosEyeOff fontSize="20px" />
+                          )}
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
+
                     {errors.confirmPassword && (
                       <Text
                         style={{ color: "red", marginTop: 5 }}
