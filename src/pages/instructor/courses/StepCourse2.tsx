@@ -37,7 +37,7 @@ const StepCourse2 = () => {
           change it later.
         </Text>
       </Stack>
-      <Box maxW={{base : "90%", md: "50%"}} mx="auto" w="100%" mt={5}>
+      <Box maxW={{base : "90%", lg: "50%"}} mx="auto" w="100%" mt={5}>
         <Formik
           initialValues={initialValues}
           validationSchema={createCourseSchema}
