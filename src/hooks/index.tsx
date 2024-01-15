@@ -19,6 +19,7 @@ export const useGetUser = () => {
 export const useLoginUser = () => {
   const toast = useToast();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isPending, mutate: loginUser } = useMutation({
     mutationFn: (user) => {
       return customFetch.post("/auth/login", user);
@@ -32,6 +33,7 @@ export const useLoginUser = () => {
         duration: 5000,
         isClosable: true,
       });
+      navigate("/")
     },
     onError: (error: any) => {
       toast({
@@ -47,6 +49,7 @@ export const useLoginUser = () => {
 
 export const useRegisterUser = () => {
   const toast = useToast();
+  const navigate = useNavigate();
   const { mutate: registerUser, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/auth/register", user);
@@ -58,6 +61,7 @@ export const useRegisterUser = () => {
         duration: 5000,
         isClosable: true,
       });
+      navigate("/sign-in")
     },
     onError: (error: any) => {
       toast({
@@ -73,6 +77,7 @@ export const useRegisterUser = () => {
 
 export const useResetPassword = () => {
   const toast = useToast();
+  const navigate = useNavigate();
   const { mutate: resetPassword, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.patch("auth/password/reset", user);
@@ -84,6 +89,7 @@ export const useResetPassword = () => {
         duration: 5000,
         isClosable: true,
       });
+      navigate("/sign-in")
     },
     onError: (error: any) => {
       console.log(error);
@@ -100,6 +106,7 @@ export const useResetPassword = () => {
 
 export const useForgotPassword = () => {
   const toast = useToast();
+  const navigate = useNavigate();
   const { mutate: forgotPassword, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.patch("auth/password/forgot", user);
@@ -111,7 +118,9 @@ export const useForgotPassword = () => {
         duration: 5000,
         isClosable: true,
       });
+      navigate("/sign-in")
     },
+
     onError: (error: any) => {
       console.log(error);
       toast({
@@ -127,17 +136,21 @@ export const useForgotPassword = () => {
 
 export const useVerifyAccount = () => {
   const toast = useToast();
+  const navigate = useNavigate();
   const { mutate: verifyAccount } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.patch("auth/verification", user);
     },
     onSuccess: () => {
       toast({
-        title: `verification successful`,
+        title: `verification successful redirecting you in few seconds`,
         status: "success",
         duration: 5000,
         isClosable: true,
       });
+      setTimeout(() => {
+        navigate("/sign-up")
+      }, 3000);
     },
     onError: (error: any) => {
       console.log(error);
@@ -153,6 +166,7 @@ export const useVerifyAccount = () => {
 };
 export const useBecomeInstructor = () => {
   const toast = useToast();
+  const navigate = useNavigate();
   const { mutate: becomeInstructor, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.patch("/user/instructor", user);
@@ -164,6 +178,7 @@ export const useBecomeInstructor = () => {
         duration: 5000,
         isClosable: true,
       });
+      navigate("/instructor/courses")
     },
     onError: (error: any) => {
       console.log(error);

@@ -174,9 +174,6 @@ const Navbar = () => {
                 color="#140342"
                 src={data?.profilePicture}
                 cursor="pointer"
-                // onMouseEnter={setHover.on}
-
-                // onMouseLeave={setHover.off}
               />
               {hover && (
                 <Box
