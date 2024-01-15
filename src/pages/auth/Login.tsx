@@ -24,8 +24,12 @@ const initialValues = {
   credential: "",
   password: "Peter12111",
 };
+// instructor
+//peteradedokun2003@gmail.com
 // myPassword = Peter12111
-
+//student
+//oludedolapo@gmail.com
+//
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);

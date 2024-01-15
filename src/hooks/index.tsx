@@ -90,7 +90,7 @@ export const useResetPassword = () => {
         isClosable: true,
       });
       setTimeout(() => {
-        navigate("/sign-up")
+        navigate("/sign-in")
       }, 3000);
     },
     onError: (error: any) => {
@@ -111,7 +111,7 @@ export const useForgotPassword = () => {
   const navigate = useNavigate();
   const { mutate: forgotPassword, isPending } = useMutation({
     mutationFn: (user: any) => {
-      return customFetch.patch("auth/password/forgot", user);
+      return customFetch.post("auth/password/forgot", user);
     },
     onSuccess: () => {
       toast({

@@ -81,6 +81,15 @@ const Navbar = () => {
   const { user } = useSelector((store: RootState) => store.user);
 
   const { data } = useGetUser();
+  console.log(data?.roles);
+  // const role = data.roles.find((role) => role.name === "instructor" );
+  const hasStudentRole = data?.roles.some(
+    (role: any) => role?.name === "student"
+  );
+  const hasInstructorRole = data?.roles.some(
+    (role: any) => role?.name === "instructor"
+  );
+
   return (
     <Stack>
       <Flex
@@ -125,16 +134,33 @@ const Navbar = () => {
         </Flex>
 
         <Flex align={"center"} columnGap={5} color="white">
-          {user && (
-            <Text
-              fontSize="15px"
-              cursor={"pointer"}
-              as={Link}
-              to="/become-instructor"
-            >
-              Become an Instructor
-            </Text>
-          )}
+        
+          <Box>
+            {hasStudentRole && !hasInstructorRole && (
+              <Text
+                fontSize="15px"
+                cursor={"pointer"}
+                as={Link}
+                to="/become-instructor"
+              >
+                Teach on Educrat
+              </Text>
+            )}
+            {!hasStudentRole && hasInstructorRole && (
+              <p>This is content for instructors.</p>
+            )}
+            {hasStudentRole && hasInstructorRole && (
+              <Text
+                fontSize="15px"
+                cursor={"pointer"}
+                as={Link}
+                to="/instructor/courses"
+              >
+                Instructor
+              </Text>
+            )}
+          </Box>
+          
 
           <Text cursor={"pointer"} onClick={() => onModalOpen()}>
             <FiSearch fontSize={"25px"} />
@@ -205,7 +231,13 @@ const Navbar = () => {
                   <Box color="gray" fontSize={"15px"}>
                     <Stack p={3}>
                       <Text> My Cart</Text>
-                      <Text>Teach on Udemy</Text>
+                      <Text
+                        cursor={"pointer"}
+                        as={Link}
+                        to="/become-instructor"
+                      >
+                        Teach on Educrat
+                      </Text>
                     </Stack>
                     <Divider />
                     <Stack p={3}>
@@ -285,7 +317,7 @@ const Navbar = () => {
             columnGap={"10px"}
             fontSize={"15px"}
           >
-            <Text as={Link} to="/sign-in">
+            <Text as={Link} to="/sign-in" _hover={{textDecoration:"none"}}>
               Login
             </Text>
             <Text as={Link} to="/sign-up">
