@@ -85,6 +85,12 @@ const CreateCourse = () => {
                   {errors.category}
                 </Text>
               )}
+                 <Box
+        position="fixed"
+        bottom="4"
+        right="4"
+        p="4"
+      >
               <Button
                 bg={"#00FF84"}
                 // isLoading={isPending}
@@ -99,13 +105,16 @@ const CreateCourse = () => {
                 py={3}
                 borderColor={"#00FF84"}
                 _hover={{ background: "none", color: "#00FF84" }}
+                isDisabled={!initialValues.title && !initialValues.category}
               >
-                Login
+                Continue
               </Button>
+              </Box>
             </Flex>
           )}
         </Formik>
       </Box>
+      
     </Stack>
   );
 };
