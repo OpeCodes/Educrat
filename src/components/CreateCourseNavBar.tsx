@@ -23,7 +23,7 @@ const CreateCourseNavBar = ({ step, progressValue }: StepNumber) => {
 
           <Text height={"60px"} w="1px" bg="white" ml ={4}  />
           <Box ml={5}>
-            <Text fontSize={{base: 14, md: 18}}>Step {step} of 2</Text>
+            <Text fontSize={{base: 14, md: 18}}>Step {step} of 1</Text>
           </Box>
         </Flex>
         <Box>

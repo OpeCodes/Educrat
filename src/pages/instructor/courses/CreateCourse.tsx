@@ -17,7 +17,7 @@ const initialValues = {
   title: "",
   category: "",
 };
-const StepCourse2 = () => {
+const CreateCourse = () => {
  const {createCourse} = useCreateCourse();
   const handleSubmit = (values: any): void => {
     createCourse(values)
@@ -26,7 +26,7 @@ const StepCourse2 = () => {
 
   return (
     <Stack>
-      <CreateCourseNavBar step={2} progressValue={100} />
+      <CreateCourseNavBar step={1} progressValue={100} />
       second step
       <Stack justify={"center"} align={"center"} mt={"7rem"}>
         <Text fontSize={"2.5rem"} fontWeight={"bold"} textAlign={"center"}>
@@ -110,4 +110,4 @@ const StepCourse2 = () => {
   );
 };
 
-export default StepCourse2;
+export default CreateCourse;

@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import { FiSearch } from "react-icons/fi";
+import { Link } from "react-router-dom";
 const Courses = () => {
   return (
     <Stack>
@@ -43,11 +44,16 @@ const Courses = () => {
           py={3}
           borderColor={"#00FF84"}
           _hover={{ background: "none", color: "#00FF84" }}
+          as={Link}
+          to="/course/create/1"
           size="lg"
         >
           New Course
         </Button>
       </Flex>
+
+
+      <Text>list of finished and unfinshed coures here</Text>
     </Stack>
   );
 };
