@@ -25,6 +25,7 @@ import {
   Input,
   Divider,
   Avatar,
+  useBoolean,
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
@@ -38,7 +39,6 @@ import { useSelector } from "react-redux";
 import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import { useGetUser } from "../hooks";
-
 const links = [
   {
     id: 1,
@@ -69,6 +69,9 @@ const links = [
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [hover, setHover] = useBoolean();
+  // const [hover, setHover] = useState(false);
+
   const {
     isOpen: modalOpen,
     onOpen: onModalOpen,
@@ -120,9 +123,7 @@ const Navbar = () => {
             </Box>
           ))}
         </Flex>
-        <Text color="white" onClick={() => dispatch(logoutUser())}>
-          logout
-        </Text>
+
         <Flex align={"center"} columnGap={5} color="white">
           {user && (
             <Text
@@ -164,7 +165,7 @@ const Navbar = () => {
             <BiMenuAltRight />
           </Box>
           {user ? (
-            <Box pos="relative">
+            <Box pos="relative" onClick={setHover.toggle}>
               <Avatar
                 name={`${user.user.firstName} ${user.user.lastName}`}
                 size="sm"
@@ -173,64 +174,72 @@ const Navbar = () => {
                 color="#140342"
                 src={data?.profilePicture}
                 cursor="pointer"
+                // onMouseEnter={setHover.on}
+
+                // onMouseLeave={setHover.off}
               />
+              {hover && (
+                <Box
+                  bg="white"
+                  boxShadow="0 0.75rem 1rem rgb(189 197 209 / 30%)"
+                  position="absolute"
+                  right="1"
+                  top="20"
+                  mt={-3}
+                >
+                  <Flex align={"center"} columnGap={3} p={3} mb={2}>
+                    <Avatar
+                      name={`${user.user.firstName} ${user.user.lastName}`}
+                      size="md"
+                      fontWeight="bold"
+                      bg="white"
+                      color="#140342"
+                      src={data?.profilePicture}
+                      cursor="pointer"
+                    />
+                    <Box>
+                      <Text color="black" fontWeight={"bold"}>
+                        {user.user.firstName} {user.user.lastName}
+                      </Text>
+                      <Text color={"gray"}>{user.user.email}</Text>
+                    </Box>
+                  </Flex>
+                  <Divider />
+                  <Box color="gray" fontSize={"15px"}>
+                    <Stack p={3}>
+                      <Text> My Cart</Text>
+                      <Text>Teach on Udemy</Text>
+                    </Stack>
+                    <Divider />
+                    <Stack p={3}>
+                      <Text>Notifications</Text>
+                      <Text>Messages</Text>
+                    </Stack>
 
-              <Box
-                bg="white"
-                boxShadow="0 0.75rem 1rem rgb(189 197 209 / 30%)"
-                position="absolute"
-                right="1"
-                top="20"
-                mt={-5}
-                // h="500px"
-              >
-                <Flex align={"center"} columnGap={3} p={3} mb={2}>
-                  <Avatar
-                    name={`${user.user.firstName} ${user.user.lastName}`}
-                    size="md"
-                    fontWeight="bold"
-                    bg="white"
-                    color="#140342"
-                    src={data?.profilePicture}
-                    cursor="pointer"
-                  />
-                  <Box>
-                    <Text fontWeight={"bold"}>
-                      {user.user.firstName} {user.user.lastName}
-                    </Text>
-                    <Text>{user.user.email}</Text>
+                    <Divider />
+                    <Stack p={3}>
+                      <Text>Account Settings</Text>
+                      <Text>Payment Methods</Text>
+                      <Text>Purcase History</Text>
+                    </Stack>
+                    <Divider />
+                    <Stack p={3}>
+                      <Text>Public Profile</Text>
+                      <Text>Edit Profile</Text>
+                    </Stack>
+                    <Divider />
+                    <Stack p={3} pb={3}>
+                      <Text>Help</Text>
+                      <Text
+                        cursor={"pointer"}
+                        onClick={() => dispatch(logoutUser())}
+                      >
+                        Logout
+                      </Text>
+                    </Stack>
                   </Box>
-                </Flex>
-                <Divider />
-                <Box color="gray" fontSize={"15px"}>
-                  <Stack p={3}>
-                    <Text> My Cart</Text>
-                    <Text>Teach on Udemy</Text>
-                  </Stack>
-                  <Divider />
-                  <Stack p={3}>
-                    <Text>Notifications</Text>
-                    <Text>Messages</Text>
-                  </Stack>
-
-                  <Divider />
-                  <Stack p={3}>
-                    <Text>Account Settings</Text>
-                    <Text>Payment Methods</Text>
-                    <Text>Purcase History</Text>
-                  </Stack>
-                  <Divider />
-                  <Stack p={3}>
-                    <Text>Public Profile</Text>
-                    <Text>Edit Profile</Text>
-                  </Stack>
-                  <Divider />
-                  <Stack p={3} pb={3}>
-                    <Text>Help</Text>
-                    <Text>Logout</Text>
-                  </Stack>
                 </Box>
-              </Box>
+              )}
             </Box>
           ) : (
             <>
