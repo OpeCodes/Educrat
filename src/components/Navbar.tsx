@@ -67,6 +67,8 @@ const links = [
   },
 ];
 
+
+
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -77,7 +79,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store.user);
 
-  const {data} = useGetUser();
+  const { data } = useGetUser();
   return (
     <Stack>
       <Flex
@@ -164,15 +166,39 @@ const Navbar = () => {
             <BiMenuAltRight />
           </Box>
           {user ? (
-            <Avatar
-              name={`${user.user.firstName} ${user.user.lastName}`}
-              size="sm"
-              fontWeight="bold"
-              bg="white"
-              color="#140342"
-              src={data?.profilePicture}
-              cursor="pointer"
-            />
+            <Box pos="relative">
+              <Avatar
+                name={`${user.user.firstName} ${user.user.lastName}`}
+                size="sm"
+                fontWeight="bold"
+                bg="white"
+                color="#140342"
+                src={data?.profilePicture}
+                cursor="pointer"
+              />
+
+              <Box bg="red" position="absolute" right="1" top="20" h="500px">
+                <Flex align={"center"} columnGap={3} p={3} mb={2}>
+                  <Avatar
+                    name={`${user.user.firstName} ${user.user.lastName}`}
+                    size="md"
+                    fontWeight="bold"
+                    bg="white"
+                    color="#140342"
+                    src={data?.profilePicture}
+                    cursor="pointer"
+                  />
+                  <Box>
+                    <Text fontWeight={"bold"}>
+                      {user.user.firstName} {user.user.lastName}
+                    </Text>
+                    <Text>{user.user.email}</Text>
+                  </Box>
+                </Flex>
+                <Divider/>
+              </Box>
+              
+            </Box>
           ) : (
             <>
               <Button

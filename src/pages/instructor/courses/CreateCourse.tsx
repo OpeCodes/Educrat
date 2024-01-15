@@ -105,9 +105,8 @@ const CreateCourse = () => {
                   py={3}
                   borderColor={"#00FF84"}
                   _hover={{ background: "none", color: "#00FF84" }}
-                  // isDisabled={initialValues.title && initialValues.category}
                 >
-                  Continue
+                  Create Course
                 </Button>
               </Box>
             </Flex>
