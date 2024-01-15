@@ -67,8 +67,6 @@ const links = [
   },
 ];
 
-
-
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -177,7 +175,15 @@ const Navbar = () => {
                 cursor="pointer"
               />
 
-              <Box bg="red" position="absolute" right="1" top="20" h="500px">
+              <Box
+                bg="white"
+                boxShadow="0 0.75rem 1rem rgb(189 197 209 / 30%)"
+                position="absolute"
+                right="1"
+                top="20"
+                mt={-5}
+                // h="500px"
+              >
                 <Flex align={"center"} columnGap={3} p={3} mb={2}>
                   <Avatar
                     name={`${user.user.firstName} ${user.user.lastName}`}
@@ -195,9 +201,36 @@ const Navbar = () => {
                     <Text>{user.user.email}</Text>
                   </Box>
                 </Flex>
-                <Divider/>
+                <Divider />
+                <Box color="gray" fontSize={"15px"}>
+                  <Stack p={3}>
+                    <Text> My Cart</Text>
+                    <Text>Teach on Udemy</Text>
+                  </Stack>
+                  <Divider />
+                  <Stack p={3}>
+                    <Text>Notifications</Text>
+                    <Text>Messages</Text>
+                  </Stack>
+
+                  <Divider />
+                  <Stack p={3}>
+                    <Text>Account Settings</Text>
+                    <Text>Payment Methods</Text>
+                    <Text>Purcase History</Text>
+                  </Stack>
+                  <Divider />
+                  <Stack p={3}>
+                    <Text>Public Profile</Text>
+                    <Text>Edit Profile</Text>
+                  </Stack>
+                  <Divider />
+                  <Stack p={3} pb={3}>
+                    <Text>Help</Text>
+                    <Text>Logout</Text>
+                  </Stack>
+                </Box>
               </Box>
-              
             </Box>
           ) : (
             <>
