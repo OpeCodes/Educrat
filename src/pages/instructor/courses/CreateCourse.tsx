@@ -90,7 +90,7 @@ const CreateCourse = () => {
                   {errors.category}
                 </Text>
               )}
-              <Box position="fixed" bottom="4" right="4" p="4">
+              <Box position="fixed" bottom={{base: "-4", md: 4}} right="4" p="4" >
                 <Button
                   bg={"#00FF84"}
                   isLoading={loading}
@@ -105,7 +105,7 @@ const CreateCourse = () => {
                   py={3}
                   borderColor={"#00FF84"}
                   _hover={{ background: "none", color: "#00FF84" }}
-                  isDisabled={!initialValues.title && !initialValues.category}
+                  // isDisabled={initialValues.title && initialValues.category}
                 >
                   Continue
                 </Button>

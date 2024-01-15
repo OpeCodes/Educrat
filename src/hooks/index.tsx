@@ -4,6 +4,7 @@ import { useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { addUserLocalStorage } from "../store/localStorage";
 import { setUser } from "../features/user/UserSlice";
+import { useNavigate } from "react-router-dom";
 export const useGetUser = () => {
   const { data } = useQuery({
     queryKey: ["user"],
@@ -189,11 +190,13 @@ export const useCourseCategory = () => {
 
 export const useCreateCourse = () => {
   const toast = useToast();
+  const navigate = useNavigate()
   const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);
     },
     onSuccess: () => {
+      navigate("/")
       toast({
         title: `course create successfully`,
         status: "success",
