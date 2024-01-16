@@ -13,26 +13,29 @@ import {
 } from "@chakra-ui/react";
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
-import { useCourseCategory } from "../../../../hooks";
+import { useCourseCategory, useSingleCourse } from "../../../../hooks";
 const initialValues = {
   title: "",
   subtitle: "",
-  //   description: "",
+  description: "",
   language: "",
   category: "",
   //   learningObjectives: [""],
-  //   preRequisities: [""],
+  preRequisities: [""],
   complexityLevel: "",
-  preRequisites: "",
+  learningObjectives: ["", "", "", ""],
 };
 const CourseLandingPage = () => {
   const { data, isPending } = useCourseCategory();
+  const {singleCourse,isPending: isLoading} = useSingleCourse()
 
   const handleSubmit = (values: any): void => {
     // loginUser(values);
-    console.log(values);
-  };
+    console.log({singleId: "65a4386329fcd03036b62cd0", values});
+    singleCourse({singleId: "65a4386329fcd03036b62cd0", user: values})
 
+  };
+  console.log(data)
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -96,32 +99,52 @@ const CourseLandingPage = () => {
                   important areas that you've covered during your course.
                 </FormHelperText>
               </FormControl>
-              {/* learning objectives */}
+              <FormControl isRequired>
+                <FormLabel>Course Description</FormLabel>
+                <Input
+                  type="text"
+                  variant="filled"
+                  placeholder="Insert your course description"
+                  value={values.description}
+                  name="description"
+                  onChange={handleChange}
+                />
+                {errors.description && (
+                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
+                    {errors.description}
+                  </Text>
+                )}
+              </FormControl>
               <Stack>
                 <Text fontWeight={"bold"}>
                   What will students learn in your course?
                 </Text>
                 <Text fontSize={13}>
-                  You must enter at least 4 learning objectives or outcomes that
+                  You must enter at 4 learning objectives or outcomes that
                   learners can expect to achieve after completing your course.
                 </Text>
-                <Stack>
-                  <FormControl isRequired>
-                    <Input
-                      type="text"
-                      variant="filled"
-                      placeholder="e.g learn learn photoshop cs6 from photoshop"
-                      //   value={values.title}
-                      name="title"
-                      onChange={handleChange}
-                    />
-                    {/* {errors.title && (
-                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.title}
-                  </Text>
-                )} */}
-                  </FormControl>
-                </Stack>
+                {values?.learningObjectives.map((value, index) => (
+                  <Stack>
+                    <FormControl isRequired>
+                      <Input
+                        type="text"
+                        variant="filled"
+                        placeholder="learning objectives"
+                        value={value}
+                        name={`learningObjectives[${index}]`}
+                        onChange={handleChange}
+                      />
+                      {errors.learningObjectives && (
+                        <Text
+                          style={{ color: "red", marginTop: 5 }}
+                          fontSize="14px"
+                        >
+                          {errors.learningObjectives}
+                        </Text>
+                      )}
+                    </FormControl>
+                  </Stack>
+                ))}
               </Stack>
               <Stack>
                 <Text fontWeight={"bold"}>
@@ -134,23 +157,26 @@ const CourseLandingPage = () => {
                   no requirements, use this space as an opportunity to lower the
                   barrier for beginners.
                 </Text>
-                <Stack>
-                  <FormControl isRequired>
-                    <Input
-                      type="text"
-                      variant="filled"
-                      placeholder="e.g learn learn photoshop cs6 from photoshop"
-                      //   value={values.title}
-                      name="title"
-                      onChange={handleChange}
-                    />
-                    {/* {errors.title && (
+                {values.preRequisities.map((value, index) => (
+                  <Stack key={index}>
+                    <FormControl isRequired>
+                      <Input
+                        type="text"
+                        variant="filled"
+                        placeholder="Example: No programming experience.You will learn everything you need know"
+                          value={value}
+                          // name={`preRequisities[${index}]`}
+                          name={`preRequisities[0]`}
+                        onChange={handleChange}
+                      />
+                      {errors.preRequisities && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.title}
+                    {errors.preRequisities}
                   </Text>
-                )} */}
-                  </FormControl>
-                </Stack>
+                )}
+                    </FormControl>
+                  </Stack>
+                ))}
               </Stack>
               <Flex columnGap={5}>
                 <Stack w="100%">
@@ -162,7 +188,6 @@ const CourseLandingPage = () => {
                     variant="filled"
                     value={values.language}
                     w="100%"
-                    // defaultValue={"english"}
                   >
                     <option value="english">English</option>
                   </Select>
@@ -233,32 +258,9 @@ const CourseLandingPage = () => {
                 </Stack>
               </Flex>
 
-              <Stack maxW="90%" w="100%">
-                <FormControl isRequired mt={4}>
-                  <FormLabel>
-                    What is primarily taught in your course?
-                  </FormLabel>
-                  <Input
-                    type="text"
-                    variant="filled"
-                    placeholder="Insert your course subtitle"
-                    value={values.preRequisites}
-                    name="preRequisites"
-                    onChange={handleChange}
-                  />
-                  {errors.preRequisites && (
-                    <Text
-                      style={{ color: "red", marginTop: 5 }}
-                      fontSize="14px"
-                    >
-                      {errors.preRequisites}
-                    </Text>
-                  )}
-                </FormControl>
-              </Stack>
               <Button
                 bg={"#00FF84"}
-                // isLoading={isPending}
+                isLoading={isLoading}
                 loadingText="Loading"
                 colorScheme="teal"
                 variant="outline"

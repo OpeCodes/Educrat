@@ -208,6 +208,7 @@ export const useCourseCategory = () => {
 export const useCreateCourse = () => {
   const toast = useToast();
   const navigate = useNavigate()
+  // const {} = CreateCourse()
   const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);
@@ -233,3 +234,30 @@ export const useCreateCourse = () => {
   });
   return { createCourse, isPending };
 };
+
+export const useSingleCourse = () =>{ 
+  const toast=  useToast();
+  const {mutate: singleCourse, isPending} = useMutation({
+      mutationFn: ({singleId, user}: any) =>{
+        return customFetch.put(`course/${singleId}`, user)
+      },
+      onSuccess: () => {
+        toast({
+          title: `course updated successfully`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+      onError: (error: any) => {
+        console.log(error);
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+  })
+  return {singleCourse,isPending}
+}

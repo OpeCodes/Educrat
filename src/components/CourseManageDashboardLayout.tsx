@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, } from "react-router-dom";
 import { CourseManageNavbar, CourseManageSidebar } from ".";
 import { Flex, Stack } from "@chakra-ui/react";
 
