@@ -15,6 +15,8 @@ const CourseLandingPage = () => {
         in your course. Learn more about creating your course landing page and
         course title standards.
       </Text>
+
+      <Stack p={5}></Stack>
     </Stack>
   );
 };
