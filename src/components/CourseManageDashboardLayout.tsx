@@ -15,7 +15,6 @@ const CourseManageDashboardLayout = () => {
           maxW={"70%"}
           my={10}
           w="full"
-          p={3}
           boxShadow="0 0.75rem 1rem rgb(189 197 209 / 90%)"
         >
           <Outlet />

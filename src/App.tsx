@@ -3,11 +3,15 @@ import {
   Error,
   SignUp,
   Login,
-  ForgotPassword ,
+  ForgotPassword,
   VerifyAccount,
   ResetPassword,
 } from "./pages/auth";
-import { CourseManageDashboardLayout, HomeLayout, InstructorDashboardLayout } from "./components";
+import {
+  CourseManageDashboardLayout,
+  HomeLayout,
+  InstructorDashboardLayout,
+} from "./components";
 import "./App.css";
 import Home from "./pages/Home";
 import { StudentCourse } from "./pages/course";
@@ -15,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
+import { CourseLandingPage } from "./pages/instructor/courses/managecourse";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -54,35 +59,34 @@ const router = createBrowserRouter([
   //instructor
   {
     path: "/become-instructor",
-    element : <BecomeInstructor/>
+    element: <BecomeInstructor />,
   },
-  
+
   {
     path: "/course/create/1",
-    element: <CreateCourse/>,
-  }
-  ,
+    element: <CreateCourse />,
+  },
   //instructor dashboard
   {
     path: "/instructor",
-    element: <InstructorDashboardLayout/>,
+    element: <InstructorDashboardLayout />,
     children: [
       {
         path: "courses",
-        element: <Courses/>,
-      }
-    ]
+        element: <Courses />,
+      },
+    ],
   },
   {
     path: "/instructor/courses/:id/manage/",
-    element: <CourseManageDashboardLayout/>,
+    element: <CourseManageDashboardLayout />,
     children: [
       {
         path: "basics",
-        element: <h1>manage basis</h1>
-      }
-    ]
-  }
+        element: <CourseLandingPage />,
+      },
+    ],
+  },
 ]);
 
 function App() {
