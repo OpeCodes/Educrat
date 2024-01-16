@@ -10,7 +10,7 @@ export const SignUpSchema = Yup.object().shape({
   password: Yup.string()
     .min(8)
     .matches(passwordRules, {
-      message: "Password must include letters and numbers",
+      message: "Password must include upper, lower and numbers",
     })
     .required("Enter your password"),
   confirmPassword: Yup.string()
@@ -20,23 +20,17 @@ export const SignUpSchema = Yup.object().shape({
 
 export const SignInSchema = Yup.object().shape({
   credential: Yup.string().required("Enter username or email"),
-  password: Yup.string()
-    .min(8)
-    .matches(passwordRules, {
-      message: "Password must include letters and numbers",
-    })
-    .required("Enter your password"),
+  password: Yup.string().required("Enter your password"),
 });
-
 
 export const resetPasswordSchema = Yup.object().shape({
   password: Yup.string()
     .min(8)
     .matches(passwordRules, {
-      message: "Password must include letters and numbers",
+      message: "Password must include upper, lower and numbers",
     })
     .required("Enter your password"),
-    confirmPassword: Yup.string()
+  confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), undefined], "Passwords must match")
     .required("Confirm your password"),
 });
@@ -51,10 +45,9 @@ export const instructorProfileSchema = Yup.object().shape({
   twitter: Yup.string(),
   facebook: Yup.string(),
   linkedin: Yup.string(),
-  youtube: Yup.string()
-})
+  youtube: Yup.string(),
+});
 export const createCourseSchema = Yup.object().shape({
   title: Yup.string().required("title is required"),
   category: Yup.string().required("Select category"),
 });
-

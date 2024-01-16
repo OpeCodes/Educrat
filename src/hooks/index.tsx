@@ -151,7 +151,7 @@ export const useVerifyAccount = () => {
         isClosable: true,
       });
       setTimeout(() => {
-        navigate("/sign-up")
+        navigate("/sign-in")
       }, 3000);
     },
     onError: (error: any) => {
