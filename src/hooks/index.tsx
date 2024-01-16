@@ -208,6 +208,7 @@ export const useCourseCategory = () => {
 export const useCreateCourse = () => {
   const toast = useToast();
   const navigate = useNavigate()
+  // const {} = CreateCourse()
   const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);

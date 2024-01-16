@@ -35,7 +35,7 @@ const CourseLandingPage = () => {
     singleCourse({singleId: "65a4386329fcd03036b62cd0", user: values})
 
   };
-
+  console.log(data)
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>

@@ -24,7 +24,6 @@ const CreateCourse = () => {
     createCourse(values);
   };
   const { data, isPending } = useCourseCategory();
-
   return (
     <Stack>
       <CreateCourseNavBar step={1} progressValue={100} />
