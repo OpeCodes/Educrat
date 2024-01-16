@@ -141,7 +141,7 @@ export const useVerifyAccount = () => {
   const navigate = useNavigate();
   const { mutate: verifyAccount } = useMutation({
     mutationFn: (user: any) => {
-      return customFetch.patch("auth/verification", user);
+      return customFetch.post("auth/verification", user);
     },
     onSuccess: () => {
       toast({

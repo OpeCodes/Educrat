@@ -234,13 +234,27 @@ const Navbar = () => {
                   <Box color="gray" fontSize={"15px"}>
                     <Stack p={3}>
                       <Text> My Cart</Text>
-                      <Text
-                        cursor={"pointer"}
-                        as={Link}
-                        to="/become-instructor"
-                      >
-                        Teach on Educrat
-                      </Text>
+                      {hasStudentRole && hasInstructorRole && (
+                <Text
+                  fontSize="15px"
+                  cursor={"pointer"}
+                  as={Link}
+                  to="/instructor/courses"
+                >
+                  Instructor Dashboard
+                </Text>
+              )}
+                {hasStudentRole && !hasInstructorRole && (
+                <Text
+                  fontSize="15px"
+                  cursor={"pointer"}
+                  as={Link}
+                  to="/become-instructor"
+                >
+                  Teach on Educrat
+                </Text>
+              )}
+                      
                     </Stack>
                     <Divider />
                     <Stack p={3}>
