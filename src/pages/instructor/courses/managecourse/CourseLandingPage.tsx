@@ -13,19 +13,20 @@ import {
 } from "@chakra-ui/react";
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
-import { useCourseCategory, } from "../../../../hooks";
+import { useCourseCategory } from "../../../../hooks";
 const initialValues = {
   title: "",
   subtitle: "",
-  description: "",
+  //   description: "",
   language: "",
   category: "",
-  learningObjectives: [""],
-  preRequisities: [""],
+  //   learningObjectives: [""],
+  //   preRequisities: [""],
   complexityLevel: "",
+  preRequisites: "",
 };
 const CourseLandingPage = () => {
-    const { data, isPending } = useCourseCategory();
+  const { data, isPending } = useCourseCategory();
 
   const handleSubmit = (values: any): void => {
     // loginUser(values);
@@ -105,6 +106,7 @@ const CourseLandingPage = () => {
                     variant="filled"
                     value={values.language}
                     w="100%"
+                    // defaultValue={"english"}
                   >
                     <option value="english">English</option>
                   </Select>
@@ -142,24 +144,28 @@ const CourseLandingPage = () => {
                   )}
                 </Stack>
                 <Stack w="100%">
-                <Select
-                placeholder="Select Category"
-                name="category"
-                onChange={handleChange}
-                mt={6}
-                variant="filled"
-                value={values.category}
-              >
-                {data?.map((values: any) =>
-                  isPending ? (
-                    <Spinner />
-                  ) : (
-                    <option key={values.id} id={values.id} value={values.id}>
-                      {values.name}
-                    </option>
-                  )
-                )}
-              </Select>
+                  <Select
+                    placeholder="Select Category"
+                    name="category"
+                    onChange={handleChange}
+                    mt={6}
+                    variant="filled"
+                    value={values.category}
+                  >
+                    {data?.map((values: any) =>
+                      isPending ? (
+                        <Spinner />
+                      ) : (
+                        <option
+                          key={values.id}
+                          id={values.id}
+                          value={values.id}
+                        >
+                          {values.name}
+                        </option>
+                      )
+                    )}
+                  </Select>
                   {errors.category && (
                     <Text
                       style={{ color: "red", marginTop: 2 }}
@@ -171,6 +177,24 @@ const CourseLandingPage = () => {
                 </Stack>
               </Flex>
 
+<Stack maxW="90%" w="100%">
+              <FormControl isRequired mt={4}>
+                <FormLabel>What is primarily taught in your course?</FormLabel>
+                <Input
+                  type="text"
+                  variant="filled"
+                  placeholder="Insert your course subtitle"
+                  value={values.preRequisites}
+                  name="preRequisites"
+                  onChange={handleChange}
+                />
+                {errors.preRequisites && (
+                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
+                    {errors.preRequisites}
+                  </Text>
+                )}
+              </FormControl>
+              </Stack>
               <Button
                 bg={"#00FF84"}
                 // isLoading={isPending}
