@@ -1,8 +1,13 @@
-const Home = () => {
- 
-  return (
-    <div>Home</div>
-  )
-}
+import { Header, Sponsors } from "../constants";
 
-export default Home
+const Home = () => {
+  return (
+    <>
+      <Header />
+      <Sponsors />
+    </>
+  );
+};
+
+export default Home;
+
