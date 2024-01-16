@@ -9,9 +9,11 @@ import {
   Divider,
   FormHelperText,
   Select,
+  Spinner,
 } from "@chakra-ui/react";
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
+import { useCourseCategory, } from "../../../../hooks";
 const initialValues = {
   title: "",
   subtitle: "",
@@ -23,6 +25,8 @@ const initialValues = {
   complexityLevel: "",
 };
 const CourseLandingPage = () => {
+    const { data, isPending } = useCourseCategory();
+
   const handleSubmit = (values: any): void => {
     // loginUser(values);
     console.log(values);
@@ -91,19 +95,71 @@ const CourseLandingPage = () => {
                   important areas that you've covered during your course.
                 </FormHelperText>
               </FormControl>
-              <Flex>
+              <Flex columnGap={5}>
                 <Stack w="100%">
                   <Select
-                    placeholder="Select Category"
-                    name="category"
+                    placeholder="Select language"
+                    name="language"
                     onChange={handleChange}
                     mt={6}
                     variant="filled"
-                    value={values.category}
+                    value={values.language}
                     w="100%"
                   >
                     <option value="english">English</option>
                   </Select>
+                  {errors.language && (
+                    <Text
+                      style={{ color: "red", marginTop: 2 }}
+                      fontSize="14px"
+                    >
+                      {errors.language}
+                    </Text>
+                  )}
+                </Stack>
+                {/* level */}
+                <Stack w="100%">
+                  <Select
+                    placeholder="Select Level"
+                    name="complexityLevel"
+                    onChange={handleChange}
+                    mt={6}
+                    variant="filled"
+                    value={values.complexityLevel}
+                    w="100%"
+                  >
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="expert">Expert</option>
+                  </Select>
+                  {errors.complexityLevel && (
+                    <Text
+                      style={{ color: "red", marginTop: 2 }}
+                      fontSize="14px"
+                    >
+                      {errors.complexityLevel}
+                    </Text>
+                  )}
+                </Stack>
+                <Stack w="100%">
+                <Select
+                placeholder="Select Category"
+                name="category"
+                onChange={handleChange}
+                mt={6}
+                variant="filled"
+                value={values.category}
+              >
+                {data?.map((values: any) =>
+                  isPending ? (
+                    <Spinner />
+                  ) : (
+                    <option key={values.id} id={values.id} value={values.id}>
+                      {values.name}
+                    </option>
+                  )
+                )}
+              </Select>
                   {errors.category && (
                     <Text
                       style={{ color: "red", marginTop: 2 }}
