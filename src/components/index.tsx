@@ -6,6 +6,8 @@ import InstructorDashboardLayout from "./InstructorDashboardLayout";
 import Sidebar from "./Sidebar";
 import CreateCourseNavBar from "./CreateCourseNavBar";
 import CourseManageDashboardLayout from "./CourseManageDashboardLayout";
+import CourseManageNavbar from "./CourseManageNavbar";
+import CourseManageSidebar from "./CourseManageSidebar";
 export {
   HomeLayout,
   Navbar,
@@ -14,5 +16,7 @@ export {
   InstructorDashboardLayout,
   Sidebar,
   CreateCourseNavBar,
-  CourseManageDashboardLayout
+  CourseManageDashboardLayout,
+  CourseManageNavbar,
+  CourseManageSidebar
 };

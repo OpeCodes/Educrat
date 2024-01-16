@@ -1,43 +1,18 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
-import { IoIosArrowBack } from "react-icons/io";
-import { Link } from "react-router-dom";
-import { IoMdSettings } from "react-icons/io";
+import { Outlet } from "react-router-dom";
+import { CourseManageNavbar, CourseManageSidebar } from ".";
+import { Flex, Stack } from "@chakra-ui/react";
 
 const CourseManageDashboardLayout = () => {
   return (
-    <Flex justify={"space-between"} bg={"#140342"} color="white" p={3}>
-      <Flex columnGap={5} align={"center"}>
-        <Flex align={"center"} columnGap={2} as={Link} to="/instructor/courses">
-          <Text>
-            <IoIosArrowBack />
-          </Text>
-          <Text fontSize={"14px"} fontWeight={"bold"}>
-            Back to courses
-          </Text>
-        </Flex>
-        <Text fontWeight={"bold"}>Learn Frontend Development from peter</Text>
-        <Text bg="red" px={2} borderRadius={5} fontSize={"14px"}>
-          DRAFT
-        </Text>
+    <>
+      <CourseManageNavbar />
+      <Flex m={20}>
+        <Stack mr={20}>
+          <CourseManageSidebar />
+        </Stack>
+        <Outlet />
       </Flex>
-      <Flex align={"center"}columnGap={4}>
-        <Button
-          display={{ base: "none", md: "flex" }}
-          px={5}
-          bg="white"
-          color="black"
-          variant="solid"
-          borderColor={"white"}
-          borderWidth={2}
-          _hover={{ background: "#140342", color: "white" }}
-        >
-          Save
-        </Button>
-        <Text cursor={"pointer"}>
-          <IoMdSettings fontSize={"25px"} />
-        </Text>
-      </Flex>
-    </Flex>
+    </>
   );
 };
 

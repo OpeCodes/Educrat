@@ -76,7 +76,7 @@ const Navbar = () => {
     onClose: onModalClose,
   } = useDisclosure();
   const dispatch = useDispatch();
-  const { user } = useSelector((store: RootState) => store.user);
+  const { user} = useSelector((store: RootState) => store.user);
   const hasStudentRole = user?.user?.roles.some(
     (role: any) => role?.name === "student"
   );
