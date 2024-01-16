@@ -6,11 +6,20 @@ const CourseManageDashboardLayout = () => {
   return (
     <>
       <CourseManageNavbar />
-      <Flex m={20}>
-        <Stack mr={20}>
+      <Flex>
+        <Stack mr={20} m={20}>
           <CourseManageSidebar />
         </Stack>
-        <Outlet />
+        <Stack
+          bg="white"
+          maxW={"70%"}
+          my={10}
+          w="full"
+          p={3}
+          boxShadow="0 0.75rem 1rem rgb(189 197 209 / 90%)"
+        >
+          <Outlet />
+        </Stack>
       </Flex>
     </>
   );
