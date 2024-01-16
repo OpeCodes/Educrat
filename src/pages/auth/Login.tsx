@@ -153,7 +153,6 @@ const Login = () => {
                     bg={"#00FF84"}
                     isLoading={isPending}
                     loadingText="Loading"
-                    colorScheme="teal"
                     variant="outline"
                     spinnerPlacement="end"
                     width="100%"
