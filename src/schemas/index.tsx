@@ -56,5 +56,5 @@ export const courseLandingSchema = Yup.object().shape({
   subtitle: Yup.string().required("pls add subtitle "),
   description: Yup.string().required("pls add description"),
   category: Yup.string().required("please add category"),
-  complexityLevel: Yup.string().required("pls add level")
-})
+  complexityLevel: Yup.string().required("pls add level"),
+});
