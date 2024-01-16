@@ -38,7 +38,6 @@ import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
 import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
-import { useGetUser } from "../hooks";
 const links = [
   {
     id: 1,
@@ -78,13 +77,10 @@ const Navbar = () => {
   } = useDisclosure();
   const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store.user);
-
-  const { data } = useGetUser();
-  console.log(data?.roles);
-  const hasStudentRole = data?.roles.some(
+  const hasStudentRole = user?.user?.roles.some(
     (role: any) => role?.name === "student"
   );
-  const hasInstructorRole = data?.roles.some(
+  const hasInstructorRole = user?.user?.roles.some(
     (role: any) => role?.name === "instructor"
   );
 
@@ -201,7 +197,7 @@ const Navbar = () => {
                 fontWeight="bold"
                 bg="white"
                 color="#140342"
-                src={data?.profilePicture}
+                src={user?.user?.profilePicture}
                 cursor="pointer"
               />
               {hover && (
@@ -220,7 +216,7 @@ const Navbar = () => {
                       fontWeight="bold"
                       bg="white"
                       color="#140342"
-                      src={data?.profilePicture}
+                      src={user?.user?.profilePicture}
                       cursor="pointer"
                     />
                     <Box>
@@ -235,26 +231,25 @@ const Navbar = () => {
                     <Stack p={3}>
                       <Text> My Cart</Text>
                       {hasStudentRole && hasInstructorRole && (
-                <Text
-                  fontSize="15px"
-                  cursor={"pointer"}
-                  as={Link}
-                  to="/instructor/courses"
-                >
-                  Instructor Dashboard
-                </Text>
-              )}
-                {hasStudentRole && !hasInstructorRole && (
-                <Text
-                  fontSize="15px"
-                  cursor={"pointer"}
-                  as={Link}
-                  to="/become-instructor"
-                >
-                  Teach on Educrat
-                </Text>
-              )}
-                      
+                        <Text
+                          fontSize="15px"
+                          cursor={"pointer"}
+                          as={Link}
+                          to="/instructor/courses"
+                        >
+                          Instructor Dashboard
+                        </Text>
+                      )}
+                      {hasStudentRole && !hasInstructorRole && (
+                        <Text
+                          fontSize="15px"
+                          cursor={"pointer"}
+                          as={Link}
+                          to="/become-instructor"
+                        >
+                          Teach on Educrat
+                        </Text>
+                      )}
                     </Stack>
                     <Divider />
                     <Stack p={3}>
@@ -345,7 +340,7 @@ const Navbar = () => {
                     fontWeight="bold"
                     bg="white"
                     color="#140342"
-                    src={data?.profilePicture}
+                    src={user?.user?.profilePicture}
                     cursor="pointer"
                   />
                   <Box p={0}>
