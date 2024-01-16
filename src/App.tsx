@@ -7,7 +7,7 @@ import {
   VerifyAccount,
   ResetPassword,
 } from "./pages/auth";
-import { HomeLayout, InstructorDashboardLayout } from "./components";
+import { CourseManageDashboardLayout, HomeLayout, InstructorDashboardLayout } from "./components";
 import "./App.css";
 import Home from "./pages/Home";
 import { StudentCourse } from "./pages/course";
@@ -56,6 +56,12 @@ const router = createBrowserRouter([
     path: "/become-instructor",
     element : <BecomeInstructor/>
   },
+  
+  {
+    path: "/course/create/1",
+    element: <CreateCourse/>,
+  }
+  ,
   //instructor dashboard
   {
     path: "/instructor",
@@ -63,13 +69,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "courses",
-        element: <Courses/>
+        element: <Courses/>,
       }
     ]
   },
   {
-    path: "/course/create/1",
-    element: <CreateCourse/>,
+    path: "/instructor/courses/:id/manage/",
+    element: <CourseManageDashboardLayout/>,
+    children: [
+      {
+        path: "basics",
+        element: <h1>manage basis</h1>
+      }
+    ]
   }
 ]);
 

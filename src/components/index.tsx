@@ -5,6 +5,7 @@ import FileUploadComponent from "./FileUploadComponent";
 import InstructorDashboardLayout from "./InstructorDashboardLayout";
 import Sidebar from "./Sidebar";
 import CreateCourseNavBar from "./CreateCourseNavBar";
+import CourseManageDashboardLayout from "./CourseManageDashboardLayout";
 export {
   HomeLayout,
   Navbar,
@@ -13,4 +14,5 @@ export {
   InstructorDashboardLayout,
   Sidebar,
   CreateCourseNavBar,
+  CourseManageDashboardLayout
 };

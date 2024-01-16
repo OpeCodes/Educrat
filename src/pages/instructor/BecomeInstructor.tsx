@@ -116,7 +116,7 @@ const BecomeInstructor = () => {
                       </FormControl>
                     </GridItem>
                     {values.socials.map((social, index) => (
-                      <GridItem w="100%">
+                      <GridItem w="100%" key={index}>
                         <FormControl isRequired>
                           <FormLabel>{`${social.type
                             .charAt(0)
