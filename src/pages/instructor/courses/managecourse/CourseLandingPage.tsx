@@ -96,6 +96,62 @@ const CourseLandingPage = () => {
                   important areas that you've covered during your course.
                 </FormHelperText>
               </FormControl>
+              {/* learning objectives */}
+              <Stack>
+                <Text fontWeight={"bold"}>
+                  What will students learn in your course?
+                </Text>
+                <Text fontSize={13}>
+                  You must enter at least 4 learning objectives or outcomes that
+                  learners can expect to achieve after completing your course.
+                </Text>
+                <Stack>
+                  <FormControl isRequired>
+                    <Input
+                      type="text"
+                      variant="filled"
+                      placeholder="e.g learn learn photoshop cs6 from photoshop"
+                      //   value={values.title}
+                      name="title"
+                      onChange={handleChange}
+                    />
+                    {/* {errors.title && (
+                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
+                    {errors.title}
+                  </Text>
+                )} */}
+                  </FormControl>
+                </Stack>
+              </Stack>
+              <Stack>
+                <Text fontWeight={"bold"}>
+                  What are the requirements or prerequisites for taking your
+                  course?
+                </Text>
+                <Text fontSize={13}>
+                  List the required skills, experience, tools or equipment
+                  learners should have prior to taking your course. If there are
+                  no requirements, use this space as an opportunity to lower the
+                  barrier for beginners.
+                </Text>
+                <Stack>
+                  <FormControl isRequired>
+                    <Input
+                      type="text"
+                      variant="filled"
+                      placeholder="e.g learn learn photoshop cs6 from photoshop"
+                      //   value={values.title}
+                      name="title"
+                      onChange={handleChange}
+                    />
+                    {/* {errors.title && (
+                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
+                    {errors.title}
+                  </Text>
+                )} */}
+                  </FormControl>
+                </Stack>
+              </Stack>
               <Flex columnGap={5}>
                 <Stack w="100%">
                   <Select
@@ -177,23 +233,28 @@ const CourseLandingPage = () => {
                 </Stack>
               </Flex>
 
-<Stack maxW="90%" w="100%">
-              <FormControl isRequired mt={4}>
-                <FormLabel>What is primarily taught in your course?</FormLabel>
-                <Input
-                  type="text"
-                  variant="filled"
-                  placeholder="Insert your course subtitle"
-                  value={values.preRequisites}
-                  name="preRequisites"
-                  onChange={handleChange}
-                />
-                {errors.preRequisites && (
-                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.preRequisites}
-                  </Text>
-                )}
-              </FormControl>
+              <Stack maxW="90%" w="100%">
+                <FormControl isRequired mt={4}>
+                  <FormLabel>
+                    What is primarily taught in your course?
+                  </FormLabel>
+                  <Input
+                    type="text"
+                    variant="filled"
+                    placeholder="Insert your course subtitle"
+                    value={values.preRequisites}
+                    name="preRequisites"
+                    onChange={handleChange}
+                  />
+                  {errors.preRequisites && (
+                    <Text
+                      style={{ color: "red", marginTop: 5 }}
+                      fontSize="14px"
+                    >
+                      {errors.preRequisites}
+                    </Text>
+                  )}
+                </FormControl>
               </Stack>
               <Button
                 bg={"#00FF84"}
