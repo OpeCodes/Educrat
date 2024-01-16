@@ -8,6 +8,7 @@ import {
   Flex,
   Divider,
   FormHelperText,
+  Select,
 } from "@chakra-ui/react";
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
@@ -24,7 +25,7 @@ const initialValues = {
 const CourseLandingPage = () => {
   const handleSubmit = (values: any): void => {
     // loginUser(values);
-    console.log(values)
+    console.log(values);
   };
 
   return (
@@ -42,7 +43,7 @@ const CourseLandingPage = () => {
         course title standards.
       </Text>
 
-      <Stack p={5}>
+      <Stack p={5} mt={-8}>
         <Formik
           initialValues={initialValues}
           validationSchema={courseLandingSchema}
@@ -70,6 +71,49 @@ const CourseLandingPage = () => {
                   and optimized for search
                 </FormHelperText>
               </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Course subtitle</FormLabel>
+                <Input
+                  type="text"
+                  variant="filled"
+                  placeholder="Insert your course subtitle"
+                  value={values.subtitle}
+                  name="subtitle"
+                  onChange={handleChange}
+                />
+                {errors.subtitle && (
+                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
+                    {errors.subtitle}
+                  </Text>
+                )}
+                <FormHelperText fontSize={10}>
+                  Use 1 or 2 related keywords, and mention 3-4 of the most
+                  important areas that you've covered during your course.
+                </FormHelperText>
+              </FormControl>
+              <Flex>
+                <Stack w="100%">
+                  <Select
+                    placeholder="Select Category"
+                    name="category"
+                    onChange={handleChange}
+                    mt={6}
+                    variant="filled"
+                    value={values.category}
+                    w="100%"
+                  >
+                    <option value="english">English</option>
+                  </Select>
+                  {errors.category && (
+                    <Text
+                      style={{ color: "red", marginTop: 2 }}
+                      fontSize="14px"
+                    >
+                      {errors.category}
+                    </Text>
+                  )}
+                </Stack>
+              </Flex>
 
               <Button
                 bg={"#00FF84"}
