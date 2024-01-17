@@ -17,7 +17,6 @@ const CourseManageNavbar = () => {
           Back to courses
         </Text>
       </Flex>
-      {/* <Text fontWeight={"bold"}>Learn Frontend Development from peter</Text> */}
       <Text fontWeight={"bold"}>{course?.title}</Text>
       <Text bg="red" px={2} borderRadius={5} fontSize={"14px"}>
         DRAFT
