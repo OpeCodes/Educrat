@@ -2,8 +2,12 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import customFetch from "../utils/axios";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { addUserLocalStorage } from "../store/localStorage";
-import { setUser } from "../features/user/UserSlice";
+import {
+  addCourseLocalStorage,
+  addUserLocalStorage,
+  removeUserFromLocalStorage,
+} from "../store/localStorage";
+import { setCourse, setUser } from "../features/user/UserSlice";
 import { useNavigate } from "react-router-dom";
 export const useGetUser = () => {
   const { data } = useQuery({
@@ -94,7 +98,6 @@ export const useResetPassword = () => {
       }, 3000);
     },
     onError: (error: any) => {
-      console.log(error);
       toast({
         title: `${error.response.data.error}`,
         status: "error",
@@ -124,7 +127,6 @@ export const useForgotPassword = () => {
     },
 
     onError: (error: any) => {
-      console.log(error);
       toast({
         title: `${error.response.data.error}`,
         status: "error",
@@ -182,7 +184,6 @@ export const useBecomeInstructor = () => {
       navigate("/instructor/courses");
     },
     onError: (error: any) => {
-      console.log(error);
       toast({
         title: `${error.response.data.error}`,
         status: "error",
@@ -207,12 +208,16 @@ export const useCourseCategory = () => {
 export const useCreateCourse = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);
     },
     onSuccess: (user) => {
       navigate(`/instructor/courses/${user?.data?.id}/manage/basics`);
+      dispatch(setCourse(user.data));
+      // addUserLocalStorage(user.data);
+      addCourseLocalStorage(user.data);
       toast({
         title: `course create successfully`,
         status: "success",
@@ -221,7 +226,6 @@ export const useCreateCourse = () => {
       });
     },
     onError: (error: any) => {
-      console.log(error);
       toast({
         title: `${error.response.data.error}`,
         status: "error",
@@ -246,9 +250,9 @@ export const useSingleCourse = () => {
         duration: 5000,
         isClosable: true,
       });
+      removeUserFromLocalStorage()
     },
     onError: (error: any) => {
-      console.log(error);
       toast({
         title: `${error.response.data.error}`,
         status: "error",
@@ -260,19 +264,9 @@ export const useSingleCourse = () => {
   return { singleCourse, isPending };
 };
 export const useGetSingleCourse = () => {
-  const toast = useToast()
   const { mutate: getSingleCourse, isPending } = useMutation({
     mutationFn: ({ course }: any) => {
       return customFetch.get(`course/${course}`);
-    },
-    onSuccess: (user) => {
-      console.log(user)
-      toast({
-        title: `course updated successfully`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
     },
   });
   return { getSingleCourse, isPending };

@@ -13,15 +13,20 @@ import {
 } from "@chakra-ui/react";
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
-import { useCourseCategory, useGetSingleCourse, useSingleCourse } from "../../../../hooks";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import {
+  useCourseCategory,
+  useGetSingleCourse,
+  useSingleCourse,
+} from "../../../../hooks";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../../../../store/store";
 const initialValues = {
   title: "",
   subtitle: "",
-  // description: "",
   language: "",
   category: "",
   preRequisities: [""],
@@ -29,28 +34,25 @@ const initialValues = {
   learningObjectives: ["", "", "", ""],
 };
 const CourseLandingPage = () => {
-  const [description, setDescripton] = useState('');
-  const [error, setError] = useState<boolean>(false)
+  const [description, setDescripton] = useState("");
+  const [error, setError] = useState<boolean>(false);
 
   const { data, isPending } = useCourseCategory();
   const { singleCourse, isPending: isLoading } = useSingleCourse();
-  const {getSingleCourse} = useGetSingleCourse()
-  const {id} = useParams();
-  console.log(id)
-  // console.log(getCourse({user: "65a4386329fcd03036b62cd0"}))
-  useEffect(()=>{
-    getSingleCourse({course: id})
+  const { getSingleCourse } = useGetSingleCourse();
+  const { id } = useParams();
+  useEffect(() => {
+    getSingleCourse({ course: id });
+  }, [id]);
 
-  },[])
-  
   const handleSubmit = (values: any): void => {
-    if(!description){
-      setError(true)
+    if (!description) {
+      setError(true);
       return;
     }
-    singleCourse({ singleId: id, user: {...values, description} });
-  }
- 
+    singleCourse({ singleId: id, user: { ...values, description } });
+  };
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -82,6 +84,8 @@ const CourseLandingPage = () => {
                   placeholder="Insert your title"
                   value={values.title}
                   name="title"
+                  as={"input"}
+                  // defaultValue={"dkdkdk"}
                   onChange={handleChange}
                 />
                 {errors.title && (
@@ -114,10 +118,14 @@ const CourseLandingPage = () => {
                   important areas that you've covered during your course.
                 </FormHelperText>
               </FormControl>
-              
+
               <FormControl isRequired>
                 <FormLabel>Course Description</FormLabel>
-                <ReactQuill theme="snow"  value={description} onChange={setDescripton} />
+                <ReactQuill
+                  theme="snow"
+                  value={description}
+                  onChange={setDescripton}
+                />
                 {error && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
                     Please add description
@@ -148,7 +156,7 @@ const CourseLandingPage = () => {
                 ))}
                 {errors.learningObjectives && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                   please include all the 4 input
+                    please include all the 4 input
                   </Text>
                 )}
               </Stack>
@@ -171,7 +179,6 @@ const CourseLandingPage = () => {
                         variant="filled"
                         placeholder="Example: No programming experience.You will learn everything you need know"
                         value={value}
-                        // name={`preRequisities[${index}]`}
                         name={`preRequisities[0]`}
                         onChange={handleChange}
                       />

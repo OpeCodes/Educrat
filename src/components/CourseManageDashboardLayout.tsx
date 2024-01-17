@@ -6,7 +6,7 @@ const CourseManageDashboardLayout = () => {
   return (
     <>
       <CourseManageNavbar />
-      <Flex>
+      <Flex flexWrap={"wrap"}>
         <Stack mr={20} m={20}>
           <CourseManageSidebar />
         </Stack>
