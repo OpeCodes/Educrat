@@ -14,10 +14,13 @@ import {
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
 import { useCourseCategory, useSingleCourse } from "../../../../hooks";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useState } from "react";
 const initialValues = {
   title: "",
   subtitle: "",
-  description: "",
+  // description: "",
   language: "",
   category: "",
   preRequisities: [""],
@@ -25,14 +28,20 @@ const initialValues = {
   learningObjectives: ["", "", "", ""],
 };
 const CourseLandingPage = () => {
+  const [description, setDescripton] = useState('');
+  const [error, setError] = useState<boolean>(false)
+
   const { data, isPending } = useCourseCategory();
   const { singleCourse, isPending: isLoading } = useSingleCourse();
-
+  
   const handleSubmit = (values: any): void => {
-    // loginUser(values);
-    singleCourse({ singleId: "65a4386329fcd03036b62cd0", user: values });
-  };
-  console.log(data);
+    if(!description){
+      setError(true)
+      return;
+    }
+    singleCourse({ singleId: "65a4386329fcd03036b62cd0", user: {...values, description} });
+  }
+ 
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -96,19 +105,13 @@ const CourseLandingPage = () => {
                   important areas that you've covered during your course.
                 </FormHelperText>
               </FormControl>
+              
               <FormControl isRequired>
                 <FormLabel>Course Description</FormLabel>
-                <Input
-                  type="text"
-                  variant="filled"
-                  placeholder="Insert your course description"
-                  value={values.description}
-                  name="description"
-                  onChange={handleChange}
-                />
-                {errors.description && (
+                <ReactQuill theme="snow"  value={description} onChange={setDescripton} />
+                {error && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.description}
+                    Please add description
                   </Text>
                 )}
               </FormControl>
