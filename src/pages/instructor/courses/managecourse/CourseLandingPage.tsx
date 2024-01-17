@@ -17,6 +17,7 @@ import { useCourseCategory, useGetSingleCourse, useSingleCourse } from "../../..
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 const initialValues = {
   title: "",
   subtitle: "",
@@ -34,10 +35,11 @@ const CourseLandingPage = () => {
   const { data, isPending } = useCourseCategory();
   const { singleCourse, isPending: isLoading } = useSingleCourse();
   const {getSingleCourse} = useGetSingleCourse()
-
+  const {id} = useParams();
+  console.log(id)
   // console.log(getCourse({user: "65a4386329fcd03036b62cd0"}))
   useEffect(()=>{
-    getSingleCourse({course: "65a4386329fcd03036b62cd0"})
+    getSingleCourse({course: id})
 
   },[])
   
@@ -46,7 +48,7 @@ const CourseLandingPage = () => {
       setError(true)
       return;
     }
-    singleCourse({ singleId: "65a4386329fcd03036b62cd0", user: {...values, description} });
+    singleCourse({ singleId: id, user: {...values, description} });
   }
  
   return (
