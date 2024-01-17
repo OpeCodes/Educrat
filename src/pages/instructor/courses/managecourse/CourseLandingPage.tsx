@@ -273,7 +273,7 @@ const CourseLandingPage = () => {
                   )}
                 </Stack>
               </Flex>
-
+            <Flex justify={"flex-end"}>
               <Button
                 bg={"#00FF84"}
                 isLoading={isLoading}
@@ -281,7 +281,6 @@ const CourseLandingPage = () => {
                 colorScheme="teal"
                 variant="outline"
                 spinnerPlacement="end"
-                width="100%"
                 onClick={() => handleSubmit()}
                 mt={3}
                 borderWidth={2}
@@ -289,8 +288,9 @@ const CourseLandingPage = () => {
                 borderColor={"#00FF84"}
                 _hover={{ background: "none", color: "#00FF84" }}
               >
-                Register
+                Update
               </Button>
+              </Flex>
             </Flex>
           )}
         </Formik>
