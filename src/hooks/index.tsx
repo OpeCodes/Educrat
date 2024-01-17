@@ -3,7 +3,7 @@ import customFetch from "../utils/axios";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { addUserLocalStorage } from "../store/localStorage";
-import { setUser } from "../features/user/UserSlice";
+import {  setUser } from "../features/user/UserSlice";
 import { useNavigate } from "react-router-dom";
 export const useGetUser = () => {
   const { data } = useQuery({
@@ -155,7 +155,6 @@ export const useVerifyAccount = () => {
       }, 3000);
     },
     onError: (error: any) => {
-      console.log(error);
       toast({
         title: `${error.response.data.error}`,
         status: "error",
@@ -207,13 +206,13 @@ export const useCourseCategory = () => {
 
 export const useCreateCourse = () => {
   const toast = useToast();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);
     },
-    onSuccess: () => {
-      navigate("/instructor/courses/65a4386329fcd03036b62cd0/manage/basics")
+    onSuccess: (user) => {
+      navigate(`/instructor/courses/${user?.data?.id}/manage/basics`)
       toast({
         title: `course create successfully`,
         status: "success",
@@ -261,7 +260,6 @@ export const useSingleCourse = () =>{
   return {singleCourse,isPending}
 }
 export const useGetSingleCourse  = () =>{ 
-  // const toast=  useToast();
   const {mutate: getSingleCourse, isPending} = useMutation({
       mutationFn: ({course}: any) =>{
         return customFetch.get(`course/${course}`)
