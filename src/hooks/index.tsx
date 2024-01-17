@@ -208,7 +208,6 @@ export const useCourseCategory = () => {
 export const useCreateCourse = () => {
   const toast = useToast();
   const navigate = useNavigate()
-  // const {} = CreateCourse()
   const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);
@@ -261,3 +260,23 @@ export const useSingleCourse = () =>{
   })
   return {singleCourse,isPending}
 }
+export const useGetSingleCourse  = () =>{ 
+  // const toast=  useToast();
+  const {mutate: getSingleCourse, isPending} = useMutation({
+      mutationFn: ({course}: any) =>{
+        return customFetch.get(`course/${course}`)
+      },
+     
+  })
+  return {getSingleCourse,isPending}
+}
+export const useGetCourse = () => {
+  const { data } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const { data } = await customFetch.get("/user");
+      return data;
+    },
+  });
+  return { data };
+};

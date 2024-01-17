@@ -13,10 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
-import { useCourseCategory, useSingleCourse } from "../../../../hooks";
+import { useCourseCategory, useGetSingleCourse, useSingleCourse } from "../../../../hooks";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const initialValues = {
   title: "",
   subtitle: "",
@@ -33,6 +33,13 @@ const CourseLandingPage = () => {
 
   const { data, isPending } = useCourseCategory();
   const { singleCourse, isPending: isLoading } = useSingleCourse();
+  const {getSingleCourse} = useGetSingleCourse()
+
+  // console.log(getCourse({user: "65a4386329fcd03036b62cd0"}))
+  useEffect(()=>{
+    getSingleCourse({course: "65a4386329fcd03036b62cd0"})
+
+  },[])
   
   const handleSubmit = (values: any): void => {
     if(!description){
