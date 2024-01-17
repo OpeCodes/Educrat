@@ -20,22 +20,19 @@ const initialValues = {
   description: "",
   language: "",
   category: "",
-  //   learningObjectives: [""],
   preRequisities: [""],
   complexityLevel: "",
   learningObjectives: ["", "", "", ""],
 };
 const CourseLandingPage = () => {
   const { data, isPending } = useCourseCategory();
-  const {singleCourse,isPending: isLoading} = useSingleCourse()
+  const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
     // loginUser(values);
-    console.log({singleId: "65a4386329fcd03036b62cd0", values});
-    singleCourse({singleId: "65a4386329fcd03036b62cd0", user: values})
-
+    singleCourse({ singleId: "65a4386329fcd03036b62cd0", user: values });
   };
-  console.log(data)
+  console.log(data);
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -124,7 +121,7 @@ const CourseLandingPage = () => {
                   learners can expect to achieve after completing your course.
                 </Text>
                 {values?.learningObjectives.map((value, index) => (
-                  <Stack>
+                  <Stack key={index}>
                     <FormControl isRequired>
                       <Input
                         type="text"
@@ -134,17 +131,14 @@ const CourseLandingPage = () => {
                         name={`learningObjectives[${index}]`}
                         onChange={handleChange}
                       />
-                      {errors.learningObjectives && (
-                        <Text
-                          style={{ color: "red", marginTop: 5 }}
-                          fontSize="14px"
-                        >
-                          {errors.learningObjectives}
-                        </Text>
-                      )}
                     </FormControl>
                   </Stack>
                 ))}
+                {errors.learningObjectives && (
+                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
+                   please include all the 4 input
+                  </Text>
+                )}
               </Stack>
               <Stack>
                 <Text fontWeight={"bold"}>
@@ -164,16 +158,19 @@ const CourseLandingPage = () => {
                         type="text"
                         variant="filled"
                         placeholder="Example: No programming experience.You will learn everything you need know"
-                          value={value}
-                          // name={`preRequisities[${index}]`}
-                          name={`preRequisities[0]`}
+                        value={value}
+                        // name={`preRequisities[${index}]`}
+                        name={`preRequisities[0]`}
                         onChange={handleChange}
                       />
                       {errors.preRequisities && (
-                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.preRequisities}
-                  </Text>
-                )}
+                        <Text
+                          style={{ color: "red", marginTop: 5 }}
+                          fontSize="14px"
+                        >
+                          {errors.preRequisities}
+                        </Text>
+                      )}
                     </FormControl>
                   </Stack>
                 ))}

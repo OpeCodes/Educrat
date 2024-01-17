@@ -214,7 +214,7 @@ export const useCreateCourse = () => {
       return customFetch.post("/course", user);
     },
     onSuccess: () => {
-      navigate("/")
+      navigate("/instructor/courses/65a4386329fcd03036b62cd0/manage/basics")
       toast({
         title: `course create successfully`,
         status: "success",

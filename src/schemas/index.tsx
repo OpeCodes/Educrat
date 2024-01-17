@@ -58,6 +58,6 @@ export const courseLandingSchema = Yup.object().shape({
   category: Yup.string().required("please select category"),
   complexityLevel: Yup.string().required("pls select level"),
   language: Yup.string().required("please select a language"),
-  learningObjectives: Yup.array().of(Yup.string().required("")),
+  learningObjectives: Yup.array().of(Yup.string().required("please include all the 4 input")),
   preRequisities: Yup.array().of(Yup.string().required("please enter prerequisities")),
 });
