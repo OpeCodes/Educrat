@@ -22,7 +22,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CourseImageFileUpload } from "../../../../components";
+import { CourseImageFileUpload, Loading } from "../../../../components";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../../../../store/store";
 const initialValues = {
@@ -57,6 +57,11 @@ const CourseLandingPage = () => {
     singleCourse({ singleId: id, user: { ...values, description } });
   };
 
+  if(isPending){
+    return (
+    <Loading/>
+    )
+  }
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
