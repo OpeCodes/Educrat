@@ -1,6 +1,6 @@
 import { Box, Button, Heading, Text, Stack } from "@chakra-ui/react";
 import { useState } from "react";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { SliderButtons, Course } from "../components/index";
 import { buttonsData, sliderSettings, coursesData } from "../utils/data";
 
@@ -60,7 +60,7 @@ export const Courses = () => {
         </Box>
         <Box as="div" mt={8}>
           <Swiper {...sliderSettings}>
-            <SliderButtons useSwiper={useSwiper} />
+            <SliderButtons />
             {coursesData.map((course, index) => {
               return (
                 <SwiperSlide key={index}>

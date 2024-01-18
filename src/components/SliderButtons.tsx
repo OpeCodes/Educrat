@@ -3,8 +3,9 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
+import { useSwiper } from "swiper/react";
 
-const SliderButtons = ({ useSwiper }) => {
+const SliderButtons = () => {
   const swiper = useSwiper();
   return (
     <Box as="div" display={"flex"}>
