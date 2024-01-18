@@ -22,6 +22,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { CourseImageFileUpload } from "../../../../components";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../../../../store/store";
 const initialValues = {
@@ -38,6 +39,9 @@ const CourseLandingPage = () => {
   const [error, setError] = useState<boolean>(false);
 
   const { data, isPending } = useCourseCategory();
+  const handleImageUpload = (file: File) => {
+    console.log("Uploaded file:", file);
+  };
   const { singleCourse, isPending: isLoading } = useSingleCourse();
   const { getSingleCourse } = useGetSingleCourse();
   const { id } = useParams();
@@ -194,7 +198,7 @@ const CourseLandingPage = () => {
                   </Stack>
                 ))}
               </Stack>
-              <Flex columnGap={5} flexWrap={'wrap'}>
+              <Flex columnGap={5} flexWrap={"wrap"}>
                 <Stack w="100%">
                   <Select
                     placeholder="Select language"
@@ -216,7 +220,6 @@ const CourseLandingPage = () => {
                     </Text>
                   )}
                 </Stack>
-                {/* level */}
                 <Stack w="100%">
                   <Select
                     placeholder="Select Level"
@@ -273,23 +276,32 @@ const CourseLandingPage = () => {
                   )}
                 </Stack>
               </Flex>
-            <Flex justify={"flex-end"}>
-              <Button
-                bg={"#00FF84"}
-                isLoading={isLoading}
-                loadingText="Loading"
-                colorScheme="teal"
-                variant="outline"
-                spinnerPlacement="end"
-                onClick={() => handleSubmit()}
-                mt={3}
-                borderWidth={2}
-                py={3}
-                borderColor={"#00FF84"}
-                _hover={{ background: "none", color: "#00FF84" }}
-              >
-                Update
-              </Button>
+              {/* level */}
+
+              <Stack>
+                <Text fontWeight={"bold"} mt={2}>
+                  Course Image
+                </Text>
+                <CourseImageFileUpload onImageUpload={handleImageUpload} />
+              </Stack>
+
+              <Flex justify={"flex-end"}>
+                <Button
+                  bg={"#00FF84"}
+                  isLoading={isLoading}
+                  loadingText="Loading"
+                  colorScheme="teal"
+                  variant="outline"
+                  spinnerPlacement="end"
+                  onClick={() => handleSubmit()}
+                  mt={3}
+                  borderWidth={2}
+                  py={3}
+                  borderColor={"#00FF84"}
+                  _hover={{ background: "none", color: "#00FF84" }}
+                >
+                  Update
+                </Button>
               </Flex>
             </Flex>
           )}

@@ -8,6 +8,7 @@ import CreateCourseNavBar from "./CreateCourseNavBar";
 import CourseManageDashboardLayout from "./CourseManageDashboardLayout";
 import CourseManageNavbar from "./CourseManageNavbar";
 import CourseManageSidebar from "./CourseManageSidebar";
+import CourseImageFileUpload from "./CourseImageFileUpload"
 export {
   HomeLayout,
   Navbar,
@@ -18,5 +19,6 @@ export {
   CreateCourseNavBar,
   CourseManageDashboardLayout,
   CourseManageNavbar,
-  CourseManageSidebar
+  CourseManageSidebar,
+  CourseImageFileUpload
 };
