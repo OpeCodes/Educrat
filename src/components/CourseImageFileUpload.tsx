@@ -72,8 +72,6 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         const base64Data = reader.result as string;
 
         // Replace 'courseId' with the actual variable holding the course id
-        // const courseId = 123; // Replace with the actual course id or use your state/props
-        // const dynamicEndpoint = `/course/${}/thumbnail`;
         const dynamicEndpoint = `/course/65a4386329fcd03036b62cd0/thumbnail`;
 
         sendBase64Data(fileToUpload, base64Data, dynamicEndpoint);

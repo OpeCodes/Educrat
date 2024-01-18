@@ -198,7 +198,7 @@ const CourseLandingPage = () => {
                   </Stack>
                 ))}
               </Stack>
-              <Flex columnGap={5} flexWrap={"wrap"}>
+              <Flex columnGap={5}  flexDirection={{base: "column", lg: "row"}}>
                 <Stack w="100%">
                   <Select
                     placeholder="Select language"
