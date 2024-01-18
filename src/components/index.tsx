@@ -10,6 +10,7 @@ import CourseManageNavbar from "./CourseManageNavbar";
 import CourseManageSidebar from "./CourseManageSidebar";
 import SliderButtons from "./SliderButtons";
 import Course from "./Course";
+import Category from "./Category";
 export {
   HomeLayout,
   Navbar,
@@ -23,4 +24,5 @@ export {
   CourseManageSidebar,
   SliderButtons,
   Course,
+  Category,
 };

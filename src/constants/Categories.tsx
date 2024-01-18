@@ -1,7 +1,7 @@
 import { Box, Stack, Heading, Text, Button } from "@chakra-ui/react";
 import { MdArrowOutward } from "react-icons/md";
 import { categoriesData } from "../utils/data";
-import { Category } from "../components";
+import { Category } from "../components/index";
 
 export interface category {
   id: number;
