@@ -8,9 +8,10 @@ import CreateCourseNavBar from "./CreateCourseNavBar";
 import CourseManageDashboardLayout from "./CourseManageDashboardLayout";
 import CourseManageNavbar from "./CourseManageNavbar";
 import CourseManageSidebar from "./CourseManageSidebar";
-import SliderButtons from "./SliderButtons";
-import Course from "./Course";
+import CourseImageFileUpload from "./CourseImageFileUpload";
 import Category from "./Category";
+import Course from "./Course";
+import SliderButtons from "./SliderButtons";
 export {
   HomeLayout,
   Navbar,
@@ -22,7 +23,8 @@ export {
   CourseManageDashboardLayout,
   CourseManageNavbar,
   CourseManageSidebar,
-  SliderButtons,
-  Course,
+  CourseImageFileUpload,
   Category,
+  Course,
+  SliderButtons,
 };
