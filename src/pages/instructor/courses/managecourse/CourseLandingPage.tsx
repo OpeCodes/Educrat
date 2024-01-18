@@ -25,8 +25,6 @@ import { useParams } from "react-router-dom";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { RootState } from "../../../../store/store";
 import { useSelector } from "react-redux";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../../../store/store";
 
 const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
