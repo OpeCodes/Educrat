@@ -66,3 +66,18 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+.swiper-wrapper {
+  display: flex;
+}
+.swiper-horizontal {
+  overflow: hidden;
+}
+
+.wrapper:hover .img {
+  scale: 1.07;
+  transition-duration: 400ms;
+}
+.img-wrapper {
+  border-radius: 10px;
+  overflow: hidden;
+}
