@@ -2,7 +2,10 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 const CourseManageNavbar = () => {
+  const { course} = useSelector((store: RootState) => store.user);
   return (
     <Flex justify={"space-between"} bg={"#140342"} color="white" p={3}>
     <Flex columnGap={5} align={"center"}>
@@ -14,7 +17,7 @@ const CourseManageNavbar = () => {
           Back to courses
         </Text>
       </Flex>
-      <Text fontWeight={"bold"}>Learn Frontend Development from peter</Text>
+      <Text fontWeight={"bold"}>{course?.title}</Text>
       <Text bg="red" px={2} borderRadius={5} fontSize={"14px"}>
         DRAFT
       </Text>

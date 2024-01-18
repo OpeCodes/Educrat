@@ -10,3 +10,14 @@ export const getUserLocalStorage = () => {
   return user;
 };
 
+export const addCourseLocalStorage = (course: any) => {
+  localStorage.setItem("course", JSON.stringify(course));
+};
+export const removeCourseFromLocalStorage = () => {
+  localStorage.removeItem("course");
+};
+export const getCourseLocalStorage = () => {
+  const result = localStorage.getItem("course");
+  const course = result ? JSON.parse(result) : null;
+  return course;
+};

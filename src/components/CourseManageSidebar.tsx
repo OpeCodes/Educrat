@@ -77,7 +77,7 @@ const CourseManageSidebar = () => {
           </Box>
         ))}
       </Stack>
-      <Stack>
+      <Stack >
         <Text fontWeight={"bold"}>Publish your course</Text>
         {links.slice(7, 11).map((link, i) => (
           <Box key={i}>

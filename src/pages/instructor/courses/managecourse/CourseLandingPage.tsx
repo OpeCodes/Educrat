@@ -13,29 +13,46 @@ import {
 } from "@chakra-ui/react";
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
-import { useCourseCategory, useSingleCourse } from "../../../../hooks";
+import {
+  useCourseCategory,
+  useGetSingleCourse,
+  useSingleCourse,
+} from "../../../../hooks";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../../../../store/store";
 const initialValues = {
   title: "",
   subtitle: "",
-  description: "",
   language: "",
   category: "",
-  //   learningObjectives: [""],
   preRequisities: [""],
   complexityLevel: "",
   learningObjectives: ["", "", "", ""],
 };
 const CourseLandingPage = () => {
+  const [description, setDescripton] = useState("");
+  const [error, setError] = useState<boolean>(false);
+
   const { data, isPending } = useCourseCategory();
-  const {singleCourse,isPending: isLoading} = useSingleCourse()
+  const { singleCourse, isPending: isLoading } = useSingleCourse();
+  const { getSingleCourse } = useGetSingleCourse();
+  const { id } = useParams();
+  useEffect(() => {
+    getSingleCourse({ course: id });
+  }, [id]);
 
   const handleSubmit = (values: any): void => {
-    // loginUser(values);
-    console.log({singleId: "65a4386329fcd03036b62cd0", values});
-    singleCourse({singleId: "65a4386329fcd03036b62cd0", user: values})
-
+    if (!description) {
+      setError(true);
+      return;
+    }
+    singleCourse({ singleId: id, user: { ...values, description } });
   };
-  console.log(data)
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -67,6 +84,8 @@ const CourseLandingPage = () => {
                   placeholder="Insert your title"
                   value={values.title}
                   name="title"
+                  as={"input"}
+                  // defaultValue={"dkdkdk"}
                   onChange={handleChange}
                 />
                 {errors.title && (
@@ -99,19 +118,17 @@ const CourseLandingPage = () => {
                   important areas that you've covered during your course.
                 </FormHelperText>
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel>Course Description</FormLabel>
-                <Input
-                  type="text"
-                  variant="filled"
-                  placeholder="Insert your course description"
-                  value={values.description}
-                  name="description"
-                  onChange={handleChange}
+                <ReactQuill
+                  theme="snow"
+                  value={description}
+                  onChange={setDescripton}
                 />
-                {errors.description && (
+                {error && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.description}
+                    Please add description
                   </Text>
                 )}
               </FormControl>
@@ -124,7 +141,7 @@ const CourseLandingPage = () => {
                   learners can expect to achieve after completing your course.
                 </Text>
                 {values?.learningObjectives.map((value, index) => (
-                  <Stack>
+                  <Stack key={index}>
                     <FormControl isRequired>
                       <Input
                         type="text"
@@ -134,17 +151,14 @@ const CourseLandingPage = () => {
                         name={`learningObjectives[${index}]`}
                         onChange={handleChange}
                       />
-                      {errors.learningObjectives && (
-                        <Text
-                          style={{ color: "red", marginTop: 5 }}
-                          fontSize="14px"
-                        >
-                          {errors.learningObjectives}
-                        </Text>
-                      )}
                     </FormControl>
                   </Stack>
                 ))}
+                {errors.learningObjectives && (
+                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
+                    please include all the 4 input
+                  </Text>
+                )}
               </Stack>
               <Stack>
                 <Text fontWeight={"bold"}>
@@ -164,21 +178,23 @@ const CourseLandingPage = () => {
                         type="text"
                         variant="filled"
                         placeholder="Example: No programming experience.You will learn everything you need know"
-                          value={value}
-                          // name={`preRequisities[${index}]`}
-                          name={`preRequisities[0]`}
+                        value={value}
+                        name={`preRequisities[0]`}
                         onChange={handleChange}
                       />
                       {errors.preRequisities && (
-                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.preRequisities}
-                  </Text>
-                )}
+                        <Text
+                          style={{ color: "red", marginTop: 5 }}
+                          fontSize="14px"
+                        >
+                          {errors.preRequisities}
+                        </Text>
+                      )}
                     </FormControl>
                   </Stack>
                 ))}
               </Stack>
-              <Flex columnGap={5}>
+              <Flex columnGap={5} flexWrap={'wrap'}>
                 <Stack w="100%">
                   <Select
                     placeholder="Select language"
@@ -257,7 +273,7 @@ const CourseLandingPage = () => {
                   )}
                 </Stack>
               </Flex>
-
+            <Flex justify={"flex-end"}>
               <Button
                 bg={"#00FF84"}
                 isLoading={isLoading}
@@ -265,7 +281,6 @@ const CourseLandingPage = () => {
                 colorScheme="teal"
                 variant="outline"
                 spinnerPlacement="end"
-                width="100%"
                 onClick={() => handleSubmit()}
                 mt={3}
                 borderWidth={2}
@@ -273,8 +288,9 @@ const CourseLandingPage = () => {
                 borderColor={"#00FF84"}
                 _hover={{ background: "none", color: "#00FF84" }}
               >
-                Register
+                Update
               </Button>
+              </Flex>
             </Flex>
           )}
         </Formik>

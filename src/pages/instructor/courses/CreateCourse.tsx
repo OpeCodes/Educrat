@@ -22,6 +22,8 @@ const CreateCourse = () => {
   const { createCourse, isPending : loading } = useCreateCourse();
   const handleSubmit = (values: any): void => {
     createCourse(values);
+  // console.log(createCourse())
+
   };
   const { data, isPending } = useCourseCategory();
   return (
