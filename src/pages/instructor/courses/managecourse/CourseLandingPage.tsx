@@ -28,20 +28,20 @@ import { useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../../../../store/store";
 
-
 const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
-const { course } = useSelector((store: RootState) => store.user);
-const initialValues = {
-  title: course?.title || "",
-  subtitle: "",
-  language: "",
-  category: "",
-  preRequisities: [""],
-  complexityLevel: "",
-  learningObjectives: ["", "", "", ""],
-};
+  const { course } = useSelector((store: RootState) => store.user);
+  console.log(course);
+  const initialValues = {
+    title: course?.title || "",
+    subtitle: "",
+    language: "",
+    category: course.category || "",
+    preRequisities: [""],
+    complexityLevel: "",
+    learningObjectives: ["", "", "", ""],
+  };
 
   const { data, isPending } = useCourseCategory();
   const handleImageUpload = (file: File) => {
@@ -280,7 +280,7 @@ const initialValues = {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      {errors.category}
+                      please select category
                     </Text>
                   )}
                 </Stack>
