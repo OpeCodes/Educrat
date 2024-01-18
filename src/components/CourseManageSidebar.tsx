@@ -5,7 +5,7 @@ const links = [
   {
     id: 1,
     name: "intended Learners",
-    href: "/instructor/courses/1/manage/basics",
+    href: "/",
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const links = [
   {
     id: 5,
     name: "Curriculum",
-    href: "/",
+    href: "/curriculum",
   },
   {
     id: 6,

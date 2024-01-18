@@ -20,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
 import { CourseLandingPage } from "./pages/instructor/courses/managecourse";
+import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -84,7 +85,10 @@ const router = createBrowserRouter([
       {
         path: "basics",
         element: <CourseLandingPage />,
-      },
+      },{
+        path: "curriculum",
+        element: <Curriculum/>
+      }
     ],
   },
 ]);

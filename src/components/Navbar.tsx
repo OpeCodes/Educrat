@@ -87,7 +87,7 @@ const Navbar = () => {
   return (
     <Stack>
       <Flex
-        bg={"#"}
+        bg={"#140342"}
         p={4}
         width={"100%"}
         justify={"space-between"}
