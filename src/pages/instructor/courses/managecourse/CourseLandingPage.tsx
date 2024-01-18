@@ -23,10 +23,18 @@ import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseImageFileUpload, Loading } from "../../../../components";
+import { RootState } from "../../../../store/store";
+import { useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 // import { RootState } from "../../../../store/store";
+
+
+const CourseLandingPage = () => {
+  const [description, setDescripton] = useState("");
+  const [error, setError] = useState<boolean>(false);
+const { course } = useSelector((store: RootState) => store.user);
 const initialValues = {
-  title: "",
+  title: course?.title || "",
   subtitle: "",
   language: "",
   category: "",
@@ -34,9 +42,6 @@ const initialValues = {
   complexityLevel: "",
   learningObjectives: ["", "", "", ""],
 };
-const CourseLandingPage = () => {
-  const [description, setDescripton] = useState("");
-  const [error, setError] = useState<boolean>(false);
 
   const { data, isPending } = useCourseCategory();
   const handleImageUpload = (file: File) => {
@@ -57,10 +62,8 @@ const CourseLandingPage = () => {
     singleCourse({ singleId: id, user: { ...values, description } });
   };
 
-  if(isPending){
-    return (
-    <Loading/>
-    )
+  if (isPending) {
+    return <Loading />;
   }
   return (
     <Stack>
@@ -96,10 +99,11 @@ const CourseLandingPage = () => {
                   as={"input"}
                   // defaultValue={"dkdkdk"}
                   onChange={handleChange}
+                  defaultValue={"kskssksksks"}
                 />
                 {errors.title && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.title}
+                    pls add title
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>
@@ -203,7 +207,7 @@ const CourseLandingPage = () => {
                   </Stack>
                 ))}
               </Stack>
-              <Flex columnGap={5}  flexDirection={{base: "column", lg: "row"}}>
+              <Flex columnGap={5} flexDirection={{ base: "column", lg: "row" }}>
                 <Stack w="100%">
                   <Select
                     placeholder="Select language"

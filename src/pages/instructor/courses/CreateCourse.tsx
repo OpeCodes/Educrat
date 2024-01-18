@@ -64,6 +64,7 @@ const CreateCourse = () => {
                   variant="filled"
                   placeholder="e.g learn learn photoshop cs6 from photoshop"
                   value={values.title}
+
                   name="title"
                   onChange={handleChange}
                 />
