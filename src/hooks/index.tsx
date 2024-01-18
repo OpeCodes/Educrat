@@ -214,9 +214,7 @@ export const useCreateCourse = () => {
       return customFetch.post("/course", user);
     },
     onSuccess: (user) => {
-      navigate(`/instructor/courses/${user?.data?.id}/manage/basics`);
       dispatch(setCourse(user.data));
-      // addUserLocalStorage(user.data);
       addCourseLocalStorage(user.data);
       toast({
         title: `course create successfully`,
@@ -224,6 +222,8 @@ export const useCreateCourse = () => {
         duration: 5000,
         isClosable: true,
       });
+      navigate(`/instructor/courses/${user?.data?.id}/manage/basics`);
+
     },
     onError: (error: any) => {
       toast({
