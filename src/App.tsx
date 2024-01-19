@@ -1,6 +1,6 @@
 import {
   createBrowserRouter,
-  redirect,
+  // redirect,
   RouterProvider,
 } from "react-router-dom";
 import {
@@ -25,10 +25,10 @@ import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
 import { CourseLandingPage } from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
-import { useSelector } from "react-redux";
-import { RootState } from "./store/store";
-import { jwtDecode } from "jwt-decode";
-import { removeUserFromLocalStorage } from "./store/localStorage";
+// import { useSelector } from "react-redux";
+// import { RootState } from "./store/store";
+// import { jwtDecode } from "jwt-decode";
+// import { removeUserFromLocalStorage } from "./store/localStorage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -105,23 +105,23 @@ const router = createBrowserRouter([
 
 function App() {
 
-  const { user } = useSelector((store: RootState) => store.user);
-  if (user?.accessToken) {
-    const token = `${user.accessToken}`;
-    try {
-      const decodedToken = jwtDecode(token);
-      const currentTime = Math.floor(Date.now() / 1000);
-      if (decodedToken.exp !== undefined && decodedToken.exp < currentTime) {
-       return redirect("/sign-in")
+  // const { user } = useSelector((store: RootState) => store.user);
+  // if (user?.accessToken) {
+  //   const token = `${user.accessToken}`;
+  //   try {
+  //     const decodedToken = jwtDecode(token);
+  //     const currentTime = Math.floor(Date.now() / 1000);
+  //     if (decodedToken.exp !== undefined && decodedToken.exp < currentTime) {
+  //      return redirect("/sign-in")
 
-        removeUserFromLocalStorage();
-      } else {
-        // console.log("JWT is still valid");
-      }
-    } catch (error) {
-      // console.error("Error decoding JWT:", error);
-    }
-  }
+  //       removeUserFromLocalStorage();
+  //     } else {
+  //       // console.log("JWT is still valid");
+  //     }
+  //   } catch (error) {
+  //     // console.error("Error decoding JWT:", error);
+  //   }
+  // }
   return (
     <>
       <RouterProvider router={router} />
