@@ -112,8 +112,9 @@ function App() {
       const decodedToken = jwtDecode(token);
       const currentTime = Math.floor(Date.now() / 1000);
       if (decodedToken.exp !== undefined && decodedToken.exp < currentTime) {
+       return redirect("/sign-in")
+
         removeUserFromLocalStorage();
-        redirect("/sign-in")
       } else {
         // console.log("JWT is still valid");
       }
