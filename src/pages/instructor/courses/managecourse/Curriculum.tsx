@@ -14,14 +14,13 @@ import {
   AlertDialogCloseButton,
   Button,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
 import { courseModelSchema } from "../../../../schemas";
-import { useDeleteModalCourse, useModuleCourse } from "../../../../hooks";
-import { useParams } from "react-router-dom";
+import { useDeleteModalCourse,   useGetModuleCourse, useModuleCourse } from "../../../../hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 const Curriculum = () => {
@@ -34,17 +33,20 @@ const Curriculum = () => {
     title: "Introductions",
     learningObjective: "",
   };
-  const { id } = useParams();
-
+  
   const handleSubmit = (values: any): void => {
-    moduleCourse({ courseId: id, user: values });
+    moduleCourse({ courseId: courseModule.courseId, user: values });
     setTimeout(() => {
       setEdit(false);
     }, 2000);
   };
-  const { courseModule } = useSelector((store: RootState) => store.user);
+const {getModuleCourse, }=useGetModuleCourse()
 
-  //get the way you get the id from the url its not efficient
+useEffect(() => {
+  getModuleCourse({ course: courseModule.courseId });
+}, []);
+const { courseModule ,AllCourseModule} = useSelector((store: RootState) => store.user);
+  console.log(AllCourseModule)
   //fetch the get user and loop it through an array to delete the endpoint for each section module
   return (
     <Stack>

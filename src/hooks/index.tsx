@@ -8,7 +8,7 @@ import {
   addUserLocalStorage,
   removeCourseModuleromLocalStorage,
 } from "../store/localStorage";
-import { setCourse, setCourseModule, setUser } from "../features/user/UserSlice";
+import { setAllCourseModule, setCourse, setCourseModule, setUser } from "../features/user/UserSlice";
 import { useNavigate } from "react-router-dom";
 export const useGetUser = () => {
   const { data } = useQuery({
@@ -348,9 +348,32 @@ export const useDeleteModalCourse = () => {
   return { deleteModule, isPending };
 };
 
+export const useGetModuleCourse = () => {
+  const dispatch= useDispatch()
+  const {
+    mutate: getModuleCourse,
+    isPending,
+    error,
+    isError,
+  } = useMutation({
+    mutationFn: ({ course }: any) => {
+      return customFetch.get(`module/course/${course}`);
+    },
+    onSuccess: (data) => {
+      dispatch(setAllCourseModule(data.data))
+
+    },
+  });
+  return { getModuleCourse, isPending, error, isError };
+};
+
+
+
+
+
 export const useGetCourse = () => {
   const { data } = useQuery({
-    queryKey: ["user"],
+    queryKey: ["course"],
     queryFn: async () => {
       const { data } = await customFetch.get("/user");
       return data;
