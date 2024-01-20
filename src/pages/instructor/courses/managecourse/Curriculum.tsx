@@ -152,6 +152,7 @@ const Curriculum = () => {
                       // variant="outline"
                       // spinnerPlacement="end"
                       onClick={() => handleSubmit()}
+                      type="button"
                       backgroundColor={"black"}
                     >
                       Save Section
