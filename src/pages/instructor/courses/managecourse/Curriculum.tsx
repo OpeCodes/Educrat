@@ -28,8 +28,8 @@ const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
   const [edit, setEdit] = useState<boolean>(false);
-  const {moduleCourse} = useModuleCourse()
-  const {deleteModule,isPending} = useDeleteModalCourse()
+  const {moduleCourse, isPending} = useModuleCourse()
+  const {deleteModule,} = useDeleteModalCourse()
   const initialValues = {
     title: "Introductions",
     learningObjective: "",
@@ -39,10 +39,16 @@ const Curriculum = () => {
   const handleSubmit = (values: any): void => {
    
     moduleCourse({ courseId: id, user: values });
+    setTimeout(() => {
     setEdit(false)
+      
+    }, 2000);
   };
   const { courseModule} = useSelector((store: RootState) => store.user);
 console.log(courseModule)
+
+//get the way you get the id from the url its not efficient
+//fetch the get user and loop it through an array to delete the endpoint for each section module
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
