@@ -6,10 +6,9 @@ import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
 import { courseModelSchema } from "../../../../schemas";
 const Curriculum = () => {
-  const [edit, setEdit] = useState(false);
-  console.log(edit);
+  const [edit, setEdit] = useState<boolean>(false);
   const initialValues = {
-    title: "",
+    title: "Introductions",
     learningObjective: "",
   };
   const handleSubmit = (values: any): void => {
@@ -50,7 +49,7 @@ const Curriculum = () => {
                   <Text>
                     <GoBookmark />
                   </Text>
-                  <Text fontWeight={"500"}>Introductions</Text>
+                  <Text fontWeight={"500"}>{initialValues.title}</Text>
                 </Flex>
               </Flex>
               <Flex align={"center"} columnGap={4}>
