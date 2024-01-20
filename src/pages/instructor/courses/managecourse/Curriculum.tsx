@@ -1,11 +1,11 @@
-import { Divider, Stack, Flex, Text, Input } from "@chakra-ui/react";
-import { useState } from "react";
+import { Divider, Stack, Flex, Text, Input,  } from "@chakra-ui/react";
+// import { useState } from "react";
 import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
 const Curriculum = () => {
-  const [edit, setEdit] = useState(false);
+  // const [edit, setEdit] = useState(false);
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -59,7 +59,7 @@ const Curriculum = () => {
             p={3}
             borderColor={"gray"}
           >
-            <Flex align={"center"}  rowGap={2}>
+            <Flex align={"center"} rowGap={2}>
               <Text fontWeight={"bold"} fontSize={16} pr={4}>
                 Section 1:
               </Text>
@@ -70,10 +70,28 @@ const Curriculum = () => {
                   borderColor={"black"}
                   borderRadius={"0px"}
                   placeholder="Filled"
-                  _focus={{borderColor: "black",}}
-                  focusBorderColor='black'
+                  _focus={{ borderColor: "black" }}
+                  focusBorderColor="black"
                 />
               </Stack>
+            </Flex>
+            <Stack ml={"5.5rem"}>
+              <Text fontWeight={"bold"}>
+                What will students be able to do at the end of this section?
+              </Text>
+              <Input
+                variant="outline"
+                w="100%"
+                borderColor={"black"}
+                borderRadius={"0px"}
+                placeholder="Filled"
+                _focus={{ borderColor: "black" }}
+                focusBorderColor="black"
+              />
+            </Stack>
+            <Flex justify={"end"} mt={2} align={"center"} columnGap={5}>
+              <Text fontWeight={"bold"} as={"button"}>Cancel</Text>
+              <Text color="#ffffff"  fontWeight={"500"} fontSize={14} as={"button"} py={2} px={4} backgroundColor={"black"}>Save Section</Text>
             </Flex>
           </Stack>
         </Stack>
