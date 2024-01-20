@@ -1,26 +1,41 @@
-import { Divider, Stack, Flex, Text, Input, useDisclosure ,   AlertDialog,
+import {
+  Divider,
+  Stack,
+  Flex,
+  Text,
+  Input,
+  useDisclosure,
+  AlertDialog,
   AlertDialogBody,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  AlertDialogCloseButton,Button} from "@chakra-ui/react";
+  AlertDialogCloseButton,
+  Button,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
 import { courseModelSchema } from "../../../../schemas";
+import { useModuleCourse } from "../../../../hooks";
+import { useParams } from "react-router-dom";
 const Curriculum = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef:any = React.useRef()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef: any = React.useRef();
   const [edit, setEdit] = useState<boolean>(false);
+  const {moduleCourse,isPending} = useModuleCourse()
   const initialValues = {
     title: "Introductions",
     learningObjective: "",
   };
+  const { id } = useParams();
+
   const handleSubmit = (values: any): void => {
-    console.log(values);
+   
+    moduleCourse({ courseId: id, user: values });
   };
 
   return (
@@ -103,13 +118,13 @@ const Curriculum = () => {
                         onChange={handleChange}
                       />
                       {errors.title && (
-                      <Text
-                        style={{ color: "red", marginTop: 0 }}
-                        fontSize="14px"
-                      >
-                        {errors.title}
-                      </Text>
-                    )}
+                        <Text
+                          style={{ color: "red", marginTop: 0 }}
+                          fontSize="14px"
+                        >
+                          {errors.title}
+                        </Text>
+                      )}
                     </Stack>
                   </Flex>
                   <Stack ml={"5.5rem"}>
@@ -137,7 +152,6 @@ const Curriculum = () => {
                         {errors.learningObjective}
                       </Text>
                     )}
-                    
                   </Stack>
                   <Flex justify={"end"} mt={2} align={"center"} columnGap={5}>
                     <Text
@@ -147,23 +161,23 @@ const Curriculum = () => {
                     >
                       Cancel
                     </Text>
-                    <Text
+                    <Button
                       color="#ffffff"
                       fontWeight={"500"}
                       fontSize={14}
                       as={"button"}
                       py={2}
                       px={4}
-                      // isLoading={isPending}
-                      // loadingText="Loading"
-                      // variant="outline"
-                      // spinnerPlacement="end"
+                      isLoading={isPending}
+                      loadingText="Loading"
+                      variant="outline"
+                      spinnerPlacement="end"
                       onClick={() => handleSubmit()}
                       type="button"
                       backgroundColor={"black"}
                     >
                       Save Section
-                    </Text>
+                    </Button>
                   </Flex>
                 </Stack>
               )}
@@ -172,7 +186,7 @@ const Curriculum = () => {
         </Stack>
       </Stack>
       <AlertDialog
-        motionPreset='slideInBottom'
+        motionPreset="slideInBottom"
         leastDestructiveRef={cancelRef}
         onClose={onClose}
         isOpen={isOpen}
@@ -184,15 +198,22 @@ const Curriculum = () => {
           <AlertDialogHeader>Please Confirm</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-          You are about to remove a curriculum item. Are you sure you want to continue?
+            You are about to remove a curriculum item. Are you sure you want to
+            continue?
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button
-            //  ref={cancelRef} 
-             onClick={onClose}>
+              //  ref={cancelRef}
+              onClick={onClose}
+            >
               Cancel
             </Button>
-            <Button bg="black" color="white" ml={3} _hover={{backgroundColor: "none", color: "none" }}>
+            <Button
+              bg="black"
+              color="white"
+              ml={3}
+              _hover={{ backgroundColor: "none", color: "none" }}
+            >
               OK
             </Button>
           </AlertDialogFooter>

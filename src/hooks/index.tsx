@@ -272,6 +272,42 @@ export const useGetSingleCourse = () => {
   });
   return { getSingleCourse, isPending, error, isError };
 };
+// export const useModuleCourse = () => {
+//   const { mutate: getSingleCourse, isPending, error, isError } = useMutation({
+//     mutationFn: ({ courseId }: any) => {
+//       return customFetch.get(`module/course/${courseId}`);
+//     },
+//   });
+//   return { getSingleCourse, isPending, error, isError };
+// };
+export const useModuleCourse = () => {
+  const toast = useToast();
+  const { mutate: moduleCourse, isPending, error , isError} = useMutation({
+    mutationFn: ({ courseId, user }: any) => {
+      return customFetch.post(`/module/course/${courseId}`, user);
+    },
+    onSuccess: () => {
+      toast({
+        title: `course section successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      // removeUserFromLocalStorage()
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { moduleCourse, isPending , error, isError};
+};
+
+
 export const useGetCourse = () => {
   const { data } = useQuery({
     queryKey: ["user"],
@@ -282,3 +318,4 @@ export const useGetCourse = () => {
   });
   return { data };
 };
+
