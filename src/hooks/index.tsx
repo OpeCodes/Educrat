@@ -358,4 +358,4 @@ export const useGetCourse = () => {
   });
   return { data };
 };
-//invalidate the course in the usesinglecourse endpoint
+//invalidate the course in the usesinglecourse
