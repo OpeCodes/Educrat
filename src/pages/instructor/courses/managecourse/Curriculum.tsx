@@ -1,9 +1,11 @@
-import { Divider, Stack, Flex, Text,  } from "@chakra-ui/react";
+import { Divider, Stack, Flex, Text, Input } from "@chakra-ui/react";
+import { useState } from "react";
 import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
 const Curriculum = () => {
+  const [edit, setEdit] = useState(false);
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -22,25 +24,40 @@ const Curriculum = () => {
       {/* Section stage */}
 
       <Stack p={5} >
-        <Flex align={"center"} bg={"#F7F8FB"} borderWidth={1} borderColor={"gray"} p={3}>
-          <Flex align={"center"} columnGap={2}>
-            <Text fontWeight={"bold"} fontSize={17}>Section 1:</Text>
-            <Flex align={"center"} mr={3} columnGap={1}>
-            <Text>
-              <GoBookmark />
-            </Text>
-            <Text>Introductions</Text>
+        <Stack bg={"#F7F8FB"} borderWidth={1} borderColor={"gray"}  p={3}  pb={10}>
+          <Flex align={"center"}>
+            <Flex align={"center"} columnGap={2}>
+              <Text fontWeight={"bold"} fontSize={17}>
+                Section 1:
+              </Text>
+              <Flex align={"center"} mr={3} columnGap={1}>
+                <Text>
+                  <GoBookmark />
+                </Text>
+                <Text>Introductions</Text>
+              </Flex>
+            </Flex>
+            <Flex align={"center"} columnGap={4}>
+              <Text cursor={"pointer"}>
+                <MdEdit />
+              </Text>
+              <Text cursor={"pointer"}>
+                <MdDelete />
+              </Text>
             </Flex>
           </Flex>
-          <Flex align={"center"} columnGap={4}  >
-            <Text cursor={"pointer"}>
-              <MdEdit />
+          <Stack bg={"#FFFFFF"} borderWidth={1} mt={6} p={3} borderColor={"gray"} >
+            <Flex align={"center"} >
+            <Text fontWeight={"bold"} fontSize={16} pr={4} w="12%">
+              Section 1:
             </Text>
-            <Text cursor={"pointer"}>
-              <MdDelete />
-            </Text>
-          </Flex>
-        </Flex>
+            <Stack w="100%">
+            <Input variant='outline' w="100%" borderColor={"black"} borderRadius={"0px"} placeholder='Filled' />
+            </Stack>
+            </Flex>
+            
+          </Stack>
+        </Stack>
       </Stack>
     </Stack>
   );
