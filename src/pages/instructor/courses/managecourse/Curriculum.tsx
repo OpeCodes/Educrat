@@ -23,8 +23,14 @@ const Curriculum = () => {
       </Text>
       {/* Section stage */}
 
-      <Stack p={5} >
-        <Stack bg={"#F7F8FB"} borderWidth={1} borderColor={"gray"}  p={3}  pb={10}>
+      <Stack p={5}>
+        <Stack
+          bg={"#F7F8FB"}
+          borderWidth={1}
+          borderColor={"gray"}
+          p={3}
+          pb={10}
+        >
           <Flex align={"center"}>
             <Flex align={"center"} columnGap={2}>
               <Text fontWeight={"bold"} fontSize={17}>
@@ -46,16 +52,29 @@ const Curriculum = () => {
               </Text>
             </Flex>
           </Flex>
-          <Stack bg={"#FFFFFF"} borderWidth={1} mt={6} p={3} borderColor={"gray"} >
-            <Flex align={"center"} >
-            <Text fontWeight={"bold"} fontSize={16} pr={4} w="12%">
-              Section 1:
-            </Text>
-            <Stack w="100%">
-            <Input variant='outline' w="100%" borderColor={"black"} borderRadius={"0px"} placeholder='Filled' />
-            </Stack>
+          <Stack
+            bg={"#FFFFFF"}
+            borderWidth={1}
+            mt={6}
+            p={3}
+            borderColor={"gray"}
+          >
+            <Flex align={"center"}  rowGap={2}>
+              <Text fontWeight={"bold"} fontSize={16} pr={4}>
+                Section 1:
+              </Text>
+              <Stack maxW="89%" w="100%">
+                <Input
+                  variant="outline"
+                  w="100%"
+                  borderColor={"black"}
+                  borderRadius={"0px"}
+                  placeholder="Filled"
+                  _focus={{borderColor: "black",}}
+                  focusBorderColor='black'
+                />
+              </Stack>
             </Flex>
-            
           </Stack>
         </Stack>
       </Stack>
