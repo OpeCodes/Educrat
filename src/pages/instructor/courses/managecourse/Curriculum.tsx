@@ -7,11 +7,11 @@ import { Formik } from "formik";
 import { courseModelSchema } from "../../../../schemas";
 const Curriculum = () => {
   const [edit, setEdit] = useState(false);
-  console.log(edit)
-  const initialValues ={
+  console.log(edit);
+  const initialValues = {
     title: "",
-    learningObjective: ""
-  }
+    learningObjective: "",
+  };
   const handleSubmit = (values: any): void => {
     console.log(values);
   };
@@ -65,94 +65,101 @@ const Curriculum = () => {
           )}
 
           {edit && (
-             <Formik
-             initialValues={initialValues}
-             validationSchema={courseModelSchema}
-             onSubmit={handleSubmit}
-           >
-             {({ handleChange, handleSubmit, values, errors }) => (
-            <Stack
-              bg={"#FFFFFF"}
-              borderWidth={1}
-              // mt={6}
-              p={3}
-              borderColor={"gray"}
+            <Formik
+              initialValues={initialValues}
+              validationSchema={courseModelSchema}
+              onSubmit={handleSubmit}
             >
-              <Flex align={"center"} rowGap={2}>
-                <Text fontWeight={"bold"} fontSize={16} pr={4}>
-                  Section 1:
-                </Text>
-                <Stack maxW="89%" w="100%">
-                  <Input
-                    variant="outline"
-                    w="100%"
-                    borderColor={"black"}
-                    borderRadius={"0px"}
-                    placeholder="title"
-                    _focus={{ borderColor: "black" }}
-                    name="title"
-                    values={values.title}
-                    focusBorderColor="black"
-                    onChange={handleChange}
-                  />
-                </Stack>
-              </Flex>
-              <Stack ml={"5.5rem"}>
-                <Text fontWeight={"bold"}>
-                  What will students be able to do at the end of this section?
-                </Text>
-                <Input
-                  variant="outline"
-                  w="100%"
-                  borderColor={"black"}
-                  borderRadius={"0px"}
-                  placeholder="Filled"
-                  _focus={{ borderColor: "black" }}
-                  focusBorderColor="black"
-                  name="learningObjective"
-
-                  values={values.learningObjective}
-                  onChange={handleChange}
-
-
-                />
-                {errors.title && (
+              {({ handleChange, handleSubmit, values, errors }) => (
+                <Stack
+                  bg={"#FFFFFF"}
+                  borderWidth={1}
+                  // mt={6}
+                  p={3}
+                  borderColor={"gray"}
+                >
+                  <Flex align={"center"} rowGap={2}>
+                    <Text fontWeight={"bold"} fontSize={16} pr={4}>
+                      Section 1:
+                    </Text>
+                    <Stack maxW="89%" w="100%">
+                      <Input
+                        variant="outline"
+                        w="100%"
+                        borderColor={"black"}
+                        borderRadius={"0px"}
+                        placeholder="title"
+                        _focus={{ borderColor: "black" }}
+                        name="title"
+                        value={values.title}
+                        focusBorderColor="black"
+                        onChange={handleChange}
+                      />
+                      {errors.title && (
                       <Text
-                        style={{ color: "red", marginTop: 5 }}
+                        style={{ color: "red", marginTop: 0 }}
                         fontSize="14px"
                       >
                         {errors.title}
                       </Text>
                     )}
-              </Stack>
-              <Flex justify={"end"} mt={2} align={"center"} columnGap={5}>
-                <Text
-                  fontWeight={"bold"}
-                  as={"button"}
-                  onClick={() => setEdit(false)}
-                >
-                  Cancel
-                </Text>
-                <Text
-                  color="#ffffff"
-                  fontWeight={"500"}
-                  fontSize={14}
-                  as={"button"}
-                  py={2}
-                  px={4}
-                  // isLoading={isPending}
-                  // loadingText="Loading"
-                  // variant="outline"
-                  // spinnerPlacement="end"
-                  onClick={() => handleSubmit()}
-                  backgroundColor={"black"}
-                >
-                  Save Section
-                </Text>
-              </Flex>
-            </Stack>
-             )}
-             </Formik>
+                    </Stack>
+                  </Flex>
+                  <Stack ml={"5.5rem"}>
+                    <Text fontWeight={"bold"}>
+                      What will students be able to do at the end of this
+                      section?
+                    </Text>
+                    <Input
+                      variant="outline"
+                      w="100%"
+                      borderColor={"black"}
+                      borderRadius={"0px"}
+                      placeholder="Filled"
+                      _focus={{ borderColor: "black" }}
+                      focusBorderColor="black"
+                      name="learningObjective"
+                      value={values.learningObjective}
+                      onChange={handleChange}
+                    />
+                    {errors.learningObjective && (
+                      <Text
+                        style={{ color: "red", marginTop: 0 }}
+                        fontSize="14px"
+                      >
+                        {errors.learningObjective}
+                      </Text>
+                    )}
+                    
+                  </Stack>
+                  <Flex justify={"end"} mt={2} align={"center"} columnGap={5}>
+                    <Text
+                      fontWeight={"bold"}
+                      as={"button"}
+                      onClick={() => setEdit(false)}
+                    >
+                      Cancel
+                    </Text>
+                    <Text
+                      color="#ffffff"
+                      fontWeight={"500"}
+                      fontSize={14}
+                      as={"button"}
+                      py={2}
+                      px={4}
+                      // isLoading={isPending}
+                      // loadingText="Loading"
+                      // variant="outline"
+                      // spinnerPlacement="end"
+                      onClick={() => handleSubmit()}
+                      backgroundColor={"black"}
+                    >
+                      Save Section
+                    </Text>
+                  </Flex>
+                </Stack>
+              )}
+            </Formik>
           )}
         </Stack>
       </Stack>
