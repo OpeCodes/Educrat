@@ -21,6 +21,19 @@ import category5 from "./category5.png";
 import category6 from "./category6.png";
 import category7 from "./category7.png";
 import category8 from "./category8.png";
+import instructor1 from "./instructor1.png";
+import instructor2 from "./instructor2.png";
+import instructor3 from "./instructor3.png";
+import instructor4 from "./instructor4.png";
+import icon3 from "./icon-3.svg";
+import student1 from "./student1.png";
+import student2 from "./student2.png";
+import student3 from "./student3.png";
+import student4 from "./student4.png";
+import cta1 from "./imgL-1.svg";
+import cta2 from "./imgL-2.svg";
+import cta3 from "./imgL-3.svg";
+import cta4 from "./imgL-4.svg";
 
 export {
   sponsor1,
@@ -46,4 +59,17 @@ export {
   category6,
   category7,
   category8,
+  instructor1,
+  instructor2,
+  instructor3,
+  instructor4,
+  icon3,
+  student1,
+  student2,
+  student3,
+  student4,
+  cta1,
+  cta2,
+  cta3,
+  cta4,
 };

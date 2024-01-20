@@ -1,22 +1,15 @@
 import { Box, Stack, Heading, Text, Button } from "@chakra-ui/react";
 import { MdArrowOutward } from "react-icons/md";
-import { categoriesData } from "../utils/data";
-import { Category } from "../components/index";
+import { studentsData } from "../utils/data";
+import { Student } from "../components";
 
-export interface category {
-  id: number;
-  img: string;
-  title: string;
-  amount: number;
-}
-
-export const Categories = () => {
+export const Students = () => {
   return (
     <Box
       as={"section"}
-      position={"relative"}
       px={{ base: "6", md: "12", lg: "16" }}
-      py={{ base: 10, md: 16, lg: 16 }}
+      py={{ base: 12, md: 16, lg: 16 }}
+      bg={"#f7f8fb"}
     >
       <Stack>
         <Box
@@ -28,22 +21,22 @@ export const Categories = () => {
         >
           <Box mb={{ base: "10px" }}>
             <Heading as={"h1"} color={"#140342"} size={"xl"}>
-              Top Categories
+              Top Students
             </Heading>
             <Text as={"p"} color={"gray.600"} my={2}>
-              10,000+ unique online course list designs
+              Lorem ipsum dolor sit amet consectetur.
             </Text>
           </Box>
           <Box>
             <Button
               variant={"outline"}
-              px={10}
+              px={6}
               py={6}
-              bg={"#eef2f6"}
+              bg={"#f4f1fe"}
               color={"#6440fb"}
               mb={{ base: "4px" }}
               border={"none"}
-              borderRadius={"10px"}
+              borderRadius={"full"}
               fontWeight={"normal"}
               _hover={{
                 bg: "#6440fb",
@@ -51,23 +44,21 @@ export const Categories = () => {
               }}
               rightIcon={<MdArrowOutward size={20} />}
             >
-              Join For Free
+              View All Students
             </Button>
           </Box>
         </Box>
         <Box
           as="div"
-          display={"grid"}
-          gridGap={8}
-          gridTemplateColumns={{
-            base: "repeat(1,1fr)",
-            md: "repeat(3,1fr)",
-            lg: "repeat(4,1fr)",
-          }}
-          mt={8}
+          display={{ md: "grid", lg: "flex" }}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          gridTemplateColumns={{ md: "repeat(2,1fr)" }}
+          mt={10}
+          gap={8}
         >
-          {categoriesData.map((category: category) => {
-            return <Category key={category.id} {...category} />;
+          {studentsData.map((student) => {
+            return <Student key={student.id} {...student} />;
           })}
         </Box>
       </Stack>

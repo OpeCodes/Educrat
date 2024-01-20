@@ -16,6 +16,18 @@ import {
   category6,
   category7,
   category8,
+  instructor1,
+  instructor2,
+  instructor3,
+  instructor4,
+  student1,
+  student2,
+  student3,
+  student4,
+  cta1,
+  cta2,
+  cta3,
+  cta4,
 } from "../assets/export";
 import { FaStar } from "react-icons/fa6";
 
@@ -212,5 +224,98 @@ export const categoriesData = [
     img: category8,
     title: "IT and Software",
     amount: 573,
+  },
+];
+
+export const instructorsData = [
+  {
+    id: 1,
+    img: instructor1,
+    name: "Flyod Miles",
+    job: "President of Sales",
+    icon: <FaStar size={11} />,
+    course: 15,
+    student: 692,
+  },
+  {
+    id: 2,
+    img: instructor2,
+    name: "Cameron Williamson",
+    job: "Web Designer",
+    icon: <FaStar size={11} />,
+    course: 15,
+    student: 692,
+  },
+  {
+    id: 3,
+    img: instructor3,
+    name: "Brooklyn Simmons",
+    job: "Dog Trainer",
+    icon: <FaStar size={11} />,
+    course: 15,
+    student: 692,
+  },
+  {
+    id: 4,
+    img: instructor4,
+    name: "Wade Warren",
+    job: "Marketing Coordinator",
+    icon: <FaStar size={11} />,
+    course: 15,
+    student: 692,
+  },
+];
+
+export const studentsData = [
+  {
+    id: 1,
+    img: student1,
+    name: "Brooklyn Simmons",
+    job: "Web Designer",
+  },
+  {
+    id: 2,
+    img: student2,
+    name: "Cody Fisher",
+    job: "Dog Trainer",
+  },
+  {
+    id: 3,
+    img: student3,
+    name: "Marvin McKinney",
+    job: "President of Sales",
+  },
+  {
+    id: 4,
+    img: student4,
+    name: "Jane Cooper",
+    job: "Marketing Coordinator",
+  },
+];
+
+export const ctaData = [
+  {
+    id: 1,
+    img: cta1,
+    title: "Learn with Experts",
+    desc: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+  },
+  {
+    id: 2,
+    img: cta2,
+    title: "Learn Anything",
+    desc: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+  },
+  {
+    id: 3,
+    img: cta3,
+    title: "Flexible Learning",
+    desc: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+  },
+  {
+    id: 4,
+    img: cta4,
+    title: "Industrial Standard",
+    desc: "Grursus mal suada faci lisis that ipsum ameti consecte.",
   },
 ];

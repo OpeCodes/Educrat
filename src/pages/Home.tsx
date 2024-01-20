@@ -1,4 +1,12 @@
-import { Categories, Courses, Header, Sponsors } from "../constants";
+import {
+  Categories,
+  Courses,
+  Cta,
+  Header,
+  Instructors,
+  Sponsors,
+  Students,
+} from "../constants";
 
 const Home = () => {
   return (
@@ -7,6 +15,9 @@ const Home = () => {
       <Sponsors />
       <Courses />
       <Categories />
+      <Instructors />
+      <Students />
+      <Cta />
     </>
   );
 };

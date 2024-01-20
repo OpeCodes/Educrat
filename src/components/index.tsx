@@ -12,6 +12,8 @@ import CourseImageFileUpload from "./CourseImageFileUpload";
 import Category from "./Category";
 import Course from "./Course";
 import SliderButtons from "./SliderButtons";
+import Instructor from "./Instructor";
+import Student from "./Student";
 export {
   HomeLayout,
   Navbar,
@@ -27,4 +29,6 @@ export {
   Category,
   Course,
   SliderButtons,
+  Instructor,
+  Student,
 };

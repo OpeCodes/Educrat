@@ -1,4 +1,6 @@
 import { Box, Flex, Text, Heading, Divider, Stack } from "@chakra-ui/react";
+import { CiPlay1, CiClock1 } from "react-icons/ci";
+import { icon3 } from "../assets/export";
 
 type Props = {
   id: number;
@@ -36,7 +38,7 @@ const Course = ({
       key={id}
     >
       <Stack>
-        <Box as={"div"} className="img-wrapper">
+        <Box as={"div"} overflow={"hidden"} borderRadius={"10px"}>
           <img
             src={img}
             className="img"
@@ -66,11 +68,30 @@ const Course = ({
           {title}
         </Heading>
         <Flex>
-          <Box fontSize={"14px"}>{lesson}</Box>
-          <Box fontSize={"14px"} mx={3}>
-            {duration}
+          <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+            <CiPlay1 size={14} />
+            <Box fontSize={"14px"}>{lesson}</Box>
           </Box>
-          <Box fontSize={"14px"}>{level}</Box>
+          <Box
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            mx={3}
+          >
+            <CiClock1 size={14} />
+            <Box fontSize={"14px"}>{duration}</Box>
+          </Box>
+          <Box
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            mx={3}
+          >
+            <img src={icon3} width={"13px"} height={"13px"} alt="level" />
+            <Box fontSize={"14px"} ml={1}>
+              {level}
+            </Box>
+          </Box>
         </Flex>
         <Divider colorScheme="#ededed" />
         <Flex justifyContent={"space-between"} alignItems={"center"}>

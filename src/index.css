@@ -74,10 +74,6 @@ button:focus-visible {
 }
 
 .wrapper:hover .img {
-  scale: 1.07;
-  transition-duration: 400ms;
-}
-.img-wrapper {
-  border-radius: 10px;
-  overflow: hidden;
+  scale: 1.1;
+  transition-duration: 500ms;
 }
