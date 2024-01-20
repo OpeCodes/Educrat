@@ -20,7 +20,6 @@ import {
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { RootState } from "../../../../store/store";
 import { useSelector } from "react-redux";
@@ -44,14 +43,14 @@ const CourseLandingPage = () => {
     console.log("Uploaded file:", file);
   };
   const { singleCourse, isPending: isLoading } = useSingleCourse();
-  const { id } = useParams();
+  
 
   const handleSubmit = (values: any): void => {
     if (!description) {
       setError(true);
       return;
     }
-    singleCourse({ singleId: id, user: { ...values, description } });
+    singleCourse({ singleId: course.id, user: { ...values, description } });
   };
 
   if (isPending) {

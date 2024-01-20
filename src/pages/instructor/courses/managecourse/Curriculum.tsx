@@ -28,8 +28,8 @@ const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
   const [edit, setEdit] = useState<boolean>(false);
-  const {moduleCourse, isPending} = useModuleCourse()
-  const {deleteModule,} = useDeleteModalCourse()
+  const { moduleCourse, isPending } = useModuleCourse();
+  const { deleteModule } = useDeleteModalCourse();
   const initialValues = {
     title: "Introductions",
     learningObjective: "",
@@ -37,18 +37,15 @@ const Curriculum = () => {
   const { id } = useParams();
 
   const handleSubmit = (values: any): void => {
-   
     moduleCourse({ courseId: id, user: values });
     setTimeout(() => {
-    setEdit(false)
-      
+      setEdit(false);
     }, 2000);
   };
-  const { courseModule} = useSelector((store: RootState) => store.user);
-console.log(courseModule)
+  const { courseModule } = useSelector((store: RootState) => store.user);
 
-//get the way you get the id from the url its not efficient
-//fetch the get user and loop it through an array to delete the endpoint for each section module
+  //get the way you get the id from the url its not efficient
+  //fetch the get user and loop it through an array to delete the endpoint for each section module
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -224,9 +221,9 @@ console.log(courseModule)
               color="white"
               ml={3}
               _hover={{ backgroundColor: "none", color: "none" }}
-              onClick={() =>{
-                deleteModule({courseId: courseModule?.id})}
-              }
+              onClick={() => {
+                deleteModule({ courseId: courseModule?.id });
+              }}
             >
               OK
             </Button>

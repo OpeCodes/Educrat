@@ -6,7 +6,6 @@ import {
   addCourseLocalStorage,
   addCourseModuleStorage,
   addUserLocalStorage,
-  removeCourseFromLocalStorage,
   removeCourseModuleromLocalStorage,
 } from "../store/localStorage";
 import { setCourse, setCourseModule, setUser } from "../features/user/UserSlice";
@@ -256,8 +255,6 @@ export const useSingleCourse = () => {
         duration: 5000,
         isClosable: true,
       });
-      // removeUserFromLocalStorage()
-      removeCourseFromLocalStorage();
     },
     onError: (error: any) => {
       toast({
@@ -361,3 +358,4 @@ export const useGetCourse = () => {
   });
   return { data };
 };
+//invalidate the course in the usesinglecourse endpoint
