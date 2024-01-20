@@ -281,22 +281,22 @@ export const useGetSingleCourse = () => {
   return { getSingleCourse, isPending, error, isError };
 };
 
-export const useModuleCourse = () => {
+export const useModuleEditCourse = () => {
   const toast = useToast();
   const dispatch = useDispatch()
 
   const {
-    mutate: moduleCourse,
+    mutate: moduleEditCourse,
     isPending,
     error,
     isError,
   } = useMutation({
     mutationFn: ({ courseId, user }: any) => {
-      return customFetch.post(`/module/course/${courseId}`, user);
+      return customFetch.put(`/module/${courseId}`, user);
     },
     onSuccess: (user) => {
-      console.log(user.data)
-      console.log("here")
+      // console.log(user.data)
+      // console.log("here")
        dispatch(setCourseModule(user.data));
       addCourseModuleStorage(user.data);
 
@@ -316,7 +316,7 @@ export const useModuleCourse = () => {
       });
     },
   });
-  return { moduleCourse, isPending, error, isError };
+  return { moduleEditCourse, isPending, error, isError };
 };
 
 export const useDeleteModalCourse = () => {
