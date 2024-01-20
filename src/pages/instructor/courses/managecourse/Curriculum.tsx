@@ -1,11 +1,19 @@
-import { Divider, Stack, Flex, Text, Input } from "@chakra-ui/react";
-import { useState } from "react";
+import { Divider, Stack, Flex, Text, Input, useDisclosure ,   AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,Button} from "@chakra-ui/react";
+import React, { useState } from "react";
 import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
 import { courseModelSchema } from "../../../../schemas";
 const Curriculum = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef:any = React.useRef()
   const [edit, setEdit] = useState<boolean>(false);
   const initialValues = {
     title: "Introductions",
@@ -56,7 +64,7 @@ const Curriculum = () => {
                 <Text cursor={"pointer"} onClick={() => setEdit(true)}>
                   <MdEdit />
                 </Text>
-                <Text cursor={"pointer"}>
+                <Text cursor={"pointer"} onClick={onOpen}>
                   <MdDelete />
                 </Text>
               </Flex>
@@ -163,6 +171,34 @@ const Curriculum = () => {
           )}
         </Stack>
       </Stack>
+      <AlertDialog
+        motionPreset='slideInBottom'
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+      >
+        <AlertDialogOverlay />
+
+        <AlertDialogContent>
+          <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
+          <AlertDialogCloseButton />
+          <AlertDialogBody>
+            Are you sure you want to discard all of your notes? 44 words will be
+            deleted.
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <Button
+            //  ref={cancelRef} 
+             onClick={onClose}>
+              No
+            </Button>
+            <Button colorScheme='red' ml={3}>
+              Yes
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Stack>
   );
 };
