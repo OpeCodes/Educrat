@@ -21,3 +21,18 @@ export const getCourseLocalStorage = () => {
   const course = result ? JSON.parse(result) : null;
   return course;
 };
+
+//course module
+
+export const addCourseModuleStorage =(user: any) =>{
+  localStorage.setItem("courseModule", JSON.stringify(user))
+}
+
+export  const getCourseModuleStorage = () =>{
+  const result = localStorage.getItem("courseModule");
+  const courseModule= result ? JSON.parse(result) : null;
+  return courseModule;
+}
+export const removeCourseModuleromLocalStorage = () => {
+  localStorage.removeItem("courseModule");
+};

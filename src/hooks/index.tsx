@@ -4,10 +4,12 @@ import { useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import {
   addCourseLocalStorage,
+  addCourseModuleStorage,
   addUserLocalStorage,
   removeCourseFromLocalStorage,
+  removeCourseModuleromLocalStorage,
 } from "../store/localStorage";
-import { setCourse, setUser } from "../features/user/UserSlice";
+import { setCourse, setCourseModule, setUser } from "../features/user/UserSlice";
 import { useNavigate } from "react-router-dom";
 export const useGetUser = () => {
   const { data } = useQuery({
@@ -223,7 +225,6 @@ export const useCreateCourse = () => {
         isClosable: true,
       });
       navigate(`/instructor/courses/${user?.data?.id}/manage/basics`);
-
     },
     onError: (error: any) => {
       toast({
@@ -239,7 +240,12 @@ export const useCreateCourse = () => {
 
 export const useSingleCourse = () => {
   const toast = useToast();
-  const { mutate: singleCourse, isPending, error , isError} = useMutation({
+  const {
+    mutate: singleCourse,
+    isPending,
+    error,
+    isError,
+  } = useMutation({
     mutationFn: ({ singleId, user }: any) => {
       return customFetch.put(`course/${singleId}`, user);
     },
@@ -262,38 +268,47 @@ export const useSingleCourse = () => {
       });
     },
   });
-  return { singleCourse, isPending , error, isError};
+  return { singleCourse, isPending, error, isError };
 };
 export const useGetSingleCourse = () => {
-  const { mutate: getSingleCourse, isPending, error, isError } = useMutation({
+  const {
+    mutate: getSingleCourse,
+    isPending,
+    error,
+    isError,
+  } = useMutation({
     mutationFn: ({ course }: any) => {
       return customFetch.get(`course/${course}`);
     },
   });
   return { getSingleCourse, isPending, error, isError };
 };
-// export const useModuleCourse = () => {
-//   const { mutate: getSingleCourse, isPending, error, isError } = useMutation({
-//     mutationFn: ({ courseId }: any) => {
-//       return customFetch.get(`module/course/${courseId}`);
-//     },
-//   });
-//   return { getSingleCourse, isPending, error, isError };
-// };
+
 export const useModuleCourse = () => {
   const toast = useToast();
-  const { mutate: moduleCourse, isPending, error , isError} = useMutation({
+  const dispatch = useDispatch()
+
+  const {
+    mutate: moduleCourse,
+    isPending,
+    error,
+    isError,
+  } = useMutation({
     mutationFn: ({ courseId, user }: any) => {
       return customFetch.post(`/module/course/${courseId}`, user);
     },
-    onSuccess: () => {
+    onSuccess: (user) => {
+      console.log(user.data)
+      console.log("here")
+       dispatch(setCourseModule(user.data));
+      addCourseModuleStorage(user.data);
+
       toast({
         title: `course section successfully`,
         status: "success",
         duration: 5000,
         isClosable: true,
       });
-      // removeUserFromLocalStorage()
     },
     onError: (error: any) => {
       toast({
@@ -304,9 +319,37 @@ export const useModuleCourse = () => {
       });
     },
   });
-  return { moduleCourse, isPending , error, isError};
+  return { moduleCourse, isPending, error, isError };
 };
 
+export const useDeleteModalCourse = () => {
+  const toast = useToast();
+  const { mutate: deleteModule, isPending } = useMutation({
+    mutationFn: ({ courseId }: any) => {
+      return customFetch.delete(`/module/${courseId}`);
+    },
+    onSuccess: () => {
+      removeCourseModuleromLocalStorage()
+
+      toast({
+        title: `course deleted successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+     
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { deleteModule, isPending };
+};
 
 export const useGetCourse = () => {
   const { data } = useQuery({
@@ -318,4 +361,3 @@ export const useGetCourse = () => {
   });
   return { data };
 };
-

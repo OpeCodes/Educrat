@@ -20,13 +20,16 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
 import { courseModelSchema } from "../../../../schemas";
-import { useModuleCourse } from "../../../../hooks";
+import { useDeleteModalCourse, useModuleCourse } from "../../../../hooks";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
   const [edit, setEdit] = useState<boolean>(false);
-  const {moduleCourse,isPending} = useModuleCourse()
+  const {moduleCourse} = useModuleCourse()
+  const {deleteModule,isPending} = useDeleteModalCourse()
   const initialValues = {
     title: "Introductions",
     learningObjective: "",
@@ -36,8 +39,10 @@ const Curriculum = () => {
   const handleSubmit = (values: any): void => {
    
     moduleCourse({ courseId: id, user: values });
+    setEdit(false)
   };
-
+  const { courseModule} = useSelector((store: RootState) => store.user);
+console.log(courseModule)
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -213,6 +218,9 @@ const Curriculum = () => {
               color="white"
               ml={3}
               _hover={{ backgroundColor: "none", color: "none" }}
+              onClick={() =>{
+                deleteModule({courseId: courseModule?.id})}
+              }
             >
               OK
             </Button>
