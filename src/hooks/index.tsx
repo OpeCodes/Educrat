@@ -254,7 +254,6 @@ export const useSingleCourse = () => {
       removeCourseFromLocalStorage();
     },
     onError: (error: any) => {
-      console.log(error)
       toast({
         title: `${error.response.data.error}`,
         status: "error",
