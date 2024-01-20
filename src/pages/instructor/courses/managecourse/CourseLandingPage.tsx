@@ -15,12 +15,11 @@ import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
 import {
   useCourseCategory,
-  useGetSingleCourse,
   useSingleCourse,
 } from "../../../../hooks";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { RootState } from "../../../../store/store";
@@ -30,7 +29,6 @@ const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
   const { course } = useSelector((store: RootState) => store.user);
-  console.log(course);
   const initialValues = {
     title: course?.title || "",
     subtitle: "",
@@ -46,11 +44,7 @@ const CourseLandingPage = () => {
     console.log("Uploaded file:", file);
   };
   const { singleCourse, isPending: isLoading } = useSingleCourse();
-  const { getSingleCourse } = useGetSingleCourse();
   const { id } = useParams();
-  useEffect(() => {
-    getSingleCourse({ course: id });
-  }, [id]);
 
   const handleSubmit = (values: any): void => {
     if (!description) {
@@ -63,6 +57,7 @@ const CourseLandingPage = () => {
   if (isPending) {
     return <Loading />;
   }
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -95,9 +90,7 @@ const CourseLandingPage = () => {
                   value={values.title}
                   name="title"
                   as={"input"}
-                  // defaultValue={"dkdkdk"}
                   onChange={handleChange}
-                  defaultValue={"kskssksksks"}
                 />
                 {errors.title && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
