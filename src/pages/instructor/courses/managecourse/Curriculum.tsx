@@ -181,20 +181,19 @@ const Curriculum = () => {
         <AlertDialogOverlay />
 
         <AlertDialogContent>
-          <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
+          <AlertDialogHeader>Please Confirm</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            Are you sure you want to discard all of your notes? 44 words will be
-            deleted.
+          You are about to remove a curriculum item. Are you sure you want to continue?
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button
             //  ref={cancelRef} 
              onClick={onClose}>
-              No
+              Cancel
             </Button>
-            <Button colorScheme='red' ml={3}>
-              Yes
+            <Button bg="black" color="white" ml={3} _hover={{backgroundColor: "none", color: "none" }}>
+              OK
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
