@@ -16,10 +16,10 @@ import "./App.css";
 import Home from "./pages/Home";
 import { StudentCourse } from "./pages/course";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
 import { CourseLandingPage } from "./pages/instructor/courses/managecourse";
+import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -70,6 +70,8 @@ const router = createBrowserRouter([
   {
     path: "/instructor",
     element: <InstructorDashboardLayout />,
+    errorElement: <Error />,
+
     children: [
       {
         path: "courses",
@@ -80,22 +82,54 @@ const router = createBrowserRouter([
   {
     path: "/instructor/courses/:id/manage/",
     element: <CourseManageDashboardLayout />,
+    errorElement: <Error />,
+
     children: [
       {
         path: "basics",
         element: <CourseLandingPage />,
+      },
+      {
+        path: "curriculum",
+        element: <Curriculum />,
       },
     ],
   },
 ]);
 
 function App() {
-  return (
-    <>
-      <RouterProvider router={router} />
-      <ToastContainer position="top-right" />
-    </>
-  );
+  // const navigate = useNavigate();
+  // const toast = useToast();
+
+  // const { user } = useSelector((store: RootState) => store.user);
+  // if (user?.accessToken) {
+
+  //   const token = `${user.accessToken}`;
+  //   try {
+  //     const decodedToken = jwtDecode(token);
+  //     const currentTime = Math.floor(Date.now() / 1000);
+  //     if (decodedToken.exp !== undefined && decodedToken.exp < currentTime) {
+  //       removeUserFromLocalStorage();
+
+  //     } else {
+  //       console.log("JWT is still valid");
+  //       toast({
+  //         title: `valid token`,
+  //         status: "error",
+  //         duration: 5000,
+  //         isClosable: true,
+  //       });
+
+  //     //  return redirect("/sign-in")
+  //     // navigate("/sign-in")
+  //     // return null;
+
+  //     }
+  //   } catch (error) {
+  //     console.error("Error decoding JWT:", error);
+  //   }
+  // }
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -1,11 +1,17 @@
 import { Box, Button, Stack, Text } from "@chakra-ui/react";
 import { CourseManageNavItem } from "./CourseManageNavItem";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
+
+
+const CourseManageSidebar = () => {
+const { course } = useSelector((store: RootState) => store.user);
 const links = [
   {
     id: 1,
     name: "intended Learners",
-    href: "/instructor/courses/1/manage/basics",
+    href: "/",
   },
   {
     id: 2,
@@ -25,7 +31,7 @@ const links = [
   {
     id: 5,
     name: "Curriculum",
-    href: "/",
+    href:  `/instructor/courses/${course.id}/manage/curriculum`,
   },
   {
     id: 6,
@@ -40,7 +46,7 @@ const links = [
   {
     id: 8,
     name: "Course Landing Page",
-    href: `/instructor/courses/1/manage/basics`,
+    href: `/instructor/courses/${course.id}/manage/basics`,
   },
   {
     id: 9,
@@ -53,8 +59,6 @@ const links = [
     href: "course messages",
   },
 ];
-
-const CourseManageSidebar = () => {
   return (
     <Stack>
       <Stack>

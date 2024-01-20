@@ -15,39 +15,36 @@ import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
 import {
   useCourseCategory,
-  useGetSingleCourse,
   useSingleCourse,
 } from "../../../../hooks";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { CourseImageFileUpload } from "../../../../components";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../../../store/store";
-const initialValues = {
-  title: "",
-  subtitle: "",
-  language: "",
-  category: "",
-  preRequisities: [""],
-  complexityLevel: "",
-  learningObjectives: ["", "", "", ""],
-};
+import { CourseImageFileUpload, Loading } from "../../../../components";
+import { RootState } from "../../../../store/store";
+import { useSelector } from "react-redux";
+
 const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
+  const { course } = useSelector((store: RootState) => store.user);
+  const initialValues = {
+    title: course?.title || "",
+    subtitle: "",
+    language: "",
+    category: course.category || "",
+    preRequisities: [""],
+    complexityLevel: "",
+    learningObjectives: ["", "", "", ""],
+  };
 
   const { data, isPending } = useCourseCategory();
   const handleImageUpload = (file: File) => {
     console.log("Uploaded file:", file);
   };
   const { singleCourse, isPending: isLoading } = useSingleCourse();
-  const { getSingleCourse } = useGetSingleCourse();
   const { id } = useParams();
-  useEffect(() => {
-    getSingleCourse({ course: id });
-  }, [id]);
 
   const handleSubmit = (values: any): void => {
     if (!description) {
@@ -56,6 +53,10 @@ const CourseLandingPage = () => {
     }
     singleCourse({ singleId: id, user: { ...values, description } });
   };
+
+  if (isPending) {
+    return <Loading />;
+  }
 
   return (
     <Stack>
@@ -89,12 +90,11 @@ const CourseLandingPage = () => {
                   value={values.title}
                   name="title"
                   as={"input"}
-                  // defaultValue={"dkdkdk"}
                   onChange={handleChange}
                 />
                 {errors.title && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.title}
+                    pls add title
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>
@@ -198,7 +198,7 @@ const CourseLandingPage = () => {
                   </Stack>
                 ))}
               </Stack>
-              <Flex columnGap={5}  flexDirection={{base: "column", lg: "row"}}>
+              <Flex columnGap={5} flexDirection={{ base: "column", lg: "row" }}>
                 <Stack w="100%">
                   <Select
                     placeholder="Select language"
@@ -271,7 +271,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      {errors.category}
+                      please select category
                     </Text>
                   )}
                 </Stack>

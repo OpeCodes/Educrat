@@ -9,6 +9,7 @@ import CourseManageDashboardLayout from "./CourseManageDashboardLayout";
 import CourseManageNavbar from "./CourseManageNavbar";
 import CourseManageSidebar from "./CourseManageSidebar";
 import CourseImageFileUpload from "./CourseImageFileUpload";
+import Loading from "./Loading";
 import Category from "./Category";
 import Course from "./Course";
 import SliderButtons from "./SliderButtons";
@@ -26,6 +27,7 @@ export {
   CourseManageNavbar,
   CourseManageSidebar,
   CourseImageFileUpload,
+  Loading,
   Category,
   Course,
   SliderButtons,

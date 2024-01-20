@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import {
   addCourseLocalStorage,
   addUserLocalStorage,
-  removeUserFromLocalStorage,
+  removeCourseFromLocalStorage,
 } from "../store/localStorage";
 import { setCourse, setUser } from "../features/user/UserSlice";
 import { useNavigate } from "react-router-dom";
@@ -239,7 +239,7 @@ export const useCreateCourse = () => {
 
 export const useSingleCourse = () => {
   const toast = useToast();
-  const { mutate: singleCourse, isPending } = useMutation({
+  const { mutate: singleCourse, isPending, error , isError} = useMutation({
     mutationFn: ({ singleId, user }: any) => {
       return customFetch.put(`course/${singleId}`, user);
     },
@@ -250,7 +250,8 @@ export const useSingleCourse = () => {
         duration: 5000,
         isClosable: true,
       });
-      removeUserFromLocalStorage()
+      // removeUserFromLocalStorage()
+      removeCourseFromLocalStorage();
     },
     onError: (error: any) => {
       toast({
@@ -261,15 +262,15 @@ export const useSingleCourse = () => {
       });
     },
   });
-  return { singleCourse, isPending };
+  return { singleCourse, isPending , error, isError};
 };
 export const useGetSingleCourse = () => {
-  const { mutate: getSingleCourse, isPending } = useMutation({
+  const { mutate: getSingleCourse, isPending, error, isError } = useMutation({
     mutationFn: ({ course }: any) => {
       return customFetch.get(`course/${course}`);
     },
   });
-  return { getSingleCourse, isPending };
+  return { getSingleCourse, isPending, error, isError };
 };
 export const useGetCourse = () => {
   const { data } = useQuery({

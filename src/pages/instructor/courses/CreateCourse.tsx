@@ -9,7 +9,7 @@ import {
   Select,
   Spinner,
 } from "@chakra-ui/react";
-import { CreateCourseNavBar } from "../../../components";
+import { CreateCourseNavBar, Loading } from "../../../components";
 import { Formik } from "formik";
 import { createCourseSchema } from "../../../schemas";
 import { useCourseCategory, useCreateCourse } from "../../../hooks";
@@ -22,10 +22,15 @@ const CreateCourse = () => {
   const { createCourse, isPending : loading } = useCreateCourse();
   const handleSubmit = (values: any): void => {
     createCourse(values);
-  // console.log(createCourse())
 
   };
-  const { data, isPending } = useCourseCategory();
+  const { data, isPending } = useCourseCategory()
+  if(isPending){
+    return (
+    <Loading/>
+    )
+  }
+
   return (
     <Stack>
       <CreateCourseNavBar step={1} progressValue={100} />
@@ -59,6 +64,7 @@ const CreateCourse = () => {
                   variant="filled"
                   placeholder="e.g learn learn photoshop cs6 from photoshop"
                   value={values.title}
+
                   name="title"
                   onChange={handleChange}
                 />
