@@ -79,10 +79,9 @@ const Curriculum = () => {
       </Text>
       {data?.map((course: any, index: any) => {
         const { title, id } = course;
-        
         return (
           <Stack key={id}>
-            <Stack p={5}>
+            <Stack px={5} py={2}>
               <Stack
                 bg={"#F7F8FB"}
                 borderWidth={1}
@@ -136,7 +135,10 @@ const Curriculum = () => {
                         p={3}
                         borderColor={"gray"}
                       >
-                        <Flex rowGap={2} flexDirection={{ base: "column", lg: "row" }}>
+                        <Flex
+                          rowGap={2}
+                          flexDirection={{ base: "column", lg: "row" }}
+                        >
                           <Text
                             fontWeight={"bold"}
                             fontSize={16}
