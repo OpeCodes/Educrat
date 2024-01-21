@@ -15,7 +15,7 @@ import {
   Button,
   Box,
 } from "@chakra-ui/react";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
@@ -35,13 +35,11 @@ import { IoCloseSharp } from "react-icons/io5";
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
-  const [edit, setEdit] = useState<boolean>(false);
+  // const [edit, setEdit] = useState<boolean>(false);
   const [showSection, setShowSection] = useState<boolean>(false);
   // const { moduleEditCourse, isPending } = useModuleEditCourse();
   const { deleteModule } = useDeleteModalCourse();
-  const {  course,  } = useSelector(
-    (store: RootState) => store.user
-  );
+  const { course } = useSelector((store: RootState) => store.user);
   const initialValues = {
     title: "",
     learningObjective: "",
@@ -51,12 +49,12 @@ const Curriculum = () => {
 
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: course._id, user: values });
-    // moduleEditCourse({ courseId: courseModule.id, user: values });
+    // moduleEdi  tCourse({ courseId: courseModule.id, user: values });
     setTimeout(() => {
-      setEdit(false);
+      setShowSection(false);
     }, 2000);
   };
-  const {data} = useGetModuleCourse(course._id);
+  const { data } = useGetModuleCourse(course._id);
 
   return (
     <Stack>
@@ -74,7 +72,7 @@ const Curriculum = () => {
         length of video content must be less than 2 hours.
       </Text>
       {data?.map((course: any, index: any) => {
-        const {title,id} = course
+        const { title, id } = course;
         return (
           <Stack key={id}>
             <Stack p={5}>
@@ -85,29 +83,27 @@ const Curriculum = () => {
                 p={3}
                 pb={10}
               >
-                {!edit && (
-                  <Flex align={"center"}>
-                    <Flex align={"center"} columnGap={2}>
-                      <Text fontWeight={"bold"} fontSize={17}>
-                        Section {index+1}
+                <Flex align={"center"}>
+                  <Flex align={"center"} columnGap={2}>
+                    <Text fontWeight={"bold"} fontSize={17}>
+                      Section {index + 1}
+                    </Text>
+                    <Flex align={"center"} mr={3} columnGap={1}>
+                      <Text>
+                        <GoBookmark />
                       </Text>
-                      <Flex align={"center"} mr={3} columnGap={1}>
-                        <Text>
-                          <GoBookmark />
-                        </Text>
-                        <Text fontWeight={"500"}>{title}</Text>
-                      </Flex>
-                    </Flex>
-                    <Flex align={"center"} columnGap={4}>
-                      <Text cursor={"pointer"} onClick={() => setEdit(true)}>
-                        <MdEdit />
-                      </Text>
-                      <Text cursor={"pointer"} onClick={onOpen}>
-                        <MdDelete />
-                      </Text>
+                      <Text fontWeight={"500"}>{title}</Text>
                     </Flex>
                   </Flex>
-                )}
+                  <Flex align={"center"} columnGap={4}>
+                    <Text cursor={"pointer"} onClick={() => setEdit(true)}>
+                      <MdEdit />
+                    </Text>
+                    <Text cursor={"pointer"} onClick={onOpen}>
+                      <MdDelete />
+                    </Text>
+                  </Flex>
+                </Flex>
               </Stack>
             </Stack>
             <AlertDialog
@@ -140,7 +136,7 @@ const Curriculum = () => {
                     _hover={{ backgroundColor: "none", color: "none" }}
                     onClick={() => {
                       deleteModule({ moduleId: id });
-                      onClose()
+                      onClose();
                     }}
                   >
                     OK
@@ -272,7 +268,7 @@ const Curriculum = () => {
                     type="button"
                     backgroundColor={"black"}
                   >
-                    Save Section
+                    Add Section
                   </Button>
                 </Flex>
               </Stack>
