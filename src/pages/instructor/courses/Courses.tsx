@@ -38,14 +38,13 @@ const Courses = () => {
           colorScheme="teal"
           variant="outline"
           spinnerPlacement="end"
-          mt={3}
           borderWidth={2}
-          py={3}
+          py={2}
           borderColor={"#00FF84"}
           _hover={{ background: "none", color: "#00FF84" }}
           as={Link}
           to="/course/create/1"
-          size="lg"
+          size="md"
         >
           New Course
         </Button>
