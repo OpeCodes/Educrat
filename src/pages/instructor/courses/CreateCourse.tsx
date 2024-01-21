@@ -12,7 +12,7 @@ import {
 import { CreateCourseNavBar, Loading } from "../../../components";
 import { Formik } from "formik";
 import { createCourseSchema } from "../../../schemas";
-import { useCourseCategory, useCreateCourse } from "../../../hooks";
+import { useCourseCategory, useCreateCourse } from "../../../hooks/course";
 
 const initialValues = {
   title: "",

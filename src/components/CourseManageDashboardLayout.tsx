@@ -1,7 +1,7 @@
 import { Outlet, useParams, } from "react-router-dom";
 import { CourseManageNavbar, CourseManageSidebar } from ".";
 import { Flex, Stack } from "@chakra-ui/react";
-import { useGetSingleCourse } from "../hooks";
+import { useGetSingleCourse } from "../hooks/course";
 import { useEffect } from "react";
 import { Error } from "../pages/auth";
 

@@ -16,7 +16,7 @@ import { Formik } from "formik";
 import {
   useCourseCategory,
   useSingleCourse,
-} from "../../../../hooks";
+} from "../../../../hooks/course";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";

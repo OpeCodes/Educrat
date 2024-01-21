@@ -23,7 +23,7 @@ import { courseModelSchema } from "../../../../schemas";
 import {
   useDeleteModalCourse,
   useModuleEditCourse,
-} from "../../../../hooks";
+} from "../../../../hooks/module";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 const Curriculum = () => {
