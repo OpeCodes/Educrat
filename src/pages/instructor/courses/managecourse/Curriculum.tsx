@@ -293,7 +293,7 @@ const Curriculum = () => {
             onSubmit={handleSubmit}
           >
             {({ handleChange, handleSubmit, values, errors }) => (
-              <Stack bg={"#FFFFFF"} borderWidth={1} p={3} borderColor={"gray"}>
+              <Stack bg={"#FFFFFF"} borderWidth={1} p={3} borderColor={"gray"} mt={-8}>
                 <Flex rowGap={2} flexDirection={{base: "column", lg: "row"}}>
                   <Text fontWeight={"bold"} fontSize={16} mt={1} width={{base: "100%", lg:"12%"}}>
                     New Section:
