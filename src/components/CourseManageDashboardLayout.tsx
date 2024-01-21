@@ -8,9 +8,9 @@ import { Error } from "../pages/auth";
 const CourseManageDashboardLayout = () => {
   const { id } = useParams();
   const { getSingleCourse, isError } = useGetSingleCourse();
-  useEffect(() => {
-    getSingleCourse({ course: id });
-  }, []);
+  // useEffect(() => {
+  //   getSingleCourse({ course: id });
+  // }, []);
   if (isError) {
     return <Error />;
   }

@@ -38,9 +38,7 @@ const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
   const [showSection, setShowSection] = useState<boolean>(false);
-  const {  course } = useSelector(
-    (store: RootState) => store.user
-  );
+  const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule } = useDeleteModalCourse();
   const initialValues1 = {
@@ -60,9 +58,9 @@ const Curriculum = () => {
       setShowSection(false);
     }, 2000);
   };
-  
+
   const { data, isOpenState, toggleIsOpen } = useGetModuleCourse(course._id);
-  
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -120,8 +118,7 @@ const Curriculum = () => {
                     onSubmit={(values: any) => {
                       moduleEditCourse({ moduleId: id, user: values });
                       setTimeout(() => {
-                      toggleIsOpen(id)
-                        
+                        toggleIsOpen(id);
                       }, 2000);
                     }}
                   >
@@ -245,11 +242,7 @@ const Curriculum = () => {
                   want to continue?
                 </AlertDialogBody>
                 <AlertDialogFooter>
-                  <Button
-                    onClick={onClose}
-                  >
-                    Cancel
-                  </Button>
+                  <Button onClick={onClose}>Cancel</Button>
                   <Button
                     bg="black"
                     color="white"
@@ -269,10 +262,8 @@ const Curriculum = () => {
         );
       })}
       <Stack p={5}>
-       
         {showSection ? (
           <Text onClick={() => setShowSection(!showSection)} cursor={"pointer"}>
-            {" "}
             <IoCloseSharp fontSize={"25px"} />
           </Text>
         ) : (
@@ -302,17 +293,13 @@ const Curriculum = () => {
             onSubmit={handleSubmit}
           >
             {({ handleChange, handleSubmit, values, errors }) => (
-              <Stack
-                bg={"#FFFFFF"}
-                borderWidth={1}
-                p={3}
-                borderColor={"gray"}
-              >
-                <Flex align={"center"} rowGap={2}>
-                  <Text fontWeight={"bold"} fontSize={16} pr={4}>
+              <Stack bg={"#FFFFFF"} borderWidth={1} p={3} borderColor={"gray"}>
+                <Flex rowGap={2} flexDirection={{base: "column", lg: "row"}}>
+                  <Text fontWeight={"bold"} fontSize={16} mt={1} width={{base: "100%", lg:"12%"}}>
                     New Section:
                   </Text>
-                  <Stack maxW="89%" w="100%">
+
+                  <Stack w={{base: "100%", lg: "88%"}}>
                     <Input
                       variant="outline"
                       w="100%"
@@ -335,7 +322,7 @@ const Curriculum = () => {
                     )}
                   </Stack>
                 </Flex>
-                <Stack ml={"5.5rem"}>
+                <Stack maxW={"88%"} w="100%" ml="auto">
                   <Text fontWeight={"bold"}>
                     What will students be able to do at the end of this section?
                   </Text>
