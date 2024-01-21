@@ -41,8 +41,8 @@ const Curriculum = () => {
   const { courseModule } = useSelector((store: RootState) => store.user);
   console.log(courseModule);
   const initialValues = {
-    title: courseModule?.title || "Introductions",
-    learningObjective: courseModule?.learningObjective || "",
+    title: "",
+    learningObjective: "",
   };
   // const { getModuleCourse } = useGetModuleCourse();
 
@@ -119,7 +119,7 @@ const Curriculum = () => {
                 >
                   <Flex align={"center"} rowGap={2}>
                     <Text fontWeight={"bold"} fontSize={16} pr={4}>
-                      Section 1:
+                      New Section:
                     </Text>
                     <Stack maxW="89%" w="100%">
                       <Input
@@ -127,7 +127,7 @@ const Curriculum = () => {
                         w="100%"
                         borderColor={"black"}
                         borderRadius={"0px"}
-                        placeholder="title"
+                        placeholder="Enter a title"
                         _focus={{ borderColor: "black" }}
                         name="title"
                         value={values.title}
@@ -154,7 +154,7 @@ const Curriculum = () => {
                       w="100%"
                       borderColor={"black"}
                       borderRadius={"0px"}
-                      placeholder="Filled"
+                      placeholder="Enter a a learning objectives"
                       _focus={{ borderColor: "black" }}
                       focusBorderColor="black"
                       name="learningObjective"
@@ -174,7 +174,7 @@ const Curriculum = () => {
                     <Text
                       fontWeight={"bold"}
                       as={"button"}
-                      onClick={() => setEdit(false)}
+                      onClick={() => setShowSection(false)}
                     >
                       Cancel
                     </Text>
