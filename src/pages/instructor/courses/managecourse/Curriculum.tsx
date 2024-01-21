@@ -322,7 +322,7 @@ const Curriculum = () => {
                     )}
                   </Stack>
                 </Flex>
-                <Stack maxW={"88%"} w="100%" ml="auto">
+                <Stack maxW={{base: "100%", lg: "88%"}} w="100%" ml="auto">
                   <Text fontWeight={"bold"}>
                     What will students be able to do at the end of this section?
                   </Text>
