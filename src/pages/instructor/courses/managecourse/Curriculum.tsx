@@ -20,7 +20,7 @@ import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
-import { courseModelSchema } from "../../../../schemas";
+import { courseEditModuleSchema, courseModuleSchema } from "../../../../schemas";
 import {
   useDeleteModalCourse,
   useModuleCreateCourse,
@@ -35,12 +35,16 @@ import { IoCloseSharp } from "react-icons/io5";
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
-  // const [edit, setEdit] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolean>(false);
   const [showSection, setShowSection] = useState<boolean>(false);
   // const { moduleEditCourse, isPending } = useModuleEditCourse();
   const { deleteModule } = useDeleteModalCourse();
   const { course } = useSelector((store: RootState) => store.user);
-  const initialValues = {
+  const initialValues1 = {
+    title: "",
+    learningObjective: "",
+  };
+  const initialValues2 = {
     title: "",
     learningObjective: "",
   };
@@ -53,6 +57,12 @@ const Curriculum = () => {
     setTimeout(() => {
       setShowSection(false);
     }, 2000);
+  };
+  const handleEditSubmit = (values: any): void => {
+    console.log(values)
+    // moduleCreateCourse({ courseId: course._id, user: values });
+    // moduleEdi  tCourse({ courseId: courseModule.id, user: values });
+    
   };
   const { data } = useGetModuleCourse(course._id);
 
@@ -96,7 +106,7 @@ const Curriculum = () => {
                     </Flex>
                   </Flex>
                   <Flex align={"center"} columnGap={4}>
-                    <Text cursor={"pointer"} onClick={() => setEdit(true)}>
+                    <Text cursor={"pointer"} onClick={() => setEdit(!edit)}>
                       <MdEdit />
                     </Text>
                     <Text cursor={"pointer"} onClick={onOpen}>
@@ -104,8 +114,115 @@ const Curriculum = () => {
                     </Text>
                   </Flex>
                 </Flex>
+
+                {/* edit part */}
+                {
+                  edit &&
+               
+                <Formik
+                  initialValues={initialValues2}
+                  validationSchema={courseEditModuleSchema}
+                  onSubmit={handleEditSubmit}
+                >
+                  {({ handleChange, handleSubmit: handleEditSubmit, values, errors }) => (
+                    <Stack
+                      bg={"#FFFFFF"}
+                      borderWidth={1}
+                      // mt={6}
+                      p={3}
+                      borderColor={"gray"}
+                    >
+                      <Flex align={"center"} rowGap={2}>
+                        <Text fontWeight={"bold"} fontSize={16} pr={4}>
+                          New Section:
+                        </Text>
+                        <Stack maxW="89%" w="100%">
+                          <Input
+                            variant="outline"
+                            w="100%"
+                            borderColor={"black"}
+                            borderRadius={"0px"}
+                            placeholder="Enter a title"
+                            _focus={{ borderColor: "black" }}
+                            name="title"
+                            value={values.title}
+                            focusBorderColor="black"
+                            onChange={handleChange}
+                          />
+                          {errors?.title && (
+                            <Text
+                              style={{ color: "red", marginTop: 0 }}
+                              fontSize="14px"
+                            >
+                              Pls add title
+                            </Text>
+                          )}
+                        </Stack>
+                      </Flex>
+                      <Stack ml={"5.5rem"}>
+                        <Text fontWeight={"bold"}>
+                          What will students be able to do at the end of this
+                          section?
+                        </Text>
+                        <Input
+                          variant="outline"
+                          w="100%"
+                          borderColor={"black"}
+                          borderRadius={"0px"}
+                          placeholder="Enter a a learning objectives"
+                          _focus={{ borderColor: "black" }}
+                          focusBorderColor="black"
+                          name="learningObjective"
+                          value={values.learningObjective}
+                          onChange={handleChange}
+                        />
+                        {errors.learningObjective && (
+                          <Text
+                            style={{ color: "red", marginTop: 0 }}
+                            fontSize="14px"
+                          >
+                            pls add learning objectives
+                          </Text>
+                        )}
+                      </Stack>
+                      <Flex
+                        justify={"end"}
+                        mt={2}
+                        align={"center"}
+                        columnGap={5}
+                      >
+                        <Text
+                          fontWeight={"bold"}
+                          as={"button"}
+                          onClick={() => setShowSection(false)}
+                        >
+                          Cancel
+                        </Text>
+                        <Button
+                          color="#ffffff"
+                          fontWeight={"500"}
+                          fontSize={14}
+                          as={"button"}
+                          py={2}
+                          px={4}
+                          isLoading={moduleLoading}
+                          loadingText="Loading"
+                          variant="outline"
+                          spinnerPlacement="end"
+                          onClick={() => handleEditSubmit()}
+                          type="button"
+                          backgroundColor={"black"}
+                        >
+                          Save Section
+                        </Button>
+                      </Flex>
+                    </Stack>
+                  )}
+                </Formik>
+                 }
               </Stack>
             </Stack>
+
             <AlertDialog
               motionPreset="slideInBottom"
               leastDestructiveRef={cancelRef}
@@ -181,8 +298,8 @@ const Curriculum = () => {
       <Stack p={5}>
         {showSection && (
           <Formik
-            initialValues={initialValues}
-            validationSchema={courseModelSchema}
+            initialValues={initialValues1}
+            validationSchema={courseModuleSchema}
             onSubmit={handleSubmit}
           >
             {({ handleChange, handleSubmit, values, errors }) => (
