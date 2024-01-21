@@ -1,19 +1,17 @@
 import { useToast } from "@chakra-ui/react";
-import { setAllCourseModule, setCourseModule } from "../../features/user/UserSlice";
+import { setCourseModule } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import {
-  addAllCourseModuleStorage,
   addCourseModuleStorage,
   removeCourseModuleromLocalStorage,
 } from "../../store/localStorage";
 
-
 export const useModuleCreateCourse = () => {
   const toast = useToast();
   const dispatch = useDispatch();
-
+  const queryClient = useQueryClient();
   const {
     mutate: moduleCreateCourse,
     isPending,
@@ -26,6 +24,7 @@ export const useModuleCreateCourse = () => {
     onSuccess: (user) => {
       dispatch(setCourseModule(user.data));
       addCourseModuleStorage(user.data);
+      queryClient.invalidateQueries({ queryKey: ["module"] });
 
       toast({
         title: `course created successfully`,
@@ -45,8 +44,6 @@ export const useModuleCreateCourse = () => {
   });
   return { moduleCreateCourse, isPending, error, isError };
 };
-
-
 
 export const useModuleEditCourse = () => {
   const toast = useToast();
@@ -86,13 +83,15 @@ export const useModuleEditCourse = () => {
 
 export const useDeleteModalCourse = () => {
   const toast = useToast();
+  const queryClient = useQueryClient();
+
   const { mutate: deleteModule, isPending } = useMutation({
-    mutationFn: ({ courseId }: any) => {
-      return customFetch.delete(`/module/${courseId}`);
+    mutationFn: ({ moduleId }: any) => {
+      return customFetch.delete(`/module/${moduleId}`);
     },
     onSuccess: () => {
       removeCourseModuleromLocalStorage();
-
+      queryClient.invalidateQueries({ queryKey: ["module"] });
       toast({
         title: `course deleted successfully`,
         status: "success",
@@ -112,22 +111,15 @@ export const useDeleteModalCourse = () => {
   return { deleteModule, isPending };
 };
 
-export const useGetModuleCourse = () => {
-  const dispatch =useDispatch()
-  const {
-    mutate: getModuleCourse,
-    isPending,
-    error,
-    isError,
-  } = useMutation({
-    mutationFn: ({ courseId }: any) => {
-      return customFetch.get(`module/course/${courseId}`);
-    },
-    onSuccess: (data) => {
-      // console.log(data.data)
-      dispatch(setAllCourseModule(data.data))
-      addAllCourseModuleStorage(data.data)
+export const useGetModuleCourse = (id: any) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ["module", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; // Destructure the queryKey to get the 'id'
+      const { data } = await customFetch.get(`module/course/${id}`);
+      return data;
     },
   });
-  return { getModuleCourse, isPending, error, isError };
+
+  return { data, isLoading };
 };

@@ -10,7 +10,7 @@ const CourseManageDashboardLayout = () => {
   const { getSingleCourse, isError } = useGetSingleCourse();
   useEffect(() => {
     getSingleCourse({ course: id });
-  }, [id]);
+  }, []);
   if (isError) {
     return <Error />;
   }
