@@ -22,7 +22,6 @@ import { Formik } from "formik";
 import { courseModelSchema } from "../../../../schemas";
 import {
   useDeleteModalCourse,
-  useGetModuleCourse,
   useModuleEditCourse,
 } from "../../../../hooks";
 import { useSelector } from "react-redux";
@@ -37,8 +36,8 @@ const Curriculum = () => {
     (store: RootState) => store.user
   );
   const initialValues = {
-    title: courseModule.title || "Introductions",
-    learningObjective: courseModule.learningObjective || "",
+    title: courseModule?.title || "Introductions",
+    learningObjective: courseModule?.learningObjective || "",
   };
  
   console.log(courseModule)
@@ -49,10 +48,9 @@ const Curriculum = () => {
       setEdit(false);
     }, 2000);
   };
-  const { getModuleCourse } = useGetModuleCourse();
 
   useEffect(() => {
-    getModuleCourse({ course: courseModule.courseId });
+    // getModuleCourse({ course: courseModule.courseId });
   }, []);
   return (
     <Stack>

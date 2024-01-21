@@ -13,7 +13,7 @@ const initialState: UserState = {
 // user: null
 course: getCourseLocalStorage(),
 courseModule: getCourseModuleStorage(),
-AllCourseModule: null
+AllCourseModule: getCourseModuleStorage()
 };
 
 const userSlice = createSlice({

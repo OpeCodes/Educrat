@@ -17,7 +17,7 @@ import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
 import { resetPasswordSchema } from "../../schemas";
 import { Link, useParams } from "react-router-dom";
-import { useResetPassword } from "../../hooks";
+import { useResetPassword } from "../../hooks/auth";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { useState } from "react";
 const initialValues = {

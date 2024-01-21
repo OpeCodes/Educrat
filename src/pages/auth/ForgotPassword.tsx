@@ -16,7 +16,7 @@ import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
 import { forgotPasswordSchema } from "../../schemas";
 import { Link } from "react-router-dom";
-import { useForgotPassword } from "../../hooks";
+import { useForgotPassword } from "../../hooks/auth";
 
 const initialValues = {
   email: "",
