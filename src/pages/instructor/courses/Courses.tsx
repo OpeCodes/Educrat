@@ -19,7 +19,7 @@ const Courses = () => {
       </Text>
       <Flex justify={"space-between"} align={"center"} flexWrap={"wrap"} rowGap={0}>
         <Flex columnGap={7} flexWrap={"wrap"} rowGap={5}>
-          <Stack width="55%">
+          <Stack width={{base: "100%", md: "55%"}}>
             <InputGroup>
               <Input placeholder="Enter search for courses" variant="filled" />
               <InputRightElement>
@@ -27,7 +27,7 @@ const Courses = () => {
               </InputRightElement>
             </InputGroup>
           </Stack>
-          <Select placeholder="Select option" variant={"filled"} width={"35%"}>
+          <Select placeholder="Select option" variant={"filled"} width={{base: "100%", md: "35%"}}>
             <option value="option1">Newest</option>
             <option value="option2">Oldest</option>
             <option value="option3">Option 3</option>
@@ -38,6 +38,8 @@ const Courses = () => {
           colorScheme="teal"
           variant="outline"
           spinnerPlacement="end"
+          // mt={3}
+          mt={{base: 3, lg: 0}}
           borderWidth={2}
           py={2}
           borderColor={"#00FF84"}
