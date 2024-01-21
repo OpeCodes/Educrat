@@ -23,17 +23,19 @@ import { Formik } from "formik";
 import { courseModelSchema } from "../../../../schemas";
 import {
   useDeleteModalCourse,
-  useGetModuleCourse,
+  // useGetModuleCourse,
   useModuleEditCourse,
 } from "../../../../hooks/module";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
-import { GoPlus } from "react-icons/go";
+import { GoPlus } from "react-icons/go";import { IoCloseSharp } from "react-icons/io5";
+
 
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
   const [edit, setEdit] = useState<boolean>(false);
+  const [showSection, setShowSection] = useState<boolean>(false)
   const { moduleEditCourse, isPending } = useModuleEditCourse();
   const { deleteModule } = useDeleteModalCourse();
   const { courseModule } = useSelector((store: RootState) => store.user);
@@ -70,56 +72,38 @@ const Curriculum = () => {
         length of video content must be less than 2 hours.
       </Text>
 
-      {/* {AllCourseModule.map((courseModule: any, index: any) => { */}
-      {/* return (
-          <> */}
       <Stack p={5}>
         <Box
           bg={"#F7F8FB"}
           borderWidth={1}
           borderColor={"gray"}
-          // p={1}
-          pb={10}
+          height={"30px"}
         ></Box>
-        <Button borderRadius={0} bg={"#F7F8FB"}
-          borderWidth={1}
-          borderColor={"black"} color="black" _hover={{backgroundColor: "none"}} width={"100px"} height={"30px"} leftIcon={<GoPlus fontSize={"20px"} />} colorScheme="teal" variant="outline">
-          Section
-        </Button>
-      </Stack>
-      <Stack p={5}>
-        <Stack
+        {
+       
+          showSection ? <Text    onClick={() => setShowSection(!showSection)}  cursor={"pointer"}> <IoCloseSharp fontSize={"25px"} /></Text>
+          :
+        <Button
+          borderRadius={0}
           bg={"#F7F8FB"}
           borderWidth={1}
-          borderColor={"gray"}
-          p={3}
-          pb={10}
+          borderColor={"black"}
+          color="black"
+          _hover={{ backgroundColor: "none" }}
+          width={"100px"}
+          height={"30px"}
+          leftIcon={<GoPlus fontSize={"20px"} />}
+          colorScheme="teal"
+          variant="outline"
+          onClick={() => setShowSection(!showSection)}
         >
-          {!edit && (
-            <Flex align={"center"}>
-              <Flex align={"center"} columnGap={2}>
-                <Text fontWeight={"bold"} fontSize={17}>
-                  Section 1
-                </Text>
-                <Flex align={"center"} mr={3} columnGap={1}>
-                  <Text>
-                    <GoBookmark />
-                  </Text>
-                  <Text fontWeight={"500"}>{initialValues.title}</Text>
-                </Flex>
-              </Flex>
-              <Flex align={"center"} columnGap={4}>
-                <Text cursor={"pointer"} onClick={() => setEdit(true)}>
-                  <MdEdit />
-                </Text>
-                <Text cursor={"pointer"} onClick={onOpen}>
-                  <MdDelete />
-                </Text>
-              </Flex>
-            </Flex>
-          )}
+          Section
+        </Button>
+        }
 
-          {edit && (
+      </Stack>
+      <Stack p={5}>
+      {showSection && (
             <Formik
               initialValues={initialValues}
               validationSchema={courseModelSchema}
@@ -216,6 +200,40 @@ const Curriculum = () => {
               )}
             </Formik>
           )}
+      </Stack>
+      <Stack p={5}>
+        <Stack
+          bg={"#F7F8FB"}
+          borderWidth={1}
+          borderColor={"gray"}
+          p={3}
+          pb={10}
+        >
+          {!edit && (
+            <Flex align={"center"}>
+              <Flex align={"center"} columnGap={2}>
+                <Text fontWeight={"bold"} fontSize={17}>
+                  Section 1
+                </Text>
+                <Flex align={"center"} mr={3} columnGap={1}>
+                  <Text>
+                    <GoBookmark />
+                  </Text>
+                  <Text fontWeight={"500"}>{initialValues.title}</Text>
+                </Flex>
+              </Flex>
+              <Flex align={"center"} columnGap={4}>
+                <Text cursor={"pointer"} onClick={() => setEdit(true)}>
+                  <MdEdit />
+                </Text>
+                <Text cursor={"pointer"} onClick={onOpen}>
+                  <MdDelete />
+                </Text>
+              </Flex>
+            </Flex>
+          )}
+
+          
         </Stack>
       </Stack>
       <AlertDialog
