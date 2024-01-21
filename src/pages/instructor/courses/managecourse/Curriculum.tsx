@@ -41,6 +41,7 @@ const Curriculum = () => {
   const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule } = useDeleteModalCourse();
+  const [moduleID, setModuleID] = useState("");
   const initialValues1 = {
     title: "",
     learningObjective: "",
@@ -78,6 +79,7 @@ const Curriculum = () => {
       </Text>
       {data?.map((course: any, index: any) => {
         const { title, id } = course;
+        
         return (
           <Stack key={id}>
             <Stack p={5}>
@@ -134,11 +136,16 @@ const Curriculum = () => {
                         p={3}
                         borderColor={"gray"}
                       >
-                        <Flex align={"center"} rowGap={2}>
-                          <Text fontWeight={"bold"} fontSize={16} pr={4}>
-                            New Section:
+                        <Flex rowGap={2} flexDirection={{ base: "column", lg: "row" }}>
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={16}
+                            mt={1}
+                            width={{ base: "100%", lg: "12%" }}
+                          >
+                            Edit Section:
                           </Text>
-                          <Stack maxW="89%" w="100%">
+                          <Stack w={{ base: "100%", lg: "88%" }}>
                             <Input
                               variant="outline"
                               w="100%"
@@ -161,7 +168,11 @@ const Curriculum = () => {
                             )}
                           </Stack>
                         </Flex>
-                        <Stack ml={"5.5rem"}>
+                        <Stack
+                          maxW={{ base: "100%", lg: "88%" }}
+                          w="100%"
+                          ml="auto"
+                        >
                           <Text fontWeight={"bold"}>
                             What will students be able to do at the end of this
                             section?
@@ -285,6 +296,7 @@ const Curriculum = () => {
           </Button>
         )}
       </Stack>
+      {/* NEW SECTION */}
       <Stack p={5}>
         {showSection && (
           <Formik
@@ -293,13 +305,24 @@ const Curriculum = () => {
             onSubmit={handleSubmit}
           >
             {({ handleChange, handleSubmit, values, errors }) => (
-              <Stack bg={"#FFFFFF"} borderWidth={1} p={3} borderColor={"gray"} mt={-8}>
-                <Flex rowGap={2} flexDirection={{base: "column", lg: "row"}}>
-                  <Text fontWeight={"bold"} fontSize={16} mt={1} width={{base: "100%", lg:"12%"}}>
+              <Stack
+                bg={"#FFFFFF"}
+                borderWidth={1}
+                p={3}
+                borderColor={"gray"}
+                mt={-8}
+              >
+                <Flex rowGap={2} flexDirection={{ base: "column", lg: "row" }}>
+                  <Text
+                    fontWeight={"bold"}
+                    fontSize={16}
+                    mt={1}
+                    width={{ base: "100%", lg: "12%" }}
+                  >
                     New Section:
                   </Text>
 
-                  <Stack w={{base: "100%", lg: "88%"}}>
+                  <Stack w={{ base: "100%", lg: "88%" }}>
                     <Input
                       variant="outline"
                       w="100%"
@@ -322,7 +345,7 @@ const Curriculum = () => {
                     )}
                   </Stack>
                 </Flex>
-                <Stack maxW={{base: "100%", lg: "88%"}} w="100%" ml="auto">
+                <Stack maxW={{ base: "100%", lg: "88%" }} w="100%" ml="auto">
                   <Text fontWeight={"bold"}>
                     What will students be able to do at the end of this section?
                   </Text>
