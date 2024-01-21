@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getCourseLocalStorage, getCourseModuleStorage, getUserLocalStorage, removeUserFromLocalStorage } from "../../store/localStorage";
+import { getAllCourseModuleStorage, getCourseLocalStorage, getCourseModuleStorage, getUserLocalStorage, removeUserFromLocalStorage } from "../../store/localStorage";
 
 interface UserState {
   user: any;
@@ -13,7 +13,7 @@ const initialState: UserState = {
 // user: null
 course: getCourseLocalStorage(),
 courseModule: getCourseModuleStorage(),
-AllCourseModule: getCourseModuleStorage()
+AllCourseModule: getAllCourseModuleStorage()
 };
 
 const userSlice = createSlice({

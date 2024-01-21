@@ -36,3 +36,16 @@ export  const getCourseModuleStorage = () =>{
 export const removeCourseModuleromLocalStorage = () => {
   localStorage.removeItem("courseModule");
 };
+
+//all course module
+export const addAllCourseModuleStorage =(user: any) =>{
+  localStorage.setItem("AllCourseModule", JSON.stringify(user))
+}
+export  const getAllCourseModuleStorage = () =>{
+  const result = localStorage.getItem("AllCourseModule");
+  const AllCourseModule= result ? JSON.parse(result) : null;
+  return AllCourseModule;
+}
+export const removeAllCourseModuleromLocalStorage = () => {
+  localStorage.removeItem("AllCourseModule");
+};

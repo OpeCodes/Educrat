@@ -24,7 +24,7 @@ import { courseModelSchema } from "../../../../schemas";
 import {
   useDeleteModalCourse,
   useModuleCreateCourse,
-  // useGetModuleCourse,
+  useGetModuleCourse,
   useModuleEditCourse,
 } from "../../../../hooks/module";
 import { useSelector } from "react-redux";
@@ -39,14 +39,12 @@ const Curriculum = () => {
   const [showSection, setShowSection] = useState<boolean>(false);
   // const { moduleEditCourse, isPending } = useModuleEditCourse();
   const { deleteModule } = useDeleteModalCourse();
-  const { courseModule ,course} = useSelector((store: RootState) => store.user);
-  console.log(courseModule);
-  console.log(course._id);
+  const { courseModule ,course,AllCourseModule} = useSelector((store: RootState) => store.user);
   const initialValues = {
     title: "",
     learningObjective: "",
   };
-  // const { getModuleCourse } = useGetModuleCourse();
+  const { getModuleCourse } = useGetModuleCourse();
  const {moduleCreateCourse,isPending: moduleLoading} = useModuleCreateCourse();
 
   const handleSubmit = (values: any): void => {
@@ -58,8 +56,10 @@ const Curriculum = () => {
   };
 
   useEffect(() => {
-    // getModuleCourse({ course: courseModule.courseId });
-  }, []);
+    getModuleCourse({courseId:course._id});
+  }, [AllCourseModule]);
+  console.log(AllCourseModule);
+  
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -75,7 +75,81 @@ const Curriculum = () => {
         clearly. If you’re intending to offer your course for free, the total
         length of video content must be less than 2 hours.
       </Text>
+{
+  AllCourseModule?.map((course: any)=> {
+    return <>      <Stack p={5}>
+    <Stack
+      bg={"#F7F8FB"}
+      borderWidth={1}
+      borderColor={"gray"}
+      p={3}
+      pb={10}
+    >
+      {!edit && (
+        <Flex align={"center"}>
+          <Flex align={"center"} columnGap={2}>
+            <Text fontWeight={"bold"} fontSize={17}>
+              Section 1
+            </Text>
+            <Flex align={"center"} mr={3} columnGap={1}>
+              <Text>
+                <GoBookmark />
+              </Text>
+              <Text fontWeight={"500"}>{initialValues.title}</Text>
+            </Flex>
+          </Flex>
+          <Flex align={"center"} columnGap={4}>
+            <Text cursor={"pointer"} onClick={() => setEdit(true)}>
+              <MdEdit />
+            </Text>
+            <Text cursor={"pointer"} onClick={onOpen}>
+              <MdDelete />
+            </Text>
+          </Flex>
+        </Flex>
+      )}
+    </Stack>
+  </Stack>
+  <AlertDialog
+    motionPreset="slideInBottom"
+    leastDestructiveRef={cancelRef}
+    onClose={onClose}
+    isOpen={isOpen}
+    isCentered
+  >
+    <AlertDialogOverlay />
 
+    <AlertDialogContent>
+      <AlertDialogHeader>Please Confirm</AlertDialogHeader>
+      <AlertDialogCloseButton />
+      <AlertDialogBody>
+        You are about to remove a curriculum item. Are you sure you want to
+        continue?
+      </AlertDialogBody>
+      <AlertDialogFooter>
+        <Button
+          //  ref={cancelRef}
+          onClick={onClose}
+        >
+          Cancel
+        </Button>
+        <Button
+          bg="black"
+          color="white"
+          ml={3}
+          _hover={{ backgroundColor: "none", color: "none" }}
+          onClick={() => {
+            deleteModule({ courseId: courseModule?.id });
+          }}
+        >
+          OK
+        </Button>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+  </>
+  })
+}
       <Stack p={5}>
         <Box
           bg={"#F7F8FB"}
@@ -205,76 +279,8 @@ const Curriculum = () => {
           </Formik>
         )}
       </Stack>
-      <Stack p={5}>
-        <Stack
-          bg={"#F7F8FB"}
-          borderWidth={1}
-          borderColor={"gray"}
-          p={3}
-          pb={10}
-        >
-          {!edit && (
-            <Flex align={"center"}>
-              <Flex align={"center"} columnGap={2}>
-                <Text fontWeight={"bold"} fontSize={17}>
-                  Section 1
-                </Text>
-                <Flex align={"center"} mr={3} columnGap={1}>
-                  <Text>
-                    <GoBookmark />
-                  </Text>
-                  <Text fontWeight={"500"}>{initialValues.title}</Text>
-                </Flex>
-              </Flex>
-              <Flex align={"center"} columnGap={4}>
-                <Text cursor={"pointer"} onClick={() => setEdit(true)}>
-                  <MdEdit />
-                </Text>
-                <Text cursor={"pointer"} onClick={onOpen}>
-                  <MdDelete />
-                </Text>
-              </Flex>
-            </Flex>
-          )}
-        </Stack>
-      </Stack>
-      <AlertDialog
-        motionPreset="slideInBottom"
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-        isOpen={isOpen}
-        isCentered
-      >
-        <AlertDialogOverlay />
+      
 
-        <AlertDialogContent>
-          <AlertDialogHeader>Please Confirm</AlertDialogHeader>
-          <AlertDialogCloseButton />
-          <AlertDialogBody>
-            You are about to remove a curriculum item. Are you sure you want to
-            continue?
-          </AlertDialogBody>
-          <AlertDialogFooter>
-            <Button
-              //  ref={cancelRef}
-              onClick={onClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              bg="black"
-              color="white"
-              ml={3}
-              _hover={{ backgroundColor: "none", color: "none" }}
-              onClick={() => {
-                deleteModule({ courseId: courseModule?.id });
-              }}
-            >
-              OK
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </Stack>
   );
 };

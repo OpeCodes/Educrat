@@ -1,9 +1,10 @@
 import { useToast } from "@chakra-ui/react";
-import { setCourseModule } from "../../features/user/UserSlice";
+import { setAllCourseModule, setCourseModule } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import {
+  addAllCourseModuleStorage,
   addCourseModuleStorage,
   removeCourseModuleromLocalStorage,
 } from "../../store/localStorage";
@@ -112,17 +113,20 @@ export const useDeleteModalCourse = () => {
 };
 
 export const useGetModuleCourse = () => {
+  const dispatch =useDispatch()
   const {
     mutate: getModuleCourse,
     isPending,
     error,
     isError,
   } = useMutation({
-    mutationFn: ({ course }: any) => {
-      return customFetch.get(`module/course/${course}`);
+    mutationFn: ({ courseId }: any) => {
+      return customFetch.get(`module/course/${courseId}`);
     },
-    onSuccess: () => {
-      // dispatch(setAllCourseModule(data.data))
+    onSuccess: (data) => {
+      // console.log(data.data)
+      dispatch(setAllCourseModule(data.data))
+      addAllCourseModuleStorage(data.data)
     },
   });
   return { getModuleCourse, isPending, error, isError };
