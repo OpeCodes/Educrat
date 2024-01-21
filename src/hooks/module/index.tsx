@@ -27,7 +27,7 @@ export const useModuleCreateCourse = () => {
       addCourseModuleStorage(user.data);
 
       toast({
-        title: `course section successfully`,
+        title: `course created successfully`,
         status: "success",
         duration: 5000,
         isClosable: true,

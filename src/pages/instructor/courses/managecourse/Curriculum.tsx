@@ -23,31 +23,35 @@ import { Formik } from "formik";
 import { courseModelSchema } from "../../../../schemas";
 import {
   useDeleteModalCourse,
+  useModuleCreateCourse,
   // useGetModuleCourse,
   useModuleEditCourse,
 } from "../../../../hooks/module";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
-import { GoPlus } from "react-icons/go";import { IoCloseSharp } from "react-icons/io5";
-
+import { GoPlus } from "react-icons/go";
+import { IoCloseSharp } from "react-icons/io5";
 
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
   const [edit, setEdit] = useState<boolean>(false);
-  const [showSection, setShowSection] = useState<boolean>(false)
-  const { moduleEditCourse, isPending } = useModuleEditCourse();
+  const [showSection, setShowSection] = useState<boolean>(false);
+  // const { moduleEditCourse, isPending } = useModuleEditCourse();
   const { deleteModule } = useDeleteModalCourse();
-  const { courseModule } = useSelector((store: RootState) => store.user);
+  const { courseModule ,course} = useSelector((store: RootState) => store.user);
   console.log(courseModule);
+  console.log(course._id);
   const initialValues = {
     title: "",
     learningObjective: "",
   };
   // const { getModuleCourse } = useGetModuleCourse();
+ const {moduleCreateCourse,isPending: moduleLoading} = useModuleCreateCourse();
 
   const handleSubmit = (values: any): void => {
-    moduleEditCourse({ courseId: courseModule.id, user: values });
+    moduleCreateCourse({courseId:course._id, user: values})
+    // moduleEditCourse({ courseId: courseModule.id, user: values });
     setTimeout(() => {
       setEdit(false);
     }, 2000);
@@ -79,127 +83,127 @@ const Curriculum = () => {
           borderColor={"gray"}
           height={"30px"}
         ></Box>
-        {
-       
-          showSection ? <Text    onClick={() => setShowSection(!showSection)}  cursor={"pointer"}> <IoCloseSharp fontSize={"25px"} /></Text>
-          :
-        <Button
-          borderRadius={0}
-          bg={"#F7F8FB"}
-          borderWidth={1}
-          borderColor={"black"}
-          color="black"
-          _hover={{ backgroundColor: "none" }}
-          width={"100px"}
-          height={"30px"}
-          leftIcon={<GoPlus fontSize={"20px"} />}
-          colorScheme="teal"
-          variant="outline"
-          onClick={() => setShowSection(!showSection)}
-        >
-          Section
-        </Button>
-        }
-
+        {showSection ? (
+          <Text onClick={() => setShowSection(!showSection)} cursor={"pointer"}>
+            {" "}
+            <IoCloseSharp fontSize={"25px"} />
+          </Text>
+        ) : (
+          <Button
+            borderRadius={0}
+            bg={"#F7F8FB"}
+            borderWidth={1}
+            borderColor={"black"}
+            color="black"
+            _hover={{ backgroundColor: "none" }}
+            width={"100px"}
+            height={"30px"}
+            leftIcon={<GoPlus fontSize={"20px"} />}
+            colorScheme="teal"
+            variant="outline"
+            onClick={() => setShowSection(!showSection)}
+          >
+            Section
+          </Button>
+        )}
       </Stack>
       <Stack p={5}>
-      {showSection && (
-            <Formik
-              initialValues={initialValues}
-              validationSchema={courseModelSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ handleChange, handleSubmit, values, errors }) => (
-                <Stack
-                  bg={"#FFFFFF"}
-                  borderWidth={1}
-                  // mt={6}
-                  p={3}
-                  borderColor={"gray"}
-                >
-                  <Flex align={"center"} rowGap={2}>
-                    <Text fontWeight={"bold"} fontSize={16} pr={4}>
-                      New Section:
-                    </Text>
-                    <Stack maxW="89%" w="100%">
-                      <Input
-                        variant="outline"
-                        w="100%"
-                        borderColor={"black"}
-                        borderRadius={"0px"}
-                        placeholder="Enter a title"
-                        _focus={{ borderColor: "black" }}
-                        name="title"
-                        value={values.title}
-                        focusBorderColor="black"
-                        onChange={handleChange}
-                      />
-                      {errors?.title && (
-                        <Text
-                          style={{ color: "red", marginTop: 0 }}
-                          fontSize="14px"
-                        >
-                          Pls add title
-                        </Text>
-                      )}
-                    </Stack>
-                  </Flex>
-                  <Stack ml={"5.5rem"}>
-                    <Text fontWeight={"bold"}>
-                      What will students be able to do at the end of this
-                      section?
-                    </Text>
+        {showSection && (
+          <Formik
+            initialValues={initialValues}
+            validationSchema={courseModelSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ handleChange, handleSubmit, values, errors }) => (
+              <Stack
+                bg={"#FFFFFF"}
+                borderWidth={1}
+                // mt={6}
+                p={3}
+                borderColor={"gray"}
+              >
+                <Flex align={"center"} rowGap={2}>
+                  <Text fontWeight={"bold"} fontSize={16} pr={4}>
+                    New Section:
+                  </Text>
+                  <Stack maxW="89%" w="100%">
                     <Input
                       variant="outline"
                       w="100%"
                       borderColor={"black"}
                       borderRadius={"0px"}
-                      placeholder="Enter a a learning objectives"
+                      placeholder="Enter a title"
                       _focus={{ borderColor: "black" }}
+                      name="title"
+                      value={values.title}
                       focusBorderColor="black"
-                      name="learningObjective"
-                      value={values.learningObjective}
                       onChange={handleChange}
                     />
-                    {errors.learningObjective && (
+                    {errors?.title && (
                       <Text
                         style={{ color: "red", marginTop: 0 }}
                         fontSize="14px"
                       >
-                        pls add learning objectives
+                        Pls add title
                       </Text>
                     )}
                   </Stack>
-                  <Flex justify={"end"} mt={2} align={"center"} columnGap={5}>
+                </Flex>
+                <Stack ml={"5.5rem"}>
+                  <Text fontWeight={"bold"}>
+                    What will students be able to do at the end of this section?
+                  </Text>
+                  <Input
+                    variant="outline"
+                    w="100%"
+                    borderColor={"black"}
+                    borderRadius={"0px"}
+                    placeholder="Enter a a learning objectives"
+                    _focus={{ borderColor: "black" }}
+                    focusBorderColor="black"
+                    name="learningObjective"
+                    value={values.learningObjective}
+                    onChange={handleChange}
+                  />
+                  {errors.learningObjective && (
                     <Text
-                      fontWeight={"bold"}
-                      as={"button"}
-                      onClick={() => setShowSection(false)}
+                      style={{ color: "red", marginTop: 0 }}
+                      fontSize="14px"
                     >
-                      Cancel
+                      pls add learning objectives
                     </Text>
-                    <Button
-                      color="#ffffff"
-                      fontWeight={"500"}
-                      fontSize={14}
-                      as={"button"}
-                      py={2}
-                      px={4}
-                      isLoading={isPending}
-                      loadingText="Loading"
-                      variant="outline"
-                      spinnerPlacement="end"
-                      onClick={() => handleSubmit()}
-                      type="button"
-                      backgroundColor={"black"}
-                    >
-                      Save Section
-                    </Button>
-                  </Flex>
+                  )}
                 </Stack>
-              )}
-            </Formik>
-          )}
+                <Flex justify={"end"} mt={2} align={"center"} columnGap={5}>
+                  <Text
+                    fontWeight={"bold"}
+                    as={"button"}
+                    onClick={() => setShowSection(false)}
+                  >
+                    Cancel
+                  </Text>
+                  <Button
+                    color="#ffffff"
+                    fontWeight={"500"}
+                    fontSize={14}
+                    as={"button"}
+                    py={2}
+                    px={4}
+                    isLoading={moduleLoading}
+                    loadingText="Loading"
+                    variant="outline"
+                    spinnerPlacement="end"
+                    onClick={() => handleSubmit()}
+                    type="button"
+                    backgroundColor={"black"}
+                  >
+                    Save Section
+                  </Button>
+                </Flex>
+              </Stack>
+            )}
+          </Formik>
+        )}
       </Stack>
       <Stack p={5}>
         <Stack
@@ -232,8 +236,6 @@ const Curriculum = () => {
               </Flex>
             </Flex>
           )}
-
-          
         </Stack>
       </Stack>
       <AlertDialog
