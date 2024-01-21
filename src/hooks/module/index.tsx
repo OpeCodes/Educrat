@@ -7,6 +7,7 @@ import {
   addCourseModuleStorage,
   removeCourseModuleromLocalStorage,
 } from "../../store/localStorage";
+import { useState } from "react";
 
 export const useModuleCreateCourse = () => {
   const toast = useToast();
@@ -107,11 +108,20 @@ export const useDeleteModalCourse = () => {
         isClosable: true,
       });
     },
+    
   });
   return { deleteModule, isPending };
 };
 
 export const useGetModuleCourse = (id: any) => {
+  const [isOpenState, setIsOpenState] = useState<{ [key: number]: boolean }>({});
+
+  const toggleIsOpen = (arrayId: number) => {
+    setIsOpenState((prevIsOpenState) => ({
+      ...prevIsOpenState,
+      [arrayId]: !prevIsOpenState[arrayId],
+    }));
+  };
   const { data, isLoading } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
@@ -121,5 +131,5 @@ export const useGetModuleCourse = (id: any) => {
     },
   });
 
-  return { data, isLoading };
+  return { data, isLoading , isOpenState, toggleIsOpen};
 };
