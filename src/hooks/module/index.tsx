@@ -19,8 +19,6 @@ export const useModuleEditCourse = () => {
         return customFetch.put(`/module/${courseId}`, user);
       },
       onSuccess: (user) => {
-        console.log(user.data)
-        // console.log("here")
          dispatch(setCourseModule(user.data));
         addCourseModuleStorage(user.data);
   

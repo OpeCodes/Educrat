@@ -40,7 +40,6 @@ const CourseLandingPage = () => {
 
   const { data, isPending } = useCourseCategory();
   const handleImageUpload = (file: File) => {
-    console.log("Uploaded file:", file);
   };
   const { singleCourse, isPending: isLoading } = useSingleCourse();
   

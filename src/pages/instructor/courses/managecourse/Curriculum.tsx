@@ -40,7 +40,6 @@ const Curriculum = () => {
     learningObjective: courseModule?.learningObjective || "",
   };
  
-  console.log(courseModule)
 
   const handleSubmit = (values: any): void => {
     moduleEditCourse({ courseId: courseModule.id, user: values });
