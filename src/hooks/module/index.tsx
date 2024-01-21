@@ -49,6 +49,7 @@ export const useModuleCreateCourse = () => {
 export const useModuleEditCourse = () => {
   const toast = useToast();
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   const {
     mutate: moduleEditCourse,
@@ -56,10 +57,12 @@ export const useModuleEditCourse = () => {
     error,
     isError,
   } = useMutation({
-    mutationFn: ({ courseId, user }: any) => {
-      return customFetch.put(`/module/${courseId}`, user);
+    mutationFn: ({ moduleId, user }: any) => {
+      return customFetch.put(`/module/${moduleId}`, user);
     },
     onSuccess: (user) => {
+      queryClient.invalidateQueries({ queryKey: ["module"] });
+
       dispatch(setCourseModule(user.data));
       addCourseModuleStorage(user.data);
 
@@ -108,13 +111,14 @@ export const useDeleteModalCourse = () => {
         isClosable: true,
       });
     },
-    
   });
   return { deleteModule, isPending };
 };
 
 export const useGetModuleCourse = (id: any) => {
-  const [isOpenState, setIsOpenState] = useState<{ [key: number]: boolean }>({});
+  const [isOpenState, setIsOpenState] = useState<{ [key: number]: boolean }>(
+    {}
+  );
 
   const toggleIsOpen = (arrayId: number) => {
     setIsOpenState((prevIsOpenState) => ({
@@ -131,5 +135,5 @@ export const useGetModuleCourse = (id: any) => {
     },
   });
 
-  return { data, isLoading , isOpenState, toggleIsOpen};
+  return { data, isLoading, isOpenState, toggleIsOpen };
 };

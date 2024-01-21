@@ -13,7 +13,6 @@ import {
   AlertDialogOverlay,
   AlertDialogCloseButton,
   Button,
-  Box,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { GoBookmark } from "react-icons/go";
@@ -28,7 +27,7 @@ import {
   useDeleteModalCourse,
   useModuleCreateCourse,
   useGetModuleCourse,
-  // useModuleEditCourse,
+  useModuleEditCourse,
 } from "../../../../hooks/module";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
@@ -39,10 +38,11 @@ const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
   const [showSection, setShowSection] = useState<boolean>(false);
-
-  // const { moduleEditCourse, isPending } = useModuleEditCourse();
+  const {  course } = useSelector(
+    (store: RootState) => store.user
+  );
+  const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule } = useDeleteModalCourse();
-  const { course } = useSelector((store: RootState) => store.user);
   const initialValues1 = {
     title: "",
     learningObjective: "",
@@ -56,19 +56,13 @@ const Curriculum = () => {
 
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: course._id, user: values });
-    // moduleEdi  tCourse({ courseId: courseModule.id, user: values });
     setTimeout(() => {
       setShowSection(false);
     }, 2000);
   };
-  const handleEditSubmit = (values: any): void => {
-    console.log(values);
-    // moduleCreateCourse({ courseId: course._id, user: values });
-    // moduleEdi  tCourse({ courseId: courseModule.id, user: values });
-  };
+  
   const { data, isOpenState, toggleIsOpen } = useGetModuleCourse(course._id);
-  console.log(isOpenState);
-
+  
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -123,7 +117,13 @@ const Curriculum = () => {
                   <Formik
                     initialValues={initialValues2}
                     validationSchema={courseEditModuleSchema}
-                    onSubmit={handleEditSubmit}
+                    onSubmit={(values: any) => {
+                      moduleEditCourse({ moduleId: id, user: values });
+                      setTimeout(() => {
+                      toggleIsOpen(id)
+                        
+                      }, 2000);
+                    }}
                   >
                     {({
                       handleChange,
@@ -134,7 +134,6 @@ const Curriculum = () => {
                       <Stack
                         bg={"#FFFFFF"}
                         borderWidth={1}
-                        // mt={6}
                         p={3}
                         borderColor={"gray"}
                       >
@@ -200,7 +199,7 @@ const Curriculum = () => {
                           <Text
                             fontWeight={"bold"}
                             as={"button"}
-                            onClick={() => setShowSection(false)}
+                            onClick={() => toggleIsOpen(id)}
                           >
                             Cancel
                           </Text>
@@ -211,7 +210,7 @@ const Curriculum = () => {
                             as={"button"}
                             py={2}
                             px={4}
-                            isLoading={moduleLoading}
+                            isLoading={editLoading}
                             loadingText="Loading"
                             variant="outline"
                             spinnerPlacement="end"
@@ -247,7 +246,6 @@ const Curriculum = () => {
                 </AlertDialogBody>
                 <AlertDialogFooter>
                   <Button
-                    //  ref={cancelRef}
                     onClick={onClose}
                   >
                     Cancel
@@ -271,12 +269,7 @@ const Curriculum = () => {
         );
       })}
       <Stack p={5}>
-        <Box
-          bg={"#F7F8FB"}
-          borderWidth={1}
-          borderColor={"gray"}
-          height={"30px"}
-        ></Box>
+       
         {showSection ? (
           <Text onClick={() => setShowSection(!showSection)} cursor={"pointer"}>
             {" "}
@@ -312,7 +305,6 @@ const Curriculum = () => {
               <Stack
                 bg={"#FFFFFF"}
                 borderWidth={1}
-                // mt={6}
                 p={3}
                 borderColor={"gray"}
               >
