@@ -1,19 +1,19 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import { CourseManageNavbar, CourseManageSidebar } from ".";
 import { Flex, Stack } from "@chakra-ui/react";
-import { useGetSingleCourse } from "../hooks/course";
-import { useEffect } from "react";
-import { Error } from "../pages/auth";
+// import { useGetSingleCourse } from "../hooks/course";
+// import { useEffect } from "react";
+// import { Error } from "../pages/auth";
 
 const CourseManageDashboardLayout = () => {
-  const { id } = useParams();
-  const { getSingleCourse, isError } = useGetSingleCourse();
+  // const { id } = useParams();
+  // const { getSingleCourse, isError } = useGetSingleCourse();
   // useEffect(() => {
   //   getSingleCourse({ course: id });
   // }, []);
-  if (isError) {
-    return <Error />;
-  }
+  // if (isError) {
+  //   return <Error />;
+  // }
   return (
     <>
       <CourseManageNavbar />
