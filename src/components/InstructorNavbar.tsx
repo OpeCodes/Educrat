@@ -21,6 +21,8 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { NavItem } from "./NavItem";
 import { FaYoutube } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { Loading } from ".";
+import { Error } from "../pages/auth";
 
 const links = [
   {
@@ -45,9 +47,16 @@ const links = [
   },
 ];
 const InstructorNavbar = () => {
-  const { data } = useGetUser();
+  const { data ,isPending,isError} = useGetUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef: any = React.useRef();
+
+  if(isPending){
+    return <Loading/>
+  }
+  if(isError){
+    return <Error/>
+  }
   return (
     <>
       <Flex

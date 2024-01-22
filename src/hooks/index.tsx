@@ -5,14 +5,14 @@ import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 export const useGetUser = () => {
-  const { data } = useQuery({
+  const { data, isPending,isError } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       const { data } = await customFetch.get("/user");
       return data;
     },
   });
-  return { data };
+  return { data, isPending,isError };
 };
 
 export const useBecomeInstructor = () => {
