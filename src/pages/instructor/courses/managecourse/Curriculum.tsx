@@ -41,7 +41,7 @@ const Curriculum = () => {
   const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule } = useDeleteModalCourse();
-  const [moduleID, setModuleID] = useState("");
+  // const [moduleID, setModuleID] = useState("");
   const initialValues1 = {
     title: "",
     learningObjective: "",
@@ -50,14 +50,16 @@ const Curriculum = () => {
     title: "",
     learningObjective: "",
   };
-  const { moduleCreateCourse, isPending: moduleLoading } =
+  const { moduleCreateCourse, isPending: moduleLoading,} =
     useModuleCreateCourse();
 
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: course._id, user: values });
     setTimeout(() => {
       setShowSection(false);
-    }, 2000);
+    }, 3000);
+      // setShowSection(success);
+
   };
 
   const { data, isOpenState, toggleIsOpen } = useGetModuleCourse(course._id);

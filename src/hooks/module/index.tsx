@@ -13,6 +13,7 @@ export const useModuleCreateCourse = () => {
   const toast = useToast();
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
+  const [success, setSucess] = useState<boolean>(false)
   const {
     mutate: moduleCreateCourse,
     isPending,
@@ -26,7 +27,7 @@ export const useModuleCreateCourse = () => {
       dispatch(setCourseModule(user.data));
       addCourseModuleStorage(user.data);
       queryClient.invalidateQueries({ queryKey: ["module"] });
-
+      setSucess(false)
       toast({
         title: `course created successfully`,
         status: "success",
@@ -43,7 +44,7 @@ export const useModuleCreateCourse = () => {
       });
     },
   });
-  return { moduleCreateCourse, isPending, error, isError };
+  return { moduleCreateCourse, isPending, error, isError,success };
 };
 
 export const useModuleEditCourse = () => {
