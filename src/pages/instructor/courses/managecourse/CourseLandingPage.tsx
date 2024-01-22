@@ -22,26 +22,26 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
-import { RootState } from "../../../../store/store";
-import { useSelector } from "react-redux";
 import { Error } from "../../../auth";
+import { useParams } from "react-router-dom";
 
 const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
-  const { course } = useSelector((store: RootState) => store.user);
+  const {id} = useParams()
+  const {getSingleCourse,isError,isPending: singleCourseLoading} = useGetSingleCourse(id)
+
   const initialValues = {
-    title: course?.title || "",
+    title: getSingleCourse?.title || "",
     subtitle: "",
     language: "",
-    category: course.category || "",
+    category: getSingleCourse.category || "",
     preRequisities: [""],
     complexityLevel: "",
     learningObjectives: ["", "", "", ""],
   };
 
   const { data, isPending } = useCourseCategory();
-  const {getSingleCourse,isError,isPending: singleCourseLoading} = useGetSingleCourse(course?.id)
   console.log(getSingleCourse)
   const handleImageUpload = (file: File) => {
     console.log("Uploaded file:", file);
@@ -54,7 +54,8 @@ const CourseLandingPage = () => {
       setError(true);
       return;
     }
-    singleCourse({ singleId: course.id, user: { ...values, description } });
+  console.log(id)
+    singleCourse({ singleId: getSingleCourse?.id, user: { ...values, description } });
   };
 
   if (isPending && singleCourseLoading) {
