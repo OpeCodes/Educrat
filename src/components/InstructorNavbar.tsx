@@ -21,8 +21,8 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { NavItem } from "./NavItem";
 import { FaYoutube } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { Loading } from ".";
-import { Error } from "../pages/auth";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const links = [
   {
@@ -47,16 +47,11 @@ const links = [
   },
 ];
 const InstructorNavbar = () => {
-  const { data ,isPending,isError} = useGetUser();
+  const { data } = useGetUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef: any = React.useRef();
+  const { user} = useSelector((store: RootState) => store.user);
 
-  if(isPending){
-    return <Loading/>
-  }
-  if(isError){
-    return <Error/>
-  }
   return (
     <>
       <Flex
@@ -83,7 +78,8 @@ const InstructorNavbar = () => {
             <IoMdNotificationsOutline fontSize={20} />
           </Box>
           <Avatar
-            name={`${data?.firstName} ${data?.lastName}`}
+            // name={`${data?.firstName} ${data?.lastName}`}
+            name={`${user.user.firstName} ${user.user.lastName}`}
             size="sm"
             fontWeight="bold"
             bg="white"

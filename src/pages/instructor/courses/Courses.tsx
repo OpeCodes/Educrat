@@ -11,7 +11,10 @@ import {
 
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useGetUser } from "../../../hooks";
 const Courses = () => {
+  
+ 
   return (
     <Stack>
       <Text fontSize={45} fontWeight={"600"}>
