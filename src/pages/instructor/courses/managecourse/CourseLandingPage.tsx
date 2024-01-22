@@ -28,41 +28,47 @@ import { useParams } from "react-router-dom";
 const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
-  const {id} = useParams()
-  const {getSingleCourse,isError,isPending: singleCourseLoading} = useGetSingleCourse(id)
+  const { id } = useParams();
+  const {
+    getSingleCourse,
+    isError,
+    isPending: singleCourseLoading,
+  } = useGetSingleCourse(id);
 
+  console.log(getSingleCourse)
   const initialValues = {
     title: getSingleCourse?.title || "",
     subtitle: "",
     language: "",
-    category: getSingleCourse.category || "",
+    category: getSingleCourse?.category?._id || "",
     preRequisities: [""],
     complexityLevel: "",
     learningObjectives: ["", "", "", ""],
   };
 
   const { data, isPending } = useCourseCategory();
-  console.log(getSingleCourse)
+  console.log(getSingleCourse);
   const handleImageUpload = (file: File) => {
     console.log("Uploaded file:", file);
   };
   const { singleCourse, isPending: isLoading } = useSingleCourse();
-  
 
   const handleSubmit = (values: any): void => {
     if (!description) {
       setError(true);
       return;
     }
-  console.log(id)
-    singleCourse({ singleId: getSingleCourse?.id, user: { ...values, description } });
+    singleCourse({
+      singleId: getSingleCourse?.id,
+      user: { ...values, description },
+    });
   };
 
   if (isPending && singleCourseLoading) {
     return <Loading />;
   }
-  if(isError){
-    return <Error/>
+  if (isError) {
+    return <Error />;
   }
   return (
     <Stack>
