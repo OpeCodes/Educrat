@@ -20,28 +20,33 @@ import {
 } from "../../../../hooks/course";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 
-const CourseLandingPage = () => {
+const CourseLandingPage = ({match}: any) => {
   const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
   const { id } = useParams();
+  
   const {
     getSingleCourse,
     isError,
+    refetch,
     isPending: singleCourseLoading,
   } = useGetSingleCourse(id);
-console.log(getSingleCourse?.title)
+  useEffect(() => {
+    refetch()
+  }, [refetch])
+console.log(getSingleCourse)
 const { course} = useSelector((store: RootState) => store.user);
 
   const initialValues = {
-    title: course?.title|| "" ,
-    subtitle: "",
+    title:getSingleCourse?.title|| "" ,
+    subtitle:getSingleCourse?.subtitle || "",
     language: "",
     category: course?.category || "",
     preRequisities: [""],
@@ -126,9 +131,12 @@ const { course} = useSelector((store: RootState) => store.user);
                   name="subtitle"
                   onChange={handleChange}
                 />
-                {errors.subtitle && (
+                {errors?.subtitle && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.subtitle}
+                    {/* {errors?.subtitle}
+
+                     */}
+                     enter subtitle brother
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>

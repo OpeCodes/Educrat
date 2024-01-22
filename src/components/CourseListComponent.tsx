@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { useGetAllUserCourse } from "../hooks/course";
 import { Error } from "../pages/auth";
-import dummyImg from "../assets/CourseImagePlaceholder.jpg"
-
+import dummyImg from "../assets/CourseImagePlaceholder.jpg";
+import { useNavigate } from "react-router-dom";
 const CourseListComponent = () => {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
@@ -24,7 +24,7 @@ const CourseListComponent = () => {
     setHoveredItem(null);
   };
   const { data, isError, isPending } = useGetAllUserCourse();
-
+  const navigate = useNavigate();
   if (isPending) {
     return (
       <Stack>
@@ -38,6 +38,7 @@ const CourseListComponent = () => {
   if (isError) {
     return <Error />;
   }
+  console.log(data)
   return (
     // <VStack align="start" spacing={4}>
     //   {items.map((item) => (
@@ -105,7 +106,14 @@ const CourseListComponent = () => {
             </Flex>
           </Flex>
           {hoveredItem === item.id && (
-            <Box width={"100%"} backgroundColor={"black"} h="100%">
+            <Box
+              width={"100%"}
+              backgroundColor={"black"}
+              h="100%"
+              onClick={() =>
+                navigate(`/instructor/courses/${item?.id}/manage/basics`)
+              }
+            >
               <Text
                 size="sm"
                 width="100%"

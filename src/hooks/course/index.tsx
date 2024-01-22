@@ -91,6 +91,7 @@ export const useGetSingleCourse = (id: any) => {
     data: getSingleCourse,
     isPending,
     isError,
+    refetch
   } = useQuery({
     queryKey: ["singleCourse", id],
     queryFn: async ({ queryKey }) => {
@@ -100,7 +101,7 @@ export const useGetSingleCourse = (id: any) => {
     },
   });
 
-  return { getSingleCourse, isPending, isError };
+  return { getSingleCourse, isPending, isError, refetch };
 };
 
 export const useGetCourse = () => {
