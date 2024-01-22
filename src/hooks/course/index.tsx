@@ -29,6 +29,8 @@ export const useCreateCourse = () => {
       dispatch(setCourse(user.data));
       addCourseLocalStorage(user.data);
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
+      queryClient.invalidateQueries({ queryKey: ["allUserCourse"] });
+      
       toast({
         title: `course create successfully`,
         status: "success",
@@ -110,4 +112,15 @@ export const useGetCourse = () => {
     },
   });
   return { data };
+};
+
+export const useGetAllUserCourse = () => {
+  const { data, isError,isPending } = useQuery({
+    queryKey: ["allUserCourse"],
+    queryFn: async () => {
+      const { data } = await customFetch.get("/course/user");
+      return data;
+    },
+  });
+  return { data , isPending,isError};
 };

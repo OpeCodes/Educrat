@@ -40,10 +40,10 @@ console.log(getSingleCourse?.title)
 const { course} = useSelector((store: RootState) => store.user);
 
   const initialValues = {
-    title: course?.title ,
+    title: course?.title|| "" ,
     subtitle: "",
     language: "",
-    category: course?.category ,
+    category: course?.category || "",
     preRequisities: [""],
     complexityLevel: "",
     learningObjectives: ["", "", "", ""],
