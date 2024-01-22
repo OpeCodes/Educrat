@@ -27,7 +27,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 
-const CourseLandingPage = ({match}: any) => {
+const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
   const { id } = useParams();
