@@ -27,6 +27,7 @@ const Courses = () => {
         align={"center"}
         flexWrap={"wrap"}
         rowGap={0}
+        mb={4}
       >
         <Flex columnGap={7} flexWrap={"wrap"} rowGap={5}>
           <Stack width={{ base: "100%", md: "55%" }}>

@@ -7,11 +7,11 @@ import {
   Stack,
   Text,
   Progress,
-  Skeleton
+  Skeleton,
 } from "@chakra-ui/react";
 import { useGetAllUserCourse } from "../hooks/course";
 import { Error } from "../pages/auth";
-
+import dummyImg from "../assets/CourseImagePlaceholder.jpg"
 
 const CourseListComponent = () => {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
@@ -23,19 +23,20 @@ const CourseListComponent = () => {
   const handleMouseLeave = () => {
     setHoveredItem(null);
   };
-  const {data,isError,isPending} = useGetAllUserCourse()
+  const { data, isError, isPending } = useGetAllUserCourse();
 
-  console.log(data)
-  if(isPending){
-    return <Stack>
-    <Skeleton height='130px'  mb={3} />
-    <Skeleton height='130px'  mb={3} />
-    <Skeleton height='130px'  mb={3} />
-    <Skeleton height='130px'   mb={3}/>
-  </Stack>
+  if (isPending) {
+    return (
+      <Stack>
+        <Skeleton height="130px" mb={3} />
+        <Skeleton height="130px" mb={3} />
+        <Skeleton height="130px" mb={3} />
+        <Skeleton height="130px" mb={3} />
+      </Stack>
+    );
   }
-  if(isError){
-    return <Error/>
+  if (isError) {
+    return <Error />;
   }
   return (
     // <VStack align="start" spacing={4}>
@@ -72,11 +73,11 @@ const CourseListComponent = () => {
           >
             <Flex columnGap={4} w={{ base: "100%", md: "40%" }}>
               <Image
-                // src="https://bit.ly/dan-abramov"
-                src={item?.thumbnail ||" https://bit.ly/dan-abramov" }
-                alt="image here"
+                src={item?.thumbnail || `${dummyImg}`}
+                alt="course image here"
                 w="120px"
                 h="full"
+                objectFit={"cover"}
               />
               <Flex
                 flexDirection={"column"}
@@ -99,9 +100,7 @@ const CourseListComponent = () => {
             >
               <Text fontWeight={"bold"}>Finish your course</Text>
               <Box maxWidth={"75%"} w="100%">
-                <Progress value={20} 
-                size="sm"
-                 />
+                <Progress value={20} size="sm" />
               </Box>
             </Flex>
           </Flex>
