@@ -40,7 +40,7 @@ const Curriculum = () => {
   const [showSection, setShowSection] = useState<boolean>(false);
   const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
-  const { deleteModule } = useDeleteModalCourse();
+  const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
   // const [moduleID, setModuleID] = useState("");
   const initialValues1 = {
     title: "",
@@ -50,7 +50,7 @@ const Curriculum = () => {
     title: "",
     learningObjective: "",
   };
-  const { moduleCreateCourse, isPending: moduleLoading,} =
+  const { moduleCreateCourse, isPending: moduleLoading } =
     useModuleCreateCourse();
 
   const handleSubmit = (values: any): void => {
@@ -58,8 +58,7 @@ const Curriculum = () => {
     setTimeout(() => {
       setShowSection(false);
     }, 3000);
-      // setShowSection(success);
-
+    // setShowSection(success);
   };
 
   const { data, isOpenState, toggleIsOpen } = useGetModuleCourse(course._id);
@@ -262,10 +261,16 @@ const Curriculum = () => {
                     bg="black"
                     color="white"
                     ml={3}
+                    isLoading={deleteLoading}
+                    loadingText="Loading"
+                    variant="outline"
+                    spinnerPlacement="end"
                     _hover={{ backgroundColor: "none", color: "none" }}
                     onClick={() => {
                       deleteModule({ moduleId: id });
-                      onClose();
+                      setTimeout(() => {
+                        onClose();
+                      }, 1500);
                     }}
                   >
                     OK
