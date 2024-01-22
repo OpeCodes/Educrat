@@ -15,6 +15,7 @@ import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
 import {
   useCourseCategory,
+  useGetSingleCourse,
   useSingleCourse,
 } from "../../../../hooks/course";
 import ReactQuill from "react-quill";
@@ -23,12 +24,12 @@ import { useState } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { RootState } from "../../../../store/store";
 import { useSelector } from "react-redux";
+import { Error } from "../../../auth";
 
 const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
   const { course } = useSelector((store: RootState) => store.user);
-  console.log(course)
   const initialValues = {
     title: course?.title || "",
     subtitle: "",
@@ -40,6 +41,8 @@ const CourseLandingPage = () => {
   };
 
   const { data, isPending } = useCourseCategory();
+  const {getSingleCourse,isError,isPending: singleCourseLoading} = useGetSingleCourse(course?.id)
+  console.log(getSingleCourse)
   const handleImageUpload = (file: File) => {
     console.log("Uploaded file:", file);
   };
@@ -54,10 +57,12 @@ const CourseLandingPage = () => {
     singleCourse({ singleId: course.id, user: { ...values, description } });
   };
 
-  if (isPending) {
+  if (isPending && singleCourseLoading) {
     return <Loading />;
   }
-
+  if(isError){
+    return <Error/>
+  }
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>

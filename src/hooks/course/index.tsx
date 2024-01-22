@@ -80,19 +80,6 @@ export const useSingleCourse = () => {
   });
   return { singleCourse, isPending, error, isError };
 };
-export const useGetSingleCourse1 = () => {
-  const {
-    mutate: getSingleCourse,
-    isPending,
-    error,
-    isError,
-  } = useMutation({
-    mutationFn: ({ course }: any) => {
-      return customFetch.get(`course/${course}`);
-    },
-  });
-  return { getSingleCourse, isPending, error, isError };
-};
 
 export const useGetSingleCourse = (id: any) => {
   const {
