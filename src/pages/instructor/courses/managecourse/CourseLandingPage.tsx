@@ -24,6 +24,8 @@ import { useState } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
 
 const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
@@ -34,12 +36,14 @@ const CourseLandingPage = () => {
     isError,
     isPending: singleCourseLoading,
   } = useGetSingleCourse(id);
+console.log(getSingleCourse?.title)
+const { course} = useSelector((store: RootState) => store.user);
 
   const initialValues = {
-    title: getSingleCourse?.title || "",
+    title: course?.title ,
     subtitle: "",
     language: "",
-    category: getSingleCourse?.category?._id || "",
+    category: course?.category ,
     preRequisities: [""],
     complexityLevel: "",
     learningObjectives: ["", "", "", ""],
@@ -62,7 +66,7 @@ const CourseLandingPage = () => {
     });
   };
 
-  if (isPending && singleCourseLoading) {
+  if ( singleCourseLoading && isPending ) {
     return <Loading />;
   }
   if (isError) {

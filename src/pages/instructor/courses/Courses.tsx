@@ -11,18 +11,20 @@ import {
 
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useGetUser } from "../../../hooks";
 const Courses = () => {
-  
- 
   return (
     <Stack>
       <Text fontSize={45} fontWeight={"600"}>
         Courses
       </Text>
-      <Flex justify={"space-between"} align={"center"} flexWrap={"wrap"} rowGap={0}>
+      <Flex
+        justify={"space-between"}
+        align={"center"}
+        flexWrap={"wrap"}
+        rowGap={0}
+      >
         <Flex columnGap={7} flexWrap={"wrap"} rowGap={5}>
-          <Stack width={{base: "100%", md: "55%"}}>
+          <Stack width={{ base: "100%", md: "55%" }}>
             <InputGroup>
               <Input placeholder="Enter search for courses" variant="filled" />
               <InputRightElement>
@@ -30,7 +32,11 @@ const Courses = () => {
               </InputRightElement>
             </InputGroup>
           </Stack>
-          <Select placeholder="Select option" variant={"filled"} width={{base: "100%", md: "35%"}}>
+          <Select
+            placeholder="Select option"
+            variant={"filled"}
+            width={{ base: "100%", md: "35%" }}
+          >
             <option value="option1">Newest</option>
             <option value="option2">Oldest</option>
             <option value="option3">Option 3</option>
@@ -42,7 +48,7 @@ const Courses = () => {
           variant="outline"
           spinnerPlacement="end"
           // mt={3}
-          mt={{base: 3, lg: 0}}
+          mt={{ base: 3, lg: 0 }}
           borderWidth={2}
           py={2}
           borderColor={"#00FF84"}
@@ -54,7 +60,6 @@ const Courses = () => {
           New Course
         </Button>
       </Flex>
-
 
       <Text>list of finished and unfinshed coures here</Text>
     </Stack>

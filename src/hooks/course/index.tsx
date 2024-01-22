@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
@@ -20,6 +20,7 @@ export const useCreateCourse = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);
@@ -27,6 +28,7 @@ export const useCreateCourse = () => {
     onSuccess: (user: any) => {
       dispatch(setCourse(user.data));
       addCourseLocalStorage(user.data);
+      queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
       toast({
         title: `course create successfully`,
         status: "success",
@@ -52,6 +54,7 @@ export const useCreateCourse = () => {
 
 export const useSingleCourse = () => {
   const toast = useToast();
+  
   const {
     mutate: singleCourse,
     isPending,
@@ -87,7 +90,7 @@ export const useGetSingleCourse = (id: any) => {
     isPending,
     isError,
   } = useQuery({
-    queryKey: ["sinlgCourse", id],
+    queryKey: ["singleCourse", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
       const { data } = await customFetch.get(`/course/${id}`);
