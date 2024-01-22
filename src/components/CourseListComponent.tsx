@@ -7,9 +7,9 @@ import {
   Stack,
   Text,
   Progress,
+  Skeleton
 } from "@chakra-ui/react";
 import { useGetAllUserCourse } from "../hooks/course";
-import { Loading } from ".";
 import { Error } from "../pages/auth";
 
 
@@ -27,7 +27,12 @@ const CourseListComponent = () => {
 
   console.log(data)
   if(isPending){
-    return <Loading/>
+    return <Stack>
+    <Skeleton height='130px'  mb={3} />
+    <Skeleton height='130px'  mb={3} />
+    <Skeleton height='130px'  mb={3} />
+    <Skeleton height='130px'   mb={3}/>
+  </Stack>
   }
   if(isError){
     return <Error/>
