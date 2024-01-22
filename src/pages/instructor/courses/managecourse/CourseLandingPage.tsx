@@ -35,7 +35,6 @@ const CourseLandingPage = () => {
     isPending: singleCourseLoading,
   } = useGetSingleCourse(id);
 
-  console.log(getSingleCourse)
   const initialValues = {
     title: getSingleCourse?.title || "",
     subtitle: "",
@@ -47,7 +46,6 @@ const CourseLandingPage = () => {
   };
 
   const { data, isPending } = useCourseCategory();
-  console.log(getSingleCourse);
   const handleImageUpload = (file: File) => {
     console.log("Uploaded file:", file);
   };
