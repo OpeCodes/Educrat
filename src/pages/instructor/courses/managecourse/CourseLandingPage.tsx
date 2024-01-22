@@ -28,6 +28,7 @@ const CourseLandingPage = () => {
   const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
   const { course } = useSelector((store: RootState) => store.user);
+  console.log(course)
   const initialValues = {
     title: course?.title || "",
     subtitle: "",
