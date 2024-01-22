@@ -7,29 +7,11 @@ import {
   Stack,
   Text,
   Progress,
-  Button,
 } from "@chakra-ui/react";
-import { FaCircleExclamation } from "react-icons/fa6";
+import { useGetAllUserCourse } from "../hooks/course";
+import { Loading } from ".";
+import { Error } from "../pages/auth";
 
-// interface ListItem {
-//   id?:number;
-//   content? : string;
-// }
-
-// interface ListWithButtonsProps {
-//   items: ListItem[];
-// }
-
-const items = [
-  {
-    id: 1,
-    content: "adedokunpeter",
-  },
-  {
-    id: 2,
-    content: "adedokunpetr",
-  },
-];
 
 const CourseListComponent = () => {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
@@ -41,7 +23,15 @@ const CourseListComponent = () => {
   const handleMouseLeave = () => {
     setHoveredItem(null);
   };
+  const {data,isError,isPending} = useGetAllUserCourse()
 
+  console.log(data)
+  if(isPending){
+    return <Loading/>
+  }
+  if(isError){
+    return <Error/>
+  }
   return (
     // <VStack align="start" spacing={4}>
     //   {items.map((item) => (
@@ -61,14 +51,14 @@ const CourseListComponent = () => {
     //   ))}
     // </VStack>
     <>
-      {items.map((item) => (
+      {data?.map((item: any) => (
         <Stack
           position={"relative"}
-          onMouseEnter={() => handleMouseEnter(item.id)}
+          onMouseEnter={() => handleMouseEnter(item._id)}
           onMouseLeave={handleMouseLeave}
         >
           <Flex
-            borderColor="gray"
+            borderColor="#d1d7dc"
             borderWidth="1px"
             justify={"space-between"}
             columnGap={5}
@@ -77,8 +67,9 @@ const CourseListComponent = () => {
           >
             <Flex columnGap={4} w={{ base: "100%", md: "40%" }}>
               <Image
-                src="https://bit.ly/dan-abramov"
-                alt="Dan Abramov"
+                // src="https://bit.ly/dan-abramov"
+                src={item?.thumbnail ||" https://bit.ly/dan-abramov" }
+                alt="image here"
                 w="120px"
                 h="full"
               />
@@ -88,7 +79,7 @@ const CourseListComponent = () => {
                 my={2}
                 width="70%"
               >
-                <Text fontWeight={"bold"}>Learn figma from peterdd</Text>
+                <Text fontWeight={"bold"}>{item.title}</Text>
                 <Text fontWeight={"700"}>DRAFT</Text>
               </Flex>
             </Flex>
@@ -103,16 +94,16 @@ const CourseListComponent = () => {
             >
               <Text fontWeight={"bold"}>Finish your course</Text>
               <Box maxWidth={"75%"} w="100%">
-                <Progress value={20} />
+                <Progress value={20} 
+                size="sm"
+                 />
               </Box>
             </Flex>
           </Flex>
           {hoveredItem === item.id && (
-            <Box width={"100%"} backgroundColor={"black"}>
+            <Box width={"100%"} backgroundColor={"black"} h="100%">
               <Text
                 size="sm"
-                // opacity={0.3}
-                // background
                 width="100%"
                 h="100%"
                 position="absolute"
@@ -120,11 +111,12 @@ const CourseListComponent = () => {
                 right={0}
                 zIndex={1}
                 fontSize={"20px"}
-                bg="blue"
+                bg={"#140342"}
                 display="flex"
                 justifyContent={"center"}
                 alignItems={"center"}
                 color={"white"}
+                cursor={"pointer"}
               >
                 Edit/Manage Course
               </Text>
