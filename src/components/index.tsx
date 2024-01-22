@@ -10,6 +10,7 @@ import CourseManageNavbar from "./CourseManageNavbar";
 import CourseManageSidebar from "./CourseManageSidebar";
 import CourseImageFileUpload from "./CourseImageFileUpload"
 import Loading from "./Loading";
+import CourseListComponent from "./CourseListComponent";
 export {
   HomeLayout,
   Navbar,
@@ -22,5 +23,6 @@ export {
   CourseManageNavbar,
   CourseManageSidebar,
   CourseImageFileUpload,
-  Loading
+  Loading,
+  CourseListComponent
 };

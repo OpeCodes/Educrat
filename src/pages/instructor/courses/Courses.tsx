@@ -11,7 +11,14 @@ import {
 
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useGetAllUserCourse } from "../../../hooks/course";
+import { CourseListComponent } from "../../../components";
 const Courses = () => {
+  const {data,isError,isPending} = useGetAllUserCourse()
+  console.log(data)
+
+
+  
   return (
     <Stack>
       <Text fontSize={45} fontWeight={"600"}>
@@ -60,8 +67,10 @@ const Courses = () => {
           New Course
         </Button>
       </Flex>
+      <Stack>
+        <CourseListComponent/>
 
-      <Text>list of finished and unfinshed coures here</Text>
+      </Stack>
     </Stack>
   );
 };
