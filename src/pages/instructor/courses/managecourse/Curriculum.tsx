@@ -36,6 +36,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
+import { RiCheckboxCircleFill } from "react-icons/ri";
 
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -266,6 +267,29 @@ const Curriculum = () => {
 
                 {/* new curriculum */}
                 <Stack p={5}>
+                  {/* list of lecture starts here */}
+                  <Stack
+                    bg={"white"}
+                    borderWidth={1}
+                    borderColor={"gray"}
+                    p={3}
+                    // pb={8}
+                  >
+                    <Flex align={"center"} justify={"space-between"}>
+                      <Flex align={"center"} columnGap={3}>
+                        <Flex align={"center"} columnGap={1}>
+                          <RiCheckboxCircleFill />
+
+                          <Text fontWeight={"500"}>Lecture 1:</Text>
+                        </Flex>
+                        <Flex align={"center"}>
+                          <Text>lecture one</Text>
+                        </Flex>
+                      </Flex>
+
+                      <Flex>contnet</Flex>
+                    </Flex>
+                  </Stack>
                   {isOpenCurriculumState[id] ? (
                     <Text
                       onClick={() => toggleIsCurriculumOpen(id)}
@@ -304,8 +328,7 @@ const Curriculum = () => {
                           user: values,
                         });
                         setTimeout(() => {
-                        toggleIsCurriculumOpen(id)
-                          
+                          toggleIsCurriculumOpen(id);
                         }, 2000);
                       }}
                     >
