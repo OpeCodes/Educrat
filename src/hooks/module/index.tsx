@@ -130,7 +130,7 @@ export const useGetModuleCourse = (id: any) => {
       [arrayId]: !prevIsOpenState[arrayId],
     }));
   };
-  const { data, isLoading,isSuccess, } = useQuery({
+  const { data, isPending,isSuccess, } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
@@ -140,5 +140,5 @@ export const useGetModuleCourse = (id: any) => {
     
   });
 
-  return { data, isLoading, isOpenState, toggleIsOpen , isSuccess};
+  return { data, isPending, isOpenState, toggleIsOpen , isSuccess};
 };

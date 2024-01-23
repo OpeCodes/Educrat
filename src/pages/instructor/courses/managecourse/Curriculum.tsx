@@ -13,6 +13,7 @@ import {
   AlertDialogOverlay,
   AlertDialogCloseButton,
   Button,
+  Skeleton,
 } from "@chakra-ui/react";
 import React from "react";
 import { GoBookmark } from "react-icons/go";
@@ -63,7 +64,8 @@ const Curriculum = () => {
     
   };
 
-  const { data, isOpenState, toggleIsOpen } = useGetModuleCourse(course._id);
+  const { data, isPending: getCourseLoading, isOpenState, toggleIsOpen } = useGetModuleCourse(course._id);
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -79,6 +81,14 @@ const Curriculum = () => {
         clearly. If you’re intending to offer your course for free, the total
         length of video content must be less than 2 hours.
       </Text>
+
+      {
+        getCourseLoading && <Stack  px={5} py={2}>
+        <Skeleton height="90px" mb={3} />
+        <Skeleton height="90px" mb={3} />
+        <Skeleton height="90px" mb={3} />
+        <Skeleton height="90px" mb={3} />
+      </Stack>     }
       {data?.map((course: any, index: any) => {
         const { title, id } = course;
         return (
