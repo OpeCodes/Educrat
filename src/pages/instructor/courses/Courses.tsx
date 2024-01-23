@@ -16,6 +16,7 @@ import { CourseListComponent } from "../../../components";
 import { useGetAllUserCourse } from "../../../hooks/course";
 import { Error } from "../../auth";
 import { useFormik } from "formik";
+import React from "react";
 
 const Courses = () => {
   // console.log(data)
@@ -27,6 +28,7 @@ const Courses = () => {
   const formik = useFormik({
     initialValues: {
       search: "",
+      sortBy: "newest"
     },
     onSubmit: (values: any) => {
       // Perform any specific actions on form submission
@@ -38,6 +40,23 @@ const Courses = () => {
         item.title.toLowerCase().includes(formik.values.search.toLowerCase())
       )
     : [];
+
+    const sortedItems = React.useMemo(() => {
+      if (!data) return [];
+      return filteredItems.sort((a: any, b: any) => {
+        if (formik.values.sortBy === 'newest') {
+          return b?.createdAt - a?.createdAt;
+        } else if (formik.values.sortBy === 'oldest') {
+          return a.id - b.id;
+        } else if (formik.values.sortBy === 'A_Z') {
+          return a?.title?.localeCompare(b.title);
+        } else if (formik.values.sortBy === 'Z_A') {
+          return b?.title?.localeCompare(a.title);
+        } else {
+          return 0;
+        }
+      });
+    }, [data, filteredItems, formik.values.sortBy]);
 
   return (
     <Stack>
@@ -72,6 +91,9 @@ const Courses = () => {
               placeholder="Select option"
               variant={"filled"}
               width={{ base: "100%", md: "35%" }}
+              name="sortBy"
+          value={formik.values.sortBy}
+          onChange={formik.handleChange}
             >
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
@@ -107,14 +129,14 @@ const Courses = () => {
         </Stack>
       ) : (
         <>
-          {filteredItems.length > 0 && (
+          {sortedItems.length > 0 && (
             <Stack>
-              {filteredItems.map((item: any) => (
+              {sortedItems?.map((item: any) => (
                 <CourseListComponent key={item.id} {...item} />
               ))}
             </Stack>
           )}
-          {filteredItems.length === 0 && formik.values.search && (
+          {sortedItems.length === 0 && formik.values.search && (
             <Text>No matching items found</Text>
           )}
         </>
