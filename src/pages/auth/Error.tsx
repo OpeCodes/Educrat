@@ -2,7 +2,7 @@ import {Link ,useRouteError} from "react-router-dom"
 const Error = () => {
   const error: any  = useRouteError()
  console.log(error)
-  if (error.status === 404) {
+  if (error?.status === 404) {
     return (
         <div>
           {/* <img src={img} alt="not found" /> */}
