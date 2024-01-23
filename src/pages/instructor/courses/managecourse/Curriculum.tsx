@@ -271,7 +271,7 @@ const Curriculum = () => {
                 {/* new curriculum */}
                 <Stack p={5}>
                   {/* list of lecture starts here */}
-                  <Stack
+                  {!dummy && <Stack
                     bg={"white"}
                     borderWidth={1}
                     borderColor={"gray"}
@@ -299,7 +299,8 @@ const Curriculum = () => {
 
                       <Flex>contnet</Flex>
                     </Flex>
-                  </Stack>
+                  </Stack> }
+                  
                   {/* edit curriculum input field */}
                   {
                     dummy &&  <Formik
@@ -332,8 +333,8 @@ const Curriculum = () => {
                           rowGap={2}
                           flexDirection={{ base: "column", lg: "row" }}
                         >
-                          <Flex columnGap={1} mr={2}>
-                            <Text>
+                          <Flex columnGap={1} mr={2} mt={2}>
+                            <Text mt={1}>
                           <RiCheckboxCircleFill />
                           </Text>
                           <Text fontWeight={"500"}>Lecture 1:</Text>
@@ -371,8 +372,7 @@ const Curriculum = () => {
                           <Text
                             fontWeight={"bold"}
                             as={"button"}
-                            onClick={() => toggleIsCurriculumOpen(id)}
-                          >
+                            onClick={() => setDummy(false) }                         >
                             Cancel
                           </Text>
                           <Button
