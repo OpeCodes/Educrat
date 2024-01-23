@@ -15,7 +15,7 @@ import {
   Button,
   Skeleton,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
@@ -36,22 +36,26 @@ import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
 
 const Curriculum = () => {
+  const [curriculumItem, setCurriculumItem] = useState<boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
+
   const { course } = useSelector((store: RootState) => store.user);
-  const {
-    moduleEditCourse,
-    isPending: editLoading,
-  } = useModuleEditCourse();
+  const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
+  //new section
   const initialValues1 = {
     title: "",
     learningObjective: "",
   };
+  //edit section
   const initialValues2 = {
     title: "",
     learningObjective: "",
   };
+  const initialValues3 ={
+    title: ""
+  }
   const {
     moduleCreateCourse,
     isPending: moduleLoading,
@@ -61,10 +65,16 @@ const Curriculum = () => {
 
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: course._id, user: values });
-    
   };
 
-  const { data, isPending: getCourseLoading, isOpenState, toggleIsOpen } = useGetModuleCourse(course._id);
+  const {
+    data,
+    isPending: getCourseLoading,
+    isOpenState,
+    toggleIsOpen,
+    isOpenCurriculumState,
+    toggleIsCurriculumOpen,
+  } = useGetModuleCourse(course._id);
 
   return (
     <Stack>
@@ -82,13 +92,14 @@ const Curriculum = () => {
         length of video content must be less than 2 hours.
       </Text>
 
-      {
-        getCourseLoading && <Stack  px={5} py={2}>
-        <Skeleton height="90px" mb={3} />
-        <Skeleton height="90px" mb={3} />
-        <Skeleton height="90px" mb={3} />
-        <Skeleton height="90px" mb={3} />
-      </Stack>     }
+      {getCourseLoading && (
+        <Stack px={5} py={2}>
+          <Skeleton height="90px" mb={3} />
+          <Skeleton height="90px" mb={3} />
+          <Skeleton height="90px" mb={3} />
+          <Skeleton height="90px" mb={3} />
+        </Stack>
+      )}
       {data?.map((course: any, index: any) => {
         const { title, id } = course;
         return (
@@ -101,31 +112,30 @@ const Curriculum = () => {
                 p={3}
                 pb={10}
               >
-                {
-                !isOpenState[id] && 
-                
-                <Flex align={"center"}>
-                  <Flex align={"center"} columnGap={2}>
-                    <Text fontWeight={"bold"} fontSize={17}>
-                      Section {index + 1}
-                    </Text>
-                    <Flex align={"center"} mr={3} columnGap={1}>
-                      <Text>
-                        <GoBookmark />
+                {!isOpenState[id] && (
+                  // main section
+                  <Flex align={"center"}>
+                    <Flex align={"center"} columnGap={2}>
+                      <Text fontWeight={"bold"} fontSize={17}>
+                        Section {index + 1}
                       </Text>
-                      <Text fontWeight={"500"}>{title}</Text>
+                      <Flex align={"center"} mr={3} columnGap={1}>
+                        <Text>
+                          <GoBookmark />
+                        </Text>
+                        <Text fontWeight={"500"}>{title}</Text>
+                      </Flex>
+                    </Flex>
+                    <Flex align={"center"} columnGap={4}>
+                      <Text cursor={"pointer"} onClick={() => toggleIsOpen(id)}>
+                        <MdEdit />
+                      </Text>
+                      <Text cursor={"pointer"} onClick={onOpen}>
+                        <MdDelete />
+                      </Text>
                     </Flex>
                   </Flex>
-                  <Flex align={"center"} columnGap={4}>
-                    <Text cursor={"pointer"} onClick={() => toggleIsOpen(id)}>
-                      <MdEdit />
-                    </Text>
-                    <Text cursor={"pointer"} onClick={onOpen}>
-                      <MdDelete />
-                    </Text>
-                  </Flex>
-                </Flex>
-              }
+                )}
                 {/* edit part */}
                 {isOpenState[id] && (
                   <Formik
@@ -250,6 +260,133 @@ const Curriculum = () => {
                     )}
                   </Formik>
                 )}
+
+                {/* new curriculum */}
+                <Stack p={5}>
+                  {isOpenCurriculumState[id] ? (
+                    <Text
+                      onClick={() => toggleIsCurriculumOpen(id)}
+                      cursor={"pointer"}
+                    >
+                      <IoCloseSharp fontSize={"25px"} />
+                    </Text>
+                  ) : (
+                    <Button
+                      borderRadius={0}
+                      bg={"#F7F8FB"}
+                      borderWidth={1}
+                      borderColor={"black"}
+                      color="black"
+                      _hover={{ backgroundColor: "none" }}
+                      height={"30px"}
+                      width="fit-content"
+                      leftIcon={<GoPlus fontSize={"20px"} />}
+                      colorScheme="teal"
+                      variant="outline"
+                      onClick={() => toggleIsCurriculumOpen(id)}
+                    >
+                      New Curriculum
+                    </Button>
+                  )}
+                    {/* new curriculum input section */}
+
+                     {isOpenCurriculumState[id] && (
+                  <Formik
+                    initialValues={initialValues2}
+                    validationSchema={courseEditModuleSchema}
+                    onSubmit={(values: any) => {
+                      moduleEditCourse({ moduleId: id, user: values });
+                      setTimeout(() => {
+                        toggleIsOpen(id);
+                      }, 2000);
+                    }}
+                  >
+                    {({
+                      handleChange,
+                      handleSubmit: handleEditSubmit,
+                      values,
+                      errors,
+                    }) => (
+                      <Stack
+                        bg={"#FFFFFF"}
+                        borderWidth={1}
+                        p={3}
+                        borderColor={"gray"}
+                      >
+                        <Flex
+                          rowGap={2}
+                          flexDirection={{ base: "column", lg: "row" }}
+                        >
+                          <Text
+                            fontWeight={"bold"}
+                            fontSize={16}
+                            mt={1}
+                            width={{ base: "100%", lg: "12%" }}
+                          >
+                            Edit Section:
+                          </Text>
+                          <Stack w={{ base: "100%", lg: "88%" }}>
+                            <Input
+                              variant="outline"
+                              w="100%"
+                              borderColor={"black"}
+                              borderRadius={"0px"}
+                              placeholder="Enter a title"
+                              _focus={{ borderColor: "black" }}
+                              name="title"
+                              value={values.title}
+                              focusBorderColor="black"
+                              onChange={handleChange}
+                            />
+                            {errors?.title && (
+                              <Text
+                                style={{ color: "red", marginTop: 0 }}
+                                fontSize="14px"
+                              >
+                                Pls add title
+                              </Text>
+                            )}
+                          </Stack>
+                        </Flex>
+                       
+                        <Flex
+                          justify={"end"}
+                          mt={2}
+                          align={"center"}
+                          columnGap={5}
+                        >
+                          <Text
+                            fontWeight={"bold"}
+                            as={"button"}
+                            onClick={() => toggleIsOpen(id)}
+                          >
+                            Cancel
+                          </Text>
+                          <Button
+                            color="#ffffff"
+                            fontWeight={"500"}
+                            fontSize={14}
+                            as={"button"}
+                            py={2}
+                            px={4}
+                            isLoading={editLoading}
+                            loadingText="Loading"
+                            variant="outline"
+                            spinnerPlacement="end"
+                            onClick={() => handleEditSubmit()}
+                            type="button"
+                            backgroundColor={"black"}
+                          >
+                            Save Section
+                          </Button>
+                        </Flex>
+                      </Stack>
+                    )}
+                  </Formik>
+                )}
+                </Stack>
+                 
+
               </Stack>
             </Stack>
 

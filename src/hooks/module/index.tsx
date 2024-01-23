@@ -123,11 +123,20 @@ export const useGetModuleCourse = (id: any) => {
   const [isOpenState, setIsOpenState] = useState<{ [key: number]: boolean }>(
     {}
   );
+  const [isOpenCurriculumState, setIsOpenCurriculumState] = useState<{ [key: number]: boolean }>(
+    {}
+  );
 
   const toggleIsOpen = (arrayId: number) => {
     setIsOpenState((prevIsOpenState) => ({
       ...prevIsOpenState,
       [arrayId]: !prevIsOpenState[arrayId],
+    }));
+  };
+  const toggleIsCurriculumOpen = (arrayId: number) => {
+    setIsOpenCurriculumState((prevIsOpenCurriculumState) => ({
+      ...prevIsOpenCurriculumState,
+      [arrayId]: !prevIsOpenCurriculumState[arrayId],
     }));
   };
   const { data, isPending,isSuccess, } = useQuery({
@@ -140,5 +149,5 @@ export const useGetModuleCourse = (id: any) => {
     
   });
 
-  return { data, isPending, isOpenState, toggleIsOpen , isSuccess};
+  return { data, isPending, isOpenState, toggleIsOpen , isSuccess,isOpenCurriculumState, toggleIsCurriculumOpen};
 };
