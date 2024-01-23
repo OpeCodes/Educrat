@@ -28,7 +28,7 @@ const Courses = () => {
   const formik = useFormik({
     initialValues: {
       search: "",
-      sortBy: "newest"
+      sortBy: "newest",
     },
     onSubmit: (values: any) => {
       // Perform any specific actions on form submission
@@ -41,22 +41,24 @@ const Courses = () => {
       )
     : [];
 
-    const sortedItems = React.useMemo(() => {
-      if (!data) return [];
-      return filteredItems.sort((a: any, b: any) => {
-        if (formik.values.sortBy === 'newest') {
-          return b?.createdAt - a?.createdAt;
-        } else if (formik.values.sortBy === 'oldest') {
-          return a.id - b.id;
-        } else if (formik.values.sortBy === 'A_Z') {
-          return a?.title?.localeCompare(b.title);
-        } else if (formik.values.sortBy === 'Z_A') {
-          return b?.title?.localeCompare(a.title);
-        } else {
-          return 0;
-        }
-      });
-    }, [data, filteredItems, formik.values.sortBy]);
+  const sortedItems = React.useMemo(() => {
+    if (!data) return [];
+    return filteredItems.sort((a: any, b: any) => {
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
+      if (formik.values.sortBy === "newest") {
+        return dateB - dateA;
+      } else if (formik.values.sortBy === "oldest") {
+        return dateA - dateB;
+      } else if (formik.values.sortBy === "A_Z") {
+        return a?.title?.localeCompare(b.title);
+      } else if (formik.values.sortBy === "Z_A") {
+        return b?.title?.localeCompare(a.title);
+      } else {
+        return 0;
+      }
+    });
+  }, [data, filteredItems, formik.values.sortBy]);
 
   return (
     <Stack>
@@ -92,8 +94,8 @@ const Courses = () => {
               variant={"filled"}
               width={{ base: "100%", md: "35%" }}
               name="sortBy"
-          value={formik.values.sortBy}
-          onChange={formik.handleChange}
+              value={formik.values.sortBy}
+              onChange={formik.handleChange}
             >
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
