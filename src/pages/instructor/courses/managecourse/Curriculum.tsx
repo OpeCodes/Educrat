@@ -23,6 +23,7 @@ import { Formik } from "formik";
 import {
   courseEditModuleSchema,
   courseModuleSchema,
+  curriculumLectureSchema,
 } from "../../../../schemas";
 import {
   useDeleteModalCourse,
@@ -36,7 +37,6 @@ import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
 
 const Curriculum = () => {
-  const [curriculumItem, setCurriculumItem] = useState<boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
 
@@ -293,17 +293,14 @@ const Curriculum = () => {
                      {isOpenCurriculumState[id] && (
                   <Formik
                     initialValues={initialValues3}
-                    validationSchema={courseEditModuleSchema}
+                    validationSchema={curriculumLectureSchema}
                     onSubmit={(values: any) => {
-                      moduleEditCourse({ moduleId: id, user: values });
-                      setTimeout(() => {
-                        toggleIsOpen(id);
-                      }, 2000);
+                    console.log(values)
                     }}
                   >
                     {({
                       handleChange,
-                      handleSubmit: handleEditSubmit,
+                      handleSubmit: handleCurriculumSubmit,
                       values,
                       errors,
                     }) => (
@@ -322,7 +319,7 @@ const Curriculum = () => {
                             mt={1}
                             width={{ base: "100%", lg: "12%" }}
                           >
-                            New Lecture
+                            New Lecture:
                           </Text>
                           <Stack w={{ base: "100%", lg: "88%" }}>
                             <Input
@@ -372,7 +369,7 @@ const Curriculum = () => {
                             loadingText="Loading"
                             variant="outline"
                             spinnerPlacement="end"
-                            onClick={() => handleEditSubmit()}
+                            onClick={() => handleCurriculumSubmit()}
                             type="button"
                             backgroundColor={"black"}
                           >
