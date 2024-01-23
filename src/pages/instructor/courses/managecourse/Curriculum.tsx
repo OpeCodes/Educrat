@@ -14,7 +14,7 @@ import {
   AlertDialogCloseButton,
   Button,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
@@ -37,7 +37,7 @@ import { IoCloseSharp } from "react-icons/io5";
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
-  const [showSection, setShowSection] = useState<boolean>(false);
+  // const [showSection, setShowSection] = useState<boolean>(false);
   const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
@@ -50,14 +50,14 @@ const Curriculum = () => {
     title: "",
     learningObjective: "",
   };
-  const { moduleCreateCourse, isPending: moduleLoading } =
+  const { moduleCreateCourse, isPending: moduleLoading , setShowSection, showSection} =
     useModuleCreateCourse();
 
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: course._id, user: values });
-    setTimeout(() => {
-      setShowSection(false);
-    }, 3000);
+    // setTimeout(() => {
+      // setShowSection(false);
+    // }, 3000);
     // setShowSection(success);
   };
 
