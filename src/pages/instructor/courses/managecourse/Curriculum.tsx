@@ -22,6 +22,7 @@ import { Formik } from "formik";
 import {
   courseEditModuleSchema,
   courseModuleSchema,
+  curriculumEditLectureSchema,
   curriculumLectureSchema,
 } from "../../../../schemas";
 import {
@@ -39,11 +40,9 @@ import { RiCheckboxCircleFill } from "react-icons/ri";
 import { LuStickyNote } from "react-icons/lu";
 
 const Curriculum = () => {
-  const [dummy, setDummy] = useState(false)
+  const [dummy, setDummy] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
-
-
 
   const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
@@ -61,6 +60,10 @@ const Curriculum = () => {
     learningObjective: "",
   };
   const initialValues3 = {
+    title: "",
+  };
+  //edit lecture
+  const initialValues4 = {
     title: "",
   };
   const {
@@ -271,133 +274,134 @@ const Curriculum = () => {
                 {/* new curriculum */}
                 <Stack p={5}>
                   {/* list of lecture starts here */}
-                  {!dummy && <Stack
-                    bg={"white"}
-                    borderWidth={1}
-                    borderColor={"gray"}
-                    p={3}
-                    // pb={8}
-                  >
-                    <Flex align={"center"} justify={"space-between"}>
-                      <Flex align={"center"} columnGap={3}>
-                        <Flex align={"center"} columnGap={1}>
-                          <RiCheckboxCircleFill />
+                  {!dummy && (
+                    <Stack
+                      bg={"white"}
+                      borderWidth={1}
+                      borderColor={"gray"}
+                      p={3}
+                      // pb={8}
+                    >
+                      <Flex align={"center"} justify={"space-between"}>
+                        <Flex align={"center"} columnGap={3}>
+                          <Flex align={"center"} columnGap={1}>
+                            <RiCheckboxCircleFill />
 
-                          <Text fontWeight={"500"}>Lecture 1:</Text>
+                            <Text fontWeight={"500"}>Lecture 1:</Text>
+                          </Flex>
+                          <Flex align={"center"} columnGap={1}>
+                            <Text>
+                              <LuStickyNote />
+                            </Text>
+                            <Text>lecture one</Text>
+                            <Text
+                              cursor={"pointer"}
+                              onClick={() => setDummy(!dummy)}
+                            >
+                              <MdEdit />
+                            </Text>
+                            <Text cursor={"pointer"} ml={3}>
+                              <MdDelete />
+                            </Text>
+                          </Flex>
                         </Flex>
-                        <Flex align={"center"}columnGap={1}>
-                          <Text><LuStickyNote /></Text>
-                          <Text>lecture one</Text>
-                          <Text cursor={"pointer"} onClick={() => setDummy(!dummy)} >
-                        <MdEdit />
-                      </Text>
-                      <Text cursor={"pointer"} ml={3}>
-                        <MdDelete />
-                      </Text>
-                        </Flex>
+
+                        <Flex>contnet</Flex>
                       </Flex>
+                    </Stack>
+                  )}
 
-                      <Flex>contnet</Flex>
-                    </Flex>
-                  </Stack> }
-                  
-                  {/* edit curriculum input field */}
-                  {
-                    dummy &&  <Formik
-                    initialValues={initialValues3}
-                    validationSchema={curriculumLectureSchema}
-                    onSubmit={(values: any) => {
-                      // console.log(values)
-                      moduleCreateLectureCourse({
-                        moduleId: id,
-                        user: values,
-                      });
-                      setTimeout(() => {
-                        toggleIsCurriculumOpen(id);
-                      }, 2000);
-                    }}
-                  >
-                    {({
-                      handleChange,
-                      handleSubmit: handleCurriculumSubmit,
-                      values,
-                      errors,
-                    }) => (
-                      <Stack
-                        bg={"#FFFFFF"}
-                        borderWidth={1}
-                        p={3}
-                        borderColor={"gray"}
-                      >
-                        <Flex
-                          rowGap={2}
-                          flexDirection={{ base: "column", lg: "row" }}
+                  {/* edit curriculum lecture input field */}
+                  {dummy && (
+                    <Formik
+                      initialValues={initialValues4}
+                      validationSchema={curriculumEditLectureSchema}
+                      onSubmit={(values: any) => {
+                        console.log(values)
+                        
+                      }}
+                    >
+                      {({
+                        handleChange,
+                        handleSubmit: handleCurriculumSubmit,
+                        values,
+                        errors,
+                      }) => (
+                        <Stack
+                          bg={"#FFFFFF"}
+                          borderWidth={1}
+                          p={3}
+                          borderColor={"gray"}
                         >
-                          <Flex columnGap={1} mr={2} mt={2}>
-                            <Text mt={1}>
-                          <RiCheckboxCircleFill />
-                          </Text>
-                          <Text fontWeight={"500"}>Lecture 1:</Text>
-                        </Flex>
-                          <Stack w={{ base: "100%", lg: "88%" }}>
-                            <Input
-                              variant="outline"
-                              w="100%"
-                              borderColor={"black"}
-                              borderRadius={"0px"}
-                              placeholder="Enter a title"
-                              _focus={{ borderColor: "black" }}
-                              name="title"
-                              value={values.title}
-                              focusBorderColor="black"
-                              onChange={handleChange}
-                            />
-                            {errors?.title && (
-                              <Text
-                                style={{ color: "red", marginTop: 0 }}
-                                fontSize="14px"
-                              >
-                                Pls add title
-                              </Text>
-                            )}
-                          </Stack>
-                        </Flex>
-
-                        <Flex
-                          justify={"end"}
-                          mt={2}
-                          align={"center"}
-                          columnGap={5}
-                        >
-                          <Text
-                            fontWeight={"bold"}
-                            as={"button"}
-                            onClick={() => setDummy(false) }                         >
-                            Cancel
-                          </Text>
-                          <Button
-                            color="#ffffff"
-                            fontWeight={"500"}
-                            fontSize={14}
-                            as={"button"}
-                            py={2}
-                            px={4}
-                            isLoading={moduleLectureLoading}
-                            loadingText="Loading"
-                            variant="outline"
-                            spinnerPlacement="end"
-                            onClick={() => handleCurriculumSubmit()}
-                            type="button"
-                            backgroundColor={"black"}
+                          <Flex
+                            rowGap={2}
+                            flexDirection={{ base: "column", lg: "row" }}
                           >
-                            Save Lecture
-                          </Button>
-                        </Flex>
-                      </Stack>
-                    )}
-                  </Formik>
-                  }
-                 
+                            <Flex columnGap={1} mr={2} mt={2}>
+                              <Text mt={1}>
+                                <RiCheckboxCircleFill />
+                              </Text>
+                              <Text fontWeight={"500"}>Lecture 1:</Text>
+                            </Flex>
+                            <Stack w={{ base: "100%", lg: "88%" }}>
+                              <Input
+                                variant="outline"
+                                w="100%"
+                                borderColor={"black"}
+                                borderRadius={"0px"}
+                                placeholder="Enter a title"
+                                _focus={{ borderColor: "black" }}
+                                name="title"
+                                value={values.title}
+                                focusBorderColor="black"
+                                onChange={handleChange}
+                              />
+                              {errors?.title && (
+                                <Text
+                                  style={{ color: "red", marginTop: 0 }}
+                                  fontSize="14px"
+                                >
+                                  Pls add title
+                                </Text>
+                              )}
+                            </Stack>
+                          </Flex>
+                          <Flex
+                            justify={"end"}
+                            mt={2}
+                            align={"center"}
+                            columnGap={5}
+                          >
+                            <Text
+                              fontWeight={"bold"}
+                              as={"button"}
+                              onClick={() => setDummy(false)}
+                            >
+                              Cancel
+                            </Text>
+                            <Button
+                              color="#ffffff"
+                              fontWeight={"500"}
+                              fontSize={14}
+                              as={"button"}
+                              py={2}
+                              px={4}
+                              isLoading={moduleLectureLoading}
+                              loadingText="Loading"
+                              variant="outline"
+                              spinnerPlacement="end"
+                              onClick={() => handleCurriculumSubmit()}
+                              type="button"
+                              backgroundColor={"black"}
+                            >
+                              Save Lecture
+                            </Button>
+                          </Flex>
+                        </Stack>
+                      )}
+                    </Formik>
+                  )}
+
                   {isOpenCurriculumState[id] ? (
                     <Text
                       onClick={() => toggleIsCurriculumOpen(id)}
