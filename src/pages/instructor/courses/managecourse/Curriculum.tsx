@@ -16,7 +16,6 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import React from "react";
-import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -37,6 +36,7 @@ import { RootState } from "../../../../store/store";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
 import { RiCheckboxCircleFill } from "react-icons/ri";
+import { LuStickyNote } from "react-icons/lu";
 
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -125,7 +125,7 @@ const Curriculum = () => {
                       </Text>
                       <Flex align={"center"} mr={3} columnGap={1}>
                         <Text>
-                          <GoBookmark />
+                          <LuStickyNote />
                         </Text>
                         <Text fontWeight={"500"}>{title}</Text>
                       </Flex>
@@ -282,8 +282,15 @@ const Curriculum = () => {
 
                           <Text fontWeight={"500"}>Lecture 1:</Text>
                         </Flex>
-                        <Flex align={"center"}>
+                        <Flex align={"center"}columnGap={1}>
+                          <Text><LuStickyNote /></Text>
                           <Text>lecture one</Text>
+                          <Text cursor={"pointer"} >
+                        <MdEdit />
+                      </Text>
+                      <Text cursor={"pointer"} ml={3}>
+                        <MdDelete />
+                      </Text>
                         </Flex>
                       </Flex>
 
