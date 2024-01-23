@@ -15,6 +15,10 @@ import { Link } from "react-router-dom";
 import { CourseListComponent } from "../../../components";
 import { useGetAllUserCourse } from "../../../hooks/course";
 import { Error } from "../../auth";
+import { Formik, useFormik } from "formik";
+const initialValues = {
+  serach: "",
+};
 const Courses = () => {
   // console.log(data)
   const { data, isError, isPending } = useGetAllUserCourse();
@@ -22,6 +26,21 @@ const Courses = () => {
   if (isError) {
     return <Error />;
   }
+  const formik = useFormik({
+    initialValues: {
+      search: "",
+    },
+    onSubmit: (values: any) => {
+      // Perform any specific actions on form submission
+      console.log("Submitted:", values);
+    },
+  });
+  const filteredItems = data
+    ? data.filter((item: any) =>
+        item.title.toLowerCase().includes(formik.values.search.toLowerCase())
+      )
+    : [];
+
   return (
     <Stack>
       <Text fontSize={45} fontWeight={"600"}>
@@ -34,25 +53,34 @@ const Courses = () => {
         rowGap={0}
         mb={4}
       >
-        <Flex columnGap={7} flexWrap={"wrap"} rowGap={5}>
-          <Stack width={{ base: "100%", md: "55%" }}>
-            <InputGroup>
-              <Input placeholder="Enter search for courses" variant="filled" />
-              <InputRightElement>
-                <FiSearch />
-              </InputRightElement>
-            </InputGroup>
-          </Stack>
-          <Select
-            placeholder="Select option"
-            variant={"filled"}
-            width={{ base: "100%", md: "35%" }}
-          >
-            <option value="option1">Newest</option>
-            <option value="option2">Oldest</option>
-            <option value="option3">Option 3</option>
-          </Select>
-        </Flex>
+        <form onSubmit={formik.handleSubmit}>
+          <Flex columnGap={7} flexWrap={"wrap"} rowGap={5}>
+            <Stack width={{ base: "100%", md: "55%" }}>
+              <InputGroup>
+                <Input
+                  type="text"
+                  variant="filled"
+                  placeholder="search"
+                  name="search"
+                  value={formik.values.search}
+                  onChange={formik.handleChange}
+                />
+                <InputRightElement>
+                  <FiSearch />
+                </InputRightElement>
+              </InputGroup>
+            </Stack>
+            <Select
+              placeholder="Select option"
+              variant={"filled"}
+              width={{ base: "100%", md: "35%" }}
+            >
+              <option value="option1">Newest</option>
+              <option value="option2">Oldest</option>
+              <option value="option3">Option 3</option>
+            </Select>
+          </Flex>
+        </form>
         <Button
           bg={"#00FF84"}
           colorScheme="teal"
@@ -79,11 +107,18 @@ const Courses = () => {
           <Skeleton height="130px" mb={3} />
         </Stack>
       ) : (
-        <Stack>
-          {data?.map((item: any) => {
-            return <CourseListComponent key={item.id} {...item} />;
-          })}
-        </Stack>
+        <>
+          {filteredItems.length > 0 && (
+            <Stack >
+              {filteredItems.map((item: any) => (
+                <CourseListComponent key={item.id} {...item} />
+              ))}
+            </Stack>
+          )}
+           {filteredItems.length === 0 && formik.values.search && (
+        <Text>No matching items found</Text>
+      )}
+        </>
       )}
     </Stack>
   );
