@@ -15,7 +15,7 @@ import {
   Button,
   Skeleton,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { GoBookmark } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
@@ -30,6 +30,7 @@ import {
   useModuleCreateCourse,
   useGetModuleCourse,
   useModuleEditCourse,
+  useCreateModuleLectureCourse,
 } from "../../../../hooks/module";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
@@ -43,6 +44,8 @@ const Curriculum = () => {
   const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
+  const { moduleCreateLectureCourse, moduleLectureLoading } =
+    useCreateModuleLectureCourse();
   //new section
   const initialValues1 = {
     title: "",
@@ -53,9 +56,9 @@ const Curriculum = () => {
     title: "",
     learningObjective: "",
   };
-  const initialValues3 ={
-    title: ""
-  }
+  const initialValues3 = {
+    title: "",
+  };
   const {
     moduleCreateCourse,
     isPending: moduleLoading,
@@ -288,101 +291,107 @@ const Curriculum = () => {
                       New Curriculum
                     </Button>
                   )}
-                    {/* new curriculum input section */}
+                  {/* new curriculum input section */}
 
-                     {isOpenCurriculumState[id] && (
-                  <Formik
-                    initialValues={initialValues3}
-                    validationSchema={curriculumLectureSchema}
-                    onSubmit={(values: any) => {
-                    console.log(values)
-                    }}
-                  >
-                    {({
-                      handleChange,
-                      handleSubmit: handleCurriculumSubmit,
-                      values,
-                      errors,
-                    }) => (
-                      <Stack
-                        bg={"#FFFFFF"}
-                        borderWidth={1}
-                        p={3}
-                        borderColor={"gray"}
-                      >
-                        <Flex
-                          rowGap={2}
-                          flexDirection={{ base: "column", lg: "row" }}
+                  {isOpenCurriculumState[id] && (
+                    <Formik
+                      initialValues={initialValues3}
+                      validationSchema={curriculumLectureSchema}
+                      onSubmit={(values: any) => {
+                        // console.log(values)
+                        moduleCreateLectureCourse({
+                          moduleId: id,
+                          user: values,
+                        });
+                        setTimeout(() => {
+                        toggleIsCurriculumOpen(id)
+                          
+                        }, 2000);
+                      }}
+                    >
+                      {({
+                        handleChange,
+                        handleSubmit: handleCurriculumSubmit,
+                        values,
+                        errors,
+                      }) => (
+                        <Stack
+                          bg={"#FFFFFF"}
+                          borderWidth={1}
+                          p={3}
+                          borderColor={"gray"}
                         >
-                          <Text
-                            fontSize={16}
-                            mt={1}
-                            width={{ base: "100%", lg: "12%" }}
+                          <Flex
+                            rowGap={2}
+                            flexDirection={{ base: "column", lg: "row" }}
                           >
-                            New Lecture:
-                          </Text>
-                          <Stack w={{ base: "100%", lg: "88%" }}>
-                            <Input
+                            <Text
+                              fontSize={16}
+                              mt={1}
+                              width={{ base: "100%", lg: "12%" }}
+                            >
+                              New Lecture:
+                            </Text>
+                            <Stack w={{ base: "100%", lg: "88%" }}>
+                              <Input
+                                variant="outline"
+                                w="100%"
+                                borderColor={"black"}
+                                borderRadius={"0px"}
+                                placeholder="Enter a title"
+                                _focus={{ borderColor: "black" }}
+                                name="title"
+                                value={values.title}
+                                focusBorderColor="black"
+                                onChange={handleChange}
+                              />
+                              {errors?.title && (
+                                <Text
+                                  style={{ color: "red", marginTop: 0 }}
+                                  fontSize="14px"
+                                >
+                                  Pls add title
+                                </Text>
+                              )}
+                            </Stack>
+                          </Flex>
+
+                          <Flex
+                            justify={"end"}
+                            mt={2}
+                            align={"center"}
+                            columnGap={5}
+                          >
+                            <Text
+                              fontWeight={"bold"}
+                              as={"button"}
+                              onClick={() => toggleIsCurriculumOpen(id)}
+                            >
+                              Cancel
+                            </Text>
+                            <Button
+                              color="#ffffff"
+                              fontWeight={"500"}
+                              fontSize={14}
+                              as={"button"}
+                              py={2}
+                              px={4}
+                              isLoading={moduleLectureLoading}
+                              loadingText="Loading"
                               variant="outline"
-                              w="100%"
-                              borderColor={"black"}
-                              borderRadius={"0px"}
-                              placeholder="Enter a title"
-                              _focus={{ borderColor: "black" }}
-                              name="title"
-                              value={values.title}
-                              focusBorderColor="black"
-                              onChange={handleChange}
-                            />
-                            {errors?.title && (
-                              <Text
-                                style={{ color: "red", marginTop: 0 }}
-                                fontSize="14px"
-                              >
-                                Pls add title
-                              </Text>
-                            )}
-                          </Stack>
-                        </Flex>
-                       
-                        <Flex
-                          justify={"end"}
-                          mt={2}
-                          align={"center"}
-                          columnGap={5}
-                        >
-                          <Text
-                            fontWeight={"bold"}
-                            as={"button"}
-                            onClick={() => toggleIsCurriculumOpen(id)}
-                          >
-                            Cancel
-                          </Text>
-                          <Button
-                            color="#ffffff"
-                            fontWeight={"500"}
-                            fontSize={14}
-                            as={"button"}
-                            py={2}
-                            px={4}
-                            isLoading={editLoading}
-                            loadingText="Loading"
-                            variant="outline"
-                            spinnerPlacement="end"
-                            onClick={() => handleCurriculumSubmit()}
-                            type="button"
-                            backgroundColor={"black"}
-                          >
-                            Add Lecture
-                          </Button>
-                        </Flex>
-                      </Stack>
-                    )}
-                  </Formik>
-                )}
+                              spinnerPlacement="end"
+                              onClick={() => handleCurriculumSubmit()}
+                              type="button"
+                              backgroundColor={"black"}
+                            >
+                              Add Lecture
+                            </Button>
+                          </Flex>
+                        </Stack>
+                      )}
+                    </Formik>
+                  )}
                 </Stack>
-                 
-
               </Stack>
             </Stack>
 

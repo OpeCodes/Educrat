@@ -14,7 +14,7 @@ export const useModuleCreateCourse = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const [showSection, setShowSection] = useState<boolean>(false);
-  const [success, setSucess] = useState<boolean>(false)
+  const [success, setSucess] = useState<boolean>(false);
   const {
     mutate: moduleCreateCourse,
     isPending,
@@ -28,7 +28,7 @@ export const useModuleCreateCourse = () => {
       dispatch(setCourseModule(user.data));
       addCourseModuleStorage(user.data);
       queryClient.invalidateQueries({ queryKey: ["module"] });
-      setSucess(false)
+      setSucess(false);
       setShowSection(false);
       toast({
         title: `course created successfully`,
@@ -46,7 +46,15 @@ export const useModuleCreateCourse = () => {
       });
     },
   });
-  return { moduleCreateCourse, isPending, error, isError,success,showSection,setShowSection };
+  return {
+    moduleCreateCourse,
+    isPending,
+    error,
+    isError,
+    success,
+    showSection,
+    setShowSection,
+  };
 };
 
 export const useModuleEditCourse = () => {
@@ -60,7 +68,6 @@ export const useModuleEditCourse = () => {
     error,
     isError,
     isSuccess,
-    
   } = useMutation({
     mutationFn: ({ moduleId, user }: any) => {
       return customFetch.put(`/module/${moduleId}`, user);
@@ -85,7 +92,7 @@ export const useModuleEditCourse = () => {
       });
     },
   });
-  return { moduleEditCourse, isPending, error, isError ,isSuccess, };
+  return { moduleEditCourse, isPending, error, isError, isSuccess };
 };
 
 export const useDeleteModalCourse = () => {
@@ -123,9 +130,9 @@ export const useGetModuleCourse = (id: any) => {
   const [isOpenState, setIsOpenState] = useState<{ [key: number]: boolean }>(
     {}
   );
-  const [isOpenCurriculumState, setIsOpenCurriculumState] = useState<{ [key: number]: boolean }>(
-    {}
-  );
+  const [isOpenCurriculumState, setIsOpenCurriculumState] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const toggleIsOpen = (arrayId: number) => {
     setIsOpenState((prevIsOpenState) => ({
@@ -139,15 +146,52 @@ export const useGetModuleCourse = (id: any) => {
       [arrayId]: !prevIsOpenCurriculumState[arrayId],
     }));
   };
-  const { data, isPending,isSuccess, } = useQuery({
+  const { data, isPending, isSuccess } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
       const { data } = await customFetch.get(`module/course/${id}`);
       return data;
     },
-    
   });
 
-  return { data, isPending, isOpenState, toggleIsOpen , isSuccess,isOpenCurriculumState, toggleIsCurriculumOpen};
+  return {
+    data,
+    isPending,
+    isOpenState,
+    toggleIsOpen,
+    isSuccess,
+    isOpenCurriculumState,
+    toggleIsCurriculumOpen,
+  };
+};
+
+export const useCreateModuleLectureCourse = () => {
+  const toast = useToast();
+  // const queryClient = useQueryClient();
+  const { mutate: moduleCreateLectureCourse, isPending: moduleLectureLoading } =
+    useMutation({
+      mutationFn: ({ moduleId, user }: any) => {
+        return customFetch.post(`/lecture/module/${moduleId}`, user);
+      },
+      onSuccess: (user) => {
+        // queryClient.invalidateQueries({ queryKey: ["module"] });
+        console.log(user);
+        toast({
+          title: `lecture created successfully`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+      onError: (error: any) => {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+    });
+  return { moduleCreateLectureCourse, moduleLectureLoading };
 };
