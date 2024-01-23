@@ -292,7 +292,7 @@ const Curriculum = () => {
 
                      {isOpenCurriculumState[id] && (
                   <Formik
-                    initialValues={initialValues2}
+                    initialValues={initialValues3}
                     validationSchema={courseEditModuleSchema}
                     onSubmit={(values: any) => {
                       moduleEditCourse({ moduleId: id, user: values });
@@ -318,12 +318,11 @@ const Curriculum = () => {
                           flexDirection={{ base: "column", lg: "row" }}
                         >
                           <Text
-                            fontWeight={"bold"}
                             fontSize={16}
                             mt={1}
                             width={{ base: "100%", lg: "12%" }}
                           >
-                            Edit Section:
+                            New Lecture
                           </Text>
                           <Stack w={{ base: "100%", lg: "88%" }}>
                             <Input
@@ -358,7 +357,7 @@ const Curriculum = () => {
                           <Text
                             fontWeight={"bold"}
                             as={"button"}
-                            onClick={() => toggleIsOpen(id)}
+                            onClick={() => toggleIsCurriculumOpen(id)}
                           >
                             Cancel
                           </Text>
@@ -377,7 +376,7 @@ const Curriculum = () => {
                             type="button"
                             backgroundColor={"black"}
                           >
-                            Save Section
+                            Add Lecture
                           </Button>
                         </Flex>
                       </Stack>
