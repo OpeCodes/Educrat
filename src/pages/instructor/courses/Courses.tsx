@@ -15,10 +15,8 @@ import { Link } from "react-router-dom";
 import { CourseListComponent } from "../../../components";
 import { useGetAllUserCourse } from "../../../hooks/course";
 import { Error } from "../../auth";
-import { Formik, useFormik } from "formik";
-const initialValues = {
-  serach: "",
-};
+import { useFormik } from "formik";
+
 const Courses = () => {
   // console.log(data)
   const { data, isError, isPending } = useGetAllUserCourse();
@@ -75,9 +73,10 @@ const Courses = () => {
               variant={"filled"}
               width={{ base: "100%", md: "35%" }}
             >
-              <option value="option1">Newest</option>
-              <option value="option2">Oldest</option>
-              <option value="option3">Option 3</option>
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="A_Z">A-Z</option>
+              <option value="Z_A">Z-A</option>
             </Select>
           </Flex>
         </form>
@@ -109,15 +108,15 @@ const Courses = () => {
       ) : (
         <>
           {filteredItems.length > 0 && (
-            <Stack >
+            <Stack>
               {filteredItems.map((item: any) => (
                 <CourseListComponent key={item.id} {...item} />
               ))}
             </Stack>
           )}
-           {filteredItems.length === 0 && formik.values.search && (
-        <Text>No matching items found</Text>
-      )}
+          {filteredItems.length === 0 && formik.values.search && (
+            <Text>No matching items found</Text>
+          )}
         </>
       )}
     </Stack>
