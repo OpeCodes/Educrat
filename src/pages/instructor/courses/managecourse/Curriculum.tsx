@@ -37,11 +37,12 @@ import { IoCloseSharp } from "react-icons/io5";
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
-  // const [showSection, setShowSection] = useState<boolean>(false);
   const { course } = useSelector((store: RootState) => store.user);
-  const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
+  const {
+    moduleEditCourse,
+    isPending: editLoading,
+  } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
-  // const [moduleID, setModuleID] = useState("");
   const initialValues1 = {
     title: "",
     learningObjective: "",
@@ -50,19 +51,19 @@ const Curriculum = () => {
     title: "",
     learningObjective: "",
   };
-  const { moduleCreateCourse, isPending: moduleLoading , setShowSection, showSection} =
-    useModuleCreateCourse();
+  const {
+    moduleCreateCourse,
+    isPending: moduleLoading,
+    setShowSection,
+    showSection,
+  } = useModuleCreateCourse();
 
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: course._id, user: values });
-    // setTimeout(() => {
-      // setShowSection(false);
-    // }, 3000);
-    // setShowSection(success);
+    
   };
 
   const { data, isOpenState, toggleIsOpen } = useGetModuleCourse(course._id);
-
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>

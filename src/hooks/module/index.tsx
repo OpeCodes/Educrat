@@ -59,16 +59,16 @@ export const useModuleEditCourse = () => {
     isPending,
     error,
     isError,
+    isSuccess,
+    
   } = useMutation({
     mutationFn: ({ moduleId, user }: any) => {
       return customFetch.put(`/module/${moduleId}`, user);
     },
     onSuccess: (user) => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
-
       dispatch(setCourseModule(user.data));
       addCourseModuleStorage(user.data);
-
       toast({
         title: `course section successfully`,
         status: "success",
@@ -85,7 +85,7 @@ export const useModuleEditCourse = () => {
       });
     },
   });
-  return { moduleEditCourse, isPending, error, isError };
+  return { moduleEditCourse, isPending, error, isError ,isSuccess, };
 };
 
 export const useDeleteModalCourse = () => {
@@ -99,6 +99,7 @@ export const useDeleteModalCourse = () => {
     onSuccess: () => {
       removeCourseModuleromLocalStorage();
       queryClient.invalidateQueries({ queryKey: ["module"] });
+
       toast({
         title: `course deleted successfully`,
         status: "success",
@@ -129,14 +130,15 @@ export const useGetModuleCourse = (id: any) => {
       [arrayId]: !prevIsOpenState[arrayId],
     }));
   };
-  const { data, isLoading } = useQuery({
+  const { data, isLoading,isSuccess, } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
       const { data } = await customFetch.get(`module/course/${id}`);
       return data;
     },
+    
   });
 
-  return { data, isLoading, isOpenState, toggleIsOpen };
+  return { data, isLoading, isOpenState, toggleIsOpen , isSuccess};
 };
