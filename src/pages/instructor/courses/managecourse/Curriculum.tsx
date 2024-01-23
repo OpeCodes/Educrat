@@ -101,6 +101,9 @@ const Curriculum = () => {
                 p={3}
                 pb={10}
               >
+                {
+                !isOpenState[id] && 
+                
                 <Flex align={"center"}>
                   <Flex align={"center"} columnGap={2}>
                     <Text fontWeight={"bold"} fontSize={17}>
@@ -122,7 +125,7 @@ const Curriculum = () => {
                     </Text>
                   </Flex>
                 </Flex>
-
+              }
                 {/* edit part */}
                 {isOpenState[id] && (
                   <Formik
