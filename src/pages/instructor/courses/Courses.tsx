@@ -7,16 +7,21 @@ import {
   Stack,
   Select,
   Button,
+  Skeleton,
 } from "@chakra-ui/react";
 
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { CourseListComponent } from "../../../components";
+import { useGetAllUserCourse } from "../../../hooks/course";
+import { Error } from "../../auth";
 const Courses = () => {
   // console.log(data)
+  const { data, isError, isPending } = useGetAllUserCourse();
 
-
-  
+  if (isError) {
+    return <Error />;
+  }
   return (
     <Stack>
       <Text fontSize={45} fontWeight={"600"}>
@@ -66,10 +71,20 @@ const Courses = () => {
           New Course
         </Button>
       </Flex>
-      <Stack>
-        <CourseListComponent/>
-
-      </Stack>
+      {isPending ? (
+        <Stack>
+          <Skeleton height="130px" mb={3} />
+          <Skeleton height="130px" mb={3} />
+          <Skeleton height="130px" mb={3} />
+          <Skeleton height="130px" mb={3} />
+        </Stack>
+      ) : (
+        <Stack>
+          {data?.map((item: any) => {
+            return <CourseListComponent key={item.id} {...item} />;
+          })}
+        </Stack>
+      )}
     </Stack>
   );
 };
