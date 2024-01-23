@@ -403,9 +403,20 @@ const Navbar = () => {
               <>
                 {hasStudentRole && hasInstructorRole && (
                   <Text
-                    as={Link}
-                    to="/sign-in"
                     _hover={{ textDecoration: "none" }}
+                    onClick={() => {
+                      toast({
+                        title: `Logging out...`,
+                        status: "success",
+                        duration: 2000,
+                        isClosable: true,
+                      });
+                      setTimeout(() => {
+                        dispatch(logoutUser());
+                        onClose()
+                      }, 2000);
+                    }}
+                    cursor={"pointer"}
                   >
                     Logout out
                   </Text>
