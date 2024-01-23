@@ -19,9 +19,7 @@ import { useFormik } from "formik";
 import React from "react";
 
 const Courses = () => {
-  // console.log(data)
   const { data, isError, isPending } = useGetAllUserCourse();
-
   if (isError) {
     return <Error />;
   }
@@ -31,7 +29,6 @@ const Courses = () => {
       sortBy: "newest",
     },
     onSubmit: (values: any) => {
-      // Perform any specific actions on form submission
       console.log("Submitted:", values);
     },
   });
