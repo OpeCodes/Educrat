@@ -39,8 +39,7 @@ const CourseLandingPage = () => {
     // Manually refetch data when the ID changes or when needed
     refetch();
   }, [id]);
-  console.log(getSingleCourse)
-
+console.log(getSingleCourse)
   const initialValues = {
     title: getSingleCourse?.title || ""  ,
     subtitle:getSingleCourse?.subtitle,
