@@ -1,12 +1,22 @@
 import { Box, Button, Stack, Text } from "@chakra-ui/react";
 import { CourseManageNavItem } from "./CourseManageNavItem";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useParams } from "react-router-dom";
+import { useGetSingleCourse } from "../hooks/course";
+import { useEffect } from "react";
 
 
 
 const CourseManageSidebar = () => {
-const { course } = useSelector((store: RootState) => store.user);
+// const { course } = useSelector((store: RootState) => store.user);
+const { id } = useParams();
+  const {
+    getSingleCourse,
+    refetch,
+  } = useGetSingleCourse(id);
+  useEffect(() => {
+    // Manually refetch data when the ID changes or when needed
+    refetch();
+  }, [id]);
 const links = [
   {
     id: 1,
@@ -31,7 +41,7 @@ const links = [
   {
     id: 5,
     name: "Curriculum",
-    href:  `/instructor/courses/${course.id}/manage/curriculum`,
+    href:  `/instructor/courses/${getSingleCourse?.id}/manage/curriculum`,
   },
   {
     id: 6,
@@ -46,7 +56,7 @@ const links = [
   {
     id: 8,
     name: "Course Landing Page",
-    href: `/instructor/courses/${course.id}/manage/basics`,
+    href: `/instructor/courses/${getSingleCourse?.id}/manage/basics`,
   },
   {
     id: 9,
