@@ -15,7 +15,7 @@ import {
   Button,
   Skeleton,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -39,12 +39,23 @@ import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
 import { RiCheckboxCircleFill } from "react-icons/ri";
 import { LuStickyNote } from "react-icons/lu";
-
+import { useParams } from "react-router-dom";
+import {
+  useGetSingleCourse,
+} from "../../../../hooks/course";
 const Curriculum = () => {
   const [dummy, setDummy] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef: any = React.useRef();
+  const { id } = useParams();
+  const {
+    getSingleCourse,
+    refetch,
+  } = useGetSingleCourse(id);
 
+  useEffect(() => {
+    refetch();
+  }, [id]);
   const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
@@ -87,7 +98,7 @@ const Curriculum = () => {
     toggleIsOpen,
     isOpenCurriculumState,
     toggleIsCurriculumOpen,
-  } = useGetModuleCourse(course._id);
+  } = useGetModuleCourse(getSingleCourse?.id);
   console.log(data)
   return (
     <Stack>
