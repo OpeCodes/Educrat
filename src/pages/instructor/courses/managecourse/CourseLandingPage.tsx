@@ -24,35 +24,33 @@ import { useState, useEffect } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store/store";
 
 const CourseLandingPage = () => {
-  const [description, setDescripton] = useState("");
   const [error, setError] = useState<boolean>(false);
   const { id } = useParams();
-  
   const {
     getSingleCourse,
     isError,
     refetch,
     isPending: singleCourseLoading,
   } = useGetSingleCourse(id);
+
   useEffect(() => {
-    refetch()
-  }, [refetch])
-console.log(getSingleCourse)
-const { course} = useSelector((store: RootState) => store.user);
+    // Manually refetch data when the ID changes or when needed
+    refetch();
+  }, [id]);
+  console.log(getSingleCourse)
 
   const initialValues = {
-    title:getSingleCourse?.title|| "" ,
-    subtitle:getSingleCourse?.subtitle || "",
-    language: "",
-    category: course?.category || "",
-    preRequisities: [""],
-    complexityLevel: "",
-    learningObjectives: ["", "", "", ""],
+    title: getSingleCourse?.title || ""  ,
+    subtitle:getSingleCourse?.subtitle,
+    language: getSingleCourse?.language,
+    category: getSingleCourse?.category?.id,
+    preRequisities: getSingleCourse?.preRequisities || [""],
+    complexityLevel: getSingleCourse?.complexityLevel || "",
+    learningObjectives: getSingleCourse?.learningObjectives || ["", "", "", ""],
   };
+  const [description, setDescripton] = useState(getSingleCourse?.description);
 
   const { data, isPending } = useCourseCategory();
   const handleImageUpload = (file: File) => {
@@ -71,7 +69,10 @@ const { course} = useSelector((store: RootState) => store.user);
     });
   };
 
-  if ( singleCourseLoading && isPending ) {
+  // if ( singleCourseLoading && isPending ) {
+  //   return <Loading />;
+  // }
+  if ( singleCourseLoading  ) {
     return <Loading />;
   }
   if (isError) {
@@ -166,7 +167,7 @@ const { course} = useSelector((store: RootState) => store.user);
                   You must enter at 4 learning objectives or outcomes that
                   learners can expect to achieve after completing your course.
                 </Text>
-                {values?.learningObjectives.map((value, index) => (
+                {values?.learningObjectives.map((value : any, index: number) => (
                   <Stack key={index}>
                     <FormControl isRequired>
                       <Input
@@ -197,7 +198,7 @@ const { course} = useSelector((store: RootState) => store.user);
                   no requirements, use this space as an opportunity to lower the
                   barrier for beginners.
                 </Text>
-                {values.preRequisities.map((value, index) => (
+                {values.preRequisities.map((value: any, index: any) => (
                   <Stack key={index}>
                     <FormControl isRequired>
                       <Input
@@ -213,7 +214,8 @@ const { course} = useSelector((store: RootState) => store.user);
                           style={{ color: "red", marginTop: 5 }}
                           fontSize="14px"
                         >
-                          {errors.preRequisities}
+                          please enter prerequisities
+                          {/* {errors.preRequisities} */}
                         </Text>
                       )}
                     </FormControl>
@@ -238,7 +240,8 @@ const { course} = useSelector((store: RootState) => store.user);
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      {errors.language}
+                      please select a language
+                      {/* {errors?.language} */}
                     </Text>
                   )}
                 </Stack>
@@ -261,7 +264,8 @@ const { course} = useSelector((store: RootState) => store.user);
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      {errors.complexityLevel}
+                      pls select level
+                      {/* {errors.complexityLevel} */}
                     </Text>
                   )}
                 </Stack>

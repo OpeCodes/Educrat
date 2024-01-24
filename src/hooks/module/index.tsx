@@ -195,3 +195,41 @@ export const useCreateModuleLectureCourse = () => {
     });
   return { moduleCreateLectureCourse, moduleLectureLoading };
 };
+
+
+export const useGetModuleLectureCourse = (id: any) => {
+  // const [isOpenState, setIsOpenState] = useState<{ [key: number]: boolean }>(
+  //   {}
+  // );
+  // const [isOpenCurriculumState, setIsOpenCurriculumState] = useState<{
+  //   [key: number]: boolean;
+  // }>({});
+
+  // const toggleIsOpen = (arrayId: number) => {
+  //   setIsOpenState((prevIsOpenState) => ({
+  //     ...prevIsOpenState,
+  //     [arrayId]: !prevIsOpenState[arrayId],
+  //   }));
+  // };
+  // const toggleIsCurriculumOpen = (arrayId: number) => {
+  //   setIsOpenCurriculumState((prevIsOpenCurriculumState) => ({
+  //     ...prevIsOpenCurriculumState,
+  //     [arrayId]: !prevIsOpenCurriculumState[arrayId],
+  //   }));
+  // };
+  const { data: moduleLectureData, isPending, isSuccess } = useQuery({
+    queryKey: ["LectureModule", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; // Destructure the queryKey to get the 'id'
+      const { data } = await customFetch.get(`lecture/module/${id}`);
+      return data;
+    },
+  });
+
+  return {
+    moduleLectureData,
+    isPending,
+    // isOpenState,
+    isSuccess,
+  };
+};

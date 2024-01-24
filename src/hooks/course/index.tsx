@@ -26,6 +26,7 @@ export const useCreateCourse = () => {
       return customFetch.post("/course", user);
     },
     onSuccess: (user: any) => {
+      console.log(user)
       dispatch(setCourse(user.data));
       addCourseLocalStorage(user.data);
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
@@ -99,7 +100,9 @@ export const useGetSingleCourse = (id: any) => {
       const { data } = await customFetch.get(`/course/${id}`);
       return data;
     },
-  });
+    
+  })
+  
 
   return { getSingleCourse, isPending, isError, refetch };
 };

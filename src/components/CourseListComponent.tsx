@@ -9,9 +9,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import dummyImg from "../assets/CourseImagePlaceholder.jpg";
+import { useNavigate } from "react-router-dom";
 
-const CourseListComponent = ({ title, thumbnail }: any) => {
+const CourseListComponent = ({ title, thumbnail,id }: any) => {
   const [isHovered, setIsHovered] = useState(false);
+ const navigate = useNavigate()
 
   return (
     <Stack
@@ -33,6 +35,7 @@ const CourseListComponent = ({ title, thumbnail }: any) => {
           borderRadius={"none"}
           fontSize="20px"
           color="white"
+          onClick={() => navigate(`/instructor/courses/${id}/manage/basics`)}
         >
           Edit /Manage Course
         </Button>

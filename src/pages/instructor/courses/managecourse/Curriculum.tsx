@@ -31,6 +31,7 @@ import {
   useGetModuleCourse,
   useModuleEditCourse,
   useCreateModuleLectureCourse,
+  useGetModuleLectureCourse,
 } from "../../../../hooks/module";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
@@ -47,6 +48,8 @@ const Curriculum = () => {
   const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
+   const {moduleLectureData} = useGetModuleLectureCourse("65afc8d34a45a6f608d8e537");
+   console.log(moduleLectureData)
   const { moduleCreateLectureCourse, moduleLectureLoading } =
     useCreateModuleLectureCourse();
   //new section
@@ -85,7 +88,7 @@ const Curriculum = () => {
     isOpenCurriculumState,
     toggleIsCurriculumOpen,
   } = useGetModuleCourse(course._id);
-
+  console.log(data)
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -272,6 +275,11 @@ const Curriculum = () => {
                 )}
 
                 {/* new curriculum */}
+                {/* {
+                  moduleLectureData.map((item) => {
+                    return <>kk</>
+                  })
+                } */}
                 <Stack p={5}>
                   {/* list of lecture starts here */}
                   {!dummy && (
@@ -318,7 +326,6 @@ const Curriculum = () => {
                       validationSchema={curriculumEditLectureSchema}
                       onSubmit={(values: any) => {
                         console.log(values)
-                        
                       }}
                     >
                       {({
