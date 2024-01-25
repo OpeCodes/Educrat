@@ -15,11 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <React.StrictMode>
         <ChakraProvider>
           <App />
-    <ReactQueryDevtools initialIsOpen={false} />
-
+          <ReactQueryDevtools initialIsOpen={false} />
         </ChakraProvider>
       </React.StrictMode>
-
     </Provider>
   </QueryClientProvider>
 );
