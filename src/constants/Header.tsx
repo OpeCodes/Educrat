@@ -14,7 +14,7 @@ export const Header = () => {
     <Box
       as={"section"}
       px={{ base: "6", md: "12", lg: "16" }}
-      pt={{ base: "20", md: "24" }}
+      pt={{ base: "130px", md: "160px", lg: "180px" }}
       pb={14}
     >
       <Stack>
@@ -25,7 +25,7 @@ export const Header = () => {
           alignItems={"start"}
         >
           <Box mb={{ base: "16", lg: "0" }}>
-            <Heading as={"h1"} size={"3xl"}>
+            <Heading as={"h1"} color={"#140342"} size={"3xl"}>
               Master The Skills To Drive Your
               <Box as={"span"} textDecor={"underline"} color={"#6440fb"} pl={3}>
                 Career

@@ -92,6 +92,8 @@ const Navbar = () => {
         py={4}
         px={{ base: "6", md: "12", lg: "16" }}
         width={"100%"}
+        position={"fixed"}
+        zIndex={10}
         justify={"space-between"}
         align={"center"}
         shadow={"base"}
@@ -316,7 +318,11 @@ const Navbar = () => {
                 borderColor={"white"}
                 borderWidth={2}
                 borderRadius={"full"}
-                _hover={{ background: "#140342", color: "white" }}
+                _hover={{
+                  background: "white",
+                  color: "#6440fb",
+                  borderColor: "#6440fb",
+                }}
                 as={Link}
                 to={"/sign-up"}
               >
