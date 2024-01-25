@@ -15,6 +15,8 @@ import Course from "./Course";
 import SliderButtons from "./SliderButtons";
 import Instructor from "./Instructor";
 import Student from "./Student";
+import Article from "./Article";
+import MedArticle from "./MedArticle";
 export {
   HomeLayout,
   Navbar,
@@ -33,4 +35,6 @@ export {
   SliderButtons,
   Instructor,
   Student,
+  Article,
+  MedArticle,
 };

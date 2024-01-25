@@ -34,6 +34,12 @@ import cta1 from "./imgL-1.svg";
 import cta2 from "./imgL-2.svg";
 import cta3 from "./imgL-3.svg";
 import cta4 from "./imgL-4.svg";
+import imgL5 from "./imgL-5.png";
+import applestore from "./apple-store.svg";
+import googlestore from "./google-store.svg";
+import news1 from "./news1.png";
+import news2 from "./news2.png";
+import recommendationImg from "./recommendation-img.png";
 
 export {
   sponsor1,
@@ -72,4 +78,10 @@ export {
   cta2,
   cta3,
   cta4,
+  imgL5,
+  applestore,
+  googlestore,
+  news1,
+  news2,
+  recommendationImg,
 };

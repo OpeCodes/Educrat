@@ -1,9 +1,13 @@
 import {
+  Ads,
   Categories,
   Courses,
   Cta,
+  Footer,
   Header,
   Instructors,
+  News,
+  Recommendations,
   Sponsors,
   Students,
 } from "../constants";
@@ -18,6 +22,10 @@ const Home = () => {
       <Instructors />
       <Students />
       <Cta />
+      <Ads />
+      <News />
+      <Recommendations />
+      <Footer />
     </>
   );
 };

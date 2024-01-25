@@ -307,7 +307,11 @@ const Navbar = () => {
                 borderColor={"white"}
                 borderWidth={2}
                 borderRadius={"full"}
-                _hover={{ background: "#140342", color: "white" }}
+                _hover={{
+                  background: "white",
+                  color: "#6440fb",
+                  borderColor: "#6440fb",
+                }}
                 as={Link}
                 to={"/sign-up"}
               >
