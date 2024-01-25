@@ -1,20 +1,22 @@
-import { Outlet, } from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import { CourseManageNavbar, CourseManageSidebar } from ".";
 import { Flex, Stack } from "@chakra-ui/react";
+
 
 const CourseManageDashboardLayout = () => {
   return (
     <>
       <CourseManageNavbar />
-      <Flex>
-        <Stack mr={20} m={20}>
+      <Flex flexWrap={"wrap"}>
+        <Stack ml={{ base: 5, lg: 20 }} mr={{ base: 5, lg: 20 }} mt={20}>
           <CourseManageSidebar />
         </Stack>
         <Stack
           bg="white"
-          maxW={"70%"}
+          maxW={{ base: "100%", md: "70%" }}
           my={10}
           w="full"
+          mr={{ base: 0, lg: 5 }}
           boxShadow="0 0.75rem 1rem rgb(189 197 209 / 90%)"
         >
           <Outlet />

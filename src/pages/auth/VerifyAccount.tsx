@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useVerifyAccount } from "../../hooks";
+import { useVerifyAccount } from "../../hooks/auth";
 const VerifyAccount = () => {
   const { code, token } = useParams();
  const {verifyAccount}= useVerifyAccount();

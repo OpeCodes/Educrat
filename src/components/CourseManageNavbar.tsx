@@ -1,8 +1,22 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { IoIosArrowBack } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
+import { useGetSingleCourse } from "../hooks/course";
+import { useEffect } from "react";
 const CourseManageNavbar = () => {
+  const { id } = useParams();
+  const {
+    getSingleCourse,
+    // isError,
+    refetch,
+    // isPending: singleCourseLoading,
+  } = useGetSingleCourse(id);
+  useEffect(() => {
+    // Manually refetch data when the ID changes or when needed
+    refetch();
+  }, [id]);
+
   return (
     <Flex justify={"space-between"} bg={"#140342"} color="white" p={3}>
     <Flex columnGap={5} align={"center"}>
@@ -14,7 +28,7 @@ const CourseManageNavbar = () => {
           Back to courses
         </Text>
       </Flex>
-      <Text fontWeight={"bold"}>Learn Frontend Development from peter</Text>
+      <Text fontWeight={"bold"}>{getSingleCourse?.title}</Text>
       <Text bg="red" px={2} borderRadius={5} fontSize={"14px"}>
         DRAFT
       </Text>

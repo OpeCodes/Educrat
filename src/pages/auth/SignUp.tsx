@@ -19,7 +19,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
 import { SignUpSchema } from "../../schemas";
 import { Link } from "react-router-dom";
-import { useRegisterUser } from "../../hooks";
+import { useRegisterUser } from "../../hooks/auth";
 
 interface User {
   firstName: string;

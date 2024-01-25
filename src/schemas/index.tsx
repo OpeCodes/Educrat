@@ -54,10 +54,25 @@ export const createCourseSchema = Yup.object().shape({
 export const courseLandingSchema = Yup.object().shape({
   title: Yup.string().required("pls add title"),
   subtitle: Yup.string().required("pls add subtitle "),
-  description: Yup.string().required("pls add description"),
-  category: Yup.string().required("please select category"),
+  description: Yup.string(),
+  category: Yup.string(),
+  // .required("please select category"),
   complexityLevel: Yup.string().required("pls select level"),
   language: Yup.string().required("please select a language"),
-  learningObjectives: Yup.array().of(Yup.string().required("")),
+  learningObjectives: Yup.array().of(Yup.string().required("please include all the 4 input")),
   preRequisities: Yup.array().of(Yup.string().required("please enter prerequisities")),
 });
+export const courseModuleSchema = Yup.object().shape({
+  title: Yup.string().required("pls add title"),
+  learningObjective: Yup.string().required("pls add learning objectives")
+})
+export const courseEditModuleSchema = Yup.object().shape({
+  title: Yup.string().required("pls add title"),
+  learningObjective: Yup.string().required("pls add learning objectives")
+})
+export const curriculumLectureSchema = Yup.object().shape({
+  title: Yup.string().required("pls add title"),
+})
+export const curriculumEditLectureSchema = Yup.object().shape({
+  title: Yup.string().required("pls add title"),
+})

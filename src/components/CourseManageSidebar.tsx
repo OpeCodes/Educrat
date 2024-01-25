@@ -1,60 +1,67 @@
 import { Box, Button, Stack, Text } from "@chakra-ui/react";
 import { CourseManageNavItem } from "./CourseManageNavItem";
-
-const links = [
-  {
-    id: 1,
-    name: "intended Learners",
-    href: "/instructor/courses/1/manage/basics",
-  },
-  {
-    id: 2,
-    name: "course structure",
-    href: "/basics",
-  },
-  {
-    id: 3,
-    name: "Setup & test video",
-    href: "/",
-  },
-  {
-    id: 4,
-    name: "Film and Edit",
-    href: "/",
-  },
-  {
-    id: 5,
-    name: "Curriculum",
-    href: "/",
-  },
-  {
-    id: 6,
-    name: "Captions(optional)",
-    href: "/",
-  },
-  {
-    id: 7,
-    name: "Accessbility(optional)",
-    href: "",
-  },
-  {
-    id: 8,
-    name: "Course Landing Page",
-    href: `/instructor/courses/1/manage/basics`,
-  },
-  {
-    id: 9,
-    name: "pricing",
-    href: "pricing",
-  },
-  {
-    id: 10,
-    name: "Course Messages",
-    href: "course messages",
-  },
-];
+import { useParams } from "react-router-dom";
+import { useGetSingleCourse } from "../hooks/course";
+import { useEffect } from "react";
 
 const CourseManageSidebar = () => {
+  const { id } = useParams();
+  const { getSingleCourse, refetch } = useGetSingleCourse(id);
+  useEffect(() => {
+    refetch();
+  }, [id]);
+  const links = [
+    {
+      id: 1,
+      name: "intended Learners",
+      href: "/",
+    },
+    {
+      id: 2,
+      name: "course structure",
+      href: "/basics",
+    },
+    {
+      id: 3,
+      name: "Setup & test video",
+      href: "/",
+    },
+    {
+      id: 4,
+      name: "Film and Edit",
+      href: "/",
+    },
+    {
+      id: 5,
+      name: "Curriculum",
+      href: `/instructor/courses/${getSingleCourse?.id}/manage/curriculum`,
+    },
+    {
+      id: 6,
+      name: "Captions(optional)",
+      href: "/",
+    },
+    {
+      id: 7,
+      name: "Accessbility(optional)",
+      href: "",
+    },
+    {
+      id: 8,
+      name: "Course Landing Page",
+      href: `/instructor/courses/${getSingleCourse?.id}/manage/basics`,
+    },
+    {
+      id: 9,
+      name: "pricing",
+      href: "pricing",
+    },
+    {
+      id: 10,
+      name: "Course Messages",
+      href: "course messages",
+    },
+  ];
   return (
     <Stack>
       <Stack>

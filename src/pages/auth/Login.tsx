@@ -19,14 +19,15 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
 import { SignInSchema } from "../../schemas";
 import { Link } from "react-router-dom";
-import { useLoginUser } from "../../hooks";
+import { useLoginUser } from "../../hooks/auth";
 const initialValues = {
   credential: "peteradedokun2003@gmail.com",
   password: "Peter12111",
 };
 // instructor
 //peteradedokun2003@gmail.com
-// myPassword = Peter12111
+// myPassword =  .
+
 //student
 //adededokunpeter11@gmail.com
 // password = Peter@167

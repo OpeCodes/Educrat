@@ -13,29 +13,70 @@ import {
 } from "@chakra-ui/react";
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
-import { useCourseCategory, useSingleCourse } from "../../../../hooks";
-const initialValues = {
-  title: "",
-  subtitle: "",
-  description: "",
-  language: "",
-  category: "",
-  //   learningObjectives: [""],
-  preRequisities: [""],
-  complexityLevel: "",
-  learningObjectives: ["", "", "", ""],
-};
+import {
+  useCourseCategory,
+  useGetSingleCourse,
+  useSingleCourse,
+} from "../../../../hooks/course";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { useState, useEffect } from "react";
+import { CourseImageFileUpload, Loading } from "../../../../components";
+import { Error } from "../../../auth";
+import { useParams } from "react-router-dom";
+
 const CourseLandingPage = () => {
+  const [error, setError] = useState<boolean>(false);
+  const { id } = useParams();
+  const {
+    getSingleCourse,
+    isError,
+    refetch,
+    isPending: singleCourseLoading,
+  } = useGetSingleCourse(id);
+
+  useEffect(() => {
+    // Manually refetch data when the ID changes or when needed
+    refetch();
+  }, [id]);
+console.log(getSingleCourse)
+  const initialValues = {
+    title: getSingleCourse?.title  ,
+    subtitle:getSingleCourse?.subtitle,
+    language: getSingleCourse?.language,
+    category: getSingleCourse?.category?.id,
+    description: getSingleCourse?.description,
+    preRequisities: getSingleCourse?.preRequisities || [""],
+    complexityLevel: getSingleCourse?.complexityLevel || "",
+    learningObjectives: getSingleCourse?.learningObjectives || ["", "", "", ""],
+  };
+  const [description, setDescripton] = useState(initialValues?.description);
   const { data, isPending } = useCourseCategory();
-  const {singleCourse,isPending: isLoading} = useSingleCourse()
+  const handleImageUpload = (file: File) => {
+    console.log("Uploaded file:", file);
+  };
+  const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
-    // loginUser(values);
-    console.log({singleId: "65a4386329fcd03036b62cd0", values});
-    singleCourse({singleId: "65a4386329fcd03036b62cd0", user: values})
-
+    if (!description) {
+      setError(true);
+      return;
+    }
+    singleCourse({
+      singleId: getSingleCourse?.id,
+      user: { ...values, description },
+    });
   };
-  console.log(data)
+
+  // if ( singleCourseLoading && isPending ) {
+  //   return <Loading />;
+  // }
+  if ( singleCourseLoading  ) {
+    return <Loading />;
+  }
+  if (isError) {
+    return <Error />;
+  }
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -67,11 +108,12 @@ const CourseLandingPage = () => {
                   placeholder="Insert your title"
                   value={values.title}
                   name="title"
+                  as={"input"}
                   onChange={handleChange}
                 />
                 {errors.title && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.title}
+                    pls add title
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>
@@ -89,9 +131,12 @@ const CourseLandingPage = () => {
                   name="subtitle"
                   onChange={handleChange}
                 />
-                {errors.subtitle && (
+                {errors?.subtitle && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.subtitle}
+                    {/* {errors?.subtitle}
+
+                     */}
+                     enter subtitle brother
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>
@@ -99,19 +144,17 @@ const CourseLandingPage = () => {
                   important areas that you've covered during your course.
                 </FormHelperText>
               </FormControl>
+
               <FormControl isRequired>
                 <FormLabel>Course Description</FormLabel>
-                <Input
-                  type="text"
-                  variant="filled"
-                  placeholder="Insert your course description"
-                  value={values.description}
-                  name="description"
-                  onChange={handleChange}
+                <ReactQuill
+                  theme="snow"
+                  value={description}
+                  onChange={setDescripton}
                 />
-                {errors.description && (
+                {error && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.description}
+                    Please add description
                   </Text>
                 )}
               </FormControl>
@@ -123,8 +166,8 @@ const CourseLandingPage = () => {
                   You must enter at 4 learning objectives or outcomes that
                   learners can expect to achieve after completing your course.
                 </Text>
-                {values?.learningObjectives.map((value, index) => (
-                  <Stack>
+                {values?.learningObjectives.map((value : any, index: number) => (
+                  <Stack key={index}>
                     <FormControl isRequired>
                       <Input
                         type="text"
@@ -134,17 +177,14 @@ const CourseLandingPage = () => {
                         name={`learningObjectives[${index}]`}
                         onChange={handleChange}
                       />
-                      {errors.learningObjectives && (
-                        <Text
-                          style={{ color: "red", marginTop: 5 }}
-                          fontSize="14px"
-                        >
-                          {errors.learningObjectives}
-                        </Text>
-                      )}
                     </FormControl>
                   </Stack>
                 ))}
+                {errors.learningObjectives && (
+                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
+                    please include all the 4 input
+                  </Text>
+                )}
               </Stack>
               <Stack>
                 <Text fontWeight={"bold"}>
@@ -157,28 +197,31 @@ const CourseLandingPage = () => {
                   no requirements, use this space as an opportunity to lower the
                   barrier for beginners.
                 </Text>
-                {values.preRequisities.map((value, index) => (
+                {values.preRequisities.map((value: any, index: any) => (
                   <Stack key={index}>
                     <FormControl isRequired>
                       <Input
                         type="text"
                         variant="filled"
                         placeholder="Example: No programming experience.You will learn everything you need know"
-                          value={value}
-                          // name={`preRequisities[${index}]`}
-                          name={`preRequisities[0]`}
+                        value={value}
+                        name={`preRequisities[0]`}
                         onChange={handleChange}
                       />
                       {errors.preRequisities && (
-                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {errors.preRequisities}
-                  </Text>
-                )}
+                        <Text
+                          style={{ color: "red", marginTop: 5 }}
+                          fontSize="14px"
+                        >
+                          please enter prerequisities
+                          {/* {errors.preRequisities} */}
+                        </Text>
+                      )}
                     </FormControl>
                   </Stack>
                 ))}
               </Stack>
-              <Flex columnGap={5}>
+              <Flex columnGap={5} flexDirection={{ base: "column", lg: "row" }}>
                 <Stack w="100%">
                   <Select
                     placeholder="Select language"
@@ -196,11 +239,11 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      {errors.language}
+                      please select a language
+                      {/* {errors?.language} */}
                     </Text>
                   )}
                 </Stack>
-                {/* level */}
                 <Stack w="100%">
                   <Select
                     placeholder="Select Level"
@@ -220,7 +263,8 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      {errors.complexityLevel}
+                      pls select level
+                      {/* {errors.complexityLevel} */}
                     </Text>
                   )}
                 </Stack>
@@ -252,29 +296,38 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      {errors.category}
+                      please select category
                     </Text>
                   )}
                 </Stack>
               </Flex>
+              {/* level */}
 
-              <Button
-                bg={"#00FF84"}
-                isLoading={isLoading}
-                loadingText="Loading"
-                colorScheme="teal"
-                variant="outline"
-                spinnerPlacement="end"
-                width="100%"
-                onClick={() => handleSubmit()}
-                mt={3}
-                borderWidth={2}
-                py={3}
-                borderColor={"#00FF84"}
-                _hover={{ background: "none", color: "#00FF84" }}
-              >
-                Register
-              </Button>
+              <Stack>
+                <Text fontWeight={"bold"} mt={2}>
+                  Course Image
+                </Text>
+                <CourseImageFileUpload onImageUpload={handleImageUpload} />
+              </Stack>
+
+              <Flex justify={"flex-end"}>
+                <Button
+                  bg={"#00FF84"}
+                  isLoading={isLoading}
+                  loadingText="Loading"
+                  colorScheme="teal"
+                  variant="outline"
+                  spinnerPlacement="end"
+                  onClick={() => handleSubmit()}
+                  mt={3}
+                  borderWidth={2}
+                  py={3}
+                  borderColor={"#00FF84"}
+                  _hover={{ background: "none", color: "#00FF84" }}
+                >
+                  Update
+                </Button>
+              </Flex>
             </Flex>
           )}
         </Formik>

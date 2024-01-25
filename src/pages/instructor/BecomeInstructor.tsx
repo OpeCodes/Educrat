@@ -35,7 +35,6 @@ const initialValues = {
 const BecomeInstructor = () => {
  const {becomeInstructor,isPending} = useBecomeInstructor();
   const handleSubmit = (values: any) => {
-    console.log(values);
     becomeInstructor(values)
   };
   const handleImageUpload = (file: File) => {
