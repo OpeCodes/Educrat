@@ -25,7 +25,7 @@ export const Header = () => {
           alignItems={"start"}
         >
           <Box mb={{ base: "16", lg: "0" }}>
-            <Heading as={"h1"} color={"#140342"} size={"3xl"}>
+            <Heading as={"h1"} color={"#140342"} fontSize={"45px"}>
               Master The Skills To Drive Your
               <Box as={"span"} textDecor={"underline"} color={"#6440fb"} pl={3}>
                 Career

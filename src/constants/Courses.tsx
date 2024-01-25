@@ -37,7 +37,7 @@ export const Courses = () => {
               10,000+ unique online course list designs
             </Text>
           </Box>
-          <Box display={"flex"}>
+          <Box display={"flex"} w={{ base: "90vw", md: "30vw" }}>
             {buttonsData.map(({ id, name }: button) => {
               return (
                 <Button

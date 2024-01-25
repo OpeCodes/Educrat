@@ -15,7 +15,7 @@ export const Recommendations = () => {
         alignItems={"start"}
         flexDirection={{ base: "column", lg: "row" }}
       >
-        <Box maxW={"600px"} mr={16} pt={12}>
+        <Box maxW={"600px"} mr={{ md: 16 }} pt={12}>
           <Heading as={"h2"} color={"white"} size={"lg"}>
             Get Personal Learning Recommendations
           </Heading>
