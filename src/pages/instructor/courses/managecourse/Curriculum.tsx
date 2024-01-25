@@ -56,13 +56,13 @@ const Curriculum = () => {
   useEffect(() => {
     refetch();
   }, [id]);
-  const { course } = useSelector((store: RootState) => store.user);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
    const {moduleLectureData} = useGetModuleLectureCourse("65afc8d34a45a6f608d8e537");
    console.log(moduleLectureData)
   const { moduleCreateLectureCourse, moduleLectureLoading } =
     useCreateModuleLectureCourse();
+    // console.log(moduleCreateLecture)
   //new section
   const initialValues1 = {
     title: "",
@@ -88,7 +88,8 @@ const Curriculum = () => {
   } = useModuleCreateCourse();
 
   const handleSubmit = (values: any): void => {
-    moduleCreateCourse({ courseId: course._id, user: values });
+    // moduleCreateCourse({ courseId: course._id, user: values });
+    moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
 
   const {
