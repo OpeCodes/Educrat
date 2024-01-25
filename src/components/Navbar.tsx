@@ -26,6 +26,7 @@ import {
   Divider,
   Avatar,
   useBoolean,
+  useToast,
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo-2.svg";
@@ -69,7 +70,7 @@ const links = [
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [hover, setHover] = useBoolean();
-
+  const toast = useToast();
   const {
     isOpen: modalOpen,
     onOpen: onModalOpen,
@@ -277,7 +278,17 @@ const Navbar = () => {
                       <Text>Help</Text>
                       <Text
                         cursor={"pointer"}
-                        onClick={() => dispatch(logoutUser())}
+                        onClick={() => {
+                          toast({
+                            title: `Logging out...`,
+                            status: "success",
+                            duration: 2000,
+                            isClosable: true,
+                          });
+                          setTimeout(() => {
+                            dispatch(logoutUser());
+                          }, 2000);
+                        }}
                       >
                         Logout
                       </Text>
@@ -332,7 +343,7 @@ const Navbar = () => {
           <DrawerCloseButton bg="white" borderRadius={"100%"} />
         </Box>
 
-        <DrawerContent>
+        <DrawerContent h={"100vh"}>
           <DrawerHeader
             borderBottomWidth="1px"
             display={"flex"}
@@ -342,7 +353,6 @@ const Navbar = () => {
           >
             {user ? (
               <>
-                {" "}
                 <Flex align={"center"} columnGap={3} mb={2} pr="10">
                   <Avatar
                     name={`${user.user.firstName} ${user.user.lastName}`}
@@ -377,16 +387,12 @@ const Navbar = () => {
                 </Text>
               </>
             )}
+
             <Box display={{ base: "block", md: "none" }}>
               <DrawerCloseButton bg="white" borderRadius={"100%"} />
             </Box>
           </DrawerHeader>
-
-          <DrawerBody
-            display={"flex"}
-            flexDirection={"column"}
-            justifyContent={"space-between"}
-          >
+          <Box paddingLeft={"32px"}>
             {user && (
               <>
                 {hasStudentRole && hasInstructorRole && (
@@ -402,7 +408,38 @@ const Navbar = () => {
                 )}
               </>
             )}
-
+            <br />
+            {user && (
+              <>
+                {hasStudentRole && hasInstructorRole && (
+                  <Text
+                    _hover={{ textDecoration: "none" }}
+                    onClick={() => {
+                      toast({
+                        title: `Logging out...`,
+                        status: "success",
+                        duration: 2000,
+                        isClosable: true,
+                      });
+                      setTimeout(() => {
+                        dispatch(logoutUser());
+                        onClose()
+                      }, 2000);
+                    }}
+                    cursor={"pointer"}
+                  >
+                    Logout out
+                  </Text>
+                )}
+              </>
+            )}
+          </Box>
+          <DrawerBody
+          // display={"flex"}
+          // flexDirection={"column"}
+          // justifyContent={"space-around"}
+          // mb={"-20px"}
+          >
             <Box>
               {links.map(({ id, name, href }) => (
                 <Box
@@ -411,7 +448,7 @@ const Navbar = () => {
                   paddingY={"2px"}
                   //   _hover={{ background: "blue" ,}}
                   transition={"all"}
-                  my={13}
+                  my={1}
                   key={id}
                 >
                   <NavLink
@@ -429,15 +466,15 @@ const Navbar = () => {
                 </Box>
               ))}
             </Box>
-            <Divider orientation="horizontal" />
-            <Flex rowGap={"25px"} flexDirection={"column"}>
+            <Divider orientation="horizontal" my={5} />
+            <Flex rowGap={"8px"} flexDirection={"column"}>
               <Text>Call Us</Text>
               <Text>08145885175</Text>
               <Text>Abule oja</Text>
               <Text>Yaba lagos</Text>
               <Text>adedokunpeter11@gmail.com</Text>
             </Flex>
-            <Flex mb="15px" columnGap={7} cursor={"pointer"}>
+            <Flex my="15px" columnGap={7} cursor={"pointer"}>
               <FaFacebookF />
               <FaTwitter />
               <FaInstagram />

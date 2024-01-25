@@ -21,3 +21,31 @@ export const getCourseLocalStorage = () => {
   const course = result ? JSON.parse(result) : null;
   return course;
 };
+
+//course module
+
+export const addCourseModuleStorage =(user: any) =>{
+  localStorage.setItem("courseModule", JSON.stringify(user))
+}
+
+export  const getCourseModuleStorage = () =>{
+  const result = localStorage.getItem("courseModule");
+  const courseModule= result ? JSON.parse(result) : null;
+  return courseModule;
+}
+export const removeCourseModuleromLocalStorage = () => {
+  localStorage.removeItem("courseModule");
+};
+
+//all course module
+export const addAllCourseModuleStorage =(user: any) =>{
+  localStorage.setItem("AllCourseModule", JSON.stringify(user))
+}
+export  const getAllCourseModuleStorage = () =>{
+  const result = localStorage.getItem("AllCourseModule");
+  const AllCourseModule= result ? JSON.parse(result) : null;
+  return AllCourseModule;
+}
+export const removeAllCourseModuleromLocalStorage = () => {
+  localStorage.removeItem("AllCourseModule");
+};

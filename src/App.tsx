@@ -98,37 +98,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  // const navigate = useNavigate();
-  // const toast = useToast();
-
-  // const { user } = useSelector((store: RootState) => store.user);
-  // if (user?.accessToken) {
-
-  //   const token = `${user.accessToken}`;
-  //   try {
-  //     const decodedToken = jwtDecode(token);
-  //     const currentTime = Math.floor(Date.now() / 1000);
-  //     if (decodedToken.exp !== undefined && decodedToken.exp < currentTime) {
-  //       removeUserFromLocalStorage();
-
-  //     } else {
-  //       console.log("JWT is still valid");
-  //       toast({
-  //         title: `valid token`,
-  //         status: "error",
-  //         duration: 5000,
-  //         isClosable: true,
-  //       });
-
-  //     //  return redirect("/sign-in")
-  //     // navigate("/sign-in")
-  //     // return null;
-
-  //     }
-  //   } catch (error) {
-  //     console.error("Error decoding JWT:", error);
-  //   }
-  // }
+  
   return <RouterProvider router={router} />;
 }
 

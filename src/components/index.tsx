@@ -10,6 +10,7 @@ import CourseManageNavbar from "./CourseManageNavbar";
 import CourseManageSidebar from "./CourseManageSidebar";
 import CourseImageFileUpload from "./CourseImageFileUpload";
 import Loading from "./Loading";
+import CourseListComponent from "./CourseListComponent";
 import Category from "./Category";
 import Course from "./Course";
 import SliderButtons from "./SliderButtons";
@@ -30,6 +31,7 @@ export {
   CourseManageSidebar,
   CourseImageFileUpload,
   Loading,
+  CourseListComponent,
   Category,
   Course,
   SliderButtons,
