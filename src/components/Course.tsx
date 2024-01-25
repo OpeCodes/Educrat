@@ -32,7 +32,8 @@ const Course = ({
     <Box
       as="div"
       className="wrapper"
-      width={{ base: "367px", md: "345px", lg: "290px" }}
+      width={{ base: "87vw", md: "345px", lg: "290px" }}
+      // width={"290px"}
       height={"auto"}
       cursor={"pointer"}
       key={id}
@@ -93,8 +94,12 @@ const Course = ({
             </Box>
           </Box>
         </Flex>
-        <Divider colorScheme="#ededed" />
-        <Flex justifyContent={"space-between"} alignItems={"center"}>
+        <Divider colorScheme="#ededed" display={{ base: "none" }} />
+        <Box
+          display={{ base: "none", lg: "flex" }}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
           <Box
             display={"flex"}
             justifyContent={"space-between"}
@@ -117,7 +122,7 @@ const Course = ({
               ${newPrice}
             </Text>
           </Box>
-        </Flex>
+        </Box>
       </Stack>
     </Box>
   );
