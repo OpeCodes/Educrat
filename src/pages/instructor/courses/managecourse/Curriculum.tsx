@@ -31,6 +31,7 @@ import {
   useGetModuleCourse,
   useModuleEditCourse,
   useCreateModuleLectureCourse,
+  useEditModuleLectureCourse,
   // useGetModuleLectureCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
@@ -50,6 +51,7 @@ const Curriculum = () => {
   }, [id]);
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
+  const {moduleEditLectureCourse,moduleEditLectureLoading}= useEditModuleLectureCourse();
   // const { moduleLectureData } = useGetModuleLectureCourse(
   //   "65afc8d34a45a6f608d8e537"
   // );
@@ -62,8 +64,8 @@ const Curriculum = () => {
   };
   //edit section
   const initialValues2 = {
-    title: getSingleCourse?.title,
-    learningObjective: getSingleCourse?.subtitle,
+    title:"",
+    learningObjective:"",
   };
   const initialValues3 = {
     title: "",
@@ -330,6 +332,10 @@ const Curriculum = () => {
                           validationSchema={curriculumEditLectureSchema}
                           onSubmit={(values: any) => {
                             console.log(values);
+                            moduleEditLectureCourse({lectureId: id, user: values})
+                            setTimeout(() => {
+                              toggleIsModuleLectureOpen(id)
+                            }, 2000);
                           }}
                         >
                           {({
@@ -397,7 +403,7 @@ const Curriculum = () => {
                                   as={"button"}
                                   py={2}
                                   px={4}
-                                  isLoading={moduleLectureLoading}
+                                  isLoading={moduleEditLectureLoading}
                                   loadingText="Loading"
                                   variant="outline"
                                   spinnerPlacement="end"

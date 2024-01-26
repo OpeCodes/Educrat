@@ -257,14 +257,14 @@ export const useEditModuleLectureCourse = () => {
   const queryClient = useQueryClient();
   const { mutate: moduleEditLectureCourse, isPending: moduleEditLectureLoading } =
     useMutation({
-      mutationFn: ({ moduleId, user }: any) => {
-        return customFetch.post(`/lecture/${moduleId}`, user);
+      mutationFn: ({ lectureId, user }: any) => {
+        return customFetch.put(`/lecture/${lectureId}`, user);
       },
       onSuccess: (user) => {
         queryClient.invalidateQueries({ queryKey: ["module"] });
         console.log(user);
         toast({
-          title: `lecture created successfully`,
+          title: `lecture edited successfully`,
           status: "success",
           duration: 5000,
           isClosable: true,
