@@ -200,14 +200,14 @@ export const useGetSingleModuleCourse = (id: any) => {
 
 export const useCreateModuleLectureCourse = () => {
   const toast = useToast();
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const { mutate: moduleCreateLectureCourse, isPending: moduleLectureLoading } =
     useMutation({
       mutationFn: ({ moduleId, user }: any) => {
         return customFetch.post(`/lecture/module/${moduleId}`, user);
       },
       onSuccess: (user) => {
-        // queryClient.invalidateQueries({ queryKey: ["module"] });
+        queryClient.invalidateQueries({ queryKey: ["module"] });
         console.log(user);
         toast({
           title: `lecture created successfully`,
@@ -229,25 +229,6 @@ export const useCreateModuleLectureCourse = () => {
 };
 
 export const useGetModuleLectureCourse = (id: any) => {
-  // const [isOpenState, setIsOpenState] = useState<{ [key: number]: boolean }>(
-  //   {}
-  // );
-  // const [isOpenCurriculumState, setIsOpenCurriculumState] = useState<{
-  //   [key: number]: boolean;
-  // }>({});
-
-  // const toggleIsOpen = (arrayId: number) => {
-  //   setIsOpenState((prevIsOpenState) => ({
-  //     ...prevIsOpenState,
-  //     [arrayId]: !prevIsOpenState[arrayId],
-  //   }));
-  // };
-  // const toggleIsCurriculumOpen = (arrayId: number) => {
-  //   setIsOpenCurriculumState((prevIsOpenCurriculumState) => ({
-  //     ...prevIsOpenCurriculumState,
-  //     [arrayId]: !prevIsOpenCurriculumState[arrayId],
-  //   }));
-  // };
   const {
     data: moduleLectureData,
     isPending,

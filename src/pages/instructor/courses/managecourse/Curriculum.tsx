@@ -31,7 +31,7 @@ import {
   useGetModuleCourse,
   useModuleEditCourse,
   useCreateModuleLectureCourse,
-  useGetModuleLectureCourse,
+  // useGetModuleLectureCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
