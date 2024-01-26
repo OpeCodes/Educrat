@@ -146,6 +146,21 @@ export const useGetModuleCourse = (id: any) => {
       [arrayId]: !prevIsOpenCurriculumState[arrayId],
     }));
   };
+
+  //lecture module
+  const [isOpenModuleLectureState, setIsOpenModuleLectureState] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  const toggleIsModuleLectureOpen = (arrayId: number) => {
+    setIsOpenModuleLectureState((prevIsModuleLectureState) => ({
+      ...prevIsModuleLectureState,
+      [arrayId]: !prevIsModuleLectureState[arrayId],
+    }));
+  };
+
+
+
   const { data, isPending, isSuccess } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
@@ -163,6 +178,23 @@ export const useGetModuleCourse = (id: any) => {
     isSuccess,
     isOpenCurriculumState,
     toggleIsCurriculumOpen,
+    toggleIsModuleLectureOpen,
+    isOpenModuleLectureState
+  };
+};
+export const useGetSingleModuleCourse = (id: any) => {
+  const { data, isPending } = useQuery({
+    queryKey: ["module", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; // Destructure the queryKey to get the 'id'
+      const { data } = await customFetch.get(`module/${id}`);
+      return data;
+    },
+  });
+
+  return {
+    data,
+    isPending,
   };
 };
 
@@ -196,7 +228,6 @@ export const useCreateModuleLectureCourse = () => {
   return { moduleCreateLectureCourse, moduleLectureLoading };
 };
 
-
 export const useGetModuleLectureCourse = (id: any) => {
   // const [isOpenState, setIsOpenState] = useState<{ [key: number]: boolean }>(
   //   {}
@@ -217,7 +248,11 @@ export const useGetModuleLectureCourse = (id: any) => {
   //     [arrayId]: !prevIsOpenCurriculumState[arrayId],
   //   }));
   // };
-  const { data: moduleLectureData, isPending, isSuccess } = useQuery({
+  const {
+    data: moduleLectureData,
+    isPending,
+    isSuccess,
+  } = useQuery({
     queryKey: ["LectureModule", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
