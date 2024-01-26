@@ -281,3 +281,34 @@ export const useEditModuleLectureCourse = () => {
     });
   return { moduleEditLectureCourse, moduleEditLectureLoading };
 };
+
+
+export const useDeleteLectureModuleCourse = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteLectureModule, isPending: lectureModuleLoading } = useMutation({
+    mutationFn: ({ lectureId }: any) => {
+      return customFetch.delete(`/lecture/${lectureId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["module"] });
+
+      toast({
+        title: `lecture deleted successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { deleteLectureModule,lectureModuleLoading };
+};
