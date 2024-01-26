@@ -29,7 +29,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
-import logo from "../assets/logo.svg";
+import logo from "../assets/logo-2.svg";
 import { FiSearch } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
@@ -88,11 +88,15 @@ const Navbar = () => {
   return (
     <Stack>
       <Flex
-        bg={"#140342"}
-        p={4}
+        bg="white"
+        py={4}
+        px={{ base: "6", md: "12", lg: "16" }}
         width={"100%"}
+        position={"fixed"}
+        zIndex={10}
         justify={"space-between"}
         align={"center"}
+        shadow={"base"}
       >
         <Flex justify={"space-between"} align={"center"}>
           <Box width={"160px"}>
@@ -119,7 +123,7 @@ const Navbar = () => {
                 style={({ isActive }) => {
                   return {
                     fontWeight: isActive ? "bold" : "",
-                    color: isActive ? "#4f547b" : "white",
+                    color: isActive ? "#6440fb" : "#140342",
                   };
                 }}
               >
@@ -159,18 +163,18 @@ const Navbar = () => {
           )}
 
           <Text cursor={"pointer"} onClick={() => onModalOpen()}>
-            <FiSearch fontSize={"25px"} />
+            <FiSearch color={"#6440fb"} fontSize={"25px"} />
           </Text>
           <Box position="relative">
             <Text cursor={"pointer"}>
-              <IoCartOutline fontSize={"25px"} />
+              <IoCartOutline color={"#6440fb"} fontSize={"25px"} />
             </Text>
             <Badge
               position="absolute"
               top="-4"
               right="-3"
               borderRadius="100%"
-              bg="red.500"
+              bg="#6440fb"
               color="white"
               textAlign={"center"}
             >
@@ -179,7 +183,7 @@ const Navbar = () => {
           </Box>
           <Box
             fontSize={"50px"}
-            color={"white"}
+            color={"#6440fb"}
             cursor={"pointer"}
             display={{ base: "black", lg: "none" }}
             onClick={onOpen}
@@ -296,7 +300,7 @@ const Navbar = () => {
           ) : (
             <>
               <Button
-                color="#ffffff"
+                color={"#6440fb"}
                 variant="link"
                 display={{ base: "none", md: "flex" }}
                 as={Link}
@@ -306,13 +310,19 @@ const Navbar = () => {
               </Button>
               <Button
                 display={{ base: "none", md: "flex" }}
-                px={8}
-                bg="white"
-                color="black"
+                px={10}
+                py={7}
+                bg="#6440fb"
+                color="white"
                 variant="solid"
                 borderColor={"white"}
                 borderWidth={2}
-                _hover={{ background: "#140342", color: "white" }}
+                borderRadius={"full"}
+                _hover={{
+                  background: "white",
+                  color: "#6440fb",
+                  borderColor: "#6440fb",
+                }}
                 as={Link}
                 to={"/sign-up"}
               >

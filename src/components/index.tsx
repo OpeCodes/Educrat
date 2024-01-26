@@ -8,9 +8,16 @@ import CreateCourseNavBar from "./CreateCourseNavBar";
 import CourseManageDashboardLayout from "./CourseManageDashboardLayout";
 import CourseManageNavbar from "./CourseManageNavbar";
 import CourseManageSidebar from "./CourseManageSidebar";
-import CourseImageFileUpload from "./CourseImageFileUpload"
+import CourseImageFileUpload from "./CourseImageFileUpload";
 import Loading from "./Loading";
 import CourseListComponent from "./CourseListComponent";
+import Category from "./Category";
+import Course from "./Course";
+import SliderButtons from "./SliderButtons";
+import Instructor from "./Instructor";
+import Student from "./Student";
+import Article from "./Article";
+import MedArticle from "./MedArticle";
 export {
   HomeLayout,
   Navbar,
@@ -24,5 +31,12 @@ export {
   CourseManageSidebar,
   CourseImageFileUpload,
   Loading,
-  CourseListComponent
+  CourseListComponent,
+  Category,
+  Course,
+  SliderButtons,
+  Instructor,
+  Student,
+  Article,
+  MedArticle,
 };
