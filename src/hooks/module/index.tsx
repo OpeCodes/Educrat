@@ -1,17 +1,10 @@
 import { useToast } from "@chakra-ui/react";
-import { setCourseModule } from "../../features/user/UserSlice";
-import { useDispatch } from "react-redux";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
-import {
-  addCourseModuleStorage,
-  removeCourseModuleromLocalStorage,
-} from "../../store/localStorage";
 import { useState } from "react";
 
 export const useModuleCreateCourse = () => {
   const toast = useToast();
-  const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const [showSection, setShowSection] = useState<boolean>(false);
   const [success, setSucess] = useState<boolean>(false);
@@ -24,9 +17,8 @@ export const useModuleCreateCourse = () => {
     mutationFn: ({ courseId, user }: any) => {
       return customFetch.post(`/module/course/${courseId}`, user);
     },
-    onSuccess: (user) => {
-      dispatch(setCourseModule(user.data));
-      addCourseModuleStorage(user.data);
+    onSuccess: () => {
+   
       queryClient.invalidateQueries({ queryKey: ["module"] });
       setSucess(false);
       setShowSection(false);
@@ -59,7 +51,6 @@ export const useModuleCreateCourse = () => {
 
 export const useModuleEditCourse = () => {
   const toast = useToast();
-  const dispatch = useDispatch();
   const queryClient = useQueryClient();
 
   const {
@@ -72,10 +63,9 @@ export const useModuleEditCourse = () => {
     mutationFn: ({ moduleId, user }: any) => {
       return customFetch.put(`/module/${moduleId}`, user);
     },
-    onSuccess: (user) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
-      dispatch(setCourseModule(user.data));
-      addCourseModuleStorage(user.data);
+      
       toast({
         title: `course section successfully`,
         status: "success",
@@ -104,7 +94,6 @@ export const useDeleteModalCourse = () => {
       return customFetch.delete(`/module/${moduleId}`);
     },
     onSuccess: () => {
-      removeCourseModuleromLocalStorage();
       queryClient.invalidateQueries({ queryKey: ["module"] });
 
       toast({
@@ -206,7 +195,7 @@ export const useCreateModuleLectureCourse = () => {
       mutationFn: ({ moduleId, user }: any) => {
         return customFetch.post(`/lecture/module/${moduleId}`, user);
       },
-      onSuccess: (user) => {
+      onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["module"] });
         toast({
           title: `lecture created successfully`,
@@ -259,7 +248,7 @@ export const useEditModuleLectureCourse = () => {
       mutationFn: ({ lectureId, user }: any) => {
         return customFetch.put(`/lecture/${lectureId}`, user);
       },
-      onSuccess: (user) => {
+      onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["module"] });
         toast({
           title: `lecture edited successfully`,

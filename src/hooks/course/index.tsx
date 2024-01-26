@@ -1,10 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import { useToast } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setCourse } from "../../features/user/UserSlice";
-import { addCourseLocalStorage } from "../../store/localStorage";
 export const useCourseCategory = () => {
   const { data, isPending } = useQuery({
     queryKey: ["courseCategory"],
@@ -19,15 +16,14 @@ export const useCourseCategory = () => {
 export const useCreateCourse = () => {
   const toast = useToast();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  
   const queryClient = useQueryClient();
   const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);
     },
     onSuccess: (user: any) => {
-      dispatch(setCourse(user.data));
-      addCourseLocalStorage(user.data);
+     
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
       queryClient.invalidateQueries({ queryKey: ["allUserCourse"] });
       
