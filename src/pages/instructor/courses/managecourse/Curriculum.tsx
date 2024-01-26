@@ -32,6 +32,7 @@ import {
   useModuleEditCourse,
   useCreateModuleLectureCourse,
   useEditModuleLectureCourse,
+  // useDeleteLectureModuleCourse,
   // useGetModuleLectureCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
@@ -52,9 +53,8 @@ const Curriculum = () => {
   const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
   const {moduleEditLectureCourse,moduleEditLectureLoading}= useEditModuleLectureCourse();
-  // const { moduleLectureData } = useGetModuleLectureCourse(
-  //   "65afc8d34a45a6f608d8e537"
-  // );
+  //  const {deleteLectureModule,lectureModuleLoading}= useDeleteLectureModuleCourse();
+  
   const { moduleCreateLectureCourse, moduleLectureLoading } =
     useCreateModuleLectureCourse();
   //new section

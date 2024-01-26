@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Box, Progress, Input, Image, useToast, Stack,Text ,Flex} from "@chakra-ui/react";
 import customFetch from "../utils/axios";
 // import imagePlaceholder from "../assets/image-placeholder.png";
 import imagePlaceholder from "../assets/CourseImagePlaceholder.jpg";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../store/store";
+import { useGetSingleCourse } from "../hooks/course";
+import { useParams } from "react-router-dom";
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
 }
@@ -14,12 +16,19 @@ const MAX_FILE_SIZE_MB = 5;
 // const EXPECTED_HEIGHT = 422;
 
 const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
-  const { course} = useSelector((store: RootState) => store.user);
+  // const { course} = useSelector((store: RootState) => store.user);
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [fileToUpload, setFileToUpload] = useState<File | null>(null);
   const toast = useToast();
+  const { id } = useParams();
+
+  const { getSingleCourse, refetch } = useGetSingleCourse(id);
+
+  useEffect(() => {
+    refetch();
+  }, [id]);
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -76,7 +85,9 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         const base64Data = reader.result as string;
 
         // Replace 'courseId' with the actual variable holding the course id
-        const dynamicEndpoint = `/course/${course?.id}/thumbnail`;
+        // const dynamicEndpoint = `/course/${course?.id}/thumbnail`;
+
+        const dynamicEndpoint = `/course/${getSingleCourse?.id}/thumbnail`;
 
         sendBase64Data(fileToUpload, base64Data, dynamicEndpoint);
       };
