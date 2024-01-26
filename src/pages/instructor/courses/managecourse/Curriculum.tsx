@@ -55,7 +55,6 @@ const Curriculum = () => {
   // );
   const { moduleCreateLectureCourse, moduleLectureLoading } =
     useCreateModuleLectureCourse();
-  // console.log(moduleCreateLecture)
   //new section
   const initialValues1 = {
     title: "",
@@ -96,8 +95,6 @@ const Curriculum = () => {
     isOpenModuleLectureState
   } = useGetModuleCourse(getSingleCourse?.id);
   // console.log(data);
-  console.log(toggleIsModuleLectureOpen)
-  console.log(isOpenModuleLectureState)
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>

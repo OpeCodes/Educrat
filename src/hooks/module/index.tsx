@@ -249,3 +249,35 @@ export const useGetModuleLectureCourse = (id: any) => {
     isSuccess,
   };
 };
+
+
+//lectures
+export const useEditModuleLectureCourse = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const { mutate: moduleEditLectureCourse, isPending: moduleEditLectureLoading } =
+    useMutation({
+      mutationFn: ({ moduleId, user }: any) => {
+        return customFetch.post(`/lecture/${moduleId}`, user);
+      },
+      onSuccess: (user) => {
+        queryClient.invalidateQueries({ queryKey: ["module"] });
+        console.log(user);
+        toast({
+          title: `lecture created successfully`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+      onError: (error: any) => {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+    });
+  return { moduleEditLectureCourse, moduleEditLectureLoading };
+};
