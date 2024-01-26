@@ -208,7 +208,6 @@ export const useCreateModuleLectureCourse = () => {
       },
       onSuccess: (user) => {
         queryClient.invalidateQueries({ queryKey: ["module"] });
-        console.log(user);
         toast({
           title: `lecture created successfully`,
           status: "success",
@@ -262,7 +261,6 @@ export const useEditModuleLectureCourse = () => {
       },
       onSuccess: (user) => {
         queryClient.invalidateQueries({ queryKey: ["module"] });
-        console.log(user);
         toast({
           title: `lecture edited successfully`,
           status: "success",

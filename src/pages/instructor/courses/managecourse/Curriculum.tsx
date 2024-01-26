@@ -96,7 +96,6 @@ const Curriculum = () => {
     toggleIsModuleLectureOpen,
     isOpenModuleLectureState
   } = useGetModuleCourse(getSingleCourse?.id);
-  // console.log(data);
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -331,7 +330,6 @@ const Curriculum = () => {
                           initialValues={initialValues4}
                           validationSchema={curriculumEditLectureSchema}
                           onSubmit={(values: any) => {
-                            console.log(values);
                             moduleEditLectureCourse({lectureId: id, user: values})
                             setTimeout(() => {
                               toggleIsModuleLectureOpen(id)
@@ -453,7 +451,6 @@ const Curriculum = () => {
                     initialValues={initialValues3}
                     validationSchema={curriculumLectureSchema}
                     onSubmit={(values: any) => {
-                      // console.log(values)
                       moduleCreateLectureCourse({
                         moduleId: id,
                         user: values,

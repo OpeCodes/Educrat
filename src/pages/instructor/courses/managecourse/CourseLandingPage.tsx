@@ -39,16 +39,15 @@ const CourseLandingPage = () => {
     // Manually refetch data when the ID changes or when needed
     refetch();
   }, [id]);
-console.log(getSingleCourse)
   const initialValues = {
     title: getSingleCourse?.title  ,
     subtitle:getSingleCourse?.subtitle,
     language: getSingleCourse?.language,
     category: getSingleCourse?.category?.id,
     description: getSingleCourse?.description,
-    preRequisities: getSingleCourse?.preRequisities || [""],
-    complexityLevel: getSingleCourse?.complexityLevel || "",
-    learningObjectives: getSingleCourse?.learningObjectives || ["", "", "", ""],
+    preRequisities: getSingleCourse?.preRequisities,
+    complexityLevel: getSingleCourse?.complexityLevel,
+    learningObjectives: getSingleCourse?.learningObjectives,
   };
   const [description, setDescripton] = useState(initialValues?.description);
   const { data, isPending } = useCourseCategory();

@@ -26,7 +26,6 @@ export const useCreateCourse = () => {
       return customFetch.post("/course", user);
     },
     onSuccess: (user: any) => {
-      console.log(user)
       dispatch(setCourse(user.data));
       addCourseLocalStorage(user.data);
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
