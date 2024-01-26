@@ -45,7 +45,7 @@ const CourseLandingPage = () => {
     language: getSingleCourse?.language,
     category: getSingleCourse?.category?.id,
     description: getSingleCourse?.description,
-    preRequisities: getSingleCourse?.preRequisities,
+    preRequisities: getSingleCourse?.preRequisities || [""],
     complexityLevel: getSingleCourse?.complexityLevel,
     learningObjectives: getSingleCourse?.learningObjectives,
   };
@@ -165,7 +165,7 @@ const CourseLandingPage = () => {
                   You must enter at 4 learning objectives or outcomes that
                   learners can expect to achieve after completing your course.
                 </Text>
-                {values?.learningObjectives.map((value : any, index: number) => (
+                {values?.learningObjectives?.map((value : any, index: number) => (
                   <Stack key={index}>
                     <FormControl isRequired>
                       <Input
@@ -196,7 +196,7 @@ const CourseLandingPage = () => {
                   no requirements, use this space as an opportunity to lower the
                   barrier for beginners.
                 </Text>
-                {values.preRequisities.map((value: any, index: any) => (
+                {values?.preRequisities.map((value: any, index: any) => (
                   <Stack key={index}>
                     <FormControl isRequired>
                       <Input
