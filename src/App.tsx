@@ -20,6 +20,7 @@ import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
 import { CourseLandingPage } from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
+
 const router = createBrowserRouter([
   {
     path: "/",
