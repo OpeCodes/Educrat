@@ -38,7 +38,6 @@ const CourseLandingPage = () => {
     isPending: singleCourseLoading,
     refetch
   } = useGetSingleCourse(id);
-console.log(getSingleCourse)
   
   const initialValues = {
     title: getSingleCourse?.title || "",
@@ -50,7 +49,10 @@ console.log(getSingleCourse)
     complexityLevel: getSingleCourse?.complexityLevel,
     learningObjectives: getSingleCourse?.learningObjectives || [""] ,
   };
+
+
   const [description, setDescripton] = useState(initialValues?.description);
+
   const { data, isPending } = useCourseCategory();
   const handleImageUpload = (file: File) => {
     console.log("Uploaded file:", file);
@@ -60,11 +62,13 @@ console.log(getSingleCourse)
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
+   
+    
     if (!description) {
       setError(true);
       return;
     }
-    setDescripton("")
+    // setDescripton("")
     singleCourse({
       singleId: getSingleCourse?.id,
       user: { ...values, description },
@@ -150,7 +154,7 @@ console.log(getSingleCourse)
                 <FormLabel>Course Description</FormLabel>
                 <ReactQuill
                   theme="snow"
-                  defaultValue={initialValues.description}
+                  defaultValue={initialValues?.description}
                   value={description}
                   onChange={setDescripton}
                 />
@@ -202,7 +206,8 @@ console.log(getSingleCourse)
                   no requirements, use this space as an opportunity to lower the
                   barrier for beginners.
                 </Text>
-                {values?.preRequisities.map((value: any, index: any) => (
+                {values?.preRequisities?.map((value: any, index: any) =>  (
+                  
                   <Stack key={index}>
                     <FormControl isRequired>
                       <Input
@@ -211,6 +216,7 @@ console.log(getSingleCourse)
                         placeholder="Example: No programming experience.You will learn everything you need know"
                         value={value}
                         name={`preRequisities[${index}]`}
+                        
                         onChange={handleChange}
                       />
                       {errors.preRequisities && (
