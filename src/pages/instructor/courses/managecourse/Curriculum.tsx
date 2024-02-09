@@ -280,12 +280,13 @@ const Curriculum = () => {
                     )}
                   </Formik>
                 )}
+                <Stack mt={6} pl={12}>
 
                 {/* new curriculum */}
                 {lectures?.map((lecture: any) => {
                   const { id,title } = lecture;
                   return (
-                    <Stack p={5}>
+                    <Stack  my={1} >
                       {/* list of lecture starts here */}
                       {!isOpenModuleLectureState[id] && (
                         <Stack
@@ -542,6 +543,7 @@ const Curriculum = () => {
                     )}
                   </Formik>
                 )}
+                </Stack>
               </Stack>
             </Stack>
 
