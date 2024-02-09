@@ -52,7 +52,7 @@ export const useCreateCourse = () => {
 
 export const useSingleCourse = () => {
   const toast = useToast();
-  
+  const queryClient = useQueryClient();
   const {
     mutate: singleCourse,
     isPending,
@@ -63,6 +63,7 @@ export const useSingleCourse = () => {
       return customFetch.put(`course/${singleId}`, user);
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
       toast({
         title: `course updated successfully`,
         status: "success",

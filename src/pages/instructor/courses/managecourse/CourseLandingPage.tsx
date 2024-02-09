@@ -20,7 +20,7 @@ import {
 } from "../../../../hooks/course";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useState, } from "react";
+import { useEffect, useState, } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
@@ -28,16 +28,20 @@ import { useParams } from "react-router-dom";
 const CourseLandingPage = () => {
   const [error, setError] = useState<boolean>(false);
   const { id } = useParams();
+  useEffect(() => {
+    refetch();
+  }, [id]);
 
   const {
     getSingleCourse,
     isError,
     isPending: singleCourseLoading,
+    refetch
   } = useGetSingleCourse(id);
 console.log(getSingleCourse)
   
   const initialValues = {
-    title: getSingleCourse?.title,
+    title: getSingleCourse?.title || "",
     subtitle: getSingleCourse?.subtitle,
     language: getSingleCourse?.language,
     category: getSingleCourse?.category?.id,
@@ -51,6 +55,8 @@ console.log(getSingleCourse)
   const handleImageUpload = (file: File) => {
     console.log("Uploaded file:", file);
   };
+
+  
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
@@ -58,6 +64,7 @@ console.log(getSingleCourse)
       setError(true);
       return;
     }
+    setDescripton("")
     singleCourse({
       singleId: getSingleCourse?.id,
       user: { ...values, description },
@@ -143,6 +150,7 @@ console.log(getSingleCourse)
                 <FormLabel>Course Description</FormLabel>
                 <ReactQuill
                   theme="snow"
+                  defaultValue={initialValues.description}
                   value={description}
                   onChange={setDescripton}
                 />
