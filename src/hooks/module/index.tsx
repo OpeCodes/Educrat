@@ -172,7 +172,7 @@ export const useGetModuleCourse = (id: any) => {
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
-  const { data, isPending } = useQuery({
+  const { data: getSingleModuleCourse, isPending } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
@@ -182,7 +182,7 @@ export const useGetSingleModuleCourse = (id: any) => {
   });
 
   return {
-    data,
+    getSingleModuleCourse,
     isPending,
   };
 };

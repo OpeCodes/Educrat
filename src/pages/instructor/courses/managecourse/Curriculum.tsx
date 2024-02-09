@@ -32,6 +32,7 @@ import {
   useModuleEditCourse,
   useCreateModuleLectureCourse,
   useEditModuleLectureCourse,
+  useGetSingleModuleCourse,
   // useDeleteLectureModuleCourse,
   // useGetModuleLectureCourse,
 } from "../../../../hooks/module";
@@ -54,7 +55,6 @@ const Curriculum = () => {
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
   const {moduleEditLectureCourse,moduleEditLectureLoading}= useEditModuleLectureCourse();
   //  const {deleteLectureModule,lectureModuleLoading}= useDeleteLectureModuleCourse();
-  
   const { moduleCreateLectureCourse, moduleLectureLoading } =
     useCreateModuleLectureCourse();
   //new section
@@ -62,11 +62,11 @@ const Curriculum = () => {
     title: "",
     learningObjective: "",
   };
-  //edit section
-  const initialValues2 = {
-    title:"",
-    learningObjective:"",
-  };
+  //edit course section
+  // const initialValues2 = {
+  //   title:"",
+  //   learningObjective:"",
+  // };
   const initialValues3 = {
     title: "",
   };
@@ -121,7 +121,15 @@ const Curriculum = () => {
         </Stack>
       )}
       {data?.map((course: any, index: any) => {
+
         const { title, id, lectures } = course;
+    const {getSingleModuleCourse} = useGetSingleModuleCourse(id)
+    //edit course section
+    const initialValues2 = {
+      title: getSingleModuleCourse?.title,
+      learningObjective:getSingleModuleCourse?.learningObjective,
+    };
+        // console.log(getSingleModuleCourse)
         return (
           <Stack key={id}>
             <Stack px={5} py={2}>
