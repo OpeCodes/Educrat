@@ -18,7 +18,6 @@ export const useModuleCreateCourse = () => {
       return customFetch.post(`/module/course/${courseId}`, user);
     },
     onSuccess: () => {
-   
       queryClient.invalidateQueries({ queryKey: ["module"] });
       setSucess(false);
       setShowSection(false);
@@ -65,7 +64,7 @@ export const useModuleEditCourse = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
-      
+
       toast({
         title: `course section successfully`,
         status: "success",
@@ -148,8 +147,6 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
-
-
   const { data, isPending, isSuccess } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
@@ -168,7 +165,7 @@ export const useGetModuleCourse = (id: any) => {
     isOpenCurriculumState,
     toggleIsCurriculumOpen,
     toggleIsModuleLectureOpen,
-    isOpenModuleLectureState
+    isOpenModuleLectureState,
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
@@ -238,51 +235,21 @@ export const useGetModuleLectureCourse = (id: any) => {
   };
 };
 
-
-//lectures
+//lectures*****************************************************************************************
 export const useEditModuleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { mutate: moduleEditLectureCourse, isPending: moduleEditLectureLoading } =
-    useMutation({
-      mutationFn: ({ lectureId, user }: any) => {
-        return customFetch.put(`/lecture/${lectureId}`, user);
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["module"] });
-        toast({
-          title: `lecture edited successfully`,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-      },
-      onError: (error: any) => {
-        toast({
-          title: `${error.response.data.error}`,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
-      },
-    });
-  return { moduleEditLectureCourse, moduleEditLectureLoading };
-};
-
-
-export const useDeleteLectureModuleCourse = () => {
-  const toast = useToast();
-  const queryClient = useQueryClient();
-
-  const { mutate: deleteLectureModule, isPending: lectureModuleLoading } = useMutation({
-    mutationFn: ({ lectureId }: any) => {
-      return customFetch.delete(`/lecture/${lectureId}`);
+  const {
+    mutate: moduleEditLectureCourse,
+    isPending: moduleEditLectureLoading,
+  } = useMutation({
+    mutationFn: ({ lectureId, user }: any) => {
+      return customFetch.put(`/lecture/${lectureId}`, user);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
-
       toast({
-        title: `lecture deleted successfully`,
+        title: `lecture edited successfully`,
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -297,5 +264,57 @@ export const useDeleteLectureModuleCourse = () => {
       });
     },
   });
-  return { deleteLectureModule,lectureModuleLoading };
+  return { moduleEditLectureCourse, moduleEditLectureLoading };
+};
+
+export const useDeleteLectureModuleCourse = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteLectureModule, isPending: lectureModuleLoading } =
+    useMutation({
+      mutationFn: ({ lectureId }: any) => {
+        return customFetch.delete(`/lecture/${lectureId}`);
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["module"] });
+
+        toast({
+          title: `lecture deleted successfully`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+      onError: (error: any) => {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+    });
+  return { deleteLectureModule, lectureModuleLoading };
+};
+
+export const useGetLectureModuleCourse = (id: any) => {
+  const {
+    data: getLectureModuleCourse,
+    isPending,
+    isSuccess,
+  } = useQuery({
+    queryKey: ["moduleLectureCourse", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; // Destructure the queryKey to get the 'id'
+      const { data } = await customFetch.get(`lecture/module/${id}`);
+      return data;
+    },
+  });
+
+  return {
+    getLectureModuleCourse,
+    isPending,
+    isSuccess,
+  };
 };
