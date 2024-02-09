@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Box, Progress, Input, Image, useToast, Stack, Text, Flex } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
 import imagePlaceholder from "../assets/CourseImagePlaceholder.jpg";
@@ -16,11 +16,9 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const toast = useToast();
   const { id } = useParams();
-  const { getSingleCourse, refetch } = useGetSingleCourse(id);
+  const { getSingleCourse } = useGetSingleCourse(id);
 
-  useEffect(() => {
-    refetch();
-  }, [id]);
+  
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];

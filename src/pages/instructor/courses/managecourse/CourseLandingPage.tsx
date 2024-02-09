@@ -20,7 +20,7 @@ import {
 } from "../../../../hooks/course";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
@@ -28,26 +28,23 @@ import { useParams } from "react-router-dom";
 const CourseLandingPage = () => {
   const [error, setError] = useState<boolean>(false);
   const { id } = useParams();
+
   const {
     getSingleCourse,
     isError,
-    refetch,
     isPending: singleCourseLoading,
   } = useGetSingleCourse(id);
-
-  useEffect(() => {
-    // Manually refetch data when the ID changes or when needed
-    refetch();
-  }, [id]);
+console.log(getSingleCourse)
+  
   const initialValues = {
-    title: getSingleCourse?.title  ,
-    subtitle:getSingleCourse?.subtitle,
+    title: getSingleCourse?.title,
+    subtitle: getSingleCourse?.subtitle,
     language: getSingleCourse?.language,
     category: getSingleCourse?.category?.id,
     description: getSingleCourse?.description,
     preRequisities: getSingleCourse?.preRequisities || [""],
     complexityLevel: getSingleCourse?.complexityLevel,
-    learningObjectives: getSingleCourse?.learningObjectives,
+    learningObjectives: getSingleCourse?.learningObjectives || [""] ,
   };
   const [description, setDescripton] = useState(initialValues?.description);
   const { data, isPending } = useCourseCategory();
@@ -67,10 +64,8 @@ const CourseLandingPage = () => {
     });
   };
 
-  // if ( singleCourseLoading && isPending ) {
-  //   return <Loading />;
-  // }
-  if ( singleCourseLoading  ) {
+ 
+  if (singleCourseLoading) {
     return <Loading />;
   }
   if (isError) {
@@ -135,7 +130,7 @@ const CourseLandingPage = () => {
                     {/* {errors?.subtitle}
 
                      */}
-                     enter subtitle brother
+                    enter subtitle brother
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>
@@ -165,20 +160,23 @@ const CourseLandingPage = () => {
                   You must enter at 4 learning objectives or outcomes that
                   learners can expect to achieve after completing your course.
                 </Text>
-                {values?.learningObjectives?.map((value : any, index: number) => (
-                  <Stack key={index}>
-                    <FormControl isRequired>
-                      <Input
-                        type="text"
-                        variant="filled"
-                        placeholder="learning objectives"
-                        value={value}
-                        name={`learningObjectives[${index}]`}
-                        onChange={handleChange}
-                      />
-                    </FormControl>
-                  </Stack>
-                ))}
+                {values?.learningObjectives.map(
+                  (value: any, index: number) => (
+                    <Stack key={index}>
+                      <FormControl isRequired>
+                        <Input
+                          type="text"
+                          variant="filled"
+                          placeholder="learning objectives"
+                          value={value}
+                          defaultValue={initialValues.learningObjectives }
+                          name={`learningObjectives[${index}]`}
+                          onChange={handleChange}
+                        />
+                      </FormControl>
+                    </Stack>
+                  )
+                )}
                 {errors.learningObjectives && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
                     please include all the 4 input
@@ -204,7 +202,7 @@ const CourseLandingPage = () => {
                         variant="filled"
                         placeholder="Example: No programming experience.You will learn everything you need know"
                         value={value}
-                        name={`preRequisities[0]`}
+                        name={`preRequisities[${index}]`}
                         onChange={handleChange}
                       />
                       {errors.preRequisities && (
