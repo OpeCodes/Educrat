@@ -32,7 +32,7 @@ import {
   useModuleEditCourse,
   useCreateModuleLectureCourse,
   useEditModuleLectureCourse,
-  useGetSingleModuleCourse,
+  // useGetSingleModuleCourse,
   useDeleteLectureModuleCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
@@ -72,6 +72,11 @@ const Curriculum = () => {
   const initialValues3 = {
     title: "",
   };
+  //edit course section
+  const initialValues2 = {
+    title: "",
+    learningObjective: "",
+  };
   //edit lecture
   const initialValues4 = {
     title: "",
@@ -97,6 +102,7 @@ const Curriculum = () => {
     toggleIsModuleLectureOpen,
     isOpenModuleLectureState,
   } = useGetModuleCourse(getSingleCourse?.id);
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -123,12 +129,12 @@ const Curriculum = () => {
       )}
       {data?.map((course: any, index: any) => {
         const { title, id, lectures } = course;
-        const { getSingleModuleCourse } = useGetSingleModuleCourse(id);
-        //edit course section
-        const initialValues2 = {
-          title: getSingleModuleCourse?.title,
-          learningObjective: getSingleModuleCourse?.learningObjective,
-        };
+        // const { getSingleModuleCourse } = useGetSingleModuleCourse(id);
+        // //edit course section
+        // const initialValues2 = {
+        //   title: getSingleModuleCourse?.title,
+        //   learningObjective: getSingleModuleCourse?.learningObjective,
+        // };
 
         return (
           <Stack key={id}>
@@ -293,7 +299,7 @@ const Curriculum = () => {
                   {lectures?.map((lecture: any, index: number) => {
                     const { id, title } = lecture;
                     return (
-                      <Stack my={1}>
+                      <Stack my={1} key={id}>
                         {/* list of lecture starts here */}
                         {!isOpenModuleLectureState[id] && (
                           <Stack
