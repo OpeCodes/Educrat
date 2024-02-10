@@ -28,7 +28,7 @@ const CourseManageNavbar = () => {
           Back to courses
         </Text>
       </Flex>
-      <Text fontWeight={"bold"}>{getSingleCourse?.title}</Text>
+      <Text fontWeight={"bold"} fontSize="13px">{getSingleCourse?.title}</Text>
       <Text bg="red" px={2} borderRadius={5} fontSize={"14px"}>
         DRAFT
       </Text>

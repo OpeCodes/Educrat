@@ -16,7 +16,7 @@ import {
   Skeleton,
   Box,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -33,7 +33,6 @@ import {
   useModuleEditCourse,
   useCreateModuleLectureCourse,
   useEditModuleLectureCourse,
-  // useGetSingleModuleCourse,
   useDeleteLectureModuleCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
@@ -55,16 +54,18 @@ const Curriculum = () => {
 
   useEffect(() => {
     refetch();
+    // me()
   }, [id]);
-  const { moduleEditCourse, isPending: editLoading } = useModuleEditCourse();
+  const { moduleEditCourse, } = useModuleEditCourse();
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
   const { deleteLectureModule, lectureModuleLoading } =
     useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse, moduleLectureLoading } =
+  const { moduleCreateLectureCourse,  } =
     useCreateModuleLectureCourse();
-  //new section
+
+  
   const initialValues1 = {
     title: "",
     learningObjective: "",
@@ -104,6 +105,10 @@ const Curriculum = () => {
     isOpenModuleLectureState,
   } = useGetModuleCourse(getSingleCourse?.id);
 
+ 
+  
+  
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -130,12 +135,26 @@ const Curriculum = () => {
       )}
       {data?.map((course: any, index: any) => {
         const { title, id, lectures } = course;
-        // const { getSingleModuleCourse } = useGetSingleModuleCourse(id);
-        // //edit course section
+        // console.log(id)
+        // const { getSingleModuleCourse, isPending: yoo,refetch: me , isError} =
+        
+        //   useGetSingleModuleCourse(id);
+        // if (yoo) {
+        //   return <div>Loading...</div>;
+        // }
+        // if(isError){
+        // return <h1>This is an error brotehr</h1>
+        // }
+        // if (!getSingleModuleCourse) {
+        //   // Render loading indicator or placeholder while data is being fetched
+        //   return <div>Error fetching data for course {title}</div>;
+        // }
+        // // edit course section
         // const initialValues2 = {
         //   title: getSingleModuleCourse?.title,
         //   learningObjective: getSingleModuleCourse?.learningObjective,
         // };
+      
 
         return (
           <Stack key={id}>
@@ -304,8 +323,8 @@ const Curriculum = () => {
                             as={"button"}
                             py={2}
                             px={4}
-                            isLoading={editLoading}
-                            loadingText="Loading"
+                            // isLoading={ isOpenState[id[0]] && editLoading}
+                            // loadingText="Loading"
                             variant="outline"
                             spinnerPlacement="end"
                             onClick={() => handleEditSubmit()}
@@ -333,7 +352,7 @@ const Curriculum = () => {
                             borderColor={"gray"}
                             p={3}
                           >
-                            <Flex align={"center"} justify={"space-between"}>
+                            <Flex justify={"space-between"}>
                               <Flex
                                 columnGap={3}
                                 flexDirection={{ base: "column", md: "row" }}
@@ -651,8 +670,10 @@ const Curriculum = () => {
                               as={"button"}
                               py={2}
                               px={4}
-                              isLoading={moduleLectureLoading}
-                              loadingText="Loading"
+                              // isLoading={moduleLectureLoading}
+                              // isLoading={  isOpenCurriculumState[id] && moduleLectureLoading}
+                              //
+                              // loadingText="Loading"
                               variant="outline"
                               spinnerPlacement="end"
                               onClick={() => handleCurriculumSubmit()}
