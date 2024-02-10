@@ -347,11 +347,13 @@ const Curriculum = () => {
                                   </Text>
                                 </Flex>
                                 <Flex align={"center"} columnGap={1}>
-                                  <Text>
+                                  <Text display={{ base: "none", lg: "flex" }}>
                                     <LuStickyNote />
                                   </Text>
                                   {/* <Text>{title}</Text> */}
-                                  {title.length > 60 ? `${title.slice(0,60)}...` : ''}
+                                  {title.length > 60 ? `${title.slice(0,60)}...` : `${title}`}
+
+                                  <Flex    display={{ base: "none", lg: "flex" }}>
                                   <Text
                                     cursor={"pointer"}
                                     onClick={() =>
@@ -367,10 +369,12 @@ const Curriculum = () => {
                                   >
                                     <MdDelete />
                                   </Text>
+                                  </Flex>
+                                  
                                 </Flex>
                               </Flex>
 
-                              <Flex>content</Flex>
+                              <Flex display={{ base: "none", lg: "flex" }}>content</Flex>
                             </Flex>
                           </Stack>
                         )}
