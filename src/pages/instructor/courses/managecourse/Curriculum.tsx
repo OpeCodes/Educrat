@@ -14,6 +14,7 @@ import {
   AlertDialogCloseButton,
   Button,
   Skeleton,
+  Box,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
@@ -148,19 +149,44 @@ const Curriculum = () => {
               >
                 {!isOpenState[id] && (
                   // main section
-                  <Flex align={"center"}>
-                    <Flex align={"center"} columnGap={2}>
-                      <Text fontWeight={"bold"} fontSize={17}>
-                        Section {index + 1}
+                  <Stack direction={{ base: "column", lg: "row" }}>
+                    <Flex>
+                      <Text fontWeight={"bold"} fontSize={17} mr={4}>
+                        Section {index + 1}:
                       </Text>
-                      <Flex align={"center"} mr={3} columnGap={1}>
-                        <Text>
-                          <LuStickyNote />
+                      <Flex
+                        align={"center"}
+                        columnGap={4}
+                        display={{ base: "flex", lg: "none" }}
+                      >
+                        <Text
+                          cursor={"pointer"}
+                          onClick={() => toggleIsOpen(id)}
+                        >
+                          <MdEdit />
                         </Text>
-                        <Text fontWeight={"500"}>{title}</Text>
+                        <Text cursor={"pointer"} onClick={onOpen}>
+                          <MdDelete />
+                        </Text>
                       </Flex>
                     </Flex>
-                    <Flex align={"center"} columnGap={4}>
+
+                    <Box
+                      alignItems={{ base: "none", lg: "center" }}
+                      mr={3}
+                      columnGap={1}
+                      display={{ base: "block", lg: "flex" }}
+                    >
+                      <Text display={{ base: "none", lg: "flex" }}>
+                        <LuStickyNote />
+                      </Text>
+                      <Text fontWeight={"500"}>{title}</Text>
+                    </Box>
+                    <Flex
+                      align={"center"}
+                      columnGap={4}
+                      display={{ base: "none", lg: "flex" }}
+                    >
                       <Text cursor={"pointer"} onClick={() => toggleIsOpen(id)}>
                         <MdEdit />
                       </Text>
@@ -168,7 +194,7 @@ const Curriculum = () => {
                         <MdDelete />
                       </Text>
                     </Flex>
-                  </Flex>
+                  </Stack>
                 )}
                 {/* edit part */}
                 {isOpenState[id] && (
@@ -294,7 +320,7 @@ const Curriculum = () => {
                     )}
                   </Formik>
                 )}
-                <Stack mt={6} pl={12}>
+                <Stack mt={6} pl={{ base: 1, lg: 12 }}>
                   {/* new curriculum */}
                   {lectures?.map((lecture: any, index: number) => {
                     const { id, title } = lecture;
@@ -310,7 +336,10 @@ const Curriculum = () => {
                             // pb={8}
                           >
                             <Flex align={"center"} justify={"space-between"}>
-                              <Flex align={"center"} columnGap={3}>
+                              <Flex
+                                columnGap={3}
+                                flexDirection={{ base: "column", md: "row" }}
+                              >
                                 <Flex align={"center"} columnGap={1}>
                                   <RiCheckboxCircleFill />
 
@@ -341,7 +370,7 @@ const Curriculum = () => {
                                 </Flex>
                               </Flex>
 
-                              <Flex>contnet</Flex>
+                              <Flex>content</Flex>
                             </Flex>
                           </Stack>
                         )}
