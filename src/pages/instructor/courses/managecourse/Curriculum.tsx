@@ -170,7 +170,6 @@ const Curriculum = () => {
                         </Text>
                       </Flex>
                     </Flex>
-
                     <Box
                       alignItems={{ base: "none", lg: "center" }}
                       mr={3}
@@ -351,7 +350,8 @@ const Curriculum = () => {
                                   <Text>
                                     <LuStickyNote />
                                   </Text>
-                                  <Text>{title}</Text>
+                                  {/* <Text>{title}</Text> */}
+                                  {title.length > 60 ? `${title.slice(0,60)}...` : ''}
                                   <Text
                                     cursor={"pointer"}
                                     onClick={() =>
