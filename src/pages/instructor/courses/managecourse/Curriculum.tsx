@@ -342,9 +342,24 @@ const Curriculum = () => {
                                 <Flex align={"center"} columnGap={1}>
                                   <RiCheckboxCircleFill />
 
-                                  <Text fontWeight={"500"}>
+                                  <Text fontWeight={"500"} mr={4}>
                                     Lecture {index + 1}
                                   </Text>
+                                  <Flex
+                        align={"center"}
+                        columnGap={4}
+                        display={{ base: "flex", lg: "none" }}
+                      >
+                        <Text
+                          cursor={"pointer"}
+                          onClick={() =>   toggleIsModuleLectureOpen(id)  }
+                        >
+                          <MdEdit />
+                        </Text>
+                        <Text cursor={"pointer"} onClick={onOpen}>
+                          <MdDelete />
+                        </Text>
+                      </Flex>
                                 </Flex>
                                 <Flex align={"center"} columnGap={1}>
                                   <Text display={{ base: "none", lg: "flex" }}>
