@@ -332,7 +332,6 @@ const Curriculum = () => {
                             borderWidth={1}
                             borderColor={"gray"}
                             p={3}
-                            // pb={8}
                           >
                             <Flex align={"center"} justify={"space-between"}>
                               <Flex
@@ -346,50 +345,54 @@ const Curriculum = () => {
                                     Lecture {index + 1}
                                   </Text>
                                   <Flex
-                        align={"center"}
-                        columnGap={4}
-                        display={{ base: "flex", lg: "none" }}
-                      >
-                        <Text
-                          cursor={"pointer"}
-                          onClick={() =>   toggleIsModuleLectureOpen(id)  }
-                        >
-                          <MdEdit />
-                        </Text>
-                        <Text cursor={"pointer"} onClick={onOpen}>
-                          <MdDelete />
-                        </Text>
-                      </Flex>
+                                    align={"center"}
+                                    columnGap={4}
+                                    display={{ base: "flex", lg: "none" }}
+                                  >
+                                    <Text
+                                      cursor={"pointer"}
+                                      onClick={() =>
+                                        toggleIsModuleLectureOpen(id)
+                                      }
+                                    >
+                                      <MdEdit />
+                                    </Text>
+                                    <Text cursor={"pointer"} onClick={onOpen}>
+                                      <MdDelete />
+                                    </Text>
+                                  </Flex>
                                 </Flex>
                                 <Flex align={"center"} columnGap={1}>
                                   <Text display={{ base: "none", lg: "flex" }}>
                                     <LuStickyNote />
                                   </Text>
-                                  {/* <Text>{title}</Text> */}
-                                  {title.length > 60 ? `${title.slice(0,60)}...` : `${title}`}
+                                  {title.length > 60
+                                    ? `${title.slice(0, 60)}...`
+                                    : `${title}`}
 
-                                  <Flex    display={{ base: "none", lg: "flex" }}>
-                                  <Text
-                                    cursor={"pointer"}
-                                    onClick={() =>
-                                      toggleIsModuleLectureOpen(id)
-                                    }
-                                  >
-                                    <MdEdit />
-                                  </Text>
-                                  <Text
-                                    cursor={"pointer"}
-                                    ml={3}
-                                    onClick={onOpenLectureModule}
-                                  >
-                                    <MdDelete />
-                                  </Text>
+                                  <Flex display={{ base: "none", lg: "flex" }}>
+                                    <Text
+                                      cursor={"pointer"}
+                                      onClick={() =>
+                                        toggleIsModuleLectureOpen(id)
+                                      }
+                                    >
+                                      <MdEdit />
+                                    </Text>
+                                    <Text
+                                      cursor={"pointer"}
+                                      ml={3}
+                                      onClick={onOpenLectureModule}
+                                    >
+                                      <MdDelete />
+                                    </Text>
                                   </Flex>
-                                  
                                 </Flex>
                               </Flex>
 
-                              <Flex display={{ base: "none", lg: "flex" }}>content</Flex>
+                              <Flex display={{ base: "none", lg: "flex" }}>
+                                content
+                              </Flex>
                             </Flex>
                           </Stack>
                         )}

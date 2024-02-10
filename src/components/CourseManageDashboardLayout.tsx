@@ -17,7 +17,7 @@ const CourseManageDashboardLayout = () => {
           my={10}
           w="full"
           mr={{ base: 0, lg: 5 }}
-          boxShadow="0 0.75rem 1rem rgb(189 197 209 / 90%)"
+          boxShadow={{base: "", lg: "0 0.75rem 1rem rgb(189 197 209 / 90%)"}}
         >
           <Outlet />
         </Stack>
