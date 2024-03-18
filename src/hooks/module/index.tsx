@@ -320,3 +320,36 @@ export const useGetLectureModuleCourse = (id: any) => {
     isSuccess,
   };
 };
+
+
+
+// export const usetestingAPI = () => {
+//   const toast = useToast();
+//   const queryClient = useQueryClient();
+//   const {
+//     mutate: testingApi,
+//     isPending: moduleEditLectureLoading,
+//   } = useMutation({
+//     mutationFn: ({ lectureId, user }: any) => {
+//       return customFetch.put(`/lecture/${lectureId}`, user);
+//     },
+//     onSuccess: () => {
+//       queryClient.invalidateQueries({ queryKey: ["module"] });
+//       toast({
+//         title: `lecture edited successfully`,
+//         status: "success",
+//         duration: 5000,
+//         isClosable: true,
+//       });
+//     },
+//     onError: (error: any) => {
+//       toast({
+//         title: `${error.response.data.error}`,
+//         status: "error",
+//         duration: 5000,
+//         isClosable: true,
+//       });
+//     },
+//   });
+//   return { testingApi, moduleEditLectureLoading };
+// };

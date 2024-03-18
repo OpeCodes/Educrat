@@ -20,7 +20,7 @@ import {
 } from "../../../../hooks/course";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useEffect, useState, } from "react";
+import { useEffect, useState } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
@@ -36,21 +36,23 @@ const CourseLandingPage = () => {
     getSingleCourse,
     isError,
     isPending: singleCourseLoading,
-    refetch
+    refetch,
   } = useGetSingleCourse(id);
-  
+
   const initialValues = {
     title: getSingleCourse?.title || "",
     subtitle: getSingleCourse?.subtitle,
     language: getSingleCourse?.language,
+    preRequisities: [""],
+
+    learningObjectives: getSingleCourse?.learningObjectives || ["", "", "", ""],
+
     category: getSingleCourse?.category?.id,
     description: getSingleCourse?.description,
-    preRequisities: getSingleCourse?.preRequisities || [""],
     complexityLevel: getSingleCourse?.complexityLevel,
-    learningObjectives: getSingleCourse?.learningObjectives || [""] ,
   };
 
-
+  // console.log(getSingleCourse)
   const [description, setDescripton] = useState(initialValues?.description);
 
   const { data, isPending } = useCourseCategory();
@@ -58,24 +60,25 @@ const CourseLandingPage = () => {
     console.log("Uploaded file:", file);
   };
 
-  
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
-   
-    
+    const { preRequisities } = values;
+
     if (!description) {
       setError(true);
       return;
     }
     // setDescripton("")
+    console.log(values);
+
     singleCourse({
       singleId: getSingleCourse?.id,
       user: { ...values, description },
+      // user: {preRequisities },
     });
   };
 
- 
   if (singleCourseLoading) {
     return <Loading />;
   }
@@ -172,28 +175,21 @@ const CourseLandingPage = () => {
                   You must enter at 4 learning objectives or outcomes that
                   learners can expect to achieve after completing your course.
                 </Text>
-                {values?.learningObjectives.map(
-                  (value: any, index: number) => (
-                    <Stack key={index}>
-                      <FormControl isRequired>
-                        <Input
-                          type="text"
-                          variant="filled"
-                          placeholder="learning objectives"
-                          value={value}
-                          defaultValue={initialValues.learningObjectives }
-                          name={`learningObjectives[${index}]`}
-                          onChange={handleChange}
-                        />
-                      </FormControl>
-                    </Stack>
-                  )
-                )}
-                {errors.learningObjectives && (
-                  <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    please include all the 4 input
-                  </Text>
-                )}
+                {values?.learningObjectives?.map((value: any, index: any) => (
+                  <Stack key={index}>
+                    <FormControl isRequired>
+                      <Input
+                        type="text"
+                        variant="filled"
+                        placeholder="learning objectives"
+                        value={value}
+                        // defaultValue={initialValues.learningObjectives }
+                        name={`learningObjectives[${index}]`}
+                        onChange={handleChange}
+                      />
+                    </FormControl>
+                  </Stack>
+                ))}
               </Stack>
               <Stack>
                 <Text fontWeight={"bold"}>
@@ -206,8 +202,7 @@ const CourseLandingPage = () => {
                   no requirements, use this space as an opportunity to lower the
                   barrier for beginners.
                 </Text>
-                {values?.preRequisities?.map((value: any, index: any) =>  (
-                  
+                {values.preRequisities.map((value: any, index: any) => (
                   <Stack key={index}>
                     <FormControl isRequired>
                       <Input
@@ -216,7 +211,6 @@ const CourseLandingPage = () => {
                         placeholder="Example: No programming experience.You will learn everything you need know"
                         value={value}
                         name={`preRequisities[${index}]`}
-                        
                         onChange={handleChange}
                       />
                       {errors.preRequisities && (
@@ -224,7 +218,7 @@ const CourseLandingPage = () => {
                           style={{ color: "red", marginTop: 5 }}
                           fontSize="14px"
                         >
-                          please enter prerequisities
+                          please enter fill in all input
                           {/* {errors.preRequisities} */}
                         </Text>
                       )}

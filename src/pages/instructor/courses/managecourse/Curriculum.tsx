@@ -102,6 +102,7 @@ const Curriculum = () => {
     isOpenCurriculumState,
     toggleIsCurriculumOpen,
     toggleIsModuleLectureOpen,
+    //down
     isOpenModuleLectureState,
   } = useGetModuleCourse(getSingleCourse?.id);
 
@@ -135,7 +136,8 @@ const Curriculum = () => {
       )}
       {data?.map((course: any, index: any) => {
         const { title, id, lectures } = course;
-        // console.log(id)
+        // console.log(lectures)
+        console.log(id)
         // const { getSingleModuleCourse, isPending: yoo,refetch: me , isError} =
         
         //   useGetSingleModuleCourse(id);
@@ -340,11 +342,61 @@ const Curriculum = () => {
                 )}
                 <Stack mt={6} pl={{ base: 1, lg: 12 }}>
                   {/* new curriculum */}
+                  
                   {lectures?.map((lecture: any, index: number) => {
                     const { id, title } = lecture;
+                    // console.log(id)
+                    // console.log(id)
                     return (
                       <Stack my={1} key={id}>
                         {/* list of lecture starts here */}
+                        <AlertDialog
+                          motionPreset="slideInBottom"
+                          leastDestructiveRef={cancelRef}
+                          onClose={onCloseLectureModule}
+                          isOpen={IsOpenlectureModule}
+                          isCentered
+                        >
+                          <AlertDialogOverlay />
+
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              Please Confirm
+                            </AlertDialogHeader>
+                            <AlertDialogCloseButton />
+                            <AlertDialogBody>
+                              You are about to remove a curriculum item. Are you
+                              sure you want to continue? lecture here
+                            </AlertDialogBody>
+                            <AlertDialogFooter>
+                              <Button onClick={onCloseLectureModule}>
+                                Cancel
+                              </Button>
+                              <Button
+                                bg="black"
+                                color="white"
+                                ml={3}
+                                isLoading={lectureModuleLoading}
+                                loadingText="Loading"
+                                variant="outline"
+                                spinnerPlacement="end"
+                                _hover={{
+                                  backgroundColor: "none",
+                                  color: "none",
+                                }}
+                                onClick={() => {
+                                  console.log(id)
+                                  deleteLectureModule({ lectureId: id });
+                                  setTimeout(() => {
+                                    onCloseLectureModule();
+                                  }, 1500);
+                                }}
+                              >
+                                OKs
+                              </Button>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                         {!isOpenModuleLectureState[id] && (
                           <Stack
                             bg={"white"}
@@ -376,7 +428,7 @@ const Curriculum = () => {
                                     >
                                       <MdEdit />
                                     </Text>
-                                    <Text cursor={"pointer"} onClick={onOpen}>
+                                    <Text cursor={"pointer"} onClick={onOpenLectureModule}>
                                       <MdDelete />
                                     </Text>
                                   </Flex>
@@ -413,10 +465,12 @@ const Curriculum = () => {
                                 content
                               </Flex>
                             </Flex>
+                       
                           </Stack>
                         )}
 
                         {/* edit curriculum lecture input field */}
+
                         {isOpenModuleLectureState[id] && (
                           <Formik
                             initialValues={initialValues4}
@@ -509,56 +563,13 @@ const Curriculum = () => {
                                     Save Lecture
                                   </Button>
                                 </Flex>
+                               
                               </Stack>
+                              
                             )}
                           </Formik>
                         )}
-                        <AlertDialog
-                          motionPreset="slideInBottom"
-                          leastDestructiveRef={cancelRef}
-                          onClose={onCloseLectureModule}
-                          isOpen={IsOpenlectureModule}
-                          isCentered
-                        >
-                          <AlertDialogOverlay />
-
-                          <AlertDialogContent>
-                            <AlertDialogHeader>
-                              Please Confirm
-                            </AlertDialogHeader>
-                            <AlertDialogCloseButton />
-                            <AlertDialogBody>
-                              You are about to remove a curriculum item. Are you
-                              sure you want to continue?
-                            </AlertDialogBody>
-                            <AlertDialogFooter>
-                              <Button onClick={onCloseLectureModule}>
-                                Cancel
-                              </Button>
-                              <Button
-                                bg="black"
-                                color="white"
-                                ml={3}
-                                isLoading={lectureModuleLoading}
-                                loadingText="Loading"
-                                variant="outline"
-                                spinnerPlacement="end"
-                                _hover={{
-                                  backgroundColor: "none",
-                                  color: "none",
-                                }}
-                                onClick={() => {
-                                  deleteLectureModule({ lectureId: id });
-                                  setTimeout(() => {
-                                    onCloseLectureModule();
-                                  }, 1500);
-                                }}
-                              >
-                                OK
-                              </Button>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialog>
+                  
                       </Stack>
                     );
                   })}
@@ -705,7 +716,7 @@ const Curriculum = () => {
                 <AlertDialogCloseButton />
                 <AlertDialogBody>
                   You are about to remove a curriculum item. Are you sure you
-                  want to continue?
+                  want to continue? 
                 </AlertDialogBody>
                 <AlertDialogFooter>
                   <Button onClick={onClose}>Cancel</Button>
@@ -720,6 +731,7 @@ const Curriculum = () => {
                     _hover={{ backgroundColor: "none", color: "none" }}
                     onClick={() => {
                       deleteModule({ moduleId: id });
+                      // isOpenCurriculumState[id]
                       setTimeout(() => {
                         onClose();
                       }, 1500);
