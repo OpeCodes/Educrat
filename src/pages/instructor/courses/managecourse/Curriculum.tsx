@@ -46,11 +46,11 @@ import { useGetSingleCourse } from "../../../../hooks/course";
 
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: IsOpenlectureModule,
-    onOpen: onOpenLectureModule,
-    onClose: onCloseLectureModule,
-  } = useDisclosure();
+  // const {
+  //   isOpen: IsOpenlectureModule,
+  //   onOpen: onOpenLectureModule,
+  //   onClose: onCloseLectureModule,
+  // } = useDisclosure();
   const cancelRef: any = React.useRef();
   const { id } = useParams();
   const { getSingleCourse, refetch } = useGetSingleCourse(id);
@@ -63,7 +63,7 @@ const Curriculum = () => {
   const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
-  const { deleteLectureModule, lectureModuleLoading } =
+  const { deleteLectureModule,  } =
     useDeleteLectureModuleCourse();
   const { moduleCreateLectureCourse,  } =
     useCreateModuleLectureCourse();
@@ -78,9 +78,9 @@ const Curriculum = () => {
     title: "",
   };
 
-  const initialValues4 = {
-    title: "",
-  };
+  // const initialValues4 = {
+  //   title: "a",
+  // };
   const {
     moduleCreateCourse,
     isPending: moduleLoading,
@@ -101,16 +101,20 @@ const Curriculum = () => {
     toggleIsModuleLectureOpen,
     isOpenModuleLectureState,
   } = useGetModuleCourse(getSingleCourse?.id);
-console.log(data)
 
+  console.log(data)
+  interface Lecture {
+    title: string;
+  }
   interface MyObject {
     title?: string;
     learningObjective?: string;
-    // Define other properties here if needed
+    lectureTitle?: string;
+    lectures: Lecture[];
   }
   const moduleTitle: string[] = (data ?? []).flat(2).map((obj: MyObject) => obj.title);
   const modulelearningObjective: string[] = (data ?? []).flat(2).map((obj: MyObject) => obj.learningObjective);
-
+  // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
 
   return (
@@ -331,58 +335,14 @@ console.log(data)
                 )}
                 <Stack mt={6} pl={{ base: 1, lg: 12 }}>
                   {/* new curriculum */}
-                  
-                  {lectures?.map((lecture: any, index: number) => {
+                  {lectures?.map((lecture: any, index: any) => {
                     const { id, title } = lecture;
+                    const initialValues4 = {
+                      title: "",
+                    }
                     return (
                       <Stack my={1} key={id}>
-                        {/* list of lecture starts here */}
-                        <AlertDialog
-                          motionPreset="slideInBottom"
-                          leastDestructiveRef={cancelRef}
-                          onClose={onCloseLectureModule}
-                          isOpen={IsOpenlectureModule}
-                          isCentered
-                        >
-                          <AlertDialogOverlay />
-
-                          <AlertDialogContent>
-                            <AlertDialogHeader>
-                              Please Confirm
-                            </AlertDialogHeader>
-                            <AlertDialogCloseButton />
-                            <AlertDialogBody>
-                              You are about to remove a curriculum item. Are you
-                              sure you want to continue? lecture here
-                            </AlertDialogBody>
-                            <AlertDialogFooter>
-                              <Button onClick={onCloseLectureModule}>
-                                Cancel
-                              </Button>
-                              <Button
-                                bg="black"
-                                color="white"
-                                ml={3}
-                                isLoading={lectureModuleLoading}
-                                loadingText="Loading"
-                                variant="outline"
-                                spinnerPlacement="end"
-                                _hover={{
-                                  backgroundColor: "none",
-                                  color: "none",
-                                }}
-                                onClick={() => {
-                                  deleteLectureModule({ lectureId: id });
-                                  setTimeout(() => {
-                                    onCloseLectureModule();
-                                  }, 1500);
-                                }}
-                              >
-                                OKs
-                              </Button>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialog>
+                        {/* list of lecture starts here */}                     
                         {!isOpenModuleLectureState[id] && (
                           <Stack
                             bg={"white"}
@@ -443,8 +403,11 @@ console.log(data)
                                     <Text
                                       cursor={"pointer"}
                                       ml={3}
-                                      onClick={onOpenLectureModule}
-                                    >
+                                      // onClick={onOpenLectureModule}
+                                      onClick={()=> { 
+                                        deleteLectureModule({ lectureId: id })}}
+                                      >
+                                    
                                       <MdDelete />
                                     </Text>
                                   </Flex>
