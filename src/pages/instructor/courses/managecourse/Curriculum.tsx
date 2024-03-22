@@ -105,11 +105,6 @@ const Curriculum = () => {
     //down
     isOpenModuleLectureState,
   } = useGetModuleCourse(getSingleCourse?.id);
-
- 
-  
-  
-
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -136,27 +131,7 @@ const Curriculum = () => {
       )}
       {data?.map((course: any, index: any) => {
         const { title, id, lectures } = course;
-        // console.log(lectures)
-        console.log(id)
-        // const { getSingleModuleCourse, isPending: yoo,refetch: me , isError} =
-        
-        //   useGetSingleModuleCourse(id);
-        // if (yoo) {
-        //   return <div>Loading...</div>;
-        // }
-        // if(isError){
-        // return <h1>This is an error brotehr</h1>
-        // }
-        // if (!getSingleModuleCourse) {
-        //   // Render loading indicator or placeholder while data is being fetched
-        //   return <div>Error fetching data for course {title}</div>;
-        // }
-        // // edit course section
-        // const initialValues2 = {
-        //   title: getSingleModuleCourse?.title,
-        //   learningObjective: getSingleModuleCourse?.learningObjective,
-        // };
-      
+       
 
         return (
           <Stack key={id}>
@@ -186,7 +161,10 @@ const Curriculum = () => {
                         >
                           <MdEdit />
                         </Text>
-                        <Text cursor={"pointer"} onClick={onOpen}>
+                        <Text cursor={"pointer"} 
+                        // onClick={onOpen}
+                        onClick={()=>     deleteModule({ moduleId: id })}
+                        >
                           <MdDelete />
                         </Text>
                       </Flex>
@@ -345,8 +323,6 @@ const Curriculum = () => {
                   
                   {lectures?.map((lecture: any, index: number) => {
                     const { id, title } = lecture;
-                    // console.log(id)
-                    // console.log(id)
                     return (
                       <Stack my={1} key={id}>
                         {/* list of lecture starts here */}
@@ -428,7 +404,12 @@ const Curriculum = () => {
                                     >
                                       <MdEdit />
                                     </Text>
-                                    <Text cursor={"pointer"} onClick={onOpenLectureModule}>
+                                    <Text cursor={"pointer"} 
+                                    // onClick={onOpenLectureModule}
+                                    onClick={()=> { 
+                                      console.log("clicked")
+                                      deleteLectureModule({ lectureId: id })}}
+                                    >
                                       <MdDelete />
                                     </Text>
                                   </Flex>

@@ -63,19 +63,16 @@ const CourseLandingPage = () => {
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
-    const { preRequisities } = values;
 
     if (!description) {
       setError(true);
       return;
     }
     // setDescripton("")
-    console.log(values);
 
     singleCourse({
       singleId: getSingleCourse?.id,
       user: { ...values, description },
-      // user: {preRequisities },
     });
   };
 

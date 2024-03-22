@@ -154,6 +154,8 @@ export const useGetModuleCourse = (id: any) => {
       const { data } = await customFetch.get(`module/course/${id}`);
       return data;
     },
+    
+  
   });
 
   return {
