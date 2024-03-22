@@ -155,7 +155,6 @@ export const useGetModuleCourse = (id: any) => {
       return data;
     },
     
-  
   });
 
   return {

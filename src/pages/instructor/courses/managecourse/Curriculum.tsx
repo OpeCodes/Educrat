@@ -34,6 +34,7 @@ import {
   useCreateModuleLectureCourse,
   useEditModuleLectureCourse,
   useDeleteLectureModuleCourse,
+  // useGetSingleModuleCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -41,6 +42,8 @@ import { RiCheckboxCircleFill } from "react-icons/ri";
 import { LuStickyNote } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../../../../hooks/course";
+
+
 const Curriculum = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -74,12 +77,7 @@ const Curriculum = () => {
   const initialValues3 = {
     title: "",
   };
-  //edit course section
-  const initialValues2 = {
-    title: "",
-    learningObjective: "",
-  };
-  //edit lecture
+
   const initialValues4 = {
     title: "",
   };
@@ -93,7 +91,6 @@ const Curriculum = () => {
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
-
   const {
     data,
     isPending: getCourseLoading,
@@ -102,9 +99,20 @@ const Curriculum = () => {
     isOpenCurriculumState,
     toggleIsCurriculumOpen,
     toggleIsModuleLectureOpen,
-    //down
     isOpenModuleLectureState,
   } = useGetModuleCourse(getSingleCourse?.id);
+console.log(data)
+
+  interface MyObject {
+    title?: string;
+    learningObjective?: string;
+    // Define other properties here if needed
+  }
+  const moduleTitle: string[] = (data ?? []).flat(2).map((obj: MyObject) => obj.title);
+  const modulelearningObjective: string[] = (data ?? []).flat(2).map((obj: MyObject) => obj.learningObjective);
+
+
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -130,9 +138,12 @@ const Curriculum = () => {
         </Stack>
       )}
       {data?.map((course: any, index: any) => {
+ 
         const { title, id, lectures } = course;
-       
-
+        const initialValues2 = {
+          title: moduleTitle[index],
+          learningObjective: modulelearningObjective[index],
+        };
         return (
           <Stack key={id}>
             <Stack px={5} py={2}>
@@ -361,7 +372,6 @@ const Curriculum = () => {
                                   color: "none",
                                 }}
                                 onClick={() => {
-                                  console.log(id)
                                   deleteLectureModule({ lectureId: id });
                                   setTimeout(() => {
                                     onCloseLectureModule();
@@ -407,7 +417,6 @@ const Curriculum = () => {
                                     <Text cursor={"pointer"} 
                                     // onClick={onOpenLectureModule}
                                     onClick={()=> { 
-                                      console.log("clicked")
                                       deleteLectureModule({ lectureId: id })}}
                                     >
                                       <MdDelete />
