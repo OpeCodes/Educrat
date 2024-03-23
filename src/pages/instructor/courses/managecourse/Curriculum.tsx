@@ -407,7 +407,6 @@ const Curriculum = () => {
                                       onClick={()=> { 
                                         deleteLectureModule({ lectureId: id })}}
                                       >
-                                    
                                       <MdDelete />
                                     </Text>
                                   </Flex>
@@ -421,9 +420,7 @@ const Curriculum = () => {
                        
                           </Stack>
                         )}
-
                         {/* edit curriculum lecture input field */}
-
                         {isOpenModuleLectureState[id] && (
                           <Formik
                             initialValues={initialValues4}
@@ -458,7 +455,7 @@ const Curriculum = () => {
                                     <Text mt={1}>
                                       <RiCheckboxCircleFill />
                                     </Text>
-                                    <Text fontWeight={"500"}>Lecture 1 </Text>
+                                    <Text fontWeight={"500"}>Lecture {index+1} </Text>
                                   </Flex>
                                   <Stack w={{ base: "100%", lg: "88%" }}>
                                     <Input
@@ -473,6 +470,7 @@ const Curriculum = () => {
                                       focusBorderColor="black"
                                       onChange={handleChange}
                                     />
+                                    
                                     {errors?.title && (
                                       <Text
                                         style={{ color: "red", marginTop: 0 }}

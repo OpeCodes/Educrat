@@ -94,7 +94,6 @@ export const useDeleteModalCourse = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
-
       toast({
         title: `course deleted successfully`,
         status: "success",
