@@ -36,9 +36,6 @@ import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../../../../hooks/course";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
-{/* <FaPlayCircle /> */}
-
-
 
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
@@ -330,9 +327,7 @@ const Curriculum = () => {
                     };
                     return (
                       <Stack>
-                        <Stack
-                          key={id}
-                        >
+                        <Stack key={id}>
                           <Stack position="relative">
                             {/* list of lecture starts here */}
                             {!isOpenModuleLectureState[id] && (
@@ -454,11 +449,9 @@ const Curriculum = () => {
                               borderWidth={1}
                               borderColor={"gray"}
                               mt={-3}
+                              pb={20}
                             >
-                              <Flex                               
-                                width="100%"
-                                justifyContent="end"
-                              >
+                              <Flex width="100%" justifyContent="end">
                                 <Flex
                                   fontSize={14}
                                   mt={-8}
@@ -477,7 +470,7 @@ const Curriculum = () => {
                                     Select content type
                                   </Text>
                                   <Text as={"button"} fontWeight="bold">
-                                    <IoCloseSharp size={20}  />
+                                    <IoCloseSharp size={20} />
                                   </Text>
                                 </Flex>
                               </Flex>
@@ -485,8 +478,26 @@ const Curriculum = () => {
                                 Select the main type of content. Files and links
                                 can be added as resources.
                               </Text>
-                              <Flex>
-
+                              <Flex justify={"center"}>
+                                <Stack
+                                  width="70px"
+                                  align={"center"}
+                                  borderWidth={1}
+                                  borderColor="#D1D7DC"
+                                  bg="#F7F9FA"
+                                >
+                                  <Text my={1}>
+                                    <FaPlayCircle size={35} color={"#D1D7DC"} />
+                                  </Text>
+                                  <Text
+                                    width={"100%"}
+                                    fontSize={12}
+                                    textAlign={"center"}
+                                    bg="#D1D7DC"
+                                  >
+                                    Video
+                                  </Text>
+                                </Stack>
                               </Flex>
                             </Stack>
                           </Stack>
