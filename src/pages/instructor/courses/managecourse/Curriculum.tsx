@@ -5,18 +5,11 @@ import {
   Text,
   Input,
   useDisclosure,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
-  AlertDialogCloseButton,
   Button,
   Skeleton,
   Box,
 } from "@chakra-ui/react";
-import React, { useEffect} from "react";
+import { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -34,7 +27,6 @@ import {
   useCreateModuleLectureCourse,
   useEditModuleLectureCourse,
   useDeleteLectureModuleCourse,
-  // useGetSingleModuleCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -43,32 +35,20 @@ import { LuStickyNote } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../../../../hooks/course";
 
-
 const Curriculum = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  // const {
-  //   isOpen: IsOpenlectureModule,
-  //   onOpen: onOpenLectureModule,
-  //   onClose: onCloseLectureModule,
-  // } = useDisclosure();
-  const cancelRef: any = React.useRef();
+  const { onOpen } = useDisclosure();
   const { id } = useParams();
   const { getSingleCourse, refetch } = useGetSingleCourse(id);
-
   useEffect(() => {
     refetch();
-    // me()
   }, [id]);
-  const { moduleEditCourse, } = useModuleEditCourse();
-  const { deleteModule, isPending: deleteLoading } = useDeleteModalCourse();
+  const { moduleEditCourse } = useModuleEditCourse();
+  const { deleteModule } = useDeleteModalCourse();
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
-  const { deleteLectureModule,  } =
-    useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse,  } =
-    useCreateModuleLectureCourse();
+  const { deleteLectureModule } = useDeleteLectureModuleCourse();
+  const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
 
-  
   const initialValues1 = {
     title: "",
     learningObjective: "",
@@ -102,7 +82,7 @@ const Curriculum = () => {
     isOpenModuleLectureState,
   } = useGetModuleCourse(getSingleCourse?.id);
 
-  console.log(data)
+  console.log(data);
   interface Lecture {
     title: string;
   }
@@ -112,10 +92,13 @@ const Curriculum = () => {
     lectureTitle?: string;
     lectures: Lecture[];
   }
-  const moduleTitle: string[] = (data ?? []).flat(2).map((obj: MyObject) => obj.title);
-  const modulelearningObjective: string[] = (data ?? []).flat(2).map((obj: MyObject) => obj.learningObjective);
+  const moduleTitle: string[] = (data ?? [])
+    .flat(2)
+    .map((obj: MyObject) => obj.title);
+  const modulelearningObjective: string[] = (data ?? [])
+    .flat(2)
+    .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
-
 
   return (
     <Stack>
@@ -142,7 +125,6 @@ const Curriculum = () => {
         </Stack>
       )}
       {data?.map((course: any, index: any) => {
- 
         const { title, id, lectures } = course;
         const initialValues2 = {
           title: moduleTitle[index],
@@ -176,9 +158,9 @@ const Curriculum = () => {
                         >
                           <MdEdit />
                         </Text>
-                        <Text cursor={"pointer"} 
-                        // onClick={onOpen}
-                        onClick={()=>     deleteModule({ moduleId: id })}
+                        <Text
+                          cursor={"pointer"}
+                          onClick={() => deleteModule({ moduleId: id })}
                         >
                           <MdDelete />
                         </Text>
@@ -318,8 +300,6 @@ const Curriculum = () => {
                             as={"button"}
                             py={2}
                             px={4}
-                            // isLoading={ isOpenState[id[0]] && editLoading}
-                            // loadingText="Loading"
                             variant="outline"
                             spinnerPlacement="end"
                             onClick={() => handleEditSubmit()}
@@ -339,10 +319,10 @@ const Curriculum = () => {
                     const { id, title } = lecture;
                     const initialValues4 = {
                       title: "",
-                    }
+                    };
                     return (
                       <Stack my={1} key={id}>
-                        {/* list of lecture starts here */}                     
+                        {/* list of lecture starts here */}
                         {!isOpenModuleLectureState[id] && (
                           <Stack
                             bg={"white"}
@@ -374,10 +354,11 @@ const Curriculum = () => {
                                     >
                                       <MdEdit />
                                     </Text>
-                                    <Text cursor={"pointer"} 
-                                    // onClick={onOpenLectureModule}
-                                    onClick={()=> { 
-                                      deleteLectureModule({ lectureId: id })}}
+                                    <Text
+                                      cursor={"pointer"}
+                                      onClick={() => {
+                                        deleteLectureModule({ lectureId: id });
+                                      }}
                                     >
                                       <MdDelete />
                                     </Text>
@@ -403,10 +384,10 @@ const Curriculum = () => {
                                     <Text
                                       cursor={"pointer"}
                                       ml={3}
-                                      // onClick={onOpenLectureModule}
-                                      onClick={()=> { 
-                                        deleteLectureModule({ lectureId: id })}}
-                                      >
+                                      onClick={() => {
+                                        deleteLectureModule({ lectureId: id });
+                                      }}
+                                    >
                                       <MdDelete />
                                     </Text>
                                   </Flex>
@@ -417,7 +398,6 @@ const Curriculum = () => {
                                 content
                               </Flex>
                             </Flex>
-                       
                           </Stack>
                         )}
                         {/* edit curriculum lecture input field */}
@@ -455,7 +435,9 @@ const Curriculum = () => {
                                     <Text mt={1}>
                                       <RiCheckboxCircleFill />
                                     </Text>
-                                    <Text fontWeight={"500"}>Lecture {index+1} </Text>
+                                    <Text fontWeight={"500"}>
+                                      Lecture {index + 1}{" "}
+                                    </Text>
                                   </Flex>
                                   <Stack w={{ base: "100%", lg: "88%" }}>
                                     <Input
@@ -470,7 +452,7 @@ const Curriculum = () => {
                                       focusBorderColor="black"
                                       onChange={handleChange}
                                     />
-                                    
+
                                     {errors?.title && (
                                       <Text
                                         style={{ color: "red", marginTop: 0 }}
@@ -514,13 +496,10 @@ const Curriculum = () => {
                                     Save Lecture
                                   </Button>
                                 </Flex>
-                               
                               </Stack>
-                              
                             )}
                           </Formik>
                         )}
-                  
                       </Stack>
                     );
                   })}
@@ -550,7 +529,6 @@ const Curriculum = () => {
                     </Button>
                   )}
                   {/* new curriculum input section */}
-
                   {isOpenCurriculumState[id] && (
                     <Formik
                       initialValues={initialValues3}
@@ -611,7 +589,6 @@ const Curriculum = () => {
                               )}
                             </Stack>
                           </Flex>
-
                           <Flex
                             justify={"end"}
                             mt={2}
@@ -632,10 +609,6 @@ const Curriculum = () => {
                               as={"button"}
                               py={2}
                               px={4}
-                              // isLoading={moduleLectureLoading}
-                              // isLoading={  isOpenCurriculumState[id] && moduleLectureLoading}
-                              //
-                              // loadingText="Loading"
                               variant="outline"
                               spinnerPlacement="end"
                               onClick={() => handleCurriculumSubmit()}
@@ -652,47 +625,6 @@ const Curriculum = () => {
                 </Stack>
               </Stack>
             </Stack>
-
-            <AlertDialog
-              motionPreset="slideInBottom"
-              leastDestructiveRef={cancelRef}
-              onClose={onClose}
-              isOpen={isOpen}
-              isCentered
-            >
-              <AlertDialogOverlay />
-
-              <AlertDialogContent>
-                <AlertDialogHeader>Please Confirm</AlertDialogHeader>
-                <AlertDialogCloseButton />
-                <AlertDialogBody>
-                  You are about to remove a curriculum item. Are you sure you
-                  want to continue? 
-                </AlertDialogBody>
-                <AlertDialogFooter>
-                  <Button onClick={onClose}>Cancel</Button>
-                  <Button
-                    bg="black"
-                    color="white"
-                    ml={3}
-                    isLoading={deleteLoading}
-                    loadingText="Loading"
-                    variant="outline"
-                    spinnerPlacement="end"
-                    _hover={{ backgroundColor: "none", color: "none" }}
-                    onClick={() => {
-                      deleteModule({ moduleId: id });
-                      // isOpenCurriculumState[id]
-                      setTimeout(() => {
-                        onClose();
-                      }, 1500);
-                    }}
-                  >
-                    OK
-                  </Button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
           </Stack>
         );
       })}
