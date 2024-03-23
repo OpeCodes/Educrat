@@ -35,6 +35,10 @@ import { LuStickyNote } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../../../../hooks/course";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaPlayCircle } from "react-icons/fa";
+{/* <FaPlayCircle /> */}
+
+
 
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
@@ -327,7 +331,6 @@ const Curriculum = () => {
                     return (
                       <Stack>
                         <Stack
-                          // my={1}
                           key={id}
                         >
                           <Stack position="relative">
@@ -452,14 +455,13 @@ const Curriculum = () => {
                               borderColor={"gray"}
                               mt={-3}
                             >
-                              <Flex
-                               
+                              <Flex                               
                                 width="100%"
                                 justifyContent="end"
                               >
                                 <Flex
                                   fontSize={14}
-                                  mt={-7}
+                                  mt={-8}
                                   backgroundColor="white"
                                   textAlign={"center"}
                                   fontWeight={"bold"}
@@ -475,14 +477,17 @@ const Curriculum = () => {
                                     Select content type
                                   </Text>
                                   <Text as={"button"} fontWeight="bold">
-                                    <IoCloseSharp size={20} />
+                                    <IoCloseSharp size={20}  />
                                   </Text>
                                 </Flex>
                               </Flex>
-                              <Text textAlign={"center"} fontSize={12}>
+                              <Text textAlign={"center"} fontSize={14}>
                                 Select the main type of content. Files and links
                                 can be added as resources.
                               </Text>
+                              <Flex>
+
+                              </Flex>
                             </Stack>
                           </Stack>
                           {/* edit curriculum lecture input field */}
