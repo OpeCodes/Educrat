@@ -35,10 +35,7 @@ import { LuStickyNote } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../../../../hooks/course";
 import { FaChevronDown , FaChevronUp} from "react-icons/fa";
-import { FaAngleUp } from "react-icons/fa";
-{/* <FaAngleUp /> */}
 
-{/* /}
 
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
@@ -399,25 +396,24 @@ const Curriculum = () => {
                                 </Flex>
                               </Flex>
 
-                              <Flex display={{ base: "none", lg: "flex" }}>
+                              <Flex marginRight={"10px"} columnGap={"15px"} align={"center"} display={{ base: "none", lg: "flex" }}>
                                 <Button
                                   borderRadius={0}
-                                  bg={"#F7F8FB"}
                                   borderWidth={1}
                                   borderColor={"black"}
                                   color="black"
-                                  _hover={{ backgroundColor: "none" }}
+                                  _hover={{ backgroundColor: "#F7F8FB" }}
                                   width={"100px"}
                                   height={"30px"}
                                   leftIcon={<GoPlus fontSize={"20px"} />}
-                                  colorScheme="teal"
                                   variant="outline"
                                 >
                                   Content
                                 </Button>
                                 <Box>
-                                  <Text>
-                                  <FaChevronDown /> 
+                                  <Text as={"button"}>
+                                  <FaChevronDown size="12px" /> 
+                                  {/* <FaChevronUp size="12px" />  */}
                                   </Text>
                                 </Box>
                                 
