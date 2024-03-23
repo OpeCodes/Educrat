@@ -478,6 +478,7 @@ const Curriculum = () => {
                                 Select the main type of content. Files and links
                                 can be added as resources.
                               </Text>
+                              <Stack position="relative">
                               <Flex justify={"center"}>
                                 <Stack
                                   width="70px"
@@ -498,9 +499,21 @@ const Curriculum = () => {
                                     Video
                                   </Text>
                                 </Stack>
+                               
                               </Flex>
+                              <Stack direction="row" justify={"center"}>
+                                <Stack>
+                                <Text my={1}>
+                                    <FaPlayCircle size={35} color={"#D1D7DC"} />
+                                  </Text>
+                                  <Text fontSize={12}
+                                    textAlign={"center"}>Video</Text>
+                                </Stack>
+                              </Stack>
+                              </Stack>
                             </Stack>
                           </Stack>
+
                           {/* edit curriculum lecture input field */}
                           {isOpenModuleLectureState[id] && (
                             <Formik
