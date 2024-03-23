@@ -478,6 +478,7 @@ const Curriculum = () => {
                                 can be added as resources.
                               </Text>
                               {/* jj */}
+                              <Flex justify={"center"} columnGap={5}>
                               <Stack justify="center" direction="row">
                                 <Flex position="relative" >
                                   <Flex >
@@ -547,7 +548,7 @@ const Curriculum = () => {
                                       borderRadius={2}
                                     >
                                       <Text my={1}>
-                                        <FaPlayCircle
+                                        <LuStickyNote
                                           size={35}
                                           color={"#D1D7DC"}
                                         />
@@ -579,7 +580,7 @@ const Curriculum = () => {
                                   >
                                     <Stack>
                                       <Text my={1}>
-                                        <FaPlayCircle
+                                        <LuStickyNote
                                           size={35}
                                           color={"#D1D7DC"}
                                         />
@@ -591,6 +592,7 @@ const Curriculum = () => {
                                   </Stack>
                                 </Flex>
                               </Stack>
+                              </Flex>
                             </Stack>
                           </Stack>
 
