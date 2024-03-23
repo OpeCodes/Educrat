@@ -102,7 +102,7 @@ const Curriculum = () => {
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
   //start
-  const [content, setContent] = useState(true);
+  const [content, setContent] = useState(false);
   //end
   return (
     <Stack>
@@ -326,130 +326,164 @@ const Curriculum = () => {
                     };
                     return (
                       <Stack>
-                        <Stack 
-                        // my={1} 
-                        key={id}>
-                          <Stack>
-                          {/* list of lecture starts here */}
-                          {!isOpenModuleLectureState[id] && (
+                        <Stack
+                          // my={1}
+                          key={id}
+                        >
+                          <Stack position="relative">
+                            {/* list of lecture starts here */}
+                            {!isOpenModuleLectureState[id] && (
+                              <Stack
+                                bg={"white"}
+                                borderWidth={1}
+                                borderColor={"gray"}
+                                p={3}
+                              >
+                                <Flex justify={"space-between"}>
+                                  <Flex
+                                    columnGap={3}
+                                    flexDirection={{
+                                      base: "column",
+                                      md: "row",
+                                    }}
+                                  >
+                                    <Flex align={"center"} columnGap={1}>
+                                      <RiCheckboxCircleFill />
+
+                                      <Text fontWeight={"500"} mr={4}>
+                                        Lecture {index + 1}
+                                      </Text>
+                                      <Flex
+                                        align={"center"}
+                                        columnGap={4}
+                                        display={{ base: "flex", lg: "none" }}
+                                      >
+                                        <Text
+                                          cursor={"pointer"}
+                                          onClick={() =>
+                                            toggleIsModuleLectureOpen(id)
+                                          }
+                                        >
+                                          <MdEdit />
+                                        </Text>
+                                        <Text
+                                          cursor={"pointer"}
+                                          onClick={() => {
+                                            deleteLectureModule({
+                                              lectureId: id,
+                                            });
+                                          }}
+                                        >
+                                          <MdDelete />
+                                        </Text>
+                                      </Flex>
+                                    </Flex>
+                                    <Flex align={"center"} columnGap={1}>
+                                      <Text
+                                        display={{ base: "none", lg: "flex" }}
+                                      >
+                                        <LuStickyNote />
+                                      </Text>
+                                      {title.length > 60
+                                        ? `${title.slice(0, 60)}...`
+                                        : `${title}`}
+
+                                      <Flex
+                                        display={{ base: "none", lg: "flex" }}
+                                      >
+                                        <Text
+                                          cursor={"pointer"}
+                                          onClick={() =>
+                                            toggleIsModuleLectureOpen(id)
+                                          }
+                                        >
+                                          <MdEdit />
+                                        </Text>
+                                        <Text
+                                          cursor={"pointer"}
+                                          ml={3}
+                                          onClick={() => {
+                                            deleteLectureModule({
+                                              lectureId: id,
+                                            });
+                                          }}
+                                        >
+                                          <MdDelete />
+                                        </Text>
+                                      </Flex>
+                                    </Flex>
+                                  </Flex>
+
+                                  {content ? (
+                                    <Flex
+                                      marginRight={"10px"}
+                                      columnGap={"15px"}
+                                      align={"center"}
+                                      display={{ base: "none", lg: "flex" }}
+                                    >
+                                      <Button
+                                        borderRadius={0}
+                                        borderWidth={1}
+                                        borderColor={"black"}
+                                        color="black"
+                                        _hover={{ backgroundColor: "#F7F8FB" }}
+                                        width={"100px"}
+                                        height={"30px"}
+                                        leftIcon={<GoPlus fontSize={"20px"} />}
+                                        variant="outline"
+                                      >
+                                        Content
+                                      </Button>
+                                      <Box>
+                                        <Text as={"button"}>
+                                          <FaChevronDown size="12px" />
+                                        </Text>
+                                      </Box>
+                                    </Flex>
+                                  ) : (
+                                    ""
+                                  )}
+                                </Flex>
+                              </Stack>
+                            )}
                             <Stack
                               bg={"white"}
                               borderWidth={1}
                               borderColor={"gray"}
-                              p={3}
-                            >
-                              <Flex justify={"space-between"}>
-                                <Flex
-                                  columnGap={3}
-                                  flexDirection={{ base: "column", md: "row" }}
-                                >
-                                  <Flex align={"center"} columnGap={1}>
-                                    <RiCheckboxCircleFill />
-
-                                    <Text fontWeight={"500"} mr={4}>
-                                      Lecture {index + 1}
-                                    </Text>
-                                    <Flex
-                                      align={"center"}
-                                      columnGap={4}
-                                      display={{ base: "flex", lg: "none" }}
-                                    >
-                                      <Text
-                                        cursor={"pointer"}
-                                        onClick={() =>
-                                          toggleIsModuleLectureOpen(id)
-                                        }
-                                      >
-                                        <MdEdit />
-                                      </Text>
-                                      <Text
-                                        cursor={"pointer"}
-                                        onClick={() => {
-                                          deleteLectureModule({
-                                            lectureId: id,
-                                          });
-                                        }}
-                                      >
-                                        <MdDelete />
-                                      </Text>
-                                    </Flex>
-                                  </Flex>
-                                  <Flex align={"center"} columnGap={1}>
-                                    <Text
-                                      display={{ base: "none", lg: "flex" }}
-                                    >
-                                      <LuStickyNote />
-                                    </Text>
-                                    {title.length > 60
-                                      ? `${title.slice(0, 60)}...`
-                                      : `${title}`}
-
-                                    <Flex
-                                      display={{ base: "none", lg: "flex" }}
-                                    >
-                                      <Text
-                                        cursor={"pointer"}
-                                        onClick={() =>
-                                          toggleIsModuleLectureOpen(id)
-                                        }
-                                      >
-                                        <MdEdit />
-                                      </Text>
-                                      <Text
-                                        cursor={"pointer"}
-                                        ml={3}
-                                        onClick={() => {
-                                          deleteLectureModule({
-                                            lectureId: id,
-                                          });
-                                        }}
-                                      >
-                                        <MdDelete />
-                                      </Text>
-                                    </Flex>
-                                  </Flex>
-                                </Flex>
-
-                                {content ? (
-                                  <Flex
-                                    marginRight={"10px"}
-                                    columnGap={"15px"}
-                                    align={"center"}
-                                    display={{ base: "none", lg: "flex" }}
-                                  >
-                                    <Button
-                                      borderRadius={0}
-                                      borderWidth={1}
-                                      borderColor={"black"}
-                                      color="black"
-                                      _hover={{ backgroundColor: "#F7F8FB" }}
-                                      width={"100px"}
-                                      height={"30px"}
-                                      leftIcon={<GoPlus fontSize={"20px"} />}
-                                      variant="outline"
-                                    >
-                                      Content
-                                    </Button>
-                                    <Box>
-                                      <Text as={"button"}>
-                                        <FaChevronDown size="12px" />
-                                      </Text>
-                                    </Box>
-                                  </Flex>
-                                ) : (
-                                  <Text>inside</Text>
-                                )}
-                              </Flex>
-                            </Stack>
-                          )}
-                          <Stack bg={"white"}
-                              borderWidth={1}
-                              borderColor={"gray"}
-                              p={3}
                               mt={-3}
+                            >
+                              <Flex
+                               
+                                width="100%"
+                                justifyContent="end"
                               >
-                            <Text textAlign={"center"} fontSize={12}>Select the main type of content. Files and links can be added as resources. </Text>
-                          </Stack>
+                                <Flex
+                                  fontSize={14}
+                                  mt={-7}
+                                  backgroundColor="white"
+                                  textAlign={"center"}
+                                  fontWeight={"bold"}
+                                  borderTopWidth={1}
+                                  borderRightWidth={1}
+                                  borderLeftWidth={1}
+                                  borderColor={"gray"}
+                                  align={"center"}
+                                  columnGap={2}
+                                  marginRight={7}
+                                >
+                                  <Text marginLeft={2} fontSize={14}>
+                                    Select content type
+                                  </Text>
+                                  <Text as={"button"} fontWeight="bold">
+                                    <IoCloseSharp size={20} />
+                                  </Text>
+                                </Flex>
+                              </Flex>
+                              <Text textAlign={"center"} fontSize={12}>
+                                Select the main type of content. Files and links
+                                can be added as resources.
+                              </Text>
+                            </Stack>
                           </Stack>
                           {/* edit curriculum lecture input field */}
                           {isOpenModuleLectureState[id] && (
