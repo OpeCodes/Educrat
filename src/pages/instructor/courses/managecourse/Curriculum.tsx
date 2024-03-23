@@ -9,7 +9,7 @@ import {
   Skeleton,
   Box,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -34,8 +34,7 @@ import { RiCheckboxCircleFill } from "react-icons/ri";
 import { LuStickyNote } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../../../../hooks/course";
-import { FaChevronDown , FaChevronUp} from "react-icons/fa";
-
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
@@ -102,6 +101,9 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
+  //start
+  const [content, setContent] = useState(true);
+  //end
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -323,204 +325,236 @@ const Curriculum = () => {
                       title: "",
                     };
                     return (
-                      <Stack my={1} key={id}>
-                        {/* list of lecture starts here */}
-                        {!isOpenModuleLectureState[id] && (
-                          <Stack
-                            bg={"white"}
-                            borderWidth={1}
-                            borderColor={"gray"}
-                            p={3}
-                          >
-                            <Flex justify={"space-between"}>
-                              <Flex
-                                columnGap={3}
-                                flexDirection={{ base: "column", md: "row" }}
-                              >
-                                <Flex align={"center"} columnGap={1}>
-                                  <RiCheckboxCircleFill />
-
-                                  <Text fontWeight={"500"} mr={4}>
-                                    Lecture {index + 1}
-                                  </Text>
-                                  <Flex
-                                    align={"center"}
-                                    columnGap={4}
-                                    display={{ base: "flex", lg: "none" }}
-                                  >
-                                    <Text
-                                      cursor={"pointer"}
-                                      onClick={() =>
-                                        toggleIsModuleLectureOpen(id)
-                                      }
-                                    >
-                                      <MdEdit />
-                                    </Text>
-                                    <Text
-                                      cursor={"pointer"}
-                                      onClick={() => {
-                                        deleteLectureModule({ lectureId: id });
-                                      }}
-                                    >
-                                      <MdDelete />
-                                    </Text>
-                                  </Flex>
-                                </Flex>
-                                <Flex align={"center"} columnGap={1}>
-                                  <Text display={{ base: "none", lg: "flex" }}>
-                                    <LuStickyNote />
-                                  </Text>
-                                  {title.length > 60
-                                    ? `${title.slice(0, 60)}...`
-                                    : `${title}`}
-
-                                  <Flex display={{ base: "none", lg: "flex" }}>
-                                    <Text
-                                      cursor={"pointer"}
-                                      onClick={() =>
-                                        toggleIsModuleLectureOpen(id)
-                                      }
-                                    >
-                                      <MdEdit />
-                                    </Text>
-                                    <Text
-                                      cursor={"pointer"}
-                                      ml={3}
-                                      onClick={() => {
-                                        deleteLectureModule({ lectureId: id });
-                                      }}
-                                    >
-                                      <MdDelete />
-                                    </Text>
-                                  </Flex>
-                                </Flex>
-                              </Flex>
-
-                              <Flex marginRight={"10px"} columnGap={"15px"} align={"center"} display={{ base: "none", lg: "flex" }}>
-                                <Button
-                                  borderRadius={0}
-                                  borderWidth={1}
-                                  borderColor={"black"}
-                                  color="black"
-                                  _hover={{ backgroundColor: "#F7F8FB" }}
-                                  width={"100px"}
-                                  height={"30px"}
-                                  leftIcon={<GoPlus fontSize={"20px"} />}
-                                  variant="outline"
-                                >
-                                  Content
-                                </Button>
-                                <Box>
-                                  <Text as={"button"}>
-                                  <FaChevronDown size="12px" /> 
-                                  {/* <FaChevronUp size="12px" />  */}
-                                  </Text>
-                                </Box>
-                                
-                              </Flex>
-                            </Flex>
-                          </Stack>
-                        )}
-                        {/* edit curriculum lecture input field */}
-                        {isOpenModuleLectureState[id] && (
-                          <Formik
-                            initialValues={initialValues4}
-                            validationSchema={curriculumEditLectureSchema}
-                            onSubmit={(values: any) => {
-                              moduleEditLectureCourse({
-                                lectureId: id,
-                                user: values,
-                              });
-                              setTimeout(() => {
-                                toggleIsModuleLectureOpen(id);
-                              }, 2000);
-                            }}
-                          >
-                            {({
-                              handleChange,
-                              handleSubmit: handleCurriculumSubmit,
-                              values,
-                              errors,
-                            }) => (
-                              <Stack
-                                bg={"#FFFFFF"}
-                                borderWidth={1}
-                                p={3}
-                                borderColor={"gray"}
-                              >
+                      <Stack>
+                        <Stack 
+                        // my={1} 
+                        key={id}>
+                          <Stack>
+                          {/* list of lecture starts here */}
+                          {!isOpenModuleLectureState[id] && (
+                            <Stack
+                              bg={"white"}
+                              borderWidth={1}
+                              borderColor={"gray"}
+                              p={3}
+                            >
+                              <Flex justify={"space-between"}>
                                 <Flex
-                                  rowGap={2}
-                                  flexDirection={{ base: "column", lg: "row" }}
+                                  columnGap={3}
+                                  flexDirection={{ base: "column", md: "row" }}
                                 >
-                                  <Flex columnGap={1} mr={2} mt={2}>
-                                    <Text mt={1}>
-                                      <RiCheckboxCircleFill />
-                                    </Text>
-                                    <Text fontWeight={"500"}>
-                                      Lecture {index + 1}{" "}
-                                    </Text>
-                                  </Flex>
-                                  <Stack w={{ base: "100%", lg: "88%" }}>
-                                    <Input
-                                      variant="outline"
-                                      w="100%"
-                                      borderColor={"black"}
-                                      borderRadius={"0px"}
-                                      placeholder="Enter a title"
-                                      _focus={{ borderColor: "black" }}
-                                      name="title"
-                                      value={values.title}
-                                      focusBorderColor="black"
-                                      onChange={handleChange}
-                                    />
+                                  <Flex align={"center"} columnGap={1}>
+                                    <RiCheckboxCircleFill />
 
-                                    {errors?.title && (
+                                    <Text fontWeight={"500"} mr={4}>
+                                      Lecture {index + 1}
+                                    </Text>
+                                    <Flex
+                                      align={"center"}
+                                      columnGap={4}
+                                      display={{ base: "flex", lg: "none" }}
+                                    >
                                       <Text
-                                        style={{ color: "red", marginTop: 0 }}
-                                        fontSize="14px"
+                                        cursor={"pointer"}
+                                        onClick={() =>
+                                          toggleIsModuleLectureOpen(id)
+                                        }
                                       >
-                                        Pls add title
+                                        <MdEdit />
                                       </Text>
-                                    )}
-                                  </Stack>
+                                      <Text
+                                        cursor={"pointer"}
+                                        onClick={() => {
+                                          deleteLectureModule({
+                                            lectureId: id,
+                                          });
+                                        }}
+                                      >
+                                        <MdDelete />
+                                      </Text>
+                                    </Flex>
+                                  </Flex>
+                                  <Flex align={"center"} columnGap={1}>
+                                    <Text
+                                      display={{ base: "none", lg: "flex" }}
+                                    >
+                                      <LuStickyNote />
+                                    </Text>
+                                    {title.length > 60
+                                      ? `${title.slice(0, 60)}...`
+                                      : `${title}`}
+
+                                    <Flex
+                                      display={{ base: "none", lg: "flex" }}
+                                    >
+                                      <Text
+                                        cursor={"pointer"}
+                                        onClick={() =>
+                                          toggleIsModuleLectureOpen(id)
+                                        }
+                                      >
+                                        <MdEdit />
+                                      </Text>
+                                      <Text
+                                        cursor={"pointer"}
+                                        ml={3}
+                                        onClick={() => {
+                                          deleteLectureModule({
+                                            lectureId: id,
+                                          });
+                                        }}
+                                      >
+                                        <MdDelete />
+                                      </Text>
+                                    </Flex>
+                                  </Flex>
                                 </Flex>
-                                <Flex
-                                  justify={"end"}
-                                  mt={2}
-                                  align={"center"}
-                                  columnGap={5}
+
+                                {content ? (
+                                  <Flex
+                                    marginRight={"10px"}
+                                    columnGap={"15px"}
+                                    align={"center"}
+                                    display={{ base: "none", lg: "flex" }}
+                                  >
+                                    <Button
+                                      borderRadius={0}
+                                      borderWidth={1}
+                                      borderColor={"black"}
+                                      color="black"
+                                      _hover={{ backgroundColor: "#F7F8FB" }}
+                                      width={"100px"}
+                                      height={"30px"}
+                                      leftIcon={<GoPlus fontSize={"20px"} />}
+                                      variant="outline"
+                                    >
+                                      Content
+                                    </Button>
+                                    <Box>
+                                      <Text as={"button"}>
+                                        <FaChevronDown size="12px" />
+                                      </Text>
+                                    </Box>
+                                  </Flex>
+                                ) : (
+                                  <Text>inside</Text>
+                                )}
+                              </Flex>
+                            </Stack>
+                          )}
+                          <Stack bg={"white"}
+                              borderWidth={1}
+                              borderColor={"gray"}
+                              p={3}
+                              mt={-3}
+                              >
+                            <Text textAlign={"center"} fontSize={12}>Select the main type of content. Files and links can be added as resources. </Text>
+                          </Stack>
+                          </Stack>
+                          {/* edit curriculum lecture input field */}
+                          {isOpenModuleLectureState[id] && (
+                            <Formik
+                              initialValues={initialValues4}
+                              validationSchema={curriculumEditLectureSchema}
+                              onSubmit={(values: any) => {
+                                moduleEditLectureCourse({
+                                  lectureId: id,
+                                  user: values,
+                                });
+                                setTimeout(() => {
+                                  toggleIsModuleLectureOpen(id);
+                                }, 2000);
+                              }}
+                            >
+                              {({
+                                handleChange,
+                                handleSubmit: handleCurriculumSubmit,
+                                values,
+                                errors,
+                              }) => (
+                                <Stack
+                                  bg={"#FFFFFF"}
+                                  borderWidth={1}
+                                  p={3}
+                                  borderColor={"gray"}
                                 >
-                                  <Text
-                                    fontWeight={"bold"}
-                                    as={"button"}
-                                    onClick={() =>
-                                      toggleIsModuleLectureOpen(id)
-                                    }
+                                  <Flex
+                                    rowGap={2}
+                                    flexDirection={{
+                                      base: "column",
+                                      lg: "row",
+                                    }}
                                   >
-                                    Cancel
-                                  </Text>
-                                  <Button
-                                    color="#ffffff"
-                                    fontWeight={"500"}
-                                    fontSize={14}
-                                    as={"button"}
-                                    py={2}
-                                    px={4}
-                                    isLoading={moduleEditLectureLoading}
-                                    loadingText="Loading"
-                                    variant="outline"
-                                    spinnerPlacement="end"
-                                    onClick={() => handleCurriculumSubmit()}
-                                    type="button"
-                                    backgroundColor={"black"}
+                                    <Flex columnGap={1} mr={2} mt={2}>
+                                      <Text mt={1}>
+                                        <RiCheckboxCircleFill />
+                                      </Text>
+                                      <Text fontWeight={"500"}>
+                                        Lecture {index + 1}{" "}
+                                      </Text>
+                                    </Flex>
+                                    <Stack w={{ base: "100%", lg: "88%" }}>
+                                      <Input
+                                        variant="outline"
+                                        w="100%"
+                                        borderColor={"black"}
+                                        borderRadius={"0px"}
+                                        placeholder="Enter a title"
+                                        _focus={{ borderColor: "black" }}
+                                        name="title"
+                                        value={values.title}
+                                        focusBorderColor="black"
+                                        onChange={handleChange}
+                                      />
+
+                                      {errors?.title && (
+                                        <Text
+                                          style={{ color: "red", marginTop: 0 }}
+                                          fontSize="14px"
+                                        >
+                                          Pls add title
+                                        </Text>
+                                      )}
+                                    </Stack>
+                                  </Flex>
+                                  <Flex
+                                    justify={"end"}
+                                    mt={2}
+                                    align={"center"}
+                                    columnGap={5}
                                   >
-                                    Save Lecture
-                                  </Button>
-                                </Flex>
-                              </Stack>
-                            )}
-                          </Formik>
-                        )}
+                                    <Text
+                                      fontWeight={"bold"}
+                                      as={"button"}
+                                      onClick={() =>
+                                        toggleIsModuleLectureOpen(id)
+                                      }
+                                    >
+                                      Cancel
+                                    </Text>
+                                    <Button
+                                      color="#ffffff"
+                                      fontWeight={"500"}
+                                      fontSize={14}
+                                      as={"button"}
+                                      py={2}
+                                      px={4}
+                                      isLoading={moduleEditLectureLoading}
+                                      loadingText="Loading"
+                                      variant="outline"
+                                      spinnerPlacement="end"
+                                      onClick={() => handleCurriculumSubmit()}
+                                      type="button"
+                                      backgroundColor={"black"}
+                                    >
+                                      Save Lecture
+                                    </Button>
+                                  </Flex>
+                                </Stack>
+                              )}
+                            </Formik>
+                          )}
+                        </Stack>
                       </Stack>
                     );
                   })}
