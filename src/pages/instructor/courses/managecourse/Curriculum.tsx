@@ -33,6 +33,7 @@ import {
   useCreateModuleLectureCourse,
   useEditModuleLectureCourse,
   useDeleteLectureModuleCourse,
+  useCreateArticleLectureCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -77,6 +78,7 @@ const Curriculum = () => {
     showSection,
   } = useModuleCreateCourse();
 
+  // useCreateArticleLectureCourse();
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };

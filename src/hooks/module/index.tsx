@@ -418,3 +418,36 @@ export const useGetLectureModuleCourse = (id: any) => {
   };
 };
 
+
+// ****************************************article endpoint**************************************
+export const useCreateArticleLectureCourse = () => {
+  const toast = useToast();
+  // const queryClient = useQueryClient();
+  const {
+    mutate: createArticleLectureCourse,
+    isPending: createArticleLectureCourseLoding,
+  } = useMutation({
+    mutationFn: ({ lectureId, user }: any) => {
+      return customFetch.post(`/lecture/content/lecture/${lectureId}/article
+      `, user);
+    },
+    onSuccess: () => {
+      // queryClient.invalidateQueries({ queryKey: ["module"] });
+      toast({
+        title: `Article created`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { createArticleLectureCourse, createArticleLectureCourseLoding };
+};
