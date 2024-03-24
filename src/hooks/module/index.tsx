@@ -191,10 +191,14 @@ export const useGetModuleCourse = (id: any) => {
   });
   // **************************description and resources toggle************************
   const [isOpendescripRes, setIsOpenDescrpRes] = useState<{
-    [key: number]: string;
+    [key: number]: boolean;
   }>({});
-  // toggleIsOpenDescripRes
-  
+  const toggleIsOpenDescripRes = (arrayId: number) => {
+    setIsOpenDescrpRes((prevIsOpenDescripResTypeState) => ({
+      ...prevIsOpenDescripResTypeState,
+      [arrayId]: !prevIsOpenDescripResTypeState[arrayId],
+    }));
+  };
   return {
     data,
     isPending,
