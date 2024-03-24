@@ -199,6 +199,19 @@ export const useGetModuleCourse = (id: any) => {
       [arrayId]: !prevIsOpenDescripResTypeState[arrayId],
     }));
   };
+
+  // *************************description func*************************
+  const [isOpendescription, setIsOpenDescription] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  const toggleIsOpenDescription = (arrayId: number) => {
+    setIsOpenDescrpRes((prevIsOpenDescriptionState) => ({
+      ...prevIsOpenDescriptionState,
+      [arrayId]: !prevIsOpenDescriptionState[arrayId],
+    }));
+  };
+
   return {
     data,
     isPending,
@@ -216,7 +229,9 @@ export const useGetModuleCourse = (id: any) => {
     toggleContentType2,
     contentType2,
     isOpendescripRes,
-    toggleIsOpenDescripRes
+    toggleIsOpenDescripRes,
+    isOpendescription,
+    toggleIsOpenDescription
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {

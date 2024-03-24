@@ -94,7 +94,9 @@ const Curriculum = () => {
     contentType2,
     toggleContentType2,
     isOpendescripRes,
-    toggleIsOpenDescripRes
+    toggleIsOpenDescripRes,
+    isOpendescription,
+    toggleIsOpenDescription
   } = useGetModuleCourse(getSingleCourse?.id);
   console.log(contentType);
   console.log(toggleContentType);
