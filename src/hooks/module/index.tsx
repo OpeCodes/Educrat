@@ -206,7 +206,7 @@ export const useGetModuleCourse = (id: any) => {
   }>({});
 
   const toggleIsOpenDescription = (arrayId: number) => {
-    setIsOpenDescrpRes((prevIsOpenDescriptionState) => ({
+    setIsOpenDescription((prevIsOpenDescriptionState) => ({
       ...prevIsOpenDescriptionState,
       [arrayId]: !prevIsOpenDescriptionState[arrayId],
     }));

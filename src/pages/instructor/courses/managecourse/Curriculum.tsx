@@ -98,8 +98,6 @@ const Curriculum = () => {
     isOpendescription,
     toggleIsOpenDescription
   } = useGetModuleCourse(getSingleCourse?.id);
-  console.log(contentType);
-  console.log(toggleContentType);
   interface Lecture {
     title: string;
   }
