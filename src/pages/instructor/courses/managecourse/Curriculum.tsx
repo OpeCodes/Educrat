@@ -14,7 +14,7 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -41,7 +41,7 @@ import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../../../../hooks/course";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
-
+import ReactQuill from "react-quill";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
   const { id } = useParams();
@@ -118,6 +118,8 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
+
+  const [article,setArticle] =useState("")
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -429,6 +431,7 @@ const Curriculum = () => {
                                     <Flex
                                       marginRight={"10px"}
                                       columnGap={"15px"}
+
                                       align={"center"}
                                       display={{ base: "none", lg: "flex" }}
                                     >
@@ -440,6 +443,7 @@ const Curriculum = () => {
                                         _hover={{ backgroundColor: "#F7F8FB" }}
                                         width={"100px"}
                                         height={"30px"}
+
                                         leftIcon={<GoPlus fontSize={"20px"} />}
                                         variant="outline"
                                         onClick={() => {
@@ -476,6 +480,8 @@ const Curriculum = () => {
                                   borderWidth={1}
                                   borderColor={"gray"}
                                   mt={-3}
+                                height="200px"
+                                // height="fit-content"
                                   pb={2}
                                 >
                                   <Flex width="100%" justifyContent="end">
@@ -723,7 +729,18 @@ const Curriculum = () => {
                                   {/* article */}
                                   {contentType2[id] &&
                                     isOpenContentType[id] && (
-                                      <Text>Article part</Text>
+                                     <Stack mx={3} > 
+                                      <Text>Text</Text>
+                                      <Stack >
+                                      <ReactQuill
+                  theme="snow"
+                  // defaultValue={initialValues?.description}
+                  value={article}
+                  onChange={setArticle}
+                  
+                />
+                                     </Stack>
+                                     </Stack>
                                     )}
                                 </Stack>
                               )}
