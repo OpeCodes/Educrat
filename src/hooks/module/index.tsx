@@ -169,6 +169,18 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
+  const [contentType2, setContentType2] = useState<{
+    [key: number]: string;
+  }>({});
+
+  const toggleContentType2 = (arrayId: number, type: string) => {
+    setContentType2((prevContentTypeState) => ({
+      ...prevContentTypeState,
+      [arrayId]: prevContentTypeState[arrayId] === type ? "" : type,
+    }));
+  };
+
+
   const { data, isPending, isSuccess } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
@@ -192,6 +204,8 @@ export const useGetModuleCourse = (id: any) => {
     isOpenContentType,
     contentType,
     toggleContentType,
+    contentType2,
+    toggleContentType2,
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
