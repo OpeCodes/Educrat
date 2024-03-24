@@ -98,7 +98,6 @@ const Curriculum = () => {
     isOpendescription,
     toggleIsOpenDescription,
     contentType3,
-    toggleContentType3,
     isOpenInnerdescripRes,
     toggleIsOpenInnerdescripRes,
   } = useGetModuleCourse(getSingleCourse?.id);
@@ -119,7 +118,6 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
-  // const contentType = true;
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -455,10 +453,8 @@ const Curriculum = () => {
                                           as={"button"}
                                           onClick={
                                             () => toggleIsOpenDescripRes(id)
-                                            // toggleIsOpenInnerdescripRes(id)
                                           }
                                         >
-                                          {/* /> */}
                                           {!isOpendescripRes[id] ? (
                                             <FaChevronDown size="12px" />
                                           ) : (
@@ -514,7 +510,6 @@ const Curriculum = () => {
                                           toggleIsOpenContentType(id);
                                           toggleContentType(id, "");
                                           toggleContentType2(id, "");
-                                          toggleContentType3(id, "");
                                         }}
                                       >
                                         <IoCloseSharp size={20} />
@@ -801,11 +796,7 @@ const Curriculum = () => {
                                           }
                                           variant="outline"
                                           onClick={() => {
-                                            toggleIsOpenInnerdescripRes(id);
-                                            // toggleContentType3(
-                                            //   id,
-                                            //   "Add Resources"
-                                            // );
+                                            toggleIsOpenInnerdescripRes(id);                                        
                                           }}
                                         >
                                           Resources
@@ -849,8 +840,6 @@ const Curriculum = () => {
                                         fontWeight="bold"
                                         onClick={() => {
                                         toggleIsOpenInnerdescripRes(id)
-
-                                          // toggleIsOpenContentType(id);
                                         }}
                                       >
                                         <IoCloseSharp size={20} />
@@ -858,12 +847,7 @@ const Curriculum = () => {
                                       </Flex>
                                     </Flex>
                                     <Stack mt={7}>
-                                    <Text>ld</Text>
-                                    <Text
-                                     
-                                    >
-                                      close
-                                    </Text>
+                                    <Text>resources</Text>                                   
                                     </Stack>
                                   </Stack>
                                 )}
