@@ -26,7 +26,6 @@ import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
 
 const CourseLandingPage = () => {
-  const [error, setError] = useState<boolean>(false);
   const { id } = useParams();
   useEffect(() => {
     refetch();
@@ -53,7 +52,6 @@ const CourseLandingPage = () => {
   };
 
   // console.log(getSingleCourse)
-  const [description, setDescripton] = useState(initialValues?.description);
 
   const { data, isPending } = useCourseCategory();
   const handleImageUpload = (file: File) => {
@@ -63,16 +61,10 @@ const CourseLandingPage = () => {
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
-
-    if (!description) {
-      setError(true);
-      return;
-    }
-    // setDescripton("")
-
+    console.log(values)
     singleCourse({
       singleId: getSingleCourse?.id,
-      user: { ...values, description },
+      user: { values },
     });
   };
 
@@ -141,7 +133,7 @@ const CourseLandingPage = () => {
                     {/* {errors?.subtitle}
 
                      */}
-                    enter subtitle 
+                    enter subtitle
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>
@@ -154,11 +146,10 @@ const CourseLandingPage = () => {
                 <FormLabel>Course Description</FormLabel>
                 <ReactQuill
                   theme="snow"
-                  defaultValue={initialValues?.description}
-                  value={description}
-                  onChange={setDescripton}
+                  value={values.description}
+                  onChange={handleChange("description")}
                 />
-                {error && (
+                {errors.description && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
                     Please add description
                   </Text>
