@@ -190,16 +190,11 @@ export const useGetModuleCourse = (id: any) => {
     },
   });
   // **************************description and resources toggle************************
-  const [descripRes, setDescrpRes] = useState<{
+  const [isOpendescripRes, setIsOpenDescrpRes] = useState<{
     [key: number]: string;
   }>({});
-
-  const toggleIsOpenDescripRes = (arrayId: number) => {
-    setIsOpenContentType((prevIsOpenContentTypeState) => ({
-      ...prevIsOpenContentTypeState,
-      [arrayId]: !prevIsOpenContentTypeState[arrayId],
-    }));
-  };
+  // toggleIsOpenDescripRes
+  
   return {
     data,
     isPending,
@@ -214,9 +209,9 @@ export const useGetModuleCourse = (id: any) => {
     isOpenContentType,
     contentType,
     toggleContentType,
-    contentType2,
     toggleContentType2,
-    descripRes,
+    contentType2,
+    isOpendescripRes,
     toggleIsOpenDescripRes
   };
 };

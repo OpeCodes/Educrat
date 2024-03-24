@@ -93,7 +93,7 @@ const Curriculum = () => {
     toggleContentType,
     contentType2,
     toggleContentType2,
-    descripRes,
+    isOpendescripRes,
     toggleIsOpenDescripRes
   } = useGetModuleCourse(getSingleCourse?.id);
   console.log(contentType);
@@ -448,8 +448,10 @@ const Curriculum = () => {
                                         Content
                                       </Button>
                                       <Box>
-                                        <Text as={"button"}>
-                                          <FaChevronDown size="12px" />
+    
+                                        <Text as={"button"} onClick={() =>toggleIsOpenDescripRes(id)}>
+                                          {/* /> */}
+                                          {!isOpendescripRes[id] ? <FaChevronDown size="12px" /> : <FaChevronUp size="12px"/>}
                                         </Text>
                                       </Box>
                                     </Flex>
@@ -721,7 +723,7 @@ const Curriculum = () => {
                                 </Stack>
                               )}
                             {/*dsecription and resources section*/}
-                            <Stack
+                            {isOpendescripRes[id] &&   <Stack
                               bg={"white"}
                               borderWidth={1}
                               borderColor={"gray"}
@@ -755,7 +757,8 @@ const Curriculum = () => {
                               >
                                 Resources
                               </Button>
-                            </Stack>
+                            </Stack>}
+                          
                           </Stack>
 
                           {/* edit curriculum lecture input field */}
@@ -888,7 +891,6 @@ const Curriculum = () => {
                       onClick={() => {
                         toggleIsCurriculumOpen(id);
                         toggleIsOpenContentType(id);
-                        // console.log(toggleIsOpenContentType(id))
                       }}
                     >
                       New Curriculum
