@@ -14,7 +14,7 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -66,11 +66,10 @@ const Curriculum = () => {
     title: "",
   };
   console.log(initialValues3.title);
-  console.log("peter");
+  const articleCreateInitialValue={
+    title: ""
+  }
 
-  // const initialValues4 = {
-  //   title: "a",
-  // };
   const {
     moduleCreateCourse,
     isPending: moduleLoading,
@@ -735,7 +734,7 @@ const Curriculum = () => {
                                       <Stack mx={3}>
                                         <Text>Text</Text>
                                         <Formik
-                                          initialValues={initialValues3}
+                                          initialValues={articleCreateInitialValue}
                                           validationSchema={
                                             ArticleCreateLectureSchema
                                           }
@@ -752,7 +751,6 @@ const Curriculum = () => {
                                             <Stack>
                                               <ReactQuill
                                                 theme="snow"
-                                                // defaultValue={initialValues?.description}
                                                 value={values.title}
                                                 onChange={handleChange("title")}
                                               />
