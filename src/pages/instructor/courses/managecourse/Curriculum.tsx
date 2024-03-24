@@ -90,8 +90,9 @@ const Curriculum = () => {
     isOpenModuleLectureState,
     toggleIsOpenContentType,
     isOpenContentType,
+    contentType: ContentType,
+    toggleContentType,
   } = useGetModuleCourse(getSingleCourse?.id);
-
   interface Lecture {
     title: string;
   }
@@ -155,7 +156,7 @@ const Curriculum = () => {
                   <Stack direction={{ base: "column", lg: "row" }}>
                     <Flex>
                       <Text fontWeight={"bold"} fontSize={17} mr={4}>
-                        Section {index + 1}:
+                        Section {index + 1}
                       </Text>
                       <Flex
                         align={"center"}
@@ -351,9 +352,19 @@ const Curriculum = () => {
                                     }}
                                   >
                                     <Flex align={"center"} columnGap={1}>
-                                      <RiCheckboxCircleFill />
+                                      <RiCheckboxCircleFill
+                                        onClick={() =>
+                                          toggleContentType(id, "article")
+                                        }
+                                      />
 
-                                      <Text fontWeight={"500"} mr={4}>
+                                      <Text
+                                        fontWeight={"500"}
+                                        mr={4}
+                                        onClick={() =>
+                                          toggleContentType(id, "video")
+                                        }
+                                      >
                                         Lecture {index + 1}
                                       </Text>
                                       <Flex
@@ -434,9 +445,10 @@ const Curriculum = () => {
                                         height={"30px"}
                                         leftIcon={<GoPlus fontSize={"20px"} />}
                                         variant="outline"
-                                        onClick={() =>
-                                          toggleIsOpenContentType(id)
-                                        }
+                                        onClick={() => {
+                                          toggleContentType(id, "Select content type");
+                                          toggleIsOpenContentType(id);
+                                        }}
                                       >
                                         Content
                                       </Button>
@@ -479,7 +491,14 @@ const Curriculum = () => {
                                       marginRight={7}
                                     >
                                       <Text marginLeft={2} fontSize={14}>
-                                        Select content type
+                                        {ContentType[id]
+                                          ? ContentType[id]
+                                          : "Select content type"}
+                                        {/* <p>{contentType[arrayId] ? contentType[arrayId] : defaultText}</p> */}
+                                        {/* {ContentType[id] ? "Add Video": ""}
+                                      {contentType2[id] ? "Add article": ""}
+                                      {!(ContentType[id] || contentType2[id]) && "yoo"} */}
+                                        {/* { ContentType["Select content type"]} */}
                                       </Text>
                                       <Text
                                         as={"button"}
@@ -651,7 +670,12 @@ const Curriculum = () => {
                                         </TabPanel>
                                         <TabPanel>
                                           <Stack>
-                                            <Text fontSize={16} fontWeight={"bold"}>Feature incoming soon.......</Text>
+                                            <Text
+                                              fontSize={16}
+                                              fontWeight={"bold"}
+                                            >
+                                              Feature incoming soon.......
+                                            </Text>
                                           </Stack>
                                         </TabPanel>
                                       </TabPanels>

@@ -146,18 +146,28 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
-
   //context type*****************
-  const [isOpenContentType, setIsOpenContentType ] =useState<{
+  const [isOpenContentType, setIsOpenContentType] = useState<{
     [key: number]: boolean;
-  }>({})
+  }>({});
 
-  const toggleIsOpenContentType =(arrayId: number) =>{
-    setIsOpenContentType((prevIsOpenContentTypeState) =>({
+  const toggleIsOpenContentType = (arrayId: number) => {
+    setIsOpenContentType((prevIsOpenContentTypeState) => ({
       ...prevIsOpenContentTypeState,
-      [arrayId]: !prevIsOpenContentTypeState[arrayId]
-    }))
-  }
+      [arrayId]: !prevIsOpenContentTypeState[arrayId],
+    }));
+  };
+  //content name*************************
+  const [contentType, setContentType] = useState<{
+    [key: number]: string;
+  }>({});
+
+  const toggleContentType = (arrayId: number, type: string) => {
+    setContentType((prevContentTypeState) => ({
+      ...prevContentTypeState,
+      [arrayId]: prevContentTypeState[arrayId] === type ? "" : type,
+    }));
+  };
 
   const { data, isPending, isSuccess } = useQuery({
     queryKey: ["module", id],
@@ -166,7 +176,6 @@ export const useGetModuleCourse = (id: any) => {
       const { data } = await customFetch.get(`module/course/${id}`);
       return data;
     },
-    
   });
 
   return {
@@ -180,11 +189,18 @@ export const useGetModuleCourse = (id: any) => {
     toggleIsModuleLectureOpen,
     isOpenModuleLectureState,
     toggleIsOpenContentType,
-    isOpenContentType
+    isOpenContentType,
+    contentType,
+    toggleContentType,
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
-  const { data: getSingleModuleCourse, isPending,refetch,isError } = useQuery({
+  const {
+    data: getSingleModuleCourse,
+    isPending,
+    refetch,
+    isError,
+  } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
@@ -197,7 +213,7 @@ export const useGetSingleModuleCourse = (id: any) => {
     getSingleModuleCourse,
     isPending,
     isError,
-    refetch
+    refetch,
   };
 };
 
@@ -336,8 +352,6 @@ export const useGetLectureModuleCourse = (id: any) => {
   };
 };
 
-
-
 // export const usetestingAPI = () => {
 //   const toast = useToast();
 //   const queryClient = useQueryClient();
@@ -367,4 +381,25 @@ export const useGetLectureModuleCourse = (id: any) => {
 //     },
 //   });
 //   return { testingApi, moduleEditLectureLoading };
+// };
+
+// const toggleIsContentType1 = () => {
+//   setContentType((prevState) => ({
+//     ...prevState,
+//     "content1": !prevState["content1"],
+//   }));
+// };
+
+// const toggleIsContentType2= () => {
+//   setContentType((prevState) => ({
+//     ...prevState,
+//     "content2": !prevState["content2"],
+//   }));
+// };
+
+// const toggleIsContentType = (arrayId: string) => {
+//   setContentType((prevContentTypeState) => ({
+//     ...prevContentTypeState,
+//     [arrayId]: !prevContentTypeState[arrayId],
+//   }));
 // };
