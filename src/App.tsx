@@ -15,7 +15,6 @@ import {
 import "./App.css";
 import Home from "./pages/Home";
 import { StudentCourse } from "./pages/course";
-import "react-toastify/dist/ReactToastify.css";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
 import { CourseLandingPage } from "./pages/instructor/courses/managecourse";
