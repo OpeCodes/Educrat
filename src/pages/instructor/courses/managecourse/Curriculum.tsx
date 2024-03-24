@@ -740,20 +740,23 @@ const Curriculum = () => {
                                 pb={2}
                                 p={3}
                               >
-                                <Button
-                                  borderRadius={0}
-                                  borderWidth={1}
-                                  borderColor={"black"}
-                                  color="black"
-                                  _hover={{ backgroundColor: "#F7F8FB" }}
-                                  width={"130px"}
-                                  height={"30px"}
-                                  leftIcon={<GoPlus fontSize={"20px"} />}
-                                  variant="outline"
-                                  onClick={() => toggleIsOpenDescription(id)}
-                                >
-                                  Description
-                                </Button>
+                                {!isOpendescription[id] && (
+                                  <Button
+                                    borderRadius={0}
+                                    borderWidth={1}
+                                    borderColor={"black"}
+                                    color="black"
+                                    _hover={{ backgroundColor: "#F7F8FB" }}
+                                    width={"130px"}
+                                    height={"30px"}
+                                    leftIcon={<GoPlus fontSize={"20px"} />}
+                                    variant="outline"
+                                    onClick={() => toggleIsOpenDescription(id)}
+                                  >
+                                    Description
+                                  </Button>
+                                )}
+                                {/* ************************description container************************** */}
                                 {isOpendescription[id] && (
                                   <Stack>
                                     <Text fontWeight={"bold"}>
