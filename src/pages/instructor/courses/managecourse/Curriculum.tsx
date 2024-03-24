@@ -427,7 +427,7 @@ const Curriculum = () => {
                                     </Flex>
                                   </Flex>
 
-                                  {!isOpenContentType[id] ? (
+                                  {!isOpenContentType[id] && !isOpenInnerdescripRes[id] && (
                                     <Flex
                                       marginRight={"10px"}
                                       columnGap={"15px"}
@@ -467,9 +467,7 @@ const Curriculum = () => {
                                         </Text>
                                       </Box>
                                     </Flex>
-                                  ) : (
-                                    ""
-                                  )}
+                                  ) }
                                 </Flex>
                               </Stack>
                             )}
@@ -500,9 +498,7 @@ const Curriculum = () => {
                                       marginRight={7}
                                     >
                                       <Text marginLeft={2} fontSize={14}>
-                                        {/* {contentType[id]
-                                          ? contentType[id]
-                                          : "Select content type"} */}
+                                       
                                         {contentType[id] && "Add Video"}
                                         {contentType2[id] && "Add Article"}
                                         {contentType3[id] && "Add Resources"}
@@ -733,7 +729,7 @@ const Curriculum = () => {
                                   {contentType2[id] &&
                                     isOpenContentType[id] && (
                                       <Text>Article part</Text>
-                                    )}                                 
+                                    )}
                                 </Stack>
                               )}
                             {/*dsecription and resources section*/}
@@ -829,14 +825,46 @@ const Curriculum = () => {
                                     pb={2}
                                     p={3}
                                   >
+                                    <Flex width="100%" justifyContent="end" mt={"-37px"}>
+                                      <Flex
+                                        fontSize={14}
+                                        zIndex="80000"
+                                        backgroundColor="white"
+                                        textAlign={"center"}
+                                        fontWeight={"bold"}
+                                        borderTopWidth={1}
+                                        borderRightWidth={1}
+                                        borderLeftWidth={1}
+                                        borderColor={"gray"}
+                                        align={"center"}
+                                        columnGap={2}
+                                        marginRight={7}
+                                        pt={"3px"}
+                                      >
+                                        <Text marginLeft={2} fontSize={14} >
+                                         Add Resources
+                                        </Text>
+                                        <Text
+                                        as={"button"}
+                                        fontWeight="bold"
+                                        onClick={() => {
+                                        toggleIsOpenInnerdescripRes(id)
+
+                                          // toggleIsOpenContentType(id);
+                                        }}
+                                      >
+                                        <IoCloseSharp size={20} />
+                                      </Text>
+                                      </Flex>
+                                    </Flex>
+                                    <Stack mt={7}>
                                     <Text>ld</Text>
                                     <Text
-                                      onClick={() =>
-                                        toggleIsOpenInnerdescripRes(id)
-                                      }
+                                     
                                     >
                                       close
                                     </Text>
+                                    </Stack>
                                   </Stack>
                                 )}
                             </Stack>
