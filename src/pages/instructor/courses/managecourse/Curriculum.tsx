@@ -503,8 +503,9 @@ const Curriculum = () => {
                                           : "Select content type"} */}
                                         {contentType[id] && "Add Video"}
                                         {contentType2[id] && "Add Article"}
+                                        {contentType3[id] && "Add Resources"}
                                         {!contentType[id] &&
-                                          !contentType2[id] &&
+                                          !contentType2[id] && !contentType3[id] &&
                                           "Select content Type"}
                                       </Text>
                                       <Text
@@ -729,6 +730,11 @@ const Curriculum = () => {
                                   {contentType2[id] &&
                                     isOpenContentType[id] && (
                                       <Text>Article part</Text>
+                                    )}
+                                    {/* resources */}
+                                    {contentType3[id] &&
+                                    isOpenContentType[id] && (
+                                      <Text>resource part part</Text>
                                     )}
                                 </Stack>
                               )}
