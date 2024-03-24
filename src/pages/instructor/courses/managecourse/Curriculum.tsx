@@ -762,6 +762,7 @@ const Curriculum = () => {
                                     <Text fontWeight={"bold"}>
                                       Lecture Description
                                     </Text>
+                                    <Text     onClick={() => toggleIsOpenDescription(id)}>Cancel</Text>
                                   </Stack>
                                 )}
 
