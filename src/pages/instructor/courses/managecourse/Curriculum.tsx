@@ -77,7 +77,7 @@ const Curriculum = () => {
     showSection,
   } = useModuleCreateCourse();
 
-  const {createArticleLectureCourse,createArticleLectureCourseLoding} = useCreateArticleLectureCourse();
+  const {createArticleLectureCourse,} = useCreateArticleLectureCourse();
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };

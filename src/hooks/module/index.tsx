@@ -425,7 +425,6 @@ export const useCreateArticleLectureCourse = () => {
   // const queryClient = useQueryClient();
   const {
     mutate: createArticleLectureCourse,
-    isPending: createArticleLectureCourseLoding,
   } = useMutation({
     mutationFn: ({ lectureId, user }: any) => {
       return customFetch.post(`/lecture/content/lecture/${lectureId}/article
@@ -449,5 +448,5 @@ export const useCreateArticleLectureCourse = () => {
       });
     },
   });
-  return { createArticleLectureCourse, createArticleLectureCourseLoding };
+  return { createArticleLectureCourse };
 };
