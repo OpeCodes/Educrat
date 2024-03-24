@@ -711,6 +711,8 @@ const Curriculum = () => {
                                       </Tabs>
                                     </Stack>
                                   )}
+
+                                  {/* article */}
                                   {contentType2[id] &&
                                     isOpenContentType[id] && (
                                       <Text>Article part</Text>
@@ -718,7 +720,7 @@ const Curriculum = () => {
                                 </Stack>
                               )}
                             {/*dsecription and resources section*/}
-                            {/* <Stack
+                            <Stack
                               bg={"white"}
                               borderWidth={1}
                               borderColor={"gray"}
@@ -752,7 +754,7 @@ const Curriculum = () => {
                               >
                                 Resources
                               </Button>
-                            </Stack> */}
+                            </Stack>
                           </Stack>
 
                           {/* edit curriculum lecture input field */}
