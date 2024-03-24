@@ -740,13 +740,16 @@ const Curriculum = () => {
                                   <Stack
                                     mx={3}
                                     borderBottom={"1px"}
-                                    borderColor={"gray"}
+                                    borderColor={"#d1d7dc"}
+                                    cursor={"pointer"}
                                   >
                                     <Text
-                                      mb={1}
+                                      mb={3}
                                       dangerouslySetInnerHTML={{
                                         __html: content?.body,
                                       }}
+                                      px={2}
+                                      _hover={{border:"1px solid #d1d7dc", paddingLeft: 2,paddingRight: 2 }}                                      
                                     />
                                   </Stack>
                                   {contentType2[id] &&
