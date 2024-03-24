@@ -14,7 +14,7 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -118,8 +118,7 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
-
-  const [article,setArticle] =useState("")
+  const [article, setArticle] = useState("");
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -427,47 +426,50 @@ const Curriculum = () => {
                                     </Flex>
                                   </Flex>
 
-                                  {!isOpenContentType[id] && !isOpenInnerdescripRes[id] && (
-                                    <Flex
-                                      marginRight={"10px"}
-                                      columnGap={"15px"}
-
-                                      align={"center"}
-                                      display={{ base: "none", lg: "flex" }}
-                                    >
-                                      <Button
-                                        borderRadius={0}
-                                        borderWidth={1}
-                                        borderColor={"black"}
-                                        color="black"
-                                        _hover={{ backgroundColor: "#F7F8FB" }}
-                                        width={"100px"}
-                                        height={"30px"}
-
-                                        leftIcon={<GoPlus fontSize={"20px"} />}
-                                        variant="outline"
-                                        onClick={() => {
-                                          toggleIsOpenContentType(id);
-                                        }}
+                                  {!isOpenContentType[id] &&
+                                    !isOpenInnerdescripRes[id] && (
+                                      <Flex
+                                        marginRight={"10px"}
+                                        columnGap={"15px"}
+                                        align={"center"}
+                                        display={{ base: "none", lg: "flex" }}
                                       >
-                                        Content
-                                      </Button>
-                                      <Box>
-                                        <Text
-                                          as={"button"}
-                                          onClick={
-                                            () => toggleIsOpenDescripRes(id)
+                                        <Button
+                                          borderRadius={0}
+                                          borderWidth={1}
+                                          borderColor={"black"}
+                                          color="black"
+                                          _hover={{
+                                            backgroundColor: "#F7F8FB",
+                                          }}
+                                          width={"100px"}
+                                          height={"30px"}
+                                          leftIcon={
+                                            <GoPlus fontSize={"20px"} />
                                           }
+                                          variant="outline"
+                                          onClick={() => {
+                                            toggleIsOpenContentType(id);
+                                          }}
                                         >
-                                          {!isOpendescripRes[id] ? (
-                                            <FaChevronDown size="12px" />
-                                          ) : (
-                                            <FaChevronUp size="12px" />
-                                          )}
-                                        </Text>
-                                      </Box>
-                                    </Flex>
-                                  ) }
+                                          Content
+                                        </Button>
+                                        <Box>
+                                          <Text
+                                            as={"button"}
+                                            onClick={() =>
+                                              toggleIsOpenDescripRes(id)
+                                            }
+                                          >
+                                            {!isOpendescripRes[id] ? (
+                                              <FaChevronDown size="12px" />
+                                            ) : (
+                                              <FaChevronUp size="12px" />
+                                            )}
+                                          </Text>
+                                        </Box>
+                                      </Flex>
+                                    )}
                                 </Flex>
                               </Stack>
                             )}
@@ -480,8 +482,8 @@ const Curriculum = () => {
                                   borderWidth={1}
                                   borderColor={"gray"}
                                   mt={-3}
-                                height="200px"
-                                // height="fit-content"
+                                  height="250px"
+                                  // height="fit-content"
                                   pb={2}
                                 >
                                   <Flex width="100%" justifyContent="end">
@@ -500,7 +502,6 @@ const Curriculum = () => {
                                       marginRight={7}
                                     >
                                       <Text marginLeft={2} fontSize={14}>
-                                       
                                         {contentType[id] && "Add Video"}
                                         {contentType2[id] && "Add Article"}
                                         {contentType3[id] && "Add Resources"}
@@ -729,18 +730,39 @@ const Curriculum = () => {
                                   {/* article */}
                                   {contentType2[id] &&
                                     isOpenContentType[id] && (
-                                     <Stack mx={3} > 
-                                      <Text>Text</Text>
-                                      <Stack >
-                                      <ReactQuill
-                  theme="snow"
-                  // defaultValue={initialValues?.description}
-                  value={article}
-                  onChange={setArticle}
-                  
-                />
-                                     </Stack>
-                                     </Stack>
+                                      <Stack mx={3}>
+                                        <Text>Text</Text>
+                                        <Stack>
+                                          <ReactQuill
+                                            theme="snow"
+                                            // defaultValue={initialValues?.description}
+                                            value={article}
+                                            onChange={setArticle}
+                                          />
+                                          <Flex
+                                            justify={"end"}
+                                            mt={"2.9rem"}
+                                            align={"center"}
+                                          >
+                                            <Button
+                                              color="#ffffff"
+                                              fontWeight={"500"}
+                                              fontSize={14}
+                                              as={"button"}
+                                              py={2}
+                                              px={4}
+                                              loadingText="Loading"
+                                              variant="outline"
+                                              spinnerPlacement="end"
+                                              // onClick={() => handleSubmit()}
+                                              type="button"
+                                              backgroundColor={"black"}
+                                            >
+                                              save
+                                            </Button>
+                                          </Flex>
+                                        </Stack>
+                                      </Stack>
                                     )}
                                 </Stack>
                               )}
@@ -813,7 +835,7 @@ const Curriculum = () => {
                                           }
                                           variant="outline"
                                           onClick={() => {
-                                            toggleIsOpenInnerdescripRes(id);                                        
+                                            toggleIsOpenInnerdescripRes(id);
                                           }}
                                         >
                                           Resources
@@ -833,7 +855,11 @@ const Curriculum = () => {
                                     pb={2}
                                     p={3}
                                   >
-                                    <Flex width="100%" justifyContent="end" mt={"-37px"}>
+                                    <Flex
+                                      width="100%"
+                                      justifyContent="end"
+                                      mt={"-37px"}
+                                    >
                                       <Flex
                                         fontSize={14}
                                         zIndex="80000"
@@ -849,22 +875,22 @@ const Curriculum = () => {
                                         marginRight={7}
                                         pt={"3px"}
                                       >
-                                        <Text marginLeft={2} fontSize={14} >
-                                         Add Resources
+                                        <Text marginLeft={2} fontSize={14}>
+                                          Add Resources
                                         </Text>
                                         <Text
-                                        as={"button"}
-                                        fontWeight="bold"
-                                        onClick={() => {
-                                        toggleIsOpenInnerdescripRes(id)
-                                        }}
-                                      >
-                                        <IoCloseSharp size={20} />
-                                      </Text>
+                                          as={"button"}
+                                          fontWeight="bold"
+                                          onClick={() => {
+                                            toggleIsOpenInnerdescripRes(id);
+                                          }}
+                                        >
+                                          <IoCloseSharp size={20} />
+                                        </Text>
                                       </Flex>
                                     </Flex>
                                     <Stack mt={7}>
-                                    <Text>resources</Text>                                   
+                                      <Text>resources</Text>
                                     </Stack>
                                   </Stack>
                                 )}
