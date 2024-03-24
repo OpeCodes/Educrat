@@ -8,6 +8,11 @@ import {
   Button,
   Skeleton,
   Box,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
@@ -84,7 +89,7 @@ const Curriculum = () => {
     toggleIsModuleLectureOpen,
     isOpenModuleLectureState,
     toggleIsOpenContentType,
-    isOpenContentType
+    isOpenContentType,
   } = useGetModuleCourse(getSingleCourse?.id);
 
   interface Lecture {
@@ -104,7 +109,7 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
- 
+  const contentType = false;
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -429,7 +434,9 @@ const Curriculum = () => {
                                         height={"30px"}
                                         leftIcon={<GoPlus fontSize={"20px"} />}
                                         variant="outline"
-                                        onClick={() => toggleIsOpenContentType(id)}
+                                        onClick={() =>
+                                          toggleIsOpenContentType(id)
+                                        }
                                       >
                                         Content
                                       </Button>
@@ -447,168 +454,212 @@ const Curriculum = () => {
                             )}
 
                             {/* video and article section */}
-                            {(!isOpenContentType[id]  && !isOpenModuleLectureState[id]) && (
-                              <Stack
-                                bg={"white"}
-                                borderWidth={1}
-                                borderColor={"gray"}
-                                mt={-3}
-                                pb={2}
-                              >
-                                <Flex width="100%" justifyContent="end">
-                                  <Flex
-                                    fontSize={14}
-                                    mt={-8}
-                                    backgroundColor="white"
-                                    textAlign={"center"}
-                                    fontWeight={"bold"}
-                                    borderTopWidth={1}
-                                    borderRightWidth={1}
-                                    borderLeftWidth={1}
-                                    borderColor={"gray"}
-                                    align={"center"}
-                                    columnGap={2}
-                                    marginRight={7}
-                                  >
-                                    <Text marginLeft={2} fontSize={14}>
-                                      Select content type
-                                    </Text>
-                                    <Text as={"button"} fontWeight="bold"   onClick={() => toggleIsOpenContentType(id)}>
-                                      <IoCloseSharp size={20} />
-                                    </Text>
+                            {!isOpenContentType[id] &&
+                              !isOpenModuleLectureState[id] && (
+                                <Stack
+                                  bg={"white"}
+                                  borderWidth={1}
+                                  borderColor={"gray"}
+                                  mt={-3}
+                                  pb={2}
+                                >
+                                  <Flex width="100%" justifyContent="end">
+                                    <Flex
+                                      fontSize={14}
+                                      mt={-8}
+                                      backgroundColor="white"
+                                      textAlign={"center"}
+                                      fontWeight={"bold"}
+                                      borderTopWidth={1}
+                                      borderRightWidth={1}
+                                      borderLeftWidth={1}
+                                      borderColor={"gray"}
+                                      align={"center"}
+                                      columnGap={2}
+                                      marginRight={7}
+                                    >
+                                      <Text marginLeft={2} fontSize={14}>
+                                        Select content type
+                                      </Text>
+                                      <Text
+                                        as={"button"}
+                                        fontWeight="bold"
+                                        onClick={() =>
+                                          toggleIsOpenContentType(id)
+                                        }
+                                      >
+                                        <IoCloseSharp size={20} />
+                                      </Text>
+                                    </Flex>
                                   </Flex>
-                                </Flex>
-                                <Text textAlign={"center"} fontSize={14}>
-                                  Select the main type of content. Files and
-                                  links can be added as resources.
-                                </Text>
-                                {/* jj */}
-                                <Flex justify={"center"} columnGap={5}>
-                                  <Stack justify="center" direction="row">
-                                    <Flex position="relative">
-                                      <Flex>
-                                        <Stack
-                                          width="70px"
-                                          align={"center"}
-                                          borderWidth={1}
-                                          borderColor="#D1D7DC"
-                                          bg="#F7F9FA"
-                                          borderRadius={2}
-                                        >
-                                          <Text my={1}>
-                                            <FaPlayCircle
-                                              size={35}
-                                              color={"#D1D7DC"}
-                                            />
-                                          </Text>
-                                          <Text
-                                            width={"100%"}
-                                            fontSize={12}
-                                            textAlign={"center"}
-                                            bg="#D1D7DC"
-                                          >
-                                            Video
-                                          </Text>
-                                        </Stack>
-                                      </Flex>
-                                      {/* overlay */}
-                                      <Stack
-                                        direction="row"
-                                        justify={"center"}
-                                        position={"absolute"}
-                                        top={0}
-                                        left={0}
-                                        width={"100%"}
-                                        height={"100%"}
-                                        backgroundColor="black"
-                                        opacity={0}
-                                        transition="opacity 0.3s"
-                                        _hover={{ opacity: 1, borderRadius: 2 }}
-                                        as={"button"}
-                                      >
-                                        <Stack>
-                                          <Text my={1}>
-                                            <FaPlayCircle
-                                              size={35}
-                                              color={"#D1D7DC"}
-                                            />
-                                          </Text>
-                                          <Text
-                                            fontSize={12}
-                                            color="white"
-                                            textAlign={"center"}
-                                          >
-                                            Video
-                                          </Text>
-                                        </Stack>
-                                      </Stack>
-                                    </Flex>
-                                  </Stack>
 
-                                  <Stack justify="center" direction="row">
-                                    <Flex position="relative">
-                                      <Flex>
-                                        <Stack
-                                          width="70px"
-                                          align={"center"}
-                                          borderWidth={1}
-                                          borderColor="#D1D7DC"
-                                          bg="#F7F9FA"
-                                          borderRadius={2}
-                                        >
-                                          <Text my={1}>
-                                            <LuStickyNote
-                                              size={35}
-                                              color={"#D1D7DC"}
-                                            />
-                                          </Text>
-                                          <Text
-                                            width={"100%"}
-                                            fontSize={12}
-                                            textAlign={"center"}
-                                            bg="#D1D7DC"
-                                          >
-                                            Article
-                                          </Text>
+                                  {/* Select the main type of content. vidoe or article */}
+                                  {contentType && (
+                                    <Stack>
+                                      <Text textAlign={"center"} fontSize={14}>
+                                        Select the main type of content. Files
+                                        and links can be added as resources.
+                                      </Text>
+                                      {/* jj */}
+                                      <Flex justify={"center"} columnGap={5}>
+                                        <Stack justify="center" direction="row">
+                                          <Flex position="relative">
+                                            <Flex>
+                                              <Stack
+                                                width="70px"
+                                                align={"center"}
+                                                borderWidth={1}
+                                                borderColor="#D1D7DC"
+                                                bg="#F7F9FA"
+                                                borderRadius={2}
+                                              >
+                                                <Text my={1}>
+                                                  <FaPlayCircle
+                                                    size={35}
+                                                    color={"#D1D7DC"}
+                                                  />
+                                                </Text>
+                                                <Text
+                                                  width={"100%"}
+                                                  fontSize={12}
+                                                  textAlign={"center"}
+                                                  bg="#D1D7DC"
+                                                >
+                                                  Video
+                                                </Text>
+                                              </Stack>
+                                            </Flex>
+                                            {/* overlay */}
+                                            <Stack
+                                              direction="row"
+                                              justify={"center"}
+                                              position={"absolute"}
+                                              top={0}
+                                              left={0}
+                                              width={"100%"}
+                                              height={"100%"}
+                                              backgroundColor="black"
+                                              opacity={0}
+                                              transition="opacity 0.3s"
+                                              _hover={{
+                                                opacity: 1,
+                                                borderRadius: 2,
+                                              }}
+                                              as={"button"}
+                                            >
+                                              <Stack>
+                                                <Text my={1}>
+                                                  <FaPlayCircle
+                                                    size={35}
+                                                    color={"#D1D7DC"}
+                                                  />
+                                                </Text>
+                                                <Text
+                                                  fontSize={12}
+                                                  color="white"
+                                                  textAlign={"center"}
+                                                >
+                                                  Video
+                                                </Text>
+                                              </Stack>
+                                            </Stack>
+                                          </Flex>
+                                        </Stack>
+
+                                        <Stack justify="center" direction="row">
+                                          <Flex position="relative">
+                                            <Flex>
+                                              <Stack
+                                                width="70px"
+                                                align={"center"}
+                                                borderWidth={1}
+                                                borderColor="#D1D7DC"
+                                                bg="#F7F9FA"
+                                                borderRadius={2}
+                                              >
+                                                <Text my={1}>
+                                                  <LuStickyNote
+                                                    size={35}
+                                                    color={"#D1D7DC"}
+                                                  />
+                                                </Text>
+                                                <Text
+                                                  width={"100%"}
+                                                  fontSize={12}
+                                                  textAlign={"center"}
+                                                  bg="#D1D7DC"
+                                                >
+                                                  Article
+                                                </Text>
+                                              </Stack>
+                                            </Flex>
+                                            {/* overlay */}
+                                            <Stack
+                                              direction="row"
+                                              justify={"center"}
+                                              position={"absolute"}
+                                              top={0}
+                                              left={0}
+                                              width={"100%"}
+                                              height={"100%"}
+                                              backgroundColor="black"
+                                              opacity={0}
+                                              transition="opacity 0.3s"
+                                              _hover={{
+                                                opacity: 1,
+                                                borderRadius: 2,
+                                              }}
+                                              as={"button"}
+                                            >
+                                              <Stack>
+                                                <Text my={1}>
+                                                  <LuStickyNote
+                                                    size={35}
+                                                    color={"#D1D7DC"}
+                                                  />
+                                                </Text>
+                                                <Text
+                                                  fontSize={12}
+                                                  color="white"
+                                                  textAlign={"center"}
+                                                >
+                                                  Article
+                                                </Text>
+                                              </Stack>
+                                            </Stack>
+                                          </Flex>
                                         </Stack>
                                       </Flex>
-                                      {/* overlay */}
-                                      <Stack
-                                        direction="row"
-                                        justify={"center"}
-                                        position={"absolute"}
-                                        top={0}
-                                        left={0}
-                                        width={"100%"}
-                                        height={"100%"}
-                                        backgroundColor="black"
-                                        opacity={0}
-                                        transition="opacity 0.3s"
-                                        _hover={{ opacity: 1, borderRadius: 2 }}
-                                        as={"button"}
-                                      >
-                                        <Stack>
-                                          <Text my={1}>
-                                            <LuStickyNote
-                                              size={35}
-                                              color={"#D1D7DC"}
-                                            />
-                                          </Text>
-                                          <Text
-                                            fontSize={12}
-                                            color="white"
-                                            textAlign={"center"}
-                                          >
-                                            Article
-                                          </Text>
-                                        </Stack>
-                                      </Stack>
-                                    </Flex>
+                                      {/* video  aspect */}
+                                    </Stack>
+                                  )}
+                                  {/* video  */}
+                                  <Stack mx={3}>
+                                    <Tabs>
+                                      <TabList>
+                                        <Tab fontWeight={"bold"} color="black">
+                                          Upload Video
+                                        </Tab>
+                                        <Tab fontWeight={"bold"} color="black">
+                                          Add from library
+                                        </Tab>
+                                      </TabList>
+
+                                      <TabPanels>
+                                        <TabPanel>
+                                          <p>one!</p>
+                                        </TabPanel>
+                                        <TabPanel>
+                                          <Stack>
+                                            <Text fontSize={16} fontWeight={"bold"}>Feature incoming soon.......</Text>
+                                          </Stack>
+                                        </TabPanel>
+                                      </TabPanels>
+                                    </Tabs>
                                   </Stack>
-                                </Flex>
-                              </Stack>
-                            )}
-                            {/*secription and resources section*/}
+                                </Stack>
+                              )}
+                            {/*dsecription and resources section*/}
                             {/* <Stack
                               bg={"white"}
                               borderWidth={1}
