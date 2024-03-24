@@ -66,7 +66,6 @@ const Curriculum = () => {
   const initialValues3 = {
     title: "",
   };
-  console.log(initialValues3.title);
   const articleCreateInitialValue={
     body: ""
   }
@@ -740,10 +739,8 @@ const Curriculum = () => {
                                           validationSchema={
                                             ArticleCreateLectureSchema
                                           }
-                                          onSubmit={(values: any) => {
-                                            console.log(values);
-                                            // useCreateArticleLectureCourse
-                                            createArticleLectureCourse({ lectureId: id, user: values });
+                                          onSubmit={(values: any) => {                                            
+                                            createArticleLectureCourse({ lectureId: id, user: {...values,title} });
                                             setTimeout(() => {
                                               toggleIsOpen(id);
                                             }, 2000);
@@ -761,7 +758,7 @@ const Curriculum = () => {
                                                 value={values.body}
                                                 onChange={handleChange("body")}
                                               />
-                                              {errors?.title && (
+                                              {errors?.body && (
                                                 <Text
                                                   style={{
                                                     color: "red",
