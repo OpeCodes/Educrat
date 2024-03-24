@@ -748,7 +748,7 @@ const Curriculum = () => {
                             <Stack
                              
                             >
-                              {!isOpenInnerdescripRes[id] && !isOpenContentType[id] && (
+                              {!isOpenInnerdescripRes[id] && !isOpenContentType[id] && !isOpenModuleLectureState[id] && (
                                 <> 
                                   {isOpendescripRes[id] && (
                                     <Stack bg={"white"}
