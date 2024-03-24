@@ -96,7 +96,7 @@ const Curriculum = () => {
     isOpendescripRes,
     toggleIsOpenDescripRes,
     isOpendescription,
-    toggleIsOpenDescription
+    toggleIsOpenDescription,
   } = useGetModuleCourse(getSingleCourse?.id);
   interface Lecture {
     title: string;
@@ -448,10 +448,18 @@ const Curriculum = () => {
                                         Content
                                       </Button>
                                       <Box>
-    
-                                        <Text as={"button"} onClick={() =>toggleIsOpenDescripRes(id)}>
+                                        <Text
+                                          as={"button"}
+                                          onClick={() =>
+                                            toggleIsOpenDescripRes(id)
+                                          }
+                                        >
                                           {/* /> */}
-                                          {!isOpendescripRes[id] ? <FaChevronDown size="12px" /> : <FaChevronUp size="12px"/>}
+                                          {!isOpendescripRes[id] ? (
+                                            <FaChevronDown size="12px" />
+                                          ) : (
+                                            <FaChevronUp size="12px" />
+                                          )}
                                         </Text>
                                       </Box>
                                     </Flex>
@@ -723,42 +731,52 @@ const Curriculum = () => {
                                 </Stack>
                               )}
                             {/*dsecription and resources section*/}
-                            {isOpendescripRes[id] &&   <Stack
-                              bg={"white"}
-                              borderWidth={1}
-                              borderColor={"gray"}
-                              mt={-3}
-                              pb={2}
-                              p={3}
-                            >
-                              <Button
-                                borderRadius={0}
+                            {isOpendescripRes[id] && (
+                              <Stack
+                                bg={"white"}
                                 borderWidth={1}
-                                borderColor={"black"}
-                                color="black"
-                                _hover={{ backgroundColor: "#F7F8FB" }}
-                                width={"130px"}
-                                height={"30px"}
-                                leftIcon={<GoPlus fontSize={"20px"} />}
-                                variant="outline"
+                                borderColor={"gray"}
+                                mt={-3}
+                                pb={2}
+                                p={3}
                               >
-                                Description
-                              </Button>
-                              <Button
-                                borderRadius={0}
-                                borderWidth={1}
-                                borderColor={"black"}
-                                color="black"
-                                _hover={{ backgroundColor: "#F7F8FB" }}
-                                width={"120px"}
-                                height={"30px"}
-                                leftIcon={<GoPlus fontSize={"20px"} />}
-                                variant="outline"
-                              >
-                                Resources
-                              </Button>
-                            </Stack>}
-                          
+                                <Button
+                                  borderRadius={0}
+                                  borderWidth={1}
+                                  borderColor={"black"}
+                                  color="black"
+                                  _hover={{ backgroundColor: "#F7F8FB" }}
+                                  width={"130px"}
+                                  height={"30px"}
+                                  leftIcon={<GoPlus fontSize={"20px"} />}
+                                  variant="outline"
+                                  onClick={() => toggleIsOpenDescription(id)}
+                                >
+                                  Description
+                                </Button>
+                                {isOpendescription[id] && (
+                                  <Stack>
+                                    <Text fontWeight={"bold"}>
+                                      Lecture Description
+                                    </Text>
+                                  </Stack>
+                                )}
+
+                                <Button
+                                  borderRadius={0}
+                                  borderWidth={1}
+                                  borderColor={"black"}
+                                  color="black"
+                                  _hover={{ backgroundColor: "#F7F8FB" }}
+                                  width={"120px"}
+                                  height={"30px"}
+                                  leftIcon={<GoPlus fontSize={"20px"} />}
+                                  variant="outline"
+                                >
+                                  Resources
+                                </Button>
+                              </Stack>
+                            )}
                           </Stack>
 
                           {/* edit curriculum lecture input field */}
