@@ -121,7 +121,6 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
-  const [article, setArticle] = useState("");
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -765,7 +764,7 @@ const Curriculum = () => {
                                                   }}
                                                   fontSize="14px"
                                                 >
-                                                  {errors.title}
+                                                   enter title
                                                 </Text>
                                               )}
                                               <Flex
