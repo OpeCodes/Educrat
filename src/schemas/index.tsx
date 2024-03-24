@@ -79,5 +79,5 @@ export const curriculumEditLectureSchema = Yup.object().shape({
 
 
 export const ArticleCreateLectureSchema = Yup.object().shape({
-  title: Yup.string().required("pls add title"),
+  body: Yup.string().required("pls add body"),
 })

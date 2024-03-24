@@ -68,7 +68,7 @@ const Curriculum = () => {
   };
   console.log(initialValues3.title);
   const articleCreateInitialValue={
-    title: ""
+    body: ""
   }
 
   const {
@@ -78,7 +78,7 @@ const Curriculum = () => {
     showSection,
   } = useModuleCreateCourse();
 
-  // useCreateArticleLectureCourse();
+  const {createArticleLectureCourse,createArticleLectureCourseLoding} = useCreateArticleLectureCourse();
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
@@ -742,6 +742,11 @@ const Curriculum = () => {
                                           }
                                           onSubmit={(values: any) => {
                                             console.log(values);
+                                            // useCreateArticleLectureCourse
+                                            createArticleLectureCourse({ lectureId: id, user: values });
+                                            setTimeout(() => {
+                                              toggleIsOpen(id);
+                                            }, 2000);
                                           }}
                                         >
                                           {({
@@ -753,8 +758,8 @@ const Curriculum = () => {
                                             <Stack>
                                               <ReactQuill
                                                 theme="snow"
-                                                value={values.title}
-                                                onChange={handleChange("title")}
+                                                value={values.body}
+                                                onChange={handleChange("body")}
                                               />
                                               {errors?.title && (
                                                 <Text
