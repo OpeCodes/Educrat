@@ -146,6 +146,19 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
+
+  //context type*****************
+  const [isOpenContentType, setIsOpenContentType ] =useState<{
+    [key: number]: boolean;
+  }>({})
+
+  const toggleIsOpenContentType =(arrayId: number) =>{
+    setIsOpenContentType((prevIsOpenContentTypeState) =>({
+      ...prevIsOpenContentTypeState,
+      [arrayId]: !prevIsOpenContentTypeState[arrayId]
+    }))
+  }
+
   const { data, isPending, isSuccess } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
@@ -166,6 +179,8 @@ export const useGetModuleCourse = (id: any) => {
     toggleIsCurriculumOpen,
     toggleIsModuleLectureOpen,
     isOpenModuleLectureState,
+    toggleIsOpenContentType,
+    isOpenContentType
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {

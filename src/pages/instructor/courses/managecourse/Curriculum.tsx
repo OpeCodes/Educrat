@@ -83,6 +83,8 @@ const Curriculum = () => {
     toggleIsCurriculumOpen,
     toggleIsModuleLectureOpen,
     isOpenModuleLectureState,
+    toggleIsOpenContentType,
+    isOpenContentType
   } = useGetModuleCourse(getSingleCourse?.id);
 
   interface Lecture {
@@ -102,11 +104,7 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
-  //start
-  const content = true;
-  const video = false;
-
-  //end
+ 
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -414,7 +412,7 @@ const Curriculum = () => {
                                     </Flex>
                                   </Flex>
 
-                                  {content ? (
+                                  {isOpenContentType[id] ? (
                                     <Flex
                                       marginRight={"10px"}
                                       columnGap={"15px"}
@@ -431,6 +429,7 @@ const Curriculum = () => {
                                         height={"30px"}
                                         leftIcon={<GoPlus fontSize={"20px"} />}
                                         variant="outline"
+                                        onClick={() => toggleIsOpenContentType(id)}
                                       >
                                         Content
                                       </Button>
@@ -448,7 +447,7 @@ const Curriculum = () => {
                             )}
 
                             {/* video and article section */}
-                            {video && (
+                            {(!isOpenContentType[id]  && !isOpenModuleLectureState[id]) && (
                               <Stack
                                 bg={"white"}
                                 borderWidth={1}
@@ -474,7 +473,7 @@ const Curriculum = () => {
                                     <Text marginLeft={2} fontSize={14}>
                                       Select content type
                                     </Text>
-                                    <Text as={"button"} fontWeight="bold">
+                                    <Text as={"button"} fontWeight="bold"   onClick={() => toggleIsOpenContentType(id)}>
                                       <IoCloseSharp size={20} />
                                     </Text>
                                   </Flex>
@@ -610,7 +609,7 @@ const Curriculum = () => {
                               </Stack>
                             )}
                             {/*secription and resources section*/}
-                            <Stack
+                            {/* <Stack
                               bg={"white"}
                               borderWidth={1}
                               borderColor={"gray"}
@@ -644,7 +643,7 @@ const Curriculum = () => {
                               >
                                 Resources
                               </Button>
-                            </Stack>
+                            </Stack> */}
                           </Stack>
 
                           {/* edit curriculum lecture input field */}
