@@ -120,7 +120,6 @@ const Curriculum = () => {
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
   // const contentType = true;
-  const hi = true;
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -747,15 +746,10 @@ const Curriculum = () => {
                             {/*dsecription and resources section*/}
 
                             <Stack
-                              // bg={"white"}
-                              // borderWidth={1}
-                              // borderColor={"gray"}
-                              // mt={-3}
-                              // pb={2}
-                              // p={3}
+                             
                             >
-                              {!isOpenInnerdescripRes[id] && (
-                                <>
+                              {!isOpenInnerdescripRes[id] && !isOpenContentType[id] && (
+                                <> 
                                   {isOpendescripRes[id] && (
                                     <Stack bg={"white"}
                                     borderWidth={1}
@@ -825,7 +819,7 @@ const Curriculum = () => {
                                   )}
                                 </>
                               )}
-                              {isOpenInnerdescripRes[id] && (
+                              {isOpenInnerdescripRes[id] &&  !isOpenContentType[id] &&(
                                 <Stack bg={"white"}
                                 borderWidth={1}
                                 borderColor={"gray"}
