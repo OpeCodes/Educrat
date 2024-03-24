@@ -180,6 +180,17 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
+  // **********************************RESOURCES***************
+  const [contentType3, setContentType3] = useState<{
+    [key: number]: string;
+  }>({});
+
+  const toggleContentType3 = (arrayId: number, type: string) => {
+    setContentType3((prevContentTypeState) => ({
+      ...prevContentTypeState,
+      [arrayId]: prevContentTypeState[arrayId] === type ? "" : type,
+    }));
+  };
 
   const { data, isPending, isSuccess } = useQuery({
     queryKey: ["module", id],
@@ -227,6 +238,8 @@ export const useGetModuleCourse = (id: any) => {
     contentType,
     toggleContentType,
     toggleContentType2,
+    contentType3,
+    toggleContentType3,
     contentType2,
     isOpendescripRes,
     toggleIsOpenDescripRes,

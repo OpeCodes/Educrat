@@ -97,6 +97,8 @@ const Curriculum = () => {
     toggleIsOpenDescripRes,
     isOpendescription,
     toggleIsOpenDescription,
+    contentType3,
+    toggleContentType3,
   } = useGetModuleCourse(getSingleCourse?.id);
   interface Lecture {
     title: string;
@@ -762,7 +764,13 @@ const Curriculum = () => {
                                     <Text fontWeight={"bold"}>
                                       Lecture Description
                                     </Text>
-                                    <Text     onClick={() => toggleIsOpenDescription(id)}>Cancel</Text>
+                                    <Text
+                                      onClick={() =>
+                                        toggleIsOpenDescription(id)
+                                      }
+                                    >
+                                      Cancel
+                                    </Text>
                                   </Stack>
                                 )}
 
