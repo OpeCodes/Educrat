@@ -39,8 +39,7 @@ import { RiCheckboxCircleFill } from "react-icons/ri";
 import { LuStickyNote } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../../../../hooks/course";
-import { FaChevronDown } from "react-icons/fa";
-// FaChevronUp
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 
 const Curriculum = () => {
@@ -94,6 +93,8 @@ const Curriculum = () => {
     toggleContentType,
     contentType2,
     toggleContentType2,
+    descripRes,
+    toggleIsOpenDescripRes
   } = useGetModuleCourse(getSingleCourse?.id);
   console.log(contentType);
   console.log(toggleContentType);

@@ -157,7 +157,7 @@ export const useGetModuleCourse = (id: any) => {
       [arrayId]: !prevIsOpenContentTypeState[arrayId],
     }));
   };
-  //content name*************************
+  //content name video*************************************************************
   const [contentType, setContentType] = useState<{
     [key: number]: string;
   }>({});
@@ -168,7 +168,7 @@ export const useGetModuleCourse = (id: any) => {
       [arrayId]: prevContentTypeState[arrayId] === type ? "" : type,
     }));
   };
-
+// **********************article**********************************
   const [contentType2, setContentType2] = useState<{
     [key: number]: string;
   }>({});
@@ -189,7 +189,17 @@ export const useGetModuleCourse = (id: any) => {
       return data;
     },
   });
+  // **************************description and resources toggle************************
+  const [descripRes, setDescrpRes] = useState<{
+    [key: number]: string;
+  }>({});
 
+  const toggleIsOpenDescripRes = (arrayId: number) => {
+    setIsOpenContentType((prevIsOpenContentTypeState) => ({
+      ...prevIsOpenContentTypeState,
+      [arrayId]: !prevIsOpenContentTypeState[arrayId],
+    }));
+  };
   return {
     data,
     isPending,
@@ -206,6 +216,8 @@ export const useGetModuleCourse = (id: any) => {
     toggleContentType,
     contentType2,
     toggleContentType2,
+    descripRes,
+    toggleIsOpenDescripRes
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
