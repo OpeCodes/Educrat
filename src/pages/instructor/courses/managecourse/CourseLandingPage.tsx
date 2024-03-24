@@ -20,7 +20,7 @@ import {
 } from "../../../../hooks/course";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
