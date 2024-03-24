@@ -141,7 +141,7 @@ const CourseLandingPage = () => {
                     {/* {errors?.subtitle}
 
                      */}
-                    enter subtitle brother
+                    enter subtitle 
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>

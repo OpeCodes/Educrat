@@ -19,6 +19,7 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
 import {
+  ArticleCreateLectureSchema,
   courseEditModuleSchema,
   courseModuleSchema,
   curriculumEditLectureSchema,
@@ -64,6 +65,8 @@ const Curriculum = () => {
   const initialValues3 = {
     title: "",
   };
+  console.log(initialValues3.title);
+  console.log("peter");
 
   // const initialValues4 = {
   //   title: "a",
@@ -732,36 +735,66 @@ const Curriculum = () => {
                                     isOpenContentType[id] && (
                                       <Stack mx={3}>
                                         <Text>Text</Text>
-                                        <Stack>
-                                          <ReactQuill
-                                            theme="snow"
-                                            // defaultValue={initialValues?.description}
-                                            value={article}
-                                            onChange={setArticle}
-                                          />
-                                          <Flex
-                                            justify={"end"}
-                                            mt={"2.9rem"}
-                                            align={"center"}
-                                          >
-                                            <Button
-                                              color="#ffffff"
-                                              fontWeight={"500"}
-                                              fontSize={14}
-                                              as={"button"}
-                                              py={2}
-                                              px={4}
-                                              loadingText="Loading"
-                                              variant="outline"
-                                              spinnerPlacement="end"
-                                              // onClick={() => handleSubmit()}
-                                              type="button"
-                                              backgroundColor={"black"}
-                                            >
-                                              save
-                                            </Button>
-                                          </Flex>
-                                        </Stack>
+                                        <Formik
+                                          initialValues={initialValues3}
+                                          validationSchema={
+                                            ArticleCreateLectureSchema
+                                          }
+                                          onSubmit={(values: any) => {
+                                            console.log(values);
+                                          }}
+                                        >
+                                          {({
+                                            handleChange,
+                                            handleSubmit: handleArticleSubmit,
+                                            values,
+                                            errors,
+                                          }) => (
+                                            <Stack>
+                                              <ReactQuill
+                                                theme="snow"
+                                                // defaultValue={initialValues?.description}
+                                                value={values.title}
+                                                onChange={handleChange("title")}
+                                              />
+                                              {errors?.title && (
+                                                <Text
+                                                  style={{
+                                                    color: "red",
+                                                    marginTop: 5,
+                                                  }}
+                                                  fontSize="14px"
+                                                >
+                                                  {errors.title}
+                                                </Text>
+                                              )}
+                                              <Flex
+                                                justify={"end"}
+                                                mt={"2.9rem"}
+                                                align={"center"}
+                                              >
+                                                <Button
+                                                  color="#ffffff"
+                                                  fontWeight={"500"}
+                                                  fontSize={14}
+                                                  as={"button"}
+                                                  py={2}
+                                                  px={4}
+                                                  loadingText="Loading"
+                                                  variant="outline"
+                                                  spinnerPlacement="end"
+                                                  onClick={() =>
+                                                    handleArticleSubmit()
+                                                  }
+                                                  type="button"
+                                                  backgroundColor={"black"}
+                                                >
+                                                  save
+                                                </Button>
+                                              </Flex>
+                                            </Stack>
+                                          )}
+                                        </Formik>
                                       </Stack>
                                     )}
                                 </Stack>
