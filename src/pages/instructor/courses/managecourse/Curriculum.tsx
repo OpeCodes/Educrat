@@ -14,7 +14,7 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
-import { useEffect, } from "react";
+import { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -43,6 +43,10 @@ import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../../../../hooks/course";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
+import { IoDocumentTextSharp } from "react-icons/io5";
+<IoDocumentTextSharp />;
+// <IoDocumentTextSharp />
+
 import ReactQuill from "react-quill";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
@@ -66,9 +70,9 @@ const Curriculum = () => {
   const initialValues3 = {
     title: "",
   };
-  const articleCreateInitialValue={
-    body: ""
-  }
+  const articleCreateInitialValue = {
+    body: "",
+  };
 
   const {
     moduleCreateCourse,
@@ -77,7 +81,7 @@ const Curriculum = () => {
     showSection,
   } = useModuleCreateCourse();
 
-  const {createArticleLectureCourse,} = useCreateArticleLectureCourse();
+  const { createArticleLectureCourse } = useCreateArticleLectureCourse();
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
@@ -104,6 +108,7 @@ const Curriculum = () => {
     isOpenInnerdescripRes,
     toggleIsOpenInnerdescripRes,
   } = useGetModuleCourse(getSingleCourse?.id);
+  console.log(data);
   interface Lecture {
     title: string;
   }
@@ -337,7 +342,8 @@ const Curriculum = () => {
                 <Stack mt={6} pl={{ base: 1, lg: 12 }}>
                   {/* new curriculum */}
                   {lectures?.map((lecture: any, index: any) => {
-                    const { id, title } = lecture;
+                    const { id, title, content } = lecture;
+
                     const initialValues4 = {
                       title: "",
                     };
@@ -730,17 +736,35 @@ const Curriculum = () => {
                                     </Stack>
                                   )}
                                   {/* article */}
+
+                                  <Stack
+                                    mx={3}
+                                    borderBottom={"1px"}
+                                    borderColor={"gray"}
+                                  >
+                                    <Text
+                                      mb={1}
+                                      dangerouslySetInnerHTML={{
+                                        __html: content?.body,
+                                      }}
+                                    />
+                                  </Stack>
                                   {contentType2[id] &&
                                     isOpenContentType[id] && (
                                       <Stack mx={3}>
                                         <Text>Text</Text>
                                         <Formik
-                                          initialValues={articleCreateInitialValue}
+                                          initialValues={
+                                            articleCreateInitialValue
+                                          }
                                           validationSchema={
                                             ArticleCreateLectureSchema
                                           }
-                                          onSubmit={(values: any) => {                                            
-                                            createArticleLectureCourse({ lectureId: id, user: {...values,title} });
+                                          onSubmit={(values: any) => {
+                                            createArticleLectureCourse({
+                                              lectureId: id,
+                                              user: { ...values, title },
+                                            });
                                             setTimeout(() => {
                                               toggleIsOpen(id);
                                             }, 2000);
@@ -766,7 +790,7 @@ const Curriculum = () => {
                                                   }}
                                                   fontSize="14px"
                                                 >
-                                                   enter title
+                                                  enter title
                                                 </Text>
                                               )}
                                               <Flex

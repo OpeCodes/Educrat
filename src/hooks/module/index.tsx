@@ -168,7 +168,7 @@ export const useGetModuleCourse = (id: any) => {
       [arrayId]: prevContentTypeState[arrayId] === type ? "" : type,
     }));
   };
-// **********************article**********************************
+  // **********************article**********************************
   const [contentType2, setContentType2] = useState<{
     [key: number]: string;
   }>({});
@@ -257,7 +257,7 @@ export const useGetModuleCourse = (id: any) => {
     isOpendescription,
     toggleIsOpenDescription,
     isOpenInnerdescripRes,
-    toggleIsOpenInnerdescripRes
+    toggleIsOpenInnerdescripRes,
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
@@ -418,17 +418,17 @@ export const useGetLectureModuleCourse = (id: any) => {
   };
 };
 
-
 // ****************************************article endpoint**************************************
 export const useCreateArticleLectureCourse = () => {
   const toast = useToast();
   // const queryClient = useQueryClient();
-  const {
-    mutate: createArticleLectureCourse,
-  } = useMutation({
+  const { mutate: createArticleLectureCourse } = useMutation({
     mutationFn: ({ lectureId, user }: any) => {
-      return customFetch.post(`/lecture/content/lecture/${lectureId}/article
-      `, user);
+      return customFetch.post(
+        `/lecture/content/lecture/${lectureId}/article
+      `,
+        user
+      );
     },
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ["module"] });
