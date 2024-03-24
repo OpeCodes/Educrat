@@ -90,9 +90,10 @@ const Curriculum = () => {
     isOpenModuleLectureState,
     toggleIsOpenContentType,
     isOpenContentType,
-    contentType: ContentType,
+    contentType,
     toggleContentType,
   } = useGetModuleCourse(getSingleCourse?.id);
+  console.log(isOpenContentType);
   interface Lecture {
     title: string;
   }
@@ -110,7 +111,7 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
-  const contentType = false;
+  // const contentType = true;
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -428,7 +429,7 @@ const Curriculum = () => {
                                     </Flex>
                                   </Flex>
 
-                                  {isOpenContentType[id] ? (
+                                  {!isOpenContentType[id] ? (
                                     <Flex
                                       marginRight={"10px"}
                                       columnGap={"15px"}
@@ -446,7 +447,7 @@ const Curriculum = () => {
                                         leftIcon={<GoPlus fontSize={"20px"} />}
                                         variant="outline"
                                         onClick={() => {
-                                          toggleContentType(id, "Select content type");
+                                          // toggleContentType(id, "Select content type");
                                           toggleIsOpenContentType(id);
                                         }}
                                       >
@@ -466,7 +467,7 @@ const Curriculum = () => {
                             )}
 
                             {/* video and article section */}
-                            {!isOpenContentType[id] &&
+                            {isOpenContentType[id] &&
                               !isOpenModuleLectureState[id] && (
                                 <Stack
                                   bg={"white"}
@@ -491,14 +492,9 @@ const Curriculum = () => {
                                       marginRight={7}
                                     >
                                       <Text marginLeft={2} fontSize={14}>
-                                        {ContentType[id]
-                                          ? ContentType[id]
+                                        {contentType[id]
+                                          ? contentType[id]
                                           : "Select content type"}
-                                        {/* <p>{contentType[arrayId] ? contentType[arrayId] : defaultText}</p> */}
-                                        {/* {ContentType[id] ? "Add Video": ""}
-                                      {contentType2[id] ? "Add article": ""}
-                                      {!(ContentType[id] || contentType2[id]) && "yoo"} */}
-                                        {/* { ContentType["Select content type"]} */}
                                       </Text>
                                       <Text
                                         as={"button"}
@@ -513,7 +509,7 @@ const Curriculum = () => {
                                   </Flex>
 
                                   {/* Select the main type of content. vidoe or article */}
-                                  {contentType && (
+                                  {isOpenContentType[id] && (
                                     <Stack>
                                       <Text textAlign={"center"} fontSize={14}>
                                         Select the main type of content. Files
@@ -653,7 +649,7 @@ const Curriculum = () => {
                                     </Stack>
                                   )}
                                   {/* video  */}
-                                  <Stack mx={3}>
+                                  {/* <Stack mx={3}>
                                     <Tabs>
                                       <TabList>
                                         <Tab fontWeight={"bold"} color="black">
@@ -680,7 +676,7 @@ const Curriculum = () => {
                                         </TabPanel>
                                       </TabPanels>
                                     </Tabs>
-                                  </Stack>
+                                  </Stack> */}
                                 </Stack>
                               )}
                             {/*dsecription and resources section*/}
@@ -848,7 +844,11 @@ const Curriculum = () => {
                       leftIcon={<GoPlus fontSize={"20px"} />}
                       colorScheme="teal"
                       variant="outline"
-                      onClick={() => toggleIsCurriculumOpen(id)}
+                      onClick={() => {
+                        toggleIsCurriculumOpen(id);
+                        toggleIsOpenContentType(id);
+                        // console.log(toggleIsOpenContentType(id))
+                      }}
                     >
                       New Curriculum
                     </Button>
