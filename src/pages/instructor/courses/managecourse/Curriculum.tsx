@@ -99,6 +99,8 @@ const Curriculum = () => {
     toggleIsOpenDescription,
     contentType3,
     toggleContentType3,
+    isOpenInnerdescripRes,
+    toggleIsOpenInnerdescripRes,
   } = useGetModuleCourse(getSingleCourse?.id);
   interface Lecture {
     title: string;
@@ -118,6 +120,7 @@ const Curriculum = () => {
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
   // const contentType = true;
+  const hi = true;
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -452,8 +455,9 @@ const Curriculum = () => {
                                       <Box>
                                         <Text
                                           as={"button"}
-                                          onClick={() =>
-                                            toggleIsOpenDescripRes(id)
+                                          onClick={
+                                            () => toggleIsOpenDescripRes(id)
+                                            // toggleIsOpenInnerdescripRes(id)
                                           }
                                         >
                                           {/* /> */}
@@ -505,7 +509,8 @@ const Curriculum = () => {
                                         {contentType2[id] && "Add Article"}
                                         {contentType3[id] && "Add Resources"}
                                         {!contentType[id] &&
-                                          !contentType2[id] && !contentType3[id] &&
+                                          !contentType2[id] &&
+                                          !contentType3[id] &&
                                           "Select content Type"}
                                       </Text>
                                       <Text
@@ -515,6 +520,7 @@ const Curriculum = () => {
                                           toggleIsOpenContentType(id);
                                           toggleContentType(id, "");
                                           toggleContentType2(id, "");
+                                          toggleContentType3(id, "");
                                         }}
                                       >
                                         <IoCloseSharp size={20} />
@@ -525,7 +531,8 @@ const Curriculum = () => {
                                   {/* Select the main type of content. vidoe or article */}
                                   {isOpenContentType[id] &&
                                     !contentType[id] &&
-                                    !contentType2[id] && (
+                                    !contentType2[id] &&
+                                    !contentType3[id] && (
                                       <Stack>
                                         <Text
                                           textAlign={"center"}
@@ -731,70 +738,111 @@ const Curriculum = () => {
                                     isOpenContentType[id] && (
                                       <Text>Article part</Text>
                                     )}
-                                    {/* resources */}
-                                    {contentType3[id] &&
-                                    isOpenContentType[id] && (
-                                      <Text>resource part part</Text>
-                                    )}
+                                  {/* resources */}
+                                  {/* {contentType3[id] && isOpendescripRes[id] && (
+                                    <Text>resource part part</Text>
+                                  )} */}
                                 </Stack>
                               )}
                             {/*dsecription and resources section*/}
-                            {isOpendescripRes[id] && (
-                              <Stack
-                                bg={"white"}
+
+                            <Stack
+                              // bg={"white"}
+                              // borderWidth={1}
+                              // borderColor={"gray"}
+                              // mt={-3}
+                              // pb={2}
+                              // p={3}
+                            >
+                              {!isOpenInnerdescripRes[id] && (
+                                <>
+                                  {isOpendescripRes[id] && (
+                                    <Stack bg={"white"}
+                                    borderWidth={1}
+                                    borderColor={"gray"}
+                                    mt={-3}
+                                    pb={2}
+                                    p={3}>
+                                      {!isOpendescription[id] && (
+                                        <Button
+                                          borderRadius={0}
+                                          borderWidth={1}
+                                          borderColor={"black"}
+                                          color="black"
+                                          _hover={{
+                                            backgroundColor: "#F7F8FB",
+                                          }}
+                                          width={"130px"}
+                                          height={"30px"}
+                                          leftIcon={
+                                            <GoPlus fontSize={"20px"} />
+                                          }
+                                          variant="outline"
+                                          onClick={() =>
+                                            toggleIsOpenDescription(id)
+                                          }
+                                        >
+                                          Description
+                                        </Button>
+                                      )}
+                                      {/* ************************description container************************** */}
+                                      {isOpendescription[id] && (
+                                        <Stack>
+                                          <Text fontWeight={"bold"}>
+                                            Lecture Description
+                                          </Text>
+                                          <Text
+                                            onClick={() =>
+                                              toggleIsOpenDescription(id)
+                                            }
+                                          >
+                                            Cancel
+                                          </Text>
+                                        </Stack>
+                                      )}
+
+                                      <Button
+                                        borderRadius={0}
+                                        borderWidth={1}
+                                        borderColor={"black"}
+                                        color="black"
+                                        _hover={{ backgroundColor: "#F7F8FB" }}
+                                        width={"120px"}
+                                        height={"30px"}
+                                        leftIcon={<GoPlus fontSize={"20px"} />}
+                                        variant="outline"
+                                        onClick={() => {
+                                          toggleIsOpenInnerdescripRes(id);
+                                          // toggleContentType3(
+                                          //   id,
+                                          //   "Add Resources"
+                                          // );
+                                        }}
+                                      >
+                                        Resources
+                                      </Button>
+                                    </Stack>
+                                  )}
+                                </>
+                              )}
+                              {isOpenInnerdescripRes[id] && (
+                                <Stack bg={"white"}
                                 borderWidth={1}
                                 borderColor={"gray"}
                                 mt={-3}
                                 pb={2}
-                                p={3}
-                              >
-                                {!isOpendescription[id] && (
-                                  <Button
-                                    borderRadius={0}
-                                    borderWidth={1}
-                                    borderColor={"black"}
-                                    color="black"
-                                    _hover={{ backgroundColor: "#F7F8FB" }}
-                                    width={"130px"}
-                                    height={"30px"}
-                                    leftIcon={<GoPlus fontSize={"20px"} />}
-                                    variant="outline"
-                                    onClick={() => toggleIsOpenDescription(id)}
+                                p={3}>
+                                  <Text>ld</Text>
+                                  <Text
+                                    onClick={() =>
+                                      toggleIsOpenInnerdescripRes(id)
+                                    }
                                   >
-                                    Description
-                                  </Button>
-                                )}
-                                {/* ************************description container************************** */}
-                                {isOpendescription[id] && (
-                                  <Stack>
-                                    <Text fontWeight={"bold"}>
-                                      Lecture Description
-                                    </Text>
-                                    <Text
-                                      onClick={() =>
-                                        toggleIsOpenDescription(id)
-                                      }
-                                    >
-                                      Cancel
-                                    </Text>
-                                  </Stack>
-                                )}
-
-                                <Button
-                                  borderRadius={0}
-                                  borderWidth={1}
-                                  borderColor={"black"}
-                                  color="black"
-                                  _hover={{ backgroundColor: "#F7F8FB" }}
-                                  width={"120px"}
-                                  height={"30px"}
-                                  leftIcon={<GoPlus fontSize={"20px"} />}
-                                  variant="outline"
-                                >
-                                  Resources
-                                </Button>
-                              </Stack>
-                            )}
+                                    close
+                                  </Text>
+                                </Stack>
+                              )}
+                            </Stack>
                           </Stack>
 
                           {/* edit curriculum lecture input field */}

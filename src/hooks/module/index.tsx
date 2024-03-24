@@ -223,6 +223,17 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
+  const [isOpenInnerdescripRes, setIsOpenInnerdescripRes] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  const toggleIsOpenInnerdescripRes = (arrayId: number) => {
+    setIsOpenInnerdescripRes((prevIsOpenInnerdescripRes) => ({
+      ...prevIsOpenInnerdescripRes,
+      [arrayId]: !prevIsOpenInnerdescripRes[arrayId],
+    }));
+  };
+
   return {
     data,
     isPending,
@@ -244,7 +255,9 @@ export const useGetModuleCourse = (id: any) => {
     isOpendescripRes,
     toggleIsOpenDescripRes,
     isOpendescription,
-    toggleIsOpenDescription
+    toggleIsOpenDescription,
+    isOpenInnerdescripRes,
+    toggleIsOpenInnerdescripRes
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
