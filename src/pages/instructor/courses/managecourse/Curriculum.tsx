@@ -108,7 +108,7 @@ const Curriculum = () => {
     isOpenInnerdescripRes,
     toggleIsOpenInnerdescripRes,
     isOpenEditArticle,
-    toggleIsOpenEditArticle
+    toggleIsOpenEditArticle,
   } = useGetModuleCourse(getSingleCourse?.id);
   interface Lecture {
     title: string;
@@ -540,7 +540,7 @@ const Curriculum = () => {
                                     </Flex>
                                   </Flex>
 
-                                  {/* Select the main type of content. vidoe or article */}
+                                  {/* Select the main type of content. video or article */}
                                   {isOpenContentType[id] &&
                                     !contentType[id] &&
                                     !contentType2[id] &&
@@ -744,88 +744,13 @@ const Curriculum = () => {
                                     </Stack>
                                   )}
 
-        {/* **************************************************article part********************* */}
-                                  {/* {contentType2[id] &&
+                                  {/* **************************************************article part********************* */}
+                                  {contentType2[id] &&
                                     isOpenContentType[id] && (
                                       <Stack mx={3}>
-                                        <Text fontWeight={"bold"}>Text</Text>
-                                        <Formik
-                                          initialValues={
-                                            articleCreateInitialValue
-                                          }
-                                          validationSchema={
-                                            ArticleCreateLectureSchema
-                                          }
-                                          onSubmit={(values: any) => {
-                                            createArticleLectureCourse({
-                                              lectureId: id,
-                                              user: { ...values, title },
-                                            });
-                                            setTimeout(() => {
-                                              toggleContentType2(id, "");
-                                              toggleIsOpenContentType(id);
-                                            }, 2000);
-                                          }}
-                                        >
-                                          {({
-                                            handleChange,
-                                            handleSubmit: handleArticleSubmit,
-                                            values,
-                                            errors,
-                                          }) => (
-                                            <Stack>
-                                              <ReactQuill
-                                                theme="snow"
-                                                value={values.body}
-                                                onChange={handleChange("body")}
-                                              />
-                                              {errors?.body && (
-                                                <Text
-                                                  style={{
-                                                    color: "red",
-                                                    marginTop: 5,
-                                                  }}
-                                                  fontSize="14px"
-                                                >
-                                                  enter title
-                                                </Text>
-                                              )}
-                                              <Flex
-                                                justify={"end"}
-                                                mt={"2.9rem"}
-                                                align={"center"}
-                                              >
-                                                <Button
-                                                  color="#ffffff"
-                                                  fontWeight={"500"}
-                                                  fontSize={14}
-                                                  as={"button"}
-                                                  py={2}
-                                                  px={4}
-                                                  loadingText="Loading"
-                                                  variant="outline"
-                                                  spinnerPlacement="end"
-                                                  onClick={() =>
-                                                    handleArticleSubmit()
-                                                  }
-                                                  type="button"
-                                                  backgroundColor={"black"}
-                                                >
-                                                  save
-                                                </Button>
-                                              </Flex>
-                                            </Stack>
-                                          )}
-                                        </Formik>
-                                      </Stack>
-                                    )} */}
-
-
-                      {/* ************************************article edit section ************* */}
-                       {contentType2[id] &&
-                                    isOpenContentType[id] && (
-                                      <Stack mx={3}>
-                                        <Text fontWeight={"bold"}>Text</Text>
+                                        <Text fontWeight={"bold"}>
+                                          Text real
+                                        </Text>
                                         <Formik
                                           initialValues={
                                             articleCreateInitialValue
@@ -940,6 +865,9 @@ const Curriculum = () => {
                                                 fontWeight={"600"}
                                                 columnGap={1}
                                                 color={"#5624D0"}
+                                                onClick={() => {
+                                                  toggleIsOpenEditArticle(id);
+                                                }}
                                               >
                                                 <Text>
                                                   <MdModeEditOutline />
@@ -968,6 +896,99 @@ const Curriculum = () => {
                                             px={2}
                                           /> */}
                                         </Stack>
+
+                                        {/* ***********article text editor */}
+                                        {/* ************************************article edit section ************* */}
+                                        {isOpenEditArticle[id] &&
+                                          !isOpenContentType[id] &&
+                                          !isOpenModuleLectureState[id] && (
+                                            <Stack
+                                              bg={"white"}
+                                              borderWidth={1}
+                                              borderColor={"gray"}
+                                              mt={-3}
+                                              pb={2}
+                                              p={3}
+                                            >
+                                              <Text fontWeight={"bold"}>
+                                                Text edit
+                                              </Text>
+                                              <Formik
+                                                initialValues={
+                                                  articleCreateInitialValue
+                                                }
+                                                validationSchema={
+                                                  ArticleCreateLectureSchema
+                                                }
+                                                onSubmit={(values: any) => {
+                                                  createArticleLectureCourse({
+                                                    lectureId: id,
+                                                    user: { ...values, title },
+                                                  });
+                                                  setTimeout(() => {
+                                                    toggleContentType2(id, "");
+                                                    toggleIsOpenContentType(id);
+                                                  }, 2000);
+                                                }}
+                                              >
+                                                {({
+                                                  handleChange,
+                                                  handleSubmit:
+                                                    handleArticleSubmit,
+                                                  values,
+                                                  errors,
+                                                }) => (
+                                                  <Stack>
+                                                    <ReactQuill
+                                                      theme="snow"
+                                                      value={values.body}
+                                                      onChange={handleChange(
+                                                        "body"
+                                                      )}
+                                                    />
+                                                    {errors?.body && (
+                                                      <Text
+                                                        style={{
+                                                          color: "red",
+                                                          marginTop: 5,
+                                                        }}
+                                                        fontSize="14px"
+                                                      >
+                                                        enter title
+                                                      </Text>
+                                                    )}
+                                                    <Flex
+                                                      justify={"end"}
+                                                      mt={"2.9rem"}
+                                                      align={"center"}
+                                                    >
+                                                      <Button
+                                                        color="#ffffff"
+                                                        fontWeight={"500"}
+                                                        fontSize={14}
+                                                        as={"button"}
+                                                        py={2}
+                                                        px={4}
+                                                        loadingText="Loading"
+                                                        variant="outline"
+                                                        spinnerPlacement="end"
+                                                        onClick={() =>
+                                                          handleArticleSubmit()
+                                                        }
+                                                        type="button"
+                                                        backgroundColor={
+                                                          "black"
+                                                        }
+                                                      >
+                                                        save
+                                                      </Button>
+                                                    </Flex>
+                                                  </Stack>
+                                                )}
+                                              </Formik>
+                                            </Stack>
+                                          )}
+                                        {/* end */}
                                         <Stack
                                           bg={"white"}
                                           borderWidth={1}
@@ -976,28 +997,29 @@ const Curriculum = () => {
                                           pb={2}
                                           p={3}
                                         >
-                                          {!isOpendescription[id] && (
-                                            <Button
-                                              borderRadius={0}
-                                              borderWidth={1}
-                                              borderColor={"black"}
-                                              color="black"
-                                              _hover={{
-                                                backgroundColor: "#F7F8FB",
-                                              }}
-                                              width={"130px"}
-                                              height={"30px"}
-                                              leftIcon={
-                                                <GoPlus fontSize={"20px"} />
-                                              }
-                                              variant="outline"
-                                              onClick={() =>
-                                                toggleIsOpenDescription(id)
-                                              }
-                                            >
-                                              Description
-                                            </Button>
-                                          )}
+                                          {!isOpendescription[id] &&
+                                            !isOpenEditArticle[id] && (
+                                              <Button
+                                                borderRadius={0}
+                                                borderWidth={1}
+                                                borderColor={"black"}
+                                                color="black"
+                                                _hover={{
+                                                  backgroundColor: "#F7F8FB",
+                                                }}
+                                                width={"130px"}
+                                                height={"30px"}
+                                                leftIcon={
+                                                  <GoPlus fontSize={"20px"} />
+                                                }
+                                                variant="outline"
+                                                onClick={() =>
+                                                  toggleIsOpenDescription(id)
+                                                }
+                                              >
+                                                Description
+                                              </Button>
+                                            )}
                                           {/* ************************description container************************** */}
                                           {isOpendescription[id] && (
                                             <Stack>
@@ -1013,27 +1035,28 @@ const Curriculum = () => {
                                               </Text>
                                             </Stack>
                                           )}
-
-                                          <Button
-                                            borderRadius={0}
-                                            borderWidth={1}
-                                            borderColor={"black"}
-                                            color="black"
-                                            _hover={{
-                                              backgroundColor: "#F7F8FB",
-                                            }}
-                                            width={"120px"}
-                                            height={"30px"}
-                                            leftIcon={
-                                              <GoPlus fontSize={"20px"} />
-                                            }
-                                            variant="outline"
-                                            onClick={() => {
-                                              toggleIsOpenInnerdescripRes(id);
-                                            }}
-                                          >
-                                            Resources
-                                          </Button>
+                                          {!isOpenEditArticle[id] && (
+                                            <Button
+                                              borderRadius={0}
+                                              borderWidth={1}
+                                              borderColor={"black"}
+                                              color="black"
+                                              _hover={{
+                                                backgroundColor: "#F7F8FB",
+                                              }}
+                                              width={"120px"}
+                                              height={"30px"}
+                                              leftIcon={
+                                                <GoPlus fontSize={"20px"} />
+                                              }
+                                              variant="outline"
+                                              onClick={() => {
+                                                toggleIsOpenInnerdescripRes(id);
+                                              }}
+                                            >
+                                              Resources
+                                            </Button>
+                                          )}
                                         </Stack>
                                       </>
                                     )}
