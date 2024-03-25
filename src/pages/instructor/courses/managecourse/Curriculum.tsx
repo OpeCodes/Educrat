@@ -735,23 +735,7 @@ const Curriculum = () => {
                                       </Tabs>
                                     </Stack>
                                   )}
-                                  {/* article */}
 
-                                  <Stack
-                                    mx={3}
-                                    borderBottom={"1px"}
-                                    borderColor={"#d1d7dc"}
-                                    cursor={"pointer"}
-                                  >
-                                    <Text
-                                      mb={3}
-                                      dangerouslySetInnerHTML={{
-                                        __html: content?.body,
-                                      }}
-                                      px={2}
-                                      _hover={{border:"1px solid #d1d7dc", paddingLeft: 2,paddingRight: 2 }}                                      
-                                    />
-                                  </Stack>
                                   {contentType2[id] &&
                                     isOpenContentType[id] && (
                                       <Stack mx={3}>
@@ -834,6 +818,31 @@ const Curriculum = () => {
                                 !isOpenContentType[id] &&
                                 !isOpenModuleLectureState[id] && (
                                   <>
+                                    {/* article */}
+
+                                    <Stack
+                                      borderBottom={"1px"}
+                                      cursor={"pointer"}
+                                      bg={"white"}
+                                      borderWidth={1}
+                                      borderColor={"gray"}
+                                      mt={-3}
+                                      pb={2}
+                                      p={3}
+                                    >
+                                      <Text
+                                        mb={3}
+                                        dangerouslySetInnerHTML={{
+                                          __html: content?.body,
+                                        }}
+                                        px={2}
+                                        _hover={{
+                                          border: "1px solid #d1d7dc",
+                                          paddingLeft: 2,
+                                          paddingRight: 2,
+                                        }}
+                                      />
+                                    </Stack>
                                     {isOpendescripRes[id] && (
                                       <Stack
                                         bg={"white"}
