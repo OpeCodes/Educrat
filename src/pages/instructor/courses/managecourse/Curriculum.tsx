@@ -957,19 +957,21 @@ const Curriculum = () => {
                                                         enter title
                                                       </Text>
                                                     )}
-                                                    
+
                                                     <Flex
                                                       justify={"end"}
                                                       align={"center"}
                                                       columnGap={5}
-                                                         mt={"2.9rem"}
+                                                      mt={"2.9rem"}
                                                     >
                                                       <Text
                                                         fontWeight={"bold"}
                                                         as={"button"}
-                                                        onClick={() =>
-                                                          toggleIsOpen(id)
-                                                        }
+                                                        onClick={() => {
+                                                          toggleIsOpenEditArticle(
+                                                            id
+                                                          );
+                                                        }}
                                                       >
                                                         Cancel
                                                       </Text>
@@ -982,15 +984,15 @@ const Curriculum = () => {
                                                         px={4}
                                                         variant="outline"
                                                         spinnerPlacement="end"
-                                                        onClick={() =>
-                                                          // handleEditSubmit()
-                                                        }
+                                                        // onClick={() =>
+                                                        //   // handleEditSubmit()
+                                                        // }
                                                         type="button"
                                                         backgroundColor={
                                                           "black"
                                                         }
                                                       >
-                                                        Save 
+                                                        Save
                                                       </Button>
                                                     </Flex>
                                                   </Stack>
