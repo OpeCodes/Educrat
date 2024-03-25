@@ -364,13 +364,26 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(content, contentEndPointType);
                     const initialValues4 = {
                       title: "",
                     };
                     const articleEditInitialValue = {
                       body: content?.body,
                     };
+                    const dateString = content?.updatedAt;
+
+                    const date = new Date(dateString);
+
+                    // Extract day, month, and year components
+                    const day = String(date.getUTCDate()).padStart(2, "0");
+                    const month = String(date.getUTCMonth() + 1).padStart(
+                      2,
+                      "0"
+                    ); // January is 0
+                    const year = date.getUTCFullYear();
+
+                    // Format the components into the desired format
+                    const formattedDate = `${month}/${day}/${year}`;
                     return (
                       <Stack>
                         <Stack key={id}>
@@ -952,7 +965,7 @@ const Curriculum = () => {
                                                 </Thead>
                                                 <Tbody>
                                                   <Tr>
-                                                    <Td>name here</Td>
+                                                    <Td>{content?.title}</Td>
                                                     <Td>Video</Td>
                                                     <Td>
                                                       <Text fontWeight={"500"}>
@@ -960,8 +973,7 @@ const Curriculum = () => {
                                                       </Text>
                                                     </Td>
                                                     <Td>
-                                                      {/* {formattedDate} */}
-                                                      date here
+                                                      {formattedDate}
                                                     </Td>
                                                     <Td
                                                       as={"button"}
