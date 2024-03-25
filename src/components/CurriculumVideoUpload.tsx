@@ -9,11 +9,9 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
@@ -131,70 +129,77 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   const formattedDate = `${month}/${day}/${year}`;
   return (
     <Stack>
-      {/* <Stack>
-      <Stack width={"100%"}>
-        <Input
-          type="file"
-          accept="video/*"
-          onChange={handleImageChange}
-          mt={2}
-          width={"100%"}
-        />
-      </Stack>
-      <Flex fontSize={13} columnGap={1}>
-        <Text fontWeight={"600"}>Note:</Text>
-        <Text>All files should be at least 720p and less than 4.0 GB.</Text>
-      </Flex>
-      <Text>{selectedImageName?.name}</Text>
-      {uploadProgress > 0 && uploadProgress < 100 && (
-        <>
-          <Progress value={uploadProgress} size="md" mt={2} />
-          <Text>{uploadProgress}%</Text>
-        </>
-      )}
-</Stack> */}
-      <Stack>
-        <TableContainer>
-          <Table variant="simple">
-            <Thead>
-              <Tr color={"black"}>
-                <Th color="black">Filename</Th>
-                <Th color="black">Type</Th>
-                <Th color="black">Status</Th>
-                <Th color="black">Date</Th>
-                <Th color="black">.</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td>testing video.mp4</Td>
-                <Td>Video</Td>
-                <Td width={"50%"}>
-                  <Stack direction={"row"} align={"center"}>
-                    <Progress
-                      value={20}
-                      size="sm"
-                      width="40%"
-                      display={{ base: "none", md: "block" }}
-                    />
 
-                    <Text>70%</Text>
-                  </Stack>
-                </Td>
-                <Td>{formattedDate}</Td>
-                <Td
-                  as={"button"}
-                  fontSize={15}
-                  fontWeight={"600"}
-                  color={"#5624D0"}
-                >
-                  Replace
-                </Td>
-              </Tr>
-            </Tbody>
-          </Table>
-        </TableContainer>
+      {
+        !selectedImageName &&
+      <Stack>
+        <Stack width={"100%"}>
+          <Input
+            type="file"
+            accept="video/*"
+            onChange={handleImageChange}
+            mt={2}
+            width={"100%"}
+          />
+        </Stack>
+        <Flex fontSize={13} columnGap={1}>
+          <Text fontWeight={"600"}>Note:</Text>
+          <Text>All files should be at least 720p and less than 4.0 GB.</Text>
+        </Flex>
+        <Text>{selectedImageName?.name}</Text>
+        {uploadProgress > 0 && uploadProgress < 100 && (
+          <>
+            <Progress value={uploadProgress} size="md" mt={2} />
+            <Text>{uploadProgress}%</Text>
+          </>
+        )}
       </Stack>
+      }
+
+      {selectedImageName && (
+        <Stack>
+          <TableContainer>
+            <Table variant="simple">
+              <Thead>
+                <Tr color={"black"}>
+                  <Th color="black">Filename</Th>
+                  <Th color="black">Type</Th>
+                  <Th color="black">Status</Th>
+                  <Th color="black">Date</Th>
+                  <Th color="black">.</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  <Td>testing video.mp4</Td>
+                  <Td>Video</Td>
+                  <Td width={"50%"}>
+                    <Stack direction={"row"} align={"center"}>
+                      <Progress
+                        value={20}
+                        size="sm"
+                        width="40%"
+                        display={{ base: "none", md: "block" }}
+                      />
+
+                      <Text>70%</Text>
+                    </Stack>
+                  </Td>
+                  <Td>{formattedDate}</Td>
+                  <Td
+                    as={"button"}
+                    fontSize={15}
+                    fontWeight={"600"}
+                    color={"#5624D0"}
+                  >
+                    Replace
+                  </Td>
+                </Tr>
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Stack>
+      )}
     </Stack>
   );
 };
