@@ -42,6 +42,7 @@ import {
   useDeleteLectureModuleCourse,
   useCreateArticleLectureCourse,
   useEditArticleLectureCourse,
+  useDeleteVideoLecture,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -94,6 +95,7 @@ const Curriculum = () => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
   const { editArticleLectureCourse } = useEditArticleLectureCourse();
+  const {deleteVideoLecture} = useDeleteVideoLecture();
   const {
     data,
     isPending: getCourseLoading,
@@ -138,7 +140,7 @@ const Curriculum = () => {
 
   const handleUploadSuccess = () => {
     // Handle upload success event here
-    // For example, show a success message or navigate to another page
+   
     console.log("Upload successful!");
   };
 
@@ -364,6 +366,7 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
+                    console.log(content,contentEndPointType)
                     const initialValues4 = {
                       title: "",
                     };
@@ -973,7 +976,9 @@ const Curriculum = () => {
                                                     </Td>
                                                     <Td>{formattedDate}</Td>
                                                     <Td
-                                                      onClick={() => {}}
+                                                      onClick={() => {
+                                                        deleteVideoLecture({videoId: content?.id})
+                                                      }}
                                                     >
                                                     < MdDelete/>
                                                     </Td>

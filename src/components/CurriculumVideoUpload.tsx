@@ -15,6 +15,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
+// import { useQueryClient  } from "@tanstack/react-query";
 
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
@@ -73,6 +74,8 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   };
 
   const uploadImage = async (file: File, duration: number, title: string) => {
+   
+
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Data = reader.result as string;
@@ -96,15 +99,17 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
             },
           }
         );
-
         console.log("Upload completed:", response.data);
         toast({
-          title: `Video uploaded`,
+          title: `Video uploaded refresh for updated changes`,
           status: "success",
           duration: 5000,
           isClosable: true,
         });
         onImageUpload(file);
+        // const queryClient = useQueryClient();
+        // queryClient.invalidateQueries({ queryKey: ["module"] });
+
       } catch (error: any) {
         toast({
           title: `${error.response.data.error}`,
@@ -200,6 +205,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                     onClick={() => {
                       setSelectImageName(null);
                       setUploadProgress(0);
+                      
                     }}
                   >
                     Replace
