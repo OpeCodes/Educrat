@@ -971,9 +971,7 @@ const Curriculum = () => {
                                                         Success
                                                       </Text>
                                                     </Td>
-                                                    <Td>
-                                                      {formattedDate}
-                                                    </Td>
+                                                    <Td>{formattedDate}</Td>
                                                     <Td
                                                       as={"button"}
                                                       fontSize={15}

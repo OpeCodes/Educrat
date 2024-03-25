@@ -56,7 +56,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         setSelectImageName(file);
 
         const duration = await getVideoDuration(file);
-        await uploadImage(file, duration);
+        await uploadImage(file, duration, file?.name);
       }
     }
   };
@@ -73,7 +73,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
     });
   };
 
-  const uploadImage = async (file: File, duration: number) => {
+  const uploadImage = async (file: File, duration: number, title: string) => {
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Data = reader.result as string;
@@ -81,7 +81,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
       try {
         const response = await customFetch.post(
           endpoint,
-          { file: base64Data, duration, title: selectedImageName },
+          { file: base64Data, duration, title },
           {
             headers: { "Content-Type": "application/json" },
             onUploadProgress: (progressEvent: {
