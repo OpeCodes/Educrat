@@ -22,7 +22,7 @@ interface ImageUploadProps {
   id: number;
 }
 
-const MAX_FILE_SIZE_MB = 5;
+const MAX_FILE_SIZE_MB = 4;
 
 const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   onImageUpload,

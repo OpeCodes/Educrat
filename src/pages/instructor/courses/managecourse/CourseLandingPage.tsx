@@ -167,8 +167,7 @@ const CourseLandingPage = () => {
                         type="text"
                         variant="filled"
                         placeholder="learning objectives"
-                        value={value}
-                        // defaultValue={initialValues.learningObjectives }
+                        value={value}                        
                         name={`learningObjectives[${index}]`}
                         onChange={handleChange}
                       />
@@ -228,8 +227,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      please select a language
-                      {/* {errors?.language} */}
+                      please select a language                    
                     </Text>
                   )}
                 </Stack>
@@ -252,8 +250,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      pls select level
-                      {/* {errors.complexityLevel} */}
+                      pls select level                    
                     </Text>
                   )}
                 </Stack>
