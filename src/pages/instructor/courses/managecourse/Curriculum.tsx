@@ -973,13 +973,9 @@ const Curriculum = () => {
                                                     </Td>
                                                     <Td>{formattedDate}</Td>
                                                     <Td
-                                                      as={"button"}
-                                                      fontSize={15}
-                                                      fontWeight={"600"}
-                                                      color={"#5624D0"}
                                                       onClick={() => {}}
                                                     >
-                                                      Replace
+                                                    < MdDelete/>
                                                     </Td>
                                                   </Tr>
                                                 </Tbody>
