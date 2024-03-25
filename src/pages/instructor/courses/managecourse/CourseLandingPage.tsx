@@ -42,10 +42,10 @@ const CourseLandingPage = () => {
     title: getSingleCourse?.title || "",
     subtitle: getSingleCourse?.subtitle,
     language: getSingleCourse?.language,
-    preRequisites:  "",
+    preRequisites: getSingleCourse?.preRequisites || "",
     learningObjectives: getSingleCourse?.learningObjectives || ["", "", "", ""],
     category: getSingleCourse?.category?.id,
-    description: getSingleCourse?.description,
+    description: getSingleCourse?.description || "",
     complexityLevel: getSingleCourse?.complexityLevel,
   };
 
@@ -61,7 +61,7 @@ const CourseLandingPage = () => {
   const handleSubmit = (values: any): void => {
     singleCourse({
       singleId: getSingleCourse?.id,
-      user: { values },
+      user:  values ,
     });
   };
 
