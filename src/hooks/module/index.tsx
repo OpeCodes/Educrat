@@ -234,6 +234,19 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
+  // **************************************article edit section **************************
+
+  const [isOpenEditArticle, setIsOpenEditArticle] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  const toggleIsOpenEditArticle = (arrayId: number) => {
+    setIsOpenEditArticle((prevIsOpenEditArticle) => ({
+      ...prevIsOpenEditArticle,
+      [arrayId]: !prevIsOpenEditArticle[arrayId],
+    }));
+  };
+
   return {
     data,
     isPending,
@@ -258,6 +271,8 @@ export const useGetModuleCourse = (id: any) => {
     toggleIsOpenDescription,
     isOpenInnerdescripRes,
     toggleIsOpenInnerdescripRes,
+    isOpenEditArticle,
+    toggleIsOpenEditArticle
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
@@ -420,6 +435,39 @@ export const useGetLectureModuleCourse = (id: any) => {
 
 // ****************************************article endpoint**************************************
 export const useCreateArticleLectureCourse = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const { mutate: createArticleLectureCourse } = useMutation({
+    mutationFn: ({ lectureId, user }: any) => {
+      return customFetch.post(
+        `/lecture/content/lecture/${lectureId}/article
+      `,
+        user
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["module"] });
+      toast({
+        title: `Article created`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { createArticleLectureCourse };
+};
+
+
+export const useEditArticleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const { mutate: createArticleLectureCourse } = useMutation({

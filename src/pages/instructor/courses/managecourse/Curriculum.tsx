@@ -107,6 +107,8 @@ const Curriculum = () => {
     contentType3,
     isOpenInnerdescripRes,
     toggleIsOpenInnerdescripRes,
+    isOpenEditArticle,
+    toggleIsOpenEditArticle
   } = useGetModuleCourse(getSingleCourse?.id);
   interface Lecture {
     title: string;
