@@ -122,17 +122,13 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
     reader.readAsDataURL(file);
   };
 
-
   //date formatted code
   const currentDate = new Date();
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // January is 0
+  const year = currentDate.getFullYear();
 
-// Extracting day, month, and year from the current date
-const day = String(currentDate.getDate()).padStart(2, '0');
-const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // January is 0
-const year = currentDate.getFullYear();
-
-// Combining day, month, and year with a '/' separator
-const formattedDate = `${month}/${day}/${year}`;
+  const formattedDate = `${month}/${day}/${year}`;
   return (
     <Stack>
       {/* <Stack>
@@ -162,20 +158,38 @@ const formattedDate = `${month}/${day}/${year}`;
           <Table variant="simple">
             <Thead>
               <Tr color={"black"}>
-                <Th color="black"  >Filename</Th>
-                <Th color="black" >Type</Th>
-                <Th color="black" >Status</Th>
-                <Th color="black" >Date</Th>
-                <Th color="black" >.</Th>
+                <Th color="black">Filename</Th>
+                <Th color="black">Type</Th>
+                <Th color="black">Status</Th>
+                <Th color="black">Date</Th>
+                <Th color="black">.</Th>
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
                 <Td>testing video.mp4</Td>
                 <Td>Video</Td>
-                <Td>25.4</Td>
+                <Td width={"50%"}>
+                  <Stack direction={"row"} align={"center"}>
+                    <Progress
+                      value={20}
+                      size="sm"
+                      width="40%"
+                      display={{ base: "none", md: "block" }}
+                    />
+
+                    <Text>70%</Text>
+                  </Stack>
+                </Td>
                 <Td>{formattedDate}</Td>
-                <Td as={"button"} fontSize={15} fontWeight={"600"} color={"#5624D0"}>Replace</Td>
+                <Td
+                  as={"button"}
+                  fontSize={15}
+                  fontWeight={"600"}
+                  color={"#5624D0"}
+                >
+                  Replace
+                </Td>
               </Tr>
             </Tbody>
           </Table>
