@@ -108,7 +108,6 @@ const Curriculum = () => {
     isOpenInnerdescripRes,
     toggleIsOpenInnerdescripRes,
   } = useGetModuleCourse(getSingleCourse?.id);
-  console.log(data);
   interface Lecture {
     title: string;
   }
@@ -345,9 +344,9 @@ const Curriculum = () => {
                     const {
                       id,
                       title,
+                      content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(contentEndPointType);
                     const initialValues4 = {
                       title: "",
                     };
@@ -743,10 +742,88 @@ const Curriculum = () => {
                                     </Stack>
                                   )}
 
-                                  {contentType2[id] &&
+        {/* **************************************************article part********************* */}
+                                  {/* {contentType2[id] &&
                                     isOpenContentType[id] && (
                                       <Stack mx={3}>
-                                        <Text>Text</Text>
+                                        <Text fontWeight={"bold"}>Text</Text>
+                                        <Formik
+                                          initialValues={
+                                            articleCreateInitialValue
+                                          }
+                                          validationSchema={
+                                            ArticleCreateLectureSchema
+                                          }
+                                          onSubmit={(values: any) => {
+                                            createArticleLectureCourse({
+                                              lectureId: id,
+                                              user: { ...values, title },
+                                            });
+                                            setTimeout(() => {
+                                              toggleContentType2(id, "");
+                                              toggleIsOpenContentType(id);
+                                            }, 2000);
+                                          }}
+                                        >
+                                          {({
+                                            handleChange,
+                                            handleSubmit: handleArticleSubmit,
+                                            values,
+                                            errors,
+                                          }) => (
+                                            <Stack>
+                                              <ReactQuill
+                                                theme="snow"
+                                                value={values.body}
+                                                onChange={handleChange("body")}
+                                              />
+                                              {errors?.body && (
+                                                <Text
+                                                  style={{
+                                                    color: "red",
+                                                    marginTop: 5,
+                                                  }}
+                                                  fontSize="14px"
+                                                >
+                                                  enter title
+                                                </Text>
+                                              )}
+                                              <Flex
+                                                justify={"end"}
+                                                mt={"2.9rem"}
+                                                align={"center"}
+                                              >
+                                                <Button
+                                                  color="#ffffff"
+                                                  fontWeight={"500"}
+                                                  fontSize={14}
+                                                  as={"button"}
+                                                  py={2}
+                                                  px={4}
+                                                  loadingText="Loading"
+                                                  variant="outline"
+                                                  spinnerPlacement="end"
+                                                  onClick={() =>
+                                                    handleArticleSubmit()
+                                                  }
+                                                  type="button"
+                                                  backgroundColor={"black"}
+                                                >
+                                                  save
+                                                </Button>
+                                              </Flex>
+                                            </Stack>
+                                          )}
+                                        </Formik>
+                                      </Stack>
+                                    )} */}
+
+
+                      {/* ************************************article edit section ************* */}
+                       {contentType2[id] &&
+                                    isOpenContentType[id] && (
+                                      <Stack mx={3}>
+                                        <Text fontWeight={"bold"}>Text</Text>
                                         <Formik
                                           initialValues={
                                             articleCreateInitialValue
@@ -855,7 +932,7 @@ const Curriculum = () => {
                                               </Box>
                                             </Flex>
                                             <Box>
-                                              <Text>00:00</Text>
+                                              <Text>{content?.duration}</Text>
                                               <Flex
                                                 align={"center"}
                                                 fontWeight={"600"}
