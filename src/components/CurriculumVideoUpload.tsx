@@ -12,16 +12,19 @@ import { useParams } from "react-router-dom";
 
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
+  title: string,
+  id: number,
 }
 
 const MAX_FILE_SIZE_MB = 5;
 
 const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
-  onImageUpload,
+  onImageUpload,title,id
 }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const toast = useToast();
+  console.log(title,id)
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -68,11 +71,11 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Data = reader.result as string;
-      const endpoint = `/lecture/content/lecture/65ff46888b58768ec858e552/video`;
+      const endpoint = `/lecture/content/lecture/${id}/video`;
       try {
         const response = await customFetch.post(
           endpoint,
-          { file: base64Data, duration, title: "testing video" }, // Include duration in the request payload
+          { file: base64Data, duration, title }, // Include duration in the request payload
           {
             headers: { "Content-Type": "application/json" },
             onUploadProgress: (progressEvent: {

@@ -359,7 +359,6 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(id)
                     const initialValues4 = {
                       title: "",
                     };
@@ -741,7 +740,8 @@ const Curriculum = () => {
                                         <TabPanels>
                                           <TabPanel>
                                             <Stack>
-                                              <CurriculumVideoUpload  onImageUpload={handleUploadSuccess} />
+                                              <CurriculumVideoUpload  onImageUpload={handleUploadSuccess}  id={id}
+                      title={title} />
                                             </Stack>
                                           </TabPanel>
                                           <TabPanel>
