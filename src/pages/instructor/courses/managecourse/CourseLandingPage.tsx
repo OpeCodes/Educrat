@@ -42,7 +42,7 @@ const CourseLandingPage = () => {
     title: getSingleCourse?.title || "",
     subtitle: getSingleCourse?.subtitle,
     language: getSingleCourse?.language,
-    preRequisities: [""],
+    preRequisities: "",
 
     learningObjectives: getSingleCourse?.learningObjectives || ["", "", "", ""],
 
@@ -190,15 +190,15 @@ const CourseLandingPage = () => {
                   no requirements, use this space as an opportunity to lower the
                   barrier for beginners.
                 </Text>
-                {values.preRequisities.map((value: any, index: any) => (
-                  <Stack key={index}>
+                
+                  <Stack >
                     <FormControl isRequired>
                       <Input
                         type="text"
                         variant="filled"
                         placeholder="Example: No programming experience.You will learn everything you need know"
-                        value={value}
-                        name={`preRequisities[${index}]`}
+                        value={values.preRequisities}
+                        name={`preRequisities`}
                         onChange={handleChange}
                       />
                       {errors.preRequisities && (
@@ -206,13 +206,12 @@ const CourseLandingPage = () => {
                           style={{ color: "red", marginTop: 5 }}
                           fontSize="14px"
                         >
-                          please enter fill in all input
-                          {/* {errors.preRequisities} */}
+                          please insert prerequisites
                         </Text>
                       )}
                     </FormControl>
                   </Stack>
-                ))}
+                
               </Stack>
               <Flex columnGap={5} flexDirection={{ base: "column", lg: "row" }}>
                 <Stack w="100%">

@@ -60,7 +60,7 @@ export const courseLandingSchema = Yup.object().shape({
   complexityLevel: Yup.string().required("pls select level"),
   language: Yup.string().required("please select a language"),
   learningObjectives: Yup.array().of(Yup.string().required("please include all the 4 input")),
-  preRequisities: Yup.array().of(Yup.string().required("please enter prerequisities")),
+  preRequisities:  Yup.array().of(Yup.string().required("please enter prequisities")),
 });
 export const courseModuleSchema = Yup.object().shape({
   title: Yup.string().required("pls add title"),

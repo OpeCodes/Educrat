@@ -44,7 +44,7 @@ import { useGetSingleCourse } from "../../../../hooks/course";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentTextSharp } from "react-icons/io5";
-<IoDocumentTextSharp />;
+  //  <IoDocumentTextSharp />;
 // <IoDocumentTextSharp />
 
 import ReactQuill from "react-quill";
