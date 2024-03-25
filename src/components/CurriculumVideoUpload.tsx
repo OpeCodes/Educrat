@@ -68,7 +68,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
       try {
         const response = await customFetch.post(
           endpoint,
-          { file: base64Data, duration, title }, // Include duration in the request payload
+          { file: base64Data, duration, title }, 
           {
             headers: { "Content-Type": "application/json" },
             onUploadProgress: (progressEvent: {
@@ -107,31 +107,34 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   };
 
   return (
-    <Flex flexDirection={{ base: "column", md: "row" }}>
-    
-      <Stack ml={4} mt={5}>
-        <Text>
-          Upload your course image here. It must meet our course image quality
-          standards to be accepted. Important guidelines: 750x422 pixels; .jpg,
-          .jpeg, .gif, or .png. no text on the image. {selectedImageName?.name}
-        </Text>
+    <Stack>
+      <Stack width={"100%"}>
         <Input
           type="file"
           accept="video/*"
           onChange={handleImageChange}
           mt={2}
+          width={"100%"}
         />
       </Stack>
+      <Flex fontSize={13 }columnGap={1}>
+        <Text fontWeight={"600"}>Note:</Text>
+        <Text>All files should be at least 720p and less than 4.0 GB.</Text>
+      </Flex>
 
-      {uploadProgress > 0 && uploadProgress < 100 && ( <>
-        <Progress value={uploadProgress} size="md" mt={2} />
-
-        <Text>{uploadProgress}%</Text>
-      </>
+      {uploadProgress > 0 && uploadProgress < 100 && (
+        <>
+          <Progress value={uploadProgress} size="md" mt={2} />
+          <Text>{uploadProgress}%</Text>
+        </>
       )}
-
-    </Flex>
+    </Stack>
   );
 };
+{
+  /* <Text>
+        {selectedImageName?.name}
+        </Text> */
+}
 
 export default CurriculumVideoUpload;
