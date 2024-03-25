@@ -86,7 +86,7 @@ const Curriculum = () => {
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
-const {editArticleLectureCourse} =  useEditArticleLectureCourse()
+  const { editArticleLectureCourse } = useEditArticleLectureCourse();
   const {
     data,
     isPending: getCourseLoading,
@@ -351,7 +351,7 @@ const {editArticleLectureCourse} =  useEditArticleLectureCourse()
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(content)
+                    console.log(content);
                     const initialValues4 = {
                       title: "",
                     };
@@ -927,16 +927,13 @@ const {editArticleLectureCourse} =  useEditArticleLectureCourse()
                                                   ArticleCreateLectureSchema
                                                 }
                                                 onSubmit={(values: any) => {
-                                                console.log(content?.id)
                                                   editArticleLectureCourse({
                                                     articleId: content?.id,
                                                     user: values,
                                                   });
-                                                  // setTimeout(() => {
-                                                  //   toggleContentType2(id, "");
-                                                  //   toggleIsOpenContentType(id);
-                                                  // }, 2000);
-                                                  console.log(values)
+                                                  setTimeout(() => {
+                                                    toggleIsOpenEditArticle(id);
+                                                  }, 2000);
                                                 }}
                                               >
                                                 {({
