@@ -9,7 +9,6 @@ import {
   Divider,
   FormHelperText,
   Select,
-  Spinner,
 } from "@chakra-ui/react";
 import { courseLandingSchema } from "../../../../schemas";
 import { Formik } from "formik";
@@ -43,15 +42,12 @@ const CourseLandingPage = () => {
     subtitle: getSingleCourse?.subtitle,
     language: getSingleCourse?.language,
     preRequisites: getSingleCourse?.preRequisites || "",
-    learningObjectives: getSingleCourse?.learningObjectives || ["", "", "", ""],
+    learningObjectives: getSingleCourse?.learningObjectives || ["", "", ""],
     category: getSingleCourse?.category?.id,
     description: getSingleCourse?.description || "",
     complexityLevel: getSingleCourse?.complexityLevel,
   };
-
-  // console.log(getSingleCourse)
-
-  const { data, isPending } = useCourseCategory();
+  const { data } = useCourseCategory();
   const handleImageUpload = (file: File) => {
     console.log("Uploaded file:", file);
   };
@@ -61,7 +57,7 @@ const CourseLandingPage = () => {
   const handleSubmit = (values: any): void => {
     singleCourse({
       singleId: getSingleCourse?.id,
-      user:  values ,
+      user: values,
     });
   };
 
@@ -127,9 +123,6 @@ const CourseLandingPage = () => {
                 />
                 {errors?.subtitle && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    {/* {errors?.subtitle}
-
-                     */}
                     enter subtitle
                   </Text>
                 )}
@@ -167,7 +160,7 @@ const CourseLandingPage = () => {
                         type="text"
                         variant="filled"
                         placeholder="learning objectives"
-                        value={value}                        
+                        value={value}
                         name={`learningObjectives[${index}]`}
                         onChange={handleChange}
                       />
@@ -186,28 +179,27 @@ const CourseLandingPage = () => {
                   no requirements, use this space as an opportunity to lower the
                   barrier for beginners.
                 </Text>
-                
-                  <Stack >
-                    <FormControl isRequired>
-                      <Input
-                        type="text"
-                        variant="filled"
-                        placeholder="Example: No programming experience.You will learn everything you need know"
-                        value={values.preRequisites}
-                        name="preRequisites"
-                        onChange={handleChange}
-                      />
-                      {errors.preRequisites && (
-                        <Text
-                          style={{ color: "red", marginTop: 5 }}
-                          fontSize="14px"
-                        >
-                          please insert prerequisites
-                        </Text>
-                      )}
-                    </FormControl>
-                  </Stack>
-                
+
+                <Stack>
+                  <FormControl isRequired>
+                    <Input
+                      type="text"
+                      variant="filled"
+                      placeholder="Example: No programming experience.You will learn everything you need know"
+                      value={values.preRequisites}
+                      name="preRequisites"
+                      onChange={handleChange}
+                    />
+                    {errors.preRequisites && (
+                      <Text
+                        style={{ color: "red", marginTop: 5 }}
+                        fontSize="14px"
+                      >
+                        please insert prerequisites
+                      </Text>
+                    )}
+                  </FormControl>
+                </Stack>
               </Stack>
               <Flex columnGap={5} flexDirection={{ base: "column", lg: "row" }}>
                 <Stack w="100%">
@@ -227,7 +219,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      please select a language                    
+                      please select a language
                     </Text>
                   )}
                 </Stack>
@@ -250,7 +242,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      pls select level                    
+                      pls select level
                     </Text>
                   )}
                 </Stack>
@@ -263,19 +255,11 @@ const CourseLandingPage = () => {
                     variant="filled"
                     value={values.category}
                   >
-                    {data?.map((values: any) =>
-                      isPending ? (
-                        <Spinner />
-                      ) : (
-                        <option
-                          key={values.id}
-                          id={values.id}
-                          value={values.id}
-                        >
-                          {values.name}
-                        </option>
-                      )
-                    )}
+                    {data?.map((values: any) => (
+                      <option key={values.id} id={values.id} value={values.id}>
+                        {values.name}
+                      </option>
+                    ))}
                   </Select>
                   {errors.category && (
                     <Text
