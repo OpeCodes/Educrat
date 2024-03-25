@@ -40,12 +40,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isExpanded, onHover }) => {
         w={isExpanded ? "250px" : "50px"}
         bg="gray.200"
         p="4"
-        h="100vh"
+        h="100%"
+        zIndex={9999}
+        // position="fixed"
         transition="width 0.3s"
         onMouseEnter={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
       >
-        <VStack spacing={4} align="left">
+        <VStack spacing={4} align="left" >
           <Box>
             {links.map((link, i) => (
               <Box key={i}>
