@@ -83,7 +83,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
       try {
         const response = await customFetch.post(
           endpoint,
-          { file: base64Data, duration, title },
+          { file: base64Data, duration, title: selectedImageName },
           {
             headers: { "Content-Type": "application/json" },
             onUploadProgress: (progressEvent: {
