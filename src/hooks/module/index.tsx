@@ -421,7 +421,7 @@ export const useGetLectureModuleCourse = (id: any) => {
 // ****************************************article endpoint**************************************
 export const useCreateArticleLectureCourse = () => {
   const toast = useToast();
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const { mutate: createArticleLectureCourse } = useMutation({
     mutationFn: ({ lectureId, user }: any) => {
       return customFetch.post(
@@ -431,7 +431,7 @@ export const useCreateArticleLectureCourse = () => {
       );
     },
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ["module"] });
+      queryClient.invalidateQueries({ queryKey: ["module"] });
       toast({
         title: `Article created`,
         status: "success",
