@@ -957,11 +957,22 @@ const Curriculum = () => {
                                                         enter title
                                                       </Text>
                                                     )}
+                                                    
                                                     <Flex
                                                       justify={"end"}
-                                                      mt={"2.9rem"}
                                                       align={"center"}
+                                                      columnGap={5}
+                                                         mt={"2.9rem"}
                                                     >
+                                                      <Text
+                                                        fontWeight={"bold"}
+                                                        as={"button"}
+                                                        onClick={() =>
+                                                          toggleIsOpen(id)
+                                                        }
+                                                      >
+                                                        Cancel
+                                                      </Text>
                                                       <Button
                                                         color="#ffffff"
                                                         fontWeight={"500"}
@@ -969,18 +980,17 @@ const Curriculum = () => {
                                                         as={"button"}
                                                         py={2}
                                                         px={4}
-                                                        loadingText="Loading"
                                                         variant="outline"
                                                         spinnerPlacement="end"
                                                         onClick={() =>
-                                                          handleArticleSubmit()
+                                                          // handleEditSubmit()
                                                         }
                                                         type="button"
                                                         backgroundColor={
                                                           "black"
                                                         }
                                                       >
-                                                        save
+                                                        Save 
                                                       </Button>
                                                     </Flex>
                                                   </Stack>
