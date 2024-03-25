@@ -470,10 +470,10 @@ export const useCreateArticleLectureCourse = () => {
 export const useEditArticleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { mutate: createArticleLectureCourse } = useMutation({
-    mutationFn: ({ lectureId, user }: any) => {
-      return customFetch.post(
-        `/lecture/content/lecture/${lectureId}/article
+  const { mutate: EditArticleLectureCourse } = useMutation({
+    mutationFn: ({ articleId, user }: any) => {
+      return customFetch.put(
+        `/lecture/content/lecture/${articleId}/article
       `,
         user
       );
@@ -481,7 +481,7 @@ export const useEditArticleLectureCourse = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
       toast({
-        title: `Article created`,
+        title: `Article edited`,
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -496,5 +496,5 @@ export const useEditArticleLectureCourse = () => {
       });
     },
   });
-  return { createArticleLectureCourse };
+  return { EditArticleLectureCourse};
 };
