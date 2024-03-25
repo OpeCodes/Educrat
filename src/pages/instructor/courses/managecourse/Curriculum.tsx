@@ -836,6 +836,7 @@ const Curriculum = () => {
                                           mt={-3}
                                           pb={2}
                                           p={3}
+                                          display={contentEndPointType ? "block": "none"}
                                         >
                                           <Text
                                             mb={3}
