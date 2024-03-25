@@ -151,7 +151,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           <Table variant="simple">
             <Thead>
               <Tr color={"black"}>
-                <Th color="black" >Filename</Th>
+                <Th color="black"  >Filename</Th>
                 <Th color="black" >Type</Th>
                 <Th color="black" >Status</Th>
                 <Th color="black" >Date</Th>
@@ -160,11 +160,11 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
             </Thead>
             <Tbody>
               <Tr>
-                <Td></Td>
-                <Td>millimetres (mm)</Td>
+                <Td>testing video.mp4</Td>
+                <Td>Video</Td>
                 <Td>25.4</Td>
                 <Td>25.4</Td>
-                <Td>25.4</Td>
+                <Td as={"button"} fontSize={15} fontWeight={"600"} color={"#5624D0"}>Replace</Td>
               </Tr>
             </Tbody>
           </Table>
