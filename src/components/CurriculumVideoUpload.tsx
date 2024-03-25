@@ -52,7 +52,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           isClosable: true,
         });
       } else {
-        // setSelectedImage(URL.createObjectURL(file));
         setSelectImageName(file);
 
         const duration = await getVideoDuration(file);
@@ -156,7 +155,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   <Th color="black">Type</Th>
                   <Th color="black">Status</Th>
                   <Th color="black">Date</Th>
-                  <Th color="black">.</Th>
+                  <Th color="black"></Th>
                 </Tr>
               </Thead>
               <Tbody>
