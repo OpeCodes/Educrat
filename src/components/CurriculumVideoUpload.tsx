@@ -1,5 +1,21 @@
 import React, { ChangeEvent, useState } from "react";
-import { Progress, Input, useToast, Stack, Text, Flex } from "@chakra-ui/react";
+import {
+  Progress,
+  Input,
+  useToast,
+  Stack,
+  Text,
+  Flex,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+} from "@chakra-ui/react";
 import customFetch from "../utils/axios";
 
 interface ImageUploadProps {
@@ -108,6 +124,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <Stack>
+      {/* <Stack>
       <Stack width={"100%"}>
         <Input
           type="file"
@@ -121,16 +138,40 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         <Text fontWeight={"600"}>Note:</Text>
         <Text>All files should be at least 720p and less than 4.0 GB.</Text>
       </Flex>
-<Text>{selectedImageName?.name}</Text>
+      <Text>{selectedImageName?.name}</Text>
       {uploadProgress > 0 && uploadProgress < 100 && (
         <>
           <Progress value={uploadProgress} size="md" mt={2} />
           <Text>{uploadProgress}%</Text>
         </>
       )}
+</Stack> */}
+      <Stack>
+        <TableContainer>
+          <Table variant="simple">
+            <Thead>
+              <Tr color={"black"}>
+                <Th color="black" >Filename</Th>
+                <Th color="black" >Type</Th>
+                <Th color="black" >Status</Th>
+                <Th color="black" >Date</Th>
+                <Th color="black" >.</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td></Td>
+                <Td>millimetres (mm)</Td>
+                <Td>25.4</Td>
+                <Td>25.4</Td>
+                <Td>25.4</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Stack>
     </Stack>
   );
 };
-
 
 export default CurriculumVideoUpload;
