@@ -349,8 +349,12 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
+                    console.log(content?.body)
                     const initialValues4 = {
                       title: "",
+                    };
+                    const articleEditInitialValue = {
+                      title: content?.body,
                     };
                     return (
                       <Stack>
