@@ -47,7 +47,7 @@ import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import { MdModeEditOutline } from "react-icons/md";
 import { HiPlayCircle } from "react-icons/hi2";
-
+import CurriculumVideoUpload from "../../../../components/CurriculumVideoUpload";
 import ReactQuill from "react-quill";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
@@ -128,6 +128,14 @@ const Curriculum = () => {
     .flat(2)
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
+
+
+  const handleUploadSuccess = (file: File) => {
+    // Handle upload success event here
+    // For example, show a success message or navigate to another page
+    console.log('Upload successful!');
+  };
+
 
   return (
     <Stack>
@@ -351,7 +359,7 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(content);
+                    console.log(id)
                     const initialValues4 = {
                       title: "",
                     };
@@ -710,7 +718,6 @@ const Curriculum = () => {
                                             </Flex>
                                           </Stack>
                                         </Flex>
-                                        {/* video  aspect */}
                                       </Stack>
                                     )}
                                   {/* video  */}
@@ -733,7 +740,9 @@ const Curriculum = () => {
                                         </TabList>
                                         <TabPanels>
                                           <TabPanel>
-                                            <p>one!</p>
+                                            <Stack>
+                                              <CurriculumVideoUpload  onImageUpload={handleUploadSuccess} />
+                                            </Stack>
                                           </TabPanel>
                                           <TabPanel>
                                             <Stack>
@@ -755,7 +764,7 @@ const Curriculum = () => {
                                     isOpenContentType[id] && (
                                       <Stack mx={3}>
                                         <Text fontWeight={"bold"}>
-                                          Text real
+                                          Text
                                         </Text>
                                         <Formik
                                           initialValues={
@@ -894,13 +903,6 @@ const Curriculum = () => {
                                             </Box>
                                           </Flex>
 
-                                          {/* <Text
-                                            mb={3}
-                                            dangerouslySetInnerHTML={{
-                                              __html: content?.body,
-                                            }}
-                                            px={2}
-                                          /> */}
                                         </Stack>
 
                                         {/* ***********article text editor */}
@@ -917,7 +919,7 @@ const Curriculum = () => {
                                               p={3}
                                             >
                                               <Text fontWeight={"bold"}>
-                                                Text edit
+                                                Text
                                               </Text>
                                               <Formik
                                                 initialValues={
