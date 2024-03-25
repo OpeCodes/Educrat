@@ -764,7 +764,6 @@ const Curriculum = () => {
                                                   handleUploadSuccess
                                                 }
                                                 id={id}
-                                                title={title}
                                               />
                                             </Stack>
                                           </TabPanel>

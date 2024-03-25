@@ -18,7 +18,6 @@ import customFetch from "../utils/axios";
 
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
-  title: string;
   id: number;
 }
 
@@ -26,7 +25,6 @@ const MAX_FILE_SIZE_MB = 5;
 
 const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   onImageUpload,
-  title,
   id,
 }) => {
   const [selectedImageName, setSelectImageName] = useState<any>(null);
