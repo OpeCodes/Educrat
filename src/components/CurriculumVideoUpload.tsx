@@ -1,32 +1,26 @@
-import React, { ChangeEvent, useState, } from "react";
-import {
-  Progress,
-  Input,
-  useToast,
-  Stack,
-  Text,
-  Flex,
-} from "@chakra-ui/react";
+import React, { ChangeEvent, useState } from "react";
+import { Progress, Input, useToast, Stack, Text, Flex } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
 
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
-  title: string,
-  id: number,
+  title: string;
+  id: number;
 }
 
 const MAX_FILE_SIZE_MB = 5;
 
 const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
-  onImageUpload,title,id
+  onImageUpload,
+  title,
+  id,
 }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [selectedImageName,setSelectImageName] = useState<any>(null);
+  const [selectedImageName, setSelectImageName] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
-setSelectImageName(file)
+    setSelectImageName(file);
     if (file) {
       if (!file.type.startsWith("video/")) {
         toast({
