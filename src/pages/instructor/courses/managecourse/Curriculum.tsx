@@ -34,6 +34,7 @@ import {
   useEditModuleLectureCourse,
   useDeleteLectureModuleCourse,
   useCreateArticleLectureCourse,
+  useEditArticleLectureCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -85,6 +86,7 @@ const Curriculum = () => {
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
+const {editArticleLectureCourse} =  useEditArticleLectureCourse()
   const {
     data,
     isPending: getCourseLoading,
@@ -349,7 +351,7 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(content?.body)
+                    console.log(content)
                     const initialValues4 = {
                       title: "",
                     };
@@ -925,10 +927,11 @@ const Curriculum = () => {
                                                   ArticleCreateLectureSchema
                                                 }
                                                 onSubmit={(values: any) => {
-                                                  // createArticleLectureCourse({
-                                                  //   lectureId: id,
-                                                  //   user: { ...values, title },
-                                                  // });
+                                                console.log(content?.id)
+                                                  editArticleLectureCourse({
+                                                    articleId: content?.id,
+                                                    user: values,
+                                                  });
                                                   // setTimeout(() => {
                                                   //   toggleContentType2(id, "");
                                                   //   toggleIsOpenContentType(id);

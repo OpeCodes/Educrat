@@ -272,7 +272,7 @@ export const useGetModuleCourse = (id: any) => {
     isOpenInnerdescripRes,
     toggleIsOpenInnerdescripRes,
     isOpenEditArticle,
-    toggleIsOpenEditArticle
+    toggleIsOpenEditArticle,
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
@@ -466,14 +466,13 @@ export const useCreateArticleLectureCourse = () => {
   return { createArticleLectureCourse };
 };
 
-
 export const useEditArticleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { mutate: EditArticleLectureCourse } = useMutation({
+  const { mutate: editArticleLectureCourse } = useMutation({
     mutationFn: ({ articleId, user }: any) => {
       return customFetch.put(
-        `/lecture/content/lecture/${articleId}/article
+        `/lecture/content/article/${articleId}
       `,
         user
       );
@@ -496,5 +495,5 @@ export const useEditArticleLectureCourse = () => {
       });
     },
   });
-  return { EditArticleLectureCourse};
+  return { editArticleLectureCourse };
 };
