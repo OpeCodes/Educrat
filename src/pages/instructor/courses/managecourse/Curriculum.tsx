@@ -129,13 +129,11 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
-
-  const handleUploadSuccess = (file: File) => {
+  const handleUploadSuccess = () => {
     // Handle upload success event here
     // For example, show a success message or navigate to another page
-    console.log('Upload successful!');
+    console.log("Upload successful!");
   };
-
 
   return (
     <Stack>
@@ -740,8 +738,13 @@ const Curriculum = () => {
                                         <TabPanels>
                                           <TabPanel>
                                             <Stack>
-                                              <CurriculumVideoUpload  onImageUpload={handleUploadSuccess}  id={id}
-                      title={title} />
+                                              <CurriculumVideoUpload
+                                                onImageUpload={
+                                                  handleUploadSuccess
+                                                }
+                                                id={id}
+                                                title={title}
+                                              />
                                             </Stack>
                                           </TabPanel>
                                           <TabPanel>
@@ -763,9 +766,7 @@ const Curriculum = () => {
                                   {contentType2[id] &&
                                     isOpenContentType[id] && (
                                       <Stack mx={3}>
-                                        <Text fontWeight={"bold"}>
-                                          Text
-                                        </Text>
+                                        <Text fontWeight={"bold"}>Text</Text>
                                         <Formik
                                           initialValues={
                                             articleCreateInitialValue
@@ -902,7 +903,6 @@ const Curriculum = () => {
                                               </Flex>
                                             </Box>
                                           </Flex>
-
                                         </Stack>
 
                                         {/* ***********article text editor */}

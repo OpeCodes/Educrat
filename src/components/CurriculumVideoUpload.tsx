@@ -8,7 +8,6 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
-import { useParams } from "react-router-dom";
 
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
@@ -22,12 +21,12 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   onImageUpload,title,id
 }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageName,setSelectImageName] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const toast = useToast();
-  console.log(title,id)
-
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
+setSelectImageName(file)
     if (file) {
       if (!file.type.startsWith("video/")) {
         toast({
@@ -48,7 +47,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           isClosable: true,
         });
       } else {
-        setSelectedImage(URL.createObjectURL(file));
+        // setSelectedImage(URL.createObjectURL(file));
         const duration = await getVideoDuration(file);
         await uploadImage(file, duration);
       }
@@ -94,7 +93,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
 
         console.log("Upload completed:", response.data);
         toast({
-          title: `Video euploaded`,
+          title: `Video uploaded`,
           status: "success",
           duration: 5000,
           isClosable: true,
@@ -126,7 +125,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         <Text>
           Upload your course image here. It must meet our course image quality
           standards to be accepted. Important guidelines: 750x422 pixels; .jpg,
-          .jpeg, .gif, or .png. no text on the image.
+          .jpeg, .gif, or .png. no text on the image. {selectedImageName?.name}
         </Text>
         <Input
           type="file"
