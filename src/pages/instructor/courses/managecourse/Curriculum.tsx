@@ -44,6 +44,7 @@ import { useGetSingleCourse } from "../../../../hooks/course";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentTextSharp } from "react-icons/io5";
+import { MdModeEditOutline } from "react-icons/md";
 
 import ReactQuill from "react-quill";
 const Curriculum = () => {
@@ -843,7 +844,7 @@ const Curriculum = () => {
                                               : "none"
                                           }
                                         >
-                                          <Flex columnGap={3}>
+                                          <Flex columnGap={2}>
                                             <Flex>
                                               <Box backgroundColor={"black"}>
                                                 <IoDocumentTextSharp
@@ -854,8 +855,12 @@ const Curriculum = () => {
                                             </Flex>
                                             <Box>
                                               <Text>00:00</Text>
-                                              <Flex>
-                                                <Text>iii</Text>
+                                              <Flex align={"center"} fontWeight={"600"} columnGap={1} color={"#5624D0"}>
+                                                <Text>
+                                                  <MdModeEditOutline />
+                                                </Text>
+
+                                                <Text>Edit Content</Text>
                                               </Flex>
 
                                               <Text>iii</Text>
