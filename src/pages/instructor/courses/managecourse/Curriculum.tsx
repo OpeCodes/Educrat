@@ -756,7 +756,7 @@ const Curriculum = () => {
                                               user: { ...values, title },
                                             });
                                             setTimeout(() => {
-                                              toggleIsOpen(id);
+                                              toggleContentType2(id, "");
                                             }, 2000);
                                           }}
                                         >
