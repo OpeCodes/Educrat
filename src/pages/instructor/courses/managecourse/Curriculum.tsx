@@ -44,8 +44,6 @@ import { useGetSingleCourse } from "../../../../hooks/course";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentTextSharp } from "react-icons/io5";
-  //  <IoDocumentTextSharp />;
-// <IoDocumentTextSharp />
 
 import ReactQuill from "react-quill";
 const Curriculum = () => {
@@ -342,8 +340,12 @@ const Curriculum = () => {
                 <Stack mt={6} pl={{ base: 1, lg: 12 }}>
                   {/* new curriculum */}
                   {lectures?.map((lecture: any, index: any) => {
-                    const { id, title, content, contentType: contentEndPointType } = lecture;
-                    console.log(contentEndPointType)
+                    const {
+                      id,
+                      title,
+                      contentType: contentEndPointType,
+                    } = lecture;
+                    console.log(contentEndPointType);
                     const initialValues4 = {
                       title: "",
                     };
@@ -435,36 +437,36 @@ const Curriculum = () => {
                                   </Flex>
 
                                   {!isOpenContentType[id] &&
-                                    !isOpenInnerdescripRes[id] &&  (
+                                    !isOpenInnerdescripRes[id] && (
                                       <Flex
                                         marginRight={"10px"}
                                         columnGap={"15px"}
                                         align={"center"}
                                         // display={{ base: "none", lg: "flex" }}
                                       >
-                                        {
-                                         !contentEndPointType  &&  <Button
-                                          borderRadius={0}
-                                          borderWidth={1}
-                                          borderColor={"black"}
-                                          color="black"
-                                          _hover={{
-                                            backgroundColor: "#F7F8FB",
-                                          }}
-                                          width={"100px"}
-                                          height={"30px"}
-                                          leftIcon={
-                                            <GoPlus fontSize={"20px"} />
-                                          }
-                                          variant="outline"
-                                          onClick={() => {
-                                            toggleIsOpenContentType(id);
-                                          }}
-                                        >
-                                          Content
-                                        </Button>
-                                        }
-                                       
+                                        {!contentEndPointType && (
+                                          <Button
+                                            borderRadius={0}
+                                            borderWidth={1}
+                                            borderColor={"black"}
+                                            color="black"
+                                            _hover={{
+                                              backgroundColor: "#F7F8FB",
+                                            }}
+                                            width={"100px"}
+                                            height={"30px"}
+                                            leftIcon={
+                                              <GoPlus fontSize={"20px"} />
+                                            }
+                                            variant="outline"
+                                            onClick={() => {
+                                              toggleIsOpenContentType(id);
+                                            }}
+                                          >
+                                            Content
+                                          </Button>
+                                        )}
+
                                         <Box>
                                           <Text
                                             as={"button"}
@@ -756,7 +758,6 @@ const Curriculum = () => {
                                               user: { ...values, title },
                                             });
                                             setTimeout(() => {
-
                                               toggleContentType2(id, "");
                                               toggleIsOpenContentType(id);
                                             }, 2000);
@@ -836,15 +837,38 @@ const Curriculum = () => {
                                           mt={-3}
                                           pb={2}
                                           p={3}
-                                          display={contentEndPointType ? "block": "none"}
+                                          display={
+                                            contentEndPointType
+                                              ? "block"
+                                              : "none"
+                                          }
                                         >
-                                          <Text
+                                          <Flex columnGap={3}>
+                                            <Flex>
+                                              <Box backgroundColor={"black"}>
+                                                <IoDocumentTextSharp
+                                                  color="white"
+                                                  size={75}
+                                                />
+                                              </Box>
+                                            </Flex>
+                                            <Box>
+                                              <Text>00:00</Text>
+                                              <Flex>
+                                                <Text>iii</Text>
+                                              </Flex>
+
+                                              <Text>iii</Text>
+                                            </Box>
+                                          </Flex>
+
+                                          {/* <Text
                                             mb={3}
                                             dangerouslySetInnerHTML={{
                                               __html: content?.body,
                                             }}
                                             px={2}
-                                          />
+                                          /> */}
                                         </Stack>
                                         <Stack
                                           bg={"white"}
