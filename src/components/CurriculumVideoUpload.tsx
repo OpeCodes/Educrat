@@ -122,6 +122,17 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
     reader.readAsDataURL(file);
   };
 
+
+  //date formatted code
+  const currentDate = new Date();
+
+// Extracting day, month, and year from the current date
+const day = String(currentDate.getDate()).padStart(2, '0');
+const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // January is 0
+const year = currentDate.getFullYear();
+
+// Combining day, month, and year with a '/' separator
+const formattedDate = `${month}/${day}/${year}`;
   return (
     <Stack>
       {/* <Stack>
@@ -163,7 +174,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                 <Td>testing video.mp4</Td>
                 <Td>Video</Td>
                 <Td>25.4</Td>
-                <Td>25.4</Td>
+                <Td>{formattedDate}</Td>
                 <Td as={"button"} fontSize={15} fontWeight={"600"} color={"#5624D0"}>Replace</Td>
               </Tr>
             </Tbody>
