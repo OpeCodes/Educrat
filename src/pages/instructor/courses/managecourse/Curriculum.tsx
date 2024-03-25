@@ -342,8 +342,8 @@ const Curriculum = () => {
                 <Stack mt={6} pl={{ base: 1, lg: 12 }}>
                   {/* new curriculum */}
                   {lectures?.map((lecture: any, index: any) => {
-                    const { id, title, content } = lecture;
-
+                    const { id, title, content, contentType: contentEndPointType } = lecture;
+                    console.log(contentEndPointType)
                     const initialValues4 = {
                       title: "",
                     };
@@ -435,14 +435,15 @@ const Curriculum = () => {
                                   </Flex>
 
                                   {!isOpenContentType[id] &&
-                                    !isOpenInnerdescripRes[id] && (
+                                    !isOpenInnerdescripRes[id] &&  (
                                       <Flex
                                         marginRight={"10px"}
                                         columnGap={"15px"}
                                         align={"center"}
-                                        display={{ base: "none", lg: "flex" }}
+                                        // display={{ base: "none", lg: "flex" }}
                                       >
-                                        <Button
+                                        {
+                                         !contentEndPointType  &&  <Button
                                           borderRadius={0}
                                           borderWidth={1}
                                           borderColor={"black"}
@@ -462,6 +463,8 @@ const Curriculum = () => {
                                         >
                                           Content
                                         </Button>
+                                        }
+                                       
                                         <Box>
                                           <Text
                                             as={"button"}
