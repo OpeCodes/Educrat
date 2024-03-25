@@ -31,11 +31,9 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
 }) => {
   const [selectedImageName, setSelectImageName] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
-
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
-    setSelectImageName(file);
     if (file) {
       if (!file.type.startsWith("video/")) {
         toast({
@@ -57,6 +55,8 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         });
       } else {
         // setSelectedImage(URL.createObjectURL(file));
+             setSelectImageName(file);
+
         const duration = await getVideoDuration(file);
         await uploadImage(file, duration);
       }
@@ -130,9 +130,9 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   const formattedDate = `${month}/${day}/${year}`;
   return (
     <Stack>
-      {!selectedImageName && (
+      { !selectedImageName  && (
         <Stack>
-          <Stack width={"100%"} >
+          <Stack width={"100%"}>
             <Input
               type="file"
               accept="video/*"
@@ -200,9 +200,9 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                     fontSize={15}
                     fontWeight={"600"}
                     color={"#5624D0"}
-                    onClick={() =>{ 
-                      setSelectImageName(null)
-                      setUploadProgress(0)
+                    onClick={() => {
+                      setSelectImageName(null);
+                      setUploadProgress(0);
                     }}
                   >
                     Replace
