@@ -836,11 +836,7 @@ const Curriculum = () => {
                                           __html: content?.body,
                                         }}
                                         px={2}
-                                        _hover={{
-                                          border: "1px solid #d1d7dc",
-                                          paddingLeft: 2,
-                                          paddingRight: 2,
-                                        }}
+                                       
                                       />
                                     </Stack>
                                     {isOpendescripRes[id] && (
