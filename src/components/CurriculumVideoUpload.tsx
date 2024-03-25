@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useRef } from "react";
+import React, { ChangeEvent, useState, } from "react";
 import {
   Progress,
   Input,
@@ -8,7 +8,6 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
-import { useGetSingleCourse } from "../hooks/course";
 import { useParams } from "react-router-dom";
 
 interface ImageUploadProps {
@@ -23,7 +22,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const toast = useToast();
-  const { id } = useParams();
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
