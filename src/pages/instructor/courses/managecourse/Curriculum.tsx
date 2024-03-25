@@ -354,7 +354,7 @@ const Curriculum = () => {
                       title: "",
                     };
                     const articleEditInitialValue = {
-                      title: content?.body,
+                      body: content?.body,
                     };
                     return (
                       <Stack>
@@ -919,26 +919,27 @@ const Curriculum = () => {
                                               </Text>
                                               <Formik
                                                 initialValues={
-                                                  articleCreateInitialValue
+                                                  articleEditInitialValue
                                                 }
                                                 validationSchema={
                                                   ArticleCreateLectureSchema
                                                 }
                                                 onSubmit={(values: any) => {
-                                                  createArticleLectureCourse({
-                                                    lectureId: id,
-                                                    user: { ...values, title },
-                                                  });
-                                                  setTimeout(() => {
-                                                    toggleContentType2(id, "");
-                                                    toggleIsOpenContentType(id);
-                                                  }, 2000);
+                                                  // createArticleLectureCourse({
+                                                  //   lectureId: id,
+                                                  //   user: { ...values, title },
+                                                  // });
+                                                  // setTimeout(() => {
+                                                  //   toggleContentType2(id, "");
+                                                  //   toggleIsOpenContentType(id);
+                                                  // }, 2000);
+                                                  console.log(values)
                                                 }}
                                               >
                                                 {({
                                                   handleChange,
                                                   handleSubmit:
-                                                    handleArticleSubmit,
+                                                    handleEditArticleSubmit,
                                                   values,
                                                   errors,
                                                 }) => (
@@ -988,9 +989,9 @@ const Curriculum = () => {
                                                         px={4}
                                                         variant="outline"
                                                         spinnerPlacement="end"
-                                                        // onClick={() =>
-                                                        //   // handleEditSubmit()
-                                                        // }
+                                                        onClick={() =>
+                                                          handleEditArticleSubmit()
+                                                        }
                                                         type="button"
                                                         backgroundColor={
                                                           "black"
