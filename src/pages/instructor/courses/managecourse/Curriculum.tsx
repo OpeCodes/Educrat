@@ -364,6 +364,7 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
+                    console.log(content, contentEndPointType);
                     const initialValues4 = {
                       title: "",
                     };
@@ -856,119 +857,127 @@ const Curriculum = () => {
                                     {isOpendescripRes[id] && (
                                       <>
                                         {/* article endpoint display**************/}
-
-                                        {/* <Stack
-                                          borderBottom={"1px"}
-                                          cursor={"pointer"}
-                                          bg={"white"}
-                                          borderWidth={1}
-                                          borderColor={"gray"}
-                                          mt={-3}
-                                          pb={2}
-                                          p={3}
-                                          display={
-                                            contentEndPointType
-                                              ? "block"
-                                              : "none"
-                                          }
-                                        >
-                                          <Flex columnGap={2}>
-                                            <Flex>
-                                              <Box backgroundColor={"black"}>
-                                                <IoDocumentTextSharp
-                                                  color="white"
-                                                  size={75}
-                                                />
+                                        {contentEndPointType ===
+                                          "lecture_article" && (
+                                          <Stack
+                                            borderBottom={"1px"}
+                                            cursor={"pointer"}
+                                            bg={"white"}
+                                            borderWidth={1}
+                                            borderColor={"gray"}
+                                            mt={-3}
+                                            pb={2}
+                                            p={3}
+                                            display={
+                                              contentEndPointType
+                                                ? "block"
+                                                : "none"
+                                            }
+                                          >
+                                            <Flex columnGap={2}>
+                                              <Flex>
+                                                <Box backgroundColor={"black"}>
+                                                  <IoDocumentTextSharp
+                                                    color="white"
+                                                    size={75}
+                                                  />
+                                                </Box>
+                                              </Flex>
+                                              <Box>
+                                                <Text>00:00</Text>
+                                                <Flex
+                                                  align={"center"}
+                                                  fontWeight={"600"}
+                                                  columnGap={1}
+                                                  color={"#5624D0"}
+                                                  onClick={() => {
+                                                    toggleIsOpenEditArticle(id);
+                                                  }}
+                                                >
+                                                  <Text>
+                                                    <MdModeEditOutline />
+                                                  </Text>
+                                                  <Text>Edit Content</Text>
+                                                </Flex>
+                                                <Flex
+                                                  align={"center"}
+                                                  fontWeight={"600"}
+                                                  columnGap={1}
+                                                  color={"#5624D0"}
+                                                >
+                                                  <Text>
+                                                    <HiPlayCircle />
+                                                  </Text>
+                                                  <Text>
+                                                    Replace With Video
+                                                  </Text>
+                                                </Flex>
                                               </Box>
                                             </Flex>
-                                            <Box>
-                                              <Text>{content?.duration}</Text>
-                                              <Flex
-                                                align={"center"}
-                                                fontWeight={"600"}
-                                                columnGap={1}
-                                                color={"#5624D0"}
-                                                onClick={() => {
-                                                  toggleIsOpenEditArticle(id);
-                                                }}
-                                              >
-                                                <Text>
-                                                  <MdModeEditOutline />
-                                                </Text>
-                                                <Text>Edit Content</Text>
-                                              </Flex>
-                                              <Flex
-                                                align={"center"}
-                                                fontWeight={"600"}
-                                                columnGap={1}
-                                                color={"#5624D0"}
-                                              >
-                                                <Text>
-                                                  <HiPlayCircle />
-                                                </Text>
-                                                <Text>Replace With Video</Text>
-                                              </Flex>
-                                            </Box>
-                                          </Flex>
-                                        </Stack> */}
+                                          </Stack>
+                                        )}
 
                                         {/* video endpoint display************************* */}
-
-                                        <Stack
-                                          borderBottom={"1px"}
-                                          cursor={"pointer"}
-                                          bg={"white"}
-                                          borderWidth={1}
-                                          borderColor={"gray"}
-                                          mt={-3}
-                                          pb={2}
-                                          p={3}
-                                          display={
-                                            contentEndPointType
-                                              ? "block"
-                                              : "none"
-                                          }
-                                        >
-                                          <TableContainer>
-                                            <Table variant="simple">
-                                              <Thead>
-                                                <Tr color={"black"}>
-                                                  <Th color="black">
-                                                    Filename
-                                                  </Th>
-                                                  <Th color="black">Type</Th>
-                                                  <Th color="black">Status</Th>
-                                                  <Th color="black">Date</Th>
-                                                  <Th color="black">.</Th>
-                                                </Tr>
-                                              </Thead>
-                                              <Tbody>
-                                                <Tr>
-                                                  <Td>name here</Td>
-                                                  <Td>Video</Td>
-                                                  <Td>
-                                                    <Text fontWeight={"500"}>
-                                                      Success
-                                                    </Text>
-                                                  </Td>
-                                                  <Td>
-                                                    {/* {formattedDate} */}
-                                                    date here
-                                                  </Td>
-                                                  <Td
-                                                    as={"button"}
-                                                    fontSize={15}
-                                                    fontWeight={"600"}
-                                                    color={"#5624D0"}
-                                                    onClick={() => {}}
-                                                  >
-                                                    Replace
-                                                  </Td>
-                                                </Tr>
-                                              </Tbody>
-                                            </Table>
-                                          </TableContainer>
-                                        </Stack>
+                                        {contentEndPointType ===
+                                          "lecture_video" && (
+                                          <Stack
+                                            borderBottom={"1px"}
+                                            cursor={"pointer"}
+                                            bg={"white"}
+                                            borderWidth={1}
+                                            borderColor={"gray"}
+                                            mt={-3}
+                                            pb={2}
+                                            p={3}
+                                            display={
+                                              contentEndPointType
+                                                ? "block"
+                                                : "none"
+                                            }
+                                          >
+                                            <TableContainer>
+                                              <Table variant="simple">
+                                                <Thead>
+                                                  <Tr color={"black"}>
+                                                    <Th color="black">
+                                                      Filename
+                                                    </Th>
+                                                    <Th color="black">Type</Th>
+                                                    <Th color="black">
+                                                      Status
+                                                    </Th>
+                                                    <Th color="black">Date</Th>
+                                                    <Th color="black">.</Th>
+                                                  </Tr>
+                                                </Thead>
+                                                <Tbody>
+                                                  <Tr>
+                                                    <Td>name here</Td>
+                                                    <Td>Video</Td>
+                                                    <Td>
+                                                      <Text fontWeight={"500"}>
+                                                        Success
+                                                      </Text>
+                                                    </Td>
+                                                    <Td>
+                                                      {/* {formattedDate} */}
+                                                      date here
+                                                    </Td>
+                                                    <Td
+                                                      as={"button"}
+                                                      fontSize={15}
+                                                      fontWeight={"600"}
+                                                      color={"#5624D0"}
+                                                      onClick={() => {}}
+                                                    >
+                                                      Replace
+                                                    </Td>
+                                                  </Tr>
+                                                </Tbody>
+                                              </Table>
+                                            </TableContainer>
+                                          </Stack>
+                                        )}
 
                                         {/* ***********article text editor */}
                                         {/* ************************************article edit section ************* */}
