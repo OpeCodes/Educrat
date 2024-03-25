@@ -129,32 +129,24 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   const formattedDate = `${month}/${day}/${year}`;
   return (
     <Stack>
-
-      {
-        !selectedImageName &&
-      <Stack>
-        <Stack width={"100%"}>
-          <Input
-            type="file"
-            accept="video/*"
-            onChange={handleImageChange}
-            mt={2}
-            width={"100%"}
-          />
+      {!selectedImageName && (
+        <Stack>
+          <Stack width={"100%"}>
+            <Input
+              type="file"
+              accept="video/*"
+              onChange={handleImageChange}
+              mt={2}
+              width={"100%"}
+            />
+          </Stack>
+          <Flex fontSize={13} columnGap={1}>
+            <Text fontWeight={"600"}>Note:</Text>
+            <Text>All files should be at least 720p and less than 4.0 GB.</Text>
+          </Flex>
+        
         </Stack>
-        <Flex fontSize={13} columnGap={1}>
-          <Text fontWeight={"600"}>Note:</Text>
-          <Text>All files should be at least 720p and less than 4.0 GB.</Text>
-        </Flex>
-        <Text>{selectedImageName?.name}</Text>
-        {uploadProgress > 0 && uploadProgress < 100 && (
-          <>
-            <Progress value={uploadProgress} size="md" mt={2} />
-            <Text>{uploadProgress}%</Text>
-          </>
-        )}
-      </Stack>
-      }
+      )}
 
       {selectedImageName && (
         <Stack>
@@ -171,19 +163,21 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
               </Thead>
               <Tbody>
                 <Tr>
-                  <Td>testing video.mp4</Td>
+                  <Td>{selectedImageName?.name}</Td>
                   <Td>Video</Td>
                   <Td width={"50%"}>
-                    <Stack direction={"row"} align={"center"}>
-                      <Progress
-                        value={20}
-                        size="sm"
-                        width="40%"
-                        display={{ base: "none", md: "block" }}
-                      />
+                    {uploadProgress > 0 && uploadProgress < 100 && (
+                      <Stack direction={"row"} align={"center"}>
+                        <Progress
+                          value={uploadProgress}
+                          size="sm"
+                          width="40%"
+                          display={{ base: "none", md: "block" }}
+                        />
 
-                      <Text>70%</Text>
-                    </Stack>
+                        <Text>{uploadProgress}%</Text>
+                      </Stack>
+                    )}
                   </Td>
                   <Td>{formattedDate}</Td>
                   <Td
