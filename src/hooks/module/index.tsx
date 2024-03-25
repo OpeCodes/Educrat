@@ -499,3 +499,32 @@ export const useEditArticleLectureCourse = () => {
   });
   return { editArticleLectureCourse };
 };
+
+export const useDeleteVideoLecture = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteModule, isPending } = useMutation({
+    mutationFn: ({ videoId }: any) => {
+      return customFetch.delete(`/lecture/content/video/${videoId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["module"] });
+      toast({
+        title: `video deleted successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { deleteModule, isPending };
+};
