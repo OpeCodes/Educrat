@@ -42,10 +42,8 @@ const CourseLandingPage = () => {
     title: getSingleCourse?.title || "",
     subtitle: getSingleCourse?.subtitle,
     language: getSingleCourse?.language,
-    preRequisities: "",
-
+    preRequisites:  "",
     learningObjectives: getSingleCourse?.learningObjectives || ["", "", "", ""],
-
     category: getSingleCourse?.category?.id,
     description: getSingleCourse?.description,
     complexityLevel: getSingleCourse?.complexityLevel,
@@ -61,7 +59,6 @@ const CourseLandingPage = () => {
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
-    console.log(values)
     singleCourse({
       singleId: getSingleCourse?.id,
       user: { values },
@@ -197,11 +194,11 @@ const CourseLandingPage = () => {
                         type="text"
                         variant="filled"
                         placeholder="Example: No programming experience.You will learn everything you need know"
-                        value={values.preRequisities}
-                        name={`preRequisities`}
+                        value={values.preRequisites}
+                        name="preRequisites"
                         onChange={handleChange}
                       />
-                      {errors.preRequisities && (
+                      {errors.preRequisites && (
                         <Text
                           style={{ color: "red", marginTop: 5 }}
                           fontSize="14px"
