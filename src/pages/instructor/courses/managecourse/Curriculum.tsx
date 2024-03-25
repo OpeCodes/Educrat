@@ -45,6 +45,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import { MdModeEditOutline } from "react-icons/md";
+import { HiPlayCircle } from "react-icons/hi2";
 
 import ReactQuill from "react-quill";
 const Curriculum = () => {
@@ -855,15 +856,28 @@ const Curriculum = () => {
                                             </Flex>
                                             <Box>
                                               <Text>00:00</Text>
-                                              <Flex align={"center"} fontWeight={"600"} columnGap={1} color={"#5624D0"}>
+                                              <Flex
+                                                align={"center"}
+                                                fontWeight={"600"}
+                                                columnGap={1}
+                                                color={"#5624D0"}
+                                              >
                                                 <Text>
                                                   <MdModeEditOutline />
                                                 </Text>
-
                                                 <Text>Edit Content</Text>
                                               </Flex>
-
-                                              <Text>iii</Text>
+                                              <Flex
+                                                align={"center"}
+                                                fontWeight={"600"}
+                                                columnGap={1}
+                                                color={"#5624D0"}
+                                              >
+                                                <Text>
+                                                  <HiPlayCircle />
+                                                </Text>
+                                                <Text>Replace With Video</Text>
+                                              </Flex>
                                             </Box>
                                           </Flex>
 
