@@ -31,6 +31,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
 }) => {
   const [selectedImageName, setSelectImageName] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
+
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -131,7 +132,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
     <Stack>
       {!selectedImageName && (
         <Stack>
-          <Stack width={"100%"}>
+          <Stack width={"100%"} >
             <Input
               type="file"
               accept="video/*"
@@ -142,9 +143,8 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           </Stack>
           <Flex fontSize={13} columnGap={1}>
             <Text fontWeight={"600"}>Note:</Text>
-            <Text>All files should be at least 720p and less than 4.0 GB.</Text>
+            <Text>All files should be less than 4.0 GB.</Text>
           </Flex>
-        
         </Stack>
       )}
 
@@ -178,6 +178,21 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                         <Text>{uploadProgress}%</Text>
                       </Stack>
                     )}
+                    {uploadProgress === 0 && (
+                      <Stack direction={"row"} align={"center"}>
+                        <Progress
+                          value={0}
+                          size="sm"
+                          width="40%"
+                          display={{ base: "none", md: "block" }}
+                        />
+
+                        <Text>0%</Text>
+                      </Stack>
+                    )}
+                    {uploadProgress >= 100 && (
+                      <Text fontWeight={"500"}>Success</Text>
+                    )}
                   </Td>
                   <Td>{formattedDate}</Td>
                   <Td
@@ -185,6 +200,10 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                     fontSize={15}
                     fontWeight={"600"}
                     color={"#5624D0"}
+                    onClick={() =>{ 
+                      setSelectImageName(null)
+                      setUploadProgress(0)
+                    }}
                   >
                     Replace
                   </Td>
