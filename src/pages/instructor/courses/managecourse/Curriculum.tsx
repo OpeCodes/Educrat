@@ -13,6 +13,13 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
@@ -850,7 +857,7 @@ const Curriculum = () => {
                                       <>
                                         {/* article endpoint display**************/}
 
-                                        <Stack
+                                        {/* <Stack
                                           borderBottom={"1px"}
                                           cursor={"pointer"}
                                           bg={"white"}
@@ -903,6 +910,64 @@ const Curriculum = () => {
                                               </Flex>
                                             </Box>
                                           </Flex>
+                                        </Stack> */}
+
+                                        {/* video endpoint display************************* */}
+
+                                        <Stack
+                                          borderBottom={"1px"}
+                                          cursor={"pointer"}
+                                          bg={"white"}
+                                          borderWidth={1}
+                                          borderColor={"gray"}
+                                          mt={-3}
+                                          pb={2}
+                                          p={3}
+                                          display={
+                                            contentEndPointType
+                                              ? "block"
+                                              : "none"
+                                          }
+                                        >
+                                          <TableContainer>
+                                            <Table variant="simple">
+                                              <Thead>
+                                                <Tr color={"black"}>
+                                                  <Th color="black">
+                                                    Filename
+                                                  </Th>
+                                                  <Th color="black">Type</Th>
+                                                  <Th color="black">Status</Th>
+                                                  <Th color="black">Date</Th>
+                                                  <Th color="black">.</Th>
+                                                </Tr>
+                                              </Thead>
+                                              <Tbody>
+                                                <Tr>
+                                                  <Td>name here</Td>
+                                                  <Td>Video</Td>
+                                                  <Td>
+                                                    <Text fontWeight={"500"}>
+                                                      Success
+                                                    </Text>
+                                                  </Td>
+                                                  <Td>
+                                                    {/* {formattedDate} */}
+                                                    date here
+                                                  </Td>
+                                                  <Td
+                                                    as={"button"}
+                                                    fontSize={15}
+                                                    fontWeight={"600"}
+                                                    color={"#5624D0"}
+                                                    onClick={() => {}}
+                                                  >
+                                                    Replace
+                                                  </Td>
+                                                </Tr>
+                                              </Tbody>
+                                            </Table>
+                                          </TableContainer>
                                         </Stack>
 
                                         {/* ***********article text editor */}

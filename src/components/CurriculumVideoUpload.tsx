@@ -55,7 +55,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         });
       } else {
         // setSelectedImage(URL.createObjectURL(file));
-             setSelectImageName(file);
+        setSelectImageName(file);
 
         const duration = await getVideoDuration(file);
         await uploadImage(file, duration);
@@ -130,7 +130,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   const formattedDate = `${month}/${day}/${year}`;
   return (
     <Stack>
-      { !selectedImageName  && (
+      {!selectedImageName && (
         <Stack>
           <Stack width={"100%"}>
             <Input
