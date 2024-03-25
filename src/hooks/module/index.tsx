@@ -192,7 +192,7 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
-  const { data, isPending, isSuccess } = useQuery({
+  const { data, isPending, isSuccess,refetch } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
@@ -253,6 +253,7 @@ export const useGetModuleCourse = (id: any) => {
     isOpenState,
     toggleIsOpen,
     isSuccess,
+    refetch,
     isOpenCurriculumState,
     toggleIsCurriculumOpen,
     toggleIsModuleLectureOpen,
@@ -273,6 +274,7 @@ export const useGetModuleCourse = (id: any) => {
     toggleIsOpenInnerdescripRes,
     isOpenEditArticle,
     toggleIsOpenEditArticle,
+
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {

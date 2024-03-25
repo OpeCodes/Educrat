@@ -108,13 +108,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <Flex flexDirection={{ base: "column", md: "row" }}>
-      {/* <Box mb={4}>
-        {selectedImage ? (
-          <Image src={selectedImage} width="650px" height={"200px"} alt="Uploaded Image" mt={4} />
-        ) : (
-          <Image src={imagePlaceholder} />
-        )}
-      </Box> */}
+    
       <Stack ml={4} mt={5}>
         <Text>
           Upload your course image here. It must meet our course image quality
@@ -128,9 +122,14 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           mt={2}
         />
       </Stack>
-      {uploadProgress > 0 && uploadProgress < 100 && (
-        <Progress value={uploadProgress} size="sm" mt={2} />
+
+      {uploadProgress > 0 && uploadProgress < 100 && ( <>
+        <Progress value={uploadProgress} size="md" mt={2} />
+
+        <Text>{uploadProgress}%</Text>
+      </>
       )}
+
     </Flex>
   );
 };
