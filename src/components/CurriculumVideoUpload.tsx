@@ -68,7 +68,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
       try {
         const response = await customFetch.post(
           endpoint,
-          { file: base64Data, duration, title }, 
+          { file: base64Data, duration, title },
           {
             headers: { "Content-Type": "application/json" },
             onUploadProgress: (progressEvent: {
@@ -117,11 +117,11 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           width={"100%"}
         />
       </Stack>
-      <Flex fontSize={13 }columnGap={1}>
+      <Flex fontSize={13} columnGap={1}>
         <Text fontWeight={"600"}>Note:</Text>
         <Text>All files should be at least 720p and less than 4.0 GB.</Text>
       </Flex>
-
+<Text>{selectedImageName?.name}</Text>
       {uploadProgress > 0 && uploadProgress < 100 && (
         <>
           <Progress value={uploadProgress} size="md" mt={2} />
@@ -131,10 +131,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
     </Stack>
   );
 };
-{
-  /* <Text>
-        {selectedImageName?.name}
-        </Text> */
-}
+
 
 export default CurriculumVideoUpload;
