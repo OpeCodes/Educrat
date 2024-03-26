@@ -577,3 +577,40 @@ export const useDeleteVideoLecture = () => {
   });
   return { deleteVideoLecture};
 };
+
+
+
+
+// ***********************external resource endpoint*****************************
+
+export const useCreateExternalResourceLink = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const { mutate: createExternalResourceLink } = useMutation({
+    mutationFn: ({ lectureId, user }: any) => {
+      return customFetch.post(
+        `/lecture/resource/lecture/${lectureId}/external
+      `,
+        user
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["module"] });
+      toast({
+        title: `link created`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { createExternalResourceLink };
+};
