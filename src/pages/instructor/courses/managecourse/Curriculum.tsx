@@ -1333,7 +1333,7 @@ const Curriculum = () => {
                                                             handleChange
                                                           }
                                                         />
-                                                        {errors.learningObjective && (
+                                                        {errors.title && (
                                                           <Text
                                                             style={{
                                                               color: "red",
@@ -1341,8 +1341,7 @@ const Curriculum = () => {
                                                             }}
                                                             fontSize="14px"
                                                           >
-                                                            enter learning
-                                                            objective
+                                                            enter title
                                                           </Text>
                                                         )}
                                                       </Stack>
@@ -1350,22 +1349,20 @@ const Curriculum = () => {
                                                         <Text
                                                           fontWeight={"bold"}
                                                         >
-                                                          What will students be
-                                                          able to do at the end
-                                                          of this section?
+                                                          URL
                                                         </Text>
                                                         <Input
                                                           variant="outline"
                                                           w="100%"
                                                           borderColor={"black"}
                                                           borderRadius={"0px"}
-                                                          placeholder="Enter a a learning objectives"
+                                                          placeholder="https://example.com"
                                                           _focus={{
                                                             borderColor:
                                                               "black",
                                                           }}
                                                           focusBorderColor="black"
-                                                          name="learningObjective"
+                                                          name="url"
                                                           value={
                                                             values.learningObjective
                                                           }
