@@ -111,7 +111,7 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
         );
         console.log("Upload completed:", response.data);
         toast({
-          title: `Video uploaded refresh for updated changes`,
+          title: `Video uploaded`,
           status: "success",
           duration: 5000,
           isClosable: true,
