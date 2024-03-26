@@ -500,6 +500,12 @@ export const useEditArticleLectureCourse = () => {
   return { editArticleLectureCourse };
 };
 
+
+
+
+
+// ****************************************video endpoint**************************************
+
 export const useDeleteVideoLecture = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
