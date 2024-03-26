@@ -20,15 +20,8 @@ import {
   Th,
   Td,
   TableContainer,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -156,19 +149,6 @@ const Curriculum = () => {
     console.log("Upload successful!");
   };
 
-  //modal effect edit article
-  const OverlayOne = () => (
-    <ModalOverlay
-      bg="blackAlpha.300"
-      backdropFilter="blur(10px) hue-rotate(90deg)"
-    />
-  );
-  const {
-    isOpen: isOpenDeleteArticleModal,
-    onOpen: onOpenDeleteArticleModal,
-    onClose: onCloseDeleteArticleModal,
-  } = useDisclosure();
-  const [overlay, setOverlay] = useState(<OverlayOne />);
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -391,8 +371,6 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(content);
-                    console.log(contentEndPointType);
                     const initialValues4 = {
                       title: "",
                     };
@@ -400,9 +378,7 @@ const Curriculum = () => {
                       body: content?.body,
                     };
                     const dateString = content?.updatedAt;
-
                     const date = new Date(dateString);
-
                     // Extract day, month, and year components
                     const day = String(date.getUTCDate()).padStart(2, "0");
                     const month = String(date.getUTCMonth() + 1).padStart(
@@ -953,9 +929,10 @@ const Curriculum = () => {
                                                   columnGap={1}
                                                   color={"#5624D0"}
                                                   onClick={() => {
-                                                    // toggleIsOpenEditVideo(id)
-                                                    setOverlay(<OverlayOne />);
-                                                    onOpenDeleteArticleModal();
+                                                    toggleIsOpenEditVideo(id);
+                                                    deleteArticleLecture({
+                                                      articleId: content?.id,
+                                                    });
                                                   }}
                                                 >
                                                   <Text>
@@ -967,72 +944,6 @@ const Curriculum = () => {
                                                 </Flex>
                                               </Box>
                                             </Flex>
-                                            <Modal
-                                              isCentered
-                                              isOpen={isOpenDeleteArticleModal}
-                                              onClose={
-                                                onCloseDeleteArticleModal
-                                              }
-                                            >
-                                              {overlay}
-                                              <ModalContent>
-                                                <ModalHeader>
-                                                  Update this lecture to video
-                                                </ModalHeader>
-                                                <ModalCloseButton />
-                                                <ModalBody>
-                                                  <Text>
-                                                    The content of this lecture
-                                                    will be deleted, but the
-                                                    description and any
-                                                    downloadable resources will
-                                                    remain. You will be prompted
-                                                    to add a video file and
-                                                    re-publish as a video
-                                                    lecture.
-                                                  </Text>
-                                                </ModalBody>
-                                                <ModalFooter>
-                                                  <Flex
-                                                    justify={"end"}
-                                                    mt={2}
-                                                    align={"center"}
-                                                    columnGap={5}
-                                                  >
-                                                    <Text
-                                                      fontWeight={"bold"}
-                                                      as={"button"}
-                                                      onClick={
-                                                        onCloseDeleteArticleModal
-                                                      }
-                                                    >
-                                                      Cancel
-                                                    </Text>
-                                                    <Button
-                                                      color="#ffffff"
-                                                      fontWeight={"500"}
-                                                      fontSize={14}
-                                                      as={"button"}
-                                                      py={2}
-                                                      px={4}
-                                                      variant="outline"
-                                                      spinnerPlacement="end"
-                                                      onClick={() => {
-                                                        deleteArticleLecture({
-                                                          articleId:
-                                                            content?.id,
-                                                        });
-                                                        onCloseDeleteArticleModal;
-                                                      }}
-                                                      type="button"
-                                                      backgroundColor={"black"}
-                                                    >
-                                                      Replace with Video
-                                                    </Button>
-                                                  </Flex>
-                                                </ModalFooter>
-                                              </ModalContent>
-                                            </Modal>
                                           </Stack>
                                         )}
 

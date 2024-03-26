@@ -105,15 +105,13 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   (progressEvent.loaded * 100) / progressEvent.total
                 );
                 setUploadProgress(percentCompleted);
-                 refetch();
 
               }
             },
           }
         );
         console.log("Upload completed:", response.data);
-        refetch();
-        
+
         toast({
           title: `Video uploaded`,
           status: "success",
@@ -122,7 +120,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         });
         onImageUpload(file);
         setSucess(true);
-        refetch();
 
       } catch (error: any) {
         setSucess(false);
@@ -140,6 +137,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
 
   //date formatted code
   const currentDate = new Date();
+  console.log(currentDate)
   const day = String(currentDate.getDate()).padStart(2, "0");
   const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // January is 0
   const year = currentDate.getFullYear();
