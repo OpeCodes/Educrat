@@ -32,6 +32,7 @@ import {
   courseModuleSchema,
   curriculumEditLectureSchema,
   curriculumLectureSchema,
+  externalResourceSchema,
 } from "../../../../schemas";
 import {
   useDeleteModalCourse,
@@ -75,15 +76,15 @@ const Curriculum = () => {
   const { moduleCreateLectureCourse, isSuccess } =
     useCreateModuleLectureCourse();
   console.log(isSuccess);
-  const initialValues1 = {
+  const initialValues1: CurriculumInterface = {
     title: "",
     learningObjective: "",
   };
 
-  const initialValues3 = {
+  const initialValues3: CurriculumInterface = {
     title: "",
   };
-  const articleCreateInitialValue = {
+  const articleCreateInitialValue: CurriculumInterface = {
     body: "",
   };
   const externalResourceInitialValue: CurriculumInterface = {
@@ -292,12 +293,13 @@ const Curriculum = () => {
                               focusBorderColor="black"
                               onChange={handleChange}
                             />
-                            {errors?.title && (
+                            {errors.title && (
                               <Text
                                 style={{ color: "red", marginTop: 0 }}
                                 fontSize="14px"
                               >
-                                Pls add title
+                                enter title
+                                {/* {errors.title} */}
                               </Text>
                             )}
                           </Stack>
@@ -328,7 +330,8 @@ const Curriculum = () => {
                               style={{ color: "red", marginTop: 0 }}
                               fontSize="14px"
                             >
-                              pls add learning objectives
+                              {/* {errors.learningObjective} */}
+                              enter leanring objetive
                             </Text>
                           )}
                         </Stack>
@@ -834,7 +837,7 @@ const Curriculum = () => {
                                                 value={values.body}
                                                 onChange={handleChange("body")}
                                               />
-                                              {errors?.body && (
+                                              {errors.body && (
                                                 <Text
                                                   style={{
                                                     color: "red",
@@ -842,7 +845,7 @@ const Curriculum = () => {
                                                   }}
                                                   fontSize="14px"
                                                 >
-                                                  enter title
+                                                  enter body
                                                 </Text>
                                               )}
                                               <Flex
@@ -1104,7 +1107,7 @@ const Curriculum = () => {
                                                       )}
                                                       placeholder="Add a description.Include what students will be able to do after completing the lecture"
                                                     />
-                                                    {errors?.body && (
+                                                    {errors.body && (
                                                       <Text
                                                         style={{
                                                           color: "red",
@@ -1282,12 +1285,113 @@ const Curriculum = () => {
                                             </TabPanel>
                                             <TabPanel>
                                               <Stack>
-                                                <Text
-                                                  fontSize={16}
-                                                  fontWeight={"bold"}
+                                                <Formik
+                                                  initialValues={
+                                                    externalResourceInitialValue
+                                                  }
+                                                  validationSchema={
+                                                    externalResourceSchema
+                                                  }
+                                                  onSubmit={(values: any) => {
+                                                    moduleEditCourse({
+                                                      moduleId: id,
+                                                      user: values,
+                                                    });
+                                                    setTimeout(() => {
+                                                      toggleIsOpen(id);
+                                                    }, 2000);
+                                                  }}
                                                 >
-                                                  external resource
-                                                </Text>
+                                                  {({
+                                                    handleChange,
+                                                    handleSubmit:
+                                                      handleExternalResource,
+                                                    values,
+                                                    errors,
+                                                  }) => (
+                                                    <>
+                                                      <Stack>
+                                                        <Text
+                                                          fontWeight={"bold"}
+                                                        >
+                                                          Title
+                                                        </Text>
+                                                        <Input
+                                                          variant="outline"
+                                                          w="100%"
+                                                          borderColor={"black"}
+                                                          borderRadius={"0px"}
+                                                          placeholder="A descriptive title"
+                                                          _focus={{
+                                                            borderColor:
+                                                              "black",
+                                                          }}
+                                                          focusBorderColor="black"
+                                                          name="title"
+                                                          value={values.title}
+                                                          onChange={
+                                                            handleChange
+                                                          }
+                                                        />
+                                                        {errors.learningObjective && (
+                                                          <Text
+                                                            style={{
+                                                              color: "red",
+                                                              marginTop: 0,
+                                                            }}
+                                                            fontSize="14px"
+                                                          >
+                                                            enter learning
+                                                            objective
+                                                          </Text>
+                                                        )}
+                                                      </Stack>
+                                                      <Stack>
+                                                        <Text
+                                                          fontWeight={"bold"}
+                                                        >
+                                                          What will students be
+                                                          able to do at the end
+                                                          of this section?
+                                                        </Text>
+                                                        <Input
+                                                          variant="outline"
+                                                          w="100%"
+                                                          borderColor={"black"}
+                                                          borderRadius={"0px"}
+                                                          placeholder="Enter a a learning objectives"
+                                                          _focus={{
+                                                            borderColor:
+                                                              "black",
+                                                          }}
+                                                          focusBorderColor="black"
+                                                          name="learningObjective"
+                                                          value={
+                                                            values.learningObjective
+                                                          }
+                                                          onChange={
+                                                            handleChange
+                                                          }
+                                                        />
+                                                        {errors.learningObjective && (
+                                                          <Text
+                                                            style={{
+                                                              color: "red",
+                                                              marginTop: 0,
+                                                            }}
+                                                            fontSize="14px"
+                                                          >
+                                                            {/* {
+                                                              errors.learningObjective
+                                                            } */}
+                                                            enter learning
+                                                            objective
+                                                          </Text>
+                                                        )}
+                                                      </Stack>
+                                                    </>
+                                                  )}
+                                                </Formik>
                                               </Stack>
                                             </TabPanel>
                                             <TabPanel>
@@ -1574,12 +1678,13 @@ const Curriculum = () => {
                                         onChange={handleChange}
                                       />
 
-                                      {errors?.title && (
+                                      {errors.title && (
                                         <Text
                                           style={{ color: "red", marginTop: 0 }}
                                           fontSize="14px"
                                         >
-                                          Pls add title
+                                          {/* {errors.title} */}
+                                          enter title
                                         </Text>
                                       )}
                                     </Stack>
@@ -1704,12 +1809,13 @@ const Curriculum = () => {
                                 focusBorderColor="black"
                                 onChange={handleChange}
                               />
-                              {errors?.title && (
+                              {errors.title && (
                                 <Text
                                   style={{ color: "red", marginTop: 0 }}
                                   fontSize="14px"
                                 >
-                                  Pls add title
+                                  {/* {errors.title} */}
+                                  enter title
                                 </Text>
                               )}
                             </Stack>
@@ -1816,12 +1922,13 @@ const Curriculum = () => {
                       focusBorderColor="black"
                       onChange={handleChange}
                     />
-                    {errors?.title && (
+                    {errors.title && (
                       <Text
                         style={{ color: "red", marginTop: 0 }}
                         fontSize="14px"
                       >
-                        Pls add title
+                        {/* {errors.title} */}
+                        enter title
                       </Text>
                     )}
                   </Stack>
@@ -1847,7 +1954,8 @@ const Curriculum = () => {
                       style={{ color: "red", marginTop: 0 }}
                       fontSize="14px"
                     >
-                      pls add learning objectives
+                      {/* {errors.learningObjective} */}
+                      enter learning objectives
                     </Text>
                   )}
                 </Stack>
