@@ -1131,8 +1131,7 @@ const Curriculum = () => {
                                     mt={-3}
                                     pb={2}
                                     p={3}
-                                  >
-                                    {" "}
+                                  >                   
                                     <Flex
                                       width="100%"
                                       justifyContent="end"
@@ -1161,14 +1160,15 @@ const Curriculum = () => {
                                           as={"button"}
                                           fontWeight="bold"
                                           onClick={() => {
-                                            toggleIsOpenInnerdescripRes(id);
+                                            // toggleIsOpenInnerdescripRes(id);
+                                            toggleIsOpenEditArticle(id);
                                           }}
                                         >
                                           <IoCloseSharp size={20} />
                                         </Text>
                                       </Flex>
                                     </Flex>
-                                    <Text fontWeight={"bold"}>Textdd</Text>
+                                    <Text fontWeight={"bold"}>Text</Text>
                                     <Formik
                                       initialValues={articleEditInitialValue}
                                       validationSchema={
@@ -1238,7 +1238,7 @@ const Curriculum = () => {
                                               type="button"
                                               backgroundColor={"black"}
                                             >
-                                              Saved
+                                              Save
                                             </Button>
                                           </Flex>
                                         </Stack>
