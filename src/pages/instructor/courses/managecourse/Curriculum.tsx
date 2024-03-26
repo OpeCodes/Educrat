@@ -84,9 +84,9 @@ const Curriculum = () => {
   const articleCreateInitialValue = {
     body: "",
   };
-  const handleDescriptionInitialValue ={
+  const handleDescriptionInitialValue = {
     description: "",
-  }
+  };
 
   const {
     moduleCreateCourse,
@@ -1049,7 +1049,6 @@ const Curriculum = () => {
                                               </Text>
                                               <Formik
                                                 initialValues={
-                                                 
                                                   handleDescriptionInitialValue
                                                 }
                                                 validationSchema={
@@ -1061,7 +1060,7 @@ const Curriculum = () => {
                                                     user: values,
                                                   });
                                                   setTimeout(() => {
-                                                    toggleIsOpenEditArticle(id);
+                                                    toggleIsOpenDescription(id);
                                                   }, 2000);
                                                 }}
                                               >
@@ -1092,13 +1091,23 @@ const Curriculum = () => {
                                                         enter title
                                                       </Text>
                                                     )}
-
                                                     <Flex
                                                       justify={"end"}
+                                                      mt={"2.9rem"}
                                                       align={"center"}
                                                       columnGap={5}
-                                                      mt={"2.9rem"}
                                                     >
+                                                      <Text
+                                                        fontWeight={"bold"}
+                                                        as={"button"}
+                                                        onClick={() =>
+                                                          toggleIsOpenDescription(
+                                                            id
+                                                          )
+                                                        }
+                                                      >
+                                                        Cancel
+                                                      </Text>
                                                       <Button
                                                         color="#ffffff"
                                                         fontWeight={"500"}
@@ -1118,7 +1127,8 @@ const Curriculum = () => {
                                                       >
                                                         Save
                                                       </Button>
-                                                    </Flex>
+                                                    </Flex>{" "}
+                                                    mt={2}
                                                   </Stack>
                                                 )}
                                               </Formik>
