@@ -247,6 +247,20 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
+  // **************************************video edit section **************************
+
+
+  const [isOpenEditVideo, setIsOpenEditVideo] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  const toggleIsOpenEditVideo = (arrayId: number) => {
+    setIsOpenEditVideo((prevIsOpenEditVideo) => ({
+      ...prevIsOpenEditVideo,
+      [arrayId]: !prevIsOpenEditVideo[arrayId],
+    }));
+  };
+
   return {
     data,
     isPending,
@@ -274,6 +288,8 @@ export const useGetModuleCourse = (id: any) => {
     toggleIsOpenInnerdescripRes,
     isOpenEditArticle,
     toggleIsOpenEditArticle,
+    isOpenEditVideo,
+    toggleIsOpenEditVideo
 
   };
 };
