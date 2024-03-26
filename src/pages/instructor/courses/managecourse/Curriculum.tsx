@@ -71,8 +71,9 @@ const Curriculum = () => {
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
   const { deleteLectureModule } = useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse ,isSuccess} = useCreateModuleLectureCourse();
-  console.log(isSuccess)
+  const { moduleCreateLectureCourse, isSuccess } =
+    useCreateModuleLectureCourse();
+  console.log(isSuccess);
   const initialValues1 = {
     title: "",
     learningObjective: "",
@@ -84,7 +85,6 @@ const Curriculum = () => {
   const articleCreateInitialValue = {
     body: "",
   };
- 
 
   const {
     moduleCreateCourse,
@@ -145,8 +145,7 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
-  const handleUploadSuccess = () => {   
-  };
+  const handleUploadSuccess = () => {};
 
   return (
     <Stack>
@@ -1226,7 +1225,47 @@ const Curriculum = () => {
                                       </Flex>
                                     </Flex>
                                     <Stack>
-                                      <Text>resources</Text>
+                                      <Stack mx={3}>
+                                        <Tabs>
+                                          <TabList>
+                                            <Tab
+                                              fontWeight={"bold"}
+                                              color="black"
+                                            >
+                                              Upload Video
+                                            </Tab>
+                                            <Tab
+                                              fontWeight={"bold"}
+                                              color="black"
+                                            >
+                                              Add from library
+                                            </Tab>
+                                          </TabList>
+                                          <TabPanels>
+                                            <TabPanel>
+                                              <Stack>
+                                                <CurriculumVideoUpload
+                                                  onImageUpload={
+                                                    handleUploadSuccess
+                                                  }
+                                                  id={id}
+                                                  contentId={content?.id}
+                                                />
+                                              </Stack>
+                                            </TabPanel>
+                                            <TabPanel>
+                                              <Stack>
+                                                <Text
+                                                  fontSize={16}
+                                                  fontWeight={"bold"}
+                                                >
+                                                  Feature incoming soon.......
+                                                </Text>
+                                              </Stack>
+                                            </TabPanel>
+                                          </TabPanels>
+                                        </Tabs>
+                                      </Stack>
                                     </Stack>
                                   </Stack>
                                 )}
