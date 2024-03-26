@@ -249,7 +249,6 @@ export const useGetModuleCourse = (id: any) => {
 
   // **************************************video edit section **************************
 
-
   const [isOpenEditVideo, setIsOpenEditVideo] = useState<{
     [key: number]: boolean;
   }>({});
@@ -516,6 +515,34 @@ export const useEditArticleLectureCourse = () => {
   return { editArticleLectureCourse };
 };
 
+export const useDeleteArticleLecture = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteArticleLecture} = useMutation({
+    mutationFn: ({ articleId }: any) => {
+      return customFetch.delete(`/lecture/content/video/${articleId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["module"] });
+      toast({
+        title: `ariticle deleted successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { deleteArticleLecture};
+};
 
 
 

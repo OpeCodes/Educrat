@@ -1292,7 +1292,7 @@ const Curriculum = () => {
                                         </Text>
                                       </Flex>
                                     </Flex>
-                                          <Stack mx={3}>
+                                    <Stack mx={3}>
                                       <Tabs>
                                         <TabList>
                                           <Tab
