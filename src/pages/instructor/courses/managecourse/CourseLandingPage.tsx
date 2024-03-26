@@ -23,22 +23,14 @@ import { useEffect } from "react";
 import { CourseImageFileUpload, Loading } from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
+import { CourseEditCreate } from "../../../../interface/courseInterface";
 
 const CourseLandingPage = () => {
   const { id } = useParams();
   useEffect(() => {
     refetch();
   }, [id]);
-  interface Course {
-    title: string;
-    subtitle: string;
-    language:string;
-    preRequisites: string;
-    learningObjectives: string[];
-    category: number;
-    description: any;
-    complexityLevel: any;
-  }
+  
   const {
     getSingleCourse,
     isError,
@@ -46,7 +38,7 @@ const CourseLandingPage = () => {
     refetch,
   } = useGetSingleCourse(id);
 
-  const initialValues: Course = {
+  const initialValues: CourseEditCreate  = {
     title: getSingleCourse?.title || "",
     subtitle: getSingleCourse?.subtitle||"",
     language: getSingleCourse?.language||"",
@@ -63,9 +55,7 @@ const CourseLandingPage = () => {
   // const handleImageUpload = (file: File) => {
   //   console.log("Uploaded file:", file);
   // }
-interface Course {
-  title: string
-}
+
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
@@ -256,7 +246,8 @@ interface Course {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                     {errors.complexityLevel}
+                     {/* {errors.complexityLevel} */}
+                     add complexity
                     </Text>
                   )}
                 </Stack>
