@@ -1213,16 +1213,7 @@ const Curriculum = () => {
                                             align={"center"}
                                             columnGap={5}
                                             mt={"2.9rem"}
-                                          >
-                                            <Text
-                                              fontWeight={"bold"}
-                                              as={"button"}
-                                              onClick={() => {
-                                                toggleIsOpenEditArticle(id);
-                                              }}
-                                            >
-                                              Cancel
-                                            </Text>
+                                          >                                            
                                             <Button
                                               color="#ffffff"
                                               fontWeight={"500"}
