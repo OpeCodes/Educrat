@@ -1232,13 +1232,25 @@ const Curriculum = () => {
                                               fontWeight={"bold"}
                                               color="black"
                                             >
-                                              Upload Video
+                                              Downloadable File
                                             </Tab>
                                             <Tab
                                               fontWeight={"bold"}
                                               color="black"
                                             >
                                               Add from library
+                                            </Tab>
+                                            <Tab
+                                              fontWeight={"bold"}
+                                              color="black"
+                                            >
+                                              External Resource
+                                            </Tab>
+                                            <Tab
+                                              fontWeight={"bold"}
+                                              color="black"
+                                            >
+                                              Source code
                                             </Tab>
                                           </TabList>
                                           <TabPanels>
@@ -1251,6 +1263,26 @@ const Curriculum = () => {
                                                   id={id}
                                                   contentId={content?.id}
                                                 />
+                                              </Stack>
+                                            </TabPanel>
+                                            <TabPanel>
+                                              <Stack>
+                                                <Text
+                                                  fontSize={16}
+                                                  fontWeight={"bold"}
+                                                >
+                                                  Feature incoming soon.......
+                                                </Text>
+                                              </Stack>
+                                            </TabPanel>
+                                            <TabPanel>
+                                              <Stack>
+                                                <Text
+                                                  fontSize={16}
+                                                  fontWeight={"bold"}
+                                                >
+                                                  external resource
+                                                </Text>
                                               </Stack>
                                             </TabPanel>
                                             <TabPanel>
