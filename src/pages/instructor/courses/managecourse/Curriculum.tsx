@@ -27,6 +27,7 @@ import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
 import {
   ArticleCreateLectureSchema,
+  DescriptionLectureSchema,
   courseEditModuleSchema,
   courseModuleSchema,
   curriculumEditLectureSchema,
@@ -83,6 +84,9 @@ const Curriculum = () => {
   const articleCreateInitialValue = {
     body: "",
   };
+  const handleDescriptionInitialValue ={
+    description: "",
+  }
 
   const {
     moduleCreateCourse,
@@ -1041,14 +1045,15 @@ const Curriculum = () => {
                                           {isOpendescription[id] && (
                                             <Stack>
                                               <Text fontWeight={"bold"}>
-                                              Lecture Description
+                                                Lecture Description
                                               </Text>
                                               <Formik
                                                 initialValues={
-                                                  articleEditInitialValue
+                                                 
+                                                  handleDescriptionInitialValue
                                                 }
                                                 validationSchema={
-                                                  ArticleCreateLectureSchema
+                                                  DescriptionLectureSchema
                                                 }
                                                 onSubmit={(values: any) => {
                                                   editArticleLectureCourse({
@@ -1063,7 +1068,7 @@ const Curriculum = () => {
                                                 {({
                                                   handleChange,
                                                   handleSubmit:
-                                                    handleEditArticleSubmit,
+                                                    handleDescriptionSubmit,
                                                   values,
                                                   errors,
                                                 }) => (
@@ -1072,7 +1077,7 @@ const Curriculum = () => {
                                                       theme="snow"
                                                       value={values.body}
                                                       onChange={handleChange(
-                                                        "body"
+                                                        "description"
                                                       )}
                                                       placeholder="Add a description.Include what students will be able to do after completing the lecture"
                                                     />
@@ -1104,7 +1109,7 @@ const Curriculum = () => {
                                                         variant="outline"
                                                         spinnerPlacement="end"
                                                         onClick={() =>
-                                                          handleEditArticleSubmit()
+                                                          handleDescriptionSubmit()
                                                         }
                                                         type="button"
                                                         backgroundColor={
