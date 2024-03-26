@@ -152,7 +152,7 @@ const Curriculum = () => {
 
     console.log("Upload successful!");
   };
-
+  const hi = false;
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -1020,26 +1020,40 @@ const Curriculum = () => {
                                           p={3}
                                         >
                                           {!isOpendescription[id] && (
-                                            <Button
-                                              borderRadius={0}
-                                              borderWidth={1}
-                                              borderColor={"black"}
-                                              color="black"
-                                              _hover={{
-                                                backgroundColor: "#F7F8FB",
-                                              }}
-                                              width={"130px"}
-                                              height={"30px"}
-                                              leftIcon={
-                                                <GoPlus fontSize={"20px"} />
-                                              }
-                                              variant="outline"
-                                              onClick={() =>
-                                                toggleIsOpenDescription(id)
-                                              }
-                                            >
-                                              Description
-                                            </Button>
+                                            <>
+                                              {hi ? (
+                                                <Button
+                                                  borderRadius={0}
+                                                  borderWidth={1}
+                                                  borderColor={"black"}
+                                                  color="black"
+                                                  _hover={{
+                                                    backgroundColor: "#F7F8FB",
+                                                  }}
+                                                  width={"130px"}
+                                                  height={"30px"}
+                                                  leftIcon={
+                                                    <GoPlus fontSize={"20px"} />
+                                                  }
+                                                  variant="outline"
+                                                  onClick={() =>
+                                                    toggleIsOpenDescription(id)
+                                                  }
+                                                >
+                                                  Description
+                                                </Button>
+                                              ) : (
+                                                <Stack
+                                                  mb={1}
+                                                  cursor={"pointer"}
+                                                  border={"color"}
+                                                  px={2}
+                                                  _hover={{ borderWidth: 1 }}
+                                                >
+                                                  <Text>kskssadfsfdak</Text>
+                                                </Stack>
+                                              )}
+                                            </>
                                           )}
                                           {/* ************************description container************************** */}
                                           {isOpendescription[id] && (
@@ -1088,7 +1102,7 @@ const Curriculum = () => {
                                                         }}
                                                         fontSize="14px"
                                                       >
-                                                        enter title
+                                                        enter description
                                                       </Text>
                                                     )}
                                                     <Flex
