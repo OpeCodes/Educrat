@@ -74,9 +74,8 @@ const Curriculum = () => {
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
   const { deleteLectureModule } = useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse, isSuccess } =
+  const { moduleCreateLectureCourse,  } =
     useCreateModuleLectureCourse();
-  console.log(isSuccess);
   const initialValues1: CurriculumInterface = {
     title: "",
     learningObjective: "",
@@ -107,7 +106,7 @@ const Curriculum = () => {
   const { editArticleLectureCourse } = useEditArticleLectureCourse();
   const { deleteVideoLecture } = useDeleteVideoLecture();
   const { deleteArticleLecture } = useDeleteArticleLecture();
- const {createExternalResourceLink} = useCreateExternalResourceLink();
+  const { createExternalResourceLink } = useCreateExternalResourceLink();
   const {
     data,
     isPending: getCourseLoading,
@@ -1299,11 +1298,6 @@ const Curriculum = () => {
                                                       lectureId: id,
                                                       user: values,
                                                     });
-
-                                                    //   setTimeout(() => {
-                                                    //     toggleIsOpen(id);
-                                                    //   }, 2000);
-                                                    console.log(values);
                                                   }}
                                                 >
                                                   {({
