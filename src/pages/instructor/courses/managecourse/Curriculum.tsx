@@ -1131,7 +1131,7 @@ const Curriculum = () => {
                                                     mt={2}
                                                   </Stack>
                                                 )}
-                                              </Formik>                                              
+                                              </Formik>
                                             </Stack>
                                           )}
                                           <Button
