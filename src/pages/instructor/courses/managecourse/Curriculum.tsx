@@ -20,8 +20,15 @@ import {
   Th,
   Td,
   TableContainer,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -147,6 +154,19 @@ const Curriculum = () => {
     console.log("Upload successful!");
   };
 
+  //modal effect edit article
+  const OverlayOne = () => (
+    <ModalOverlay
+      bg="blackAlpha.300"
+      backdropFilter="blur(10px) hue-rotate(90deg)"
+    />
+  );
+  const {
+    isOpen: isOpenDeleteArticleModal,
+    onOpen: onOpenDeleteArticleModal,
+    onClose: onCloseDeleteArticleModal,
+  } = useDisclosure();
+  const [overlay, setOverlay] = useState(<OverlayOne />);
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -928,9 +948,11 @@ const Curriculum = () => {
                                                   fontWeight={"600"}
                                                   columnGap={1}
                                                   color={"#5624D0"}
-                                                  onClick={() =>
-                                                    toggleIsOpenEditVideo(id)
-                                                  }
+                                                  onClick={() => {
+                                                    // toggleIsOpenEditVideo(id)
+                                                    setOverlay(<OverlayOne />)
+                                                    onOpenDeleteArticleModal();
+                                                  }}
                                                 >
                                                   <Text>
                                                     <HiPlayCircle />
@@ -941,6 +963,29 @@ const Curriculum = () => {
                                                 </Flex>
                                               </Box>
                                             </Flex>
+                                            <Modal
+                                              isCentered
+                                              isOpen={isOpenDeleteArticleModal}
+                                              onClose={onCloseDeleteArticleModal}
+                                            >
+                                              {overlay}
+                                              <ModalContent>
+                                                <ModalHeader>
+                                                  Modal Title
+                                                </ModalHeader>
+                                                <ModalCloseButton />
+                                                <ModalBody>
+                                                  <Text>
+                                                    Custom backdrop filters!
+                                                  </Text>
+                                                </ModalBody>
+                                                <ModalFooter>
+                                                  <Button onClick={onCloseDeleteArticleModal}>
+                                                    Close
+                                                  </Button>
+                                                </ModalFooter>
+                                              </ModalContent>
+                                            </Modal>
                                           </Stack>
                                         )}
 
