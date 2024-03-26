@@ -1386,6 +1386,31 @@ const Curriculum = () => {
                                                           </Text>
                                                         )}
                                                       </Stack>
+                                                      <Flex
+                                                        justify={"end"}
+                                                        align={"center"}
+                                                      >
+                                                        <Button
+                                                          color="#ffffff"
+                                                          fontWeight={"500"}
+                                                          fontSize={14}
+                                                          as={"button"}
+                                                          py={2}
+                                                          px={4}
+                                                          loadingText="Loading"
+                                                          variant="outline"
+                                                          spinnerPlacement="end"
+                                                          onClick={() =>
+                                                            handleExternalResource()
+                                                          }
+                                                          type="button"
+                                                          backgroundColor={
+                                                            "black"
+                                                          }
+                                                        >
+                                                          save
+                                                        </Button>
+                                                      </Flex>
                                                     </>
                                                   )}
                                                 </Formik>
