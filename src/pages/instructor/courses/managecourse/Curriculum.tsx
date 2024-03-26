@@ -869,7 +869,8 @@ const Curriculum = () => {
                             {/*dsecription and resources section*/}
 
                             <Stack>
-                              {!isOpenInnerdescripRes[id] && !isOpenEditArticle[id] &&
+                              {!isOpenInnerdescripRes[id] &&
+                                !isOpenEditArticle[id] &&
                                 !isOpenContentType[id] &&
                                 !isOpenModuleLectureState[id] && (
                                   <>
@@ -996,13 +997,6 @@ const Curriculum = () => {
                                         )}
 
                                         {/* ***********article text editor */}
-                                        {/* ************************************article edit section ************* */}
-                                        {/* {isOpenEditArticle[id] &&
-                                          !isOpenContentType[id] &&
-                                          !isOpenModuleLectureState[id] && (
-                                            
-                                          )} */}
-                                        {/* end */}
                                         <Stack
                                           bg={"white"}
                                           borderWidth={1}
@@ -1048,7 +1042,6 @@ const Curriculum = () => {
                                               </Text>
                                             </Stack>
                                           )}
-                                          {/* {!isOpenEditArticle[id] && ( */}
                                           <Button
                                             borderRadius={0}
                                             borderWidth={1}
@@ -1069,7 +1062,6 @@ const Curriculum = () => {
                                           >
                                             Resources
                                           </Button>
-                                          {/* )} */}
                                         </Stack>
                                       </>
                                     )}
@@ -1089,7 +1081,6 @@ const Curriculum = () => {
                                     <Flex
                                       width="100%"
                                       justifyContent="end"
-                                      // mt={"-37px"}
                                       mt={"-12px"}
                                     >
                                       <Flex
