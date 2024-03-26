@@ -84,9 +84,7 @@ const Curriculum = () => {
   const articleCreateInitialValue = {
     body: "",
   };
-  const handleDescriptionInitialValue = {
-    description: "",
-  };
+ 
 
   const {
     moduleCreateCourse,
@@ -147,12 +145,8 @@ const Curriculum = () => {
     .map((obj: MyObject) => obj.learningObjective);
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
-  const handleUploadSuccess = () => {
-    // Handle upload success event here
-
-    console.log("Upload successful!");
+  const handleUploadSuccess = () => {   
   };
-  const hi = false;
 
   return (
     <Stack>
@@ -379,6 +373,9 @@ const Curriculum = () => {
                     } = lecture;
                     const initialValues4 = {
                       title: "",
+                    };
+                    const handleDescriptionInitialValue = {
+                      description: description || "",
                     };
                     const articleEditInitialValue = {
                       body: content?.body,
@@ -1023,7 +1020,7 @@ const Curriculum = () => {
                                         >
                                           {!isOpendescription[id] && (
                                             <>
-                                              {hi ? (
+                                              {!description ? (
                                                 <Button
                                                   borderRadius={0}
                                                   borderWidth={1}
@@ -1051,8 +1048,15 @@ const Curriculum = () => {
                                                   border={"color"}
                                                   px={2}
                                                   _hover={{ borderWidth: 1 }}
+                                                  onClick={() =>
+                                                    toggleIsOpenDescription(id)
+                                                  }
                                                 >
-                                                  <Text dangerouslySetInnerHTML={{ __html: description }}/>
+                                                  <Text
+                                                    dangerouslySetInnerHTML={{
+                                                      __html: description,
+                                                    }}
+                                                  />
                                                 </Stack>
                                               )}
                                             </>
