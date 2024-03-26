@@ -1040,73 +1040,82 @@ const Curriculum = () => {
                                           {/* ************************description container************************** */}
                                           {isOpendescription[id] && (
                                             <Stack>
-                                               <Text fontWeight={"bold"}>Text</Text>
-                                    <Formik
-                                      initialValues={articleEditInitialValue}
-                                      validationSchema={
-                                        ArticleCreateLectureSchema
-                                      }
-                                      onSubmit={(values: any) => {
-                                        editArticleLectureCourse({
-                                          articleId: content?.id,
-                                          user: values,
-                                        });
-                                        setTimeout(() => {
-                                          toggleIsOpenEditArticle(id);
-                                        }, 2000);
-                                      }}
-                                    >
-                                      {({
-                                        handleChange,
-                                        handleSubmit: handleEditArticleSubmit,
-                                        values,
-                                        errors,
-                                      }) => (
-                                        <Stack>
-                                          <ReactQuill
-                                            theme="snow"
-                                            value={values.body}
-                                            onChange={handleChange("body")}
-                                          />
-                                          {errors?.body && (
-                                            <Text
-                                              style={{
-                                                color: "red",
-                                                marginTop: 5,
-                                              }}
-                                              fontSize="14px"
-                                            >
-                                              enter title
-                                            </Text>
-                                          )}
+                                              <Text fontWeight={"bold"}>
+                                              Lecture Description
+                                              </Text>
+                                              <Formik
+                                                initialValues={
+                                                  articleEditInitialValue
+                                                }
+                                                validationSchema={
+                                                  ArticleCreateLectureSchema
+                                                }
+                                                onSubmit={(values: any) => {
+                                                  editArticleLectureCourse({
+                                                    articleId: content?.id,
+                                                    user: values,
+                                                  });
+                                                  setTimeout(() => {
+                                                    toggleIsOpenEditArticle(id);
+                                                  }, 2000);
+                                                }}
+                                              >
+                                                {({
+                                                  handleChange,
+                                                  handleSubmit:
+                                                    handleEditArticleSubmit,
+                                                  values,
+                                                  errors,
+                                                }) => (
+                                                  <Stack>
+                                                    <ReactQuill
+                                                      theme="snow"
+                                                      value={values.body}
+                                                      onChange={handleChange(
+                                                        "body"
+                                                      )}
+                                                    />
+                                                    {errors?.body && (
+                                                      <Text
+                                                        style={{
+                                                          color: "red",
+                                                          marginTop: 5,
+                                                        }}
+                                                        fontSize="14px"
+                                                      >
+                                                        enter title
+                                                      </Text>
+                                                    )}
 
-                                          <Flex
-                                            justify={"end"}
-                                            align={"center"}
-                                            columnGap={5}
-                                            mt={"2.9rem"}
-                                          >
-                                            <Button
-                                              color="#ffffff"
-                                              fontWeight={"500"}
-                                              fontSize={14}
-                                              as={"button"}
-                                              py={2}
-                                              px={4}
-                                              variant="outline"
-                                              spinnerPlacement="end"
-                                              onClick={() =>
-                                                handleEditArticleSubmit()
-                                              }
-                                              type="button"
-                                              backgroundColor={"black"}
-                                            >
-                                              Save
-                                            </Button>
-                                          </Flex>
-                                        </Stack>
-                                      )}
-                                    </Formik>
+                                                    <Flex
+                                                      justify={"end"}
+                                                      align={"center"}
+                                                      columnGap={5}
+                                                      mt={"2.9rem"}
+                                                    >
+                                                      <Button
+                                                        color="#ffffff"
+                                                        fontWeight={"500"}
+                                                        fontSize={14}
+                                                        as={"button"}
+                                                        py={2}
+                                                        px={4}
+                                                        variant="outline"
+                                                        spinnerPlacement="end"
+                                                        onClick={() =>
+                                                          handleEditArticleSubmit()
+                                                        }
+                                                        type="button"
+                                                        backgroundColor={
+                                                          "black"
+                                                        }
+                                                      >
+                                                        Save
+                                                      </Button>
+                                                    </Flex>
+                                                  </Stack>
+                                                )}
+                                              </Formik>
                                               <Text
                                                 onClick={() =>
                                                   toggleIsOpenDescription(id)
