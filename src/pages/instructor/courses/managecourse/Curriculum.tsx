@@ -1131,14 +1131,7 @@ const Curriculum = () => {
                                                     mt={2}
                                                   </Stack>
                                                 )}
-                                              </Formik>
-                                              <Text
-                                                onClick={() =>
-                                                  toggleIsOpenDescription(id)
-                                                }
-                                              >
-                                                Cancel
-                                              </Text>
+                                              </Formik>                                              
                                             </Stack>
                                           )}
                                           <Button
