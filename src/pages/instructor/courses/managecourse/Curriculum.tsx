@@ -153,6 +153,7 @@ const Curriculum = () => {
     console.log("Upload successful!");
   };
   const hi = false;
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -373,6 +374,7 @@ const Curriculum = () => {
                       id,
                       title,
                       content,
+                      description,
                       contentType: contentEndPointType,
                     } = lecture;
                     const initialValues4 = {
@@ -1050,7 +1052,7 @@ const Curriculum = () => {
                                                   px={2}
                                                   _hover={{ borderWidth: 1 }}
                                                 >
-                                                  <Text>kskssadfsfdak</Text>
+                                                  <Text dangerouslySetInnerHTML={{ __html: description }}/>
                                                 </Stack>
                                               )}
                                             </>
