@@ -36,7 +36,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   const { id: ID } = useParams();
   const { getSingleCourse } = useGetSingleCourse(ID);
   const { deleteVideoLecture } = useDeleteVideoLecture();
-  const { refetch , toggleContentType2} = useGetModuleCourse(getSingleCourse?.id);
+  const { refetch } = useGetModuleCourse(getSingleCourse?.id);
 
   const [selectedImageName, setSelectImageName] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
