@@ -48,9 +48,12 @@ const CourseLandingPage = () => {
     complexityLevel: getSingleCourse?.complexityLevel,
   };
   const { data } = useCourseCategory();
-  const handleImageUpload = (file: File) => {
-    console.log("Uploaded file:", file);
+  const handleImageUpload = () => {
+    console.log("Uploaded file:");
   };
+  // const handleImageUpload = (file: File) => {
+  //   console.log("Uploaded file:", file);
+  // }
 
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 

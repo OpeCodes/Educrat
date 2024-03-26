@@ -76,7 +76,6 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
           duration: 5000,
           isClosable: true,
         });
-        console.error("Upload failed:", error);
       }
     };
     reader.readAsDataURL(file);
