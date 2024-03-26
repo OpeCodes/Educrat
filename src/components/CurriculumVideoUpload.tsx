@@ -15,7 +15,12 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
+import { useGetModuleCourse } from "../hooks/module";
+import { useGetSingleCourse } from "../hooks/course";
+import { useParams } from "react-router-dom";
 // import { useQueryClient  } from "@tanstack/react-query";
+
+
 
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
@@ -28,6 +33,11 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   onImageUpload,
   id,
 }) => {
+  const { id: ID } = useParams();
+const {getSingleCourse}=  useGetSingleCourse(ID)
+
+const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
+
   const [selectedImageName, setSelectImageName] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const toast = useToast();
@@ -107,9 +117,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           isClosable: true,
         });
         onImageUpload(file);
-        // const queryClient = useQueryClient();
-        // queryClient.invalidateQueries({ queryKey: ["module"] });
-
+      
       } catch (error: any) {
         toast({
           title: `${error.response.data.error}`,
@@ -205,6 +213,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                     onClick={() => {
                       setSelectImageName(null);
                       setUploadProgress(0);
+                      refetch()
                       
                     }}
                   >

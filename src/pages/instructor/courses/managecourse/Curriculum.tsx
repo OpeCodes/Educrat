@@ -100,6 +100,7 @@ const Curriculum = () => {
     data,
     isPending: getCourseLoading,
     isOpenState,
+    refetch: moduleRefetch,
     toggleIsOpen,
     isOpenCurriculumState,
     toggleIsCurriculumOpen,
@@ -120,6 +121,7 @@ const Curriculum = () => {
     toggleIsOpenInnerdescripRes,
     isOpenEditArticle,
     toggleIsOpenEditArticle,
+    
   } = useGetModuleCourse(getSingleCourse?.id);
   interface Lecture {
     title: string;
@@ -366,7 +368,7 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(content,contentEndPointType)
+                    // console.log(content,contentEndPointType)
                     const initialValues4 = {
                       title: "",
                     };
@@ -567,7 +569,9 @@ const Curriculum = () => {
                                         onClick={() => {
                                           toggleIsOpenContentType(id);
                                           toggleContentType(id, "");
+
                                           toggleContentType2(id, "");
+                                          moduleRefetch()
                                         }}
                                       >
                                         <IoCloseSharp size={20} />
