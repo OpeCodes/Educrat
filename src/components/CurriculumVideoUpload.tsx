@@ -40,6 +40,7 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
 
   const [selectedImageName, setSelectImageName] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [success, setSucess] = useState(false);
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -117,8 +118,10 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
           isClosable: true,
         });
         onImageUpload(file);
+        setSucess(true)
       
       } catch (error: any) {
+        setSucess(false)
         toast({
           title: `${error.response.data.error}`,
           status: "error",
@@ -200,8 +203,11 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
                         <Text>0%</Text>
                       </Stack>
                     )}
-                    {uploadProgress >= 100 && (
-                      <Text fontWeight={"500"}>Success</Text>
+                    {uploadProgress >= 100 && !success && (
+                      <Text fontWeight={"500"}>Proccessing</Text>
+                    )}
+                     {uploadProgress >= 100 && success && (
+                      <Text fontWeight={"500"}>success</Text>
                     )}
                   </Td>
                   <Td>{formattedDate}</Td>
@@ -214,6 +220,7 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
                       setSelectImageName(null);
                       setUploadProgress(0);
                       refetch()
+                      setSucess(false)
                       
                     }}
                   >
