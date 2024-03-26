@@ -1179,13 +1179,17 @@ const Curriculum = () => {
                                     mt={-3}
                                     pb={2}
                                     p={3}
+
                                   >
                                     <Flex
                                       width="100%"
                                       justifyContent="end"
-                                      mt={"-37px"}
+                                      // mt={"-37px"}
+                                      mt={"-12px"}
                                     >
                                       <Flex
+                                      mt={"-30px"}
+
                                         fontSize={14}
                                         zIndex="80000"
                                         backgroundColor="white"
@@ -1214,7 +1218,7 @@ const Curriculum = () => {
                                         </Text>
                                       </Flex>
                                     </Flex>
-                                    <Stack mt={7}>
+                                    <Stack >
                                       <Text>resources</Text>
                                     </Stack>
                                   </Stack>
