@@ -368,7 +368,8 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    // console.log(content,contentEndPointType)
+                    // console.log(content)
+                    console.log(content?.id)
                     const initialValues4 = {
                       title: "",
                     };

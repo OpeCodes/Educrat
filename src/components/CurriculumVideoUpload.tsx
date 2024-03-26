@@ -15,17 +15,15 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
-import { useGetModuleCourse } from "../hooks/module";
+import { useDeleteVideoLecture, useGetModuleCourse } from "../hooks/module";
 import { useGetSingleCourse } from "../hooks/course";
 import { useParams } from "react-router-dom";
 // import { useQueryClient  } from "@tanstack/react-query";
 
-
-
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
   id: number;
-  contentId: number
+  contentId: number;
 }
 
 const MAX_FILE_SIZE_MB = 4;
@@ -33,13 +31,13 @@ const MAX_FILE_SIZE_MB = 4;
 const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   onImageUpload,
   id,
-  contentId
+  contentId,
 }) => {
-  console.log(contentId)
+  console.log(contentId);
   const { id: ID } = useParams();
-const {getSingleCourse}=  useGetSingleCourse(ID)
-
-const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
+  const { getSingleCourse } = useGetSingleCourse(ID);
+  const { deleteVideoLecture } = useDeleteVideoLecture();
+  const { refetch } = useGetModuleCourse(getSingleCourse?.id);
 
   const [selectedImageName, setSelectImageName] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
@@ -88,7 +86,7 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
   };
 
   const uploadImage = async (file: File, duration: number, title: string) => {
-   
+    refetch();
 
     const reader = new FileReader();
     reader.onloadend = async () => {
@@ -121,10 +119,9 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
           isClosable: true,
         });
         onImageUpload(file);
-        setSucess(true)
-      
+        setSucess(true);
       } catch (error: any) {
-        setSucess(false)
+        setSucess(false);
         toast({
           title: `${error.response.data.error}`,
           status: "error",
@@ -209,21 +206,22 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
                     {uploadProgress >= 100 && !success && (
                       <Text fontWeight={"500"}>Proccessing</Text>
                     )}
-                     {uploadProgress >= 100 && success && (
+                    {uploadProgress >= 100 && success && (
                       <Text fontWeight={"500"}>success</Text>
                     )}
                   </Td>
                   <Td>{formattedDate}</Td>
                   <Td
-                  cursor={"pointer"}
+                    cursor={"pointer"}
                     fontSize={15}
                     fontWeight={"600"}
                     color={"#5624D0"}
                     onClick={() => {
                       setSelectImageName(null);
                       setUploadProgress(0);
-                      refetch()
-                      setSucess(false)                      
+                      refetch();
+                      setSucess(false);
+                      deleteVideoLecture({ videoId: contentId });
                     }}
                   >
                     Replace
