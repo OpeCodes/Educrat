@@ -1074,7 +1074,7 @@ const Curriculum = () => {
                                                   <Stack>
                                                     <ReactQuill
                                                       theme="snow"
-                                                      value={values.body}
+                                                      value={values.description}
                                                       onChange={handleChange(
                                                         "description"
                                                       )}
