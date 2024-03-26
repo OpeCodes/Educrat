@@ -1055,8 +1055,8 @@ const Curriculum = () => {
                                                   DescriptionLectureSchema
                                                 }
                                                 onSubmit={(values: any) => {
-                                                  editArticleLectureCourse({
-                                                    articleId: content?.id,
+                                                  moduleEditLectureCourse({
+                                                    lectureId: id,
                                                     user: values,
                                                   });
                                                   setTimeout(() => {
