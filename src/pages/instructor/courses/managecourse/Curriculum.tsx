@@ -71,8 +71,8 @@ const Curriculum = () => {
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
   const { deleteLectureModule } = useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
-
+  const { moduleCreateLectureCourse ,isSuccess} = useCreateModuleLectureCourse();
+  console.log(isSuccess)
   const initialValues1 = {
     title: "",
     learningObjective: "",
@@ -1339,7 +1339,7 @@ const Curriculum = () => {
                                               type="button"
                                               backgroundColor={"black"}
                                             >
-                                              Saves
+                                              Save
                                             </Button>
                                           </Flex>
                                         </Stack>
