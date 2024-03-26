@@ -1114,11 +1114,12 @@ const Curriculum = () => {
                                       </Flex>
                                     </Flex>
                                     <Stack>
-                                      <Text>resourcesyy</Text>
+                                      <Text>resources</Text>
                                     </Stack>
                                   </Stack>
                                 )}
 
+                              {/* ****************************edit article section*********************** */}
                               {isOpenEditArticle[id] &&
                                 !isOpenInnerdescripRes[id] &&
                                 !isOpenContentType[id] &&
@@ -1131,6 +1132,42 @@ const Curriculum = () => {
                                     pb={2}
                                     p={3}
                                   >
+                                    {" "}
+                                    <Flex
+                                      width="100%"
+                                      justifyContent="end"
+                                      mt={"-12px"}
+                                    >
+                                      <Flex
+                                        mt={"-30px"}
+                                        fontSize={14}
+                                        zIndex="80000"
+                                        backgroundColor="white"
+                                        textAlign={"center"}
+                                        fontWeight={"bold"}
+                                        borderTopWidth={1}
+                                        borderRightWidth={1}
+                                        borderLeftWidth={1}
+                                        borderColor={"gray"}
+                                        align={"center"}
+                                        columnGap={2}
+                                        marginRight={7}
+                                        pt={"3px"}
+                                      >
+                                        <Text marginLeft={2} fontSize={14}>
+                                          Add Article
+                                        </Text>
+                                        <Text
+                                          as={"button"}
+                                          fontWeight="bold"
+                                          onClick={() => {
+                                            toggleIsOpenInnerdescripRes(id);
+                                          }}
+                                        >
+                                          <IoCloseSharp size={20} />
+                                        </Text>
+                                      </Flex>
+                                    </Flex>
                                     <Text fontWeight={"bold"}>Textdd</Text>
                                     <Formik
                                       initialValues={articleEditInitialValue}
