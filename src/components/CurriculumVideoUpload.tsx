@@ -85,7 +85,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   };
 
   const uploadImage = async (file: File, duration: number, title: string) => {
-    refetch();
 
     const reader = new FileReader();
     reader.onloadend = async () => {
@@ -106,11 +105,15 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   (progressEvent.loaded * 100) / progressEvent.total
                 );
                 setUploadProgress(percentCompleted);
+                 refetch();
+
               }
             },
           }
         );
         console.log("Upload completed:", response.data);
+        refetch();
+        
         toast({
           title: `Video uploaded`,
           status: "success",
@@ -119,6 +122,8 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         });
         onImageUpload(file);
         setSucess(true);
+        refetch();
+
       } catch (error: any) {
         setSucess(false);
         toast({
@@ -212,8 +217,10 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   <Td>{formattedDate}</Td>
                   <Td
                     as={"button"}
-                    disabled={!success}
-                    cursor={!success ? "not-allowed" : "pointer"}
+                    // disabled={!success}
+                    disabled={true}
+                    // cursor={!success ? "not-allowed" : "pointer"}
+                    cursor={"not-allowed"}
                     fontSize={15}
                     fontWeight={"600"}
                     color={"#5624D0"}
