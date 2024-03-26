@@ -33,7 +33,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   id,
   contentId,
 }) => {
-  console.log(contentId);
   const { id: ID } = useParams();
   const { getSingleCourse } = useGetSingleCourse(ID);
   const { deleteVideoLecture } = useDeleteVideoLecture();
@@ -212,7 +211,9 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   </Td>
                   <Td>{formattedDate}</Td>
                   <Td
-                    cursor={"pointer"}
+                    as={"button"}
+                    disabled={!success}
+                    cursor={!success ? "not-allowed" : "pointer"}
                     fontSize={15}
                     fontWeight={"600"}
                     color={"#5624D0"}

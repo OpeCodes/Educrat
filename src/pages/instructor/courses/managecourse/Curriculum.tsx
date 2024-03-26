@@ -148,7 +148,7 @@ const Curriculum = () => {
 
   return (
     <Stack>
-      <Text p={5} fontSize={20} fontWeight={"bold"}>
+      <Text p={5} fontSize={20} fontWeight={"bold"} >
         Curriculum
       </Text>
       <Divider />
@@ -368,8 +368,6 @@ const Curriculum = () => {
                       content,
                       contentType: contentEndPointType,
                     } = lecture;
-                    // console.log(content)
-                    console.log(content?.id)
                     const initialValues4 = {
                       title: "",
                     };
