@@ -46,6 +46,7 @@ import {
   useEditArticleLectureCourse,
   useDeleteVideoLecture,
   useDeleteArticleLecture,
+  useCreateExternalResourceLink,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -106,6 +107,7 @@ const Curriculum = () => {
   const { editArticleLectureCourse } = useEditArticleLectureCourse();
   const { deleteVideoLecture } = useDeleteVideoLecture();
   const { deleteArticleLecture } = useDeleteArticleLecture();
+ const {createExternalResourceLink} = useCreateExternalResourceLink();
   const {
     data,
     isPending: getCourseLoading,
@@ -1293,13 +1295,15 @@ const Curriculum = () => {
                                                     externalResourceSchema
                                                   }
                                                   onSubmit={(values: any) => {
-                                                    moduleEditCourse({
-                                                      moduleId: id,
+                                                    createExternalResourceLink({
+                                                      lectureId: id,
                                                       user: values,
                                                     });
-                                                    setTimeout(() => {
-                                                      toggleIsOpen(id);
-                                                    }, 2000);
+
+                                                    //   setTimeout(() => {
+                                                    //     toggleIsOpen(id);
+                                                    //   }, 2000);
+                                                    console.log(values);
                                                   }}
                                                 >
                                                   {({
@@ -1363,14 +1367,12 @@ const Curriculum = () => {
                                                           }}
                                                           focusBorderColor="black"
                                                           name="url"
-                                                          value={
-                                                            values.learningObjective
-                                                          }
+                                                          value={values.url}
                                                           onChange={
                                                             handleChange
                                                           }
                                                         />
-                                                        {errors.learningObjective && (
+                                                        {errors.url && (
                                                           <Text
                                                             style={{
                                                               color: "red",
@@ -1381,8 +1383,7 @@ const Curriculum = () => {
                                                             {/* {
                                                               errors.learningObjective
                                                             } */}
-                                                            enter learning
-                                                            objective
+                                                            enter url
                                                           </Text>
                                                         )}
                                                       </Stack>
