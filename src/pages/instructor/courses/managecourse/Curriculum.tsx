@@ -1074,6 +1074,7 @@ const Curriculum = () => {
                                                       onChange={handleChange(
                                                         "body"
                                                       )}
+                                                      placeholder="Add a description.Include what students will be able to do after completing the lecture"
                                                     />
                                                     {errors?.body && (
                                                       <Text
