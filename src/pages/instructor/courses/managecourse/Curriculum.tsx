@@ -771,6 +771,7 @@ const Curriculum = () => {
                                                   handleUploadSuccess
                                                 }
                                                 id={id}
+                                                contentId ={content?.id}
                                               />
                                             </Stack>
                                           </TabPanel>

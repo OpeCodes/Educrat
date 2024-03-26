@@ -25,6 +25,7 @@ import { useParams } from "react-router-dom";
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
   id: number;
+  contentId: number
 }
 
 const MAX_FILE_SIZE_MB = 4;
@@ -32,7 +33,9 @@ const MAX_FILE_SIZE_MB = 4;
 const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   onImageUpload,
   id,
+  contentId
 }) => {
+  console.log(contentId)
   const { id: ID } = useParams();
 const {getSingleCourse}=  useGetSingleCourse(ID)
 
@@ -212,7 +215,7 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
                   </Td>
                   <Td>{formattedDate}</Td>
                   <Td
-                    as={"button"}
+                  cursor={"pointer"}
                     fontSize={15}
                     fontWeight={"600"}
                     color={"#5624D0"}
@@ -220,8 +223,7 @@ const {refetch} =  useGetModuleCourse(getSingleCourse?.id);
                       setSelectImageName(null);
                       setUploadProgress(0);
                       refetch()
-                      setSucess(false)
-                      
+                      setSucess(false)                      
                     }}
                   >
                     Replace
