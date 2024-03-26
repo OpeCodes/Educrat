@@ -521,7 +521,7 @@ export const useDeleteArticleLecture = () => {
 
   const { mutate: deleteArticleLecture} = useMutation({
     mutationFn: ({ articleId }: any) => {
-      return customFetch.delete(`/lecture/content/video/${articleId}`);
+      return customFetch.delete(`/lecture/content/article/${articleId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
