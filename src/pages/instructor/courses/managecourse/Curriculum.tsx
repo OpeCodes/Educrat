@@ -85,6 +85,10 @@ const Curriculum = () => {
   const articleCreateInitialValue = {
     body: "",
   };
+  const externalResourceInitialValue={
+    title: "",
+    url: ""
+  }
 
   const {
     moduleCreateCourse,

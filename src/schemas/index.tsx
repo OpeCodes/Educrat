@@ -84,3 +84,8 @@ export const ArticleCreateLectureSchema = Yup.object().shape({
 export const DescriptionLectureSchema = Yup.object().shape({
   description: Yup.string().required("pls enter description"),
 })
+export const externalResourceSchema =  Yup.object().shape({
+  title: Yup.string().required("pls enter description"),
+  // url: Yup.string().required("pls enter description"),
+  url: Yup.string().url("enter a valid url").required("pls enter a url")
+})

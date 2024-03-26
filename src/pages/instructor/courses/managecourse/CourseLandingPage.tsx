@@ -29,7 +29,16 @@ const CourseLandingPage = () => {
   useEffect(() => {
     refetch();
   }, [id]);
-
+  interface Course {
+    title: string;
+    subtitle: string;
+    language:string;
+    preRequisites: string;
+    learningObjectives: string[];
+    category: number;
+    description: any;
+    complexityLevel: any;
+  }
   const {
     getSingleCourse,
     isError,
@@ -37,10 +46,10 @@ const CourseLandingPage = () => {
     refetch,
   } = useGetSingleCourse(id);
 
-  const initialValues = {
+  const initialValues: Course = {
     title: getSingleCourse?.title || "",
-    subtitle: getSingleCourse?.subtitle,
-    language: getSingleCourse?.language,
+    subtitle: getSingleCourse?.subtitle||"",
+    language: getSingleCourse?.language||"",
     preRequisites: getSingleCourse?.preRequisites || "",
     learningObjectives: getSingleCourse?.learningObjectives || ["", "", ""],
     category: getSingleCourse?.category?.id,
@@ -54,7 +63,9 @@ const CourseLandingPage = () => {
   // const handleImageUpload = (file: File) => {
   //   console.log("Uploaded file:", file);
   // }
-
+interface Course {
+  title: string
+}
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any): void => {
@@ -106,7 +117,7 @@ const CourseLandingPage = () => {
                 />
                 {errors.title && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    pls add title
+                    {errors.title}
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>
@@ -124,9 +135,9 @@ const CourseLandingPage = () => {
                   name="subtitle"
                   onChange={handleChange}
                 />
-                {errors?.subtitle && (
+                {errors.subtitle && (
                   <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
-                    enter subtitle
+                    {errors.subtitle}
                   </Text>
                 )}
                 <FormHelperText fontSize={10}>
@@ -198,7 +209,7 @@ const CourseLandingPage = () => {
                         style={{ color: "red", marginTop: 5 }}
                         fontSize="14px"
                       >
-                        please insert prerequisites
+                        {errors.preRequisites}
                       </Text>
                     )}
                   </FormControl>
@@ -222,7 +233,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      please select a language
+                    { errors.language}
                     </Text>
                   )}
                 </Stack>
@@ -245,7 +256,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      pls select level
+                     {errors.complexityLevel}
                     </Text>
                   )}
                 </Stack>
@@ -269,7 +280,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      please select category
+                      {errors.category}
                     </Text>
                   )}
                 </Stack>
