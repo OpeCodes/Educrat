@@ -59,6 +59,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { HiPlayCircle } from "react-icons/hi2";
 import CurriculumVideoUpload from "../../../../components/CurriculumVideoUpload";
 import ReactQuill from "react-quill";
+import { CurriculumInterface } from "../../../../interface/courseInterface";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
   const { id } = useParams();
@@ -85,10 +86,10 @@ const Curriculum = () => {
   const articleCreateInitialValue = {
     body: "",
   };
-  const externalResourceInitialValue={
+  const externalResourceInitialValue: CurriculumInterface = {
     title: "",
-    url: ""
-  }
+    url: "",
+  };
 
   const {
     moduleCreateCourse,

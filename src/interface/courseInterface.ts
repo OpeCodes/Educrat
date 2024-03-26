@@ -8,3 +8,10 @@ export interface CourseEditCreate{
     description: any;
     complexityLevel: any;
 }
+export interface CurriculumInterface {
+    title?: string;
+    body?: string;
+    url?: string;
+    learningObjective?: string;
+    description?: string
+}
