@@ -121,6 +121,8 @@ const Curriculum = () => {
     toggleIsOpenInnerdescripRes,
     isOpenEditArticle,
     toggleIsOpenEditArticle,
+    isOpenEditVideo,
+    toggleIsOpenEditVideo,
   } = useGetModuleCourse(getSingleCourse?.id);
   interface Lecture {
     title: string;
@@ -476,7 +478,8 @@ const Curriculum = () => {
 
                                   {!isOpenContentType[id] &&
                                     !isOpenInnerdescripRes[id] &&
-                                    !isOpenEditArticle[id] && (
+                                    !isOpenEditArticle[id] &&
+                                    !isOpenEditVideo[id] && (
                                       <Flex
                                         marginRight={"10px"}
                                         columnGap={"15px"}
@@ -871,6 +874,7 @@ const Curriculum = () => {
                             <Stack>
                               {!isOpenInnerdescripRes[id] &&
                                 !isOpenEditArticle[id] &&
+                                !isOpenEditVideo[id] &&
                                 !isOpenContentType[id] &&
                                 !isOpenModuleLectureState[id] && (
                                   <>
@@ -924,6 +928,9 @@ const Curriculum = () => {
                                                   fontWeight={"600"}
                                                   columnGap={1}
                                                   color={"#5624D0"}
+                                                  onClick={() =>
+                                                    toggleIsOpenEditVideo(id)
+                                                  }
                                                 >
                                                   <Text>
                                                     <HiPlayCircle />
@@ -1118,7 +1125,6 @@ const Curriculum = () => {
                                     </Stack>
                                   </Stack>
                                 )}
-
                               {/* ****************************edit article section*********************** */}
                               {isOpenEditArticle[id] &&
                                 !isOpenInnerdescripRes[id] &&
@@ -1131,7 +1137,7 @@ const Curriculum = () => {
                                     mt={-3}
                                     pb={2}
                                     p={3}
-                                  >                   
+                                  >
                                     <Flex
                                       width="100%"
                                       justifyContent="end"
@@ -1213,7 +1219,125 @@ const Curriculum = () => {
                                             align={"center"}
                                             columnGap={5}
                                             mt={"2.9rem"}
-                                          >                                            
+                                          >
+                                            <Button
+                                              color="#ffffff"
+                                              fontWeight={"500"}
+                                              fontSize={14}
+                                              as={"button"}
+                                              py={2}
+                                              px={4}
+                                              variant="outline"
+                                              spinnerPlacement="end"
+                                              onClick={() =>
+                                                handleEditArticleSubmit()
+                                              }
+                                              type="button"
+                                              backgroundColor={"black"}
+                                            >
+                                              Save
+                                            </Button>
+                                          </Flex>
+                                        </Stack>
+                                      )}
+                                    </Formik>
+                                  </Stack>
+                                )}
+                              {/* ****************************edit video section*********************** */}
+
+                              {isOpenEditVideo[id] &&
+                                !isOpenInnerdescripRes[id] &&
+                                !isOpenContentType[id] &&
+                                !isOpenModuleLectureState[id] && (
+                                  <Stack
+                                    bg={"white"}
+                                    borderWidth={1}
+                                    borderColor={"gray"}
+                                    mt={-3}
+                                    pb={2}
+                                    p={3}
+                                  >
+                                    <Flex
+                                      width="100%"
+                                      justifyContent="end"
+                                      mt={"-12px"}
+                                    >
+                                      <Flex
+                                        mt={"-30px"}
+                                        fontSize={14}
+                                        zIndex="80000"
+                                        backgroundColor="white"
+                                        textAlign={"center"}
+                                        fontWeight={"bold"}
+                                        borderTopWidth={1}
+                                        borderRightWidth={1}
+                                        borderLeftWidth={1}
+                                        borderColor={"gray"}
+                                        align={"center"}
+                                        columnGap={2}
+                                        marginRight={7}
+                                        pt={"3px"}
+                                      >
+                                        <Text marginLeft={2} fontSize={14}>
+                                          Add video
+                                        </Text>
+                                        <Text
+                                          as={"button"}
+                                          fontWeight="bold"
+                                          onClick={() =>
+                                            toggleIsOpenEditVideo(id)
+                                          }
+                                        >
+                                          <IoCloseSharp size={20} />
+                                        </Text>
+                                      </Flex>
+                                    </Flex>
+                                    <Text fontWeight={"bold"}>Text</Text>
+                                    <Formik
+                                      initialValues={articleEditInitialValue}
+                                      validationSchema={
+                                        ArticleCreateLectureSchema
+                                      }
+                                      onSubmit={(values: any) => {
+                                        editArticleLectureCourse({
+                                          articleId: content?.id,
+                                          user: values,
+                                        });
+                                        setTimeout(() => {
+                                          toggleIsOpenEditArticle(id);
+                                        }, 2000);
+                                      }}
+                                    >
+                                      {({
+                                        handleChange,
+                                        handleSubmit: handleEditArticleSubmit,
+                                        values,
+                                        errors,
+                                      }) => (
+                                        <Stack>
+                                          <ReactQuill
+                                            theme="snow"
+                                            value={values.body}
+                                            onChange={handleChange("body")}
+                                          />
+                                          {errors?.body && (
+                                            <Text
+                                              style={{
+                                                color: "red",
+                                                marginTop: 5,
+                                              }}
+                                              fontSize="14px"
+                                            >
+                                              enter title
+                                            </Text>
+                                          )}
+
+                                          <Flex
+                                            justify={"end"}
+                                            align={"center"}
+                                            columnGap={5}
+                                            mt={"2.9rem"}
+                                          >
                                             <Button
                                               color="#ffffff"
                                               fontWeight={"500"}
