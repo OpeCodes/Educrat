@@ -380,7 +380,7 @@ export const useEditModuleLectureCourse = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
       toast({
-        title: `lecture edited successfully`,
+        title: `successfully`,
         status: "success",
         duration: 5000,
         isClosable: true,
