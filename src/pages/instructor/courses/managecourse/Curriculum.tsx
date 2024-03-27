@@ -490,7 +490,7 @@ const Curriculum = () => {
                                       >
                                         <LuStickyNote />
                                       </Text>
-                                      <Text  display={{base: "none", md: "flex"}}>
+                                      <Text  display={{base: "none", lg: "flex"}}>
                                       {title.length > 60
                                         ? `${title.slice(0, 40)}...`
                                         : `${title}`}
@@ -552,7 +552,6 @@ const Curriculum = () => {
                                             onClick={() => {
                                               toggleIsOpenContentType(id);
                                             }}
-                                            // width={{base: "100%", md: "100px"}}
                                           >
                                             Content
                                           </Button>
@@ -578,12 +577,45 @@ const Curriculum = () => {
                                 </Flex>
                               </Stack>
                             )}
-                            <Stack display={{base: "block", md: "none"}} bg={"white"}
+                            <Stack display={{base: "block", lg: "none"}} bg={"white"}
                                 borderWidth={1}
                                 mt={-3}
                                 borderColor={"gray"}
                                 p={3}>
-                            <Text>testing</Text>
+                            <Text>{title.length > 60
+                                        ? `${title.slice(0, 45)}...`
+                                        : `${title}`}</Text>
+                                    <Stack mt={1}>
+                                    {!isOpenContentType[id] &&
+                                    !isOpenInnerdescripRes[id] &&
+                                    !isOpenEditArticle[id] &&
+                                    !isOpenEditVideo[id] && (
+                                   <Stack>
+                                    {!contentEndPointType && (
+                                          <Button
+                                            borderRadius={0}
+                                            borderWidth={1}
+                                            borderColor={"black"}
+                                            color="black"
+                                            _hover={{
+                                              backgroundColor: "#F7F8FB",
+                                            }}
+                                            width={"100px"}
+                                            height={"30px"}
+                                            leftIcon={
+                                              <GoPlus fontSize={"20px"} />
+                                            }
+                                            variant="outline"
+                                            onClick={() => {
+                                              toggleIsOpenContentType(id);
+                                            }}
+                                          >
+                                            Content
+                                          </Button>
+                                        )}
+                                   </Stack>
+                                      )}
+                                    </Stack>
 
                             </Stack>
 
