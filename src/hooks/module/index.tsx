@@ -326,8 +326,6 @@ export const useCreateModuleLectureCourse = () => {
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["module"] });
-        setCreateLectureModuleSuccess(false)
-        console.log(createLectureModuleSuccess, "endpoint")
         toast({
           title: `lecture created successfully`,
           status: "success",
