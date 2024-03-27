@@ -63,8 +63,8 @@ export const courseLandingSchema = Yup.object().shape({
   preRequisites:  Yup.string().required("please enter prequisites"),
 });
 export const courseModuleSchema = Yup.object().shape({
-  title: Yup.string().required("pls add title"),
-  learningObjective: Yup.string().required("pls add learning objectives")
+  title: Yup.string().min(3).max(80).required("pls add title"),
+  learningObjective: Yup.string().min(3).max(200).required("pls add learning objectives")
 })
 export const courseEditModuleSchema = Yup.object().shape({
   title: Yup.string().required("pls add title"),
