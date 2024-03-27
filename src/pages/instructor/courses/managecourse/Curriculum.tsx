@@ -945,8 +945,6 @@ const Curriculum = () => {
                                               )}
                                               <Flex
                                                 justify={"end"}
-                                                // mt={"2.9rem"}
-                                                // mt={{base: "2.4rem" , md: 0}}
                                                 align={"center"}
                                               >
                                                 <Button
@@ -1279,7 +1277,7 @@ const Curriculum = () => {
                                                         }}
                                                         fontSize="14px"
                                                       >
-                                                        enter description
+                                                        <>{errors.body}</>
                                                       </Text>
                                                     )}
                                                     <Flex
