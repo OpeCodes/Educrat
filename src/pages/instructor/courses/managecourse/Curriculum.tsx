@@ -395,6 +395,7 @@ const Curriculum = () => {
                       resources,
                       contentType: contentEndPointType,
                     } = lecture;
+                    console.log(content)
                     const initialValues4: CurriculumInterface = {
                       title: "",
                     };
