@@ -84,11 +84,11 @@ export const useModuleEditCourse = () => {
   return { moduleEditCourse, isPending, error, isError, isSuccess };
 };
 
-export const useDeleteModalCourse = () => {
+export const useDeleteModuleCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteModule, isPending } = useMutation({
+  const { mutate: deleteModule, isPending: deleteModuleLoading } = useMutation({
     mutationFn: ({ moduleId }: any) => {
       return customFetch.delete(`/module/${moduleId}`);
     },
@@ -110,7 +110,7 @@ export const useDeleteModalCourse = () => {
       });
     },
   });
-  return { deleteModule, isPending };
+  return { deleteModule, deleteModuleLoading };
 };
 
 export const useGetModuleCourse = (id: any) => {
