@@ -66,7 +66,7 @@ export const useModuleEditCourse = () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
 
       toast({
-        title: `course section successfully`,
+        title: `course section updated`,
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -88,6 +88,7 @@ export const useDeleteModuleCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
+  
   const { mutate: deleteModule, isPending: deleteModuleLoading } = useMutation({
     mutationFn: ({ moduleId }: any) => {
       return customFetch.delete(`/module/${moduleId}`);
@@ -110,7 +111,7 @@ export const useDeleteModuleCourse = () => {
       });
     },
   });
-  return { deleteModule, deleteModuleLoading };
+  return { deleteModule, deleteModuleLoading, };
 };
 
 export const useGetModuleCourse = (id: any) => {
@@ -260,6 +261,8 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
+
+  
   return {
     data,
     isPending,
