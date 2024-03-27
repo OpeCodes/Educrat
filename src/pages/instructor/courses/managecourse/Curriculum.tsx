@@ -533,7 +533,7 @@ const Curriculum = () => {
                                         align={"center"}
                                         // display={{ base: "none", lg: "flex" }}
                                       >
-                                        <Stack display={{base: "none", md: "block"}}>
+                                        <Stack display={{base: "none", lg: "block"}}>
                                         {!contentEndPointType && (
                                           <Button
                                             borderRadius={0}
