@@ -200,7 +200,6 @@ const Curriculum = () => {
                 borderColor={"gray"}
                 p={3}
                 pb={10}
-                // bg={"#f4522d"}
               >
                 {!isOpenState[id] && (
                   // main section
@@ -639,7 +638,6 @@ const Curriculum = () => {
                                   borderWidth={1}
                                   borderColor={"gray"}
                                   mt={-3}
-                                  // height="250px"
                                   pb={2}
                                 >
                                   <Flex width="100%" justifyContent="end">
