@@ -1463,6 +1463,11 @@ const Curriculum = () => {
                                                       lectureId: id,
                                                       user: values,
                                                     });
+                                                    setTimeout(() => {
+                                                      toggleIsOpenInnerdescripRes(
+                                                        id
+                                                      );
+                                                    }, 2000);
                                                   }}
                                                 >
                                                   {({
@@ -1504,7 +1509,7 @@ const Curriculum = () => {
                                                             }}
                                                             fontSize="14px"
                                                           >
-                                                            enter title
+                                                            <>{errors.title}</>
                                                           </Text>
                                                         )}
                                                       </Stack>
@@ -1539,10 +1544,7 @@ const Curriculum = () => {
                                                             }}
                                                             fontSize="14px"
                                                           >
-                                                            {/* {
-                                                              errors.learningObjective
-                                                            } */}
-                                                            enter url
+                                                            <>{errors.url}</>
                                                           </Text>
                                                         )}
                                                       </Stack>
@@ -1562,9 +1564,6 @@ const Curriculum = () => {
                                                           spinnerPlacement="end"
                                                           onClick={() => {
                                                             handleExternalResource();
-                                                            toggleIsOpenInnerdescripRes(
-                                                              id
-                                                            );
                                                           }}
                                                           type="button"
                                                           backgroundColor={

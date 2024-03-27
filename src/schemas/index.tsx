@@ -76,8 +76,6 @@ export const curriculumLectureSchema = Yup.object().shape({
 export const curriculumEditLectureSchema = Yup.object().shape({
   title: Yup.string().min(3).max(80).required("pls add title"),
 })
-
-
 export const ArticleCreateLectureSchema = Yup.object().shape({
   body: Yup.string().required("pls add article"),
 })
@@ -86,6 +84,5 @@ export const DescriptionLectureSchema = Yup.object().shape({
 })
 export const externalResourceSchema =  Yup.object().shape({
   title: Yup.string().required("pls enter description"),
-  url: Yup.string().required("pls enter description"),
-  // url: Yup.string().url("enter a valid url").required("pls enter a url")
+  url: Yup.string().url("enter a valid url").required("pls enter a url")
 })
