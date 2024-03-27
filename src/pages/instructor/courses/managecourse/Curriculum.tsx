@@ -47,6 +47,7 @@ import {
   useDeleteVideoLecture,
   useDeleteArticleLecture,
   useCreateExternalResourceLink,
+  useDeleteExternalResource,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -77,6 +78,7 @@ const Curriculum = () => {
     useEditModuleLectureCourse();
   const { deleteLectureModule } = useDeleteLectureModuleCourse();
   const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
+   const {deleteExternalResource}=useDeleteExternalResource();
   const initialValues1: CurriculumInterface = {
     title: "",
     learningObjective: "",
@@ -1058,7 +1060,13 @@ const Curriculum = () => {
                                                           </Text>
                                                           <Text>{title}</Text>
                                                         </Flex>
-                                                        <Text as={"button"}>
+                                                        <Text as={"button"}
+                                                         onClick={() => {
+                                                          deleteExternalResource({
+                                                            resourceId: id,
+                                                          });
+                                                        }}
+                                                        >
                                                           <MdDelete />
                                                         </Text>
                                                       </Flex>
