@@ -79,7 +79,8 @@ const Curriculum = () => {
   const { deleteLectureModule, deleteLecutureModuleCourseLoading } =
     useDeleteLectureModuleCourse();
   const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
-  const { deleteExternalResource } = useDeleteExternalResource();
+  const { deleteExternalResource, deleteExternalResourceLoading } =
+    useDeleteExternalResource();
   const initialValues1: CurriculumInterface = {
     title: "",
     learningObjective: "",
@@ -1088,6 +1089,14 @@ const Curriculum = () => {
                                                         </Flex>
                                                         <Text
                                                           as={"button"}
+                                                          disabled={
+                                                            deleteExternalResourceLoading
+                                                          }
+                                                          cursor={
+                                                            deleteExternalResourceLoading
+                                                              ? "not-allowed"
+                                                              : "pointer"
+                                                          }
                                                           onClick={() => {
                                                             deleteExternalResource(
                                                               {

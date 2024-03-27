@@ -623,7 +623,7 @@ export const useDeleteExternalResource = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteExternalResource} = useMutation({
+  const { mutate: deleteExternalResource, isPending: deleteExternalResourceLoading} = useMutation({
     mutationFn: ({ resourceId }: any) => {
       return customFetch.delete(`/lecture/resource/${resourceId}`);
     },
@@ -645,5 +645,5 @@ export const useDeleteExternalResource = () => {
       });
     },
   });
-  return { deleteExternalResource};
+  return { deleteExternalResource, deleteExternalResourceLoading};
 };
