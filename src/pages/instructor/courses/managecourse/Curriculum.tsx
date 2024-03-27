@@ -63,7 +63,6 @@ import { HiPlayCircle } from "react-icons/hi2";
 import CurriculumVideoUpload from "../../../../components/CurriculumVideoUpload";
 import ReactQuill from "react-quill";
 import { VscLinkExternal } from "react-icons/vsc";
-const peter = true;
 import { CurriculumInterface } from "../../../../interface/courseInterface";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
@@ -78,7 +77,7 @@ const Curriculum = () => {
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
   const { deleteLectureModule } = useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse ,createLectureModuleSuccess, moduleLectureLoading} = useCreateModuleLectureCourse();
+  const { moduleCreateLectureCourse ,} = useCreateModuleLectureCourse();
    const {deleteExternalResource}=useDeleteExternalResource();
   const initialValues1: CurriculumInterface = {
     title: "",
@@ -103,7 +102,7 @@ const Curriculum = () => {
     showSection,
   } = useModuleCreateCourse();
 
-  const { createArticleLectureCourse,createArticleSuccess } = useCreateArticleLectureCourse();
+  const { createArticleLectureCourse, } = useCreateArticleLectureCourse();
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
@@ -1840,13 +1839,9 @@ const Curriculum = () => {
                           moduleId: id,
                           user: values,
                         });
-                        // setTimeout(() => {
-                        //   toggleIsCurriculumOpen(id);
-                        // }, 2000);
-                        if(moduleLectureLoading){
+                        setTimeout(() => {
                           toggleIsCurriculumOpen(id);
-                          console.log(moduleLectureLoading)
-                        }
+                        }, 2000);                      
                       }}
                     >
                       {({

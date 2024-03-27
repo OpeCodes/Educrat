@@ -318,13 +318,16 @@ export const useGetSingleModuleCourse = (id: any) => {
 export const useCreateModuleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { mutate: moduleCreateLectureCourse, isPending: moduleLectureLoading,isSuccess:createLectureModuleSuccess } =
+  const [createLectureModuleSuccess, setCreateLectureModuleSuccess] = useState(true);
+  const { mutate: moduleCreateLectureCourse, isPending: moduleLectureLoading } =
     useMutation({
       mutationFn: ({ moduleId, user }: any) => {
         return customFetch.post(`/lecture/module/${moduleId}`, user);
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["module"] });
+        setCreateLectureModuleSuccess(false)
+        console.log(createLectureModuleSuccess, "endpoint")
         toast({
           title: `lecture created successfully`,
           status: "success",
@@ -341,7 +344,7 @@ export const useCreateModuleLectureCourse = () => {
         });
       },
     });
-  return { moduleCreateLectureCourse, moduleLectureLoading ,createLectureModuleSuccess};
+  return { moduleCreateLectureCourse, moduleLectureLoading ,createLectureModuleSuccess, setCreateLectureModuleSuccess};
 };
 
 export const useGetModuleLectureCourse = (id: any) => {
