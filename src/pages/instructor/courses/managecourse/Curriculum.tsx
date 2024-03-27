@@ -180,6 +180,7 @@ const Curriculum = () => {
       )}
       {data?.map((course: any, index: any) => {
         const { title, id, lectures } = course;
+        
         const initialValues2 = {
           title: moduleTitle[index],
           learningObjective: modulelearningObjective[index],
@@ -377,6 +378,7 @@ const Curriculum = () => {
                       title,
                       content,
                       description,
+                      resources,
                       contentType: contentEndPointType,
                     } = lecture;
                     const initialValues4 = {
@@ -1026,6 +1028,17 @@ const Curriculum = () => {
                                           pb={2}
                                           p={3}
                                         >
+                                       {/* *************resource endpoint display********************** */}
+                                        <Stack  borderTopWidth={1} borderBottomWidth={1}>
+                                          <Stack p={3}>
+                                          <Text fontWeight={"bold"}>External Resource</Text>
+
+                                          </Stack>
+                                        </Stack>
+
+
+                                       {/* *************resource endpoint display END********************** */}
+
                                           {!isOpendescription[id] && (
                                             <>
                                               {!description ? (
@@ -1053,7 +1066,6 @@ const Curriculum = () => {
                                                 <Stack
                                                   mb={1}
                                                   cursor={"pointer"}
-                                                  border={"color"}
                                                   px={2}
                                                   _hover={{ borderWidth: 1 }}
                                                   onClick={() =>
@@ -1065,8 +1077,10 @@ const Curriculum = () => {
                                                       __html: description,
                                                     }}
                                                   />
+
                                                 </Stack>
                                               )}
+
                                             </>
                                           )}
                                           {/* ************************description container************************** */}
@@ -1155,7 +1169,7 @@ const Curriculum = () => {
                                                       >
                                                         Save
                                                       </Button>
-                                                    </Flex>{" "}
+                                                    </Flex>
                                                     mt={2}
                                                   </Stack>
                                                 )}
