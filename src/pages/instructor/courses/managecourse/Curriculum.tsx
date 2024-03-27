@@ -429,7 +429,7 @@ const Curriculum = () => {
                                 borderColor={"gray"}
                                 p={3}
                               >
-                                <Flex justify={"space-between"}>
+                                <Flex justify={"space-between"}  >
                                   <Flex
                                     columnGap={3}
                                     flexDirection={{
@@ -490,9 +490,12 @@ const Curriculum = () => {
                                       >
                                         <LuStickyNote />
                                       </Text>
+                                      <Text  display={{base: "none", md: "flex"}}>
                                       {title.length > 60
-                                        ? `${title.slice(0, 60)}...`
+                                        ? `${title.slice(0, 40)}...`
                                         : `${title}`}
+                                      </Text>
+                                     
 
                                       <Flex
                                         display={{ base: "none", lg: "flex" }}
@@ -530,6 +533,7 @@ const Curriculum = () => {
                                         align={"center"}
                                         // display={{ base: "none", lg: "flex" }}
                                       >
+                                        <Stack display={{base: "none", md: "block"}}>
                                         {!contentEndPointType && (
                                           <Button
                                             borderRadius={0}
@@ -548,10 +552,12 @@ const Curriculum = () => {
                                             onClick={() => {
                                               toggleIsOpenContentType(id);
                                             }}
+                                            // width={{base: "100%", md: "100px"}}
                                           >
                                             Content
                                           </Button>
                                         )}
+                                        </Stack>
 
                                         <Box>
                                           <Text
@@ -572,6 +578,14 @@ const Curriculum = () => {
                                 </Flex>
                               </Stack>
                             )}
+                            <Stack display={{base: "block", md: "none"}} bg={"white"}
+                                borderWidth={1}
+                                mt={-3}
+                                borderColor={"gray"}
+                                p={3}>
+                            <Text>testing</Text>
+
+                            </Stack>
 
                             {/* video and article section */}
                             {isOpenContentType[id] &&
