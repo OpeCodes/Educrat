@@ -187,7 +187,7 @@ const Curriculum = () => {
       )}
       {data?.map((course: any, index: any) => {
         const { title, id, lectures } = course;
-        const initialValues2 = {
+        const initialValues2: CurriculumInterface = {
           title: moduleTitle[index],
           learningObjective: modulelearningObjective[index],
         };
@@ -315,8 +315,7 @@ const Curriculum = () => {
                                 style={{ color: "red", marginTop: 0 }}
                                 fontSize="14px"
                               >
-                                enter title
-                                {/* {errors.title} */}
+                                <>{errors.title}</>
                               </Text>
                             )}
                           </Stack>
@@ -347,8 +346,7 @@ const Curriculum = () => {
                               style={{ color: "red", marginTop: 0 }}
                               fontSize="14px"
                             >
-                              {/* {errors.learningObjective} */}
-                              enter leanring objetive
+                              <>{errors.learningObjective}</>
                             </Text>
                           )}
                         </Stack>
