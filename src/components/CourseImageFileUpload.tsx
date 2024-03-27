@@ -17,6 +17,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const toast = useToast();
   const { id } = useParams();
   const { getSingleCourse } = useGetSingleCourse(id);
+  console.log(getSingleCourse)
  const {refetch} = useGetAllUserCourse()
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +88,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         {selectedImage ? (
           <Image src={selectedImage} width="650px" height={"200px"} alt="Uploaded Image" mt={4} />
         ) : (
-          <Image src={imagePlaceholder} />
+          <Image src= {getSingleCourse?.thumbnail ||imagePlaceholder} width="650px" height={"200px"} objectFit={"cover"} />
         )}
       </Box>
       <Stack ml={4} mt={5}>
