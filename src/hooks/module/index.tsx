@@ -614,3 +614,32 @@ export const useCreateExternalResourceLink = () => {
   });
   return { createExternalResourceLink };
 };
+
+export const useDeleteExternalResource = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteExternalResource} = useMutation({
+    mutationFn: ({ resourceId }: any) => {
+      return customFetch.delete(`/lecture/resource/${resourceId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["module"] });
+      toast({
+        title: ` deleted successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { deleteExternalResource};
+};
