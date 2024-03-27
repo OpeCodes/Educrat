@@ -63,9 +63,7 @@ import { HiPlayCircle } from "react-icons/hi2";
 import CurriculumVideoUpload from "../../../../components/CurriculumVideoUpload";
 import ReactQuill from "react-quill";
 import { VscLinkExternal } from "react-icons/vsc";
-import {
-  CurriculumInterface,
-} from "../../../../interface/courseInterface";
+import { CurriculumInterface } from "../../../../interface/courseInterface";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
   const { id } = useParams();
@@ -83,7 +81,7 @@ const Curriculum = () => {
   const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
   const { deleteExternalResource, deleteExternalResourceLoading } =
     useDeleteExternalResource();
-  
+
   const initialValues1: CurriculumInterface = {
     title: "",
     learningObjective: "",
@@ -867,31 +865,30 @@ const Curriculum = () => {
                                             errors,
                                           }) => (
                                             <Stack>
-                                              <Box >
-                                              <ReactQuill
-                                                theme="snow"
-                                                value={values.body}
-                                                onChange={handleChange("body")}
-                                                style={{height: "100%", paddingBottom: "50px"}}
-                                              />
+                                              <Box>
+                                                <ReactQuill
+                                                  theme="snow"
+                                                  value={values.body}
+                                                  onChange={handleChange(
+                                                    "body"
+                                                  )}
+                                                  className="reactQuillArticleCreate"
+                                                />
                                               </Box>
                                               {errors.body && (
                                                 <Text
                                                   style={{
                                                     color: "red",
-                                                    marginTop: 5,
                                                   }}
                                                   fontSize="14px"
                                                 >
-                                                  <>
-                                                  {errors.body}
-                                                  </>
+                                                  <>{errors.body}</>
                                                 </Text>
                                               )}
                                               <Flex
                                                 justify={"end"}
                                                 // mt={"2.9rem"}
-                                                mt={{base: "2.4rem" , md: 0}}
+                                                // mt={{base: "2.4rem" , md: 0}}
                                                 align={"center"}
                                               >
                                                 <Button

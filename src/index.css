@@ -80,3 +80,28 @@ button:focus-visible {
   scale: 1.1;
   transition-duration: 500ms;
 }
+.reactQuillArticleCreate{
+  /* display: none; */
+  height: 100%;
+  /* padding-bottom: 50px; */
+}
+@media only screen and (max-width: 2560px) {
+  .reactQuillArticleCreate{
+    padding-bottom: 50px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .reactQuillArticleCreate{
+    padding-bottom: 50px;
+  }
+}
+@media only screen and (max-width: 467px) {
+  .reactQuillArticleCreate{
+    padding-bottom: 70px;
+  }
+}
+@media only screen and (max-width: 367px) {
+  .reactQuillArticleCreate{
+    padding-bottom: 95px;
+  }
+}
