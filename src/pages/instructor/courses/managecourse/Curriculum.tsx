@@ -76,7 +76,7 @@ const Curriculum = () => {
   const { deleteModule,deleteModuleLoading } = useDeleteModuleCourse();
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
-  const { deleteLectureModule } = useDeleteLectureModuleCourse();
+  const { deleteLectureModule, } = useDeleteLectureModuleCourse();
   const { moduleCreateLectureCourse ,} = useCreateModuleLectureCourse();
    const {deleteExternalResource}=useDeleteExternalResource();
   const initialValues1: CurriculumInterface = {

@@ -406,7 +406,7 @@ export const useDeleteLectureModuleCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteLectureModule, isPending: lectureModuleLoading } =
+  const { mutate: deleteLectureModule, isPending: deleteLecutureModuleCourseLoading } =
     useMutation({
       mutationFn: ({ lectureId }: any) => {
         return customFetch.delete(`/lecture/${lectureId}`);
@@ -430,7 +430,7 @@ export const useDeleteLectureModuleCourse = () => {
         });
       },
     });
-  return { deleteLectureModule, lectureModuleLoading };
+  return { deleteLectureModule, deleteLecutureModuleCourseLoading };
 };
 
 export const useGetLectureModuleCourse = (id: any) => {
