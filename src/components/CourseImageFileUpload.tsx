@@ -86,7 +86,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
     <Flex flexDirection={{ base: "column", md: "row" }}>
       <Box mb={4}>
         {selectedImage ? (
-          <Image src={selectedImage} width="650px" height={"200px"} alt="Uploaded Image" mt={4} />
+          <Image src={selectedImage} width="650px" height={"200px"} alt="Uploaded Image" mt={4} objectFit={"cover"}  />
         ) : (
           <Image src= {getSingleCourse?.thumbnail ||imagePlaceholder} width="650px" height={"200px"} objectFit={"cover"} />
         )}
