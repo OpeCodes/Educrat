@@ -396,7 +396,7 @@ const Curriculum = () => {
                       resources,
                       contentType: contentEndPointType,
                     } = lecture;
-                    const initialValues4 : CurriculumInterface= {
+                    const initialValues4: CurriculumInterface = {
                       title: "",
                     };
                     const handleDescriptionInitialValue = {
@@ -429,7 +429,7 @@ const Curriculum = () => {
                                 borderColor={"gray"}
                                 p={3}
                               >
-                                <Flex justify={"space-between"}  >
+                                <Flex justify={"space-between"}>
                                   <Flex
                                     columnGap={3}
                                     flexDirection={{
@@ -490,12 +490,13 @@ const Curriculum = () => {
                                       >
                                         <LuStickyNote />
                                       </Text>
-                                      <Text  display={{base: "none", lg: "flex"}}>
-                                      {title.length > 60
-                                        ? `${title.slice(0, 40)}...`
-                                        : `${title}`}
+                                      <Text
+                                        display={{ base: "none", lg: "flex" }}
+                                      >
+                                        {title.length > 60
+                                          ? `${title.slice(0, 40)}...`
+                                          : `${title}`}
                                       </Text>
-                                     
 
                                       <Flex
                                         display={{ base: "none", lg: "flex" }}
@@ -531,31 +532,35 @@ const Curriculum = () => {
                                         marginRight={"10px"}
                                         columnGap={"15px"}
                                         align={"center"}
-                                        // display={{ base: "none", lg: "flex" }}
                                       >
-                                        <Stack display={{base: "none", lg: "block"}}>
-                                        {!contentEndPointType && (
-                                          <Button
-                                            borderRadius={0}
-                                            borderWidth={1}
-                                            borderColor={"black"}
-                                            color="black"
-                                            _hover={{
-                                              backgroundColor: "#F7F8FB",
-                                            }}
-                                            width={"100px"}
-                                            height={"30px"}
-                                            leftIcon={
-                                              <GoPlus fontSize={"20px"} />
-                                            }
-                                            variant="outline"
-                                            onClick={() => {
-                                              toggleIsOpenContentType(id);
-                                            }}
-                                          >
-                                            Content
-                                          </Button>
-                                        )}
+                                        <Stack
+                                          display={{
+                                            base: "none",
+                                            lg: "block",
+                                          }}
+                                        >
+                                          {!contentEndPointType && (
+                                            <Button
+                                              borderRadius={0}
+                                              borderWidth={1}
+                                              borderColor={"black"}
+                                              color="black"
+                                              _hover={{
+                                                backgroundColor: "#F7F8FB",
+                                              }}
+                                              width={"100px"}
+                                              height={"30px"}
+                                              leftIcon={
+                                                <GoPlus fontSize={"20px"} />
+                                              }
+                                              variant="outline"
+                                              onClick={() => {
+                                                toggleIsOpenContentType(id);
+                                              }}
+                                            >
+                                              Content
+                                            </Button>
+                                          )}
                                         </Stack>
 
                                         <Box>
@@ -577,46 +582,55 @@ const Curriculum = () => {
                                 </Flex>
                               </Stack>
                             )}
-                            <Stack display={{base: "block", lg: "none"}} bg={"white"}
-                                borderWidth={1}
-                                mt={-3}
-                                borderColor={"gray"}
-                                p={3}>
-                            <Text>{title.length > 60
-                                        ? `${title.slice(0, 45)}...`
-                                        : `${title}`}</Text>
-                                    <Stack mt={1}>
-                                    {!isOpenContentType[id] &&
-                                    !isOpenInnerdescripRes[id] &&
-                                    !isOpenEditArticle[id] &&
-                                    !isOpenEditVideo[id] && (
-                                   <Stack>
-                                    {!contentEndPointType && (
-                                          <Button
-                                            borderRadius={0}
-                                            borderWidth={1}
-                                            borderColor={"black"}
-                                            color="black"
-                                            _hover={{
-                                              backgroundColor: "#F7F8FB",
-                                            }}
-                                            width={"100px"}
-                                            height={"30px"}
-                                            leftIcon={
-                                              <GoPlus fontSize={"20px"} />
-                                            }
-                                            variant="outline"
-                                            onClick={() => {
-                                              toggleIsOpenContentType(id);
-                                            }}
-                                          >
-                                            Content
-                                          </Button>
-                                        )}
-                                   </Stack>
+
+                            {/* ******************************mobile ************************** */}
+                            <Stack
+                              display={{ base: "block", lg: "none" }}
+                              bg={"white"}
+                              borderBottomWidth={1}
+                              borderRightWidth={1}
+                              borderLeftWidth={1}
+                              mt={-3}
+                              borderColor={"gray"}
+                              px={3}
+                              pb={3}
+                            >
+                              <Text>
+                                {title.length > 60
+                                  ? `${title.slice(0, 45)}...`
+                                  : `${title}`}
+                              </Text>
+                              <Stack mt={1}>
+                                {!isOpenContentType[id] &&
+                                  !isOpenInnerdescripRes[id] &&
+                                  !isOpenEditArticle[id] &&
+                                  !isOpenEditVideo[id] && (
+                                    <Stack>
+                                      {!contentEndPointType && (
+                                        <Button
+                                          borderRadius={0}
+                                          borderWidth={1}
+                                          borderColor={"black"}
+                                          color="black"
+                                          _hover={{
+                                            backgroundColor: "#F7F8FB",
+                                          }}
+                                          width={"100px"}
+                                          height={"30px"}
+                                          leftIcon={
+                                            <GoPlus fontSize={"20px"} />
+                                          }
+                                          variant="outline"
+                                          onClick={() => {
+                                            toggleIsOpenContentType(id);
+                                          }}
+                                        >
+                                          Content
+                                        </Button>
                                       )}
                                     </Stack>
-
+                                  )}
+                              </Stack>
                             </Stack>
 
                             {/* video and article section */}
@@ -1854,10 +1868,7 @@ const Curriculum = () => {
                                           style={{ color: "red", marginTop: 0 }}
                                           fontSize="14px"
                                         >
-                                          <>
-                                          {errors.title}
-                                          </>
-
+                                          <>{errors.title}</>
                                         </Text>
                                       )}
                                     </Stack>
