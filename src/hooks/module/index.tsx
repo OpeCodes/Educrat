@@ -523,7 +523,7 @@ export const useDeleteArticleLecture = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteArticleLecture} = useMutation({
+  const { mutate: deleteArticleLecture, isPending: deleteArticleLectureLoading} = useMutation({
     mutationFn: ({ articleId }: any) => {
       return customFetch.delete(`/lecture/content/article/${articleId}`);
     },
@@ -545,7 +545,7 @@ export const useDeleteArticleLecture = () => {
       });
     },
   });
-  return { deleteArticleLecture};
+  return { deleteArticleLecture, deleteArticleLectureLoading};
 };
 
 

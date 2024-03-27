@@ -110,7 +110,7 @@ const Curriculum = () => {
   };
   const { editArticleLectureCourse } = useEditArticleLectureCourse();
   const { deleteVideoLecture } = useDeleteVideoLecture();
-  const { deleteArticleLecture } = useDeleteArticleLecture();
+  const { deleteArticleLecture, deleteArticleLectureLoading} = useDeleteArticleLecture();
   const { createExternalResourceLink } = useCreateExternalResourceLink();
   const {
     data,
@@ -970,6 +970,11 @@ const Curriculum = () => {
                                                   fontWeight={"600"}
                                                   columnGap={1}
                                                   color={"#5624D0"}
+                                                  as={"button"}
+                                                  disabled={deleteArticleLectureLoading}
+                                                  cursor={
+                                                    deleteArticleLectureLoading ? "not-allowed" : "pointer"
+                                                  }
                                                   onClick={() => {
                                                     toggleIsOpenEditVideo(id);
                                                     deleteArticleLecture({
@@ -1485,9 +1490,12 @@ const Curriculum = () => {
                                                           loadingText="Loading"
                                                           variant="outline"
                                                           spinnerPlacement="end"
-                                                          onClick={() =>
-                                                            handleExternalResource()
-                                                          }
+                                                          onClick={() => {
+                                                            handleExternalResource();
+                                                            toggleIsOpenInnerdescripRes(
+                                                              id
+                                                            );
+                                                          }}
                                                           type="button"
                                                           backgroundColor={
                                                             "black"
