@@ -64,6 +64,7 @@ import CurriculumVideoUpload from "../../../../components/CurriculumVideoUpload"
 import ReactQuill from "react-quill";
 import { VscLinkExternal } from "react-icons/vsc";
 import { CurriculumInterface } from "../../../../interface/courseInterface";
+import ExternalResourceDownloadableFile from "../../../../components/ExternalResourceDownloadableFile";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
   const { id } = useParams();
@@ -1432,12 +1433,11 @@ const Curriculum = () => {
                                           <TabPanels>
                                             <TabPanel>
                                               <Stack>
-                                                <CurriculumVideoUpload
+                                                <ExternalResourceDownloadableFile
                                                   onImageUpload={
                                                     handleUploadSuccess
                                                   }
                                                   id={id}
-                                                  contentId={content?.id}
                                                 />
                                               </Stack>
                                             </TabPanel>

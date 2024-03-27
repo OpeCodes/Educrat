@@ -15,15 +15,13 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
-import { useDeleteVideoLecture, useGetModuleCourse } from "../hooks/module";
+import { useGetModuleCourse } from "../hooks/module";
 import { useGetSingleCourse } from "../hooks/course";
 import { useParams } from "react-router-dom";
-// import { useQueryClient  } from "@tanstack/react-query";
 
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
   id: number;
-  contentId: number;
 }
 
 const MAX_FILE_SIZE_MB = 4;
@@ -31,11 +29,9 @@ const MAX_FILE_SIZE_MB = 4;
 const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
   onImageUpload,
   id,
-  contentId,
 }) => {
   const { id: ID } = useParams();
   const { getSingleCourse } = useGetSingleCourse(ID);
-  const { deleteVideoLecture } = useDeleteVideoLecture();
   const { refetch } = useGetModuleCourse(getSingleCourse?.id);
 
   const [selectedImageName, setSelectImageName] = useState<any>(null);
@@ -65,7 +61,7 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Data = reader.result as string;
-      const endpoint = `/lecture/resource/lecture/${id}/downloable`;
+      const endpoint = `/lecture/resource/lecture/${id}/downloadable`;
       try {
         const response = await customFetch.post(
           endpoint,
@@ -147,7 +143,6 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
                   <Th color="black">Type</Th>
                   <Th color="black">Status</Th>
                   <Th color="black">Date</Th>
-                  <Th color="black"></Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -187,23 +182,7 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
                     )}
                   </Td>
                   <Td>{formattedDate}</Td>
-                  <Td
-                    as={"button"}
-                    disabled={!success}
-                    cursor={!success ? "not-allowed" : "pointer"}
-                    fontSize={15}
-                    fontWeight={"600"}
-                    color={"#5624D0"}
-                    onClick={() => {
-                      setSelectImageName(null);
-                      setUploadProgress(0);
-                      refetch();
-                      setSucess(false);
-                      deleteVideoLecture({ videoId: contentId });
-                    }}
-                  >
-                    Replace
-                  </Td>
+                  
                 </Tr>
               </Tbody>
             </Table>
