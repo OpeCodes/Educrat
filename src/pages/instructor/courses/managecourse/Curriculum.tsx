@@ -1261,28 +1261,33 @@ const Curriculum = () => {
                                                   errors,
                                                 }) => (
                                                   <Stack>
-                                                    <ReactQuill
-                                                      theme="snow"
-                                                      value={values.description}
-                                                      onChange={handleChange(
-                                                        "description"
-                                                      )}
-                                                      placeholder="Add a description.Include what students will be able to do after completing the lecture"
-                                                    />
-                                                    {errors.body && (
+                                                    <Box>
+                                                      <ReactQuill
+                                                        theme="snow"
+                                                        value={
+                                                          values.description
+                                                        }
+                                                        onChange={handleChange(
+                                                          "description"
+                                                        )}
+                                                        className="reactQuillArticleCreate"
+                                                        placeholder="Add a description.Include what students will be able to do after completing the lecture"
+                                                      />
+                                                    </Box>
+                                                    {errors.description && (
                                                       <Text
                                                         style={{
                                                           color: "red",
-                                                          marginTop: 5,
                                                         }}
                                                         fontSize="14px"
                                                       >
-                                                        <>{errors.body}</>
+                                                        <>
+                                                          {errors.description}
+                                                        </>
                                                       </Text>
                                                     )}
                                                     <Flex
                                                       justify={"end"}
-                                                      mt={"2.9rem"}
                                                       align={"center"}
                                                       columnGap={5}
                                                     >
