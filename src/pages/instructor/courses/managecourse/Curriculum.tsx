@@ -867,11 +867,14 @@ const Curriculum = () => {
                                             errors,
                                           }) => (
                                             <Stack>
+                                              <Box >
                                               <ReactQuill
                                                 theme="snow"
                                                 value={values.body}
                                                 onChange={handleChange("body")}
+                                                style={{height: "100%", paddingBottom: "50px"}}
                                               />
+                                              </Box>
                                               {errors.body && (
                                                 <Text
                                                   style={{
@@ -887,7 +890,8 @@ const Curriculum = () => {
                                               )}
                                               <Flex
                                                 justify={"end"}
-                                                mt={"2.9rem"}
+                                                // mt={"2.9rem"}
+                                                mt={{base: "2.4rem" , md: 0}}
                                                 align={"center"}
                                               >
                                                 <Button
