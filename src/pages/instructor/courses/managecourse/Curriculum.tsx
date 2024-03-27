@@ -2042,8 +2042,7 @@ const Curriculum = () => {
                         style={{ color: "red", marginTop: 0 }}
                         fontSize="14px"
                       >
-                        {/* {errors.title} */}
-                        enter title
+                        {errors.title}
                       </Text>
                     )}
                   </Stack>
@@ -2069,8 +2068,7 @@ const Curriculum = () => {
                       style={{ color: "red", marginTop: 0 }}
                       fontSize="14px"
                     >
-                      {/* {errors.learningObjective} */}
-                      enter learning objectives
+                      {errors.learningObjective}
                     </Text>
                   )}
                 </Stack>
