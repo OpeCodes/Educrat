@@ -74,7 +74,7 @@ export const curriculumLectureSchema = Yup.object().shape({
   title: Yup.string().min(3).max(80).required("pls add title"),
 })
 export const curriculumEditLectureSchema = Yup.object().shape({
-  title: Yup.string().required("pls add title"),
+  title: Yup.string().min(3).max(80).required("pls add title"),
 })
 
 

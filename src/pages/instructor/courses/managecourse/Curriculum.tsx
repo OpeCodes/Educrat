@@ -396,7 +396,7 @@ const Curriculum = () => {
                       resources,
                       contentType: contentEndPointType,
                     } = lecture;
-                    const initialValues4 = {
+                    const initialValues4 : CurriculumInterface= {
                       title: "",
                     };
                     const handleDescriptionInitialValue = {
@@ -1808,8 +1808,10 @@ const Curriculum = () => {
                                           style={{ color: "red", marginTop: 0 }}
                                           fontSize="14px"
                                         >
-                                          {/* {errors.title} */}
-                                          enter title
+                                          <>
+                                          {errors.title}
+                                          </>
+
                                         </Text>
                                       )}
                                     </Stack>
