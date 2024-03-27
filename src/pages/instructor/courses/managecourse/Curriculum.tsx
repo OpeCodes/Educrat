@@ -194,14 +194,18 @@ const Curriculum = () => {
                 bg={"#F7F8FB"}
                 borderWidth={1}
                 borderColor={"gray"}
-                p={3}
                 pb={10}
+
               >
+                
+                <Stack
+                //  bg={"#f4522d"}
+                  p={3}>
                 {!isOpenState[id] && (
                   // main section
-                  <Stack direction={{ base: "column", lg: "row" }}>
+                  <Stack direction={{ base: "column", lg: "row" }}  >
                     <Flex>
-                      <Text fontWeight={"bold"} fontSize={17} mr={4}>
+                      <Text fontWeight={"bold"} fontSize={17} mr={4} >
                         Section {index + 1}
                       </Text>
                       <Flex
@@ -248,6 +252,8 @@ const Curriculum = () => {
                     </Flex>
                   </Stack>
                 )}
+                </Stack>
+                
                 {/* edit part */}
                 {isOpenState[id] && (
                   <Formik
