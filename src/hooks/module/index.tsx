@@ -647,3 +647,52 @@ export const useDeleteExternalResource = () => {
   });
   return { deleteExternalResource, deleteExternalResourceLoading};
 };
+
+
+
+export const useCurriculumVideoUpload = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const { mutate: uploadingVideo } = useMutation({
+    mutationFn: ({ videoId, user }: any) => {
+      return customFetch.post(
+        `/lecture/content/lecture/${videoId}/video
+      `,
+        user,
+        // {         
+        //   onUploadProgress: (progressEvent: {
+        //     loaded: number;
+        //     total?: number;
+        //   }) => {
+        //     if (progressEvent.total) {
+        //       const percentCompleted = Math.round(
+        //         (progressEvent.loaded * 100) / progressEvent.total
+        //       );
+        //       setUploadProgress(percentCompleted);
+
+        //     }
+        //   },
+        // }
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["module"] });
+      toast({
+        title: `link created`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { uploadingVideo,uploadProgress,setUploadProgress };
+};

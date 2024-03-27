@@ -110,6 +110,8 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
             },
           }
         );
+        refetch();
+
         console.log("Upload completed:", response.data);
         toast({
           title: `Video uploaded`,
@@ -132,6 +134,8 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
       }
     };
     reader.readAsDataURL(file);
+    refetch();
+
   };
 
   //date formatted code
@@ -213,10 +217,10 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   <Td>{formattedDate}</Td>
                   <Td
                     as={"button"}
-                    // disabled={!success}
-                    disabled={true}
-                    // cursor={!success ? "not-allowed" : "pointer"}
-                    cursor={"not-allowed"}
+                    disabled={!success}
+                    // disabled={true}
+                    cursor={!success ? "not-allowed" : "pointer"}
+                    // cursor={"not-allowed"}
                     fontSize={15}
                     fontWeight={"600"}
                     color={"#5624D0"}

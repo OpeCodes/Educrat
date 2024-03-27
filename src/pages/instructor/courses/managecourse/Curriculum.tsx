@@ -187,6 +187,8 @@ const Curriculum = () => {
       )}
       {data?.map((course: any, index: any) => {
         const { title, id, lectures } = course;
+        console.log(lectures)
+
         const initialValues2: CurriculumInterface = {
           title: moduleTitle[index],
           learningObjective: modulelearningObjective[index],
