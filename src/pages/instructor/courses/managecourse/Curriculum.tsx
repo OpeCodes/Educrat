@@ -78,7 +78,7 @@ const Curriculum = () => {
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
   const { deleteLectureModule } = useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse ,createLectureModuleSuccess} = useCreateModuleLectureCourse();
+  const { moduleCreateLectureCourse ,createLectureModuleSuccess, moduleLectureLoading} = useCreateModuleLectureCourse();
    const {deleteExternalResource}=useDeleteExternalResource();
   const initialValues1: CurriculumInterface = {
     title: "",
@@ -104,7 +104,6 @@ const Curriculum = () => {
   } = useModuleCreateCourse();
 
   const { createArticleLectureCourse,createArticleSuccess } = useCreateArticleLectureCourse();
-  console.log(createArticleSuccess)
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
@@ -408,8 +407,8 @@ const Curriculum = () => {
                     // Format the components into the desired format
                     const formattedDate = `${month}/${day}/${year}`;
                     return (
-                      <Stack>
-                        <Stack key={id}>
+                      <Stack key={id}>
+                        <Stack >
                           <Stack position="relative">
                             {/* list of lecture starts here */}
                             {!isOpenModuleLectureState[id] && (
@@ -827,11 +826,10 @@ const Curriculum = () => {
                                               lectureId: id,
                                               user: { ...values, title },
                                             });
-                                            console.log(createArticleSuccess)
-                                            // setTimeout(() => {
-                                            //   toggleContentType2(id, "");
-                                            //   toggleIsOpenContentType(id);
-                                            // }, 2000);
+                                            setTimeout(() => {
+                                              toggleContentType2(id, "");
+                                              toggleIsOpenContentType(id);
+                                            }, 2000);
                                             
                                           }}
                                         >
@@ -1842,9 +1840,13 @@ const Curriculum = () => {
                           moduleId: id,
                           user: values,
                         });
-                        setTimeout(() => {
+                        // setTimeout(() => {
+                        //   toggleIsCurriculumOpen(id);
+                        // }, 2000);
+                        if(moduleLectureLoading){
                           toggleIsCurriculumOpen(id);
-                        }, 2000);
+                          console.log(moduleLectureLoading)
+                        }
                       }}
                     >
                       {({

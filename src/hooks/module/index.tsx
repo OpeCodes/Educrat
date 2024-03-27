@@ -318,7 +318,7 @@ export const useGetSingleModuleCourse = (id: any) => {
 export const useCreateModuleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { mutate: moduleCreateLectureCourse, isPending: moduleLectureLoading,isSuccess:createLectureModuleSuccess, } =
+  const { mutate: moduleCreateLectureCourse, isPending: moduleLectureLoading,isSuccess:createLectureModuleSuccess } =
     useMutation({
       mutationFn: ({ moduleId, user }: any) => {
         return customFetch.post(`/lecture/module/${moduleId}`, user);
