@@ -35,6 +35,7 @@ import {
   externalResourceSchema,
 } from "../../../../schemas";
 import {
+  useDeleteModuleCourse,
   useModuleCreateCourse,
   useGetModuleCourse,
   useModuleEditCourse,
@@ -47,7 +48,6 @@ import {
   useDeleteArticleLecture,
   useCreateExternalResourceLink,
   useDeleteExternalResource,
-  useDeleteModuleCourse,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -73,12 +73,12 @@ const Curriculum = () => {
     refetch();
   }, [id]);
   const { moduleEditCourse } = useModuleEditCourse();
-  const { deleteModule } = useDeleteModuleCourse();
+  const { deleteModule,deleteModuleLoading } = useDeleteModuleCourse();
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
   const { deleteLectureModule } = useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
-  const { deleteExternalResource } = useDeleteExternalResource();
+  const { moduleCreateLectureCourse ,} = useCreateModuleLectureCourse();
+   const {deleteExternalResource}=useDeleteExternalResource();
   const initialValues1: CurriculumInterface = {
     title: "",
     learningObjective: "",
@@ -102,7 +102,7 @@ const Curriculum = () => {
     showSection,
   } = useModuleCreateCourse();
 
-  const { createArticleLectureCourse } = useCreateArticleLectureCourse();
+  const { createArticleLectureCourse, } = useCreateArticleLectureCourse();
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
@@ -194,68 +194,66 @@ const Curriculum = () => {
                 bg={"#F7F8FB"}
                 borderWidth={1}
                 borderColor={"gray"}
+                p={3}
                 pb={10}
+                // bg={"#f4522d"}
               >
-                <Stack
-                  //  bg={"#f4522d"}
-                  p={3}
-                >
-                  {!isOpenState[id] && (
-                    // main section
-                    <Stack direction={{ base: "column", lg: "row" }}>
-                      <Flex>
-                        <Text fontWeight={"bold"} fontSize={17} mr={4}>
-                          Section {index + 1}
-                        </Text>
-                        <Flex
-                          align={"center"}
-                          columnGap={4}
-                          display={{ base: "flex", lg: "none" }}
-                        >
-                          <Text
-                            cursor={"pointer"}
-                            onClick={() => toggleIsOpen(id)}
-                          >
-                            <MdEdit />
-                          </Text>
-                          <Text
-                            cursor={"pointer"}
-                            onClick={() => deleteModule({ moduleId: id })}
-                          >
-                            <MdDelete />
-                          </Text>
-                        </Flex>
-                      </Flex>
-                      <Box
-                        alignItems={{ base: "none", lg: "center" }}
-                        mr={3}
-                        columnGap={1}
-                        display={{ base: "block", lg: "flex" }}
-                      >
-                        <Text display={{ base: "none", lg: "flex" }}>
-                          <LuStickyNote />
-                        </Text>
-                        <Text fontWeight={"500"}>{title}</Text>
-                      </Box>
+                {!isOpenState[id] && (
+                  // main section
+                  <Stack direction={{ base: "column", lg: "row" }}  >
+                    <Flex>
+                      <Text fontWeight={"bold"} fontSize={17} mr={4} >
+                        Section {index + 1}
+                      </Text>
                       <Flex
                         align={"center"}
                         columnGap={4}
-                        display={{ base: "none", lg: "flex" }}
+                        display={{ base: "flex", lg: "none" }}
+                        
                       >
                         <Text
-                          cursor={"pointer"}
                           onClick={() => toggleIsOpen(id)}
+                          as={"button"}
+                        disabled={deleteModuleLoading}
+                    cursor={deleteModuleLoading ? "not-allowed" : "pointer"}
                         >
                           <MdEdit />
                         </Text>
-                        <Text cursor={"pointer"} onClick={onOpen}>
+                        <Text
+                          onClick={() => deleteModule({ moduleId: id })}
+                          as={"button"}
+                        disabled={deleteModuleLoading}
+                    cursor={deleteModuleLoading ? "not-allowed" : "pointer"}
+                        >
                           <MdDelete />
                         </Text>
                       </Flex>
-                    </Stack>
-                  )}
-                </Stack>
-
+                    </Flex>
+                    <Box
+                      alignItems={{ base: "none", lg: "center" }}
+                      mr={3}
+                      columnGap={1}
+                      display={{ base: "block", lg: "flex" }}
+                    >
+                      <Text display={{ base: "none", lg: "flex" }}>
+                        <LuStickyNote />
+                      </Text>
+                      <Text fontWeight={"500"}>{title}</Text>
+                    </Box>
+                    <Flex
+                      align={"center"}
+                      columnGap={4}
+                      display={{ base: "none", lg: "flex" }}
+                    >
+                      <Text cursor={"pointer"} onClick={() => toggleIsOpen(id)}>
+                        <MdEdit />
+                      </Text>
+                      <Text cursor={"pointer"} onClick={onOpen}>
+                        <MdDelete />
+                      </Text>
+                    </Flex>
+                  </Stack>
+                )}
                 {/* edit part */}
                 {isOpenState[id] && (
                   <Formik
@@ -266,6 +264,7 @@ const Curriculum = () => {
                       setTimeout(() => {
                         toggleIsOpen(id);
                       }, 2000);
+                     
                     }}
                   >
                     {({
@@ -414,7 +413,7 @@ const Curriculum = () => {
                     const formattedDate = `${month}/${day}/${year}`;
                     return (
                       <Stack key={id}>
-                        <Stack>
+                        <Stack >
                           <Stack position="relative">
                             {/* list of lecture starts here */}
                             {!isOpenModuleLectureState[id] && (
@@ -836,6 +835,7 @@ const Curriculum = () => {
                                               toggleContentType2(id, "");
                                               toggleIsOpenContentType(id);
                                             }, 2000);
+                                            
                                           }}
                                         >
                                           {({
@@ -1068,15 +1068,12 @@ const Curriculum = () => {
                                                           </Text>
                                                           <Text>{title}</Text>
                                                         </Flex>
-                                                        <Text
-                                                          as={"button"}
-                                                          onClick={() => {
-                                                            deleteExternalResource(
-                                                              {
-                                                                resourceId: id,
-                                                              }
-                                                            );
-                                                          }}
+                                                        <Text as={"button"}
+                                                         onClick={() => {
+                                                          deleteExternalResource({
+                                                            resourceId: id,
+                                                          });
+                                                        }}
                                                         >
                                                           <MdDelete />
                                                         </Text>
@@ -1850,7 +1847,7 @@ const Curriculum = () => {
                         });
                         setTimeout(() => {
                           toggleIsCurriculumOpen(id);
-                        }, 2000);
+                        }, 2000);                      
                       }}
                     >
                       {({
