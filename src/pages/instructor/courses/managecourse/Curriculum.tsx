@@ -61,6 +61,8 @@ import { MdModeEditOutline } from "react-icons/md";
 import { HiPlayCircle } from "react-icons/hi2";
 import CurriculumVideoUpload from "../../../../components/CurriculumVideoUpload";
 import ReactQuill from "react-quill";
+import { VscLinkExternal } from "react-icons/vsc";
+
 import { CurriculumInterface } from "../../../../interface/courseInterface";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
@@ -74,8 +76,7 @@ const Curriculum = () => {
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
   const { deleteLectureModule } = useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse,  } =
-    useCreateModuleLectureCourse();
+  const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
   const initialValues1: CurriculumInterface = {
     title: "",
     learningObjective: "",
@@ -180,7 +181,7 @@ const Curriculum = () => {
       )}
       {data?.map((course: any, index: any) => {
         const { title, id, lectures } = course;
-        
+
         const initialValues2 = {
           title: moduleTitle[index],
           learningObjective: modulelearningObjective[index],
@@ -381,6 +382,7 @@ const Curriculum = () => {
                       resources,
                       contentType: contentEndPointType,
                     } = lecture;
+                    console.log(resources)
                     const initialValues4 = {
                       title: "",
                     };
@@ -1028,16 +1030,35 @@ const Curriculum = () => {
                                           pb={2}
                                           p={3}
                                         >
-                                       {/* *************resource endpoint display********************** */}
-                                        <Stack  borderTopWidth={1} borderBottomWidth={1}>
-                                          <Stack p={3}>
-                                          <Text fontWeight={"bold"}>External Resource</Text>
-
+                                          {/* *************resource endpoint display********************** */}
+                                          <Stack
+                                            borderTopWidth={1}
+                                            borderBottomWidth={1}
+                                          >
+                                            <Stack p={3}>
+                                              <Text fontWeight={"bold"}>
+                                                External Resource
+                                              </Text>
+                                              {resources?.map((resource: any) => {
+                                                const {title,id} = resource
+                                                return (
+                                                  <Flex align={"center"} justify={"space-between"}>
+                                                    <Flex align={"center"} columnGap={1}>
+                                                      <Text>
+                                                        <VscLinkExternal />
+                                                      </Text>
+                                                      <Text>{title}</Text>
+                                                    </Flex>
+                                                    <Text as={"button"}>
+                                                      <MdDelete/>
+                                                    </Text>
+                                                  </Flex>
+                                                );
+                                              })}
+                                            </Stack>
                                           </Stack>
-                                        </Stack>
 
-
-                                       {/* *************resource endpoint display END********************** */}
+                                          {/* *************resource endpoint display END********************** */}
 
                                           {!isOpendescription[id] && (
                                             <>
@@ -1077,10 +1098,8 @@ const Curriculum = () => {
                                                       __html: description,
                                                     }}
                                                   />
-
                                                 </Stack>
                                               )}
-
                                             </>
                                           )}
                                           {/* ************************description container************************** */}
