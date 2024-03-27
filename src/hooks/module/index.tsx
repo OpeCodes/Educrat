@@ -318,7 +318,7 @@ export const useGetSingleModuleCourse = (id: any) => {
 export const useCreateModuleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { mutate: moduleCreateLectureCourse, isPending: moduleLectureLoading,isSuccess } =
+  const { mutate: moduleCreateLectureCourse, isPending: moduleLectureLoading,isSuccess:createLectureModuleSuccess, } =
     useMutation({
       mutationFn: ({ moduleId, user }: any) => {
         return customFetch.post(`/lecture/module/${moduleId}`, user);
@@ -341,7 +341,7 @@ export const useCreateModuleLectureCourse = () => {
         });
       },
     });
-  return { moduleCreateLectureCourse, moduleLectureLoading ,isSuccess};
+  return { moduleCreateLectureCourse, moduleLectureLoading ,createLectureModuleSuccess};
 };
 
 export const useGetModuleLectureCourse = (id: any) => {
@@ -454,7 +454,7 @@ export const useGetLectureModuleCourse = (id: any) => {
 export const useCreateArticleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { mutate: createArticleLectureCourse } = useMutation({
+  const { mutate: createArticleLectureCourse,isSuccess: createArticleSuccess } = useMutation({
     mutationFn: ({ lectureId, user }: any) => {
       return customFetch.post(
         `/lecture/content/lecture/${lectureId}/article
@@ -480,7 +480,7 @@ export const useCreateArticleLectureCourse = () => {
       });
     },
   });
-  return { createArticleLectureCourse };
+  return { createArticleLectureCourse,createArticleSuccess };
 };
 
 export const useEditArticleLectureCourse = () => {

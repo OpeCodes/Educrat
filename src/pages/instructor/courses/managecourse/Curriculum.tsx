@@ -63,11 +63,12 @@ import { HiPlayCircle } from "react-icons/hi2";
 import CurriculumVideoUpload from "../../../../components/CurriculumVideoUpload";
 import ReactQuill from "react-quill";
 import { VscLinkExternal } from "react-icons/vsc";
-
+const peter = true;
 import { CurriculumInterface } from "../../../../interface/courseInterface";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
   const { id } = useParams();
+
   const { getSingleCourse, refetch } = useGetSingleCourse(id);
   useEffect(() => {
     refetch();
@@ -77,7 +78,7 @@ const Curriculum = () => {
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
   const { deleteLectureModule } = useDeleteLectureModuleCourse();
-  const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
+  const { moduleCreateLectureCourse ,createLectureModuleSuccess} = useCreateModuleLectureCourse();
    const {deleteExternalResource}=useDeleteExternalResource();
   const initialValues1: CurriculumInterface = {
     title: "",
@@ -102,7 +103,8 @@ const Curriculum = () => {
     showSection,
   } = useModuleCreateCourse();
 
-  const { createArticleLectureCourse } = useCreateArticleLectureCourse();
+  const { createArticleLectureCourse,createArticleSuccess } = useCreateArticleLectureCourse();
+  console.log(createArticleSuccess)
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
@@ -258,6 +260,7 @@ const Curriculum = () => {
                       setTimeout(() => {
                         toggleIsOpen(id);
                       }, 2000);
+                     
                     }}
                   >
                     {({
@@ -824,10 +827,12 @@ const Curriculum = () => {
                                               lectureId: id,
                                               user: { ...values, title },
                                             });
-                                            setTimeout(() => {
-                                              toggleContentType2(id, "");
-                                              toggleIsOpenContentType(id);
-                                            }, 2000);
+                                            console.log(createArticleSuccess)
+                                            // setTimeout(() => {
+                                            //   toggleContentType2(id, "");
+                                            //   toggleIsOpenContentType(id);
+                                            // }, 2000);
+                                            
                                           }}
                                         >
                                           {({
