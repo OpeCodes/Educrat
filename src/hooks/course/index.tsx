@@ -117,12 +117,12 @@ export const useGetCourse = () => {
 };
 
 export const useGetAllUserCourse = () => {
-  const { data, isError,isPending } = useQuery({
+  const { data, isError,isPending,refetch } = useQuery({
     queryKey: ["allUserCourse"],
     queryFn: async () => {
       const { data } = await customFetch.get("/course/user");
       return data;
     },
   });
-  return { data , isPending,isError};
+  return { data , isPending,isError ,refetch};
 };

@@ -2,7 +2,7 @@ import React, { ChangeEvent,  useState } from "react";
 import { Box, Progress, Input, Image, useToast, Stack, Text, Flex } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
 import imagePlaceholder from "../assets/CourseImagePlaceholder.jpg";
-import { useGetSingleCourse } from "../hooks/course";
+import { useGetAllUserCourse, useGetSingleCourse } from "../hooks/course";
 import { useParams } from "react-router-dom";
 
 interface ImageUploadProps {
@@ -17,10 +17,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const toast = useToast();
   const { id } = useParams();
   const { getSingleCourse } = useGetSingleCourse(id);
-
-  // useEffect(() => {
-  //   refetch();
-  // }, [id]);
+ const {refetch} = useGetAllUserCourse()
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -60,6 +57,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
             },
           }
         );
+        refetch();
 
         console.log("Upload completed:", response.data);
         toast({
@@ -79,6 +77,8 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
       }
     };
     reader.readAsDataURL(file);
+    refetch();
+
   };
 
   return (
