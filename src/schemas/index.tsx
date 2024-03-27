@@ -71,7 +71,7 @@ export const courseEditModuleSchema = Yup.object().shape({
   learningObjective: Yup.string().required("pls add learning objectives")
 })
 export const curriculumLectureSchema = Yup.object().shape({
-  title: Yup.string().required("pls add title"),
+  title: Yup.string().min(3).max(80).required("pls add title"),
 })
 export const curriculumEditLectureSchema = Yup.object().shape({
   title: Yup.string().required("pls add title"),
@@ -79,7 +79,7 @@ export const curriculumEditLectureSchema = Yup.object().shape({
 
 
 export const ArticleCreateLectureSchema = Yup.object().shape({
-  body: Yup.string().required("pls add body"),
+  body: Yup.string().required("pls add article"),
 })
 export const DescriptionLectureSchema = Yup.object().shape({
   description: Yup.string().required("pls enter description"),

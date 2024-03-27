@@ -63,7 +63,9 @@ import { HiPlayCircle } from "react-icons/hi2";
 import CurriculumVideoUpload from "../../../../components/CurriculumVideoUpload";
 import ReactQuill from "react-quill";
 import { VscLinkExternal } from "react-icons/vsc";
-import { CurriculumInterface } from "../../../../interface/courseInterface";
+import {
+  CurriculumInterface,
+} from "../../../../interface/courseInterface";
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
   const { id } = useParams();
@@ -81,14 +83,15 @@ const Curriculum = () => {
   const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
   const { deleteExternalResource, deleteExternalResourceLoading } =
     useDeleteExternalResource();
+  
   const initialValues1: CurriculumInterface = {
     title: "",
     learningObjective: "",
   };
-
   const initialValues3: CurriculumInterface = {
     title: "",
   };
+
   const articleCreateInitialValue: CurriculumInterface = {
     body: "",
   };
@@ -110,7 +113,8 @@ const Curriculum = () => {
   };
   const { editArticleLectureCourse } = useEditArticleLectureCourse();
   const { deleteVideoLecture } = useDeleteVideoLecture();
-  const { deleteArticleLecture, deleteArticleLectureLoading} = useDeleteArticleLecture();
+  const { deleteArticleLecture, deleteArticleLectureLoading } =
+    useDeleteArticleLecture();
   const { createExternalResourceLink } = useCreateExternalResourceLink();
   const {
     data,
@@ -579,8 +583,7 @@ const Curriculum = () => {
                                   borderWidth={1}
                                   borderColor={"gray"}
                                   mt={-3}
-                                  height="250px"
-                                  // height="fit-content"
+                                  // height="250px"
                                   pb={2}
                                 >
                                   <Flex width="100%" justifyContent="end">
@@ -877,7 +880,9 @@ const Curriculum = () => {
                                                   }}
                                                   fontSize="14px"
                                                 >
-                                                  enter body
+                                                  <>
+                                                  {errors.body}
+                                                  </>
                                                 </Text>
                                               )}
                                               <Flex
@@ -971,9 +976,13 @@ const Curriculum = () => {
                                                   columnGap={1}
                                                   color={"#5624D0"}
                                                   as={"button"}
-                                                  disabled={deleteArticleLectureLoading}
+                                                  disabled={
+                                                    deleteArticleLectureLoading
+                                                  }
                                                   cursor={
-                                                    deleteArticleLectureLoading ? "not-allowed" : "pointer"
+                                                    deleteArticleLectureLoading
+                                                      ? "not-allowed"
+                                                      : "pointer"
                                                   }
                                                   onClick={() => {
                                                     toggleIsOpenEditVideo(id);
@@ -1929,8 +1938,7 @@ const Curriculum = () => {
                                   style={{ color: "red", marginTop: 0 }}
                                   fontSize="14px"
                                 >
-                                  {/* {errors.title} */}
-                                  enter title
+                                  <>{errors.title}</>
                                 </Text>
                               )}
                             </Stack>
