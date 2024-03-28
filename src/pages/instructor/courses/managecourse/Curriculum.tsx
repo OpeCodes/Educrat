@@ -1139,6 +1139,54 @@ const Curriculum = () => {
                                                 <Text fontWeight={"bold"}>
                                                  Downloadable Materials
                                                 </Text>
+                                                {resources?.map(
+                                                  (resource: any) => {
+                                                    const { title, id,source } =
+                                                      resource;
+                                                    return (
+                                                      <>
+                                                      {source === "downloadable" && 
+                                                      <Flex
+                                                        align={"center"}
+                                                        justify={
+                                                          "space-between"
+                                                        }
+                                                      >
+                                                        <Flex
+                                                          align={"center"}
+                                                          columnGap={1}
+                                                        >
+                                                          <Text>
+                                                            <VscLinkExternal />
+                                                          </Text>
+                                                          <Text>{title}</Text>
+                                                        </Flex>
+                                                        <Text
+                                                          as={"button"}
+                                                          disabled={
+                                                            deleteExternalResourceLoading
+                                                          }
+                                                          cursor={
+                                                            deleteExternalResourceLoading
+                                                              ? "not-allowed"
+                                                              : "pointer"
+                                                          }
+                                                          onClick={() => {
+                                                            deleteExternalResource(
+                                                              {
+                                                                resourceId: id,
+                                                              }
+                                                            );
+                                                          }}
+                                                        >
+                                                          <MdDelete />
+                                                        </Text>
+                                                      </Flex>
+                                                      }
+                                                      </>
+                                                    );
+                                                  }
+                                                )}
                                                 </Stack>
                                               
                                               <Stack p={3}>
