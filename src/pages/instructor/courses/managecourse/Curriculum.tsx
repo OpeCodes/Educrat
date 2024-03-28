@@ -162,7 +162,6 @@ const Curriculum = () => {
 
   const handleUploadSuccess = () => {};
 
- 
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -396,11 +395,11 @@ const Curriculum = () => {
                       resources,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(resources)
+                    console.log(resources);
                     const ResourcesType: string[] = (resources ?? [])
-    .flat(2)
-    .map((type: any) => type?.source);
-    console.log(ResourcesType, "herew")
+                      .flat(2)
+                      .map((type: any) => type?.source);
+                    console.log(ResourcesType, "herew");
                     const initialValues4: CurriculumInterface = {
                       title: "",
                     };
@@ -1141,112 +1140,130 @@ const Curriculum = () => {
                                               borderBottomWidth={1}
                                             >
                                               <Stack p={3}>
-                                                
-                                               {
-                                                ResourcesType.includes("downloadable") &&  <Text fontWeight={"bold"}>
-                                                Downloadable Materials
-                                               </Text>
-                                               }
+                                                {ResourcesType.includes(
+                                                  "downloadable"
+                                                ) && (
+                                                  <Text fontWeight={"bold"}>
+                                                    Downloadable Materials
+                                                  </Text>
+                                                )}
                                                 {resources?.map(
                                                   (resource: any) => {
-                                                    const { title, id,source, } =
-                                                      resource;
-                                                      // setYoo(index)  
+                                                    const {
+                                                      title,
+                                                      id,
+                                                      source,
+                                                    } = resource;
                                                     return (
                                                       <>
-                                                      {source === "downloadable" && 
-                                                      <Flex
-                                                        align={"center"}
-                                                        justify={
-                                                          "space-between"
-                                                        }
-                                                      >
-                                                        <Flex
-                                                          align={"center"}
-                                                          columnGap={1}
-                                                        >
-                                                          <Text>
-                                                            <VscLinkExternal />
-                                                          </Text>
-                                                          <Text>{title}</Text>
-                                                        </Flex>
-                                                        <Text
-                                                          as={"button"}
-                                                          disabled={
-                                                            deleteExternalResourceLoading
-                                                          }
-                                                          cursor={
-                                                            deleteExternalResourceLoading
-                                                              ? "not-allowed"
-                                                              : "pointer"
-                                                          }
-                                                          onClick={() => {
-                                                            deleteExternalResource(
-                                                              {
-                                                                resourceId: id,
+                                                        {source ===
+                                                          "downloadable" && (
+                                                          <Flex
+                                                            align={"center"}
+                                                            justify={
+                                                              "space-between"
+                                                            }
+                                                          >
+                                                            <Flex
+                                                              align={"center"}
+                                                              columnGap={1}
+                                                            >
+                                                              <Text>
+                                                                <VscLinkExternal />
+                                                              </Text>
+                                                              <Text>
+                                                                {title}
+                                                              </Text>
+                                                            </Flex>
+                                                            <Text
+                                                              as={"button"}
+                                                              disabled={
+                                                                deleteExternalResourceLoading
                                                               }
-                                                            );
-                                                          }}
-                                                        >
-                                                          <MdDelete />
-                                                        </Text>
-                                                      </Flex>
-                                                      }
+                                                              cursor={
+                                                                deleteExternalResourceLoading
+                                                                  ? "not-allowed"
+                                                                  : "pointer"
+                                                              }
+                                                              onClick={() => {
+                                                                deleteExternalResource(
+                                                                  {
+                                                                    resourceId:
+                                                                      id,
+                                                                  }
+                                                                );
+                                                              }}
+                                                            >
+                                                              <MdDelete />
+                                                            </Text>
+                                                          </Flex>
+                                                        )}
                                                       </>
                                                     );
                                                   }
                                                 )}
-                                                </Stack>
-                                              
+                                              </Stack>
+
                                               <Stack p={3} borderTopWidth={1}>
-                                               { ResourcesType.includes("external") &&  <Text fontWeight={"bold"}>
-                                                  External Resource
-                                                </Text> }
-                                                
+                                                {ResourcesType.includes(
+                                                  "external"
+                                                ) && (
+                                                  <Text fontWeight={"bold"}>
+                                                    External Resource
+                                                  </Text>
+                                                )}
+
                                                 {resources?.map(
                                                   (resource: any) => {
-                                                    const { title, id,source } =
-                                                      resource;
+                                                    const {
+                                                      title,
+                                                      id,
+                                                      source,
+                                                    } = resource;
                                                     return (
                                                       <>
-                                                      {source === "external" && 
-                                                      <Flex
-                                                        align={"center"}
-                                                        justify={
-                                                          "space-between"
-                                                        }
-                                                      >
-                                                        <Flex
-                                                          align={"center"}
-                                                          columnGap={1}
-                                                        >
-                                                          <Text>
-                                                            <VscLinkExternal />
-                                                          </Text>
-                                                          <Text>{title}</Text>
-                                                        </Flex>
-                                                        <Text
-                                                          as={"button"}
-                                                          disabled={
-                                                            deleteExternalResourceLoading
-                                                          }
-                                                          cursor={
-                                                            deleteExternalResourceLoading
-                                                              ? "not-allowed"
-                                                              : "pointer"
-                                                          }
-                                                          onClick={() => {
-                                                            deleteExternalResource(
-                                                              {
-                                                                resourceId: id,
+                                                        {source ===
+                                                          "external" && (
+                                                          <Flex
+                                                            align={"center"}
+                                                            justify={
+                                                              "space-between"
+                                                            }
+                                                          >
+                                                            <Flex
+                                                              align={"center"}
+                                                              columnGap={1}
+                                                            >
+                                                              <Text>
+                                                                <VscLinkExternal />
+                                                              </Text>
+                                                              <Text>
+                                                                {title}
+                                                              </Text>
+                                                            </Flex>
+                                                            <Text
+                                                              as={"button"}
+                                                              disabled={
+                                                                deleteExternalResourceLoading
                                                               }
-                                                            );
-                                                          }}
-                                                        >
-                                                          <MdDelete />
-                                                        </Text>
-                                                      </Flex>
-                                                      }
+                                                              cursor={
+                                                                deleteExternalResourceLoading
+                                                                  ? "not-allowed"
+                                                                  : "pointer"
+                                                              }
+                                                              onClick={() => {
+                                                                deleteExternalResource(
+                                                                  {
+                                                                    resourceId:
+                                                                      id,
+                                                                  }
+                                                                );
+                                                              }}
+                                                            >
+                                                              <MdDelete />
+                                                            </Text>
+                                                          </Flex>
+                                                        )}
                                                       </>
                                                     );
                                                   }
