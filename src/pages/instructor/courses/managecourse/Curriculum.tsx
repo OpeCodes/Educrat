@@ -863,13 +863,7 @@ const Curriculum = () => {
                                             color="black"
                                           >
                                             Upload Video
-                                          </Tab>
-                                          <Tab
-                                            fontWeight={"bold"}
-                                            color="black"
-                                          >
-                                            Add from library
-                                          </Tab>
+                                          </Tab>                                          
                                         </TabList>
                                         <TabPanels>
                                           <TabPanel>
