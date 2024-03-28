@@ -1780,16 +1780,18 @@ const Curriculum = () => {
                                         errors,
                                       }) => (
                                         <Stack>
+                                          <Box>
                                           <ReactQuill
                                             theme="snow"
                                             value={values.body}
                                             onChange={handleChange("body")}
+                                            className="reactQuillArticleCreate"
                                           />
+                                          </Box>
                                           {errors?.body && (
                                             <Text
                                               style={{
                                                 color: "red",
-                                                marginTop: 5,
                                               }}
                                               fontSize="14px"
                                             >
@@ -1801,7 +1803,6 @@ const Curriculum = () => {
                                             justify={"end"}
                                             align={"center"}
                                             columnGap={5}
-                                            mt={"2.9rem"}
                                           >
                                             <Button
                                               color="#ffffff"
