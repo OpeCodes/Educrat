@@ -1147,9 +1147,11 @@ const Curriculum = () => {
                                                 </Text>
                                                 {resources?.map(
                                                   (resource: any) => {
-                                                    const { title, id } =
+                                                    const { title, id,source } =
                                                       resource;
                                                     return (
+                                                      <>
+                                                      {source === "external" && 
                                                       <Flex
                                                         align={"center"}
                                                         justify={
@@ -1186,6 +1188,8 @@ const Curriculum = () => {
                                                           <MdDelete />
                                                         </Text>
                                                       </Flex>
+                                                      }
+                                                      </>
                                                     );
                                                   }
                                                 )}
