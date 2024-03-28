@@ -1136,10 +1136,11 @@ const Curriculum = () => {
                                           {/* *************resource endpoint display********************** */}
                                           {resources.length > 0 && (
                                             <Stack
-                                              borderTopWidth={1}
-                                              borderBottomWidth={1}
+                                              borderBottomWidth={ResourcesType.includes(
+                                                "downloadable"
+                                              ) ? 1 : 0}
                                             >
-                                              <Stack p={3}>
+                                              <Stack>
                                                 {ResourcesType.includes(
                                                   "downloadable"
                                                 ) && (
@@ -1204,7 +1205,11 @@ const Curriculum = () => {
                                                 )}
                                               </Stack>
 
-                                              <Stack p={3} borderTopWidth={1}>
+                                              <Stack borderTopWidth={ResourcesType.includes(
+                                                  "external"
+                                                ) ? 1 : 0 } borderBottomWidth={ResourcesType.includes(
+                                                  "external"
+                                                ) ? 1 : 0 }>
                                                 {ResourcesType.includes(
                                                   "external"
                                                 ) && (
