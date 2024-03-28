@@ -242,8 +242,10 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                     {/* {errors.complexityLevel} */}
-                     add complexity
+                      <>
+                     {errors.complexityLevel}
+
+                      </>
                     </Text>
                   )}
                 </Stack>

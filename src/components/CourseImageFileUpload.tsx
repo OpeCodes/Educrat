@@ -16,7 +16,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const toast = useToast();
   const { id } = useParams();
-  const { getSingleCourse } = useGetSingleCourse(id);
+  const { getSingleCourse,refetch: singleCourseRefetch } = useGetSingleCourse(id);
   console.log(getSingleCourse)
  const {refetch} = useGetAllUserCourse()
 
@@ -59,6 +59,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
           }
         );
         refetch();
+        singleCourseRefetch()
 
         console.log("Upload completed:", response.data);
         toast({
@@ -79,6 +80,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
     };
     reader.readAsDataURL(file);
     refetch();
+    singleCourseRefetch()
 
   };
 
@@ -88,7 +90,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         {selectedImage ? (
           <Image src={selectedImage} width="650px" height={"200px"} alt="Uploaded Image" mt={4} objectFit={"cover"}  />
         ) : (
-          <Image src= {getSingleCourse?.thumbnail ||imagePlaceholder} width="650px" height={"200px"} objectFit={"cover"} />
+          <Image src= {imagePlaceholder} width="650px" height={"200px"} objectFit={"cover"} />
         )}
       </Box>
       <Stack ml={4} mt={5}>
