@@ -589,54 +589,56 @@ const Curriculum = () => {
                             )}
 
                             {/* ******************************mobile ************************** */}
-                            <Stack
-                              display={{ base: "block", lg: "none" }}
-                              bg={"white"}
-                              borderBottomWidth={1}
-                              borderRightWidth={1}
-                              borderLeftWidth={1}
-                              mt={-3}
-                              borderColor={"gray"}
-                              px={3}
-                              pb={3}
-                            >
-                              <Text>
-                                {title.length > 60
-                                  ? `${title.slice(0, 45)}...`
-                                  : `${title}`}
-                              </Text>
-                              <Stack mt={1}>
-                                {!isOpenContentType[id] &&
-                                  !isOpenInnerdescripRes[id] &&
-                                  !isOpenEditArticle[id] &&
-                                  !isOpenEditVideo[id] && (
-                                    <Stack>
-                                      {!contentEndPointType && (
-                                        <Button
-                                          borderRadius={0}
-                                          borderWidth={1}
-                                          borderColor={"black"}
-                                          color="black"
-                                          _hover={{
-                                            backgroundColor: "#F7F8FB",
-                                          }}
-                                          width={"100px"}
-                                          height={"30px"}
-                                          leftIcon={
-                                            <GoPlus fontSize={"20px"} />
-                                          }
-                                          variant="outline"
-                                          onClick={() => {
-                                            toggleIsOpenContentType(id);
-                                          }}
-                                        >
-                                          Content
-                                        </Button>
-                                      )}
-                                    </Stack>
-                                  )}
+                            {!isOpenModuleLectureState[id] && (
+                              <Stack
+                                display={{ base: "block", lg: "none" }}
+                                bg={"white"}
+                                borderBottomWidth={1}
+                                borderRightWidth={1}
+                                borderLeftWidth={1}
+                                mt={-3}
+                                borderColor={"gray"}
+                                px={3}
+                                pb={3}
+                              >
+                                <Text>
+                                  {title.length > 60
+                                    ? `${title.slice(0, 45)}...`
+                                    : `${title}`}
+                                </Text>
+                                <Stack mt={1}>
+                                  {!isOpenContentType[id] &&
+                                    !isOpenInnerdescripRes[id] &&
+                                    !isOpenEditArticle[id] &&
+                                    !isOpenEditVideo[id] && (
+                                      <Stack>
+                                        {!contentEndPointType && (
+                                          <Button
+                                            borderRadius={0}
+                                            borderWidth={1}
+                                            borderColor={"black"}
+                                            color="black"
+                                            _hover={{
+                                              backgroundColor: "#F7F8FB",
+                                            }}
+                                            width={"100px"}
+                                            height={"30px"}
+                                            leftIcon={
+                                              <GoPlus fontSize={"20px"} />
+                                            }
+                                            variant="outline"
+                                            onClick={() => {
+                                              toggleIsOpenContentType(id);
+                                            }}
+                                          >
+                                            Content
+                                          </Button>
+                                        )}
+                                      </Stack>
+                                    )}
+                                </Stack>
                               </Stack>
-                            </Stack>
+                            )}
 
                             {/* video and article section */}
                             {isOpenContentType[id] &&
@@ -1781,12 +1783,12 @@ const Curriculum = () => {
                                       }) => (
                                         <Stack>
                                           <Box>
-                                          <ReactQuill
-                                            theme="snow"
-                                            value={values.body}
-                                            onChange={handleChange("body")}
-                                            className="reactQuillArticleCreate"
-                                          />
+                                            <ReactQuill
+                                              theme="snow"
+                                              value={values.body}
+                                              onChange={handleChange("body")}
+                                              className="reactQuillArticleCreate"
+                                            />
                                           </Box>
                                           {errors?.body && (
                                             <Text
