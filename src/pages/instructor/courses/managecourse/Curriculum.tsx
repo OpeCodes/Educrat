@@ -395,11 +395,9 @@ const Curriculum = () => {
                       resources,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(resources);
                     const ResourcesType: string[] = (resources ?? [])
                       .flat(2)
                       .map((type: any) => type?.source);
-                    console.log(ResourcesType, "herew");
                     const initialValues4: CurriculumInterface = {
                       title: "",
                     };
