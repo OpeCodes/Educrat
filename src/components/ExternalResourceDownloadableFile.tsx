@@ -83,7 +83,7 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
         refetch();
         console.log("Upload completed:", response.data);
         toast({
-          title: `Video uploaded`,
+          title: `uploaded`,
           status: "success",
           duration: 5000,
           isClosable: true,
