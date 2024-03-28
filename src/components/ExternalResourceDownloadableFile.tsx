@@ -128,7 +128,12 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
           </Stack>
           <Flex fontSize={13} columnGap={1}>
             <Text fontWeight={"600"}>Note:</Text>
-            <Text>All files should be less than 4.0 GB.</Text>
+            <Text>    
+              A resource is for any type of document that can be used to help
+              students in the lecture. This file is going to be seen as a
+              lecture extra. Make sure everything is legible and the file size
+              is less than 1 GiB
+            </Text>
           </Flex>
         </Stack>
       )}
@@ -182,7 +187,6 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
                     )}
                   </Td>
                   <Td>{formattedDate}</Td>
-                  
                 </Tr>
               </Tbody>
             </Table>
