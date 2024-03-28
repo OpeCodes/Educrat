@@ -21,7 +21,7 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import { useEffect ,useState} from "react";
+import { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -161,7 +161,7 @@ const Curriculum = () => {
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
   const handleUploadSuccess = () => {};
-  const [yoo, setYoo] = useState<any>(null)
+
  
   return (
     <Stack>
