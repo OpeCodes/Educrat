@@ -1207,7 +1207,9 @@ const Curriculum = () => {
 
                                               <Stack borderTopWidth={ResourcesType.includes(
                                                   "external"
-                                                ) ? 1 : 0 } borderBottomWidth={ResourcesType.includes(
+                                                ) && ResourcesType.includes(
+                                                  "downloadable"
+                                                )  ? 1 : 0 } borderBottomWidth={ResourcesType.includes(
                                                   "external"
                                                 ) ? 1 : 0 }>
                                                 {ResourcesType.includes(
