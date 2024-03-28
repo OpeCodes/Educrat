@@ -21,7 +21,7 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -161,7 +161,8 @@ const Curriculum = () => {
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
   const handleUploadSuccess = () => {};
-
+  const [yoo, setYoo] = useState<any>(null)
+ 
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -396,6 +397,10 @@ const Curriculum = () => {
                       contentType: contentEndPointType,
                     } = lecture;
                     console.log(resources)
+                    const ResourcesType: string[] = (resources ?? [])
+    .flat(2)
+    .map((type: any) => type?.source);
+    console.log(ResourcesType, "herew")
                     const initialValues4: CurriculumInterface = {
                       title: "",
                     };
@@ -1136,13 +1141,17 @@ const Curriculum = () => {
                                               borderBottomWidth={1}
                                             >
                                               <Stack p={3}>
-                                                <Text fontWeight={"bold"}>
-                                                 Downloadable Materials
-                                                </Text>
+                                                
+                                               {
+                                                ResourcesType.includes("downloadable") &&  <Text fontWeight={"bold"}>
+                                                Downloadable Materials
+                                               </Text>
+                                               }
                                                 {resources?.map(
                                                   (resource: any) => {
-                                                    const { title, id,source } =
+                                                    const { title, id,source, } =
                                                       resource;
+                                                      // setYoo(index)  
                                                     return (
                                                       <>
                                                       {source === "downloadable" && 
@@ -1189,10 +1198,11 @@ const Curriculum = () => {
                                                 )}
                                                 </Stack>
                                               
-                                              <Stack p={3}>
-                                                <Text fontWeight={"bold"}>
+                                              <Stack p={3} borderTopWidth={1}>
+                                               { ResourcesType.includes("external") &&  <Text fontWeight={"bold"}>
                                                   External Resource
-                                                </Text>
+                                                </Text> }
+                                                
                                                 {resources?.map(
                                                   (resource: any) => {
                                                     const { title, id,source } =
