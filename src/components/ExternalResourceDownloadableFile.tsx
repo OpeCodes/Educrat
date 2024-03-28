@@ -40,7 +40,7 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
-
+    console.log(file?.size)
     if (file) {
       if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
         toast({
@@ -52,12 +52,12 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
       } else {
         setSelectImageName(file);
 
-        await uploadImage(file, file?.type, file?.name);
+        await uploadImage(file, file?.type, file?.name, file?.size);
       }
     }
   };
 
-  const uploadImage = async (file: File, type: string, title: string) => {
+  const uploadImage = async (file: File, type: string, title: string,size: number) => {
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Data = reader.result as string;
@@ -65,7 +65,7 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
       try {
         const response = await customFetch.post(
           endpoint,
-          { file: base64Data, type, title },
+          { file: base64Data, type, title, size },
           {
             headers: { "Content-Type": "application/json" },
             onUploadProgress: (progressEvent: {

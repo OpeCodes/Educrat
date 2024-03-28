@@ -44,6 +44,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
+   
     if (file) {
       if (!file.type.startsWith("video/")) {
         toast({
