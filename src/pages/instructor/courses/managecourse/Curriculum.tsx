@@ -188,7 +188,6 @@ const Curriculum = () => {
       )}
       {data?.map((course: any, index: any) => {
         const { title, id, lectures } = course;
-        console.log(lectures)
 
         const initialValues2: CurriculumInterface = {
           title: moduleTitle[index],
@@ -396,7 +395,7 @@ const Curriculum = () => {
                       resources,
                       contentType: contentEndPointType,
                     } = lecture;
-                    console.log(content)
+                    console.log(resources)
                     const initialValues4: CurriculumInterface = {
                       title: "",
                     };
@@ -1136,6 +1135,12 @@ const Curriculum = () => {
                                               borderTopWidth={1}
                                               borderBottomWidth={1}
                                             >
+                                              <Stack p={3}>
+                                                <Text fontWeight={"bold"}>
+                                                 Downloadable Materials
+                                                </Text>
+                                                </Stack>
+                                              
                                               <Stack p={3}>
                                                 <Text fontWeight={"bold"}>
                                                   External Resource
