@@ -40,7 +40,6 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
-    console.log(file?.size)
     if (file) {
       if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
         toast({
@@ -82,7 +81,6 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
           }
         );
         refetch();
-
         console.log("Upload completed:", response.data);
         toast({
           title: `Video uploaded`,

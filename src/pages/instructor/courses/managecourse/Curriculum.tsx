@@ -1164,6 +1164,7 @@ const Curriculum = () => {
                                                       title,
                                                       id,
                                                       source,
+                                                      size
                                                     } = resource;
                                                     return (
                                                       <>
@@ -1185,7 +1186,7 @@ const Curriculum = () => {
                                                                 />
                                                               </Text>
                                                               <Text>
-                                                                {title}
+                                                                {title} ({(size/1024).toFixed(1)}) kB
                                                               </Text>
                                                             </Flex>
                                                             <Text
