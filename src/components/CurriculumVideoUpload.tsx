@@ -218,9 +218,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   <Td
                     as={"button"}
                     disabled={!success}
-                    // disabled={true}
                     cursor={!success ? "not-allowed" : "pointer"}
-                    // cursor={"not-allowed"}
                     fontSize={15}
                     fontWeight={"600"}
                     color={"#5624D0"}

@@ -557,7 +557,7 @@ export const useDeleteVideoLecture = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteVideoLecture} = useMutation({
+  const { mutate: deleteVideoLecture, isPending: deleteVideoLectureLoding} = useMutation({
     mutationFn: ({ videoId }: any) => {
       return customFetch.delete(`/lecture/content/video/${videoId}`);
     },
@@ -579,7 +579,7 @@ export const useDeleteVideoLecture = () => {
       });
     },
   });
-  return { deleteVideoLecture};
+  return { deleteVideoLecture, deleteVideoLectureLoding};
 };
 
 

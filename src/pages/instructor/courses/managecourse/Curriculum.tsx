@@ -113,7 +113,8 @@ const Curriculum = () => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
   };
   const { editArticleLectureCourse } = useEditArticleLectureCourse();
-  const { deleteVideoLecture } = useDeleteVideoLecture();
+  const { deleteVideoLecture, deleteVideoLectureLoding } =
+    useDeleteVideoLecture();
   const { deleteArticleLecture, deleteArticleLectureLoading } =
     useDeleteArticleLecture();
   const { createExternalResourceLink } = useCreateExternalResourceLink();
@@ -863,7 +864,7 @@ const Curriculum = () => {
                                             color="black"
                                           >
                                             Upload Video
-                                          </Tab>                                          
+                                          </Tab>
                                         </TabList>
                                         <TabPanels>
                                           <TabPanel>
@@ -1089,7 +1090,7 @@ const Curriculum = () => {
                                                       Status
                                                     </Th>
                                                     <Th color="black">Date</Th>
-                                                    <Th color="black">.</Th>
+                                                    <Th color="black"></Th>
                                                   </Tr>
                                                 </Thead>
                                                 <Tbody>
@@ -1103,6 +1104,15 @@ const Curriculum = () => {
                                                     </Td>
                                                     <Td>{formattedDate}</Td>
                                                     <Td
+                                                      as={"button"}
+                                                      disabled={
+                                                        deleteVideoLectureLoding
+                                                      }
+                                                      cursor={
+                                                        deleteVideoLectureLoding
+                                                          ? "not-allowed"
+                                                          : "pointer"
+                                                      }
                                                       onClick={() => {
                                                         deleteVideoLecture({
                                                           videoId: content?.id,
@@ -1168,7 +1178,9 @@ const Curriculum = () => {
                                                               columnGap={1}
                                                             >
                                                               <Text>
-                                                                <HiFolderDownload size={20} />
+                                                                <HiFolderDownload
+                                                                  size={20}
+                                                                />
                                                               </Text>
                                                               <Text>
                                                                 {title}
