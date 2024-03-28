@@ -65,6 +65,8 @@ import ReactQuill from "react-quill";
 import { VscLinkExternal } from "react-icons/vsc";
 import { CurriculumInterface } from "../../../../interface/courseInterface";
 import ExternalResourceDownloadableFile from "../../../../components/ExternalResourceDownloadableFile";
+import { HiFolderDownload } from "react-icons/hi";
+
 const Curriculum = () => {
   const { onOpen } = useDisclosure();
   const { id } = useParams();
@@ -1134,9 +1136,13 @@ const Curriculum = () => {
                                           {/* *************resource endpoint display********************** */}
                                           {resources.length > 0 && (
                                             <Stack
-                                              borderBottomWidth={ResourcesType.includes(
-                                                "downloadable"
-                                              ) ? 1 : 0}
+                                              borderBottomWidth={
+                                                ResourcesType.includes(
+                                                  "downloadable"
+                                                )
+                                                  ? 1
+                                                  : 0
+                                              }
                                             >
                                               <Stack>
                                                 {ResourcesType.includes(
@@ -1168,7 +1174,7 @@ const Curriculum = () => {
                                                               columnGap={1}
                                                             >
                                                               <Text>
-                                                                <VscLinkExternal />
+                                                                <HiFolderDownload size={20} />
                                                               </Text>
                                                               <Text>
                                                                 {title}
@@ -1203,13 +1209,25 @@ const Curriculum = () => {
                                                 )}
                                               </Stack>
 
-                                              <Stack borderTopWidth={ResourcesType.includes(
-                                                  "external"
-                                                ) && ResourcesType.includes(
-                                                  "downloadable"
-                                                )  ? 1 : 0 } borderBottomWidth={ResourcesType.includes(
-                                                  "external"
-                                                ) ? 1 : 0 }>
+                                              <Stack
+                                                borderTopWidth={
+                                                  ResourcesType.includes(
+                                                    "external"
+                                                  ) &&
+                                                  ResourcesType.includes(
+                                                    "downloadable"
+                                                  )
+                                                    ? 1
+                                                    : 0
+                                                }
+                                                borderBottomWidth={
+                                                  ResourcesType.includes(
+                                                    "external"
+                                                  )
+                                                    ? 1
+                                                    : 0
+                                                }
+                                              >
                                                 {ResourcesType.includes(
                                                   "external"
                                                 ) && (
