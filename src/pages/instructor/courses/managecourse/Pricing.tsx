@@ -13,12 +13,10 @@ const Pricing = () => {
         Pricing
       </Text>
       <Divider />
-      <Stack py={5}>
+      <Stack pt={5} pb={2}>
         <Text fontWeight={"bold"}>Set a price for your course</Text>
         <Text fontSize={14}>
-          Please select the currency and the price tier for your course. If
-          you’d like to offer your course for free, it must have a total video
-          length of less than 2 hours. Also, courses with practice tests can not
+          Please select the currency and the price tier for your course. 
           be free.
         </Text>
       </Stack>
@@ -58,19 +56,20 @@ const Pricing = () => {
                 <Select
                   variant={"filled"}
                   //   width={{ base: "100%", md: "35%" }}
-                  name="currency"
-                  value={values.currency}
+                  name="price"
+                  placeholder="Select"
+                  value={values.price}
                   onChange={handleChange}
                 >
-                  <option value="USD">USD</option>
-                  <option value="NGN">NGN</option>
-                  <option value="GHS">GHS</option>
-                  <option value="ZAR">ZAR</option>
-                  <option value="KES">KES</option>
+                  <option value="free">Free</option>
+                  <option value="tier-1">$19.99 (tier 1)</option>
+                  <option value="tier-2">$22.99 (tier 2)</option>
+                  <option value="tier-3">$24.99 (tier 3)</option>
+                  <option value="tier-4">#29.99 (tier-4)</option>
                 </Select>
-                {errors.currency && (
+                {errors.price && (
                   <Text style={{ color: "red", marginTop: 0 }} fontSize="14px">
-                    <>{errors.currency}</>
+                    <>{errors.price}</>
                   </Text>
                 )}
               </Stack>
@@ -80,8 +79,9 @@ const Pricing = () => {
                 fontWeight={"500"}
                 fontSize={14}
                 as={"button"}
-                py={2}
-                px={4}
+                mt={3}
+                py={6}
+                px={6}
                 variant="outline"
                 spinnerPlacement="end"
                 onClick={() => handleSubmit()}
@@ -89,7 +89,7 @@ const Pricing = () => {
                 backgroundColor={"black"}
                 width={"fit-content"}
               >
-                Save Section
+                Save 
               </Button>
             </Stack>
           )}
