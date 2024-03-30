@@ -72,12 +72,28 @@ export const useRegisterUser = () => {
       navigate("/sign-in");
     },
     onError: (error: any) => {
-      toast({
-        title: `${error.response.data.error}`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     },
   });
   return { isPending, registerUser };
