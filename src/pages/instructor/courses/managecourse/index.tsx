@@ -1,2 +1,3 @@
 import CourseLandingPage from "./CourseLandingPage";
-export {CourseLandingPage}
+import Pricing from "./Pricing";
+export {CourseLandingPage,Pricing}

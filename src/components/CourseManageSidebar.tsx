@@ -54,7 +54,7 @@ const CourseManageSidebar = () => {
     {
       id: 9,
       name: "pricing",
-      href: "pricing",
+      href: `/instructor/courses/${getSingleCourse?.id}/manage/pricing`,
     },
     {
       id: 10,

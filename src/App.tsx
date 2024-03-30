@@ -17,7 +17,7 @@ import Home from "./pages/Home";
 import { StudentCourse } from "./pages/course";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
-import { CourseLandingPage } from "./pages/instructor/courses/managecourse";
+import { CourseLandingPage, Pricing } from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 
 const router = createBrowserRouter([
@@ -92,6 +92,10 @@ const router = createBrowserRouter([
       {
         path: "curriculum",
         element: <Curriculum />,
+      },
+      {
+        path: "pricing",
+        element: <Pricing />,
       },
     ],
   },
