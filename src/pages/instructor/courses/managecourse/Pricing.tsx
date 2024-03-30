@@ -2,7 +2,7 @@ import { Button, Divider, Flex, Select, Stack, Text } from "@chakra-ui/react";
 import { Formik } from "formik";
 
 const initialValues = {
-  currency: "",
+  currency: "USD",
   price: "",
 };
 const Pricing = () => {
@@ -34,17 +34,18 @@ const Pricing = () => {
               <Stack>
                 <Text fontWeight={"bolf"}>Currency</Text>
                 <Select
-                  placeholder="Select option"
+                //   placeholder="Select option"
                   variant={"filled"}
                   //   width={{ base: "100%", md: "35%" }}
                   name="currency"
                   value={values.currency}
                   onChange={handleChange}
                 >
-                  <option value="newest">Newest</option>
-                  <option value="oldest">Oldest</option>
-                  <option value="A_Z">A-Z</option>
-                  <option value="Z_A">Z-A</option>
+                  <option value="USD">USD</option>
+                  <option value="NGN">NGN</option>
+                  <option value="GHS">GHS</option>
+                  <option value="ZAR">ZAR</option>
+                  <option value="KES">KES</option>
                 </Select>
                 {errors.currency && (
                   <Text style={{ color: "red", marginTop: 0 }} fontSize="14px">
