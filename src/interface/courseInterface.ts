@@ -13,5 +13,6 @@ export interface CurriculumInterface {
     body?: string;
     url?: string;
     learningObjective?: string;
-    description?: string
+    description?: string;
+    duration?: string;
 }

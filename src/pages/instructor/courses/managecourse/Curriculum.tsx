@@ -165,6 +165,20 @@ const Curriculum = () => {
 
   const handleUploadSuccess = () => {};
 
+  //create article duration formate
+  const convertSecondsToTime = (seconds: number) => {
+    const hours = Math.floor(seconds / 3600);
+    const remainingMinutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    const formattedTime = `${hours
+      .toString()
+      .padStart(2, "0")}:${remainingMinutes
+      .toString()
+      .padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+    return formattedTime;
+  };
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -1014,7 +1028,11 @@ const Curriculum = () => {
                                                 </Box>
                                               </Flex>
                                               <Box>
-                                                <Text>00:00</Text>
+                                                <Text>
+                                                  {convertSecondsToTime(
+                                                    content?.duration
+                                                  )}
+                                                </Text>
                                                 <Flex
                                                   align={"center"}
                                                   fontWeight={"600"}
@@ -1164,7 +1182,7 @@ const Curriculum = () => {
                                                       title,
                                                       id,
                                                       source,
-                                                      size
+                                                      size,
                                                     } = resource;
                                                     return (
                                                       <>
@@ -1186,7 +1204,11 @@ const Curriculum = () => {
                                                                 />
                                                               </Text>
                                                               <Text>
-                                                                {title} ({(size/1024).toFixed(1)}) kB
+                                                                {title} (
+                                                                {(
+                                                                  size / 1024
+                                                                ).toFixed(1)}
+                                                                ) kB
                                                               </Text>
                                                             </Flex>
                                                             <Text
