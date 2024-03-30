@@ -74,7 +74,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         duration: 5000,
         isClosable: true,
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: `${error}`,
         status: "error",
