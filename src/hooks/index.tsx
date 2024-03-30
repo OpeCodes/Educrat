@@ -5,14 +5,14 @@ import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 export const useGetUser = () => {
-  const { data, isPending,isError } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       const { data } = await customFetch.get("/user");
       return data;
     },
   });
-  return { data, isPending,isError };
+  return { data, isPending, isError };
 };
 
 export const useBecomeInstructor = () => {
@@ -32,19 +32,31 @@ export const useBecomeInstructor = () => {
       navigate("/instructor/courses");
     },
     onError: (error: any) => {
-      toast({
-        title: `${error.response.data.error}`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     },
   });
   return { becomeInstructor, isPending };
 };
-
-
-
-
 
 //invalidate the course in the usesinglecourse

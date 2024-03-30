@@ -545,6 +545,7 @@ export const useGetLectureModuleCourse = (id: any) => {
       const { data } = await customFetch.get(`lecture/module/${id}`);
       return data;
     },
+   
   });
 
   return {
