@@ -29,30 +29,28 @@ export const useModuleCreateCourse = () => {
       });
     },
     onError: (error: any) => {
-    
-
- if (error.response) {
-  toast({
-    title: `${error.response.data.error}`,
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else if (error.request) {
-  toast({
-    title: "Network error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else {
-  toast({
-    title: "An error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-}
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     },
   });
   return {
@@ -91,30 +89,28 @@ export const useModuleEditCourse = () => {
       });
     },
     onError: (error: any) => {
-   
-
- if (error.response) {
-  toast({
-    title: `${error.response.data.error}`,
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else if (error.request) {
-  toast({
-    title: "Network error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else {
-  toast({
-    title: "An error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-}
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     },
   });
   return { moduleEditCourse, isPending, error, isError, isSuccess };
@@ -124,7 +120,6 @@ export const useDeleteModuleCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  
   const { mutate: deleteModule, isPending: deleteModuleLoading } = useMutation({
     mutationFn: ({ moduleId }: any) => {
       return customFetch.delete(`/module/${moduleId}`);
@@ -139,33 +134,31 @@ export const useDeleteModuleCourse = () => {
       });
     },
     onError: (error: any) => {
-     
-
- if (error.response) {
-  toast({
-    title: `${error.response.data.error}`,
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else if (error.request) {
-  toast({
-    title: "Network error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else {
-  toast({
-    title: "An error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-}
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     },
   });
-  return { deleteModule, deleteModuleLoading, };
+  return { deleteModule, deleteModuleLoading };
 };
 
 export const useGetModuleCourse = (id: any) => {
@@ -247,7 +240,7 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
-  const { data, isPending, isSuccess,refetch } = useQuery({
+  const { data, isPending, isSuccess, refetch } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
@@ -315,8 +308,6 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
 
-
-  
   return {
     data,
     isPending,
@@ -345,8 +336,7 @@ export const useGetModuleCourse = (id: any) => {
     isOpenEditArticle,
     toggleIsOpenEditArticle,
     isOpenEditVideo,
-    toggleIsOpenEditVideo
-
+    toggleIsOpenEditVideo,
   };
 };
 export const useGetSingleModuleCourse = (id: any) => {
@@ -375,7 +365,8 @@ export const useGetSingleModuleCourse = (id: any) => {
 export const useCreateModuleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const [createLectureModuleSuccess, setCreateLectureModuleSuccess] = useState(true);
+  const [createLectureModuleSuccess, setCreateLectureModuleSuccess] =
+    useState(true);
   const { mutate: moduleCreateLectureCourse, isPending: moduleLectureLoading } =
     useMutation({
       mutationFn: ({ moduleId, user }: any) => {
@@ -415,7 +406,12 @@ export const useCreateModuleLectureCourse = () => {
         }
       },
     });
-  return { moduleCreateLectureCourse, moduleLectureLoading ,createLectureModuleSuccess, setCreateLectureModuleSuccess};
+  return {
+    moduleCreateLectureCourse,
+    moduleLectureLoading,
+    createLectureModuleSuccess,
+    setCreateLectureModuleSuccess,
+  };
 };
 
 export const useGetModuleLectureCourse = (id: any) => {
@@ -492,46 +488,48 @@ export const useDeleteLectureModuleCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteLectureModule, isPending: deleteLecutureModuleCourseLoading } =
-    useMutation({
-      mutationFn: ({ lectureId }: any) => {
-        return customFetch.delete(`/lecture/${lectureId}`);
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["module"] });
+  const {
+    mutate: deleteLectureModule,
+    isPending: deleteLecutureModuleCourseLoading,
+  } = useMutation({
+    mutationFn: ({ lectureId }: any) => {
+      return customFetch.delete(`/lecture/${lectureId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["module"] });
 
+      toast({
+        title: `lecture deleted successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      if (error.response) {
         toast({
-          title: `lecture deleted successfully`,
-          status: "success",
+          title: `${error.response.data.error}`,
+          status: "error",
           duration: 5000,
           isClosable: true,
         });
-      },
-      onError: (error: any) => {
-        if (error.response) {
-          toast({
-            title: `${error.response.data.error}`,
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        } else if (error.request) {
-          toast({
-            title: "Network error occurred. Please try again later.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: "An error occurred. Please try again later.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        }
-      },
-    });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
   return { deleteLectureModule, deleteLecutureModuleCourseLoading };
 };
 
@@ -560,7 +558,10 @@ export const useGetLectureModuleCourse = (id: any) => {
 export const useCreateArticleLectureCourse = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { mutate: createArticleLectureCourse,isSuccess: createArticleSuccess } = useMutation({
+  const {
+    mutate: createArticleLectureCourse,
+    isSuccess: createArticleSuccess,
+  } = useMutation({
     mutationFn: ({ lectureId, user }: any) => {
       return customFetch.post(
         `/lecture/content/lecture/${lectureId}/article
@@ -586,7 +587,7 @@ export const useCreateArticleLectureCourse = () => {
       });
     },
   });
-  return { createArticleLectureCourse,createArticleSuccess };
+  return { createArticleLectureCourse, createArticleSuccess };
 };
 
 export const useEditArticleLectureCourse = () => {
@@ -641,7 +642,10 @@ export const useDeleteArticleLecture = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteArticleLecture, isPending: deleteArticleLectureLoading} = useMutation({
+  const {
+    mutate: deleteArticleLecture,
+    isPending: deleteArticleLectureLoading,
+  } = useMutation({
     mutationFn: ({ articleId }: any) => {
       return customFetch.delete(`/lecture/content/article/${articleId}`);
     },
@@ -655,37 +659,32 @@ export const useDeleteArticleLecture = () => {
       });
     },
     onError: (error: any) => {
-     
-
- if (error.response) {
-  toast({
-    title: `${error.response.data.error}`,
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else if (error.request) {
-  toast({
-    title: "Network error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else {
-  toast({
-    title: "An error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-}
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     },
   });
-  return { deleteArticleLecture, deleteArticleLectureLoading};
+  return { deleteArticleLecture, deleteArticleLectureLoading };
 };
-
-
-
 
 // ****************************************video endpoint**************************************
 
@@ -693,51 +692,47 @@ export const useDeleteVideoLecture = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteVideoLecture, isPending: deleteVideoLectureLoding} = useMutation({
-    mutationFn: ({ videoId }: any) => {
-      return customFetch.delete(`/lecture/content/video/${videoId}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["module"] });
-      toast({
-        title: `video deleted successfully`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-    },
-    onError: (error: any) => {
-     
-
- if (error.response) {
-  toast({
-    title: `${error.response.data.error}`,
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else if (error.request) {
-  toast({
-    title: "Network error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else {
-  toast({
-    title: "An error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-}
-    },
-  });
-  return { deleteVideoLecture, deleteVideoLectureLoding};
+  const { mutate: deleteVideoLecture, isPending: deleteVideoLectureLoding } =
+    useMutation({
+      mutationFn: ({ videoId }: any) => {
+        return customFetch.delete(`/lecture/content/video/${videoId}`);
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["module"] });
+        toast({
+          title: `video deleted successfully`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      },
+      onError: (error: any) => {
+        if (error.response) {
+          toast({
+            title: `${error.response.data.error}`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else if (error.request) {
+          toast({
+            title: "Network error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "An error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      },
+    });
+  return { deleteVideoLecture, deleteVideoLectureLoding };
 };
-
-
-
 
 // ***********************external resource endpoint*****************************
 
@@ -762,30 +757,28 @@ export const useCreateExternalResourceLink = () => {
       });
     },
     onError: (error: any) => {
-     
-
- if (error.response) {
-  toast({
-    title: `${error.response.data.error}`,
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else if (error.request) {
-  toast({
-    title: "Network error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else {
-  toast({
-    title: "An error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-}
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     },
   });
   return { createExternalResourceLink };
@@ -795,7 +788,10 @@ export const useDeleteExternalResource = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { mutate: deleteExternalResource, isPending: deleteExternalResourceLoading} = useMutation({
+  const {
+    mutate: deleteExternalResource,
+    isPending: deleteExternalResourceLoading,
+  } = useMutation({
     mutationFn: ({ resourceId }: any) => {
       return customFetch.delete(`/lecture/resource/${resourceId}`);
     },
@@ -809,34 +805,29 @@ export const useDeleteExternalResource = () => {
       });
     },
     onError: (error: any) => {
-    
-
- if (error.response) {
-  toast({
-    title: `${error.response.data.error}`,
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else if (error.request) {
-  toast({
-    title: "Network error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-} else {
-  toast({
-    title: "An error occurred. Please try again later.",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-  });
-}
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     },
   });
-  return { deleteExternalResource, deleteExternalResourceLoading};
+  return { deleteExternalResource, deleteExternalResourceLoading };
 };
-
-
-
