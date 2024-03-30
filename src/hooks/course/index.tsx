@@ -16,35 +16,49 @@ export const useCourseCategory = () => {
 export const useCreateCourse = () => {
   const toast = useToast();
   const navigate = useNavigate();
-  
+
   const queryClient = useQueryClient();
   const { mutate: createCourse, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("/course", user);
     },
     onSuccess: (user: any) => {
-     
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
       queryClient.invalidateQueries({ queryKey: ["allUserCourse"] });
-      
+
       toast({
         title: `course create successfully`,
         status: "success",
         duration: 5000,
         isClosable: true,
       });
-      setTimeout(() =>{
+      setTimeout(() => {
         navigate(`/instructor/courses/${user?.data?.id}/manage/basics`);
-
-      },1000)
+      }, 1000);
     },
     onError: (error: any) => {
-      toast({
-        title: `${error.response.data.error}`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     },
   });
   return { createCourse, isPending };
@@ -90,7 +104,7 @@ export const useGetSingleCourse = (id: any) => {
     data: getSingleCourse,
     isPending,
     isError,
-    refetch
+    refetch,
   } = useQuery({
     queryKey: ["singleCourse", id],
     queryFn: async ({ queryKey }) => {
@@ -98,9 +112,7 @@ export const useGetSingleCourse = (id: any) => {
       const { data } = await customFetch.get(`/course/${id}`);
       return data;
     },
-    
-  })
-  
+  });
 
   return { getSingleCourse, isPending, isError, refetch };
 };
@@ -117,12 +129,12 @@ export const useGetCourse = () => {
 };
 
 export const useGetAllUserCourse = () => {
-  const { data, isError,isPending,refetch } = useQuery({
+  const { data, isError, isPending, refetch } = useQuery({
     queryKey: ["allUserCourse"],
     queryFn: async () => {
       const { data } = await customFetch.get("/course/user");
       return data;
     },
   });
-  return { data , isPending,isError ,refetch};
+  return { data, isPending, isError, refetch };
 };
