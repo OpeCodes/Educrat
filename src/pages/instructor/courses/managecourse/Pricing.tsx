@@ -31,10 +31,10 @@ const Pricing = () => {
         >
           {({ handleChange, handleSubmit, values, errors }) => (
             <Stack>
+                <Flex columnGap={5}>
               <Stack>
-                <Text fontWeight={"bolf"}>Currency</Text>
+                <Text fontWeight={"bold"}>Currency</Text>
                 <Select
-                //   placeholder="Select option"
                   variant={"filled"}
                   //   width={{ base: "100%", md: "35%" }}
                   name="currency"
@@ -53,7 +53,28 @@ const Pricing = () => {
                   </Text>
                 )}
               </Stack>
-
+              <Stack>
+                <Text fontWeight={"bold"}>Price Tier</Text>
+                <Select
+                  variant={"filled"}
+                  //   width={{ base: "100%", md: "35%" }}
+                  name="currency"
+                  value={values.currency}
+                  onChange={handleChange}
+                >
+                  <option value="USD">USD</option>
+                  <option value="NGN">NGN</option>
+                  <option value="GHS">GHS</option>
+                  <option value="ZAR">ZAR</option>
+                  <option value="KES">KES</option>
+                </Select>
+                {errors.currency && (
+                  <Text style={{ color: "red", marginTop: 0 }} fontSize="14px">
+                    <>{errors.currency}</>
+                  </Text>
+                )}
+              </Stack>
+              </Flex>
               <Button
                 color="#ffffff"
                 fontWeight={"500"}
@@ -66,6 +87,7 @@ const Pricing = () => {
                 onClick={() => handleSubmit()}
                 type="button"
                 backgroundColor={"black"}
+                width={"fit-content"}
               >
                 Save Section
               </Button>
