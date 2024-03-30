@@ -1,20 +1,77 @@
-import { Divider, Stack, Text } from "@chakra-ui/react";
+import { Button, Divider, Flex, Select, Stack, Text } from "@chakra-ui/react";
+import { Formik } from "formik";
 
+const initialValues = {
+  currency: "",
+  price: "",
+};
 const Pricing = () => {
+  const handleSubmit = () => {};
   return (
-    <Stack>
-      <Text p={5} fontSize={20} fontWeight={"bold"}>
+    <Stack p={5}>
+      <Text fontSize={20} fontWeight={"bold"}>
         Pricing
       </Text>
       <Divider />
-      <Stack p={5}>
-      <Text fontWeight={"bold"}>Set a price for your course</Text>
-      <Text fontSize={14}>
-        Please select the currency and the price tier for your course. If you’d
-        like to offer your course for free, it must have a total video length of
-        less than 2 hours. Also, courses with practice tests can not be free.
-      </Text>
+      <Stack py={5}>
+        <Text fontWeight={"bold"}>Set a price for your course</Text>
+        <Text fontSize={14}>
+          Please select the currency and the price tier for your course. If
+          you’d like to offer your course for free, it must have a total video
+          length of less than 2 hours. Also, courses with practice tests can not
+          be free.
+        </Text>
       </Stack>
+
+      <Flex>
+        <Formik
+          initialValues={initialValues}
+          //   validationSchema={courseLandingSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ handleChange, handleSubmit, values, errors }) => (
+            <Stack>
+              <Stack>
+                <Text fontWeight={"bolf"}>Currency</Text>
+                <Select
+                  placeholder="Select option"
+                  variant={"filled"}
+                  //   width={{ base: "100%", md: "35%" }}
+                  name="currency"
+                  value={values.currency}
+                  onChange={handleChange}
+                >
+                  <option value="newest">Newest</option>
+                  <option value="oldest">Oldest</option>
+                  <option value="A_Z">A-Z</option>
+                  <option value="Z_A">Z-A</option>
+                </Select>
+                {errors.currency && (
+                  <Text style={{ color: "red", marginTop: 0 }} fontSize="14px">
+                    <>{errors.currency}</>
+                  </Text>
+                )}
+              </Stack>
+
+              <Button
+                color="#ffffff"
+                fontWeight={"500"}
+                fontSize={14}
+                as={"button"}
+                py={2}
+                px={4}
+                variant="outline"
+                spinnerPlacement="end"
+                onClick={() => handleSubmit()}
+                type="button"
+                backgroundColor={"black"}
+              >
+                Save Section
+              </Button>
+            </Stack>
+          )}
+        </Formik>
+      </Flex>
     </Stack>
   );
 };

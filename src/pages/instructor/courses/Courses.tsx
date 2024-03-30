@@ -30,6 +30,7 @@ const Courses = () => {
     },
     onSubmit: (values: any) => {
       console.log("Submitted:", values);
+      
     },
   });
   const filteredItems = data
