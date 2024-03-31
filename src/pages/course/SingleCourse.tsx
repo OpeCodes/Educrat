@@ -10,6 +10,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Textarea,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
@@ -37,12 +38,14 @@ const data = [
     name: "All the techniques used by UX professionals",
   },
 ];
-const initialValues ={
+const initialValues = {
   title: "",
-  content: ""
-}
+  content: "",
+};
 const SingleCourse = () => {
-  const handleSubmit = () =>{}
+  const handleSubmit = (values: any) => {
+    console.log(values)
+  };
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
   return (
@@ -320,9 +323,9 @@ const SingleCourse = () => {
                             <Input
                               type="text"
                               variant="filled"
-                              placeholder="username or email"
+                              placeholder="write your review"
                               value={values.title}
-                              name="credential"
+                              name="title"
                               onChange={handleChange}
                             />
                             {errors.title && (
@@ -331,6 +334,24 @@ const SingleCourse = () => {
                                 fontSize="14px"
                               >
                                 <>{errors.title}</>
+                              </Text>
+                            )}
+                          </FormControl>
+                          <FormControl isRequired mt={5}>
+                            <FormLabel>Review Content</FormLabel>
+                            <Textarea
+                              variant="filled"
+                              placeholder="Message"
+                              value={values.content}
+                              name="content"
+                              onChange={handleChange}
+                            />
+                            {errors.content && (
+                              <Text
+                                style={{ color: "red", marginTop: 5 }}
+                                fontSize="14px"
+                              >
+                                <>{errors.content}</>
                               </Text>
                             )}
                           </FormControl>
@@ -349,7 +370,7 @@ const SingleCourse = () => {
                             borderColor={"#00FF84"}
                             _hover={{ background: "none", color: "#00FF84" }}
                           >
-                            Login
+                            Submit Review
                           </Button>
                         </Flex>
                       )}
