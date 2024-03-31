@@ -56,7 +56,12 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
     }
   };
 
-  const uploadImage = async (file: File, type: string, title: string,size: number) => {
+  const uploadImage = async (
+    file: File,
+    type: string,
+    title: string,
+    size: number
+  ) => {
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Data = reader.result as string;
@@ -92,13 +97,28 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
         setSucess(true);
       } catch (error: any) {
         setSucess(false);
-        toast({
-          title: `${error.response.data.error}`,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
-        console.error("Upload failed:", error);
+        if (error.response) {
+          toast({
+            title: `${error.response.data.error}`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else if (error.request) {
+          toast({
+            title: "Network error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "An error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
       }
     };
     reader.readAsDataURL(file);
@@ -126,7 +146,7 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
           </Stack>
           <Flex fontSize={13} columnGap={1}>
             <Text fontWeight={"600"}>Note:</Text>
-            <Text>    
+            <Text>
               A resource is for any type of document that can be used to help
               students in the lecture. This file is going to be seen as a
               lecture extra. Make sure everything is legible and the file size

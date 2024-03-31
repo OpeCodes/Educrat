@@ -8,7 +8,7 @@ const initialValues = {
 };
 const Pricing = () => {
   const handleSubmit = (values: any) => {
-    console.log(values)
+    console.log(values);
   };
   return (
     <Stack p={5}>
@@ -27,7 +27,7 @@ const Pricing = () => {
       <Flex>
         <Formik
           initialValues={initialValues}
-            validationSchema={pricingPageValidationSchema}
+          validationSchema={pricingPageValidationSchema}
           onSubmit={handleSubmit}
         >
           {({ handleChange, handleSubmit, values, errors }) => (
