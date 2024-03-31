@@ -1,5 +1,12 @@
-import React, { ChangeEvent, useState ,} from "react";
-import { Box, Progress, Input, Image, Button,useToast } from "@chakra-ui/react";
+import React, { ChangeEvent, useState } from "react";
+import {
+  Box,
+  Progress,
+  Input,
+  Image,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 import customFetch from "../utils/axios";
 import imagePlaceholder from "../assets/image-placeholder.png";
 interface ImageUploadProps {
@@ -15,21 +22,20 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
 
-    
     if (file) {
-        if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
         toast({
-            title: `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        } else {
-          const imageUrl = URL.createObjectURL(file);
-          setSelectedImage(imageUrl);
-          setFileToUpload(file);
-        }
+          title: `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        const imageUrl = URL.createObjectURL(file);
+        setSelectedImage(imageUrl);
+        setFileToUpload(file);
       }
+    }
   };
 
   const handleUploadClick = () => {
@@ -75,12 +81,28 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         isClosable: true,
       });
     } catch (error: any) {
-      toast({
-        title: `${error}`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     }
     onImageUpload(uploadedFile);
   };
@@ -106,7 +128,6 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
       {uploadProgress > 0 && uploadProgress < 100 && (
         <Progress value={uploadProgress} size="sm" mt={2} />
       )}
-
     </Box>
   );
 };
