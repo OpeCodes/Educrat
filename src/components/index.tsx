@@ -12,7 +12,7 @@ import CourseImageFileUpload from "./CourseImageFileUpload";
 import Loading from "./Loading";
 import CourseListComponent from "./CourseListComponent";
 import Category from "./Category";
-import Course from "./Course";
+import Course from "./FeaturedCourses";
 import SliderButtons from "./SliderButtons";
 import Instructor from "./Instructor";
 import Student from "./Student";

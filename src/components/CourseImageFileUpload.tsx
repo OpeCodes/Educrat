@@ -27,7 +27,6 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const { id } = useParams();
   const { getSingleCourse, refetch: singleCourseRefetch } =
     useGetSingleCourse(id);
-  console.log(getSingleCourse);
   const { refetch } = useGetAllUserCourse();
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {

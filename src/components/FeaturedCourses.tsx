@@ -12,7 +12,6 @@ type Props = {
   level: string;
   avatar: string;
   name: string;
-  oldPrice: number;
   newPrice: number;
 };
 const Course = ({
@@ -25,7 +24,6 @@ const Course = ({
   level,
   avatar,
   name,
-  oldPrice,
   newPrice,
 }: Props) => {
   return (
@@ -114,10 +112,7 @@ const Course = ({
             display={"flex"}
             justifyContent={"space-between"}
             alignItems={"center"}
-          >
-            <Text color={"gray.600"} mr={2} textDecoration={"line-through"}>
-              ${oldPrice}
-            </Text>
+          >            
             <Text color={"#140342"} fontSize={"xl"}>
               ${newPrice}
             </Text>
