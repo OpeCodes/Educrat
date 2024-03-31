@@ -14,7 +14,7 @@ import {
 } from "./components";
 import "./App.css";
 import Home from "./pages/Home";
-import { StudentCourse } from "./pages/course";
+import { SingleCourse, StudentCourse } from "./pages/course";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
 import { CourseLandingPage, Pricing } from "./pages/instructor/courses/managecourse";
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/all-courses",
         element: <StudentCourse />,
+      },
+      {
+        path: "/course/:id",
+        element: <SingleCourse />,
       },
     ],
   },
