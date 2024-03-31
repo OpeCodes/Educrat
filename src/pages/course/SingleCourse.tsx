@@ -7,12 +7,15 @@ import {
   GridItem,
   Collapse,
   Button,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
 import { MdOutlineCheckCircleOutline } from "react-icons/md";
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
+import { Formik } from "formik";
 
 const data = [
   {
@@ -292,6 +295,69 @@ const SingleCourse = () => {
                     </Text>
                     <Text>What is it like about the  Course?</Text>
                     <Text>Review star here </Text>
+                    <Formik
+              // initialValues={initialValues}
+              validationSchema={SignInSchema}
+              onSubmit={handleSubmit}
+            >
+              {({ handleChange, handleSubmit, values, errors }) => (
+                <Flex
+                  rowGap={"5px"}
+                  flexDirection="column"
+                  maxHeight={{ base: "100%", lg: "530px" }}
+                  overflowY={"auto"}
+                  pb={5}
+                >
+                  <FormControl isRequired>
+                    <FormLabel>Username or email</FormLabel>
+                    <Input 
+                      type="text"
+                      variant="filled"
+                      placeholder="username or email"
+                      value={values.credential}
+                      name="credential"
+                      onChange={handleChange}
+                    />
+                    {errors.credential && (
+                      <Text
+                        style={{ color: "red", marginTop: 5 }}
+                        fontSize="14px"
+                      >
+                        {errors.credential}
+                      </Text>
+                    )}
+                  </FormControl>
+                
+                  <Button
+                    color={"#00FF84"}
+                    as={Link}
+                    to="/reset-password"
+                    variant="link"
+                    display={"flex"}
+                    fontSize="14px"
+                    justifyContent={"end"}
+                  >
+                    Forgot Password?
+                  </Button>
+                  <Button
+                    bg={"#00FF84"}
+                    isLoading={isPending}
+                    loadingText="Loading"
+                    variant="outline"
+                    spinnerPlacement="end"
+                    width="100%"
+                    onClick={() => handleSubmit()}
+                    mt={3}
+                    borderWidth={2}
+                    py={3}
+                    borderColor={"#00FF84"}
+                    _hover={{ background: "none", color: "#00FF84" }}
+                  >
+                    Login
+                  </Button>
+                </Flex>
+              )}
+            </Formik>
                   </Stack>
                 </Stack>
               </Stack>
