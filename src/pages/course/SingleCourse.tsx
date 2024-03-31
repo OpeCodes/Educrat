@@ -227,8 +227,7 @@ const SingleCourse = () => {
                             <Text>
                               <HiOutlineChat />
                             </Text>
-                            <Text>692 Students
-</Text>
+                            <Text>692 Students</Text>
                           </Flex>
                           <Flex
                             columnGap={1}
@@ -236,7 +235,7 @@ const SingleCourse = () => {
                             align={"center"}
                           >
                             <Text>
-                            <LuClock3 />
+                              <LuClock3 />
                             </Text>
                             <Text>15 Course</Text>
                           </Flex>
@@ -249,11 +248,38 @@ const SingleCourse = () => {
                       designed many high profile web and iPhone applications.
                       The applications range from 3D medical aided web
                       applications to project management applications for niche
-                      industries. <br/> <br/> I am also the founder of a large local design
-                      organization, Salt Lake Designers, where I and other local
-                      influencers help cultivate the talents of up and coming UX
-                      designers through workshops and panel discussions.
+                      industries. <br /> <br /> I am also the founder of a large
+                      local design organization, Salt Lake Designers, where I
+                      and other local influencers help cultivate the talents of
+                      up and coming UX designers through workshops and panel
+                      discussions.
                     </Text>
+                  </Stack>
+                  {/* Student review */}
+                  <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
+                    <Text
+                      color={"black"}
+                      fontWeight={"bold"}
+                      fontSize={"1.1rem"}
+                    >
+                      Reviews
+                    </Text>
+                    <Flex columnGap={3}>
+                      <Avatar size="lg" name="Adedokun Peter" />
+                      <Stack>
+                        <Flex columnGap={1} rowGap={3}>
+                          <Text color={"black"}>Adedokun Peter</Text>
+                          <Text>3 days ago</Text>
+                        </Flex>
+                        <Text color={"black"}>The best LMS Design</Text>
+                        <Text>
+                          This course is a very applicable. Professor Ng
+                          explains precisely each algorithm and even tries to
+                          give an intuition for mathematical and statistic
+                          concepts behind each algorithm. Thank you very much.
+                        </Text>
+                      </Stack>
+                    </Flex>
                   </Stack>
                 </Stack>
               </Stack>
