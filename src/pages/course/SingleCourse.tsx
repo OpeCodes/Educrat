@@ -1,7 +1,17 @@
-import { Stack, Text, Flex, Avatar, Grid, GridItem } from "@chakra-ui/react";
+import {
+  Stack,
+  Text,
+  Flex,
+  Avatar,
+  Grid,
+  GridItem,
+  Collapse,
+  Button,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
 import { MdOutlineCheckCircleOutline } from "react-icons/md";
+import { useState } from "react";
 
 const data = [
   {
@@ -22,6 +32,8 @@ const data = [
   },
 ];
 const SingleCourse = () => {
+  const [show, setShow] = useState(false);
+  const handleToggle = () => setShow(!show);
   return (
     <Stack>
       <Stack>
@@ -117,7 +129,7 @@ const SingleCourse = () => {
                       Requirement
                     </Text>
 
-                    <Flex align={"center"} color={"#4f547b"} columnGap={1}>
+                    <Flex align={"center"} color={"#4f547b"} columnGap={1} >
                       <Text mt={"-.2rem"} fontSize={"1.2rem"}>
                         &#x2022;
                       </Text>
@@ -128,12 +140,32 @@ const SingleCourse = () => {
                     </Flex>
                   </Stack>
                   {/* description */}
-                  <Stack  mb={"1.5rem"}>
+                  <Stack mb={"1.5rem"} color={"#4f547b"}>
                     <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                       Description
                     </Text>
-
-                </Stack>
+                    <Collapse startingHeight={150} in={show} color={"#4f547b"} >
+                      Phasellus enim magna, varius et commodo ut, ultricies
+                      vitae velit. Ut nulla tellus, eleifend euismod
+                      pellentesque vel, sagittis vel justo. In libero urna,
+                      venenatis sit amet ornare non, suscipit nec risus. Sed
+                      consequat justo non mauris pretium at tempor justo
+                      sodales. Quisque tincidunt laoreet malesuada. Cum sociis
+                      natoque penatibus et magnis dis parturient montes,
+                      nascetur. This course is aimed at people interested in
+                      UI/UX Design. We’ll start from the very beginning and work
+                      all the way through, step by step. If you already have
+                      some UI/UX Design experience but want to get up to speed
+                      using Adobe XD then this course is perfect for you too!
+                      First, we will go over the differences between UX and UI
+                      Design. We will look at what our brief for this real-world
+                      project is, then we will learn about low-fidelity
+                      wireframes and how to make use of existing UI design kits.
+                    </Collapse>
+                    <Button size="sm" onClick={handleToggle} mt="1rem">
+                      Show {show ? "Less" : "More"}
+                    </Button>
+                  </Stack>
                 </Stack>
               </Stack>
               <Stack>
