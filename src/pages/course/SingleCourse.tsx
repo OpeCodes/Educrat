@@ -100,11 +100,12 @@ const SingleCourse = () => {
                   />
                   <Text fontWeight={"400"}>Adedokun Peter</Text>
                 </Flex>
+                <Text>course content here brother</Text>
+
                 <Stack mt={"1.8rem"} mb={"1.5rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     What you'll learn
                   </Text>
-                  <Text>course content here brother</Text>
                   <Stack>
                     <Grid templateColumns={{ md: "repeat(2, 1fr)" }} gap={3}>
                       {data?.map((item) => (
@@ -226,7 +227,8 @@ const SingleCourse = () => {
                             <Text>
                               <HiOutlineChat />
                             </Text>
-                            <Text>23,987 Reviews</Text>
+                            <Text>692 Students
+</Text>
                           </Flex>
                           <Flex
                             columnGap={1}
@@ -234,9 +236,9 @@ const SingleCourse = () => {
                             align={"center"}
                           >
                             <Text>
-                              <HiOutlineChat />
+                            <LuClock3 />
                             </Text>
-                            <Text>23,987 Reviews</Text>
+                            <Text>15 Course</Text>
                           </Flex>
                         </Flex>
                       </Stack>
