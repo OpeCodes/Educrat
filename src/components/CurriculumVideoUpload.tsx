@@ -44,7 +44,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
-   
+
     if (file) {
       if (!file.type.startsWith("video/")) {
         toast({
@@ -86,7 +86,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   };
 
   const uploadImage = async (file: File, duration: number, title: string) => {
-
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Data = reader.result as string;
@@ -106,7 +105,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   (progressEvent.loaded * 100) / progressEvent.total
                 );
                 setUploadProgress(percentCompleted);
-
               }
             },
           }
@@ -122,21 +120,34 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         });
         onImageUpload(file);
         setSucess(true);
-
       } catch (error: any) {
         setSucess(false);
-        toast({
-          title: `${error.response.data.error}`,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
-        console.error("Upload failed:", error);
+        if (error.response) {
+          toast({
+            title: `${error.response.data.error}`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else if (error.request) {
+          toast({
+            title: "Network error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "An error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
       }
     };
     reader.readAsDataURL(file);
     refetch();
-
   };
 
   //date formatted code
@@ -229,7 +240,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                       refetch();
                       setSucess(false);
                       deleteVideoLecture({ videoId: contentId });
-
                     }}
                   >
                     Replace
