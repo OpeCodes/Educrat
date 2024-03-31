@@ -44,7 +44,7 @@ const initialValues = {
 };
 const SingleCourse = () => {
   const handleSubmit = (values: any) => {
-    console.log(values)
+    console.log(values);
   };
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);

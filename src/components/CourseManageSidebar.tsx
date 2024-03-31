@@ -59,7 +59,7 @@ const CourseManageSidebar = () => {
     {
       id: 10,
       name: "Course Messages",
-      href: "course messages",
+      href: `/instructor/courses/${getSingleCourse?.id}/manage/communications/messages`,
     },
   ];
   return (
