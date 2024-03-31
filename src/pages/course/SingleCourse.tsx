@@ -129,7 +129,7 @@ const SingleCourse = () => {
                       Requirement
                     </Text>
 
-                    <Flex align={"center"} color={"#4f547b"} columnGap={1} >
+                    <Flex align={"center"} color={"#4f547b"} columnGap={1}>
                       <Text mt={"-.2rem"} fontSize={"1.2rem"}>
                         &#x2022;
                       </Text>
@@ -144,7 +144,7 @@ const SingleCourse = () => {
                     <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                       Description
                     </Text>
-                    <Collapse startingHeight={150} in={show} color={"#4f547b"} >
+                    <Collapse startingHeight={150} in={show} color={"#4f547b"}>
                       Phasellus enim magna, varius et commodo ut, ultricies
                       vitae velit. Ut nulla tellus, eleifend euismod
                       pellentesque vel, sagittis vel justo. In libero urna,
@@ -162,7 +162,17 @@ const SingleCourse = () => {
                       project is, then we will learn about low-fidelity
                       wireframes and how to make use of existing UI design kits.
                     </Collapse>
-                    <Button size="sm" onClick={handleToggle} mt="1rem">
+                    <Button
+                      color={"#6440fb"}
+                      textAlign={"left"}
+                      display={"flex"}
+                      justifyContent={"left"}
+                      size="sm"
+                      onClick={handleToggle}
+                      mt="1rem"
+                      colorScheme="teal"
+                      variant="link"
+                    >
                       Show {show ? "Less" : "More"}
                     </Button>
                   </Stack>
