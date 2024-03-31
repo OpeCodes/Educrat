@@ -48,7 +48,7 @@ const links = [
   {
     id: 2,
     name: "Course",
-    href: "/courses",
+    href: "/all-courses",
   },
   {
     id: 3,

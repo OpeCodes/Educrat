@@ -99,8 +99,8 @@ const StudentCourse = () => {
               </Flex>
             </Flex>
             <Grid templateColumns={{base: "repeat(1, 1fr)", md:"repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
-              {courses.map((item) => (
-                <GridItem w="100%">
+              {courses.map((item, index) => (
+                <GridItem w="100%" key={index}>
                   <Stack>
                     <Stack>
                       <Image
