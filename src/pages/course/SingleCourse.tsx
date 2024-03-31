@@ -112,9 +112,26 @@ const SingleCourse = () => {
                       ))}
                     </Grid>
                   </Stack>
+                  <Stack mt={"1.8rem"} mb={"3rem"}>
+                    <Text fontWeight={"bold"} fontSize={"1.1rem"}>
+                      Requirement
+                    </Text>
+
+                    <Flex align={"center"} color={"#4f547b"} columnGap={1}>
+                      <Text mt={"-.2rem"} fontSize={"1.2rem"}>
+                        &#x2022;
+                      </Text>
+                      <Text>
+                        You will need a copy of Adobe XD 2019 or above. A free
+                        trial can be.
+                      </Text>
+                    </Flex>
+                  </Stack>
                 </Stack>
               </Stack>
-              <Text>something here</Text>
+              <Stack>
+                <Text>something here</Text>
+              </Stack>
             </Flex>
           </Stack>
         </Stack>
