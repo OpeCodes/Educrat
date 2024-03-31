@@ -4,7 +4,6 @@ import {
   Flex,
   Text,
   Input,
-  useDisclosure,
   Button,
   Skeleton,
   Box,
@@ -22,7 +21,7 @@ import {
   TableContainer,
   useToast
 } from "@chakra-ui/react";
-import { useEffect,useState } from "react";
+import { useEffect,} from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -76,7 +75,7 @@ const Curriculum = () => {
   useEffect(() => {
     refetch();
   }, [id]);
-  const { moduleEditCourse } = useModuleEditCourse();
+  const { moduleEditCourse,isPending: moduleEditCourseLoading } = useModuleEditCourse();
   const { deleteModule, deleteModuleLoading } = useDeleteModuleCourse();
   const { moduleEditLectureCourse, moduleEditLectureLoading } =
     useEditModuleLectureCourse();
@@ -110,7 +109,11 @@ const toast = useToast()
   } = useModuleCreateCourse();
 
   ToastLoading(moduleLoading,toast)
-
+  ToastLoading(deleteModuleLoading,toast)
+  ToastLoading(moduleEditLectureLoading,toast)
+  ToastLoading(deleteLecutureModuleCourseLoading,toast)
+  ToastLoading(moduleEditCourseLoading,toast)
+  //moduleEditCourseLoading
   
 
 
@@ -182,8 +185,6 @@ const toast = useToast()
     return formattedTime
   }
  
-  ToastLoading(moduleLoading,toast)
-  ToastLoading(moduleLoading,toast)
   
   return (
     <Stack>

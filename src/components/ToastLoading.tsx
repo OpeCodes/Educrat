@@ -9,7 +9,7 @@ const ToastLoading = (isPending: boolean, toast: any) => {
       // Display a loading toast message and store its ID
       const toastId = toast({
         title: 'Loading...',
-        description: 'Please wait',        
+        // description: 'Please wait',        
         status: 'loading',
         duration: null, // Toast will persist until you manually close it or until the request completes
         isClosable: false, // Disables the close button on the toast
