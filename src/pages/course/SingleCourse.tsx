@@ -264,7 +264,7 @@ const SingleCourse = () => {
                     >
                       Reviews
                     </Text>
-                    <Flex columnGap={3}>
+                    <Flex columnGap={3} mt={3}>
                       <Avatar size="lg" name="Adedokun Peter" />
                       <Stack>
                         <Flex columnGap={1} rowGap={3}>
@@ -280,6 +280,18 @@ const SingleCourse = () => {
                         </Text>
                       </Stack>
                     </Flex>
+                  </Stack>
+                  {/* write review */}
+                  <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
+                    <Text
+                      color={"black"}
+                      fontWeight={"bold"}
+                      fontSize={"1.1rem"}
+                    >
+                      Write a Review
+                    </Text>
+                    <Text>What is it like about the  Course?</Text>
+                    <Text>Review star here </Text>
                   </Stack>
                 </Stack>
               </Stack>
