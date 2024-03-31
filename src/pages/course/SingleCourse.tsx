@@ -49,7 +49,7 @@ const SingleCourse = () => {
                     name="Kola Tioluwani"
                     src="https://bit.ly/tioluwani-kolawole"
                   />
-                  <Text>Adedokun Peter</Text>
+                  <Text fontWeight={"400"}>Adedokun Peter</Text>
                 </Flex>
               </Stack>
               <Text>something here</Text>
