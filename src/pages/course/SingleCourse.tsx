@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
 import { MdOutlineCheckCircleOutline } from "react-icons/md";
 import { useState } from "react";
+import { HiOutlineChat } from "react-icons/hi";
 
 const data = [
   {
@@ -103,6 +104,7 @@ const SingleCourse = () => {
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     What you'll learn
                   </Text>
+                  <Text>course content here brother</Text>
                   <Stack>
                     <Grid templateColumns={{ md: "repeat(2, 1fr)" }} gap={3}>
                       {data?.map((item) => (
@@ -141,7 +143,11 @@ const SingleCourse = () => {
                   </Stack>
                   {/* description */}
                   <Stack mb={"1.5rem"} color={"#4f547b"}>
-                    <Text fontWeight={"bold"} fontSize={"1.1rem"}>
+                    <Text
+                      color={"black"}
+                      fontWeight={"bold"}
+                      fontSize={"1.1rem"}
+                    >
                       Description
                     </Text>
                     <Collapse startingHeight={150} in={show} color={"#4f547b"}>
@@ -175,6 +181,77 @@ const SingleCourse = () => {
                     >
                       Show {show ? "Less" : "More"}
                     </Button>
+                  </Stack>
+                  {/* instructor profile */}
+                  <Stack>
+                    <Text
+                      color={"black"}
+                      fontWeight={"bold"}
+                      fontSize={"1.1rem"}
+                    >
+                      Instructor
+                    </Text>
+                    <Flex columnGap={5} mt={"1rem"}>
+                      <Avatar
+                        size="xl"
+                        name="Christian Nwamba"
+                        src="https://bit.ly/code-beast"
+                      />
+                      <Stack>
+                        <Text fontWeight={"bold"}>Adedokun Peter</Text>
+                        <Text color={"#4f547b"}>Adedokun Peter</Text>
+                        <Flex
+                          color={"#4f547b"}
+                          columnGap={5}
+                          fontSize={"0.9rem"}
+                        >
+                          <Flex>
+                            <Text>Instructor Rating</Text>
+                          </Flex>
+                          <Flex
+                            columnGap={1}
+                            color={"#4f547b"}
+                            align={"center"}
+                          >
+                            <Text>
+                              <HiOutlineChat />
+                            </Text>
+                            <Text>23,987 Reviews</Text>
+                          </Flex>
+                          <Flex
+                            columnGap={1}
+                            color={"#4f547b"}
+                            align={"center"}
+                          >
+                            <Text>
+                              <HiOutlineChat />
+                            </Text>
+                            <Text>23,987 Reviews</Text>
+                          </Flex>
+                          <Flex
+                            columnGap={1}
+                            color={"#4f547b"}
+                            align={"center"}
+                          >
+                            <Text>
+                              <HiOutlineChat />
+                            </Text>
+                            <Text>23,987 Reviews</Text>
+                          </Flex>
+                        </Flex>
+                      </Stack>
+                    </Flex>
+                    <Text color={"#4f547b"} mt={"0.8rem"}>
+                      Back in 2010, I started brainspin with a desire to design
+                      compelling and engaging apps. For over 7 years, I have
+                      designed many high profile web and iPhone applications.
+                      The applications range from 3D medical aided web
+                      applications to project management applications for niche
+                      industries. <br/> <br/> I am also the founder of a large local design
+                      organization, Salt Lake Designers, where I and other local
+                      influencers help cultivate the talents of up and coming UX
+                      designers through workshops and panel discussions.
+                    </Text>
                   </Stack>
                 </Stack>
               </Stack>
