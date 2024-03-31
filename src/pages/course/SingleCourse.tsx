@@ -1,13 +1,14 @@
 import { Stack, Text, Flex, Avatar } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
+import { MdOutlineCheckCircleOutline } from "react-icons/md";
 
 const SingleCourse = () => {
   return (
     <Stack>
       <Stack bg={"#f5f7fe"}>
         <Stack mt={"5.3rem"} width="100%" maxW={"80%"} mx="auto">
-          <Stack pb={"10rem"}>
+          <Stack pb={"5rem"}>
             <Flex columnGap={2} color={"#4F547B"} fontSize={14} mt={"0.7rem"}>
               <Text as={Link} to="/">
                 Home
@@ -57,7 +58,16 @@ const SingleCourse = () => {
           </Stack>
         </Stack>
       </Stack>
-      <Text>ald;jfaksljf</Text>
+      <Stack width="100%" maxW={"80%"} mx="auto" mt={"1.8rem"} mb={"3rem"}>
+        <Stack>
+          <Text fontWeight={"bold"} fontSize={"1.3rem"}>
+            What you will learn
+          </Text>
+          <Text>
+            <MdOutlineCheckCircleOutline color={"#4f547b"} size={25} />
+          </Text>
+        </Stack>
+      </Stack>
     </Stack>
   );
 };
