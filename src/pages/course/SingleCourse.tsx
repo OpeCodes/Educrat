@@ -1,25 +1,60 @@
-import { Stack, Text, Flex, Avatar } from "@chakra-ui/react";
+import { Stack, Text, Flex, Avatar, Grid, GridItem } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
 import { MdOutlineCheckCircleOutline } from "react-icons/md";
 
+const data = [
+  {
+    id: 1,
+    name: "Become a UX designer.",
+  },
+  {
+    id: 2,
+    name: "You will be able to add UX designer to your CV",
+  },
+  {
+    id: 3,
+    name: "You will be able to talk correctly with other UX design",
+  },
+  {
+    id: 4,
+    name: "All the techniques used by UX professionals",
+  },
+];
 const SingleCourse = () => {
   return (
     <Stack>
-      <Stack bg={"#f5f7fe"}>
-        <Stack mt={"5.3rem"} width="100%" maxW={"80%"} mx="auto">
-          <Stack pb={"5rem"}>
-            <Flex columnGap={2} color={"#4F547B"} fontSize={14} mt={"0.7rem"}>
-              <Text as={Link} to="/">
-                Home
-              </Text>
-              <Flex columnGap={1} as={Link} to="/all-courses">
-                <Text>&#x2022;</Text>
-                <Text>All Courses</Text>
+      <Stack>
+        <Stack mt={"4.5rem"}>
+          <Stack>
+            <Stack bg={"#f5f7fe"} py={3}>
+              <Flex
+                w={"100%"}
+                maxW={"80%"}
+                mx="auto"
+                columnGap={2}
+                color={"#4F547B"}
+                fontSize={14}
+                mt={"0.7rem"}
+              >
+                <Text as={Link} to="/">
+                  Home
+                </Text>
+                <Flex columnGap={1} as={Link} to="/all-courses">
+                  <Text>&#x2022;</Text>
+                  <Text>All Courses</Text>
+                </Flex>
               </Flex>
-            </Flex>
-            <Flex justify={"space-between"} mt={"4rem"}>
-              <Stack width={"60%"} rowGap={5}>
+            </Stack>
+            <Flex
+              w={"100%"}
+              maxW={"80%"}
+              mx="auto"
+              justify={"space-between"}
+              mt={"4rem"}
+              flexDirection={{ sm: "column", md: "row" }}
+            >
+              <Stack width={{ md: "60%" }} rowGap={5}>
                 <Text fontWeight={"bold"} fontSize={"2rem"}>
                   Angular - The Complete Guide (2022 Edition)
                 </Text>
@@ -52,20 +87,36 @@ const SingleCourse = () => {
                   />
                   <Text fontWeight={"400"}>Adedokun Peter</Text>
                 </Flex>
+                <Stack mt={"1.8rem"} mb={"3rem"}>
+                  <Text fontWeight={"bold"} fontSize={"1.1rem"}>
+                    What you'll learn
+                  </Text>
+                  <Stack>
+                    <Grid templateColumns={{ md: "repeat(2, 1fr)" }} gap={3}>
+                      {data?.map((item) => (
+                        <GridItem w="100%">
+                          <Flex
+                            align={"center"}
+                            columnGap={1}
+                            color={"#4f547b"}
+                          >
+                            <Text>
+                              <MdOutlineCheckCircleOutline
+                                color={"#4f547b"}
+                                size={20}
+                              />
+                            </Text>
+                            <Text>{item.name}</Text>
+                          </Flex>
+                        </GridItem>
+                      ))}
+                    </Grid>
+                  </Stack>
+                </Stack>
               </Stack>
               <Text>something here</Text>
             </Flex>
           </Stack>
-        </Stack>
-      </Stack>
-      <Stack width="100%" maxW={"80%"} mx="auto" mt={"1.8rem"} mb={"3rem"}>
-        <Stack>
-          <Text fontWeight={"bold"} fontSize={"1.3rem"}>
-            What you will learn
-          </Text>
-          <Text>
-            <MdOutlineCheckCircleOutline color={"#4f547b"} size={25} />
-          </Text>
         </Stack>
       </Stack>
     </Stack>
