@@ -1,5 +1,14 @@
-import React, { ChangeEvent,  useState } from "react";
-import { Box, Progress, Input, Image, useToast, Stack, Text, Flex } from "@chakra-ui/react";
+import React, { ChangeEvent, useState } from "react";
+import {
+  Box,
+  Progress,
+  Input,
+  Image,
+  useToast,
+  Stack,
+  Text,
+  Flex,
+} from "@chakra-ui/react";
 import customFetch from "../utils/axios";
 import imagePlaceholder from "../assets/CourseImagePlaceholder.jpg";
 import { useGetAllUserCourse, useGetSingleCourse } from "../hooks/course";
@@ -16,9 +25,10 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const toast = useToast();
   const { id } = useParams();
-  const { getSingleCourse,refetch: singleCourseRefetch } = useGetSingleCourse(id);
-  console.log(getSingleCourse)
- const {refetch} = useGetAllUserCourse()
+  const { getSingleCourse, refetch: singleCourseRefetch } =
+    useGetSingleCourse(id);
+  console.log(getSingleCourse);
+  const { refetch } = useGetAllUserCourse();
 
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -50,16 +60,21 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
           { image: base64Data },
           {
             headers: { "Content-Type": "application/json" },
-            onUploadProgress: (progressEvent: { loaded: number; total?: number }) => {
+            onUploadProgress: (progressEvent: {
+              loaded: number;
+              total?: number;
+            }) => {
               if (progressEvent.total) {
-                const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                const percentCompleted = Math.round(
+                  (progressEvent.loaded * 100) / progressEvent.total
+                );
                 setUploadProgress(percentCompleted);
               }
             },
           }
         );
         refetch();
-        singleCourseRefetch()
+        singleCourseRefetch();
 
         console.log("Upload completed:", response.data);
         toast({
@@ -69,28 +84,55 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
           isClosable: true,
         });
         onImageUpload(file);
-      } catch (error) {
-        toast({
-          title: `${error}`,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
+      } catch (error: any) {
+        if (error.response) {
+          toast({
+            title: `${error.response.data.error}`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else if (error.request) {
+          toast({
+            title: "Network error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "An error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
       }
     };
     reader.readAsDataURL(file);
     refetch();
-    singleCourseRefetch()
-
+    singleCourseRefetch();
   };
 
   return (
     <Flex flexDirection={{ base: "column", md: "row" }}>
       <Box mb={4}>
         {selectedImage ? (
-          <Image src={selectedImage} width="650px" height={"200px"} alt="Uploaded Image" mt={4} objectFit={"cover"}  />
+          <Image
+            src={selectedImage}
+            width="650px"
+            height={"200px"}
+            alt="Uploaded Image"
+            mt={4}
+            objectFit={"cover"}
+          />
         ) : (
-          <Image src= {imagePlaceholder} width="650px" height={"200px"} objectFit={"cover"} />
+          <Image
+            src={imagePlaceholder}
+            width="650px"
+            height={"200px"}
+            objectFit={"cover"}
+          />
         )}
       </Box>
       <Stack ml={4} mt={5}>
@@ -99,7 +141,12 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
           standards to be accepted. Important guidelines: 750x422 pixels; .jpg,
           .jpeg, .gif, or .png. no text on the image.
         </Text>
-        <Input type="file" accept="image/*" onChange={handleImageChange} mt={2} />
+        <Input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          mt={2}
+        />
       </Stack>
       {uploadProgress > 0 && uploadProgress < 100 && (
         <Progress value={uploadProgress} size="sm" mt={2} />
