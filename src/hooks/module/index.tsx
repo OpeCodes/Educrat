@@ -17,6 +17,7 @@ export const useModuleCreateCourse = () => {
     mutationFn: ({ courseId, user }: any) => {
       return customFetch.post(`/module/course/${courseId}`, user);
     },
+    
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
       setSucess(false);
@@ -28,6 +29,7 @@ export const useModuleCreateCourse = () => {
         isClosable: true,
       });
     },
+    
     onError: (error: any) => {
       if (error.response) {
         toast({

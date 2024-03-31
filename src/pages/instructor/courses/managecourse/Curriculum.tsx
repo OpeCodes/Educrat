@@ -20,8 +20,9 @@ import {
   Th,
   Td,
   TableContainer,
+  useToast
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -66,9 +67,9 @@ import { VscLinkExternal } from "react-icons/vsc";
 import { CurriculumInterface } from "../../../../interface/courseInterface";
 import ExternalResourceDownloadableFile from "../../../../components/ExternalResourceDownloadableFile";
 import { HiFolderDownload } from "react-icons/hi";
+import { ToastLoading } from "../../../../components";
 
 const Curriculum = () => {
-  const { onOpen } = useDisclosure();
   const { id } = useParams();
 
   const { getSingleCourse, refetch } = useGetSingleCourse(id);
@@ -100,13 +101,19 @@ const Curriculum = () => {
     title: "",
     url: "",
   };
-
+const toast = useToast()
   const {
     moduleCreateCourse,
     isPending: moduleLoading,
     setShowSection,
     showSection,
   } = useModuleCreateCourse();
+
+  ToastLoading(moduleLoading,toast)
+
+  
+
+
 
   const { createArticleLectureCourse } = useCreateArticleLectureCourse();
   const handleSubmit = (values: any): void => {
@@ -175,7 +182,8 @@ const Curriculum = () => {
     return formattedTime
   }
  
-
+  ToastLoading(moduleLoading,toast)
+  ToastLoading(moduleLoading,toast)
   
   return (
     <Stack>
@@ -249,6 +257,7 @@ const Curriculum = () => {
                           }
                         >
                           <MdDelete />
+                          
                         </Text>
                       </Flex>
                     </Flex>
@@ -271,7 +280,12 @@ const Curriculum = () => {
                       <Text cursor={"pointer"} onClick={() => toggleIsOpen(id)}>
                         <MdEdit />
                       </Text>
-                      <Text cursor={"pointer"} onClick={onOpen}>
+                      <Text   onClick={() => deleteModule({ moduleId: id })}
+                          as={"button"}
+                          disabled={deleteModuleLoading}
+                          cursor={
+                            deleteModuleLoading ? "not-allowed" : "pointer"
+                          }>
                         <MdDelete />
                       </Text>
                     </Flex>

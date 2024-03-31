@@ -18,6 +18,7 @@ import Instructor from "./Instructor";
 import Student from "./Student";
 import Article from "./Article";
 import MedArticle from "./MedArticle";
+import ToastLoading from "./ToastLoading";
 export {
   HomeLayout,
   Navbar,
@@ -38,5 +39,6 @@ export {
   Instructor,
   Student,
   Article,
+  ToastLoading,
   MedArticle,
 };

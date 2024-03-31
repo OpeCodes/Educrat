@@ -87,7 +87,7 @@ const SingleCourse = () => {
                   />
                   <Text fontWeight={"400"}>Adedokun Peter</Text>
                 </Flex>
-                <Stack mt={"1.8rem"} mb={"3rem"}>
+                <Stack mt={"1.8rem"} mb={"1.5rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     What you'll learn
                   </Text>
@@ -112,7 +112,7 @@ const SingleCourse = () => {
                       ))}
                     </Grid>
                   </Stack>
-                  <Stack mt={"1.8rem"} mb={"3rem"}>
+                  <Stack mt={"1.8rem"} mb={"1.5rem"}>
                     <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                       Requirement
                     </Text>
@@ -127,6 +127,13 @@ const SingleCourse = () => {
                       </Text>
                     </Flex>
                   </Stack>
+                  {/* description */}
+                  <Stack  mb={"1.5rem"}>
+                    <Text fontWeight={"bold"} fontSize={"1.1rem"}>
+                      Description
+                    </Text>
+
+                </Stack>
                 </Stack>
               </Stack>
               <Stack>
