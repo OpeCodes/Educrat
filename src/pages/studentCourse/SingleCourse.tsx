@@ -7,18 +7,13 @@ import {
   GridItem,
   Collapse,
   Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Textarea,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
 import { MdOutlineCheckCircleOutline } from "react-icons/md";
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
-import { Formik } from "formik";
-import { reviewCourseValidationSchema } from "../../schemas";
+import StudentCourseContent from "../../components/StudentCourseContent";
 
 const data = [
   {
@@ -38,14 +33,14 @@ const data = [
     name: "All the techniques used by UX professionals",
   },
 ];
-const initialValues = {
-  title: "",
-  content: "",
-};
+// const initialValues = {
+//   title: "",
+//   content: "",
+// };
 const SingleCourse = () => {
-  const handleSubmit = (values: any) => {
-    console.log(values);
-  };
+  // const handleSubmit = (values: any) => {
+  //   console.log(values);
+  // };
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
   return (
@@ -114,6 +109,7 @@ const SingleCourse = () => {
                   <Text fontWeight={"400"}>Adedokun Peter</Text>
                 </Flex>
                 <Text>course content here brother</Text>
+                <StudentCourseContent/>
 
                 <Stack mt={"1.8rem"} mb={"1.5rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
