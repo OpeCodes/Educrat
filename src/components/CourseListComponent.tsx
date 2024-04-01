@@ -63,7 +63,7 @@ const CourseListComponent = ({ title, thumbnail,id }: any) => {
             width="70%"
           >
             <Text fontWeight={"bold"}>{title}</Text>
-            <Text fontWeight={"700"}>DRAFT</Text>
+            <Text fontWeight={"700"}> </Text>
           </Flex>
         </Flex>
         <Flex

@@ -1,7 +1,7 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
+import {  Flex, Text } from "@chakra-ui/react";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
-import { IoMdSettings } from "react-icons/io";
+// import { IoMdSettings } from "react-icons/io";
 import { useGetSingleCourse } from "../hooks/course";
 import { useEffect } from "react";
 const CourseManageNavbar = () => {
@@ -30,10 +30,10 @@ const CourseManageNavbar = () => {
       </Flex>
       <Text fontWeight={"bold"} fontSize="13px">{getSingleCourse?.title}</Text>
       <Text bg="red" px={2} borderRadius={5} fontSize={"14px"}>
-        DRAFT
+      {(getSingleCourse?.status).toUpperCase()}
       </Text>
     </Flex>
-    <Flex align={"center"} columnGap={4}>
+    {/* <Flex align={"center"} columnGap={4}>
       <Button
         display={{ base: "none", md: "flex" }}
         px={5}
@@ -49,7 +49,7 @@ const CourseManageNavbar = () => {
       <Text cursor={"pointer"}>
         <IoMdSettings fontSize={"25px"} />
       </Text>
-    </Flex>
+    </Flex> */}
   </Flex>
   )
 }
