@@ -112,12 +112,12 @@ const formattedDate = `${month.toString().padStart(2, "0")}/${year.toString().pa
                   </Flex>
                 </Flex>
                 <Flex align={"center"} columnGap={2} color={"#4f547b"}>
-                  <Avatar
-                    size="sm"
-                    name="Kola Tioluwani"
-                    src="https://bit.ly/tioluwani-kolawole"
-                  />
-                  <Text fontWeight={"400"}>Adedokun Peter</Text>
+                <Avatar
+              size="sm"
+              name={`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}
+              src={getSingleCourse?.userId?.profilePicture}
+            />
+                  <Text fontWeight={"400"}>{`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}</Text>
                 </Flex>
                 {/* course content */}
                 <Stack mt={"1.8rem"} mb={"1.5rem"}>
