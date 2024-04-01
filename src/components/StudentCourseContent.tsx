@@ -12,28 +12,32 @@ import {
 } from "@chakra-ui/react";
 import { RiPlayCircleFill } from "react-icons/ri";
 
-interface SingleCourse{
-    SingleCourseProp: any
+interface SingleCourse {
+  SingleCourseProp: any;
 }
 
+const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
+  const lectureLength: string[] = (SingleCourseProp?.modules ?? []).flatMap(
+    (obj: any) => obj.lectures
+  );
 
-const StudentCourseContent = ({SingleCourseProp}: SingleCourse) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const data = [
-
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },
+    {
+      name: "kdkdk",
+    },
+    {
+      name: "kdkdk",
+    },
+    {
+      name: "kdkdk",
+    },
+    {
+      name: "kdkdk",
+    },
+    {
+      name: "kdkdk",
+    },
   ];
   function getLastNumberFormat(arr: any) {
     const length = arr.length;
@@ -59,7 +63,7 @@ const StudentCourseContent = ({SingleCourseProp}: SingleCourse) => {
           <Text>{SingleCourseProp?.modules?.length} sections</Text>
           <Flex align={"center"} columnGap={1}>
             <Text fontSize={"1.2rem"}>&#x2022;</Text>
-            <Text>{data.length} Lectures</Text>
+            <Text>{lectureLength.length} Lectures</Text>
           </Flex>
         </Flex>
         <Stack>
@@ -96,12 +100,13 @@ const StudentCourseContent = ({SingleCourseProp}: SingleCourse) => {
       </Flex>
 
       <Accordion allowMultiple index={index} onChange={setIndex}>
-        {SingleCourseProp?.modules?.map((module: any) => {
+        {SingleCourseProp?.modules?.map((module: any, index: any) => {
           return (
             <AccordionItem
               style={{ borderWidth: 1, borderRadius: 15 }}
               mb={4}
               rowGap={6}
+              key={index}
             >
               <Stack>
                 <AccordionButton
