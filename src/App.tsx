@@ -17,7 +17,7 @@ import Home from "./pages/Home";
 import { SingleCourse, StudentCourse } from "./pages/course";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
-import { CourseLandingPage, CourseMessage, Pricing } from "./pages/instructor/courses/managecourse";
+import { CourseLandingPage, CourseMessage, CourseSettings, Pricing } from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 
 const router = createBrowserRouter([
@@ -103,9 +103,12 @@ const router = createBrowserRouter([
       },
       {
        path: "communications/messages",
-       element: <CourseMessage/>
-        
-      }
+       element: <CourseMessage/>        
+      },
+      {
+        path: "settings",
+        element: <CourseSettings/>        
+       }
     ],
   },
 ]);
