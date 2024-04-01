@@ -136,7 +136,7 @@ const SingleCourse = () => {
                   <Stack>
                     <Grid templateColumns={{ md: "repeat(2, 1fr)" }} gap={3}>
                       {getSingleCourse?.learningObjectives?.map(
-                        (learn, index) => {
+                        (learn: any, index: any) => {
                           return (
                             <GridItem w="100%" key={index}>
                               <Flex
@@ -186,9 +186,7 @@ const SingleCourse = () => {
                       startingHeight={150}
                       in={show}
                       color={"#4f547b"}
-                    >
-                      
-                    </Collapse>
+                    ></Collapse>
                     <Button
                       color={"#6440fb"}
                       textAlign={"left"}
