@@ -97,3 +97,8 @@ export const reviewCourseValidationSchema  = Yup.object().shape({
   content: Yup.string().required("pls add content"),
 
 })
+export const courseMessageValidationSchema =  Yup.object().shape({
+  welcomeMessage: Yup.string().required("pls add title"),
+  completionMessage: Yup.string().required("pls add content"),
+
+})
