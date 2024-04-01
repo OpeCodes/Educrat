@@ -140,11 +140,11 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                         <Text>
                           <RiPlayCircleFill size={25} color={"#4f547b"} />
                         </Text>
-                        <Text>Introduction to User</Text>
+                        <Text>{lecture.title}</Text>
                       </Flex>
                       <Flex align={"center"} columnGap={4}>
-                        {
-                           lecture?.contentPreviewable && <Button
+                        {lecture?.contentPreviewable && (
+                          <Button
                             color={"#6440fb"}
                             textAlign={"left"}
                             display={"flex"}
@@ -152,12 +152,11 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                             size="sm"
                             colorScheme="teal"
                             variant="link"
-                          
                           >
                             Preview
                           </Button>
-                        }
-                        
+                        )}
+
                         <Text color={"#4f547b"}>27 mins</Text>
                       </Flex>
                     </Flex>
