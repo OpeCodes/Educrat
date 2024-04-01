@@ -27,7 +27,7 @@ const CourseSettings = () => {
               //       spinnerPlacement="end"
 
               onClick={() => {
-                singleStatusCourse({ id: id, status: "published" });
+                singleStatusCourse({ id: ";lkjljlkl",});
               }}
             >
               Unpublish

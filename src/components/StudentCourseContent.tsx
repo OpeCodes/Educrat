@@ -10,6 +10,7 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
+import { RiPlayCircleFill } from "react-icons/ri";
 
 const StudentCourseContent = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -20,6 +21,77 @@ const StudentCourseContent = () => {
     {
       name: "kdkdk",
     },
+    {
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },{
+        name: "kdkdk",
+      },
+      {
+        name: "kdkdk",
+      },
   ];
   function getLastNumberFormat(arr: any) {
     const length = arr.length;
@@ -113,7 +185,31 @@ const StudentCourseContent = () => {
                   </Flex>
                 </AccordionButton>
               </Stack>
-              <AccordionPanel p={0}>Content for Section 1</AccordionPanel>
+              <AccordionPanel>
+                <Flex align={"center"} justify={"space-between"}>
+                  <Flex color={"#4f547b"} align={"center"} columnGap={5}>
+                    <Text>
+                      <RiPlayCircleFill size={25} color={"#4f547b"} />
+                    </Text>
+                    <Text>Introduction to User</Text>
+                  </Flex>
+                  <Flex align={"center"} columnGap={4}>
+                    <Button
+                      color={"#6440fb"}
+                      textAlign={"left"}
+                      display={"flex"}
+                      justifyContent={"left"}
+                      size="sm"
+                      colorScheme="teal"
+                      variant="link"
+                      onClick={expandAllAccordionItems}
+                    >
+                      Preview
+                    </Button>
+                    <Text color={"#4f547b"}>27 mins</Text>
+                  </Flex>
+                </Flex>
+              </AccordionPanel>
             </AccordionItem>
           );
         })}

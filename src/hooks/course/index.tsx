@@ -175,3 +175,53 @@ export const useSingleStatusCourse = () => {
   });
   return { singleStatusCourse, isPending, error, isError };
 };
+
+
+export const useDeleteCourseModule = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const {
+    mutate: deleteCourseModule,
+    isPending: deleteCourseModuleLoading,
+  } = useMutation({
+    mutationFn: ({ courseId }: any) => {
+      return customFetch.delete(`/course/${courseId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["allUserCourse"] });
+      toast({
+        title: `course deleted successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      navigate("/instructor/courses")
+    },
+    onError: (error: any) => {
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
+  return { deleteCourseModule, deleteCourseModuleLoading };
+};
