@@ -8,7 +8,7 @@ import { useSwiper } from "swiper/react";
 const SliderButtons = () => {
   const swiper = useSwiper();
   return (
-    <Box as="div" display={"flex"}>
+    <Box as="div" display={"flex"} cursor={"pointer"}>
       <Box
         position={"absolute"}
         top={{ base: "54%", lg: "58%" }}

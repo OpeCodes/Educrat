@@ -1,4 +1,13 @@
-import { Box, Flex, Text, Heading, Divider, Stack, Image, Avatar } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Heading,
+  Divider,
+  Stack,
+  Image,
+  Avatar,
+} from "@chakra-ui/react";
 import { CiPlay1, CiClock1 } from "react-icons/ci";
 import { icon3 } from "../assets/export";
 import { FaRegStar } from "react-icons/fa6";
@@ -10,13 +19,7 @@ type Props = {
   userId?: any;
   title?: string;
 };
-const Course = ({
-  id,
-  thumbnail,
-  title,
-  complexityLevel,
-  userId,
-}: Props) => {
+const Course = ({ id, thumbnail, title, complexityLevel, userId }: Props) => {
   return (
     <Box
       as="div"
@@ -32,8 +35,7 @@ const Course = ({
             src={thumbnail}
             className="img"
             maxH={"200px"}
-          height={"100%"}
-          
+            height={"100%"}
             style={{ borderRadius: "10px" }}
             alt={title}
           />
@@ -42,12 +44,18 @@ const Course = ({
           <Flex justifyContent={"start"} alignItems={"center"}>
             <Text color={"#e59819"}>4.5</Text>
             <Box color={"#e59819"} display={"flex"} ml={2} mr={3}>
-              <Box mr={1}><FaRegStar /></Box>
-              <Box mr={1}><FaRegStar /></Box>
-              <Box mr={1}><FaRegStar /></Box>
-              <Box mr={1}><FaRegStar /></Box>
-           
-              
+              <Box mr={1}>
+                <FaRegStar />
+              </Box>
+              <Box mr={1}>
+                <FaRegStar />
+              </Box>
+              <Box mr={1}>
+                <FaRegStar />
+              </Box>
+              <Box mr={1}>
+                <FaRegStar />
+              </Box>
             </Box>
             <Text color={"gray.600"}>(1991)</Text>
           </Flex>
@@ -61,7 +69,12 @@ const Course = ({
           {title}
         </Heading>
         <Flex>
-          <Box display={"flex"} columnGap={1} justifyContent={"center"} alignItems={"center"}>
+          <Box
+            display={"flex"}
+            columnGap={1}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             <CiPlay1 size={14} />
             <Box>lesson</Box>
           </Box>
@@ -72,7 +85,7 @@ const Course = ({
             mx={3}
             columnGap={1}
           >
-            <CiClock1  />
+            <CiClock1 />
             <Box fontSize={"14px"}>22hrs 0mins</Box>
           </Box>
           <Box
@@ -99,16 +112,20 @@ const Course = ({
             alignItems={"center"}
             columnGap={3}
           >
-            <Avatar    size='xs' name={`${userId?.firstName} ${userId.lastName}`} src={userId?.profilePicture}/>
+            <Avatar
+              size="xs"
+              name={`${userId?.firstName} ${userId.lastName}`}
+              src={userId?.profilePicture}
+            />
             <Text color={"gray.600"} fontSize={"small"}>
-            {`${userId?.firstName} ${userId.lastName}`}
+              {`${userId?.firstName} ${userId.lastName}`}
             </Text>
           </Box>
           <Box
             display={"flex"}
             justifyContent={"space-between"}
             alignItems={"center"}
-          >            
+          >
             <Text color={"#140342"} fontSize={"xl"}>
               $99
             </Text>

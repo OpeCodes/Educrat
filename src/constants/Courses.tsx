@@ -1,4 +1,13 @@
-import { Box, Button, Heading, Text, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Text,
+  Stack,
+  Skeleton,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SliderButtons, Course } from "../components/index";
@@ -17,8 +26,9 @@ export const Courses = () => {
   };
   // const { data } = useGetUser();
   // const {getLectureModuleCourse,isPending} = useGetAllInstructorCourses(data?.id);
- const {data} = useGetAllCourse()
-  console.log(data)
+  const { data, isPending } = useGetAllCourse();
+  console.log(data);
+  const dummyArray = [1, 2, 3, 4];
   return (
     <Box
       as={"section"}
@@ -63,9 +73,23 @@ export const Courses = () => {
             })}
           </Box>
         </Box>
+        {isPending && (
+          <Stack>
+            <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+              {dummyArray.map(() => (
+                <GridItem w="100%">
+                  <Skeleton height="200px" />
+                  <Skeleton height="80px" mt={1} />
+                </GridItem>
+              ))}
+            </Grid>
+          </Stack>
+        )}
+
         <Box as="div" mt={8}>
           <Swiper {...sliderSettings}>
-            <SliderButtons />
+            {!isPending && <SliderButtons />}
+
             {data?.map((course: any, index: number) => {
               return (
                 <SwiperSlide key={index}>
