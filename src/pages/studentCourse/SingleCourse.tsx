@@ -213,12 +213,16 @@ const SingleCourse = () => {
                     <Flex columnGap={5} mt={"1rem"}>
                       <Avatar
                         size="xl"
-                        name="Christian Nwamba"
-                        src="https://bit.ly/code-beast"
+                        name={`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}
+                        src={getSingleCourse?.userId?.profilePicture}
                       />
                       <Stack>
-                        <Text fontWeight={"bold"}>Adedokun Peter</Text>
-                        <Text color={"#4f547b"}>Adedokun Peter</Text>
+                        <Text
+                          fontWeight={"bold"}
+                        >{`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}</Text>
+                        <Text color={"#4f547b"}>
+                          {getSingleCourse?.userId?.headline}
+                        </Text>
                         <Flex
                           color={"#4f547b"}
                           columnGap={5}
@@ -261,16 +265,7 @@ const SingleCourse = () => {
                       </Stack>
                     </Flex>
                     <Text color={"#4f547b"} mt={"0.8rem"}>
-                      Back in 2010, I started brainspin with a desire to design
-                      compelling and engaging apps. For over 7 years, I have
-                      designed many high profile web and iPhone applications.
-                      The applications range from 3D medical aided web
-                      applications to project management applications for niche
-                      industries. <br /> <br /> I am also the founder of a large
-                      local design organization, Salt Lake Designers, where I
-                      and other local influencers help cultivate the talents of
-                      up and coming UX designers through workshops and panel
-                      discussions.
+                      {getSingleCourse?.userId?.biography}
                     </Text>
                   </Stack>
                   {/* Student review */}
