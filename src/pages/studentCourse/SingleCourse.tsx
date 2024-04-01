@@ -15,24 +15,7 @@ import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import { useGetSingleCourse } from "../../hooks/course";
-const data = [
-  {
-    id: 1,
-    name: "Become a UX designer.",
-  },
-  {
-    id: 2,
-    name: "You will be able to add UX designer to your CV",
-  },
-  {
-    id: 3,
-    name: "You will be able to talk correctly with other UX design",
-  },
-  {
-    id: 4,
-    name: "All the techniques used by UX professionals",
-  },
-];
+
 
 // const initialValues = {
 //   title: "",
@@ -122,14 +105,14 @@ const SingleCourse = () => {
                   >{`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}</Text>
                 </Flex>
                 {/* course content */}
-                <Stack mt={"1.8rem"} mb={"1.5rem"}>
+                <Stack mt={"1.8rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     Course Content
                   </Text>
                   <StudentCourseContent SingleCourseProp={getSingleCourse} />
                 </Stack>
 
-                <Stack mt={"1.8rem"} mb={"1.5rem"}>
+                <Stack  mb={"1.5rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     What you'll learn
                   </Text>
