@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionItem,
@@ -6,7 +6,10 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
+  Stack,
   Button,
+  Flex,
+  Text,
 } from "@chakra-ui/react";
 
 const StudentCourseContent = () => {
@@ -49,6 +52,45 @@ const StudentCourseContent = () => {
   };
   return (
     <Stack>
+      <Flex align={"center"} justify={"space-between"}>
+        <Flex align={"center"} color={"#4f547b"} columnGap={2}>
+          <Text>27 sections</Text>
+          <Flex align={"center"}>
+            <Text fontSize={"1.2rem"}>&#x2022;</Text>
+            <Text>{data.length} Lectures</Text>
+          </Flex>
+        </Flex>
+        <Stack>
+          {isExpanded ? (
+            <Button
+              color={"#6440fb"}
+              textAlign={"left"}
+              display={"flex"}
+              justifyContent={"left"}
+              size="sm"
+              mt="1rem"
+              colorScheme="teal"
+              variant="link"
+            >
+              Expand All Sections
+            </Button>
+          ) : (
+            <Button
+              color={"#6440fb"}
+              textAlign={"left"}
+              display={"flex"}
+              justifyContent={"left"}
+              size="md"
+              mt="1rem"
+              colorScheme="teal"
+              variant="link"
+            >
+              Collapse All Sections
+            </Button>
+          )}
+        </Stack>
+      </Flex>
+
       {isExpanded ? (
         <Button onClick={toggleAllAccordionItems} mb={4}>
           Expand all
