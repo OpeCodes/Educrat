@@ -48,7 +48,7 @@ const StudentCourseContent = () => {
     setIndex([]);
   };
   return (
-    <div>
+    <Stack>
       {isExpanded ? (
         <Button onClick={toggleAllAccordionItems} mb={4}>
           Expand all
@@ -88,7 +88,7 @@ const StudentCourseContent = () => {
 
         {/* Additional accordion items can be added here */}
       </Accordion>
-    </div>
+    </Stack>
   );
 };
 

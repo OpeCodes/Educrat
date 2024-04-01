@@ -108,8 +108,13 @@ const SingleCourse = () => {
                   />
                   <Text fontWeight={"400"}>Adedokun Peter</Text>
                 </Flex>
-                <Text>course content here brother</Text>
-                <StudentCourseContent/>
+                {/* course content */}
+                <Stack mt={"1.8rem"} mb={"1.5rem"}>
+                  <Text fontWeight={"bold"} fontSize={"1.1rem"}>
+                   Course Content
+                  </Text>
+                  <StudentCourseContent />
+                </Stack>
 
                 <Stack mt={"1.8rem"} mb={"1.5rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
