@@ -4,11 +4,11 @@ import { icon3 } from "../assets/export";
 import { FaRegStar } from "react-icons/fa6";
 
 type Props = {
-  id: number;
-  thumbnail: string;
-  complexityLevel: string;
-  userId: any;
-  title: string;
+  id?: number;
+  thumbnail?: string;
+  complexityLevel?: string;
+  userId?: any;
+  title?: string;
 };
 const Course = ({
   id,
@@ -22,7 +22,6 @@ const Course = ({
       as="div"
       className="wrapper"
       width={{ base: "87vw", md: "345px", lg: "290px" }}
-      // width={"290px"}
       height={"auto"}
       cursor={"pointer"}
       key={id}
