@@ -84,11 +84,14 @@ const StudentCourseContent = () => {
       <Accordion allowMultiple index={index} onChange={setIndex}>
         {data.map((item) => {
           return (
-            <AccordionItem style={{ borderWidth: 0 }} p={0}>
+            <AccordionItem
+              style={{ borderWidth: 1, borderRadius: 15 }}
+              mb={4}
+              rowGap={6}
+            >
               <Stack>
                 <AccordionButton
                   _hover={{ backgroundColor: "none" }}
-                  my={4}
                   py={5}
                   borderRadius={15}
                   backgroundColor={"#F7F8FB"}
