@@ -23,7 +23,7 @@ import { useGetSingleCourse } from "../../hooks/course";
 // };
 const SingleCourse = () => {
   const { id } = useParams();
-  const { getSingleCourse, isPending } = useGetSingleCourse(id);
+  const { getSingleCourse, } = useGetSingleCourse(id);
   console.log(getSingleCourse);
   // const handleSubmit = (values: any) => {
   //   console.log(values);
