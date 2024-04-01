@@ -20,7 +20,7 @@ export const useBecomeInstructor = () => {
   const navigate = useNavigate();
   const { mutate: becomeInstructor, isPending } = useMutation({
     mutationFn: (user: any) => {
-      return customFetch.put("/user/instructor", user);
+      return customFetch.put("/instructor/become-instructor", user);
     },
     onSuccess: () => {
       toast({
