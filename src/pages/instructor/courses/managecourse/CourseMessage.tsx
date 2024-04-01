@@ -2,12 +2,22 @@ import { Button, Divider, Flex, Stack, Text } from "@chakra-ui/react";
 import { Formik } from "formik";
 import ReactQuill from "react-quill";
 import { courseMessageValidationSchema } from "../../../../schemas";
+import { useSingleCourse } from "../../../../hooks/course";
+import { useParams } from "react-router-dom";
 const initialValues = {
   welcomeMessage: "",
   completionMessage: "",
 };
 const CourseMessage = () => {
-  const handleSubmit = () => {};
+  const { singleCourse, isPending: isLoading } = useSingleCourse();
+
+  const { id } = useParams();
+  const handleSubmit = (values: any): void => {
+    singleCourse({
+      singleId: id,
+      user: values,
+    });
+  };
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -68,7 +78,7 @@ const CourseMessage = () => {
             <Flex display={"flex"} justifyContent={"end"}>
               <Button
                 bg={"#00FF84"}
-                // isLoading={isLoading}
+                isLoading={isLoading}
                 loadingText="Loading"
                 variant="outline"
                 spinnerPlacement="end"

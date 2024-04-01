@@ -30,7 +30,7 @@ const CourseLandingPage = () => {
   useEffect(() => {
     refetch();
   }, [id]);
-  
+
   const {
     getSingleCourse,
     isError,
@@ -38,10 +38,10 @@ const CourseLandingPage = () => {
     refetch,
   } = useGetSingleCourse(id);
 
-  const initialValues: CourseEditCreate  = {
+  const initialValues: CourseEditCreate = {
     title: getSingleCourse?.title || "",
-    subtitle: getSingleCourse?.subtitle||"",
-    language: getSingleCourse?.language||"",
+    subtitle: getSingleCourse?.subtitle || "",
+    language: getSingleCourse?.language || "",
     preRequisites: getSingleCourse?.preRequisites || "",
     learningObjectives: getSingleCourse?.learningObjectives || ["", "", ""],
     category: getSingleCourse?.category?.id,
@@ -50,7 +50,6 @@ const CourseLandingPage = () => {
   };
   const { data } = useCourseCategory();
   const handleImageUpload = () => {};
-  
 
   const { singleCourse, isPending: isLoading } = useSingleCourse();
 
@@ -219,7 +218,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                    { errors.language}
+                      {errors.language}
                     </Text>
                   )}
                 </Stack>
@@ -242,10 +241,7 @@ const CourseLandingPage = () => {
                       style={{ color: "red", marginTop: 2 }}
                       fontSize="14px"
                     >
-                      <>
-                     {errors.complexityLevel}
-
-                      </>
+                      <>{errors.complexityLevel}</>
                     </Text>
                   )}
                 </Stack>
