@@ -191,7 +191,9 @@ export const useDeleteCourseModule = () => {
           duration: 5000,
           isClosable: true,
         });
-        navigate("/instructor/courses");
+        setTimeout(() => {
+          navigate("/instructor/courses");
+        }, 1000);
       },
       onError: (error: any) => {
         if (error.response) {
