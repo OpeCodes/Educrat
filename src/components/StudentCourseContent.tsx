@@ -132,31 +132,35 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                   </Flex>
                 </AccordionButton>
               </Stack>
-              <AccordionPanel>
-                <Flex align={"center"} justify={"space-between"}>
-                  <Flex color={"#4f547b"} align={"center"} columnGap={5}>
-                    <Text>
-                      <RiPlayCircleFill size={25} color={"#4f547b"} />
-                    </Text>
-                    <Text>Introduction to User</Text>
-                  </Flex>
-                  <Flex align={"center"} columnGap={4}>
-                    <Button
-                      color={"#6440fb"}
-                      textAlign={"left"}
-                      display={"flex"}
-                      justifyContent={"left"}
-                      size="sm"
-                      colorScheme="teal"
-                      variant="link"
-                      onClick={expandAllAccordionItems}
-                    >
-                      Preview
-                    </Button>
-                    <Text color={"#4f547b"}>27 mins</Text>
-                  </Flex>
-                </Flex>
-              </AccordionPanel>
+              {module?.lectures?.map((lecture: any) => {
+                return (
+                  <AccordionPanel key={lecture.id}>
+                    <Flex align={"center"} justify={"space-between"}>
+                      <Flex color={"#4f547b"} align={"center"} columnGap={5}>
+                        <Text>
+                          <RiPlayCircleFill size={25} color={"#4f547b"} />
+                        </Text>
+                        <Text>Introduction to User</Text>
+                      </Flex>
+                      <Flex align={"center"} columnGap={4}>
+                        <Button
+                          color={"#6440fb"}
+                          textAlign={"left"}
+                          display={"flex"}
+                          justifyContent={"left"}
+                          size="sm"
+                          colorScheme="teal"
+                          variant="link"
+                          onClick={expandAllAccordionItems}
+                        >
+                          Preview
+                        </Button>
+                        <Text color={"#4f547b"}>27 mins</Text>
+                      </Flex>
+                    </Flex>
+                  </AccordionPanel>
+                );
+              })}
             </AccordionItem>
           );
         })}
