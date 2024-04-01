@@ -138,3 +138,40 @@ export const useGetAllUserCourse = () => {
   });
   return { data, isPending, isError, refetch };
 };
+
+
+
+export const useSingleStatusCourse = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const {
+    mutate: singleStatusCourse,
+    isPending,
+    error,
+    isError,
+  } = useMutation({
+    mutationFn: ({ id, user }: any) => {
+      return customFetch.put(`course/${id}/status`, user);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
+      queryClient.invalidateQueries({ queryKey: ["allUserCourse"] });
+
+      toast({
+        title: `course updated successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: `${error.response.data.error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+  return { singleStatusCourse, isPending, error, isError };
+};

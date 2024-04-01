@@ -1,6 +1,8 @@
 import { Button, Divider, Flex, Stack, Text } from "@chakra-ui/react";
+import { useSingleStatusCourse } from "../../../../hooks/course";
 
 const CourseSettings = () => {
+  const {singleStatusCourse,isPending}=  useSingleStatusCourse()
   return (
     <Stack mb={"12rem"}>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
