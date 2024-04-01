@@ -11,7 +11,7 @@ const Pricing = () => {
     console.log(values);
   };
   return (
-    <Stack p={5}>
+    <Stack p={5} mb={"12rem"}>
       <Text fontSize={20} fontWeight={"bold"}>
         Pricing
       </Text>

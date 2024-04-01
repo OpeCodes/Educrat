@@ -1,8 +1,18 @@
+import { Divider, Stack, Text } from "@chakra-ui/react";
 
 const CourseSettings = () => {
   return (
-    <div>CourseSettings</div>
-  )
-}
+    <Stack>
+      <Text p={5} fontSize={20} fontWeight={"bold"}>
+        Settings
+      </Text>
+      <Divider />
 
-export default CourseSettings
+      <Stack p={5}>
+        
+      </Stack>
+    </Stack>
+  );
+};
+
+export default CourseSettings;
