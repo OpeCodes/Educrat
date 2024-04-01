@@ -2,7 +2,8 @@ import { Box, Button, Heading, Text, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SliderButtons, Course } from "../components/index";
-import { buttonsData, sliderSettings, coursesData } from "../utils/data";
+import { buttonsData, sliderSettings } from "../utils/data";
+import { useGetAllCourse } from "../hooks/studentCourse";
 
 type button = {
   id: number;
@@ -14,6 +15,10 @@ export const Courses = () => {
   const handleButtonClick = (buttonId: number) => {
     setActiveButton(buttonId === activeButton ? null : buttonId);
   };
+  // const { data } = useGetUser();
+  // const {getLectureModuleCourse,isPending} = useGetAllInstructorCourses(data?.id);
+ const {data} = useGetAllCourse()
+  console.log(data)
   return (
     <Box
       as={"section"}
@@ -61,7 +66,7 @@ export const Courses = () => {
         <Box as="div" mt={8}>
           <Swiper {...sliderSettings}>
             <SliderButtons />
-            {coursesData.map((course, index) => {
+            {data?.map((course: any, index: number) => {
               return (
                 <SwiperSlide key={index}>
                   <Course key={course.id} {...course} />
