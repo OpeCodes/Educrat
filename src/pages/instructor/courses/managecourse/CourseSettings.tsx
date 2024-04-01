@@ -3,8 +3,8 @@ import { useSingleStatusCourse } from "../../../../hooks/course";
 import { useParams } from "react-router-dom";
 
 const CourseSettings = () => {
-  const {singleStatusCourse,}=  useSingleStatusCourse()
-  const {id} = useParams()
+  const { singleStatusCourse } = useSingleStatusCourse();
+  const { id } = useParams();
   return (
     <Stack mb={"12rem"}>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -22,12 +22,12 @@ const CourseSettings = () => {
               _hover={{ backgroundColor: "none" }}
               variant="outline"
               px={"2.7rem"}
-            //   isLoading={isLoading}
-            //       loadingText="Loading"
-            //       spinnerPlacement="end"
+              //   isLoading={isLoading}
+              //       loadingText="Loading"
+              //       spinnerPlacement="end"
 
-              onClick={ () =>{
-                singleStatusCourse({id: id, status: "published"})
+              onClick={() => {
+                singleStatusCourse({ id: id, status: "published" });
               }}
             >
               Unpublish
@@ -44,8 +44,8 @@ const CourseSettings = () => {
               _hover={{ backgroundColor: "none" }}
               variant="outline"
               px={"3.5rem"}
-              onClick={ () =>{
-                singleStatusCourse({id: id, status: ""})
+              onClick={() => {
+                singleStatusCourse({ id: id, status: "" });
               }}
             >
               Delete

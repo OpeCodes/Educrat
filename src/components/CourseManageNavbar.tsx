@@ -30,7 +30,7 @@ const CourseManageNavbar = () => {
       </Flex>
       <Text fontWeight={"bold"} fontSize="13px">{getSingleCourse?.title}</Text>
       <Text bg="red" px={2} borderRadius={5} fontSize={"14px"}>
-      {(getSingleCourse?.status).toUpperCase()}
+      {(getSingleCourse?.status)?.toUpperCase()}
       </Text>
     </Flex>
     {/* <Flex align={"center"} columnGap={4}>
