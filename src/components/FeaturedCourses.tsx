@@ -11,6 +11,7 @@ import {
 import { CiPlay1, CiClock1 } from "react-icons/ci";
 import { icon3 } from "../assets/export";
 import { FaRegStar } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 type Props = {
   id?: number;
@@ -19,7 +20,9 @@ type Props = {
   userId?: any;
   title?: string;
 };
+
 const Course = ({ id, thumbnail, title, complexityLevel, userId }: Props) => {
+// console.log(data)
   return (
     <Box
       as="div"
@@ -61,10 +64,11 @@ const Course = ({ id, thumbnail, title, complexityLevel, userId }: Props) => {
           </Flex>
         </Box>
         <Heading
-          as={"h3"}
           fontSize={"17px"}
           color={"#140342"}
           fontWeight={"normal"}
+          as={Link}
+          to={`/course/${id}`}
         >
           {title}
         </Heading>

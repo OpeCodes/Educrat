@@ -12,7 +12,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SliderButtons, Course } from "../components/index";
 import { buttonsData, sliderSettings } from "../utils/data";
-import { useGetAllCourse } from "../hooks/studentCourse";
+import {  useGetCourse } from "../hooks/course";
 
 type button = {
   id: number;
@@ -26,8 +26,8 @@ export const Courses = () => {
   };
   // const { data } = useGetUser();
   // const {getLectureModuleCourse,isPending} = useGetAllInstructorCourses(data?.id);
-  const { data, isPending } = useGetAllCourse();
-  console.log(data);
+  const { data, isPending } = useGetCourse();
+
   const dummyArray = [1, 2, 3, 4];
   return (
     <Box

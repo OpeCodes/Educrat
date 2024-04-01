@@ -8,13 +8,13 @@ import {
   Collapse,
   Button,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
 import { MdOutlineCheckCircleOutline } from "react-icons/md";
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
-
+import { useGetSingleCourse } from "../../hooks/course";
 const data = [
   {
     id: 1,
@@ -33,16 +33,22 @@ const data = [
     name: "All the techniques used by UX professionals",
   },
 ];
+
 // const initialValues = {
 //   title: "",
 //   content: "",
 // };
 const SingleCourse = () => {
+  const { id } = useParams() ;
+const { getSingleCourse, isPending } = useGetSingleCourse(id);
+console.log(getSingleCourse)
   // const handleSubmit = (values: any) => {
   //   console.log(values);
   // };
+
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
+
   return (
     <Stack>
       <Stack>
@@ -111,7 +117,7 @@ const SingleCourse = () => {
                 {/* course content */}
                 <Stack mt={"1.8rem"} mb={"1.5rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
-                   Course Content
+                    Course Content
                   </Text>
                   <StudentCourseContent />
                 </Stack>
