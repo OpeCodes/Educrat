@@ -41,12 +41,12 @@ const StudentCourseContent = () => {
 
   const [index, setIndex] = React.useState<any>([]);
 
-  const toggleAllAccordionItems = () => {
+  const collapseAllAccordionItems = () => {
     setIsExpanded(!isExpanded);
     setIndex(getLastNumberFormat(data));
   };
 
-  const toggleAllAccordionItems2 = () => {
+  const expandAllAccordionItems = () => {
     setIsExpanded(!isExpanded);
     setIndex([]);
   };
@@ -71,6 +71,7 @@ const StudentCourseContent = () => {
               mt="1rem"
               colorScheme="teal"
               variant="link"
+              onClick={collapseAllAccordionItems}
             >
               Expand All Sections
             </Button>
@@ -80,10 +81,11 @@ const StudentCourseContent = () => {
               textAlign={"left"}
               display={"flex"}
               justifyContent={"left"}
-              size="md"
+              size="sm"
               mt="1rem"
               colorScheme="teal"
               variant="link"
+              onClick={expandAllAccordionItems}
             >
               Collapse All Sections
             </Button>
@@ -91,7 +93,7 @@ const StudentCourseContent = () => {
         </Stack>
       </Flex>
 
-      {isExpanded ? (
+      {/* {isExpanded ? (
         <Button onClick={toggleAllAccordionItems} mb={4}>
           Expand all
         </Button>
@@ -99,7 +101,7 @@ const StudentCourseContent = () => {
         <Button onClick={toggleAllAccordionItems2} mb={4}>
           collapse all
         </Button>
-      )}
+      )} */}
 
       <Accordion allowMultiple index={index} onChange={setIndex}>
         {/* First accordion item */}
