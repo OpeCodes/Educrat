@@ -41,7 +41,7 @@ const data = [
 const SingleCourse = () => {
   const { id } = useParams();
   const { getSingleCourse, isPending } = useGetSingleCourse(id);
-  console.log(getSingleCourse)
+  console.log(getSingleCourse);
   // const handleSubmit = (values: any) => {
   //   console.log(values);
   // };
@@ -126,7 +126,7 @@ const SingleCourse = () => {
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     Course Content
                   </Text>
-                  <StudentCourseContent SingleCourseProp= {getSingleCourse} />
+                  <StudentCourseContent SingleCourseProp={getSingleCourse} />
                 </Stack>
 
                 <Stack mt={"1.8rem"} mb={"1.5rem"}>
@@ -135,38 +135,39 @@ const SingleCourse = () => {
                   </Text>
                   <Stack>
                     <Grid templateColumns={{ md: "repeat(2, 1fr)" }} gap={3}>
-                      {getSingleCourse?.learningObjectives?.map(({learn, index} : any) => (
-                        <GridItem w="100%" key={index}>
-                          <Flex
-                            align={"center"}
-                            columnGap={1}
-                            color={"#4f547b"}
-                          >
-                            <Text>
-                              <MdOutlineCheckCircleOutline
+                      {getSingleCourse?.learningObjectives?.map(
+                        (learn, index) => {
+                          return (
+                            <GridItem w="100%" key={index}>
+                              <Flex
+                                align={"center"}
+                                columnGap={1}
                                 color={"#4f547b"}
-                                size={20}
-                              />
-                            </Text>
-                            <Text>{learn}</Text>
-                          </Flex>
-                        </GridItem>
-                      ))}
+                              >
+                                <Text>
+                                  <MdOutlineCheckCircleOutline
+                                    color={"#4f547b"}
+                                    size={20}
+                                  />
+                                </Text>
+                                <Text>{learn}</Text>
+                              </Flex>
+                            </GridItem>
+                          );
+                        }
+                      )}
                     </Grid>
                   </Stack>
                   <Stack mt={"1.8rem"} mb={"1.5rem"}>
                     <Text fontWeight={"bold"} fontSize={"1.1rem"}>
-                      Requirement
+                      Requirements
                     </Text>
 
                     <Flex align={"center"} color={"#4f547b"} columnGap={1}>
                       <Text mt={"-.2rem"} fontSize={"1.2rem"}>
                         &#x2022;
                       </Text>
-                      <Text>
-                        You will need a copy of Adobe XD 2019 or above. A free
-                        trial can be.
-                      </Text>
+                      <Text>{getSingleCourse?.preRequisites}</Text>
                     </Flex>
                   </Stack>
                   {/* description */}
@@ -178,23 +179,15 @@ const SingleCourse = () => {
                     >
                       Description
                     </Text>
-                    <Collapse startingHeight={150} in={show} color={"#4f547b"}>
-                      Phasellus enim magna, varius et commodo ut, ultricies
-                      vitae velit. Ut nulla tellus, eleifend euismod
-                      pellentesque vel, sagittis vel justo. In libero urna,
-                      venenatis sit amet ornare non, suscipit nec risus. Sed
-                      consequat justo non mauris pretium at tempor justo
-                      sodales. Quisque tincidunt laoreet malesuada. Cum sociis
-                      natoque penatibus et magnis dis parturient montes,
-                      nascetur. This course is aimed at people interested in
-                      UI/UX Design. We’ll start from the very beginning and work
-                      all the way through, step by step. If you already have
-                      some UI/UX Design experience but want to get up to speed
-                      using Adobe XD then this course is perfect for you too!
-                      First, we will go over the differences between UX and UI
-                      Design. We will look at what our brief for this real-world
-                      project is, then we will learn about low-fidelity
-                      wireframes and how to make use of existing UI design kits.
+                    <Collapse
+                      dangerouslySetInnerHTML={{
+                        __html: getSingleCourse?.description,
+                      }}
+                      startingHeight={150}
+                      in={show}
+                      color={"#4f547b"}
+                    >
+                      
                     </Collapse>
                     <Button
                       color={"#6440fb"}
