@@ -124,7 +124,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                     </Flex>
                   </Flex>
                   <Flex align={"center"} color={"#4f547b"} columnGap={2}>
-                    <Text>27 sections</Text>
+                    <Text>{module?.lectures.length} lectures</Text>
                     <Flex align={"center"} columnGap={1}>
                       <Text fontSize={"1.2rem"}>&#x2022;</Text>
                       <Text>{data.length}mins</Text>
