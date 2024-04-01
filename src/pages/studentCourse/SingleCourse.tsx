@@ -39,18 +39,20 @@ const data = [
 //   content: "",
 // };
 const SingleCourse = () => {
-  const { id } = useParams() ;
-const { getSingleCourse, isPending } = useGetSingleCourse(id);
-console.log(getSingleCourse)
+  const { id } = useParams();
+  const { getSingleCourse, isPending } = useGetSingleCourse(id);
+  console.log(getSingleCourse)
   // const handleSubmit = (values: any) => {
   //   console.log(values);
   // };
 
   const dateString = getSingleCourse?.updatedAt;
-const date = new Date(dateString);
-const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
-const year = date.getFullYear() % 100;
-const formattedDate = `${month.toString().padStart(2, "0")}/${year.toString().padStart(2, "0")}`;
+  const date = new Date(dateString);
+  const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
+  const year = date.getFullYear() % 100;
+  const formattedDate = `${month.toString().padStart(2, "0")}/${year
+    .toString()
+    .padStart(2, "0")}`;
 
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
@@ -89,11 +91,9 @@ const formattedDate = `${month.toString().padStart(2, "0")}/${year.toString().pa
             >
               <Stack width={{ md: "60%" }} rowGap={5}>
                 <Text fontWeight={"bold"} fontSize={"2rem"}>
-                 {getSingleCourse?.title}
+                  {getSingleCourse?.title}
                 </Text>
-                <Text color={"#4f547b"}>
-                 {getSingleCourse?.subtitle}
-                </Text>
+                <Text color={"#4f547b"}>{getSingleCourse?.subtitle}</Text>
                 <Flex color={"#4f547b"} align={"center"} columnGap={6}>
                   <Flex>
                     <Text>star review here</Text>
@@ -112,19 +112,21 @@ const formattedDate = `${month.toString().padStart(2, "0")}/${year.toString().pa
                   </Flex>
                 </Flex>
                 <Flex align={"center"} columnGap={2} color={"#4f547b"}>
-                <Avatar
-              size="sm"
-              name={`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}
-              src={getSingleCourse?.userId?.profilePicture}
-            />
-                  <Text fontWeight={"400"}>{`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}</Text>
+                  <Avatar
+                    size="sm"
+                    name={`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}
+                    src={getSingleCourse?.userId?.profilePicture}
+                  />
+                  <Text
+                    fontWeight={"400"}
+                  >{`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}</Text>
                 </Flex>
                 {/* course content */}
                 <Stack mt={"1.8rem"} mb={"1.5rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     Course Content
                   </Text>
-                  <StudentCourseContent />
+                  <StudentCourseContent SingleCourseProp= {getSingleCourse} />
                 </Stack>
 
                 <Stack mt={"1.8rem"} mb={"1.5rem"}>
@@ -133,8 +135,8 @@ const formattedDate = `${month.toString().padStart(2, "0")}/${year.toString().pa
                   </Text>
                   <Stack>
                     <Grid templateColumns={{ md: "repeat(2, 1fr)" }} gap={3}>
-                      {data?.map((item) => (
-                        <GridItem w="100%">
+                      {getSingleCourse?.learningObjectives?.map(({learn, index} : any) => (
+                        <GridItem w="100%" key={index}>
                           <Flex
                             align={"center"}
                             columnGap={1}
@@ -146,7 +148,7 @@ const formattedDate = `${month.toString().padStart(2, "0")}/${year.toString().pa
                                 size={20}
                               />
                             </Text>
-                            <Text>{item.name}</Text>
+                            <Text>{learn}</Text>
                           </Flex>
                         </GridItem>
                       ))}

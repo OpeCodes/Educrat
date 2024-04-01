@@ -12,73 +12,15 @@ import {
 } from "@chakra-ui/react";
 import { RiPlayCircleFill } from "react-icons/ri";
 
-const StudentCourseContent = () => {
+interface SingleCourse{
+    SingleCourseProp: any
+}
+
+
+const StudentCourseContent = ({SingleCourseProp}: SingleCourse) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const data = [
-    {
-      name: "kdkdk",
-    },
-    {
-      name: "kdkdk",
-    },
-    {
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
-      {
-        name: "kdkdk",
-      },{
-        name: "kdkdk",
-      },
+
       {
         name: "kdkdk",
       },{
@@ -114,7 +56,7 @@ const StudentCourseContent = () => {
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
         <Flex align={"center"} color={"#4f547b"} columnGap={2}>
-          <Text>27 sections</Text>
+          <Text>{SingleCourseProp?.modules?.length} sections</Text>
           <Flex align={"center"} columnGap={1}>
             <Text fontSize={"1.2rem"}>&#x2022;</Text>
             <Text>{data.length} Lectures</Text>
@@ -154,7 +96,7 @@ const StudentCourseContent = () => {
       </Flex>
 
       <Accordion allowMultiple index={index} onChange={setIndex}>
-        {data.map((item) => {
+        {SingleCourseProp?.modules?.map((module: any) => {
           return (
             <AccordionItem
               style={{ borderWidth: 1, borderRadius: 15 }}
@@ -173,7 +115,7 @@ const StudentCourseContent = () => {
                   <Flex>
                     <Flex align={"center"} columnGap={5}>
                       <AccordionIcon fontSize={23} />
-                      <Text fontSize={18}>Course Content</Text>
+                      <Text fontSize={18}>{module?.title}</Text>
                     </Flex>
                   </Flex>
                   <Flex align={"center"} color={"#4f547b"} columnGap={2}>
