@@ -143,18 +143,21 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                         <Text>Introduction to User</Text>
                       </Flex>
                       <Flex align={"center"} columnGap={4}>
-                        <Button
-                          color={"#6440fb"}
-                          textAlign={"left"}
-                          display={"flex"}
-                          justifyContent={"left"}
-                          size="sm"
-                          colorScheme="teal"
-                          variant="link"
-                          onClick={expandAllAccordionItems}
-                        >
-                          Preview
-                        </Button>
+                        {
+                           lecture?.contentPreviewable && <Button
+                            color={"#6440fb"}
+                            textAlign={"left"}
+                            display={"flex"}
+                            justifyContent={"left"}
+                            size="sm"
+                            colorScheme="teal"
+                            variant="link"
+                          
+                          >
+                            Preview
+                          </Button>
+                        }
+                        
                         <Text color={"#4f547b"}>27 mins</Text>
                       </Flex>
                     </Flex>
