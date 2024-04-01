@@ -295,7 +295,7 @@ const SingleCourse = () => {
                     </Flex>
                   </Stack>
                   {/* write review */}
-                  <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
+                  {/* <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
                     <Text
                       color={"black"}
                       fontWeight={"bold"}
@@ -375,7 +375,7 @@ const SingleCourse = () => {
                         </Flex>
                       )}
                     </Formik>
-                  </Stack>
+                  </Stack> */}
                 </Stack>
               </Stack>
               <Stack>
