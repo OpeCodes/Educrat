@@ -46,6 +46,12 @@ console.log(getSingleCourse)
   //   console.log(values);
   // };
 
+  const dateString = getSingleCourse?.updatedAt;
+const date = new Date(dateString);
+const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
+const year = date.getFullYear() % 100;
+const formattedDate = `${month.toString().padStart(2, "0")}/${year.toString().padStart(2, "0")}`;
+
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
@@ -83,11 +89,10 @@ console.log(getSingleCourse)
             >
               <Stack width={{ md: "60%" }} rowGap={5}>
                 <Text fontWeight={"bold"} fontSize={"2rem"}>
-                  Angular - The Complete Guide (2022 Edition)
+                 {getSingleCourse?.title}
                 </Text>
                 <Text color={"#4f547b"}>
-                  Use XD to get a job in UI Design, User Interface, User
-                  Experience design, UX design & Web Design
+                 {getSingleCourse?.subtitle}
                 </Text>
                 <Flex color={"#4f547b"} align={"center"} columnGap={6}>
                   <Flex>
@@ -103,7 +108,7 @@ console.log(getSingleCourse)
                     <Text>
                       <LuClock3 />
                     </Text>
-                    <Text>Last updated 11/2021</Text>
+                    <Text>Last updated {formattedDate}</Text>
                   </Flex>
                 </Flex>
                 <Flex align={"center"} columnGap={2} color={"#4f547b"}>
