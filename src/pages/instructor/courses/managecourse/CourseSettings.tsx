@@ -1,8 +1,10 @@
 import { Button, Divider, Flex, Stack, Text } from "@chakra-ui/react";
 import { useSingleStatusCourse } from "../../../../hooks/course";
+import { useParams } from "react-router-dom";
 
 const CourseSettings = () => {
   const {singleStatusCourse,isPending}=  useSingleStatusCourse()
+  const {id} = useParams()
   return (
     <Stack mb={"12rem"}>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -20,6 +22,9 @@ const CourseSettings = () => {
               _hover={{ backgroundColor: "none" }}
               variant="outline"
               px={"2.7rem"}
+              onClick={ () =>{
+                singleStatusCourse({id: id, status: "published"})
+              }}
             >
               Unpublish
             </Button>
@@ -35,6 +40,9 @@ const CourseSettings = () => {
               _hover={{ backgroundColor: "none" }}
               variant="outline"
               px={"3.5rem"}
+              onClick={ () =>{
+                singleStatusCourse({id: id, status: ""})
+              }}
             >
               Delete
             </Button>
