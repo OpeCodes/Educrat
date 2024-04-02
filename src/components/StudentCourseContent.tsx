@@ -23,7 +23,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
   );
 
   const [isExpanded, setIsExpanded] = useState(true);
-  
+
   function getLastNumberFormat(arr: any) {
     const length = arr.length;
     const lastNumberFormat = Array.from({ length }, (_, i) => i);
@@ -31,7 +31,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
   }
 
   const [index, setIndex] = React.useState<any>([]);
-
+  console.log(SingleCourseProp?.modules);
   const collapseAllAccordionItems = () => {
     setIsExpanded(!isExpanded);
     setIndex(getLastNumberFormat(SingleCourseProp?.modules));
@@ -41,8 +41,6 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
     setIsExpanded(!isExpanded);
     setIndex([]);
   };
-  
- 
 
   const getTotalDurationPerModule = (modules: any) => {
     return SingleCourseProp?.modules?.map((module: any) => {
@@ -52,12 +50,14 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
           totalDuration += lecture?.content?.duration || 0;
         });
       }
-      return  totalDuration 
+      return totalDuration;
     });
   };
-  
+
   // Get total duration for each module
-  const totalDurationPerModule = getTotalDurationPerModule(SingleCourseProp?.modules);
+  const totalDurationPerModule = getTotalDurationPerModule(
+    SingleCourseProp?.modules
+  );
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
@@ -129,19 +129,25 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                     <Text>{module?.lectures.length} lectures</Text>
                     <Flex align={"center"} columnGap={1}>
                       <Text fontSize={"1.2rem"}>&#x2022;</Text>
-                      <Text> {convertSecondsToHMS(totalDurationPerModule[index])}</Text>
+                      <Text>                        
+                        {convertSecondsToHMS(totalDurationPerModule[index])}
+                      </Text>
                     </Flex>
                   </Flex>
                 </AccordionButton>
               </Stack>
               {module?.lectures?.map((lecture: any) => {
-                const { contentPreviewable, content } = lecture;
+                const { contentPreviewable, content, contentType } = lecture;
                 return (
                   <AccordionPanel key={lecture.id}>
                     <Flex align={"center"} justify={"space-between"}>
                       <Flex color={"#4f547b"} align={"center"} columnGap={5}>
                         <Text>
-                          <RiPlayCircleFill size={25} color={"#4f547b"} />
+                          {contentType === "lecture_video" ? (
+                            <RiPlayCircleFill size={25} color={"#4f547b"} />
+                          ) : (
+                            <LuStickyNote size={20} color={"#4f547b"} />
+                          )}
                         </Text>
                         <Text>{lecture.title}</Text>
                       </Flex>
