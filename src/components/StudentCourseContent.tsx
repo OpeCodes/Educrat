@@ -22,7 +22,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
     (obj: any) => obj.lectures
   );
 
-  console.log(SingleCourseProp)
+  console.log(SingleCourseProp);
   const [isExpanded, setIsExpanded] = useState(true);
   const data = [
     {
@@ -58,8 +58,22 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
     setIsExpanded(!isExpanded);
     setIndex([]);
   };
-
+  const totalDuration = SingleCourseProp?.modules?.reduce((accumulator: any, currentModule: any) => {
+    // If 'lectures' array exists in the current module
+    if (currentModule.lectures && Array.isArray(currentModule.lectures)) {
+      // Calculate total duration for lectures in the current module
+      const moduleDuration = currentModule.lectures.reduce((moduleAccumulator: any, lecture: any) => {
+        // Add duration of each lecture to module accumulator
+        return moduleAccumulator + (lecture?.content?.duration || 0); // Ensure 'duration' exists and is a number
+      }, 0);
   
+      // Add module duration to accumulator
+      return accumulator + moduleDuration;
+    }
+    
+    return accumulator; // If 'lectures' array doesn't exist or is not an array, return accumulator
+  }, 0);
+  console.log(totalDuration)
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
@@ -137,7 +151,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                 </AccordionButton>
               </Stack>
               {module?.lectures?.map((lecture: any) => {
-                const {contentPreviewable, content} = lecture
+                const { contentPreviewable, content } = lecture;
                 return (
                   <AccordionPanel key={lecture.id}>
                     <Flex align={"center"} justify={"space-between"}>
@@ -148,7 +162,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                         <Text>{lecture.title}</Text>
                       </Flex>
                       <Flex align={"center"} columnGap={4}>
-                      {contentPreviewable && (
+                        {contentPreviewable && (
                           <Button
                             color={"#6440fb"}
                             textAlign={"left"}
@@ -161,7 +175,9 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                             Preview
                           </Button>
                         )}
-                        <Text color={"#4f547b"}>{convertSecondsToTime(content?.duration)} </Text>
+                        <Text color={"#4f547b"}>
+                          {convertSecondsToTime(content?.duration)}{" "}
+                        </Text>
                       </Flex>
                     </Flex>
                   </AccordionPanel>
