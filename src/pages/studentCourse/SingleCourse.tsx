@@ -18,6 +18,7 @@ import {
   MdOutlinePlayLesson,
 } from "react-icons/md";
 import { WiTime3 } from "react-icons/wi";
+import { FiBarChart2 } from "react-icons/fi";
 
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
@@ -361,8 +362,9 @@ const SingleCourse = () => {
                           <Stack fontSize={17} color={"#140342"}>
                             <Flex justify={"space-between"} align={"center"}>
                               <Flex columnGap={3} align={"center"}>
-                                <MdOutlinePlayLesson />
-                                <Text>skill level</Text>
+                              <FiBarChart2 />
+
+                                <Text>Skill level</Text>
                               </Flex>
                               <Text>20</Text>
                             </Flex>
