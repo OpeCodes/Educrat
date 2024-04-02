@@ -7,7 +7,7 @@ import {
 import { useParams } from "react-router-dom";
 
 const CourseSettings = () => {
-  const { singleStatusCourse,isPending } = useSingleStatusCourse();
+  const { singleStatusCourse, isPending } = useSingleStatusCourse();
   const { id } = useParams();
   const { deleteCourseModule, deleteCourseModuleLoading } =
     useDeleteCourseModule();
@@ -20,7 +20,11 @@ const CourseSettings = () => {
       <Divider />
       <Stack p={5}>
         <Text fontWeight={"bold"}>Course Status</Text>
-        <Text>This course is not published on the Educrat marketplace.</Text>
+        <Text>
+          This course is{" "}
+          {getSingleCourse?.status === "published" ? "now" : "not"} published on
+          the Educrat marketplace.
+        </Text>
         <Stack mt={"0.9rem"}>
           <Flex columnGap={4} align={"center"}>
             {getSingleCourse?.status === "published" ? (
