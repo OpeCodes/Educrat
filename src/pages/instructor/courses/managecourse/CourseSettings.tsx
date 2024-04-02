@@ -7,7 +7,7 @@ import {
 import { useParams } from "react-router-dom";
 
 const CourseSettings = () => {
-  const { singleStatusCourse } = useSingleStatusCourse();
+  const { singleStatusCourse,isPending } = useSingleStatusCourse();
   const { id } = useParams();
   const { deleteCourseModule, deleteCourseModuleLoading } =
     useDeleteCourseModule();
@@ -29,6 +29,9 @@ const CourseSettings = () => {
                 borderColor={"black"}
                 _hover={{ backgroundColor: "none" }}
                 variant="outline"
+                isLoading={isPending}
+                loadingText="Loading"
+                spinnerPlacement="end"
                 px={"2.7rem"}
                 onClick={() => {
                   singleStatusCourse({ id, status: "draft" });
@@ -42,6 +45,9 @@ const CourseSettings = () => {
                 borderColor={"black"}
                 _hover={{ backgroundColor: "none" }}
                 variant="outline"
+                isLoading={isPending}
+                loadingText="Loading"
+                spinnerPlacement="end"
                 px={"2.7rem"}
                 onClick={() => {
                   singleStatusCourse({ id, status: "published" });
