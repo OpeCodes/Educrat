@@ -58,22 +58,24 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
     setIsExpanded(!isExpanded);
     setIndex([]);
   };
-  const totalDuration = SingleCourseProp?.modules?.reduce((accumulator: any, currentModule: any) => {
-    // If 'lectures' array exists in the current module
-    if (currentModule.lectures && Array.isArray(currentModule.lectures)) {
-      // Calculate total duration for lectures in the current module
-      const moduleDuration = currentModule.lectures.reduce((moduleAccumulator: any, lecture: any) => {
-        // Add duration of each lecture to module accumulator
-        return moduleAccumulator + (lecture?.content?.duration || 0); // Ensure 'duration' exists and is a number
-      }, 0);
   
-      // Add module duration to accumulator
-      return accumulator + moduleDuration;
-    }
-    
-    return accumulator; // If 'lectures' array doesn't exist or is not an array, return accumulator
-  }, 0);
-  console.log(totalDuration)
+ 
+
+  const getTotalDurationPerModule = (modules: any) => {
+    return SingleCourseProp?.modules?.map((module: any) => {
+      let totalDuration = 0;
+      if (module.lectures && Array.isArray(module.lectures)) {
+        module.lectures.forEach((lecture: any) => {
+          totalDuration += lecture?.content?.duration || 0;
+        });
+      }
+      return  totalDuration 
+    });
+  };
+  
+  // Get total duration for each module
+  const totalDurationPerModule = getTotalDurationPerModule(SingleCourseProp?.modules);
+  console.log('Total duration of each module:', totalDurationPerModule);
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
@@ -145,7 +147,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                     <Text>{module?.lectures.length} lectures</Text>
                     <Flex align={"center"} columnGap={1}>
                       <Text fontSize={"1.2rem"}>&#x2022;</Text>
-                      <Text>{data.length}mins</Text>
+                      <Text>{totalDurationPerModule[index]}mins</Text>
                     </Flex>
                   </Flex>
                 </AccordionButton>
