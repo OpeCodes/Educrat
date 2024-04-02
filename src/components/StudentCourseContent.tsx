@@ -62,7 +62,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
         <Flex align={"center"} color={"#4f547b"} columnGap={2}>
-          <Text>{SingleCourseProp?.modules?.length} sections</Text>
+          <Text>{SingleCourseProp?.modules?.length} section{SingleCourseProp?.modules?.length > 1 && "s"}  </Text>
           <Flex align={"center"} columnGap={1}>
             <Text fontSize={"1.2rem"}>&#x2022;</Text>
             <Text>{lectureLength.length} Lecture{lectureLength.length > 1 && "s"}</Text>
