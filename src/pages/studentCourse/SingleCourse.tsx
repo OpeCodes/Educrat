@@ -73,7 +73,7 @@ const SingleCourse = () => {
               columnGap={20}
               flexDirection={{ sm: "column", md: "row" }}
             >
-              <Stack  rowGap={5}>
+              <Stack rowGap={5}>
                 <Text fontWeight={"bold"} fontSize={"2rem"}>
                   {getStudentSingleCourse?.title}
                 </Text>
@@ -299,16 +299,36 @@ const SingleCourse = () => {
                   // height={"400px"}
                   p="2"
                   borderRadius="md"
-                mx={2}
-
-
+                  width={"350px"}
+                  mx={1}
                 >
-                    <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
-                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
-                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
-                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
-                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
-                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
+                  <Image
+                    mx="auto"
+                    src="https://bit.ly/dan-abramov"
+                    alt="Dan Abramov"
+                  />
+                  <Stack mx={4}>
+                    <Text mt={3} fontSize={"1.5rem"}>
+                      $120
+                    </Text>
+                    <Stack>
+                      <Button
+                        bg={"#6440FB"}
+                        py={"25px"}
+                        variant="solid"
+                        color={"white"}
+                      >
+                        Add to Cart
+                      </Button>
+                      <Button
+                        borderColor={"#140342"}
+                        py={"25px"}
+                        variant="outline"
+                      >
+                        Buy Now
+                      </Button>
+                    </Stack>
+                  </Stack>
                 </Box>
               </Stack>
             </Flex>
