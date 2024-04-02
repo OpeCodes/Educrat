@@ -1,11 +1,17 @@
 import { Button, Divider, Flex, Stack, Text } from "@chakra-ui/react";
-import { useDeleteCourseModule, useSingleStatusCourse } from "../../../../hooks/course";
+import {
+  useDeleteCourseModule,
+  useGetSingleCourse,
+  useSingleStatusCourse,
+} from "../../../../hooks/course";
 import { useParams } from "react-router-dom";
 
 const CourseSettings = () => {
   const { singleStatusCourse } = useSingleStatusCourse();
   const { id } = useParams();
-const {deleteCourseModule,deleteCourseModuleLoading} =  useDeleteCourseModule()
+  const { deleteCourseModule, deleteCourseModuleLoading } =
+    useDeleteCourseModule();
+  const { getSingleCourse } = useGetSingleCourse(id);
   return (
     <Stack mb={"12rem"}>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -17,19 +23,34 @@ const {deleteCourseModule,deleteCourseModuleLoading} =  useDeleteCourseModule()
         <Text>This course is not published on the Educrat marketplace.</Text>
         <Stack mt={"0.9rem"}>
           <Flex columnGap={4} align={"center"}>
-            <Button
-              borderRadius={0}
-              borderColor={"black"}
-              _hover={{ backgroundColor: "none" }}
-              variant="outline"
-              px={"2.7rem"}
-             
-              onClick={() => {
-                singleStatusCourse({ id, status: "published"});
-              }}
-            >
-              Unpublish
-            </Button>
+            {getSingleCourse?.status === "published" ? (
+              <Button
+                borderRadius={0}
+                borderColor={"black"}
+                _hover={{ backgroundColor: "none" }}
+                variant="outline"
+                px={"2.7rem"}
+                onClick={() => {
+                  singleStatusCourse({ id, status: "draft" });
+                }}
+              >
+                Unpublish
+              </Button>
+            ) : (
+              <Button
+                borderRadius={0}
+                borderColor={"black"}
+                _hover={{ backgroundColor: "none" }}
+                variant="outline"
+                px={"2.7rem"}
+                onClick={() => {
+                  singleStatusCourse({ id, status: "published" });
+                }}
+              >
+                publish
+              </Button>
+            )}
+
             <Text>
               New students cannot find your course via search, but existing
               students can still access content.
@@ -45,9 +66,8 @@ const {deleteCourseModule,deleteCourseModuleLoading} =  useDeleteCourseModule()
               isLoading={deleteCourseModuleLoading}
               loadingText="Loading"
               spinnerPlacement="end"
-
               onClick={() => {
-                deleteCourseModule({ courseId: id});
+                deleteCourseModule({ courseId: id });
               }}
             >
               Delete
