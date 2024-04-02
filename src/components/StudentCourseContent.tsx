@@ -54,9 +54,9 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
   };
 
   // Get total duration for each module
-  const totalDurationPerModule = getTotalDurationPerModule(
+  const totalDurationPerModule =
+    getTotalDurationPerModule();
     // SingleCourseProp?.modules
-  );
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
@@ -127,7 +127,12 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                       <Text fontSize={18}>{module?.title}</Text>
                     </Flex>
                   </Flex>
-                  <Flex align={"center"} color={"#4f547b"} columnGap={2}>
+                  <Flex
+                    display={{ base: "none", sm: "flex" }}
+                    align={"center"}
+                    color={"#4f547b"}
+                    columnGap={2}
+                  >
                     <Text>
                       {module?.lectures.length} lecture
                       {module?.lectures.length > 1 && "s"}{" "}
