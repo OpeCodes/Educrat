@@ -28,7 +28,7 @@ import { FaCertificate } from "react-icons/fa6";
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
-import { useGetStudentSingleCourse } from "../../hooks/studentCourse";
+import { useGetAllUEnrolledCourse, useGetStudentSingleCourse } from "../../hooks/studentCourse";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 
 // const initialValues = {
@@ -38,7 +38,7 @@ import { convertSecondsToHMS } from "../../components/TimeFormat";
 const SingleCourse = () => {
   const { slug } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse);
+  console.log(getStudentSingleCourse)
   // const handleSubmit = (values: any) => {
   //   console.log(values);
   // };
@@ -69,6 +69,9 @@ const SingleCourse = () => {
   };
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
+
+ const {data} =  useGetAllUEnrolledCourse();
+ console.log(data)
   return (
     <Stack>
       <Stack>
