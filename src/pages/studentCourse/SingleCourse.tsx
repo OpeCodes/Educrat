@@ -20,6 +20,7 @@ import {
 import { WiTime3 } from "react-icons/wi";
 import { FiBarChart2 } from "react-icons/fi";
 import { IoLanguage } from "react-icons/io5";
+import { FaCertificate } from "react-icons/fa6";
 
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
@@ -341,7 +342,7 @@ const SingleCourse = () => {
                           <Stack fontSize={17} color={"#140342"}>
                             <Flex justify={"space-between"} align={"center"}>
                               <Flex columnGap={3} align={"center"}>
-                               <MdOutlinePlayLesson />
+                                <MdOutlinePlayLesson />
                                 <Text>Lesson</Text>
                               </Flex>
                               <Text>20</Text>
@@ -352,7 +353,7 @@ const SingleCourse = () => {
                           <Stack fontSize={17} color={"#140342"}>
                             <Flex justify={"space-between"} align={"center"}>
                               <Flex columnGap={3} align={"center"}>
-                              <WiTime3 />
+                                <WiTime3 />
                                 <Text>Duration</Text>
                               </Flex>
                               <Text>20</Text>
@@ -363,7 +364,7 @@ const SingleCourse = () => {
                           <Stack fontSize={17} color={"#140342"}>
                             <Flex justify={"space-between"} align={"center"}>
                               <Flex columnGap={3} align={"center"}>
-                              <FiBarChart2 />
+                                <FiBarChart2 />
 
                                 <Text>Skill level</Text>
                               </Flex>
@@ -375,7 +376,7 @@ const SingleCourse = () => {
                           <Stack fontSize={17} color={"#140342"}>
                             <Flex justify={"space-between"} align={"center"}>
                               <Flex columnGap={3} align={"center"}>
-                              <IoLanguage />
+                                <IoLanguage />
 
                                 <Text>Language</Text>
                               </Flex>
@@ -387,7 +388,8 @@ const SingleCourse = () => {
                           <Stack fontSize={17} color={"#140342"}>
                             <Flex justify={"space-between"} align={"center"}>
                               <Flex columnGap={3} align={"center"}>
-                                <MdOutlinePlayLesson />
+                                <FaCertificate />
+
                                 <Text>Certificate</Text>
                               </Flex>
                               <Text>yes</Text>
