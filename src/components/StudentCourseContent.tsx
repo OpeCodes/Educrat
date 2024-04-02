@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { convertSecondsToHMS, convertSecondsToTime } from "./TimeFormat";
-
+import { LuStickyNote } from "react-icons/lu";
 interface SingleCourse {
   SingleCourseProp: any;
 }
@@ -22,25 +22,8 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
     (obj: any) => obj.lectures
   );
 
-  console.log(SingleCourseProp);
   const [isExpanded, setIsExpanded] = useState(true);
-  const data = [
-    {
-      name: "kdkdk",
-    },
-    {
-      name: "kdkdk",
-    },
-    {
-      name: "kdkdk",
-    },
-    {
-      name: "kdkdk",
-    },
-    {
-      name: "kdkdk",
-    },
-  ];
+  
   function getLastNumberFormat(arr: any) {
     const length = arr.length;
     const lastNumberFormat = Array.from({ length }, (_, i) => i);
@@ -51,7 +34,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
 
   const collapseAllAccordionItems = () => {
     setIsExpanded(!isExpanded);
-    setIndex(getLastNumberFormat(data));
+    setIndex(getLastNumberFormat(SingleCourseProp?.modules));
   };
 
   const expandAllAccordionItems = () => {
@@ -75,7 +58,6 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
   
   // Get total duration for each module
   const totalDurationPerModule = getTotalDurationPerModule(SingleCourseProp?.modules);
-  console.log('Total duration of each module:', totalDurationPerModule);
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
