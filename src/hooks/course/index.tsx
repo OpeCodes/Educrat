@@ -148,8 +148,8 @@ export const useSingleStatusCourse = () => {
     error,
     isError,
   } = useMutation({
-    mutationFn: ({ id, user }: any) => {
-      return customFetch.put(`course/${id}/status`, user);
+    mutationFn: ({ id, status }: any) => {
+      return customFetch.put(`course/${id}/status`, status);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });

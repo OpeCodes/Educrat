@@ -21,6 +21,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
     (obj: any) => obj.lectures
   );
 
+  console.log(SingleCourseProp)
   const [isExpanded, setIsExpanded] = useState(true);
   const data = [
     {
