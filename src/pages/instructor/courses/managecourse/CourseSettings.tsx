@@ -62,10 +62,10 @@ const CourseSettings = () => {
             )}
 
             <Text>
-              New students{" "}
+              New students
               {getSingleCourse?.status === "published"
-                ? "can find your course via search,"
-                : "cannot find your course via search,  but existing students can still access content."}
+                ? " can find your course via search,"
+                : " cannot find your course via search,  but existing students can still access content."}
             </Text>
           </Flex>
           <Flex columnGap={4} align={"center"} mt={"1.5rem"}>
