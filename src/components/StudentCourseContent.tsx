@@ -11,7 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { RiPlayCircleFill } from "react-icons/ri";
-import { convertSecondsToTime } from "./TimeFormat";
+import { convertSecondsToHMS, convertSecondsToTime } from "./TimeFormat";
 
 interface SingleCourse {
   SingleCourseProp: any;
@@ -147,7 +147,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                     <Text>{module?.lectures.length} lectures</Text>
                     <Flex align={"center"} columnGap={1}>
                       <Text fontSize={"1.2rem"}>&#x2022;</Text>
-                      <Text>{totalDurationPerModule[index]}mins</Text>
+                      <Text> {convertSecondsToHMS(totalDurationPerModule[index])}</Text>
                     </Flex>
                   </Flex>
                 </AccordionButton>
