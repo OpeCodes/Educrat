@@ -8,6 +8,7 @@ import {
   Collapse,
   Button,
   Box,
+  Image,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
@@ -65,13 +66,14 @@ const SingleCourse = () => {
             </Stack>
             <Flex
               w={"100%"}
-              maxW={"80%"}
+              maxW={"90%"}
               mx="auto"
               justify={"space-between"}
               mt={"4rem"}
+              columnGap={20}
               flexDirection={{ sm: "column", md: "row" }}
             >
-              <Stack width={{ md: "60%" }} rowGap={5}>
+              <Stack  rowGap={5}>
                 <Text fontWeight={"bold"} fontSize={"2rem"}>
                   {getStudentSingleCourse?.title}
                 </Text>
@@ -289,17 +291,24 @@ const SingleCourse = () => {
                   base: "",
                   lg: "0 0 1rem rgb(189 197 200 / 99%)",
                 }}
-                width="350px"
               >
                 <Box
                   position="sticky"
                   top="95px"
                   zIndex="1"
-                  height={"400px"}
-                  p="4"
+                  // height={"400px"}
+                  p="2"
                   borderRadius="md"
+                mx={2}
+
+
                 >
-                  <Text>Your fixed text here</Text>
+                    <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
+                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
+                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
+                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
+                    <Text>This is name of the obysjs alsdjf;a a;sldkfja;l a;sldkfj ;aslfd;laskjf;asdfasfdasfdasfdfdsf</Text>
                 </Box>
               </Stack>
             </Flex>
