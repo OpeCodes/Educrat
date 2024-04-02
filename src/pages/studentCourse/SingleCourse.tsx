@@ -134,7 +134,6 @@ const SingleCourse = () => {
                 mt={"1.6rem"}
                 columnGap={20}
                 flexDirection={{ base: "column-reverse", lg: "row" }}
-              
               >
                 <Stack rowGap={5}>
                   <Text fontWeight={"bold"} fontSize={"2rem"}>
@@ -143,7 +142,12 @@ const SingleCourse = () => {
                   <Text color={"#4f547b"}>
                     {getStudentSingleCourse?.subtitle}
                   </Text>
-                  <Flex flexDirection={{base: "column", lg: "row"}} color={"#4f547b"} align={{base: "start", lg: "center"}} columnGap={6}>
+                  <Flex
+                    flexDirection={{ base: "column", lg: "row" }}
+                    color={"#4f547b"}
+                    align={{ base: "start", lg: "center" }}
+                    columnGap={6}
+                  >
                     <Flex>
                       <Text>star review here</Text>
                     </Flex>
@@ -238,22 +242,21 @@ const SingleCourse = () => {
                         in={show}
                         color={"#4f547b"}
                       ></Collapse>
-                      {
-                         getStudentSingleCourse?.description.length > 150  && <Button
-                         color={"#6440fb"}
-                         textAlign={"left"}
-                         display={"flex"}
-                         justifyContent={"left"}
-                         size="sm"
-                         onClick={handleToggle}
-                         mt="1rem"
-                         colorScheme="teal"
-                         variant="link"
-                       >
-                         Show {show ? "Less" : "More"}
-                       </Button>
-                      }
-                      
+                      {getStudentSingleCourse?.description.length > 150 && (
+                        <Button
+                          color={"#6440fb"}
+                          textAlign={"left"}
+                          display={"flex"}
+                          justifyContent={"left"}
+                          size="sm"
+                          onClick={handleToggle}
+                          mt="1rem"
+                          colorScheme="teal"
+                          variant="link"
+                        >
+                          Show {show ? "Less" : "More"}
+                        </Button>
+                      )}
                     </Stack>
                     {/* instructor profile */}
                     <Stack>
@@ -281,7 +284,7 @@ const SingleCourse = () => {
                             color={"#4f547b"}
                             columnGap={5}
                             fontSize={"0.9rem"}
-                            flexDirection={{base: "column", lg: "row"}}
+                            flexDirection={{ base: "column", lg: "row" }}
                           >
                             <Flex>
                               <Text>Instructor Rating</Text>
@@ -365,8 +368,8 @@ const SingleCourse = () => {
                     zIndex="1"
                     p="2"
                     borderRadius="md"
-                    width={{base: "100%", lg: "350px"}}                    
-                    mx={{base: 0, lg: 1}}
+                    width={{ base: "100%", lg: "350px" }}
+                    mx={{ base: 0, lg: 1 }}
                   >
                     <Image
                       mx="auto"
@@ -374,8 +377,11 @@ const SingleCourse = () => {
                       alt="Dan Abramov"
                       width={"100%"}
                     />
-                    <Stack maxHeight={{base: "100%", lg: "200px"}} overflowY={{base: "hidden", lg: "scroll"}}>
-                      <Stack mx={{base: 0, lg: 4}}>
+                    <Stack
+                      maxHeight={{ base: "100%", lg: "200px" }}
+                      overflowY={{ base: "hidden", lg: "scroll" }}
+                    >
+                      <Stack mx={{ base: 0, lg: 4 }}>
                         {!hi ? (
                           <Stack>
                             <Text mt={3} fontSize={"1.5rem"}>
@@ -505,7 +511,6 @@ const SingleCourse = () => {
         </Stack>
       </Stack>
       <Text>other part here</Text>
-      
     </Stack>
   );
 };

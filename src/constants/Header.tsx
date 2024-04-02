@@ -8,6 +8,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import heroImg from "../assets/hero_img.svg";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
@@ -55,6 +56,8 @@ export const Header = () => {
                   bg: "white",
                   color: "#6440fb",
                 }}
+                as={Link}
+                to={"/sign-up"}
               >
                 Join For Free
               </Button>
@@ -67,6 +70,8 @@ export const Header = () => {
                 borderWidth={2}
                 borderRadius={"full"}
                 _hover={{ bg: "#140342", color: "white" }}
+                as={Link}
+                to={"/all-courses"}
               >
                 Find Courses
               </Button>
