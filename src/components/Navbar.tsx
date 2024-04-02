@@ -99,7 +99,7 @@ const Navbar = () => {
         shadow={"base"}
       >
         <Flex justify={"space-between"} align={"center"}>
-          <Box width={"160px"}>
+          <Box width={"160px"} as={Link} to={"/"}>
             <Image src={logo} alt="logo" />
           </Box>
         </Flex>

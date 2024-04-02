@@ -24,7 +24,6 @@ import { useGetStudentSingleCourse } from "../../hooks/studentCourse";
 const SingleCourse = () => {
   const { slug } = useParams();
   const { getStudentSingleCourse, } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse);
   // const handleSubmit = (values: any) => {
   //   console.log(values);
   // };
