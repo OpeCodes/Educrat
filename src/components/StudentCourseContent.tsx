@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { RiPlayCircleFill } from "react-icons/ri";
+import { convertSecondsToTime } from "./TimeFormat";
 
 interface SingleCourse {
   SingleCourseProp: any;
@@ -57,6 +58,8 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
     setIsExpanded(!isExpanded);
     setIndex([]);
   };
+
+  
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
@@ -158,7 +161,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                             Preview
                           </Button>
                         )}
-                        <Text color={"#4f547b"}>{content?.duration}</Text>
+                        <Text color={"#4f547b"}>{convertSecondsToTime(content?.duration)} </Text>
                       </Flex>
                     </Flex>
                   </AccordionPanel>
