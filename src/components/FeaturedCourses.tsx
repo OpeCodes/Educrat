@@ -19,9 +19,10 @@ type Props = {
   complexityLevel?: string;
   userId?: any;
   title?: string;
+  slug: string;
 };
 
-const Course = ({ id, thumbnail, title, complexityLevel, userId }: Props) => {
+const Course = ({ id, thumbnail, title, complexityLevel, userId,slug }: Props) => {
 // console.log(data)
   return (
     <Box
@@ -68,7 +69,7 @@ const Course = ({ id, thumbnail, title, complexityLevel, userId }: Props) => {
           color={"#140342"}
           fontWeight={"normal"}
           as={Link}
-          to={`/course/${id}`}
+          to={`/course/${slug}`}
         >
           {title}
         </Heading>

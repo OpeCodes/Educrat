@@ -12,7 +12,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SliderButtons, Course } from "../components/index";
 import { buttonsData, sliderSettings } from "../utils/data";
-import {  useGetCourse } from "../hooks/course";
+import { useGetCourse } from "../hooks/course";
 
 type button = {
   id: number;
@@ -27,7 +27,6 @@ export const Courses = () => {
   // const { data } = useGetUser();
   // const {getLectureModuleCourse,isPending} = useGetAllInstructorCourses(data?.id);
   const { data, isPending } = useGetCourse();
-  console.log(data.data)
 
   const dummyArray = [1, 2, 3, 4];
   return (
@@ -77,8 +76,8 @@ export const Courses = () => {
         {isPending && (
           <Stack>
             <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-              {dummyArray.map(() => (
-                <GridItem w="100%">
+              {dummyArray.map((_, index) => (
+                <GridItem w="100%" key={index}>
                   <Skeleton height="200px" />
                   <Skeleton height="80px" mt={1} />
                 </GridItem>
@@ -91,7 +90,7 @@ export const Courses = () => {
           <Swiper {...sliderSettings}>
             {!isPending && <SliderButtons />}
 
-            {data?.data.map((course: any, index: number) => {
+            {data?.data?.map((course: any, index: number) => {
               return (
                 <SwiperSlide key={index}>
                   <Course key={course.id} {...course} />

@@ -14,7 +14,7 @@ import { MdOutlineCheckCircleOutline } from "react-icons/md";
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
-import { useGetSingleCourse } from "../../hooks/course";
+import { useGetStudentSingleCourse } from "../../hooks/studentCourse";
 
 
 // const initialValues = {
@@ -22,14 +22,14 @@ import { useGetSingleCourse } from "../../hooks/course";
 //   content: "",
 // };
 const SingleCourse = () => {
-  const { id } = useParams();
-  const { getSingleCourse, } = useGetSingleCourse(id);
-  console.log(getSingleCourse);
+  const { slug } = useParams();
+  const { getStudentSingleCourse, } = useGetStudentSingleCourse(slug);
+  console.log(getStudentSingleCourse);
   // const handleSubmit = (values: any) => {
   //   console.log(values);
   // };
 
-  const dateString = getSingleCourse?.updatedAt;
+  const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
   const year = date.getFullYear() % 100;
@@ -74,9 +74,9 @@ const SingleCourse = () => {
             >
               <Stack width={{ md: "60%" }} rowGap={5}>
                 <Text fontWeight={"bold"} fontSize={"2rem"}>
-                  {getSingleCourse?.title}
+                  {getStudentSingleCourse?.title}
                 </Text>
-                <Text color={"#4f547b"}>{getSingleCourse?.subtitle}</Text>
+                <Text color={"#4f547b"}>{getStudentSingleCourse?.subtitle}</Text>
                 <Flex color={"#4f547b"} align={"center"} columnGap={6}>
                   <Flex>
                     <Text>star review here</Text>
@@ -97,19 +97,19 @@ const SingleCourse = () => {
                 <Flex align={"center"} columnGap={2} color={"#4f547b"}>
                   <Avatar
                     size="sm"
-                    name={`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}
-                    src={getSingleCourse?.userId?.profilePicture}
+                    name={`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}
+                    src={getStudentSingleCourse?.userId?.profilePicture}
                   />
                   <Text
                     fontWeight={"400"}
-                  >{`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}</Text>
+                  >{`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}</Text>
                 </Flex>
                 {/* course content */}
                 <Stack mt={"1.8rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     Course Content
                   </Text>
-                  <StudentCourseContent SingleCourseProp={getSingleCourse} />
+                  <StudentCourseContent SingleCourseProp={getStudentSingleCourse} />
                 </Stack>
 
                 <Stack  mb={"1.5rem"}>
@@ -118,7 +118,7 @@ const SingleCourse = () => {
                   </Text>
                   <Stack>
                     <Grid templateColumns={{ md: "repeat(2, 1fr)" }} gap={3}>
-                      {getSingleCourse?.learningObjectives?.map(
+                      {getStudentSingleCourse?.learningObjectives?.map(
                         (learn: any, index: any) => {
                           return (
                             <GridItem w="100%" key={index}>
@@ -150,7 +150,7 @@ const SingleCourse = () => {
                       <Text mt={"-.2rem"} fontSize={"1.2rem"}>
                         &#x2022;
                       </Text>
-                      <Text>{getSingleCourse?.preRequisites}</Text>
+                      <Text>{getStudentSingleCourse?.preRequisites}</Text>
                     </Flex>
                   </Stack>
                   {/* description */}
@@ -164,7 +164,7 @@ const SingleCourse = () => {
                     </Text>
                     <Collapse
                       dangerouslySetInnerHTML={{
-                        __html: getSingleCourse?.description,
+                        __html: getStudentSingleCourse?.description,
                       }}
                       startingHeight={150}
                       in={show}
@@ -196,15 +196,15 @@ const SingleCourse = () => {
                     <Flex columnGap={5} mt={"1rem"}>
                       <Avatar
                         size="xl"
-                        name={`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}
-                        src={getSingleCourse?.userId?.profilePicture}
+                        name={`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}
+                        src={getStudentSingleCourse?.userId?.profilePicture}
                       />
                       <Stack>
                         <Text
                           fontWeight={"bold"}
-                        >{`${getSingleCourse?.userId?.firstName} ${getSingleCourse?.userId.lastName}`}</Text>
+                        >{`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}</Text>
                         <Text color={"#4f547b"}>
-                          {getSingleCourse?.userId?.headline}
+                          {getStudentSingleCourse?.userId?.headline}
                         </Text>
                         <Flex
                           color={"#4f547b"}
@@ -248,7 +248,7 @@ const SingleCourse = () => {
                       </Stack>
                     </Flex>
                     <Text color={"#4f547b"} mt={"0.8rem"}>
-                      {getSingleCourse?.userId?.biography}
+                      {getStudentSingleCourse?.userId?.biography}
                     </Text>
                   </Stack>
                   {/* Student review */}
