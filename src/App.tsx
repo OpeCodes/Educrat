@@ -37,11 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/course/:slug",
         element: <SingleCourse />,
-      },
-      {
-        path: "/course/:slug/learn/lecture/:id",
-        element: <SingleEnrolledCourse />,
-      },
+      },      
     ],
   },
   {
@@ -63,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "/reset-password/:code/:token",
     element: <ResetPassword />,
+  },
+  {
+    path: "/course/:slug/learn/lecture/:id",
+    element: <SingleEnrolledCourse />,
   },
   //instructor
   {

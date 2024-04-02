@@ -76,7 +76,6 @@ const SingleCourse = () => {
   //  const {data} =  useGetAllUEnrolledCourse();
   const { courseEnroll } = useCourseEnrollment();
   //  console.log(data)
-
   return (
     <Stack>
       <Stack>
