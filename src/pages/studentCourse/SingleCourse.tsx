@@ -369,6 +369,7 @@ const SingleCourse = () => {
                       mx="auto"
                       src="https://bit.ly/dan-abramov"
                       alt="Dan Abramov"
+                      width={"100%"}
                     />
                     <Stack maxHeight={{base: "100%", lg: "200px"}} overflowY={{base: "hidden", lg: "scroll"}}>
                       <Stack mx={{base: 0, lg: 4}}>
