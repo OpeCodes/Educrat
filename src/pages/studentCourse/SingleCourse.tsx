@@ -17,6 +17,8 @@ import {
   MdOutlineCheckCircleOutline,
   MdOutlinePlayLesson,
 } from "react-icons/md";
+import { WiTime3 } from "react-icons/wi";
+
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
@@ -337,10 +339,65 @@ const SingleCourse = () => {
                           <Stack fontSize={17} color={"#140342"}>
                             <Flex justify={"space-between"} align={"center"}>
                               <Flex columnGap={3} align={"center"}>
-                                <MdOutlinePlayLesson />
+                               <MdOutlinePlayLesson />
                                 <Text>Lesson</Text>
                               </Flex>
                               <Text>20</Text>
+                            </Flex>
+                            <Divider />
+                          </Stack>
+                          {/* duration */}
+                          <Stack fontSize={17} color={"#140342"}>
+                            <Flex justify={"space-between"} align={"center"}>
+                              <Flex columnGap={3} align={"center"}>
+                              <WiTime3 />
+                                <Text>Duration</Text>
+                              </Flex>
+                              <Text>20</Text>
+                            </Flex>
+                            <Divider />
+                          </Stack>
+                          {/* skill level */}
+                          <Stack fontSize={17} color={"#140342"}>
+                            <Flex justify={"space-between"} align={"center"}>
+                              <Flex columnGap={3} align={"center"}>
+                                <MdOutlinePlayLesson />
+                                <Text>skill level</Text>
+                              </Flex>
+                              <Text>20</Text>
+                            </Flex>
+                            <Divider />
+                          </Stack>
+                          {/* language */}
+                          <Stack fontSize={17} color={"#140342"}>
+                            <Flex justify={"space-between"} align={"center"}>
+                              <Flex columnGap={3} align={"center"}>
+                                <MdOutlinePlayLesson />
+                                <Text>English</Text>
+                              </Flex>
+                              <Text>20</Text>
+                            </Flex>
+                            <Divider />
+                          </Stack>
+                          {/* certificate */}
+                          <Stack fontSize={17} color={"#140342"}>
+                            <Flex justify={"space-between"} align={"center"}>
+                              <Flex columnGap={3} align={"center"}>
+                                <MdOutlinePlayLesson />
+                                <Text>Certificate</Text>
+                              </Flex>
+                              <Text>yes</Text>
+                            </Flex>
+                            <Divider />
+                          </Stack>
+                          {/* full lifetime access */}
+                          <Stack fontSize={17} color={"#140342"}>
+                            <Flex justify={"space-between"} align={"center"}>
+                              <Flex columnGap={3} align={"center"}>
+                                <MdOutlinePlayLesson />
+                                <Text>Full lifetime access</Text>
+                              </Flex>
+                              <Text>yes</Text>
                             </Flex>
                             <Divider />
                           </Stack>
