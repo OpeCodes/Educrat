@@ -28,6 +28,7 @@ import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import { useGetStudentSingleCourse } from "../../hooks/studentCourse";
+import { convertSecondsToHMS } from "../../components/TimeFormat";
 
 // const initialValues = {
 //   title: "",
@@ -36,6 +37,7 @@ import { useGetStudentSingleCourse } from "../../hooks/studentCourse";
 const SingleCourse = () => {
   const { slug } = useParams();
   const { getStudentSingleCourse } = useGetStudentSingleCourse(slug);
+  console.log(getStudentSingleCourse);
   // const handleSubmit = (values: any) => {
   //   console.log(values);
   // };
@@ -52,6 +54,20 @@ const SingleCourse = () => {
   const handleToggle = () => setShow(!show);
 
   const hi = true;
+
+  const getTotalLecturesDuration = () => {
+    let totalDuration = 0;
+    getStudentSingleCourse?.modules.forEach((module: any) => {
+      if (module.lectures && Array.isArray(module.lectures)) {
+        module.lectures.forEach((lecture: any) => {
+          totalDuration += lecture?.content?.duration || 0;
+        });
+      }
+    });
+    return totalDuration;
+  }
+  // Calculate total duration
+  const totalDuration = getTotalLecturesDuration();
   return (
     <Stack>
       <Stack>
@@ -383,7 +399,7 @@ const SingleCourse = () => {
                                 <WiTime3 />
                                 <Text>Duration</Text>
                               </Flex>
-                              <Text>20</Text>
+                              <Text>{convertSecondsToHMS(totalDuration)}</Text>
                             </Flex>
                             <Divider />
                           </Stack>
