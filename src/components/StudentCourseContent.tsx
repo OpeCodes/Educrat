@@ -42,7 +42,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
     setIndex([]);
   };
 
-  const getTotalDurationPerModule = (modules: any) => {
+  const getTotalDurationPerModule = () => {
     return SingleCourseProp?.modules?.map((module: any) => {
       let totalDuration = 0;
       if (module.lectures && Array.isArray(module.lectures)) {
@@ -56,16 +56,21 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
 
   // Get total duration for each module
   const totalDurationPerModule = getTotalDurationPerModule(
-    SingleCourseProp?.modules
+    // SingleCourseProp?.modules
   );
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
         <Flex align={"center"} color={"#4f547b"} columnGap={2}>
-          <Text>{SingleCourseProp?.modules?.length} section{SingleCourseProp?.modules?.length > 1 && "s"}  </Text>
+          <Text>
+            {SingleCourseProp?.modules?.length} section
+            {SingleCourseProp?.modules?.length > 1 && "s"}{" "}
+          </Text>
           <Flex align={"center"} columnGap={1}>
             <Text fontSize={"1.2rem"}>&#x2022;</Text>
-            <Text>{lectureLength.length} Lecture{lectureLength.length > 1 && "s"}</Text>
+            <Text>
+              {lectureLength.length} Lecture{lectureLength.length > 1 && "s"}
+            </Text>
           </Flex>
         </Flex>
         <Stack>
@@ -126,10 +131,13 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                     </Flex>
                   </Flex>
                   <Flex align={"center"} color={"#4f547b"} columnGap={2}>
-                    <Text>{module?.lectures.length} lecture{module?.lectures.length > 1 && "s"} </Text>
+                    <Text>
+                      {module?.lectures.length} lecture
+                      {module?.lectures.length > 1 && "s"}{" "}
+                    </Text>
                     <Flex align={"center"} columnGap={1}>
                       <Text fontSize={"1.2rem"}>&#x2022;</Text>
-                      <Text>                        
+                      <Text>
                         {convertSecondsToHMS(totalDurationPerModule[index])}
                       </Text>
                     </Flex>

@@ -25,3 +25,4 @@
   
     return result.trim();
   }
+  
