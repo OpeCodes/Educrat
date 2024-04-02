@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Checkbox,
   Flex,
   Image,
   Stack,
@@ -12,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-2.svg";
 import { Link } from "react-router-dom";
+import { RiPlayCircleFill } from "react-icons/ri";
 const SingleEnrolledCourse = () => {
   return (
     <Stack>
@@ -63,7 +65,23 @@ const SingleEnrolledCourse = () => {
                   </AccordionButton>
                 </Stack>
 
-                <AccordionPanel>text content hre</AccordionPanel>
+                <AccordionPanel>
+                  <Flex columnGap={3} align={"start"}>
+                    <Checkbox
+                      mt={1}
+                      iconColor={"black"}
+                      size="lg"
+                      borderColor={"black"}
+                      colorScheme={"blackAlpha"}
+                    />
+                    <Stack>
+                      <Text>1. What is NodeJs</Text>
+                      <Flex align={"center"} color={"gray"}>
+                        <RiPlayCircleFill size={25} />1 min
+                      </Flex>
+                    </Stack>
+                  </Flex>
+                </AccordionPanel>
               </AccordionItem>
             </Accordion>
           </Stack>
