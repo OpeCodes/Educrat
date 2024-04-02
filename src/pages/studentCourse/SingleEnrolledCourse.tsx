@@ -15,11 +15,21 @@ import logo from "../../assets/logo-2.svg";
 import { Link } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
-const dummyData2 = [1, 2, 3,3];
+const dummyData2 = [1, 2, 3, 3];
 const SingleEnrolledCourse = () => {
   return (
     <Stack>
-      <Flex justify="space-between" width={"100%"} align={"center"} p={4} bg="red" position="fixed" right="0" top="0">
+      <Flex
+        justify="space-between"
+        width={"100%"}
+        align={"center"}
+        zIndex={10000}
+        p={4}
+        bg="red"
+        position="fixed"
+        right="0"
+        top="0"
+      >
         <Box width={"160px"} as={Link} to={"/"}>
           <Image src={logo} alt="logo" />
         </Box>
@@ -30,59 +40,31 @@ const SingleEnrolledCourse = () => {
         <Text>Back to courses</Text>
       </Flex>
       <Stack maxW={"90%"} width={"100%"} mx={"auto"} mt={10}>
-        <Flex justify={"space-between"}  mt={"3.5rem"}>
-          
-        <Stack>
-          <Text>peter</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk</Text>
-          <Text>ads;flkjsd;lfjk </Text>
-        </Stack>
-          
-          <Stack width={"30%"}  position="fixed" right="12" top="125px">
-          <Text fontWeight={"bold"}>Course content</Text>
+        <Flex
+          justify={"space-between"}
+          mt={"3.5rem"}
+          flexDirection={{ base: "column", lg: "row" }}
+        >
+          <Stack>
+            <Text>peter</Text>
+            <Text>
+              ads;flkjsd;llkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkfjk
+            </Text>
+          </Stack>
 
-            <Accordion    allowToggle maxH={"490px"} overflowY={"scroll"}>
+          <Stack
+            width={{ base: "100%", lg: "30%" }}
+            position={{ base: "static", lg: "fixed" }}
+            right="12"
+            top="125px"
+          >
+            <Text fontWeight={"bold"}>Course content</Text>
+
+            <Accordion
+              allowToggle
+              maxH={{ base: "100%", lg: "490px" }}
+              overflowY={{ base: "hidden", lg: "scroll" }}
+            >
               {dummyData.map((_, index) => {
                 return (
                   <AccordionItem
@@ -117,30 +99,27 @@ const SingleEnrolledCourse = () => {
                         </Flex>
                       </AccordionButton>
                     </Stack>
-                  {
-                    dummyData2.map(() => {
+                    {dummyData2.map(() => {
                       return (
                         <AccordionPanel>
-                        <Flex columnGap={3} align={"start"}>
-                          <Checkbox
-                            mt={1}
-                            iconColor={"black"}
-                            size="lg"
-                            borderColor={"black"}
-                            colorScheme={"blackAlpha"}
-                          />
-                          <Stack>
-                            <Text>1. What is NodeJs</Text>
-                            <Flex align={"center"} color={"gray"}>
-                              <RiPlayCircleFill size={25} />1 min
-                            </Flex>
-                          </Stack>
-                        </Flex>
-                      </AccordionPanel>
-                      )
-                    })
-                  }
-                 
+                          <Flex columnGap={3} align={"start"}>
+                            <Checkbox
+                              mt={1}
+                              iconColor={"black"}
+                              size="lg"
+                              borderColor={"black"}
+                              colorScheme={"blackAlpha"}
+                            />
+                            <Stack>
+                              <Text>1. What is NodeJs</Text>
+                              <Flex align={"center"} color={"gray"}>
+                                <RiPlayCircleFill size={25} />1 min
+                              </Flex>
+                            </Stack>
+                          </Flex>
+                        </AccordionPanel>
+                      );
+                    })}
                   </AccordionItem>
                 );
               })}
