@@ -27,7 +27,7 @@ export const Courses = () => {
   // const { data } = useGetUser();
   // const {getLectureModuleCourse,isPending} = useGetAllInstructorCourses(data?.id);
   const { data, isPending } = useGetCourse();
-  console.log(data)
+  console.log(data.data)
 
   const dummyArray = [1, 2, 3, 4];
   return (
@@ -91,7 +91,7 @@ export const Courses = () => {
           <Swiper {...sliderSettings}>
             {!isPending && <SliderButtons />}
 
-            {data?.map((course: any, index: number) => {
+            {data?.data.map((course: any, index: number) => {
               return (
                 <SwiperSlide key={index}>
                   <Course key={course.id} {...course} />
