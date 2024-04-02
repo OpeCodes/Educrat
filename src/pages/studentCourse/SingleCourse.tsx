@@ -307,7 +307,8 @@ const SingleCourse = () => {
                     src="https://bit.ly/dan-abramov"
                     alt="Dan Abramov"
                   />
-                  <Stack mx={4}>
+                  <Stack  maxHeight={"200px"} overflowY={"scroll"}>
+                    <Stack mx={4}>
                     <Text mt={3} fontSize={"1.5rem"}>
                       $120
                     </Text>
@@ -327,7 +328,16 @@ const SingleCourse = () => {
                       >
                         Buy Now
                       </Button>
+                      <Text>ksksk</Text>
+                      <Text>ksksk</Text>
+                      <Text>ksksk</Text>
+                      <Text>ksksk</Text>
+                      <Text>ksksk</Text>
+                      <Text>ksksk</Text>
+                      <Text>ksksk</Text>
+                      <Text>ksksk</Text>
                     </Stack>
+                  </Stack>
                   </Stack>
                 </Box>
               </Stack>
