@@ -69,7 +69,7 @@ const SingleCourse = () => {
               maxW={"90%"}
               mx="auto"
               justify={"space-between"}
-              mt={"4rem"}
+              mt={"1.6rem"}
               columnGap={20}
               flexDirection={{ sm: "column", md: "row" }}
             >
