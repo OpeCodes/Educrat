@@ -28,7 +28,10 @@ import { FaCertificate } from "react-icons/fa6";
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
-import { useCourseEnrollment,  useGetStudentSingleCourse } from "../../hooks/studentCourse";
+import {
+  useCourseEnrollment,
+  useGetStudentSingleCourse,
+} from "../../hooks/studentCourse";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 
 // const initialValues = {
@@ -38,7 +41,7 @@ import { convertSecondsToHMS } from "../../components/TimeFormat";
 const SingleCourse = () => {
   const { slug } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse)
+  console.log(getStudentSingleCourse);
   // const handleSubmit = (values: any) => {
   //   console.log(values);
   // };
@@ -54,7 +57,7 @@ const SingleCourse = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
-  const hi = false;
+  const hi = true;
 
   const getTotalLecturesDuration = () => {
     let totalDuration = 0;
@@ -70,9 +73,9 @@ const SingleCourse = () => {
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
 
-//  const {data} =  useGetAllUEnrolledCourse();
- const {courseEnroll}  =useCourseEnrollment()
-//  console.log(data)
+  //  const {data} =  useGetAllUEnrolledCourse();
+  const { courseEnroll } = useCourseEnrollment();
+  //  console.log(data)
 
   return (
     <Stack>
@@ -404,7 +407,11 @@ const SingleCourse = () => {
                               borderColor={"#140342"}
                               py={"25px"}
                               variant="outline"
-                              onClick={() => courseEnroll({courseId: getStudentSingleCourse?.id})}
+                              onClick={() =>
+                                courseEnroll({
+                                  courseId: getStudentSingleCourse?.id,
+                                })
+                              }
                             >
                               Buy Now
                             </Button>
@@ -422,6 +429,8 @@ const SingleCourse = () => {
                               py={"25px"}
                               variant="solid"
                               color={"white"}
+                              as={Link}
+                              to={"/kkd"}
                             >
                               Go to Course
                             </Button>

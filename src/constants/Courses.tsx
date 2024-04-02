@@ -28,8 +28,8 @@ export const Courses = () => {
   // const {getLectureModuleCourse,isPending} = useGetAllInstructorCourses(data?.id);
   const { data, isPending } = useGetCourse();
 
+
   const dummyArray = [1, 2, 3, 4];
-  console.log(data)
   return (
     <Box
       as={"section"}

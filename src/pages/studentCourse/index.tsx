@@ -1,3 +1,4 @@
 import StudentCourse from "./AllCourses";
 import SingleCourse from "./SingleCourse";
-export {StudentCourse,SingleCourse}
+import SingleEnrolledCourse from "./SingleEnrolledCourse";
+export {StudentCourse,SingleCourse, SingleEnrolledCourse}
