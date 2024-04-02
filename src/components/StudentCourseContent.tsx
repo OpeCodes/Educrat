@@ -65,7 +65,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
           <Text>{SingleCourseProp?.modules?.length} sections</Text>
           <Flex align={"center"} columnGap={1}>
             <Text fontSize={"1.2rem"}>&#x2022;</Text>
-            <Text>{lectureLength.length} Lectures</Text>
+            <Text>{lectureLength.length} Lecture{lectureLength.length > 1 && "s"}</Text>
           </Flex>
         </Flex>
         <Stack>
