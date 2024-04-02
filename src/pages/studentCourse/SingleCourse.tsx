@@ -9,10 +9,14 @@ import {
   Button,
   Box,
   Image,
+  Divider,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
-import { MdOutlineCheckCircleOutline } from "react-icons/md";
+import {
+  MdOutlineCheckCircleOutline,
+  MdOutlinePlayLesson,
+} from "react-icons/md";
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
@@ -307,37 +311,42 @@ const SingleCourse = () => {
                     src="https://bit.ly/dan-abramov"
                     alt="Dan Abramov"
                   />
-                  <Stack  maxHeight={"200px"} overflowY={"scroll"}>
+                  <Stack maxHeight={"200px"} overflowY={"scroll"}>
                     <Stack mx={4}>
-                    <Text mt={3} fontSize={"1.5rem"}>
-                      $120
-                    </Text>
-                    <Stack>
-                      <Button
-                        bg={"#6440FB"}
-                        py={"25px"}
-                        variant="solid"
-                        color={"white"}
-                      >
-                        Add to Cart
-                      </Button>
-                      <Button
-                        borderColor={"#140342"}
-                        py={"25px"}
-                        variant="outline"
-                      >
-                        Buy Now
-                      </Button>
-                      <Text>ksksk</Text>
-                      <Text>ksksk</Text>
-                      <Text>ksksk</Text>
-                      <Text>ksksk</Text>
-                      <Text>ksksk</Text>
-                      <Text>ksksk</Text>
-                      <Text>ksksk</Text>
-                      <Text>ksksk</Text>
+                      <Text mt={3} fontSize={"1.5rem"}>
+                        $120
+                      </Text>
+                      <Stack>
+                        <Button
+                          bg={"#6440FB"}
+                          py={"25px"}
+                          variant="solid"
+                          color={"white"}
+                        >
+                          Add to Cart
+                        </Button>
+                        <Button
+                          borderColor={"#140342"}
+                          py={"25px"}
+                          variant="outline"
+                        >
+                          Buy Now
+                        </Button>
+                        <Stack mt={"1rem"}>
+                          {/* lessons */}
+                          <Stack fontSize={17} color={"#140342"}>
+                            <Flex justify={"space-between"} align={"center"}>
+                              <Flex columnGap={3} align={"center"}>
+                                <MdOutlinePlayLesson />
+                                <Text>Lesson</Text>
+                              </Flex>
+                              <Text>20</Text>
+                            </Flex>
+                            <Divider />
+                          </Stack>
+                        </Stack>
+                      </Stack>
                     </Stack>
-                  </Stack>
                   </Stack>
                 </Box>
               </Stack>
