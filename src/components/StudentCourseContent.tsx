@@ -156,7 +156,6 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                             Preview
                           </Button>
                         )}
-
                         <Text color={"#4f547b"}>27 mins</Text>
                       </Flex>
                     </Flex>

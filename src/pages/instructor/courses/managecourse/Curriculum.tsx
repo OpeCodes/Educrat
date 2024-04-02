@@ -184,7 +184,6 @@ const toast = useToast()
     const formattedTime = `${hours.toString().padStart(2, '0')}:${remainingMinutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
     return formattedTime
   }
- 
   
   return (
     <Stack>

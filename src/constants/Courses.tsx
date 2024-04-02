@@ -27,6 +27,7 @@ export const Courses = () => {
   // const { data } = useGetUser();
   // const {getLectureModuleCourse,isPending} = useGetAllInstructorCourses(data?.id);
   const { data, isPending } = useGetCourse();
+  console.log(data)
 
   const dummyArray = [1, 2, 3, 4];
   return (
