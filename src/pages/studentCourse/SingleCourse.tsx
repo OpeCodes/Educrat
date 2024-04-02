@@ -238,19 +238,22 @@ const SingleCourse = () => {
                         in={show}
                         color={"#4f547b"}
                       ></Collapse>
-                      <Button
-                        color={"#6440fb"}
-                        textAlign={"left"}
-                        display={"flex"}
-                        justifyContent={"left"}
-                        size="sm"
-                        onClick={handleToggle}
-                        mt="1rem"
-                        colorScheme="teal"
-                        variant="link"
-                      >
-                        Show {show ? "Less" : "More"}
-                      </Button>
+                      {
+                         getStudentSingleCourse?.description.length > 150  && <Button
+                         color={"#6440fb"}
+                         textAlign={"left"}
+                         display={"flex"}
+                         justifyContent={"left"}
+                         size="sm"
+                         onClick={handleToggle}
+                         mt="1rem"
+                         colorScheme="teal"
+                         variant="link"
+                       >
+                         Show {show ? "Less" : "More"}
+                       </Button>
+                      }
+                      
                     </Stack>
                     {/* instructor profile */}
                     <Stack>
@@ -501,11 +504,8 @@ const SingleCourse = () => {
           </Stack>
         </Stack>
       </Stack>
-      <Text>klsd;jflaksj</Text>
-      <Text>klsd;jflaksj</Text>
-      <Text>klsd;jflaksj</Text>
-      <Text>klsd;jflaksj</Text>
-      <Text>klsd;jflaksj</Text>
+      <Text>other part here</Text>
+      
     </Stack>
   );
 };
