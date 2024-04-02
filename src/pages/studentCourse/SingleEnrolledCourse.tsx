@@ -15,6 +15,7 @@ import logo from "../../assets/logo-2.svg";
 import { Link } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
+const dummyData2 = [1, 2, 3,3];
 const SingleEnrolledCourse = () => {
   return (
     <Stack>
@@ -81,14 +82,13 @@ const SingleEnrolledCourse = () => {
           <Stack width={"30%"}  position="fixed" right="12" top="125px">
           <Text fontWeight={"bold"}>Course content</Text>
 
-            <Accordion allowMultiple allowToggle maxH={"500px"} overflowY={"scroll"}>
+            <Accordion    allowToggle maxH={"490px"} overflowY={"scroll"}>
               {dummyData.map((_, index) => {
                 return (
                   <AccordionItem
                     style={{ borderWidth: 1, borderRadius: 15 }}
                     mb={4}
                     rowGap={6}
-
                   >
                     <Stack>
                       <AccordionButton
@@ -117,24 +117,30 @@ const SingleEnrolledCourse = () => {
                         </Flex>
                       </AccordionButton>
                     </Stack>
-
-                    <AccordionPanel>
-                      <Flex columnGap={3} align={"start"}>
-                        <Checkbox
-                          mt={1}
-                          iconColor={"black"}
-                          size="lg"
-                          borderColor={"black"}
-                          colorScheme={"blackAlpha"}
-                        />
-                        <Stack>
-                          <Text>1. What is NodeJs</Text>
-                          <Flex align={"center"} color={"gray"}>
-                            <RiPlayCircleFill size={25} />1 min
-                          </Flex>
-                        </Stack>
-                      </Flex>
-                    </AccordionPanel>
+                  {
+                    dummyData2.map(() => {
+                      return (
+                        <AccordionPanel>
+                        <Flex columnGap={3} align={"start"}>
+                          <Checkbox
+                            mt={1}
+                            iconColor={"black"}
+                            size="lg"
+                            borderColor={"black"}
+                            colorScheme={"blackAlpha"}
+                          />
+                          <Stack>
+                            <Text>1. What is NodeJs</Text>
+                            <Flex align={"center"} color={"gray"}>
+                              <RiPlayCircleFill size={25} />1 min
+                            </Flex>
+                          </Stack>
+                        </Flex>
+                      </AccordionPanel>
+                      )
+                    })
+                  }
+                 
                   </AccordionItem>
                 );
               })}

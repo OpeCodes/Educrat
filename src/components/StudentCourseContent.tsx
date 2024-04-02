@@ -103,7 +103,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
         </Stack>
       </Flex>
 
-      <Accordion allowMultiple index={index} onChange={setIndex}>
+      <Accordion allowToggle index={index} onChange={setIndex}>
         {SingleCourseProp?.modules?.map((module: any, index: any) => {
           return (
             <AccordionItem
