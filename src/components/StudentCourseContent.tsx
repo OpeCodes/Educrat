@@ -31,7 +31,6 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
   }
 
   const [index, setIndex] = React.useState<any>([]);
-  console.log(SingleCourseProp?.modules);
   const collapseAllAccordionItems = () => {
     setIsExpanded(!isExpanded);
     setIndex(getLastNumberFormat(SingleCourseProp?.modules));

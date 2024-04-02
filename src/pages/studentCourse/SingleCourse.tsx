@@ -343,9 +343,9 @@ const SingleCourse = () => {
                           </Button>
                         </Stack>
                       ) : (
-                        <Stack mt={3} >
+                        <Stack mt={3}>
                           <Flex columnGap={4} align={"center"}>
-                            <FcInfo size={35}/>
+                            <FcInfo size={35} />
                             <Text fontWeight={"bold"}>
                               You purchased this course on mar, 11,2024
                             </Text>
@@ -370,7 +370,9 @@ const SingleCourse = () => {
                                 <MdOutlinePlayLesson />
                                 <Text>Lesson</Text>
                               </Flex>
-                              <Text>20</Text>
+                              <Text>
+                                {getStudentSingleCourse?.modules?.length}
+                              </Text>
                             </Flex>
                             <Divider />
                           </Stack>
@@ -393,7 +395,9 @@ const SingleCourse = () => {
 
                                 <Text>Skill level</Text>
                               </Flex>
-                              <Text>20</Text>
+                              <Text>
+                                {getStudentSingleCourse?.complexityLevel}
+                              </Text>
                             </Flex>
                             <Divider />
                           </Stack>
@@ -405,7 +409,7 @@ const SingleCourse = () => {
 
                                 <Text>Language</Text>
                               </Flex>
-                              <Text>20</Text>
+                              <Text>{getStudentSingleCourse?.language}</Text>
                             </Flex>
                             <Divider />
                           </Stack>
