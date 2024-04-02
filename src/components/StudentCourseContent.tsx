@@ -126,7 +126,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                     </Flex>
                   </Flex>
                   <Flex align={"center"} color={"#4f547b"} columnGap={2}>
-                    <Text>{module?.lectures.length} lectures</Text>
+                    <Text>{module?.lectures.length} lecture{module?.lectures.length > 1 && "s"} </Text>
                     <Flex align={"center"} columnGap={1}>
                       <Text fontSize={"1.2rem"}>&#x2022;</Text>
                       <Text>                        
