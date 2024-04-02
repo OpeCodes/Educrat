@@ -28,7 +28,7 @@ import { FaCertificate } from "react-icons/fa6";
 import { useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
-import { useGetAllUEnrolledCourse, useGetStudentSingleCourse } from "../../hooks/studentCourse";
+import { useCourseEnrollment,  useGetStudentSingleCourse } from "../../hooks/studentCourse";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 
 // const initialValues = {
@@ -54,7 +54,7 @@ const SingleCourse = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
-  const hi = true;
+  const hi = false;
 
   const getTotalLecturesDuration = () => {
     let totalDuration = 0;
@@ -70,8 +70,10 @@ const SingleCourse = () => {
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
 
- const {data} =  useGetAllUEnrolledCourse();
- console.log(data)
+//  const {data} =  useGetAllUEnrolledCourse();
+ const {courseEnroll}  =useCourseEnrollment()
+//  console.log(data)
+
   return (
     <Stack>
       <Stack>
@@ -402,6 +404,7 @@ const SingleCourse = () => {
                               borderColor={"#140342"}
                               py={"25px"}
                               variant="outline"
+                              onClick={() => courseEnroll({courseId: getStudentSingleCourse?.id})}
                             >
                               Buy Now
                             </Button>
