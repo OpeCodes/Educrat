@@ -156,7 +156,7 @@ export const useSingleStatusCourse = () => {
       queryClient.invalidateQueries({ queryKey: ["allUserCourse"] });
 
       toast({
-        title: `course updated successfully`,
+        title: `course status updated successfully`,
         status: "success",
         duration: 5000,
         isClosable: true,
