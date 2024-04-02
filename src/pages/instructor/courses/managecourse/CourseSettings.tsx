@@ -25,7 +25,7 @@ const {deleteCourseModule,deleteCourseModuleLoading} =  useDeleteCourseModule()
               px={"2.7rem"}
              
               onClick={() => {
-                singleStatusCourse({ id: ";lkjljlkl",});
+                singleStatusCourse({ id, status: "published"});
               }}
             >
               Unpublish

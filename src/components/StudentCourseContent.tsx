@@ -134,6 +134,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                 </AccordionButton>
               </Stack>
               {module?.lectures?.map((lecture: any) => {
+                const {contentPreviewable, content} = lecture
                 return (
                   <AccordionPanel key={lecture.id}>
                     <Flex align={"center"} justify={"space-between"}>
@@ -144,7 +145,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                         <Text>{lecture.title}</Text>
                       </Flex>
                       <Flex align={"center"} columnGap={4}>
-                        {lecture?.contentPreviewable && (
+                      {contentPreviewable && (
                           <Button
                             color={"#6440fb"}
                             textAlign={"left"}
@@ -157,7 +158,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                             Preview
                           </Button>
                         )}
-                        <Text color={"#4f547b"}>27 mins</Text>
+                        <Text color={"#4f547b"}>{content?.duration}</Text>
                       </Flex>
                     </Flex>
                   </AccordionPanel>
