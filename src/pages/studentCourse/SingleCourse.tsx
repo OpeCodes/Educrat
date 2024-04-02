@@ -17,6 +17,8 @@ import {
   MdOutlineCheckCircleOutline,
   MdOutlinePlayLesson,
 } from "react-icons/md";
+import { FcInfo } from "react-icons/fc";
+
 import { WiTime3 } from "react-icons/wi";
 import { FiBarChart2 } from "react-icons/fi";
 import { IoLanguage } from "react-icons/io5";
@@ -49,6 +51,7 @@ const SingleCourse = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
+  const hi = true;
   return (
     <Stack>
       <Stack>
@@ -318,25 +321,47 @@ const SingleCourse = () => {
                   />
                   <Stack maxHeight={"200px"} overflowY={"scroll"}>
                     <Stack mx={4}>
-                      <Text mt={3} fontSize={"1.5rem"}>
-                        $120
-                      </Text>
+                      {!hi ? (
+                        <Stack>
+                          <Text mt={3} fontSize={"1.5rem"}>
+                            $120
+                          </Text>
+                          <Button
+                            bg={"#6440FB"}
+                            py={"25px"}
+                            variant="solid"
+                            color={"white"}
+                          >
+                            Add to Cart
+                          </Button>
+                          <Button
+                            borderColor={"#140342"}
+                            py={"25px"}
+                            variant="outline"
+                          >
+                            Buy Now
+                          </Button>
+                        </Stack>
+                      ) : (
+                        <Stack mt={3} >
+                          <Flex columnGap={4} align={"center"}>
+                            <FcInfo size={35}/>
+                            <Text fontWeight={"bold"}>
+                              You purchased this course on mar, 11,2024
+                            </Text>
+                          </Flex>
+                          <Button
+                            bg={"#6440FB"}
+                            py={"25px"}
+                            variant="solid"
+                            color={"white"}
+                          >
+                            Go to Course
+                          </Button>
+                        </Stack>
+                      )}
+
                       <Stack>
-                        <Button
-                          bg={"#6440FB"}
-                          py={"25px"}
-                          variant="solid"
-                          color={"white"}
-                        >
-                          Add to Cart
-                        </Button>
-                        <Button
-                          borderColor={"#140342"}
-                          py={"25px"}
-                          variant="outline"
-                        >
-                          Buy Now
-                        </Button>
                         <Stack mt={"1rem"}>
                           {/* lessons */}
                           <Stack fontSize={17} color={"#140342"}>
