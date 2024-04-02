@@ -89,14 +89,15 @@ const Navbar = () => {
     <Stack>
       <Flex
         bg="white"
+        shadow={"base"}
+        zIndex={10}
+
         py={4}
         px={{ base: "6", md: "12", lg: "16" }}
         width={"100%"}
         position={"fixed"}
-        zIndex={10}
         justify={"space-between"}
         align={"center"}
-        shadow={"base"}
       >
         <Flex justify={"space-between"} align={"center"}>
           <Box width={"160px"} as={Link} to={"/"}>

@@ -7,6 +7,7 @@ import {
   GridItem,
   Collapse,
   Button,
+  Box,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
@@ -16,14 +17,13 @@ import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import { useGetStudentSingleCourse } from "../../hooks/studentCourse";
 
-
 // const initialValues = {
 //   title: "",
 //   content: "",
 // };
 const SingleCourse = () => {
   const { slug } = useParams();
-  const { getStudentSingleCourse, } = useGetStudentSingleCourse(slug);
+  const { getStudentSingleCourse } = useGetStudentSingleCourse(slug);
   // const handleSubmit = (values: any) => {
   //   console.log(values);
   // };
@@ -47,7 +47,7 @@ const SingleCourse = () => {
             <Stack bg={"#f5f7fe"} py={3}>
               <Flex
                 w={"100%"}
-                maxW={"80%"}
+                maxW={"90%"}
                 mx="auto"
                 columnGap={2}
                 color={"#4F547B"}
@@ -75,7 +75,9 @@ const SingleCourse = () => {
                 <Text fontWeight={"bold"} fontSize={"2rem"}>
                   {getStudentSingleCourse?.title}
                 </Text>
-                <Text color={"#4f547b"}>{getStudentSingleCourse?.subtitle}</Text>
+                <Text color={"#4f547b"}>
+                  {getStudentSingleCourse?.subtitle}
+                </Text>
                 <Flex color={"#4f547b"} align={"center"} columnGap={6}>
                   <Flex>
                     <Text>star review here</Text>
@@ -108,10 +110,12 @@ const SingleCourse = () => {
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     Course Content
                   </Text>
-                  <StudentCourseContent SingleCourseProp={getStudentSingleCourse} />
+                  <StudentCourseContent
+                    SingleCourseProp={getStudentSingleCourse}
+                  />
                 </Stack>
 
-                <Stack  mb={"1.5rem"}>
+                <Stack mb={"1.5rem"}>
                   <Text fontWeight={"bold"} fontSize={"1.1rem"}>
                     What you'll learn
                   </Text>
@@ -276,8 +280,48 @@ const SingleCourse = () => {
                       </Stack>
                     </Flex>
                   </Stack>
-                  {/* write review */}
-                  {/* <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
+                </Stack>
+              </Stack>
+              <Stack
+                bg="white"
+                // zIndex={30}
+                boxShadow={{
+                  base: "",
+                  lg: "0 0 1rem rgb(189 197 200 / 99%)",
+                }}
+                width="350px"
+              >
+                <Box
+                  position="sticky"
+                  top="95px"
+                  zIndex="1"
+                  height={"400px"}
+                  p="4"
+                  borderRadius="md"
+                >
+                  <Text>Your fixed text here</Text>
+                </Box>
+              </Stack>
+            </Flex>
+          </Stack>
+        </Stack>
+      </Stack>
+      <Text>klsd;jflaksj</Text>
+      <Text>klsd;jflaksj</Text>
+      <Text>klsd;jflaksj</Text>
+      <Text>klsd;jflaksj</Text>
+      <Text>klsd;jflaksj</Text>
+    </Stack>
+  );
+};
+
+export default SingleCourse;
+
+{
+  /* write review */
+}
+{
+  /* <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
                     <Text
                       color={"black"}
                       fontWeight={"bold"}
@@ -357,18 +401,5 @@ const SingleCourse = () => {
                         </Flex>
                       )}
                     </Formik>
-                  </Stack> */}
-                </Stack>
-              </Stack>
-              <Stack>
-                <Text>something here</Text>
-              </Stack>
-            </Flex>
-          </Stack>
-        </Stack>
-      </Stack>
-    </Stack>
-  );
-};
-
-export default SingleCourse;
+                  </Stack> */
+}
