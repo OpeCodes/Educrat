@@ -133,7 +133,7 @@ const SingleCourse = () => {
                 justify={"space-between"}
                 mt={"1.6rem"}
                 columnGap={20}
-                flexDirection={{ base: "column", lg: "row" }}
+                flexDirection={{ base: "column-reverse", lg: "row" }}
               
               >
                 <Stack rowGap={5}>

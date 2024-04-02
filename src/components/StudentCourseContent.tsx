@@ -80,7 +80,6 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
               display={"flex"}
               justifyContent={"left"}
               size="sm"
-              mt="1rem"
               colorScheme="teal"
               variant="link"
               onClick={collapseAllAccordionItems}
@@ -94,7 +93,6 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
               display={"flex"}
               justifyContent={"left"}
               size="sm"
-              mt="1rem"
               colorScheme="teal"
               variant="link"
               onClick={expandAllAccordionItems}
