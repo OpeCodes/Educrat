@@ -1,37 +1,35 @@
-import {  useMutation, useQuery, useQueryClient,  } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import { useToast } from "@chakra-ui/react";
 export const useGetStudentSingleCourse = (slug: any) => {
-    const {
-      data: getStudentSingleCourse,
-      isPending,
-      isError,
-      refetch,
-    } = useQuery({
-      queryKey: ["singleCourse", slug],
-      queryFn: async ({ queryKey }) => {
-        const [, slug] = queryKey; // Destructure the queryKey to get the 'id'
-        const { data } = await customFetch.get(`/course/slug/${slug}`);
-        return data;
-      },
-    });
-  
-    return { getStudentSingleCourse, isPending, isError, refetch };
-  };
+  const {
+    data: getStudentSingleCourse,
+    isPending,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["singleCourse", slug],
+    queryFn: async ({ queryKey }) => {
+      const [, slug] = queryKey; // Destructure the queryKey to get the 'id'
+      const { data } = await customFetch.get(`/course/slug/${slug}`);
+      return data;
+    },
+  });
 
-  export const useGetAllUEnrolledCourse = () => {
-    const { data, isError, isPending, refetch } = useQuery({
-      queryKey: ["allEnrolledCourse"],
-      queryFn: async () => {
-        const { data } = await customFetch.get("/enrollment");
-        return data;
-      },
-    });
-    return { data, isPending, isError, refetch };
-  };
-  
+  return { getStudentSingleCourse, isPending, isError, refetch };
+};
 
-  
+export const useGetAllUEnrolledCourse = () => {
+  const { data, isError, isPending, refetch } = useQuery({
+    queryKey: ["allEnrolledCourse"],
+    queryFn: async () => {
+      const { data } = await customFetch.get("/enrollment");
+      return data;
+    },
+  });
+  return { data, isPending, isError, refetch };
+};
+
 export const useCourseEnrollment = () => {
   const toast = useToast();
   // const queryClient = useQueryClient();
@@ -84,12 +82,7 @@ export const useCourseEnrollment = () => {
   return { courseEnroll, isPending, error, isError, isSuccess };
 };
 
-
-
-
-
 // ***************************************************reviews***************************************
-
 
 export const useCreateEnrolledCourseReview = () => {
   const toast = useToast();
@@ -137,26 +130,22 @@ export const useCreateEnrolledCourseReview = () => {
       }
     },
   });
-  return { createEnrolledCourseReview, createEnrolledCourseReviewLoading};
+  return { createEnrolledCourseReview, createEnrolledCourseReviewLoading };
 };
 export const useGetCourseReview = (id: any) => {
   const {
     data: getCourseReview,
     isPending,
-    refetch,
-    isError,
   } = useQuery({
     queryKey: ["getCourseReview", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; // Destructure the queryKey to get the 'id'
+      const [, id] = queryKey; 
       const { data } = await customFetch.get(`/course/review/course${id}`);
       return data;
     },
-  })
+  });
   return {
     getCourseReview,
     isPending,
-    isError,
-    refetch,
   };
 };
