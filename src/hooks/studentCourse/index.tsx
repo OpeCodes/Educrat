@@ -110,8 +110,8 @@ export const useCreateEnrolledCourseReview = () => {
     mutate: createEnrolledCourseReview,
     isPending: createEnrolledCourseReviewLoading,
   } = useMutation({
-    mutationFn: ({ courseId }: any) => {
-      return customFetch.post(`/course/review/course/${courseId}`);
+    mutationFn: ({ courseId ,review }: any) => {
+      return customFetch.post(`/course/review/course/${courseId}`, review);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });

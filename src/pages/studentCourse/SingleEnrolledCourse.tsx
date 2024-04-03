@@ -34,21 +34,23 @@ import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar, FaTrophy } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useRef } from "react";
-import { useGetSingleEnrolledCourse } from "../../hooks/studentCourse";
+import { useCreateEnrolledCourseReview, useGetSingleEnrolledCourse } from "../../hooks/studentCourse";
 
 
 const initialValues = {
+  stars: 0,
   title: "",
   content: "",
-  stars: 0,
+ 
 };
 const SingleEnrolledCourse = () => {
   const {id} = useParams()
  const {getSingleEnrolledCourse}= useGetSingleEnrolledCourse(id)
  console.log(getSingleEnrolledCourse);
+ const{createEnrolledCourseReview}=useCreateEnrolledCourseReview()
  
   const handleSubmit = (values: any) => {
-    console.log(values);
+    createEnrolledCourseReview({courseId: getSingleEnrolledCourse?.courseId?.id, review:values})
   };
   const initialFocusRef: any = useRef();
   return (
@@ -301,7 +303,7 @@ const SingleEnrolledCourse = () => {
                               <Text>{title}</Text>
                             </Flex>
                             <Flex>
-                              <Text fontSize={14}>5 / 6 | 6 mins</Text>
+                              <Text fontSize={14}>1/ {lectures?.length} | 6 mins</Text>
                             </Flex>
                           </Stack>
                           <Text>
