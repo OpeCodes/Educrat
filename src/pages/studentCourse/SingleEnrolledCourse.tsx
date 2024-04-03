@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaStar,  } from "react-icons/fa";
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 const dummyData2 = [1, 2, 3, 3];
 const initialValues = {
@@ -128,12 +128,14 @@ const SingleEnrolledCourse = () => {
                           {Array.from({ length: 5 }, (_, index) => (
                             <IconButton
                               key={index}
+                              p={0}
+                              m={0}
                               icon={
                                 values.rating >= index + 1 ? (
                                   index + 1 === values.rating ? (
-                                    <FaStarHalfAlt />
+                                    <FaStar color="#FFE234"/>
                                   ) : (
-                                    <FaStar />
+                                    <FaStar color="#FFE234"/>
                                   )
                                 ) : (
                                   <FaStar color="gray" />
