@@ -35,12 +35,10 @@ import {
 } from "../../hooks/studentCourse";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 
-
 const SingleCourse = () => {
-  const { slug,index} = useParams();
+  const { slug, index } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse);
- 
+
 
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
@@ -52,9 +50,6 @@ const SingleCourse = () => {
 
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
-
- 
-
 
   const getTotalLecturesDuration = () => {
     let totalDuration = 0;
@@ -70,22 +65,17 @@ const SingleCourse = () => {
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
 
-   const {data} =  useGetAllUEnrolledCourse();
-  const { courseEnroll } = useCourseEnrollment();
-   console.log(data)
-   const singleID: string[] = (data ?? [])
-    .flat(2)
-    .map((obj: any) => obj.id);
-    const singleSlug: string[] = (data ?? [])
+  const { data } = useGetAllUEnrolledCourse();
+  const { courseEnroll } = useCourseEnrollment(); 
+  const singleID: string[] = (data ?? []).flat(2).map((obj: any) => obj.id);
+  const singleSlug: string[] = (data ?? [])
     .flat(2)
     .map((obj: any) => obj?.courseId?.slug);
-    console.log(singleSlug)
 
-    let exists = false;
-if (slug) {
-  // Ensure slug is defined before using toLowerCase()
-  exists = singleSlug.includes(slug.toLowerCase());
-}
+  let exists = false;
+  if (slug) {
+    exists = singleSlug.includes(slug.toLowerCase());
+  }
   return (
     <Stack>
       <Stack>
@@ -109,7 +99,7 @@ if (slug) {
                   <Text>All Courses</Text>
                 </Flex>
               </Flex>
-            </Stack>          
+            </Stack>
             {isPending ? (
               <Stack mx={"4.3rem"}>
                 <Skeleton height="60px" />
@@ -410,7 +400,9 @@ if (slug) {
                               variant="solid"
                               color={"white"}
                               as={Link}
-                              to={`/course/${slug}/learn/lecture/${singleID[parseInt(index ?? "0")]}`}
+                              to={`/course/${slug}/learn/lecture/${
+                                singleID[parseInt(index ?? "0")]
+                              }`}
                             >
                               Add to Cart
                             </Button>
@@ -442,7 +434,9 @@ if (slug) {
                               variant="solid"
                               color={"white"}
                               as={Link}
-                              to={"/course/earn-frontend-development-from-peter/learn/lecture/dkjaklfja"}
+                              to={`/course/${slug}/learn/lecture/${
+                                singleID[parseInt(index ?? "0")]
+                              }`}
                             >
                               Go to Course
                             </Button>
@@ -547,4 +541,3 @@ export default SingleCourse;
 {
   /* write review */
 }
-

@@ -27,22 +27,26 @@ import {
   PopoverArrow,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar, FaTrophy } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useRef } from "react";
+import { useGetSingleEnrolledCourse } from "../../hooks/studentCourse";
 
-const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
-const dummyData2 = [1, 2, 3, 3];
+
 const initialValues = {
   title: "",
   content: "",
   stars: 0,
 };
 const SingleEnrolledCourse = () => {
+  const {id} = useParams()
+ const {getSingleEnrolledCourse}= useGetSingleEnrolledCourse(id)
+ console.log(getSingleEnrolledCourse);
+ 
   const handleSubmit = (values: any) => {
     console.log(values);
   };
@@ -75,7 +79,7 @@ const SingleEnrolledCourse = () => {
             <IoMdArrowRoundBack color={"white"} fontSize={24} />
           </Text>
           <Text fontWeight={"bold"} fontSize={14} color={"white"}>
-            Learn frontend development from peter
+            {getSingleEnrolledCourse?.courseId?.title}
           </Text>
         </Flex>
         <Flex
@@ -271,7 +275,8 @@ const SingleEnrolledCourse = () => {
               maxH={{ base: "100%", lg: "490px" }}
               overflowY={{ base: "hidden", lg: "scroll" }}
             >
-              {dummyData.map((_, index) => {
+              {getSingleEnrolledCourse?.courseId?.modules.map((module:any , index: any) => {
+                const {lectures,title} = module;
                 return (
                   <AccordionItem
                     style={{ borderWidth: 1, borderRadius: 15 }}
@@ -293,7 +298,7 @@ const SingleEnrolledCourse = () => {
                           <Stack>
                             <Flex columnGap={2} fontWeight={"bold"}>
                               <Text>Section {index + 1}:</Text>
-                              <Text>Introduction</Text>
+                              <Text>{title}</Text>
                             </Flex>
                             <Flex>
                               <Text fontSize={14}>5 / 6 | 6 mins</Text>
@@ -305,7 +310,8 @@ const SingleEnrolledCourse = () => {
                         </Flex>
                       </AccordionButton>
                     </Stack>
-                    {dummyData2.map(() => {
+                    {lectures?.map((lecture: any, index: number) => {
+                      const {title} =lecture
                       return (
                         <AccordionPanel>
                           <Flex columnGap={3} align={"start"}>
@@ -317,7 +323,7 @@ const SingleEnrolledCourse = () => {
                               colorScheme={"blackAlpha"}
                             />
                             <Stack>
-                              <Text>1. What is NodeJs</Text>
+                              <Text>{index+1} {title}</Text>
                               <Flex align={"center"} color={"gray"}>
                                 <RiPlayCircleFill size={25} />1 min
                               </Flex>

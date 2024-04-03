@@ -98,7 +98,6 @@ export const Courses = () => {
         <Box as="div" mt={8}>
           <Swiper {...sliderSettings}>
             {!isPending && <SliderButtons />}
-
             {data?.data?.map((course: any, index: number) => {
               const { id, thumbnail, title, complexityLevel, userId, slug } =
                 course;
