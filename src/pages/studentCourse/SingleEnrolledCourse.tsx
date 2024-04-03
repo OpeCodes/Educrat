@@ -79,7 +79,7 @@ const SingleEnrolledCourse = () => {
             </CircularProgressLabel>
           </CircularProgress>
           <Flex columnGap={4}>
-            <Text color={"white"}>Your Progress</Text>
+            <Text color={"white"} fontSize={15}>Your Progress</Text>
             <Text color={"white"}> Share this course</Text>
           </Flex>
         </Flex>
