@@ -67,7 +67,7 @@ const SingleEnrolledCourse = () => {
             <Stack
               w={{ base: "100%", xl: "920px", "2xl": "1700px" }}
               h={{ base: "900px", lg: "400px" }}
-              overflowY={{base: "hidden", xl: "scroll"}}
+              overflowY={{ base: "hidden", xl: "scroll" }}
               borderBottomWidth={2}
               borderColor={"#f1f1f1"}
             >
@@ -126,6 +126,7 @@ const SingleEnrolledCourse = () => {
             top="90px"
             pl={{ base: 2, xl: 4 }}
             pr={{ base: 2, xl: 0 }}
+            mt={{base: 4,xl: 0}}
           >
             <Text fontWeight={"bold"}>Course content</Text>
             <Accordion
