@@ -31,6 +31,7 @@ import {
   useGetAllUEnrolledCourse,
   useGetCourseReview,
   useGetStudentSingleCourse,
+  // useInstructorReviewRating,
 } from "../../hooks/studentCourse";
 import {
   convertSecondsToHMS,
@@ -40,7 +41,11 @@ import {
 const SingleCourse = () => {
   const { slug, index } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
+  console.log(getStudentSingleCourse?.userId?.id, "this bro")
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
+
+  //  const {instructorReviewRating} = useInstructorReviewRating(getStudentSingleCourse?.userId?.id)
+  //  console.log(instructorReviewRating, "peter")
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
