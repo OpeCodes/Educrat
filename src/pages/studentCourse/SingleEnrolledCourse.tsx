@@ -24,6 +24,8 @@ import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar } from "react-icons/fa";
+import { IoMdArrowRoundBack } from "react-icons/io";
+
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 const dummyData2 = [1, 2, 3, 3];
 const initialValues = {
@@ -42,17 +44,20 @@ const SingleEnrolledCourse = () => {
         width={"100%"}
         align={"center"}
         zIndex={10000}
-        p={4}
+        p={3}
         bg="black"
         position="fixed"
         right="0"
         top="0"
+        borderBottomWidth={0.5}
+        borderColor={"white"}
       >
         <Flex align={"center"}>
-          <Box width={"160px"} as={Link} to={"/"}>
+          <Box width={"160px"} as={Link} to={"/"} display={{base: "none", md:"block"}}>
             <Image src={logo} alt="logo" color={"black"} />
           </Box>
-          <Text fontWeight={"bold"} mt={-1} fontSize={16} color={"white"}>
+          <Text display={{base: "block", md: "none"}} mr={3}><IoMdArrowRoundBack color={"white"} fontSize={24} /></Text>
+          <Text fontWeight={"bold"}  fontSize={14} color={"white"}>
             Learn frontend development from peter
           </Text>
         </Flex>
