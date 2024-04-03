@@ -81,7 +81,7 @@ const SignUp = () => {
               {({ handleChange, handleSubmit, values, errors }) => (
                 <Flex rowGap={"5px"} flexDirection="column" pb={5}>
                   <FormControl isRequired>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel>Firstname</FormLabel>
                     <Input
                       type="text"
                       variant="filled"
@@ -100,11 +100,11 @@ const SignUp = () => {
                     )}
                   </FormControl>
                   <FormControl isRequired>
-                    <FormLabel>Last Name</FormLabel>
+                    <FormLabel>Lastname</FormLabel>
                     <Input
                       type="text"
                       variant="filled"
-                      placeholder="LastName"
+                      placeholder="Lastname"
                       value={values.lastName}
                       name="lastName"
                       onChange={handleChange}
@@ -119,11 +119,11 @@ const SignUp = () => {
                     )}
                   </FormControl>
                   <FormControl isRequired>
-                    <FormLabel>User Name</FormLabel>
+                    <FormLabel>Username</FormLabel>
                     <Input
                       type="text"
                       variant="filled"
-                      placeholder="Userame"
+                      placeholder="username"
                       value={values.username}
                       name="username"
                       onChange={handleChange}
