@@ -24,10 +24,7 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
-  PopoverCloseButton,
-  ButtonGroup,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
 import { Link } from "react-router-dom";
@@ -98,35 +95,12 @@ const SingleEnrolledCourse = () => {
               <PopoverTrigger>
                 <Button>Trigger</Button>
               </PopoverTrigger>
-              <PopoverContent
-                color="black"
-                bg="white"
-                borderColor="blue.800"
-              >
+              <PopoverContent color="black" bg="white" borderRadius={0}>
                 <PopoverHeader pt={4} fontWeight="bold" border="0">
-                  Manage Your Channels
+                  226 of 370 complete.
                 </PopoverHeader>
-                <PopoverArrow bg="white"height={"100px"} width={"30px"} />
-                <PopoverCloseButton />
-                <PopoverBody>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </PopoverBody>
-                <PopoverFooter
-                  border="0"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  pb={4}
-                >
-                  <Box fontSize="sm">Step 2 of 4</Box>
-                  <ButtonGroup size="sm">
-                    <Button colorScheme="green">Setup Email</Button>
-                    <Button colorScheme="blue" ref={initialFocusRef}>
-                      Next
-                    </Button>
-                  </ButtonGroup>
-                </PopoverFooter>
+                <PopoverArrow bg="white" />
+                <PopoverBody>Finish course to get your certificate</PopoverBody>
               </PopoverContent>
             </Popover>
 
