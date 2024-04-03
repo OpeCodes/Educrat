@@ -78,7 +78,7 @@ const SingleEnrolledCourse = () => {
             Learn frontend development from peter
           </Text>
         </Flex>
-        <Flex align={"center"} columnGap={1}>
+        <Flex align={"center"} columnGap={1} display={{base: "none", md: "flex"}}>
           <CircularProgress value={40} color="green.400" thickness="4px">
             <CircularProgressLabel color={"white"}>
               <Text ml={"17.5px"}>
