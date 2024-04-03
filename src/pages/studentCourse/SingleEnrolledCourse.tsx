@@ -128,8 +128,6 @@ const SingleEnrolledCourse = () => {
                           {Array.from({ length: 5 }, (_, index) => (
                             <IconButton
                               key={index}
-                              p={0}
-                              m={0}
                               icon={
                                 values.stars >= index + 1 ? (
                                   index + 1 === values.stars ? (
