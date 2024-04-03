@@ -429,7 +429,7 @@ const SingleCourse = () => {
                               variant="solid"
                               color={"white"}
                               as={Link}
-                              to={"/earn-frontend-development-from-peter/learn/lecture/dkjaklfja"}
+                              to={"/course/earn-frontend-development-from-peter/learn/lecture/dkjaklfja"}
                             >
                               Go to Course
                             </Button>

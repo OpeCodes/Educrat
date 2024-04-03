@@ -107,6 +107,7 @@ const Navbar = () => {
 
         <Flex
           columnGap={4}
+          
           color={"white"}
           display={{ base: "none", lg: "flex" }}
         >

@@ -45,12 +45,23 @@ const SingleEnrolledCourse = () => {
           mt={"3.5rem"}
           flexDirection={{ base: "column", lg: "row" }}
         >
-          <Stack>
-            <Text>peter</Text>
-            <Text>
-              ads;flkjsd;llkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkfjk
-            </Text>
-          </Stack>
+          {/* <Stack  background={"red"} width={"60%"}   height={"100px"}>
+          <video controls controlsList="nodownload" width="100%" height={"10px"} >
+          <source src={"https://res.cloudinary.com/dtori4rq2/video/upload/v1712063516/educrat/tqreteiyjik06l1ztccx.mp4"} />
+          Your browser does not support the video tag.
+        </video>
+          </Stack> */}
+          <div
+          //  style={{ width: '100%', maxWidth: '800px', margin: 'auto' }}
+           >
+            <Stack flex="1" width={"100%"}>
+     
+        <video controls  controlsList="nodownload"  width={"200px"} height={"120px"} style={{flex: 1, width: "200px", height: "100px", borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+          <source src={"https://res.cloudinary.com/dtori4rq2/video/upload/v1712063516/educrat/tqreteiyjik06l1ztccx.mp4"} type="video/mp4" />
+          Your browser does not support the video tag. 1280 x 720 pixels
+        </video>
+        </Stack>
+    </div>
 
           <Stack
             width={{ base: "100%", lg: "30%" }}
@@ -133,7 +144,4 @@ const SingleEnrolledCourse = () => {
 
 export default SingleEnrolledCourse;
 
-// <video controls controlsList="nodownload" width="600" height="400">
-//           <source src={"https://res.cloudinary.com/dtori4rq2/video/upload/v1712063516/educrat/tqreteiyjik06l1ztccx.mp4"} />
-//           Your browser does not support the video tag.
-//         </video>
+
