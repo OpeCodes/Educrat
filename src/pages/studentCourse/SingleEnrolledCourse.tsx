@@ -12,12 +12,14 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import logo from "../../assets/logo-2.svg";
+import logo from "../../assets/logo-3.svg";
 import { Link } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 const dummyData2 = [1, 2, 3, 3];
 const SingleEnrolledCourse = () => {
+  const peter =
+    "<div><h1>This is peter adedokun from another i dont know</h1><p> i just want to test the endpoint i am building that's all</p></div>";
   return (
     <Stack>
       <Flex
@@ -26,17 +28,19 @@ const SingleEnrolledCourse = () => {
         align={"center"}
         zIndex={10000}
         p={4}
-        bg="red"
+        bg="black"
         position="fixed"
         right="0"
         top="0"
       >
-        <Box width={"160px"} as={Link} to={"/"}>
-          <Image src={logo} alt="logo" />
-        </Box>
-        {/* <Text fontWeight={"bold"} fontSize={20} color={"white"}>
-          Learn frontend development from peter
-        </Text> */}
+        <Flex align={"center"}>
+          <Box width={"160px"} as={Link} to={"/"}>
+            <Image src={logo} alt="logo" color={"black"} />
+          </Box>
+          <Text fontWeight={"bold"} fontSize={20} color={"white"}>
+            Learn frontend development from peter
+          </Text>
+        </Flex>
 
         <Text>Back to courses</Text>
       </Flex>
@@ -47,7 +51,7 @@ const SingleEnrolledCourse = () => {
           flexDirection={{ base: "column", xl: "row" }}
         >
           <Stack mt={6} w={"100%"}>
-            <AspectRatio
+            {/* <AspectRatio
               maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
               maxH={{ base: "900px", lg: "400px" }}
               ratio={{ base: 15 / 8, lg: 15 / 13 }}
@@ -59,7 +63,61 @@ const SingleEnrolledCourse = () => {
                 }
                 allowFullScreen
               />
-            </AspectRatio>
+            </AspectRatio> */}
+            <Stack
+              w={{ base: "100%", xl: "920px", "2xl": "1700px" }}
+              h={{ base: "900px", lg: "400px" }}
+              overflowY={"scroll"}
+              borderBottomWidth={2}
+              borderColor={"gray"}
+            >
+              <Stack>
+                <div dangerouslySetInnerHTML={{ __html: peter }} />
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+                <Text>kakad;dalkjf;lasdkf</Text>
+              </Stack>
+            </Stack>
           </Stack>
           <Stack
             width={{ base: "100%", xl: "30%" }}
@@ -135,7 +193,7 @@ const SingleEnrolledCourse = () => {
               })}
             </Accordion>
           </Stack>
-        </Flex>        
+        </Flex>
       </Stack>
     </Stack>
   );
