@@ -69,7 +69,7 @@ const SingleEnrolledCourse = () => {
               h={{ base: "900px", lg: "400px" }}
               overflowY={{base: "hidden", xl: "scroll"}}
               borderBottomWidth={2}
-              borderColor={"gray"}
+              borderColor={"#f1f1f1"}
             >
               <Stack>
                 <div dangerouslySetInnerHTML={{ __html: peter }} />
