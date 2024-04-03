@@ -8,6 +8,8 @@ import {
   Box,
   Button,
   Checkbox,
+  CircularProgress,
+  CircularProgressLabel,
   Flex,
   FormControl,
   FormLabel,
@@ -23,7 +25,7 @@ import { Link } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaTrophy } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
@@ -53,16 +55,31 @@ const SingleEnrolledCourse = () => {
         borderColor={"white"}
       >
         <Flex align={"center"}>
-          <Box width={"160px"} as={Link} to={"/"} display={{base: "none", md:"block"}}>
+          <Box
+            width={"160px"}
+            as={Link}
+            to={"/"}
+            display={{ base: "none", md: "block" }}
+          >
             <Image src={logo} alt="logo" color={"black"} />
           </Box>
-          <Text display={{base: "block", md: "none"}} mr={3}><IoMdArrowRoundBack color={"white"} fontSize={24} /></Text>
-          <Text fontWeight={"bold"}  fontSize={14} color={"white"}>
+          <Text display={{ base: "block", md: "none" }} mr={3}>
+            <IoMdArrowRoundBack color={"white"} fontSize={24} />
+          </Text>
+          <Text fontWeight={"bold"} fontSize={14} color={"white"}>
             Learn frontend development from peter
           </Text>
         </Flex>
+        <Flex>
+          <CircularProgress value={40} color="green.400">
+            <CircularProgressLabel color={"white"}>
+              <Text ml={"17.5px"}>
+              <FaTrophy color={"white"} fontSize={15} />
 
-        {/* <Text>Back to courses</Text> */}
+              </Text>
+            </CircularProgressLabel>
+          </CircularProgress>
+        </Flex>
       </Flex>
       <Stack>
         <Flex
