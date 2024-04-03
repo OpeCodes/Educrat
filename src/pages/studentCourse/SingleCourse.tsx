@@ -34,17 +34,12 @@ import {
 } from "../../hooks/studentCourse";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 
-// const initialValues = {
-//   title: "",
-//   content: "",
-// };
+
 const SingleCourse = () => {
   const { slug } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   console.log(getStudentSingleCourse);
-  // const handleSubmit = (values: any) => {
-  //   console.log(values);
-  // };
+ 
 
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
@@ -534,86 +529,4 @@ export default SingleCourse;
 {
   /* write review */
 }
-{
-  /* <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
-                    <Text
-                      color={"black"}
-                      fontWeight={"bold"}
-                      fontSize={"1.1rem"}
-                    >
-                      Write a Review
-                    </Text>
-                    <Text>What is it like about the Course?</Text>
-                    <Text>Review star here </Text>
-                    <Formik
-                      initialValues={initialValues}
-                      validationSchema={reviewCourseValidationSchema}
-                      onSubmit={handleSubmit}
-                    >
-                      {({ handleChange, handleSubmit, values, errors }) => (
-                        <Flex
-                          rowGap={"5px"}
-                          flexDirection="column"
-                          maxHeight={{ base: "100%", lg: "530px" }}
-                          overflowY={"auto"}
-                          pb={5}
-                        >
-                          <FormControl isRequired>
-                            <FormLabel>Review Title</FormLabel>
-                            <Input
-                              type="text"
-                              variant="filled"
-                              placeholder="write your review"
-                              value={values.title}
-                              name="title"
-                              onChange={handleChange}
-                            />
-                            {errors.title && (
-                              <Text
-                                style={{ color: "red", marginTop: 5 }}
-                                fontSize="14px"
-                              >
-                                <>{errors.title}</>
-                              </Text>
-                            )}
-                          </FormControl>
-                          <FormControl isRequired mt={5}>
-                            <FormLabel>Review Content</FormLabel>
-                            <Textarea
-                              variant="filled"
-                              placeholder="Message"
-                              value={values.content}
-                              name="content"
-                              onChange={handleChange}
-                            />
-                            {errors.content && (
-                              <Text
-                                style={{ color: "red", marginTop: 5 }}
-                                fontSize="14px"
-                              >
-                                <>{errors.content}</>
-                              </Text>
-                            )}
-                          </FormControl>
 
-                          <Button
-                            bg={"#00FF84"}
-                            // isLoading={isPending}
-                            loadingText="Loading"
-                            variant="outline"
-                            spinnerPlacement="end"
-                            width="100%"
-                            onClick={() => handleSubmit()}
-                            mt={3}
-                            borderWidth={2}
-                            py={3}
-                            borderColor={"#00FF84"}
-                            _hover={{ background: "none", color: "#00FF84" }}
-                          >
-                            Submit Review
-                          </Button>
-                        </Flex>
-                      )}
-                    </Formik>
-                  </Stack> */
-}

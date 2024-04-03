@@ -6,20 +6,32 @@ import {
   AccordionPanel,
   AspectRatio,
   Box,
+  Button,
   Checkbox,
   Flex,
+  FormControl,
+  FormLabel,
   Image,
+  Input,
   Stack,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
 import { Link } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
+import { Formik } from "formik";
+import { reviewCourseValidationSchema } from "../../schemas";
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 const dummyData2 = [1, 2, 3, 3];
+const initialValues = {
+  title: "",
+  content: "",
+};
 const SingleEnrolledCourse = () => {
-  const peter =
-    "<div><h1>This is peter adedokun from another i dont know</h1><p> i just want to test the endpoint i am building that's all</p></div>";
+  const handleSubmit = (values: any) => {
+    console.log(values);
+  };
   return (
     <Stack>
       <Flex
@@ -51,7 +63,8 @@ const SingleEnrolledCourse = () => {
           flexDirection={{ base: "column", xl: "row" }}
         >
           <Stack mt={6} w={"100%"}>
-            {/* <AspectRatio
+            {/* video section */}
+            <AspectRatio
               maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
               maxH={{ base: "900px", lg: "400px" }}
               ratio={{ base: 15 / 8, lg: 15 / 13 }}
@@ -63,9 +76,10 @@ const SingleEnrolledCourse = () => {
                 }
                 allowFullScreen
               />
-            </AspectRatio> */}
-            <Stack
-              w={{ base: "100%", xl: "920px", "2xl": "1700px" }}
+            </AspectRatio>
+            {/* article section
+            {/* <Stack
+              w={{ base: "100%", xl: "923px", "2xl": "1700px" }}
               h={{ base: "900px", lg: "400px" }}
               overflowY={{ base: "hidden", xl: "scroll" }}
               borderBottomWidth={2}
@@ -73,49 +87,90 @@ const SingleEnrolledCourse = () => {
             >
               <Stack>
                 <div dangerouslySetInnerHTML={{ __html: peter }} />
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
-                <Text>kakad;dalkjf;lasdkf</Text>
+              </Stack>
+            </Stack> */}
+            <Stack
+              maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
+              px={{ base: "2", xl: 20 }}
+            >
+              {/* review section */}
+
+              <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
+                <Text color={"black"} fontWeight={"bold"} fontSize={"1.1rem"}>
+                  Write a Review
+                </Text>
+                <Text>What is it like about the Course?</Text>
+                <Text>Review star here </Text>
+                <Formik
+                  initialValues={initialValues}
+                  validationSchema={reviewCourseValidationSchema}
+                  onSubmit={handleSubmit}
+                >
+                  {({ handleChange, handleSubmit, values, errors }) => (
+                    <Flex
+                      rowGap={"5px"}
+                      flexDirection="column"
+                      maxHeight={{ base: "100%", lg: "530px" }}
+                      overflowY={"auto"}
+                      pb={5}
+                    >
+                      <FormControl isRequired>
+                        <FormLabel>Review Title</FormLabel>
+                        <Input
+                          type="text"
+                          variant="filled"
+                          placeholder="write your review"
+                          value={values.title}
+                          name="title"
+                          onChange={handleChange}
+                        />
+                        {errors.title && (
+                          <Text
+                            style={{ color: "red", marginTop: 5 }}
+                            fontSize="14px"
+                          >
+                            <>{errors.title}</>
+                          </Text>
+                        )}
+                      </FormControl>
+                      <FormControl isRequired mt={5}>
+                        <FormLabel>Review Content</FormLabel>
+                        <Textarea
+                          variant="filled"
+                          placeholder="Message"
+                          value={values.content}
+                          name="content"
+                          onChange={handleChange}
+                        />
+                        {errors.content && (
+                          <Text
+                            style={{ color: "red", marginTop: 5 }}
+                            fontSize="14px"
+                          >
+                            <>{errors.content}</>
+                          </Text>
+                        )}
+                      </FormControl>
+
+                      <Button
+                        bg={"#00FF84"}
+                        // isLoading={isPending}
+                        loadingText="Loading"
+                        variant="outline"
+                        spinnerPlacement="end"
+                        width="100%"
+                        onClick={() => handleSubmit()}
+                        mt={3}
+                        borderWidth={2}
+                        py={3}
+                        borderColor={"#00FF84"}
+                        _hover={{ background: "none", color: "#00FF84" }}
+                      >
+                        Submit Review
+                      </Button>
+                    </Flex>
+                  )}
+                </Formik>
               </Stack>
             </Stack>
           </Stack>
@@ -126,7 +181,7 @@ const SingleEnrolledCourse = () => {
             top="90px"
             pl={{ base: 2, xl: 4 }}
             pr={{ base: 2, xl: 0 }}
-            mt={{base: 4,xl: 0}}
+            mt={{ base: 4, xl: 0 }}
           >
             <Text fontWeight={"bold"}>Course content</Text>
             <Accordion
