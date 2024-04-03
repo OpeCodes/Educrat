@@ -34,29 +34,42 @@ const SingleEnrolledCourse = () => {
         <Box width={"160px"} as={Link} to={"/"}>
           <Image src={logo} alt="logo" />
         </Box>
-        <Text fontWeight={"bold"} fontSize={20} color={"white"}>
+        {/* <Text fontWeight={"bold"} fontSize={20} color={"white"}>
           Learn frontend development from peter
-        </Text>
+        </Text> */}
 
         <Text>Back to courses</Text>
       </Flex>
-      <Stack
-      //  maxW={"90%"} width={"100%"} mx={"auto"}
-      // mt={10}
-      >
+      <Stack>
         <Flex
           justify={"space-between"}
           mt={"3.5rem"}
-          flexDirection={{ base: "column", lg: "row" }}
-        >         
+          flexDirection={{ base: "column", xl: "row" }}
+        >
+          <Stack mt={6} w={"100%"}>
+            <AspectRatio
+              maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
+              maxH={{ base: "900px", lg: "400px" }}
+              ratio={{ base: 15 / 8, lg: 15 / 13 }}
+            >
+              <iframe
+                title="Learn frontend development from peter"
+                src={
+                  "https://res.cloudinary.com/dtori4rq2/video/upload/v1712143746/educrat/r0kttd4uzsjtdp2kq938.mp4"
+                }
+                allowFullScreen
+              />
+            </AspectRatio>
+          </Stack>
           <Stack
-            width={{ base: "100%", lg: "30%" }}
-            position={{ base: "static", lg: "fixed" }}
+            width={{ base: "100%", xl: "30%" }}
+            position={{ base: "static", xl: "fixed" }}
             right="12"
-            top="125px"
+            top="90px"
+            pl={{ base: 2, xl: 4 }}
+            pr={{ base: 2, xl: 0 }}
           >
             <Text fontWeight={"bold"}>Course content</Text>
-
             <Accordion
               allowToggle
               maxH={{ base: "100%", lg: "490px" }}
@@ -122,20 +135,8 @@ const SingleEnrolledCourse = () => {
               })}
             </Accordion>
           </Stack>
-        </Flex>
-        <Stack mt={"18px"}>
-          <AspectRatio maxW="900px" maxH={"400px"} ratio={15 / 13}>
-            <iframe
-              title="Learn frontend development from peter"
-              src={
-                "https://res.cloudinary.com/dtori4rq2/video/upload/v1712143746/educrat/r0kttd4uzsjtdp2kq938.mp4"
-              }
-            />
-          </AspectRatio>
-        </Stack>
+        </Flex>        
       </Stack>
-
-      <Text>;akldf</Text>
     </Stack>
   );
 };

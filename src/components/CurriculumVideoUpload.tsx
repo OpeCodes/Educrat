@@ -26,7 +26,7 @@ interface ImageUploadProps {
   contentId: number;
 }
 
-const MAX_FILE_SIZE_MB = 4;
+const MAX_FILE_SIZE_MB = 50;
 
 const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   onImageUpload,
@@ -57,20 +57,20 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
       }
     }
     if (file) {
-      // if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
-      //   toast({
-      //     title: `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
-      //     status: "error",
-      //     duration: 5000,
-      //     isClosable: true,
-      //   });
-      // }
-      //  else {
-        // setSelectImageName(file);
+      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        toast({
+          title: `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+       else {
+        setSelectImageName(file);
 
         const duration = await getVideoDuration(file);
         await uploadImage(file, duration, file?.name);
-      // }
+      }
     }
   };
 
@@ -83,7 +83,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         // maxW="900px" ratio={17/10}
         const width = video.videoWidth;
         const height = video.videoHeight;
-        console.log(width, height)
         if (width < 1200 || height < 700) {
           toast({
             title: "Video dimensions are invalid",
