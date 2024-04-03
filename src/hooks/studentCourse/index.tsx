@@ -83,3 +83,53 @@ export const useCourseEnrollment = () => {
   });
   return { courseEnroll, isPending, error, isError, isSuccess };
 };
+
+
+export const useCreateEnrolledCourseReview = () => {
+  const toast = useToast();
+  // const queryClient = useQueryClient();
+
+  const {
+    mutate: createEnrolledCourseReview,
+    isPending: createEnrolledCourseReviewLoading,
+  } = useMutation({
+    mutationFn: ({ courseId }: any) => {
+      return customFetch.post(`/course/review/course/${courseId}`);
+    },
+    onSuccess: () => {
+      // queryClient.invalidateQueries({ queryKey: ["module"] });
+
+      toast({
+        title: `review successful`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
+  return { createEnrolledCourseReview, createEnrolledCourseReviewLoading};
+};
