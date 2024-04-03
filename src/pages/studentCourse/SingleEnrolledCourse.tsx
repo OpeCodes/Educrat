@@ -37,7 +37,7 @@ const SingleEnrolledCourse = () => {
           <Box width={"160px"} as={Link} to={"/"}>
             <Image src={logo} alt="logo" color={"black"} />
           </Box>
-          <Text fontWeight={"bold"} fontSize={20} color={"white"}>
+          <Text fontWeight={"bold"} mt={-1} fontSize={20} color={"white"}>
             Learn frontend development from peter
           </Text>
         </Flex>
