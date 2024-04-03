@@ -34,7 +34,10 @@ import {
   useGetCourseReview,
   useGetStudentSingleCourse,
 } from "../../hooks/studentCourse";
-import { convertSecondsToHMS } from "../../components/TimeFormat";
+import {
+  convertSecondsToHMS,
+  getTimeDifference,
+} from "../../components/TimeFormat";
 
 const SingleCourse = () => {
   const { slug, index } = useParams();
@@ -343,7 +346,7 @@ const SingleCourse = () => {
                         Reviews
                       </Text>
                       {getCourseReview?.map((review: any) => {
-                        const { reviewer, title, content } = review;
+                        const { reviewer, title, content, updatedAt } = review;
                         return (
                           <Flex columnGap={3} mt={3}>
                             <Avatar
@@ -356,7 +359,7 @@ const SingleCourse = () => {
                                 <Text color={"black"}>
                                   {reviewer?.firstName} {reviewer?.lastName}
                                 </Text>
-                                <Text>3 days ago</Text>
+                                <Text>{getTimeDifference(updatedAt)}</Text>
                               </Flex>
                               <Text color={"black"}>{title}</Text>
                               <Text>{content}</Text>
