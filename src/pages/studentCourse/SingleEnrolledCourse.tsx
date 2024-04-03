@@ -19,6 +19,15 @@ import {
   Stack,
   Text,
   Textarea,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
 import { Link } from "react-router-dom";
@@ -27,6 +36,7 @@ import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar, FaTrophy } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useRef } from "react";
 
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 const dummyData2 = [1, 2, 3, 3];
@@ -39,6 +49,7 @@ const SingleEnrolledCourse = () => {
   const handleSubmit = (values: any) => {
     console.log(values);
   };
+  const initialFocusRef: any = useRef();
   return (
     <Stack>
       <Flex
@@ -79,7 +90,46 @@ const SingleEnrolledCourse = () => {
             </CircularProgressLabel>
           </CircularProgress>
           <Flex columnGap={4}>
-            <Text color={"white"} fontSize={15}>Your Progress</Text>
+            <Popover
+              initialFocusRef={initialFocusRef}
+              placement="bottom"
+              closeOnBlur={false}
+            >
+              <PopoverTrigger>
+                <Button>Trigger</Button>
+              </PopoverTrigger>
+              <PopoverContent
+                color="black"
+                bg="white"
+                borderColor="blue.800"
+              >
+                <PopoverHeader pt={4} fontWeight="bold" border="0">
+                  Manage Your Channels
+                </PopoverHeader>
+                <PopoverArrow bg="white"height={"100px"} width={"30px"} />
+                <PopoverCloseButton />
+                <PopoverBody>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore.
+                </PopoverBody>
+                <PopoverFooter
+                  border="0"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  pb={4}
+                >
+                  <Box fontSize="sm">Step 2 of 4</Box>
+                  <ButtonGroup size="sm">
+                    <Button colorScheme="green">Setup Email</Button>
+                    <Button colorScheme="blue" ref={initialFocusRef}>
+                      Next
+                    </Button>
+                  </ButtonGroup>
+                </PopoverFooter>
+              </PopoverContent>
+            </Popover>
+
             <Text color={"white"}> Share this course</Text>
           </Flex>
         </Flex>
