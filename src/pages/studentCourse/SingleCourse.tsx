@@ -39,9 +39,7 @@ import { convertSecondsToHMS } from "../../components/TimeFormat";
 const SingleCourse = () => {
   const { slug, index } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse?.id);
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
-  console.log(getCourseReview);
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
@@ -346,7 +344,6 @@ const SingleCourse = () => {
                       </Text>
                       {getCourseReview?.map((review: any) => {
                         const { reviewer, title, content } = review;
-                        console.log(reviewer, "heer")
                         return (
                           <Flex columnGap={3} mt={3}>
                             <Avatar
