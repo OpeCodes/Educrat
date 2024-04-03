@@ -344,19 +344,20 @@ const SingleCourse = () => {
                       >
                         Reviews
                       </Text>
-                      {getStudentSingleCourse?.reviews.map((review: any) => {
-                        const { firstName, lastName, title, content } = review;
+                      {getCourseReview?.map((review: any) => {
+                        const { reviewer, title, content } = review;
+                        console.log(reviewer, "heer")
                         return (
                           <Flex columnGap={3} mt={3}>
                             <Avatar
                               size="lg"
-                              name={`${firstName} ${lastName}`}
+                              name={`${reviewer?.firstName} ${reviewer?.lastName}`}
                               src={""}
                             />
                             <Stack>
                               <Flex columnGap={1} rowGap={3}>
                                 <Text color={"black"}>
-                                  {firstName} {lastName}
+                                  {reviewer?.firstName} {reviewer?.lastName}
                                 </Text>
                                 <Text>3 days ago</Text>
                               </Flex>
