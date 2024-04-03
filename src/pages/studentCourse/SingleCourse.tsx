@@ -30,6 +30,7 @@ import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import {
   useCourseEnrollment,
+  useGetAllUEnrolledCourse,
   useGetStudentSingleCourse,
 } from "../../hooks/studentCourse";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
@@ -38,7 +39,7 @@ import { convertSecondsToHMS } from "../../components/TimeFormat";
 const SingleCourse = () => {
   const { slug } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse);
+  // console.log(getStudentSingleCourse);
  
 
   const dateString = getStudentSingleCourse?.updatedAt;
@@ -52,7 +53,7 @@ const SingleCourse = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
-  const hi = true;
+  const hi = false;
 
   const getTotalLecturesDuration = () => {
     let totalDuration = 0;
@@ -68,9 +69,9 @@ const SingleCourse = () => {
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
 
-  //  const {data} =  useGetAllUEnrolledCourse();
+   const {data} =  useGetAllUEnrolledCourse();
   const { courseEnroll } = useCourseEnrollment();
-  //  console.log(data)
+   console.log(data)
   return (
     <Stack>
       <Stack>

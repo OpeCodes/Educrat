@@ -19,6 +19,7 @@ import Student from "./Student";
 import Article from "./Article";
 import MedArticle from "./MedArticle";
 import ToastLoading from "./ToastLoading";
+import CoursePromotionalVideoUpload from "./CoursePromotionalVideoUpload";
 export {
   HomeLayout,
   Navbar,
@@ -41,4 +42,5 @@ export {
   Article,
   ToastLoading,
   MedArticle,
+  CoursePromotionalVideoUpload
 };
