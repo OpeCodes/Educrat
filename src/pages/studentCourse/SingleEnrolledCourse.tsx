@@ -11,6 +11,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  IconButton,
   Image,
   Input,
   Stack,
@@ -22,11 +23,13 @@ import { Link } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 const dummyData2 = [1, 2, 3, 3];
 const initialValues = {
   title: "",
   content: "",
+  rating: 0,
 };
 const SingleEnrolledCourse = () => {
   const handleSubmit = (values: any) => {
@@ -100,13 +103,19 @@ const SingleEnrolledCourse = () => {
                   Write a Review
                 </Text>
                 <Text>What is it like about the Course?</Text>
-                <Text>Review star here </Text>
+
                 <Formik
                   initialValues={initialValues}
                   validationSchema={reviewCourseValidationSchema}
                   onSubmit={handleSubmit}
                 >
-                  {({ handleChange, handleSubmit, values, errors }) => (
+                  {({
+                    handleChange,
+                    setFieldValue,
+                    handleSubmit,
+                    values,
+                    errors,
+                  }) => (
                     <Flex
                       rowGap={"5px"}
                       flexDirection="column"
@@ -114,60 +123,83 @@ const SingleEnrolledCourse = () => {
                       overflowY={"auto"}
                       pb={5}
                     >
-                      <FormControl isRequired>
-                        <FormLabel>Review Title</FormLabel>
-                        <Input
-                          type="text"
-                          variant="filled"
-                          placeholder="write your review"
-                          value={values.title}
-                          name="title"
-                          onChange={handleChange}
-                        />
-                        {errors.title && (
-                          <Text
-                            style={{ color: "red", marginTop: 5 }}
-                            fontSize="14px"
-                          >
-                            <>{errors.title}</>
-                          </Text>
-                        )}
-                      </FormControl>
-                      <FormControl isRequired mt={5}>
-                        <FormLabel>Review Content</FormLabel>
-                        <Textarea
-                          variant="filled"
-                          placeholder="Message"
-                          value={values.content}
-                          name="content"
-                          onChange={handleChange}
-                        />
-                        {errors.content && (
-                          <Text
-                            style={{ color: "red", marginTop: 5 }}
-                            fontSize="14px"
-                          >
-                            <>{errors.content}</>
-                          </Text>
-                        )}
-                      </FormControl>
+                      <>
+                        <Flex align="center">
+                          {Array.from({ length: 5 }, (_, index) => (
+                            <IconButton
+                              key={index}
+                              icon={
+                                values.rating >= index + 1 ? (
+                                  index + 1 === values.rating ? (
+                                    <FaStarHalfAlt />
+                                  ) : (
+                                    <FaStar />
+                                  )
+                                ) : (
+                                  <FaStar color="gray" />
+                                )
+                              }
+                              onClick={() => setFieldValue("rating", index + 1)}
+                              variant="unstyled"
+                              aria-label={`${index + 1} stars`}
+                            />
+                          ))}
+                        </Flex>
+                        <FormControl isRequired>
+                          <FormLabel>Review Title</FormLabel>
+                          <Input
+                            type="text"
+                            variant="filled"
+                            placeholder="write your review"
+                            value={values.title}
+                            name="title"
+                            onChange={handleChange}
+                          />
+                          {errors.title && (
+                            <Text
+                              style={{ color: "red", marginTop: 5 }}
+                              fontSize="14px"
+                            >
+                              <>{errors.title}</>
+                            </Text>
+                          )}
+                        </FormControl>
+                        <FormControl isRequired mt={5}>
+                          <FormLabel>Review Content</FormLabel>
+                          <Textarea
+                            variant="filled"
+                            placeholder="Message"
+                            value={values.content}
+                            name="content"
+                            onChange={handleChange}
+                          />
+                          {errors.content && (
+                            <Text
+                              style={{ color: "red", marginTop: 5 }}
+                              fontSize="14px"
+                            >
+                              <>{errors.content}</>
+                            </Text>
+                          )}
+                        </FormControl>
 
-                      <Button
-                        bg={"#00FF84"}
-                        // isLoading={isPending}
-                        loadingText="Loading"
-                        variant="outline"
-                        spinnerPlacement="end"
-                        width="100%"
-                        onClick={() => handleSubmit()}
-                        mt={3}
-                        borderWidth={2}
-                        py={3}
-                        borderColor={"#00FF84"}
-                        _hover={{ background: "none", color: "#00FF84" }}
-                      >
-                        Submit Review
-                      </Button>
+                        <Button
+                          bg={"#00FF84"}
+                          // isLoading={isPending}
+                          loadingText="Loading"
+                          variant="outline"
+                          spinnerPlacement="end"
+                          width="100%"
+                          onClick={() => handleSubmit()}
+                          mt={3}
+                          borderWidth={2}
+                          py={3}
+                          borderColor={"#00FF84"}
+                          _hover={{ background: "none", color: "#00FF84" }}
+                        >
+                          Submit Review
+                        </Button>
+                      </>
                     </Flex>
                   )}
                 </Formik>
