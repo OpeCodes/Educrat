@@ -37,12 +37,12 @@ const SingleEnrolledCourse = () => {
           <Box width={"160px"} as={Link} to={"/"}>
             <Image src={logo} alt="logo" color={"black"} />
           </Box>
-          <Text fontWeight={"bold"} mt={-1} fontSize={20} color={"white"}>
+          <Text fontWeight={"bold"} mt={-1} fontSize={16} color={"white"}>
             Learn frontend development from peter
           </Text>
         </Flex>
 
-        <Text>Back to courses</Text>
+        {/* <Text>Back to courses</Text> */}
       </Flex>
       <Stack>
         <Flex
@@ -67,7 +67,7 @@ const SingleEnrolledCourse = () => {
             <Stack
               w={{ base: "100%", xl: "920px", "2xl": "1700px" }}
               h={{ base: "900px", lg: "400px" }}
-              overflowY={"scroll"}
+              overflowY={{base: "hidden", xl: "scroll"}}
               borderBottomWidth={2}
               borderColor={"gray"}
             >
