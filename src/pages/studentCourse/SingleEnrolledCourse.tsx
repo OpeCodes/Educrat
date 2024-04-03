@@ -90,10 +90,9 @@ const SingleEnrolledCourse = () => {
             <Popover
               initialFocusRef={initialFocusRef}
               placement="bottom"
-              closeOnBlur={false}
             >
               <PopoverTrigger>
-                <Button>Trigger</Button>
+                <Text as={"button"} color={"white"} fontSize={15}>Your Progress</Text>
               </PopoverTrigger>
               <PopoverContent color="black" bg="white" borderRadius={0}>
                 <PopoverHeader pt={4} fontWeight="bold" border="0">
