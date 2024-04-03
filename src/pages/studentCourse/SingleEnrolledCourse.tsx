@@ -70,18 +70,17 @@ const SingleEnrolledCourse = () => {
             Learn frontend development from peter
           </Text>
         </Flex>
-        <Flex align={"center"} columnGap={3}>
-          <CircularProgress value={40} color="green.400" thickness='4px'>
+        <Flex align={"center"} columnGap={1}>
+          <CircularProgress value={40} color="green.400" thickness="4px">
             <CircularProgressLabel color={"white"}>
               <Text ml={"17.5px"}>
-              <FaTrophy color={"white"} fontSize={15} />
-
+                <FaTrophy color={"white"} fontSize={15} />
               </Text>
             </CircularProgressLabel>
           </CircularProgress>
           <Flex columnGap={4}>
-          <Text color ={"white"}>Your Progress</Text>
-          <Text color={"white"}> Share this course</Text>
+            <Text color={"white"}>Your Progress</Text>
+            <Text color={"white"}> Share this course</Text>
           </Flex>
         </Flex>
       </Flex>
