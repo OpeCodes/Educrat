@@ -78,7 +78,11 @@ const SingleEnrolledCourse = () => {
             Learn frontend development from peter
           </Text>
         </Flex>
-        <Flex align={"center"} columnGap={1} display={{base: "none", md: "flex"}}>
+        <Flex
+          align={"center"}
+          columnGap={1}
+          display={{ base: "none", md: "flex" }}
+        >
           <CircularProgress value={40} color="green.400" thickness="4px">
             <CircularProgressLabel color={"white"}>
               <Text ml={"17.5px"}>
@@ -87,12 +91,11 @@ const SingleEnrolledCourse = () => {
             </CircularProgressLabel>
           </CircularProgress>
           <Flex columnGap={4}>
-            <Popover
-              initialFocusRef={initialFocusRef}
-              placement="bottom"
-            >
+            <Popover initialFocusRef={initialFocusRef} placement="bottom">
               <PopoverTrigger>
-                <Text as={"button"} color={"white"} fontSize={15}>Your Progress</Text>
+                <Text as={"button"} color={"white"} fontSize={15}>
+                  Your Progress
+                </Text>
               </PopoverTrigger>
               <PopoverContent color="black" bg="white" borderRadius={0}>
                 <PopoverHeader pt={4} fontWeight="bold" border="0">
@@ -102,7 +105,6 @@ const SingleEnrolledCourse = () => {
                 <PopoverBody>Finish course to get your certificate</PopoverBody>
               </PopoverContent>
             </Popover>
-
             <Text color={"white"}> Share this course</Text>
           </Flex>
         </Flex>
@@ -110,7 +112,7 @@ const SingleEnrolledCourse = () => {
       <Stack>
         <Flex
           justify={"space-between"}
-          mt={"3.5rem"}
+          mt={{base: "1.5rem", md: "3.1rem"}}
           flexDirection={{ base: "column", xl: "row" }}
         >
           <Stack mt={6} w={"100%"}>
