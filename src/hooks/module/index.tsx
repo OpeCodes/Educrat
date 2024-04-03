@@ -351,7 +351,7 @@ export const useGetSingleModuleCourse = (id: any) => {
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; // Destructure the queryKey to get the 'id'
-      const { data } = await customFetch.get(`module/${id}`);
+      const { data } = await customFetch.get(`/module/${id}`);
       return data;
     },
   });

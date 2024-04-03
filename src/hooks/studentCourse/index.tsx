@@ -1,4 +1,4 @@
-import {  useMutation, useQuery,  } from "@tanstack/react-query";
+import {  useMutation, useQuery, useQueryClient,  } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import { useToast } from "@chakra-ui/react";
 export const useGetStudentSingleCourse = (slug: any) => {
@@ -85,9 +85,15 @@ export const useCourseEnrollment = () => {
 };
 
 
+
+
+
+// ***************************************************reviews***************************************
+
+
 export const useCreateEnrolledCourseReview = () => {
   const toast = useToast();
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const {
     mutate: createEnrolledCourseReview,
@@ -97,7 +103,7 @@ export const useCreateEnrolledCourseReview = () => {
       return customFetch.post(`/course/review/course/${courseId}`);
     },
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ["module"] });
+      queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
 
       toast({
         title: `review successful`,
@@ -132,4 +138,25 @@ export const useCreateEnrolledCourseReview = () => {
     },
   });
   return { createEnrolledCourseReview, createEnrolledCourseReviewLoading};
+};
+export const useGetCourseReview = (id: any) => {
+  const {
+    data: getCourseReview,
+    isPending,
+    refetch,
+    isError,
+  } = useQuery({
+    queryKey: ["getCourseReview", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; // Destructure the queryKey to get the 'id'
+      const { data } = await customFetch.get(`/course/review/course${id}`);
+      return data;
+    },
+  })
+  return {
+    getCourseReview,
+    isPending,
+    isError,
+    refetch,
+  };
 };
