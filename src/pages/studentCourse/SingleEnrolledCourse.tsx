@@ -23,13 +23,13 @@ import { Link } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
-import { FaStar,  } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 const dummyData = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 const dummyData2 = [1, 2, 3, 3];
 const initialValues = {
   title: "",
   content: "",
-  rating: 0,
+  stars: 0,
 };
 const SingleEnrolledCourse = () => {
   const handleSubmit = (values: any) => {
@@ -131,17 +131,17 @@ const SingleEnrolledCourse = () => {
                               p={0}
                               m={0}
                               icon={
-                                values.rating >= index + 1 ? (
-                                  index + 1 === values.rating ? (
-                                    <FaStar color="#FFE234"/>
+                                values.stars >= index + 1 ? (
+                                  index + 1 === values.stars ? (
+                                    <FaStar color="#FFE234" />
                                   ) : (
-                                    <FaStar color="#FFE234"/>
+                                    <FaStar color="#FFE234" />
                                   )
                                 ) : (
                                   <FaStar color="gray" />
                                 )
                               }
-                              onClick={() => setFieldValue("rating", index + 1)}
+                              onClick={() => setFieldValue("stars", index + 1)}
                               variant="unstyled"
                               aria-label={`${index + 1} stars`}
                             />
