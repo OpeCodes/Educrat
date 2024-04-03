@@ -37,9 +37,9 @@ import { convertSecondsToHMS } from "../../components/TimeFormat";
 
 
 const SingleCourse = () => {
-  const { slug } = useParams();
+  const { slug,index} = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  // console.log(getStudentSingleCourse);
+  console.log(getStudentSingleCourse);
  
 
   const dateString = getStudentSingleCourse?.updatedAt;
@@ -53,7 +53,8 @@ const SingleCourse = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
-  const hi = false;
+ 
+
 
   const getTotalLecturesDuration = () => {
     let totalDuration = 0;
@@ -72,6 +73,19 @@ const SingleCourse = () => {
    const {data} =  useGetAllUEnrolledCourse();
   const { courseEnroll } = useCourseEnrollment();
    console.log(data)
+   const singleID: string[] = (data ?? [])
+    .flat(2)
+    .map((obj: any) => obj.id);
+    const singleSlug: string[] = (data ?? [])
+    .flat(2)
+    .map((obj: any) => obj?.courseId?.slug);
+    console.log(singleSlug)
+
+    let exists = false;
+if (slug) {
+  // Ensure slug is defined before using toLowerCase()
+  exists = singleSlug.includes(slug.toLowerCase());
+}
   return (
     <Stack>
       <Stack>
@@ -95,7 +109,7 @@ const SingleCourse = () => {
                   <Text>All Courses</Text>
                 </Flex>
               </Flex>
-            </Stack>
+            </Stack>          
             {isPending ? (
               <Stack mx={"4.3rem"}>
                 <Skeleton height="60px" />
@@ -385,7 +399,7 @@ const SingleCourse = () => {
                       overflowY={{ base: "hidden", lg: "scroll" }}
                     >
                       <Stack mx={{ base: 0, lg: 4 }}>
-                        {!hi ? (
+                        {!exists ? (
                           <Stack>
                             <Text mt={3} fontSize={"1.5rem"}>
                               $120
@@ -395,9 +409,12 @@ const SingleCourse = () => {
                               py={"25px"}
                               variant="solid"
                               color={"white"}
+                              as={Link}
+                              to={`/course/${slug}/learn/lecture/${singleID[parseInt(index ?? "0")]}`}
                             >
                               Add to Cart
                             </Button>
+
                             <Button
                               borderColor={"#140342"}
                               py={"25px"}
