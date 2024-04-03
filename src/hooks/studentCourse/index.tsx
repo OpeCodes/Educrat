@@ -114,10 +114,12 @@ export const useCreateEnrolledCourseReview = () => {
       return customFetch.post(`/course/review/course/${courseId}`, review);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
+      // queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
+      queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
+      // singleCourse
 
       toast({
-        title: `review successful`,
+        title: `review submitted`,
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -158,7 +160,7 @@ export const useGetCourseReview = (id: any) => {
     queryKey: ["getCourseReview", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; 
-      const { data } = await customFetch.get(`/course/review/course${id}`);
+      const { data } = await customFetch.get(`/course/review/course/${id}`);
       return data;
     },
   });

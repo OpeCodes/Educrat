@@ -29,8 +29,8 @@ const initialValues = {
 // myPassword =  .
 
 //student
-//adededokunpeter11@gmail.com
-// password = Peter@167
+//peteradedokun436@gmail.com
+// password = MsjR2yAysYU2DW2
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);

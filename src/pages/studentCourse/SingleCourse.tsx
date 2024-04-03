@@ -31,6 +31,7 @@ import StudentCourseContent from "../../components/StudentCourseContent";
 import {
   useCourseEnrollment,
   useGetAllUEnrolledCourse,
+  useGetCourseReview,
   useGetStudentSingleCourse,
 } from "../../hooks/studentCourse";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
@@ -38,8 +39,9 @@ import { convertSecondsToHMS } from "../../components/TimeFormat";
 const SingleCourse = () => {
   const { slug, index } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-
-
+  console.log(getStudentSingleCourse?.id);
+  const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
+  console.log(getCourseReview);
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
@@ -66,7 +68,7 @@ const SingleCourse = () => {
   const totalDuration = getTotalLecturesDuration();
 
   const { data } = useGetAllUEnrolledCourse();
-  const { courseEnroll } = useCourseEnrollment(); 
+  const { courseEnroll } = useCourseEnrollment();
   const singleID: string[] = (data ?? []).flat(2).map((obj: any) => obj.id);
   const singleSlug: string[] = (data ?? [])
     .flat(2)
@@ -342,22 +344,28 @@ const SingleCourse = () => {
                       >
                         Reviews
                       </Text>
-                      <Flex columnGap={3} mt={3}>
-                        <Avatar size="lg" name="Adedokun Peter" />
-                        <Stack>
-                          <Flex columnGap={1} rowGap={3}>
-                            <Text color={"black"}>Adedokun Peter</Text>
-                            <Text>3 days ago</Text>
+                      {getStudentSingleCourse?.reviews.map((review: any) => {
+                        const { firstName, lastName, title, content } = review;
+                        return (
+                          <Flex columnGap={3} mt={3}>
+                            <Avatar
+                              size="lg"
+                              name={`${firstName} ${lastName}`}
+                              src={""}
+                            />
+                            <Stack>
+                              <Flex columnGap={1} rowGap={3}>
+                                <Text color={"black"}>
+                                  {firstName} {lastName}
+                                </Text>
+                                <Text>3 days ago</Text>
+                              </Flex>
+                              <Text color={"black"}>{title}</Text>
+                              <Text>{content}</Text>
+                            </Stack>
                           </Flex>
-                          <Text color={"black"}>The best LMS Design</Text>
-                          <Text>
-                            This course is a very applicable. Professor Ng
-                            explains precisely each algorithm and even tries to
-                            give an intuition for mathematical and statistic
-                            concepts behind each algorithm. Thank you very much.
-                          </Text>
-                        </Stack>
-                      </Flex>
+                        );
+                      })}
                     </Stack>
                   </Stack>
                 </Stack>
