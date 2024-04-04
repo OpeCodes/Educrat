@@ -30,11 +30,12 @@ import {
   useCourseEnrollment,
   useGetAllUEnrolledCourse,
   useGetCourseReview,
+  useGetCourseReviewRating,
   useGetStudentSingleCourse,
   useInstructorReviewRating,
   // useInstructorReviewRating,
 } from "../../hooks/studentCourse";
-import { FaStar } from 'react-icons/fa';
+import { FaStar } from "react-icons/fa";
 import {
   convertSecondsToHMS,
   getTimeDifference,
@@ -45,7 +46,14 @@ const SingleCourse = () => {
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
 
-   const {instructorReviewRating} = useInstructorReviewRating(getStudentSingleCourse?.userId?.id)
+  const { instructorReviewRating } = useInstructorReviewRating(
+    getStudentSingleCourse?.userId?.id
+  );
+  const { courseReviewRating } = useGetCourseReviewRating(
+    getStudentSingleCourse?.id
+  );
+  console.log(courseReviewRating, "course");
+  console.log(instructorReviewRating, "instructor");
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
@@ -83,18 +91,17 @@ const SingleCourse = () => {
     exists = singleSlug.includes(slug.toLowerCase());
   }
 
-  //instuctor star 
+  //instuctor star
   const stars = [];
   // Fill stars based on the rating value
   for (let i = 1; i <= 5; i++) {
     stars.push(
-      <FaStar 
-        key={i} 
-        color={i <= instructorReviewRating?.average ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
+      <FaStar
+        key={i}
+        color={i <= courseReviewRating?.average ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
       />
     );
   }
-  
 
   return (
     <Stack>
@@ -176,9 +183,13 @@ const SingleCourse = () => {
                     columnGap={6}
                   >
                     <Flex align={"center"} columnGap={1}>
-                      <Text color={"#FFD700"}>{instructorReviewRating?.average}</Text>
-                      <Text display={"flex"} columnGap={1}>{stars}</Text>
-                      <Text>({instructorReviewRating?.total})</Text>
+                      <Text color={"#FFD700"}>
+                        {courseReviewRating?.average}
+                      </Text>
+                      <Text display={"flex"} columnGap={1}>
+                        {stars}
+                      </Text>
+                      <Text>({courseReviewRating?.total})</Text>
                     </Flex>
                     <Flex align={"center"} columnGap={2}>
                       <Text>
@@ -319,14 +330,21 @@ const SingleCourse = () => {
                               <Text>Instructor Rating</Text>
                             </Flex>
                             <Flex
-                              columnGap={1}
+                              columnGap={2}
                               color={"#4f547b"}
                               align={"center"}
                             >
                               <Text>
                                 <HiOutlineChat />
                               </Text>
-                              <Text>23,987 Reviews</Text>
+                              <Text>
+                                {
+                                  +parseFloat(
+                                    instructorReviewRating?.total
+                                  ).toFixed(2)
+                                }
+                              </Text>
+                              <Text> Reviews</Text>
                             </Flex>
                             <Flex
                               columnGap={1}
