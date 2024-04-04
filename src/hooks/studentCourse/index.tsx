@@ -100,6 +100,28 @@ export const useGetSingleEnrolledCourse = (id: any) => {
   };
 };
 
+export const useGetStudentEnrolledCourse= (id: any) => {
+  const {
+    data: getSingleEnrolledCourse,
+    isPending,
+  } = useQuery({
+    queryKey: ["getCourseReview", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; 
+      const { data } = await customFetch.get(`/enrollment/course/${id}/enrolled-students`);
+      return data;
+    },
+  });
+  return {
+    getSingleEnrolledCourse,
+    isPending,
+  };
+};
+
+
+
+
+
 // ***************************************************reviews***************************************
 
 export const useCreateEnrolledCourseReview = () => {
