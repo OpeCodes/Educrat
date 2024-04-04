@@ -7,7 +7,7 @@ import {
   Text,
   Flex,
   Box,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 // import { useQueryClient  } from "@tanstack/react-query";
@@ -22,14 +22,11 @@ const MAX_FILE_SIZE_MB = 50;
 const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
   onImageUpload2,
 }) => {
-  const { id} = useParams();
-  const [selectedImageName, setSelectImageName] = useState<any>(null);
+  const { id } = useParams();
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
-    console.log(setSelectImageName)
-
 
     if (file) {
       if (!file.type.startsWith("video/")) {
@@ -50,14 +47,11 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
           duration: 5000,
           isClosable: true,
         });
-      }
-       else {
-
+      } else {
         await uploadImage(file);
       }
     }
   };
-
 
   const uploadImage = async (file: File) => {
     const reader = new FileReader();
@@ -122,24 +116,12 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
   return (
     <Flex flexDirection={{ base: "column", md: "row" }}>
       <Box mb={4}>
-        {selectedImageName ? (
-          <Image
-            src={selectedImageName}
-            width="650px"
-            height={"200px"}
-            alt="Uploaded Image"
-            mt={4}
-        
-            objectFit={"cover"}
-          />
-        ) : (
-          <Image
-            src={imagePlaceholder}
-            width="650px"
-            height={"200px"}
-            objectFit={"cover"}
-          />
-        )}
+        <Image
+          src={imagePlaceholder}
+          width="650px"
+          height={"200px"}
+          objectFit={"cover"}
+        />
       </Box>
       <Stack ml={4} mt={5}>
         <Text>
@@ -162,7 +144,5 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
 };
 
 export default CoursePromotionalVideoUpload;
-
-
 
 // CoursePromotionalVideoUpload
