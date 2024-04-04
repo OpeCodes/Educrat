@@ -91,6 +91,9 @@ const SingleCourse = () => {
     exists = singleSlug.includes(slug.toLowerCase());
   }
 
+  //rounding the rating to whole number always
+  let ratingFormat = parseFloat(courseReviewRating?.average);
+
   //instuctor star
   const stars = [];
   // Fill stars based on the rating value
@@ -98,7 +101,7 @@ const SingleCourse = () => {
     stars.push(
       <FaStar
         key={i}
-        color={i <= courseReviewRating?.average ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
+        color={i <= Math.round(ratingFormat) ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
       />
     );
   }
@@ -183,9 +186,7 @@ const SingleCourse = () => {
                     columnGap={6}
                   >
                     <Flex align={"center"} columnGap={1}>
-                      <Text color={"#FFD700"}>
-                        {courseReviewRating?.average}
-                      </Text>
+                      <Text color={"#FFD700"}>{Math.round(ratingFormat)}</Text>
                       <Text display={"flex"} columnGap={1}>
                         {stars}
                       </Text>
@@ -328,9 +329,7 @@ const SingleCourse = () => {
                           >
                             <Flex columnGap={1} align={"center"}>
                               <Text>
-                                <FaStar
-                                  color={"#FFD700"} 
-                                />
+                                <FaStar color={"#FFD700"} />
                               </Text>
                               <Text color={"#FFD700"}>
                                 {
