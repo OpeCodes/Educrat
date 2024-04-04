@@ -31,6 +31,7 @@ import {
   useGetAllUEnrolledCourse,
   useGetCourseReview,
   useGetStudentSingleCourse,
+  useInstructorReviewRating,
   // useInstructorReviewRating,
 } from "../../hooks/studentCourse";
 import { FaStar } from 'react-icons/fa';
@@ -44,8 +45,8 @@ const SingleCourse = () => {
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
 
-  //  const {instructorReviewRating} = useInstructorReviewRating(getStudentSingleCourse?.userId?.id)
-  //  console.log(instructorReviewRating, "peter")
+   const {instructorReviewRating} = useInstructorReviewRating(getStudentSingleCourse?.userId?.id)
+   console.log(instructorReviewRating, "peter")
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
@@ -85,13 +86,12 @@ const SingleCourse = () => {
 
   //instuctor star 
   const stars = [];
- let rating= 3
   // Fill stars based on the rating value
   for (let i = 1; i <= 5; i++) {
     stars.push(
       <FaStar 
         key={i} 
-        color={i <= rating ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
+        color={i <= instructorReviewRating?.average ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
       />
     );
   }
@@ -177,7 +177,7 @@ const SingleCourse = () => {
                     columnGap={6}
                   >
                     <Flex align={"center"} columnGap={1}>
-                      <Text color={"#FFD700"}>4.5</Text>
+                      <Text color={"#FFD700"}>{instructorReviewRating?.average}</Text>
                       <Text display={"flex"} columnGap={1}>{stars}</Text>
                       <Text>(2990)</Text>
                     </Flex>
