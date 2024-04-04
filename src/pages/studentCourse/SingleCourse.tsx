@@ -179,7 +179,7 @@ const SingleCourse = () => {
                     <Flex align={"center"} columnGap={1}>
                       <Text color={"#FFD700"}>{instructorReviewRating?.average}</Text>
                       <Text display={"flex"} columnGap={1}>{stars}</Text>
-                      <Text>(2990)</Text>
+                      <Text>({instructorReviewRating?.total})</Text>
                     </Flex>
                     <Flex align={"center"} columnGap={2}>
                       <Text>
