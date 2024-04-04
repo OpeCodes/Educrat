@@ -33,6 +33,7 @@ import {
   useGetStudentSingleCourse,
   // useInstructorReviewRating,
 } from "../../hooks/studentCourse";
+import { FaStar } from 'react-icons/fa';
 import {
   convertSecondsToHMS,
   getTimeDifference,
@@ -41,7 +42,6 @@ import {
 const SingleCourse = () => {
   const { slug, index } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse?.userId?.id, "this bro")
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
 
   //  const {instructorReviewRating} = useInstructorReviewRating(getStudentSingleCourse?.userId?.id)
@@ -82,6 +82,21 @@ const SingleCourse = () => {
   if (slug) {
     exists = singleSlug.includes(slug.toLowerCase());
   }
+
+  //instuctor star 
+  const stars = [];
+ let rating= 3
+  // Fill stars based on the rating value
+  for (let i = 1; i <= 5; i++) {
+    stars.push(
+      <FaStar 
+        key={i} 
+        color={i <= rating ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
+      />
+    );
+  }
+  
+
   return (
     <Stack>
       <Stack>
@@ -162,7 +177,7 @@ const SingleCourse = () => {
                     columnGap={6}
                   >
                     <Flex>
-                      <Text>star review here</Text>
+                      <Text display={"flex"} columnGap={1}>{stars}</Text>
                     </Flex>
                     <Flex align={"center"} columnGap={2}>
                       <Text>
