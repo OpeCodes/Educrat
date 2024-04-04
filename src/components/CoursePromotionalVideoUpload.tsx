@@ -125,9 +125,9 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
       </Box>
       <Stack ml={4} mt={5}>
         <Text>
-          Upload your course image here. It must meet our course image quality
-          standards to be accepted. Important guidelines: 750x422 pixels; .jpg,
-          .jpeg, .gif, or .png. no text on the image.
+          Your promo video is a quick and compelling way for students to preview
+          what they’ll learn in your course. Students considering your course
+          are more likely to enroll if your promo video is well-made. 
         </Text>
         <Input
           type="file"
@@ -144,5 +144,3 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
 };
 
 export default CoursePromotionalVideoUpload;
-
-// CoursePromotionalVideoUpload
