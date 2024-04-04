@@ -1,11 +1,191 @@
-
-const CoursePromotionalVideoUpload = () => {
-  return (
-    <div>CoursePromotionalVideoUpload</div>
-  )
+import React, { ChangeEvent, useState } from "react";
+import {
+  Progress,
+  Input,
+  useToast,
+  Stack,
+  Text,
+  Flex,
+  Box,
+  Image
+} from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
+// import { useQueryClient  } from "@tanstack/react-query";
+import imagePlaceholder from "../assets/CourseImagePlaceholder.jpg";
+import customFetch from "../utils/axios";
+interface ImageUploadProps {
+  onImageUpload2: (file: File) => void;
 }
 
-export default CoursePromotionalVideoUpload
+const MAX_FILE_SIZE_MB = 50;
+
+const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
+  onImageUpload2,
+}) => {
+  const { id} = useParams();
+  const [selectedImageName, setSelectImageName] = useState<any>(null);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const toast = useToast();
+  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+
+    if (file) {
+      if (!file.type.startsWith("video/")) {
+        toast({
+          title: "Please select a video file",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        return;
+      }
+    }
+    if (file) {
+      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        toast({
+          title: `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+       else {
+
+        await uploadImage(file);
+      }
+    }
+  };
+
+  // const getVideoDuration = async (file: File): Promise<number> => {
+  //   return new Promise((resolve) => {
+  //     const video = document.createElement("video");
+  //     video.preload = "metadata";
+  //     video.onloadedmetadata = () => {
+
+  //       const width = video.videoWidth;
+  //       const height = video.videoHeight;
+  //       if (width < 1200 || height < 700) {
+  //         toast({
+  //           title: "Video dimensions are invalid",
+  //           description: "Width must be 900px and height must be at least 428px",
+  //           status: "error",
+  //           duration: 5000,
+  //           isClosable: true,
+  //         });
+  //         return;
+  //       }
+  //       setSelectImageName(file);
+
+  //       window.URL.revokeObjectURL(video.src);
+  //       resolve(video.duration);
+  //     };
+  //     video.src = URL.createObjectURL(file);
+  //   });
+  // };
+
+  const uploadImage = async (file: File) => {
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64Data = reader.result as string;
+      const endpoint = `/course/${id}/promotional-video`;
+      try {
+        const response = await customFetch.put(
+          endpoint,
+          { video: base64Data },
+          {
+            headers: { "Content-Type": "application/json" },
+            onUploadProgress: (progressEvent: {
+              loaded: number;
+              total?: number;
+            }) => {
+              if (progressEvent.total) {
+                const percentCompleted = Math.round(
+                  (progressEvent.loaded * 100) / progressEvent.total
+                );
+                setUploadProgress(percentCompleted);
+              }
+            },
+          }
+        );
+
+        console.log("Upload completed:", response.data);
+        toast({
+          title: `Video uploaded`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        onImageUpload2(file);
+      } catch (error: any) {
+        if (error.response) {
+          toast({
+            title: `${error.response.data.error}`,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else if (error.request) {
+          toast({
+            title: "Network error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "An error occurred. Please try again later.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+  return (
+    <Flex flexDirection={{ base: "column", md: "row" }}>
+      <Box mb={4}>
+        {selectedImageName ? (
+          <Image
+            src={selectedImageName}
+            width="650px"
+            height={"200px"}
+            alt="Uploaded Image"
+            mt={4}
+            accept="video/*"
+            objectFit={"cover"}
+          />
+        ) : (
+          <Image
+            src={imagePlaceholder}
+            width="650px"
+            height={"200px"}
+            objectFit={"cover"}
+          />
+        )}
+      </Box>
+      <Stack ml={4} mt={5}>
+        <Text>
+          Upload your course image here. It must meet our course image quality
+          standards to be accepted. Important guidelines: 750x422 pixels; .jpg,
+          .jpeg, .gif, or .png. no text on the image.
+        </Text>
+        <Input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          mt={2}
+        />
+      </Stack>
+      {uploadProgress > 0 && uploadProgress < 100 && (
+        <Progress value={uploadProgress} size="sm" mt={2} />
+      )}
+    </Flex>
+  );
+};
+
+export default CoursePromotionalVideoUpload;
 
 
 

@@ -20,7 +20,7 @@ import {
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect } from "react";
-import { CourseImageFileUpload, Loading } from "../../../../components";
+import { CourseImageFileUpload, CoursePromotionalVideoUpload, Loading } from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
 import { CourseEditCreate } from "../../../../interface/courseInterface";
@@ -277,6 +277,13 @@ const CourseLandingPage = () => {
                   Course Image
                 </Text>
                 <CourseImageFileUpload onImageUpload={handleImageUpload} />
+              </Stack>
+
+              <Stack>
+                <Text fontWeight={"bold"} mt={2}>
+                  
+                </Text>
+                <CoursePromotionalVideoUpload onImageUpload2={handleImageUpload} />
               </Stack>
 
               <Flex justify={"flex-end"}>
