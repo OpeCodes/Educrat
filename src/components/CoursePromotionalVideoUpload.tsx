@@ -58,32 +58,6 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
     }
   };
 
-  // const getVideoDuration = async (file: File): Promise<number> => {
-  //   return new Promise((resolve) => {
-  //     const video = document.createElement("video");
-  //     video.preload = "metadata";
-  //     video.onloadedmetadata = () => {
-
-  //       const width = video.videoWidth;
-  //       const height = video.videoHeight;
-  //       if (width < 1200 || height < 700) {
-  //         toast({
-  //           title: "Video dimensions are invalid",
-  //           description: "Width must be 900px and height must be at least 428px",
-  //           status: "error",
-  //           duration: 5000,
-  //           isClosable: true,
-  //         });
-  //         return;
-  //       }
-  //       setSelectImageName(file);
-
-  //       window.URL.revokeObjectURL(video.src);
-  //       resolve(video.duration);
-  //     };
-  //     video.src = URL.createObjectURL(file);
-  //   });
-  // };
 
   const uploadImage = async (file: File) => {
     const reader = new FileReader();

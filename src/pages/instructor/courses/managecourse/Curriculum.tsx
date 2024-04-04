@@ -66,6 +66,7 @@ import { VscLinkExternal } from "react-icons/vsc";
 import { CurriculumInterface } from "../../../../interface/courseInterface";
 import ExternalResourceDownloadableFile from "../../../../components/ExternalResourceDownloadableFile";
 import { HiFolderDownload } from "react-icons/hi";
+import { ToastLoading } from "../../../../components";
 import { convertSecondsToTime } from "../../../../components/TimeFormat";
 const Curriculum = () => {
   const { id } = useParams();
@@ -99,12 +100,24 @@ const Curriculum = () => {
     title: "",
     url: "",
   };
+const toast = useToast()
   const {
     moduleCreateCourse,
     isPending: moduleLoading,
     setShowSection,
     showSection,
   } = useModuleCreateCourse();
+
+  ToastLoading(moduleLoading,toast)
+  ToastLoading(deleteModuleLoading,toast)
+  ToastLoading(moduleEditLectureLoading,toast)
+  ToastLoading(deleteLecutureModuleCourseLoading,toast)
+  ToastLoading(moduleEditCourseLoading,toast)
+  //moduleEditCourseLoading
+  
+
+
+
   const { createArticleLectureCourse } = useCreateArticleLectureCourse();
   const handleSubmit = (values: any): void => {
     moduleCreateCourse({ courseId: getSingleCourse?.id, user: values });
