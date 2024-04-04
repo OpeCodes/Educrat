@@ -20,7 +20,11 @@ import {
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect } from "react";
-import { CourseImageFileUpload, CoursePromotionalVideoUpload, Loading } from "../../../../components";
+import {
+  CourseImageFileUpload,
+  CoursePromotionalVideoUpload,
+  Loading,
+} from "../../../../components";
 import { Error } from "../../../auth";
 import { useParams } from "react-router-dom";
 import { CourseEditCreate } from "../../../../interface/courseInterface";
@@ -38,12 +42,17 @@ const CourseLandingPage = () => {
     refetch,
   } = useGetSingleCourse(id);
 
+  const checkLearningObjective =
+    getSingleCourse?.learningObjectives.length === 0;
+
   const initialValues: CourseEditCreate = {
     title: getSingleCourse?.title || "",
     subtitle: getSingleCourse?.subtitle || "",
     language: getSingleCourse?.language || "",
     preRequisites: getSingleCourse?.preRequisites || "",
-    learningObjectives: getSingleCourse?.learningObjectives || ["", "", ""],
+    learningObjectives: checkLearningObjective
+      ? ["", "", "", ""]
+      : getSingleCourse?.learningObjectives,
     category: getSingleCourse?.category?.id,
     description: getSingleCourse?.description || "",
     complexityLevel: getSingleCourse?.complexityLevel,
@@ -152,7 +161,7 @@ const CourseLandingPage = () => {
                   You must enter at 4 learning objectives or outcomes that
                   learners can expect to achieve after completing your course.
                 </Text>
-                {values?.learningObjectives?.map((value: any, index: any) => (
+                {values.learningObjectives.map((value: any, index: any) => (
                   <Stack key={index}>
                     <FormControl isRequired>
                       <Input
@@ -280,10 +289,10 @@ const CourseLandingPage = () => {
               </Stack>
 
               <Stack>
-                <Text fontWeight={"bold"} mt={2}>
-                  
-                </Text>
-                <CoursePromotionalVideoUpload onImageUpload2={handleImageUpload} />
+                <Text fontWeight={"bold"} mt={2}></Text>
+                <CoursePromotionalVideoUpload
+                  onImageUpload2={handleImageUpload}
+                />
               </Stack>
 
               <Flex justify={"flex-end"}>
