@@ -102,7 +102,7 @@ export const useGetSingleEnrolledCourse = (id: any) => {
 
 export const useGetStudentEnrolledCourse= (id: any) => {
   const {
-    data: getSingleEnrolledCourse,
+    data:getStudentEnrolledCourse,
     isPending,
   } = useQuery({
     queryKey: ["getCourseReview", id],
@@ -113,7 +113,7 @@ export const useGetStudentEnrolledCourse= (id: any) => {
     },
   });
   return {
-    getSingleEnrolledCourse,
+    getStudentEnrolledCourse,
     isPending,
   };
 };

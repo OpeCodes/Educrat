@@ -31,6 +31,7 @@ import {
   useGetAllUEnrolledCourse,
   useGetCourseReview,
   useGetCourseReviewRating,
+  useGetStudentEnrolledCourse,
   useGetStudentSingleCourse,
   useInstructorReviewRating,
   // useInstructorReviewRating,
@@ -52,8 +53,7 @@ const SingleCourse = () => {
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
-  console.log(courseReviewRating, "course");
-  console.log(instructorReviewRating, "instructor");
+  console.log(courseReviewRating?.average, "course");
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
@@ -81,6 +81,12 @@ const SingleCourse = () => {
 
   const { data } = useGetAllUEnrolledCourse();
   const { courseEnroll } = useCourseEnrollment();
+  console.log(getStudentSingleCourse);
+
+  const { getStudentEnrolledCourse } = useGetStudentEnrolledCourse(
+    getStudentSingleCourse?.id
+  );
+  console.log(getStudentEnrolledCourse, "peter");
   const singleID: string[] = (data ?? []).flat(2).map((obj: any) => obj.id);
   const singleSlug: string[] = (data ?? [])
     .flat(2)
@@ -92,7 +98,9 @@ const SingleCourse = () => {
   }
 
   //rounding the rating to whole number always
-  let ratingFormat = parseFloat(courseReviewRating?.average);
+  let ratingFormat = parseFloat(
+    courseReviewRating?.average === "NaN" ? "0" : courseReviewRating?.average
+  );
 
   //instuctor star
   const stars = [];
@@ -196,7 +204,10 @@ const SingleCourse = () => {
                       <Text>
                         <LuClock3 />
                       </Text>
-                      <Text>853 enrolled on this course</Text>
+                      <Text>
+                        {getStudentEnrolledCourse?.length} enrolled on this
+                        course
+                      </Text>
                     </Flex>
                     <Flex align={"center"} columnGap={2}>
                       <Text>
