@@ -53,7 +53,6 @@ const SingleCourse = () => {
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
-  console.log(courseReviewRating?.average, "course");
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
@@ -86,7 +85,6 @@ const SingleCourse = () => {
   const { getStudentEnrolledCourse } = useGetStudentEnrolledCourse(
     getStudentSingleCourse?.id
   );
-  console.log(getStudentEnrolledCourse, "peter");
   const singleID: string[] = (data ?? []).flat(2).map((obj: any) => obj.id);
   const singleSlug: string[] = (data ?? [])
     .flat(2)
