@@ -28,6 +28,8 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
+    console.log(setSelectImageName)
+
 
     if (file) {
       if (!file.type.startsWith("video/")) {
@@ -153,7 +155,7 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
             height={"200px"}
             alt="Uploaded Image"
             mt={4}
-            accept="video/*"
+        
             objectFit={"cover"}
           />
         ) : (
@@ -173,7 +175,7 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
         </Text>
         <Input
           type="file"
-          accept="image/*"
+          accept="video/*"
           onChange={handleImageChange}
           mt={2}
         />
