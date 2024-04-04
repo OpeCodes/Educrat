@@ -187,3 +187,22 @@ export const useInstructorReviewRating = (id: any) => {
     isPending,
   };
 };
+
+
+export const useGetCourseReviewRating = (id: any) => {
+  const {
+    data: courseReviewRating,
+    isPending,
+  } = useQuery({
+    queryKey: ["courseReviewRating", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; 
+      const { data } = await customFetch.get(`/course/review/course/${id}/rating`);
+      return data;
+    },
+  });
+  return {
+    courseReviewRating,
+    isPending,
+  };
+}
