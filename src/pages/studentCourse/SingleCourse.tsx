@@ -326,9 +326,13 @@ const SingleCourse = () => {
                             fontSize={"0.9rem"}
                             flexDirection={{ base: "column", lg: "row" }}
                           >
-                            <Flex columnGap={1}>
+                            <Flex columnGap={1} align={"center"}>
+                              <Text>
+                                <FaStar
+                                  color={"#FFD700"} 
+                                />
+                              </Text>
                               <Text color={"#FFD700"}>
-                                {" "}
                                 {
                                   +parseFloat(
                                     instructorReviewRating?.average
