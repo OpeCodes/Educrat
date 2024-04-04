@@ -176,8 +176,10 @@ const SingleCourse = () => {
                     align={{ base: "start", lg: "center" }}
                     columnGap={6}
                   >
-                    <Flex>
+                    <Flex align={"center"} columnGap={1}>
+                      <Text color={"#FFD700"}>4.5</Text>
                       <Text display={"flex"} columnGap={1}>{stars}</Text>
+                      <Text>(2990)</Text>
                     </Flex>
                     <Flex align={"center"} columnGap={2}>
                       <Text>
