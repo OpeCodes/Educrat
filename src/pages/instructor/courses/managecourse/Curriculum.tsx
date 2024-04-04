@@ -108,12 +108,6 @@ const toast = useToast()
     showSection,
   } = useModuleCreateCourse();
 
-  ToastLoading(moduleLoading,toast)
-  ToastLoading(deleteModuleLoading,toast)
-  ToastLoading(moduleEditLectureLoading,toast)
-  ToastLoading(deleteLecutureModuleCourseLoading,toast)
-  ToastLoading(moduleEditCourseLoading,toast)
-  //moduleEditCourseLoading
   
 
 
