@@ -28,10 +28,13 @@ import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import {
   useCourseEnrollment,
-  useGetAllUEnrolledCourse,
+  // useGetAllUEnrolledCourse,
   useGetCourseReview,
   useGetCourseReviewRating,
-  useGetStudentEnrolledCourse,
+  // useGetStudentEnrolledCourse,
+  // useGetStudentEnrolledCourse111111,
+  // useGetStudentEnrolledCourse,
+  // useGetStudentEnrolledCourse,
   useGetStudentSingleCourse,
   useInstructorReviewRating,
   // useInstructorReviewRating,
@@ -43,10 +46,10 @@ import {
 } from "../../components/TimeFormat";
 
 const SingleCourse = () => {
-  const { slug, index } = useParams();
+  const { slug,} = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
-
+console.log(getStudentSingleCourse?.id)
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
   );
@@ -78,27 +81,26 @@ const SingleCourse = () => {
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
 
-  const { data } = useGetAllUEnrolledCourse();
+  // const { data } = useGetAllUEnrolledCourse();
   const { courseEnroll } = useCourseEnrollment();
-  console.log(getStudentSingleCourse);
+  console.log(getStudentSingleCourse)
 
-  const { getStudentEnrolledCourse } = useGetStudentEnrolledCourse(
-    getStudentSingleCourse?.id
-  );
-  const singleID: string[] = (data ?? []).flat(2).map((obj: any) => obj.id);
-  const singleSlug: string[] = (data ?? [])
-    .flat(2)
-    .map((obj: any) => obj?.courseId?.slug);
+//  const {getStudentEnrolledCourse} = useGetStudentEnrolledCourse(getStudentSingleCourse?.id);
+//  console.log(getStudentEnrolledCourse, "oooo")
+//  const {testing} = useGetStudentEnrolledCourse111111(getStudentSingleCourse?.id)
+//  console.log(testing, "testing")
+  // const singleID: string[] = (data ?? []).flat(2).map((obj: any) => obj.id);
+  // const singleSlug: string[] = (data ?? [])
+  //   .flat(2)
+  //   .map((obj: any) => obj?.courseId?.slug);
 
   let exists = false;
-  if (slug) {
-    exists = singleSlug.includes(slug.toLowerCase());
-  }
+  // if (slug) {
+  //   exists = singleSlug.includes(slug.toLowerCase());
+  // }
 
   //rounding the rating to whole number always
-  let ratingFormat = parseFloat(
-    courseReviewRating?.average === "NaN" ? "0" : courseReviewRating?.average
-  );
+  let ratingFormat = parseFloat(courseReviewRating?.average ?  courseReviewRating?.average : "0") ;
 
   //instuctor star
   const stars = [];
@@ -202,10 +204,7 @@ const SingleCourse = () => {
                       <Text>
                         <LuClock3 />
                       </Text>
-                      <Text>
-                        {getStudentEnrolledCourse?.length} enrolled on this
-                        course
-                      </Text>
+                      <Text>3 enrolled on this course</Text>
                     </Flex>
                     <Flex align={"center"} columnGap={2}>
                       <Text>
@@ -345,7 +344,7 @@ const SingleCourse = () => {
                                   +parseFloat(
                                     instructorReviewRating?.average
                                   ).toFixed(2)
-                                }{" "}
+                                }
                               </Text>
                               <Text>Instructor Rating</Text>
                             </Flex>
@@ -361,7 +360,7 @@ const SingleCourse = () => {
                                 {
                                   +parseFloat(
                                     instructorReviewRating?.total
-                                  ).toFixed(2)
+                                  ).toFixed()
                                 }
                               </Text>
                               <Text> Reviews</Text>
@@ -466,9 +465,9 @@ const SingleCourse = () => {
                               variant="solid"
                               color={"white"}
                               as={Link}
-                              to={`/course/${slug}/learn/lecture/${
-                                singleID[parseInt(index ?? "0")]
-                              }`}
+                              // to={`/course/${slug}/learn/lecture/${
+                              //   singleID[parseInt(index ?? "0")]
+                              // }`}
                             >
                               Add to Cart
                             </Button>
@@ -500,9 +499,9 @@ const SingleCourse = () => {
                               variant="solid"
                               color={"white"}
                               as={Link}
-                              to={`/course/${slug}/learn/lecture/${
-                                singleID[parseInt(index ?? "0")]
-                              }`}
+                              // to={`/course/${slug}/learn/lecture/${
+                              //   singleID[parseInt(index ?? "0")]
+                              // }`}
                             >
                               Go to Course
                             </Button>

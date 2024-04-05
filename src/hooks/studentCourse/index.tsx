@@ -105,7 +105,7 @@ export const useGetStudentEnrolledCourse= (id: any) => {
     data:getStudentEnrolledCourse,
     isPending,
   } = useQuery({
-    queryKey: ["getCourseReview", id],
+    queryKey: ["getCourseReview111", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; 
       const { data } = await customFetch.get(`/enrollment/course/${id}/enrolled-students`);
@@ -119,8 +119,42 @@ export const useGetStudentEnrolledCourse= (id: any) => {
 };
 
 
+export const useGetInstructorenrolledCourse= (id: any) => {
+  const {
+    data:getInstructorenrolledCourse,
+    isPending,
+  } = useQuery({
+    queryKey: ["getInstructorCourseReview", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; 
+      const { data } = await customFetch.get(`/enrollment/instructor/${id}/enrolled-students`);
+      return data;
+    },
+  });
+  return {
+    getInstructorenrolledCourse,
+    isPending,
+  };
+};
 
 
+// export const useGetStudentEnrolledCourse111111= (id: any) => {
+//   const {
+//     data:testing,
+//     isPending,
+//   } = useQuery({
+//     queryKey: ["getCourseReview111", id],
+//     queryFn: async ({ queryKey }) => {
+//       const [, id] = queryKey; 
+//       const { data } = await customFetch.get(`/enrollment/course/${id}`);
+//       return data;
+//     },
+//   });
+//   return {
+//     testing,
+//     isPending,
+//   };
+// };
 
 // ***************************************************reviews***************************************
 
