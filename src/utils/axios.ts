@@ -25,7 +25,6 @@ customFetch.interceptors.response.use(
     const user = getUserLocalStorage();  
     if (error.response && error.response.status === 401) {
       const refreshToken = user.accessToken;
-
       if (refreshToken) {      
         removeUserFromLocalStorage();
         navigate("/sign-in"); 

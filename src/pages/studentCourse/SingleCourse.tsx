@@ -403,6 +403,7 @@ const SingleCourse = () => {
                     >
                       Reviews
                     </Text>
+                    {getCourseReview.length === 0 && <Text>no reivew yet</Text>}
                     {getCourseReview?.map((review: any) => {
                       const { reviewer, title, content, updatedAt } = review;
                       return (
