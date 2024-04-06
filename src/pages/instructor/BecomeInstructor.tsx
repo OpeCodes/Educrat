@@ -39,9 +39,7 @@ const BecomeInstructor = () => {
   };
   const handleImageUpload = () => {
   };
-  // const handleImageUpload = (file: File) => {
-  //   console.log('Uploaded file:', file);
-  // };
+ 
   return (
     <Stack>
       {/* <InstructorNavbar /> */}
