@@ -19,7 +19,6 @@ import {
   Th,
   Td,
   TableContainer,
-  useToast
 } from "@chakra-ui/react";
 import { useEffect,} from "react";
 import { MdEdit } from "react-icons/md";
@@ -66,7 +65,6 @@ import { VscLinkExternal } from "react-icons/vsc";
 import { CurriculumInterface } from "../../../../interface/courseInterface";
 import ExternalResourceDownloadableFile from "../../../../components/ExternalResourceDownloadableFile";
 import { HiFolderDownload } from "react-icons/hi";
-import { ToastLoading } from "../../../../components";
 import { convertSecondsToTime } from "../../../../components/TimeFormat";
 const Curriculum = () => {
   const { id } = useParams();
@@ -75,9 +73,9 @@ const Curriculum = () => {
   useEffect(() => {
     refetch();
   }, [id]);
-  const { moduleEditCourse,isPending: moduleEditCourseLoading } = useModuleEditCourse();
+  const { moduleEditCourse, } = useModuleEditCourse();
   const { deleteModule, deleteModuleLoading } = useDeleteModuleCourse();
-  const { moduleEditLectureCourse, moduleEditLectureLoading } =
+  const { moduleEditLectureCourse,  } =
     useEditModuleLectureCourse();
   const { deleteLectureModule, deleteLecutureModuleCourseLoading } =
     useDeleteLectureModuleCourse();
@@ -100,7 +98,6 @@ const Curriculum = () => {
     title: "",
     url: "",
   };
-const toast = useToast()
   const {
     moduleCreateCourse,
     isPending: moduleLoading,
@@ -108,11 +105,11 @@ const toast = useToast()
     showSection,
   } = useModuleCreateCourse();
 
-  ToastLoading(moduleLoading,toast)
-  ToastLoading(deleteModuleLoading,toast)
-  ToastLoading(moduleEditLectureLoading,toast)
-  ToastLoading(deleteLecutureModuleCourseLoading,toast)
-  ToastLoading(moduleEditCourseLoading,toast)
+  // ToastLoading(moduleLoading,toast)
+  // ToastLoading(deleteModuleLoading,toast)
+  // ToastLoading(moduleEditLectureLoading,toast)
+  // ToastLoading(deleteLecutureModuleCourseLoading,toast)
+  // ToastLoading(moduleEditCourseLoading,toast)
   //moduleEditCourseLoading
   
 
@@ -2031,8 +2028,6 @@ const toast = useToast()
                                       as={"button"}
                                       py={2}
                                       px={4}
-                                      isLoading={moduleEditLectureLoading}
-                                      loadingText="Loading"
                                       variant="outline"
                                       spinnerPlacement="end"
                                       onClick={() => handleCurriculumSubmit()}
