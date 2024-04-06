@@ -44,7 +44,7 @@ export const instructorProfileSchema = Yup.object().shape({
   website: Yup.string().url("enter a valid url").required("pls enter a your website"),
   twitter: Yup.string().url("enter a valid url").required("pls enter a your twitter url"),
   facebook: Yup.string().url("enter a valid url").required("pls enter a your facebook url"),
-  linkedin: Yup.string(),
+  linkedin: Yup.string().url("enter a valid url").required("pls enter a your linkedIn url"),
   youtube: Yup.string(),
 });
 export const createCourseSchema = Yup.object().shape({
