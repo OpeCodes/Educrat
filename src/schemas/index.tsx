@@ -42,7 +42,7 @@ export const instructorProfileSchema = Yup.object().shape({
   headline: Yup.string().required("Pls include headline"),
   biography: Yup.string().required("Pls include biography"),
   website: Yup.string().url("enter a valid url").required("pls enter a your website"),
-  twitter: Yup.string(),
+  twitter: Yup.string().url("enter a valid url").required("pls enter a your twitter url"),
   facebook: Yup.string(),
   linkedin: Yup.string(),
   youtube: Yup.string(),
