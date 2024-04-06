@@ -116,41 +116,46 @@ const SingleCourse = () => {
     );
   }
 
+  const [visibleReviews, setVisibleReviews] = useState(3);
+  const handleShowMore = () => {
+    setVisibleReviews((prev) => prev + 3); // Increase visible reviews by 3
+  };
+
   return (
     <Stack>
-             {isPending &&
-              <Stack mx={"4.3rem"}>
-                <Skeleton height="60px" />
-                <Stack>
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                  <Skeleton height="60px" />
-                </Stack>
-              </Stack>
-}
+      {isPending && (
+        <Stack mx={"4.3rem"}>
+          <Skeleton height="60px" />
+          <Stack>
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+            <Skeleton height="60px" />
+          </Stack>
+        </Stack>
+      )}
       <Stack>
         <Stack mt={"4.5rem"}>
           <Stack>
@@ -403,29 +408,42 @@ const SingleCourse = () => {
                     >
                       Reviews
                     </Text>
-                    {getCourseReview.length === 0 && <Text>no reivew yet</Text>}
-                    {getCourseReview?.map((review: any) => {
-                      const { reviewer, title, content, updatedAt } = review;
-                      return (
-                        <Flex columnGap={3} mt={3}>
-                          <Avatar
-                            size="lg"
-                            name={`${reviewer?.firstName} ${reviewer?.lastName}`}
-                            src={""}
-                          />
-                          <Stack>
-                            <Flex columnGap={1} rowGap={3}>
-                              <Text color={"black"}>
-                                {reviewer?.firstName} {reviewer?.lastName}
-                              </Text>
-                              <Text>{getTimeDifference(updatedAt)}</Text>
-                            </Flex>
-                            <Text color={"black"}>{title}</Text>
-                            <Text>{content}</Text>
-                          </Stack>
-                        </Flex>
-                      );
-                    })}
+                    {getCourseReview?.length === 0 && (
+                      <Text>no reivew yet</Text>
+                    )}
+                    {getCourseReview
+                      ?.slice(0, visibleReviews)
+                      ?.map((review: any) => {
+                        const { reviewer, title, content, updatedAt } = review;
+                        return (
+                          <Flex columnGap={3} mt={3}>
+                            <Avatar
+                              size="lg"
+                              name={`${reviewer?.firstName} ${reviewer?.lastName}`}
+                              src={""}
+                            />
+                            <Stack>
+                              <Flex columnGap={1} rowGap={3}>
+                                <Text color={"black"}>
+                                  {reviewer?.firstName} {reviewer?.lastName}
+                                </Text>
+                                <Text>{getTimeDifference(updatedAt)}</Text>
+                              </Flex>
+                              <Text color={"black"}>{title}</Text>
+                              <Text>{content}</Text>
+                            </Stack>
+                          </Flex>
+                        );
+                      })}
+                    {visibleReviews < getCourseReview?.length && (
+                      <Button
+                        onClick={handleShowMore}
+                        variant="link"
+                        color={"blue"}
+                      >
+                        Show More Reviews
+                      </Button>
+                    )}
                   </Stack>
                 </Stack>
               </Stack>
