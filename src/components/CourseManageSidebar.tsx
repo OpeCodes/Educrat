@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Text } from "@chakra-ui/react";
+import { Box,  Stack, Text } from "@chakra-ui/react";
 import { CourseManageNavItem } from "./CourseManageNavItem";
 import { useParams } from "react-router-dom";
 import { useGetSingleCourse } from "../hooks/course";
@@ -50,7 +50,7 @@ const CourseManageSidebar = () => {
           </Box>
         ))}
       </Stack>
-      <Button
+      {/* <Button
         bg={"#00FF84"}
         variant="outline"
         spinnerPlacement="end"
@@ -61,7 +61,7 @@ const CourseManageSidebar = () => {
         _hover={{ background: "none", color: "#00FF84" }}
       >
         Submit for Review
-      </Button>
+      </Button> */}
     </Stack>
   );
 };
