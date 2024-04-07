@@ -23,11 +23,9 @@ export const Courses = () => {
   const [activeButton, setActiveButton] = useState<number | null>(1);
   const handleButtonClick = (buttonId: number) => {
     setActiveButton(buttonId === activeButton ? null : buttonId);
-  };
-  // const { data } = useGetUser();
-  // const {getLectureModuleCourse,isPending} = useGetAllInstructorCourses(data?.id);
+  }; 
   const { data, isPending } = useGetCourse();
-
+  
   const dummyArray = [1, 2, 3, 4];
   return (
     <Box
