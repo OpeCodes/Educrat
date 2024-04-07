@@ -86,7 +86,6 @@ const SingleCourse = () => {
   const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
-  console.log(getSingleEnrolledCourse, "here brother");
 
 
   let ratingFormat = parseFloat(

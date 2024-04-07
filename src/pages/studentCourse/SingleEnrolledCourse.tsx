@@ -46,7 +46,7 @@ const initialValues = {
 const SingleEnrolledCourse = () => {
   const {id} = useParams()
  const {getSingleEnrolledCourse}= useGetSingleEnrolledCourse(id)
- 
+ console.log(getSingleEnrolledCourse, "sigle enroleeed")
  const{createEnrolledCourseReview}=useCreateEnrolledCourseReview()
  
   const handleSubmit = (values: any) => {
@@ -277,7 +277,7 @@ const SingleEnrolledCourse = () => {
               maxH={{ base: "100%", lg: "490px" }}
               overflowY={{ base: "hidden", lg: "scroll" }}
             >
-              {getSingleEnrolledCourse?.courseId?.modules.map((module:any , index: any) => {
+              {getSingleEnrolledCourse?.courseId?.modules?.map((module:any , index: any) => {
                 const {lectures,title} = module;
                 return (
                   <AccordionItem
