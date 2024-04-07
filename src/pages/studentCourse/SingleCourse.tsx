@@ -8,7 +8,6 @@ import {
   Collapse,
   Button,
   Box,
-  Image,
   Divider,
   useToast,
   Skeleton,
@@ -43,6 +42,7 @@ import {
 } from "../../components/TimeFormat";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { PromotionalVideoPlayModal } from "../../components";
 
 const SingleCourse = () => {
   const { slug } = useParams();
@@ -50,7 +50,7 @@ const SingleCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse, "nro")
+  console.log(getStudentSingleCourse, "nro");
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
@@ -492,12 +492,18 @@ const SingleCourse = () => {
                     width={{ base: "100%", lg: "350px" }}
                     mx={{ base: 0, lg: 1 }}
                   >
-                    <Image
+                    {/* <Image
                       mx="auto"
                       src="https://bit.ly/dan-abramov"
                       alt="Dan Abramov"
                       width={"100%"}
-                    />
+                    /> */}
+                    <Box width={"100%"} h={"350px"}>
+                      <PromotionalVideoPlayModal
+                        imageUrl={getStudentSingleCourse?.thumbnail}
+                        videoUrl={getStudentSingleCourse?.promotionalVideo}
+                      />
+                    </Box>
                     <Stack
                       maxHeight={{ base: "100%", lg: "200px" }}
                       overflowY={{ base: "hidden", lg: "scroll" }}
