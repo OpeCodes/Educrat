@@ -189,7 +189,7 @@ export const useCreateEnrolledCourseReview = () => {
       return customFetch.post(`/course/review/course/${courseId}`, review);
     },
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
+      queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
       // singleCourse
 
