@@ -27,7 +27,7 @@ import {
   PopoverArrow,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
-import { Link, Navigate, useParams, useNavigate } from "react-router-dom";
+import { Link,  useParams, useNavigate } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
