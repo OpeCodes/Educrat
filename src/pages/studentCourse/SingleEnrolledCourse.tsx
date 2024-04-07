@@ -34,23 +34,27 @@ import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar, FaTrophy } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useRef } from "react";
-import { useCreateEnrolledCourseReview, useGetSingleEnrolledCourse } from "../../hooks/studentCourse";
-
+import {
+  useCreateEnrolledCourseReview,
+  useGetSingleEnrolledStudentCourse,
+} from "../../hooks/studentCourse";
 
 const initialValues = {
   stars: 0,
   title: "",
   content: "",
- 
 };
 const SingleEnrolledCourse = () => {
-  const {id} = useParams()
- const {getSingleEnrolledCourse}= useGetSingleEnrolledCourse(id)
- console.log(getSingleEnrolledCourse, "sigle enroleeed")
- const{createEnrolledCourseReview}=useCreateEnrolledCourseReview()
- 
+  const { id } = useParams();
+  const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
+  console.log(getSingleEnrolledCourse, "sigle enroleeed");
+  const { createEnrolledCourseReview } = useCreateEnrolledCourseReview();
+
   const handleSubmit = (values: any) => {
-    createEnrolledCourseReview({courseId: getSingleEnrolledCourse?.courseId?.id, review:values})
+    createEnrolledCourseReview({
+      courseId: getSingleEnrolledCourse?.courseId?.id,
+      review: values,
+    });
   };
   const initialFocusRef: any = useRef();
   return (
@@ -118,7 +122,7 @@ const SingleEnrolledCourse = () => {
       <Stack>
         <Flex
           justify={"space-between"}
-          mt={{base: "1.5rem", md: "3.1rem"}}
+          mt={{ base: "1.5rem", md: "3.1rem" }}
           flexDirection={{ base: "column", xl: "row" }}
         >
           <Stack mt={6} w={"100%"}>
@@ -277,66 +281,72 @@ const SingleEnrolledCourse = () => {
               maxH={{ base: "100%", lg: "490px" }}
               overflowY={{ base: "hidden", lg: "scroll" }}
             >
-              {getSingleEnrolledCourse?.courseId?.modules?.map((module:any , index: any) => {
-                const {lectures,title} = module;
-                return (
-                  <AccordionItem
-                    style={{ borderWidth: 1, borderRadius: 15 }}
-                    mb={4}
-                    rowGap={6}
-                  >
-                    <Stack>
-                      <AccordionButton
-                        _hover={{ backgroundColor: "none" }}
-                        py={3}
-                        borderRadius={15}
-                        backgroundColor={"#F7F8FB"}
-                      >
-                        <Flex
-                          width={"100%"}
-                          justify={"space-between"}
-                          align={"center"}
+              {getSingleEnrolledCourse?.courseId?.modules?.map(
+                (module: any, index: any) => {
+                  const { lectures, title } = module;
+                  return (
+                    <AccordionItem
+                      style={{ borderWidth: 1, borderRadius: 15 }}
+                      mb={4}
+                      rowGap={6}
+                    >
+                      <Stack>
+                        <AccordionButton
+                          _hover={{ backgroundColor: "none" }}
+                          py={3}
+                          borderRadius={15}
+                          backgroundColor={"#F7F8FB"}
                         >
-                          <Stack>
-                            <Flex columnGap={2} fontWeight={"bold"}>
-                              <Text>Section {index + 1}:</Text>
-                              <Text>{title}</Text>
-                            </Flex>
-                            <Flex>
-                              <Text fontSize={14}>1/ {lectures?.length} | 6 mins</Text>
-                            </Flex>
-                          </Stack>
-                          <Text>
-                            <AccordionIcon fontSize={23} />
-                          </Text>
-                        </Flex>
-                      </AccordionButton>
-                    </Stack>
-                    {lectures?.map((lecture: any, index: number) => {
-                      const {title} =lecture
-                      return (
-                        <AccordionPanel>
-                          <Flex columnGap={3} align={"start"}>
-                            <Checkbox
-                              mt={1}
-                              iconColor={"black"}
-                              size="lg"
-                              borderColor={"black"}
-                              colorScheme={"blackAlpha"}
-                            />
+                          <Flex
+                            width={"100%"}
+                            justify={"space-between"}
+                            align={"center"}
+                          >
                             <Stack>
-                              <Text>{index+1} {title}</Text>
-                              <Flex align={"center"} color={"gray"}>
-                                <RiPlayCircleFill size={25} />1 min
+                              <Flex columnGap={2} fontWeight={"bold"}>
+                                <Text>Section {index + 1}:</Text>
+                                <Text>{title}</Text>
+                              </Flex>
+                              <Flex>
+                                <Text fontSize={14}>
+                                  1/ {lectures?.length} | 6 mins
+                                </Text>
                               </Flex>
                             </Stack>
+                            <Text>
+                              <AccordionIcon fontSize={23} />
+                            </Text>
                           </Flex>
-                        </AccordionPanel>
-                      );
-                    })}
-                  </AccordionItem>
-                );
-              })}
+                        </AccordionButton>
+                      </Stack>
+                      {lectures?.map((lecture: any, index: number) => {
+                        const { title } = lecture;
+                        return (
+                          <AccordionPanel>
+                            <Flex columnGap={3} align={"start"}>
+                              <Checkbox
+                                mt={1}
+                                iconColor={"black"}
+                                size="lg"
+                                borderColor={"black"}
+                                colorScheme={"blackAlpha"}
+                              />
+                              <Stack>
+                                <Text>
+                                  {index + 1} {title}
+                                </Text>
+                                <Flex align={"center"} color={"gray"}>
+                                  <RiPlayCircleFill size={25} />1 min
+                                </Flex>
+                              </Stack>
+                            </Flex>
+                          </AccordionPanel>
+                        );
+                      })}
+                    </AccordionItem>
+                  );
+                }
+              )}
             </Accordion>
           </Stack>
         </Flex>

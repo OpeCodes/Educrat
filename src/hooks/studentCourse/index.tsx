@@ -86,7 +86,7 @@ export const useGetSingleEnrolledStudentCourse = (id: any) => {
     data: getSingleEnrolledCourse,
     isPending,
   } = useQuery({
-    queryKey: ["getCourseReview", id],
+    queryKey: ["getCourseStudentEnrollCourse", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; 
       const { data } = await customFetch.get(`/enrollment/${id}`);
