@@ -19,7 +19,7 @@ export const useGetStudentSingleCourse = (slug: any) => {
   return { getStudentSingleCourse, isPending, isError, refetch };
 };
 
-export const useGetAllUEnrolledCourse = () => {
+export const useGetAllUserEnrolledCourse = () => {
   const { data, isError, isPending, refetch } = useQuery({
     queryKey: ["allEnrolledCourse"],
     queryFn: async () => {

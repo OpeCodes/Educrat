@@ -28,17 +28,11 @@ import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import {
   useCourseEnrollment,
-  // useGetAllUEnrolledCourse,
   useGetCourseReview,
   useGetCourseReviewRating,
   useGetSingleEnrolledCourse,
-  // useGetStudentEnrolledCourse,
-  // useGetStudentEnrolledCourse111111,
-  // useGetStudentEnrolledCourse,
-  // useGetStudentEnrolledCourse,
   useGetStudentSingleCourse,
   useInstructorReviewRating,
-  // useInstructorReviewRating,
 } from "../../hooks/studentCourse";
 import { FaStar } from "react-icons/fa";
 import {
@@ -56,7 +50,6 @@ const SingleCourse = () => {
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
-  console.log(courseReviewRating, "course");
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
