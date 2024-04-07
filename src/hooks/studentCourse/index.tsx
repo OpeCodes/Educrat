@@ -32,8 +32,7 @@ export const useGetAllUEnrolledCourse = () => {
 
 export const useCourseEnrollment = () => {
   const toast = useToast();
-  // const queryClient = useQueryClient();
-
+  const queryClient = useQueryClient();
   const {
     mutate: courseEnroll,
     isPending,
@@ -45,7 +44,7 @@ export const useCourseEnrollment = () => {
       return customFetch.post(`/enrollment/course/${courseId}`);
     },
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ["module"] });
+      queryClient.invalidateQueries({ queryKey: ["getCourseEnroll"] });
 
       toast({
         title: `course enrollment successfull`,

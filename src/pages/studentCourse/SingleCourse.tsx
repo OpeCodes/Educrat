@@ -83,24 +83,12 @@ const SingleCourse = () => {
 
   // const { data } = useGetAllUEnrolledCourse();
   const { courseEnroll } = useCourseEnrollment();
-  const {getSingleEnrolledCourse}= useGetSingleEnrolledCourse(getStudentSingleCourse?.id)
-  console.log(getSingleEnrolledCourse,"here brother")
+  const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
+    getStudentSingleCourse?.id
+  );
+  console.log(getSingleEnrolledCourse, "here brother");
 
-  //  const {getStudentEnrolledCourse} = useGetStudentEnrolledCourse(getStudentSingleCourse?.id);
-  //  console.log(getStudentEnrolledCourse, "oooo")
-  //  const {testing} = useGetStudentEnrolledCourse111111(getStudentSingleCourse?.id)
-  //  console.log(testing, "testing")
-  // const singleID: string[] = (data ?? []).flat(2).map((obj: any) => obj.id);
-  // const singleSlug: string[] = (data ?? [])
-  //   .flat(2)
-  //   .map((obj: any) => obj?.courseId?.slug);
 
-  let exists = false;
-  // if (slug) {
-  //   exists = singleSlug.includes(slug.toLowerCase());
-  // }
-
-  //rounding the rating to whole number always
   let ratingFormat = parseFloat(
     courseReviewRating?.average ? courseReviewRating?.average : "0"
   );
@@ -479,7 +467,7 @@ const SingleCourse = () => {
                       overflowY={{ base: "hidden", lg: "scroll" }}
                     >
                       <Stack mx={{ base: 0, lg: 4 }}>
-                        {!exists ? (
+                        {!getSingleEnrolledCourse ? (
                           <Stack>
                             <Text mt={3} fontSize={"1.5rem"}>
                               $120
@@ -488,11 +476,7 @@ const SingleCourse = () => {
                               bg={"#6440FB"}
                               py={"25px"}
                               variant="solid"
-                              color={"white"}
-                              as={Link}
-                              // to={`/course/${slug}/learn/lecture/${
-                              //   singleID[parseInt(index ?? "0")]
-                              // }`}
+                              color={"white"}                           
                             >
                               Add to Cart
                             </Button>
@@ -524,9 +508,7 @@ const SingleCourse = () => {
                               variant="solid"
                               color={"white"}
                               as={Link}
-                              // to={`/course/${slug}/learn/lecture/${
-                              //   singleID[parseInt(index ?? "0")]
-                              // }`}
+                              to={`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.courseId}`}
                             >
                               Go to Course
                             </Button>

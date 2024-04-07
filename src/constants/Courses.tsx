@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { SliderButtons, } from "../components/index";
+import { Course, SliderButtons } from "../components/index";
 // import { SliderButtons, Course } from "../components/index";
 import { buttonsData, sliderSettings } from "../utils/data";
 import { useGetCourse } from "../hooks/course";
@@ -99,132 +99,9 @@ export const Courses = () => {
           <Swiper {...sliderSettings}>
             {!isPending && <SliderButtons />}
             {data?.data?.map((course: any, index: number) => {
-              const { id, thumbnail, title, complexityLevel, userId, slug } =
-                course;
               return (
                 <SwiperSlide key={index}>
-                  {/* <Course key={course.id} {...course} /> */}
-                  <Box
-                    as="div"
-                    className="wrapper"
-                    width={{ base: "87vw", md: "345px", lg: "290px" }}
-                    height={"auto"}
-                    cursor={"pointer"}
-                    key={id}
-                  >
-                    <Stack>
-                      <Box as={"div"} overflow={"hidden"} borderRadius={"10px"}>
-                        <Image
-                          src={thumbnail}
-                          className="img"
-                          maxH={"200px"}
-                          height={"100%"}
-                          style={{ borderRadius: "10px" }}
-                          alt={title}
-                        />
-                      </Box>
-                      <Box>
-                        <Flex justifyContent={"start"} alignItems={"center"}>
-                          <Text color={"#e59819"}>4.5</Text>
-                          <Box color={"#e59819"} display={"flex"} ml={2} mr={3}>
-                            <Box mr={1}>
-                              <FaRegStar />
-                            </Box>
-                            <Box mr={1}>
-                              <FaRegStar />
-                            </Box>
-                            <Box mr={1}>
-                              <FaRegStar />
-                            </Box>
-                            <Box mr={1}>
-                              <FaRegStar />
-                            </Box>
-                          </Box>
-                          <Text color={"gray.600"}>(1991)</Text>
-                        </Flex>
-                      </Box>
-                      <Heading
-                        fontSize={"17px"}
-                        color={"#140342"}
-                        fontWeight={"normal"}
-                        as={Link}
-                        to={`/course/${slug}/${index}`}
-                      >
-                        {title}
-                      </Heading>
-                      <Flex>
-                        <Box
-                          display={"flex"}
-                          columnGap={1}
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                        >
-                          <CiPlay1 size={14} />
-                          <Box>lesson</Box>
-                        </Box>
-                        <Box
-                          display={"flex"}
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          mx={3}
-                          columnGap={1}
-                        >
-                          <CiClock1 />
-                          <Box fontSize={"14px"}>22hrs 0mins</Box>
-                        </Box>
-                        <Box
-                          display={"flex"}
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          mx={3}
-                        >
-                          <img
-                            src={icon3}
-                            width={"13px"}
-                            height={"13px"}
-                            alt="level"
-                          />
-                          <Box fontSize={"14px"} ml={1}>
-                            {complexityLevel}
-                          </Box>
-                        </Box>
-                      </Flex>
-                      <Divider
-                        colorScheme="#ededed"
-                        display={{ base: "none" }}
-                      />
-                      <Box
-                        display={{ base: "none", lg: "flex" }}
-                        justifyContent={"space-between"}
-                        alignItems={"center"}
-                      >
-                        <Box
-                          display={"flex"}
-                          justifyContent={"space-between"}
-                          alignItems={"center"}
-                          columnGap={3}
-                        >
-                          <Avatar
-                            size="xs"
-                            name={`${userId?.firstName} ${userId.lastName}`}
-                            src={userId?.profilePicture}
-                          />
-                          <Text color={"gray.600"} fontSize={"small"}>
-                            {`${userId?.firstName} ${userId.lastName}`}
-                          </Text>
-                        </Box>
-                        <Box
-                          display={"flex"}
-                          justifyContent={"space-between"}
-                          alignItems={"center"}
-                        >
-                          <Text color={"#140342"} fontSize={"xl"}>
-                            $99
-                          </Text>
-                        </Box>
-                      </Box>
-                    </Stack>
-                  </Box>
+                  <Course key={course.id} {...course} />
                 </SwiperSlide>
               );
             })}
