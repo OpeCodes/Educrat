@@ -288,6 +288,7 @@ const SingleEnrolledCourse = () => {
                     <AccordionItem
                       style={{ borderWidth: 1, borderRadius: 15 }}
                       mb={4}
+                      key={index}
                       rowGap={6}
                     >
                       <Stack>

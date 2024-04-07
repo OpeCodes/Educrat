@@ -146,6 +146,22 @@ export const useGetInstructorenrolledCourse = (id: any) => {
 };
 
 
+// export const useGetNumStudentEnrolledCourse = (id: any) => {
+//   const { data: getStudentEnrolledCourse, isPending } = useQuery({
+//     queryKey: ["getNumStudentEnrolledCourse", id],
+//     queryFn: async ({ queryKey }) => {
+//       const [, id] = queryKey;
+//       const { data } = await customFetch.get(
+//         `/enrollment/course/${id}/enrolled-students`
+//       );
+//       return data;
+//     },
+//   });
+//   return {
+//     getStudentEnrolledCourse,
+//     isPending,
+//   };
+// };
 
 // ***************************************************reviews***************************************
 

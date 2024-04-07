@@ -31,6 +31,7 @@ import {
   useGetCourseReview,
   useGetCourseReviewRating,
   useGetSingleEnrolledCourse,
+  useGetStudentEnrolledCourse,
   useGetStudentSingleCourse,
   useInstructorReviewRating,
 } from "../../hooks/studentCourse";
@@ -50,6 +51,8 @@ const SingleCourse = () => {
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
+ const {getStudentEnrolledCourse}= useGetStudentEnrolledCourse(getStudentSingleCourse?.id)
+  console.log(getStudentEnrolledCourse, "bri")
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
@@ -193,7 +196,7 @@ const SingleCourse = () => {
                       <Text>
                         <LuClock3 />
                       </Text>
-                      <Text>3 enrolled on this course</Text>
+                      <Text>{getStudentEnrolledCourse?.length} enrolled on this course</Text>
                     </Flex>
                     <Flex align={"center"} columnGap={2}>
                       <Text>
