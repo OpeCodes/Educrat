@@ -20,6 +20,7 @@ import Article from "./Article";
 import MedArticle from "./MedArticle";
 import ToastLoading from "./ToastLoading";
 import CoursePromotionalVideoUpload from "./CoursePromotionalVideoUpload";
+import PromotionalVideoPlay from "./PromotionalVideoPlay";
 export {
   HomeLayout,
   Navbar,
@@ -42,5 +43,6 @@ export {
   Article,
   ToastLoading,
   MedArticle,
-  CoursePromotionalVideoUpload
+  CoursePromotionalVideoUpload,
+  PromotionalVideoPlay
 };

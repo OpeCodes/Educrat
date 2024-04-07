@@ -41,18 +41,16 @@ import {
   convertSecondsToHMS,
   getTimeDifference,
 } from "../../components/TimeFormat";
-import { useGetUser } from "../../hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
 const SingleCourse = () => {
   const { slug } = useParams();
-  const { data: getUser } = useGetUser();
   const navigate = useNavigate();
-  console.log(getUser, "getuser");
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
+  console.log(getStudentSingleCourse, "nro")
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
