@@ -82,15 +82,33 @@ export const useCourseEnrollment = () => {
   return { courseEnroll, isPending, error, isError, isSuccess };
 };
 
+// export const useGetSingleEnrolledCourse = (id: any) => {
+//   const {
+//     data: getSingleEnrolledCourse,
+//     isPending,
+//   } = useQuery({
+//     queryKey: ["getCourseReview", id],
+//     queryFn: async ({ queryKey }) => {
+//       const [, id] = queryKey; 
+//       const { data } = await customFetch.get(`/enrollment/${id}`);
+//       return data;
+//     },
+//   });
+//   return {
+//     getSingleEnrolledCourse,
+//     isPending,
+//   };
+// };
+
 export const useGetSingleEnrolledCourse = (id: any) => {
   const {
     data: getSingleEnrolledCourse,
     isPending,
   } = useQuery({
-    queryKey: ["getCourseReview", id],
+    queryKey: ["getCourseEnroll", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; 
-      const { data } = await customFetch.get(`/enrollment/${id}`);
+      const { data } = await customFetch.get(`/enrollment/course/${id}`);
       return data;
     },
   });
@@ -99,6 +117,8 @@ export const useGetSingleEnrolledCourse = (id: any) => {
     isPending,
   };
 };
+
+
 
 export const useGetStudentEnrolledCourse= (id: any) => {
   const {

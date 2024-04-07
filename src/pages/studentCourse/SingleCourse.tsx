@@ -31,6 +31,7 @@ import {
   // useGetAllUEnrolledCourse,
   useGetCourseReview,
   useGetCourseReviewRating,
+  useGetSingleEnrolledCourse,
   // useGetStudentEnrolledCourse,
   // useGetStudentEnrolledCourse111111,
   // useGetStudentEnrolledCourse,
@@ -49,7 +50,6 @@ const SingleCourse = () => {
   const { slug } = useParams();
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
-  console.log(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
   );
@@ -83,7 +83,8 @@ const SingleCourse = () => {
 
   // const { data } = useGetAllUEnrolledCourse();
   const { courseEnroll } = useCourseEnrollment();
-  console.log(getStudentSingleCourse);
+  const {getSingleEnrolledCourse}= useGetSingleEnrolledCourse(getStudentSingleCourse?.id)
+  console.log(getSingleEnrolledCourse,"here brother")
 
   //  const {getStudentEnrolledCourse} = useGetStudentEnrolledCourse(getStudentSingleCourse?.id);
   //  console.log(getStudentEnrolledCourse, "oooo")
