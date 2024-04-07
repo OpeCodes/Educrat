@@ -9,14 +9,13 @@ const Error = () => {
   const error: any = useRouteError();
   console.log(error);
   toast({
-    title: `Navigating you  back home... `,
+    title: `redirecting to to previous page... `,
     status: "info",
     duration: 3000,
     isClosable: true,
   });
   setTimeout(() => {
-    navigate("/");
-    // navigate.re;
+    navigate(-1);
   }, 3000);
   if (error?.status === 404) {
     return (

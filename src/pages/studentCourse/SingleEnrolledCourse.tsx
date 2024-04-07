@@ -47,7 +47,8 @@ const initialValues = {
 const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  const { createEnrolledCourseReview ,createEnrolledCourseReviewLoading} = useCreateEnrolledCourseReview();
+  const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
+    useCreateEnrolledCourseReview();
 
   const handleSubmit = (values: any) => {
     createEnrolledCourseReview({
@@ -241,7 +242,6 @@ const SingleEnrolledCourse = () => {
                             </Text>
                           )}
                         </FormControl>
-
                         <Button
                           bg={"#00FF84"}
                           isLoading={createEnrolledCourseReviewLoading}
