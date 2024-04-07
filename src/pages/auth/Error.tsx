@@ -16,6 +16,7 @@ const Error = () => {
   });
   setTimeout(() => {
     navigate("/");
+    // navigate.re;
   }, 3000);
   if (error?.status === 404) {
     return (

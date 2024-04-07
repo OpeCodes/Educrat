@@ -3,7 +3,7 @@ import { getUserLocalStorage, removeUserFromLocalStorage} from "../store/localSt
 import { useNavigate } from "react-router-dom"; // Assuming you're using React Router for navigation
 
 const customFetch = axios.create({
-  baseURL: "https://educrat-be.onrender.com/api/v1"
+  baseURL: "https://educrat.onrender.com/api/v1"
 });
 
 customFetch.interceptors.request.use((config) => {
