@@ -118,14 +118,14 @@ export const useGetSingleCourse = (id: any) => {
 };
 
 export const useGetCourse = () => {
-  const { data,isPending } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ["course"],
     queryFn: async () => {
       const { data } = await customFetch.get("/course");
       return data;
     },
   });
-  return { data ,isPending};
+  return { data, isPending };
 };
 
 export const useGetAllUserCourse = () => {
@@ -149,7 +149,7 @@ export const useSingleStatusCourse = () => {
     isError,
   } = useMutation({
     mutationFn: ({ id, status }: any) => {
-      return customFetch.put(`course/${id}/status`, {status});
+      return customFetch.put(`course/${id}/status`, { status });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });

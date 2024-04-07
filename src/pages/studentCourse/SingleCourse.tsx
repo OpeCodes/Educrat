@@ -56,6 +56,7 @@ const SingleCourse = () => {
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
+  console.log(courseReviewRating, "course");
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
@@ -81,15 +82,13 @@ const SingleCourse = () => {
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
 
-  // const { data } = useGetAllUEnrolledCourse();
   const { courseEnroll } = useCourseEnrollment();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
 
-
   let ratingFormat = parseFloat(
-    courseReviewRating?.average ? courseReviewRating?.average : "0"
+    courseReviewRating?.average === "NaN" ? "0" : courseReviewRating?.average
   );
 
   //instuctor star
@@ -106,7 +105,7 @@ const SingleCourse = () => {
 
   const [visibleReviews, setVisibleReviews] = useState(3);
   const handleShowMore = () => {
-    setVisibleReviews((prev) => prev + 3); // Increase visible reviews by 3
+    setVisibleReviews((prev) => prev + 3);
   };
 
   return (
@@ -475,7 +474,7 @@ const SingleCourse = () => {
                               bg={"#6440FB"}
                               py={"25px"}
                               variant="solid"
-                              color={"white"}                           
+                              color={"white"}
                             >
                               Add to Cart
                             </Button>

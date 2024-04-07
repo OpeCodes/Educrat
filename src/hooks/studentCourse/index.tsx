@@ -82,13 +82,10 @@ export const useCourseEnrollment = () => {
 };
 
 export const useGetSingleEnrolledStudentCourse = (id: any) => {
-  const {
-    data: getSingleEnrolledCourse,
-    isPending,
-  } = useQuery({
+  const { data: getSingleEnrolledCourse, isPending } = useQuery({
     queryKey: ["getCourseStudentEnrollCourse", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
+      const [, id] = queryKey;
       const { data } = await customFetch.get(`/enrollment/${id}`);
       return data;
     },
@@ -100,13 +97,10 @@ export const useGetSingleEnrolledStudentCourse = (id: any) => {
 };
 
 export const useGetSingleEnrolledCourse = (id: any) => {
-  const {
-    data: getSingleEnrolledCourse,
-    isPending,
-  } = useQuery({
+  const { data: getSingleEnrolledCourse, isPending } = useQuery({
     queryKey: ["getCourseEnroll", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
+      const [, id] = queryKey;
       const { data } = await customFetch.get(`/enrollment/course/${id}`);
       return data;
     },
@@ -117,17 +111,14 @@ export const useGetSingleEnrolledCourse = (id: any) => {
   };
 };
 
-
-
-export const useGetStudentEnrolledCourse= (id: any) => {
-  const {
-    data:getStudentEnrolledCourse,
-    isPending,
-  } = useQuery({
+export const useGetStudentEnrolledCourse = (id: any) => {
+  const { data: getStudentEnrolledCourse, isPending } = useQuery({
     queryKey: ["getCourseReview111", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
-      const { data } = await customFetch.get(`/enrollment/course/${id}/enrolled-students`);
+      const [, id] = queryKey;
+      const { data } = await customFetch.get(
+        `/enrollment/course/${id}/enrolled-students`
+      );
       return data;
     },
   });
@@ -137,16 +128,14 @@ export const useGetStudentEnrolledCourse= (id: any) => {
   };
 };
 
-
-export const useGetInstructorenrolledCourse= (id: any) => {
-  const {
-    data:getInstructorenrolledCourse,
-    isPending,
-  } = useQuery({
+export const useGetInstructorenrolledCourse = (id: any) => {
+  const { data: getInstructorenrolledCourse, isPending } = useQuery({
     queryKey: ["getInstructorCourseReview", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
-      const { data } = await customFetch.get(`/enrollment/instructor/${id}/enrolled-students`);
+      const [, id] = queryKey;
+      const { data } = await customFetch.get(
+        `/enrollment/instructor/${id}/enrolled-students`
+      );
       return data;
     },
   });
@@ -157,23 +146,6 @@ export const useGetInstructorenrolledCourse= (id: any) => {
 };
 
 
-// export const useGetStudentEnrolledCourse111111= (id: any) => {
-//   const {
-//     data:testing,
-//     isPending,
-//   } = useQuery({
-//     queryKey: ["getCourseReview111", id],
-//     queryFn: async ({ queryKey }) => {
-//       const [, id] = queryKey; 
-//       const { data } = await customFetch.get(`/enrollment/course/${id}`);
-//       return data;
-//     },
-//   });
-//   return {
-//     testing,
-//     isPending,
-//   };
-// };
 
 // ***************************************************reviews***************************************
 
@@ -185,14 +157,12 @@ export const useCreateEnrolledCourseReview = () => {
     mutate: createEnrolledCourseReview,
     isPending: createEnrolledCourseReviewLoading,
   } = useMutation({
-    mutationFn: ({ courseId ,review }: any) => {
+    mutationFn: ({ courseId, review }: any) => {
       return customFetch.post(`/course/review/course/${courseId}`, review);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
-      // singleCourse
-
       toast({
         title: `review submitted`,
         status: "success",
@@ -228,13 +198,10 @@ export const useCreateEnrolledCourseReview = () => {
   return { createEnrolledCourseReview, createEnrolledCourseReviewLoading };
 };
 export const useGetCourseReview = (id: any) => {
-  const {
-    data: getCourseReview,
-    isPending,
-  } = useQuery({
+  const { data: getCourseReview, isPending } = useQuery({
     queryKey: ["getCourseReview", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
+      const [, id] = queryKey;
       const { data } = await customFetch.get(`/course/review/course/${id}`);
       return data;
     },
@@ -246,14 +213,13 @@ export const useGetCourseReview = (id: any) => {
 };
 
 export const useInstructorReviewRating = (id: any) => {
-  const {
-    data: instructorReviewRating,
-    isPending,
-  } = useQuery({
+  const { data: instructorReviewRating, isPending } = useQuery({
     queryKey: ["instructorReviewRating", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
-      const { data } = await customFetch.get(`/course/review/instructor/${id}/rating`);
+      const [, id] = queryKey;
+      const { data } = await customFetch.get(
+        `/course/review/instructor/${id}/rating`
+      );
       return data;
     },
   });
@@ -263,16 +229,14 @@ export const useInstructorReviewRating = (id: any) => {
   };
 };
 
-
 export const useGetCourseReviewRating = (id: any) => {
-  const {
-    data: courseReviewRating,
-    isPending,
-  } = useQuery({
+  const { data: courseReviewRating, isPending } = useQuery({
     queryKey: ["courseReviewRating", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
-      const { data } = await customFetch.get(`/course/review/course/${id}/rating`);
+      const [, id] = queryKey;
+      const { data } = await customFetch.get(
+        `/course/review/course/${id}/rating`
+      );
       return data;
     },
   });
@@ -280,4 +244,4 @@ export const useGetCourseReviewRating = (id: any) => {
     courseReviewRating,
     isPending,
   };
-}
+};
