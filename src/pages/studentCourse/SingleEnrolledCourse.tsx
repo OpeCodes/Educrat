@@ -27,7 +27,7 @@ import {
   PopoverArrow,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams, useNavigate } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
@@ -46,6 +46,7 @@ const initialValues = {
 };
 const SingleEnrolledCourse = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
@@ -81,7 +82,12 @@ const SingleEnrolledCourse = () => {
           >
             <Image src={logo} alt="logo" color={"black"} />
           </Box>
-          <Text display={{ base: "block", md: "none" }} mr={3}>
+          <Text
+            display={{ base: "block", md: "none" }}
+            mr={3}
+            as={"button"}
+            onClick={() => navigate(-1)}
+          >
             <IoMdArrowRoundBack color={"white"} fontSize={24} />
           </Text>
           <Text fontWeight={"bold"} fontSize={14} color={"white"}>

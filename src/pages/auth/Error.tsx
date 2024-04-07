@@ -11,12 +11,12 @@ const Error = () => {
   toast({
     title: `redirecting to to previous page... `,
     status: "info",
-    duration: 3000,
+    duration: 4000,
     isClosable: true,
   });
   setTimeout(() => {
     navigate(-1);
-  }, 3000);
+  }, 4000);
   if (error?.status === 404) {
     return (
       <div>
