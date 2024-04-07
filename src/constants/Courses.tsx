@@ -7,21 +7,12 @@ import {
   Skeleton,
   Grid,
   GridItem,
-  Avatar,
-  Flex,
-  Divider,
-  Image,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Course, SliderButtons } from "../components/index";
-// import { SliderButtons, Course } from "../components/index";
 import { buttonsData, sliderSettings } from "../utils/data";
 import { useGetCourse } from "../hooks/course";
-import { CiPlay1, CiClock1 } from "react-icons/ci";
-import { icon3 } from "../assets/export";
-import { FaRegStar } from "react-icons/fa6";
-import { Link } from "react-router-dom";
 
 type button = {
   id: number;
