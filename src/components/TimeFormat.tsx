@@ -34,28 +34,34 @@ export function getTimeDifference(timestamp: any) {
 
   const difference = currentDate - pastDate;
 
-  const millisecondsInHour = 1000 * 60 * 60;
+  const millisecondsInMinute = 1000 * 60;
+  const millisecondsInHour = millisecondsInMinute * 60;
   const millisecondsInDay = millisecondsInHour * 24;
   const millisecondsInWeek = millisecondsInDay * 7;
   const millisecondsInMonth = millisecondsInDay * 30;
   const millisecondsInYear = millisecondsInDay * 365;
 
-  if (difference < millisecondsInHour) {
-    return "Less than an hour ago";
+  if (difference < millisecondsInMinute) {
+    const secondsAgo = Math.floor(difference / 1000);
+    return `${secondsAgo} second${secondsAgo !== 1 ? 's' : ''} ago`;
+  } else if (difference < millisecondsInHour) {
+    const minutesAgo = Math.floor(difference / millisecondsInMinute);
+    return `${minutesAgo} minute${minutesAgo !== 1 ? 's' : ''} ago`;
   } else if (difference < millisecondsInDay) {
     const hoursAgo = Math.floor(difference / millisecondsInHour);
-    return `${hoursAgo} hour${hoursAgo > 1 ? "s" : ""} ago`;
+    return `${hoursAgo} hour${hoursAgo !== 1 ? 's' : ''} ago`;
   } else if (difference < millisecondsInWeek) {
     const daysAgo = Math.floor(difference / millisecondsInDay);
-    return `${daysAgo} day${daysAgo > 1 ? "s" : ""} ago`;
+    return `${daysAgo} day${daysAgo !== 1 ? 's' : ''} ago`;
   } else if (difference < millisecondsInMonth) {
     const weeksAgo = Math.floor(difference / millisecondsInWeek);
-    return `${weeksAgo} week${weeksAgo > 1 ? "s" : ""} ago`;
+    return `${weeksAgo} week${weeksAgo !== 1 ? 's' : ''} ago`;
   } else if (difference < millisecondsInYear) {
     const monthsAgo = Math.floor(difference / millisecondsInMonth);
-    return `${monthsAgo} month${monthsAgo > 1 ? "s" : ""} ago`;
+    return `${monthsAgo} month${monthsAgo !== 1 ? 's' : ''} ago`;
   } else {
     const yearsAgo = Math.floor(difference / millisecondsInYear);
-    return `${yearsAgo} year${yearsAgo > 1 ? "s" : ""} ago`;
+    return `${yearsAgo} year${yearsAgo !== 1 ? 's' : ''} ago`;
   }
 }
+
