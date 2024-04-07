@@ -491,13 +491,7 @@ const SingleCourse = () => {
                     borderRadius="md"
                     width={{ base: "100%", lg: "350px" }}
                     mx={{ base: 0, lg: 1 }}
-                  >
-                    {/* <Image
-                      mx="auto"
-                      src="https://bit.ly/dan-abramov"
-                      alt="Dan Abramov"
-                      width={"100%"}
-                    /> */}
+                  >                    
                     <Box width={"100%"} h={"350px"}>
                       <PromotionalVideoPlayModal
                         imageUrl={getStudentSingleCourse?.thumbnail}
