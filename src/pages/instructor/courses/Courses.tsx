@@ -28,10 +28,7 @@ const Courses = () => {
       search: "",
       sortBy: "newest",
     },
-    onSubmit: (values: any) => {
-      console.log("Submitted:", values);
-      
-    },
+   
   });
   const filteredItems = data
     ? data.filter((item: any) =>

@@ -7,8 +7,7 @@ const initialValues = {
   price: "",
 };
 const Pricing = () => {
-  const handleSubmit = (values: any) => {
-    console.log(values);
+  const handleSubmit = () => {
   };
   return (
     <Stack p={5} mb={"12rem"}>

@@ -47,7 +47,6 @@ const initialValues = {
 const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  console.log(getSingleEnrolledCourse, "sigle enroleeed");
   const { createEnrolledCourseReview } = useCreateEnrolledCourseReview();
 
   const handleSubmit = (values: any) => {

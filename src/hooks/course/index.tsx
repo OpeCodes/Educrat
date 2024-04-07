@@ -163,7 +163,6 @@ export const useSingleStatusCourse = () => {
       });
     },
     onError: (error: any) => {
-      console.log(error,"error here")
       if (error.response) {
         toast({
           title: `${error.response.data.error}`,
