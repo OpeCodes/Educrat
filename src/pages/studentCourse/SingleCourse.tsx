@@ -10,9 +10,10 @@ import {
   Box,
   Image,
   Divider,
+  useToast,
   Skeleton,
 } from "@chakra-ui/react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
 import {
   MdOutlineCheckCircleOutline,
@@ -41,11 +42,16 @@ import {
   getTimeDifference,
 } from "../../components/TimeFormat";
 import { useGetUser } from "../../hooks";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const SingleCourse = () => {
   const { slug } = useParams();
-   const {data: getUser} =useGetUser();
-   console.log(getUser, "getuser")
+  const { data: getUser } = useGetUser();
+  const navigate = useNavigate();
+  console.log(getUser, "getuser");
+  const { user } = useSelector((store: RootState) => store?.user);
+
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
@@ -54,7 +60,10 @@ const SingleCourse = () => {
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
- const {getStudentEnrolledCourse}= useGetStudentEnrolledCourse(getStudentSingleCourse?.id)
+  const { getStudentEnrolledCourse } = useGetStudentEnrolledCourse(
+    getStudentSingleCourse?.id
+  );
+
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
   const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
@@ -62,7 +71,7 @@ const SingleCourse = () => {
   const formattedDate = `${month.toString().padStart(2, "0")}/${year
     .toString()
     .padStart(2, "0")}`;
-
+  const toast = useToast();
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
@@ -85,6 +94,36 @@ const SingleCourse = () => {
     getStudentSingleCourse?.id
   );
 
+  const handleEnrolledCourse = () => {
+    if (!user) {
+      navigate("/sign-up");
+      toast({
+        title: `Sign up to purchase a course`,
+        status: "info",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    } else {
+      courseEnroll({
+        courseId: getStudentSingleCourse?.id,
+      });
+    }
+  };
+  const handleGoToCourse = () => {
+    if (!user) {
+      navigate("/sign-up");
+      toast({
+        title: `Sign up to purchase a course`,
+        status: "info",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    } else {
+      navigate(`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.id}`);
+    }
+  };
   let ratingFormat = parseFloat(
     courseReviewRating?.average === "NaN" ? "0" : courseReviewRating?.average
   );
@@ -198,7 +237,10 @@ const SingleCourse = () => {
                       <Text>
                         <LuClock3 />
                       </Text>
-                      <Text>{getStudentEnrolledCourse?.length} enrolled on this course</Text>
+                      <Text>
+                        {getStudentEnrolledCourse?.length} enrolled on this
+                        course
+                      </Text>
                     </Flex>
                     <Flex align={"center"} columnGap={2}>
                       <Text>
@@ -481,11 +523,12 @@ const SingleCourse = () => {
                               borderColor={"#140342"}
                               py={"25px"}
                               variant="outline"
-                              onClick={() =>
-                                courseEnroll({
-                                  courseId: getStudentSingleCourse?.id,
-                                })
-                              }
+                              // onClick={() => {
+                              //   courseEnroll({
+                              //     courseId: getStudentSingleCourse?.id,
+                              //   });
+                              // }}
+                              onClick={handleEnrolledCourse}
                             >
                               Buy Now
                             </Button>
@@ -503,8 +546,9 @@ const SingleCourse = () => {
                               py={"25px"}
                               variant="solid"
                               color={"white"}
-                              as={Link}
-                              to={`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.id}`}
+                              // as={Link}
+                              onClick={handleGoToCourse}
+                              // to={`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.id}`}
                             >
                               Go to Course
                             </Button>

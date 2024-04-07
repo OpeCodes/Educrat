@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,7 @@ import { addUserLocalStorage } from "../../store/localStorage";
 export const useLoginUser = () => {
   const toast = useToast();
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { isPending, mutate: loginUser } = useMutation({
     mutationFn: (user) => {
@@ -17,6 +18,7 @@ export const useLoginUser = () => {
     onSuccess: (user) => {
       dispatch(setUser(user.data));
       addUserLocalStorage(user.data);
+      queryClient.invalidateQueries()
       toast({
         title: `welcome ${user.data.user.firstName}`,
         status: "success",
