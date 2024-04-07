@@ -47,7 +47,7 @@ const initialValues = {
 const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  const { createEnrolledCourseReview } = useCreateEnrolledCourseReview();
+  const { createEnrolledCourseReview ,createEnrolledCourseReviewLoading} = useCreateEnrolledCourseReview();
 
   const handleSubmit = (values: any) => {
     createEnrolledCourseReview({
@@ -244,7 +244,7 @@ const SingleEnrolledCourse = () => {
 
                         <Button
                           bg={"#00FF84"}
-                          // isLoading={isPending}
+                          isLoading={createEnrolledCourseReviewLoading}
                           loadingText="Loading"
                           variant="outline"
                           spinnerPlacement="end"
