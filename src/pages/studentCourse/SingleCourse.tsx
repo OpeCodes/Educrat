@@ -507,7 +507,7 @@ const SingleCourse = () => {
                               variant="solid"
                               color={"white"}
                               as={Link}
-                              to={`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.courseId}`}
+                              to={`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.id}`}
                             >
                               Go to Course
                             </Button>
