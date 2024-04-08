@@ -75,7 +75,6 @@ export const Courses = () => {
           <Stack>
             <Grid templateColumns={{base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)"}}
              gap={6}
-
              >
               {dummyArray.map((_, index) => (
                 <GridItem w="100%" key={index}>
