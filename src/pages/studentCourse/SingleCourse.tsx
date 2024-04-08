@@ -91,6 +91,7 @@ const SingleCourse = () => {
   const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
+  console.log(getSingleEnrolledCourse, "single")
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getStudentSingleCourse?.userId?.id
   );
@@ -446,10 +447,10 @@ const SingleCourse = () => {
                       {getCourseReview
                         ?.slice(0, visibleReviews)
                         ?.map((review: any) => {
-                          const { reviewer, title, content, updatedAt } =
+                          const { reviewer, title, content, updatedAt ,id} =
                             review;
                           return (
-                            <Flex columnGap={3} mt={3}>
+                            <Flex columnGap={3} mt={3} key={id}>
                               <Avatar
                                 size="lg"
                                 name={`${reviewer?.firstName} ${reviewer?.lastName}`}
@@ -544,9 +545,7 @@ const SingleCourse = () => {
                               py={"25px"}
                               variant="solid"
                               color={"white"}
-                              // as={Link}
                               onClick={handleGoToCourse}
-                              // to={`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.id}`}
                             >
                               Go to Course
                             </Button>

@@ -65,3 +65,19 @@ export function getTimeDifference(timestamp: any) {
   }
 }
 
+export function formatEnrollDate(inputDate: string): string {
+  const date = new Date(inputDate);
+
+  const monthNames: string[] = [
+    "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
+    "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."
+  ];
+  const year: number = date.getFullYear();
+  const monthIndex: number = date.getMonth(); 
+  const day: number = date.getDate();
+  const formattedDate: string = `${monthNames[monthIndex]} ${day}, ${year}`;
+  return formattedDate;
+}
+
+
+
