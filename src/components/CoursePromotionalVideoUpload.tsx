@@ -59,7 +59,7 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
       const base64Data = reader.result as string;
       const endpoint = `/course/${id}/promotional-video`;
       try {
-        const response = await customFetch.put(
+        await customFetch.put(
           endpoint,
           { video: base64Data },
           {
@@ -77,8 +77,6 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
             },
           }
         );
-
-        console.log("Upload completed:", response.data);
         toast({
           title: `Video uploaded`,
           status: "success",
@@ -127,7 +125,7 @@ const CoursePromotionalVideoUpload: React.FC<ImageUploadProps> = ({
         <Text>
           Your promo video is a quick and compelling way for students to preview
           what they’ll learn in your course. Students considering your course
-          are more likely to enroll if your promo video is well-made. 
+          are more likely to enroll if your promo video is well-made.
         </Text>
         <Input
           type="file"

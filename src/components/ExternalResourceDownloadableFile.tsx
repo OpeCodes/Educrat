@@ -67,7 +67,7 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
       const base64Data = reader.result as string;
       const endpoint = `/lecture/resource/lecture/${id}/downloadable`;
       try {
-        const response = await customFetch.post(
+       customFetch.post(
           endpoint,
           { file: base64Data, type, title, size },
           {
@@ -86,7 +86,6 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
           }
         );
         refetch();
-        console.log("Upload completed:", response.data);
         toast({
           title: `uploaded`,
           status: "success",

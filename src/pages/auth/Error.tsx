@@ -7,7 +7,6 @@ const Error = () => {
   const navigate = useNavigate();
 
   const error: any = useRouteError();
-  console.log(error);
   toast({
     title: `redirecting to to previous page... `,
     status: "info",

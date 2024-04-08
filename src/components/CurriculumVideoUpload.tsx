@@ -107,7 +107,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
       const base64Data = reader.result as string;
       const endpoint = `/lecture/content/lecture/${id}/video`;
       try {
-        const response = await customFetch.post(
+        await customFetch.post(
           endpoint,
           { file: base64Data, duration, title },
           {
@@ -126,8 +126,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           }
         );
         refetch();
-
-        console.log("Upload completed:", response.data);
         toast({
           title: `Video uploaded`,
           status: "success",

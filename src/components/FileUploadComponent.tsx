@@ -52,7 +52,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
 
   const sendBase64Data = async (uploadedFile: File, base64Data: string) => {
     try {
-      const response = await customFetch.put(
+      await customFetch.put(
         "/user/profile-picture",
         { profilePicture: base64Data },
         {
@@ -72,8 +72,6 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
           },
         }
       );
-
-      console.log("Upload completed:", response.data);
       toast({
         title: `Profile picture uploaded`,
         status: "success",

@@ -32,7 +32,6 @@ export const useLoginUser = () => {
       }, 1000);
     },
     onError: (error: any) => {
-      console.log(error, "here")
       if (error.response) {
         toast({
           title: `${error.response.data.error}`,

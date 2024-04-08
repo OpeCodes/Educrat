@@ -54,7 +54,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
       const endpoint = `/course/${getSingleCourse?.id}/thumbnail`;
 
       try {
-        const response = await customFetch.put(
+       await customFetch.put(
           endpoint,
           { image: base64Data },
           {
@@ -75,7 +75,6 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         refetch();
         singleCourseRefetch();
 
-        console.log("Upload completed:", response.data);
         toast({
           title: `Profile picture uploaded`,
           status: "success",
