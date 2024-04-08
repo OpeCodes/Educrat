@@ -1,10 +1,14 @@
-import { Outlet} from "react-router-dom";
+import { Navigate, Outlet,  } from "react-router-dom";
 import { CourseManageNavbar, CourseManageSidebar } from ".";
-import { Flex, Stack } from "@chakra-ui/react";
-
+import { Flex, Stack,  } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const CourseManageDashboardLayout = () => {
-  return (
+  const { user } = useSelector((store: RootState) => store?.user);
+  return !user ? (
+    <Navigate to={"/sign-in"} />
+  ) : (
     <>
       <CourseManageNavbar />
       <Flex flexWrap={"wrap"}>
@@ -17,7 +21,7 @@ const CourseManageDashboardLayout = () => {
           my={10}
           w="full"
           mr={{ base: 0, lg: 5 }}
-          boxShadow={{base: "", lg: "0 0.75rem 1rem rgb(189 197 209 / 90%)"}}
+          boxShadow={{ base: "", lg: "0 0.75rem 1rem rgb(189 197 209 / 90%)" }}
         >
           <Outlet />
         </Stack>
