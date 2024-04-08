@@ -26,7 +26,9 @@ export const useLoginUser = () => {
         isClosable: true,
       });
       setTimeout(() => {
-        navigate(-1)
+        // navigate("/");
+        navigate(-1);
+
       }, 1000);
     },
     onError: (error: any) => {
