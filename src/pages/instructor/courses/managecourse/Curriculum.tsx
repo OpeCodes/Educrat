@@ -1872,13 +1872,7 @@ const Curriculum = () => {
                                             color="black"
                                           >
                                             Upload Video
-                                          </Tab>
-                                          <Tab
-                                            fontWeight={"bold"}
-                                            color="black"
-                                          >
-                                            Add from library
-                                          </Tab>
+                                          </Tab>                                         
                                         </TabList>
                                         <TabPanels>
                                           <TabPanel>
@@ -1891,17 +1885,7 @@ const Curriculum = () => {
                                                 contentId={content?.id}
                                               />
                                             </Stack>
-                                          </TabPanel>
-                                          <TabPanel>
-                                            <Stack>
-                                              <Text
-                                                fontSize={16}
-                                                fontWeight={"bold"}
-                                              >
-                                                Feature incoming soon.......
-                                              </Text>
-                                            </Stack>
-                                          </TabPanel>
+                                          </TabPanel>                                         
                                         </TabPanels>
                                       </Tabs>
                                     </Stack>
