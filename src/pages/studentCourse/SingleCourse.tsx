@@ -39,6 +39,7 @@ import {
 import { FaStar } from "react-icons/fa";
 import {
   convertSecondsToHMS,
+  formatEnrollDate,
   getTimeDifference,
 } from "../../components/TimeFormat";
 import { useSelector } from "react-redux";
@@ -537,7 +538,7 @@ const SingleCourse = () => {
                             <Flex columnGap={4} align={"center"}>
                               <FcInfo size={35} />
                               <Text fontWeight={"bold"}>
-                                You purchased this course on mar, 11,2024
+                                You purchased this course on {formatEnrollDate(getSingleEnrolledCourse?.createdAt)}
                               </Text>
                             </Flex>
                             <Button
