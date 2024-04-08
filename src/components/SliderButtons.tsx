@@ -11,7 +11,7 @@ const SliderButtons = () => {
     <Box as="div" display={"flex"} cursor={"pointer"}>
       <Box
         position={"absolute"}
-        top={{ base: "54%", lg: "58%" }}
+        top={{ base: "50%", lg: "58%" }}
         left={{ base: "1%", lg: "2.5%" }}
       >
         <BsFillArrowLeftCircleFill
@@ -22,7 +22,7 @@ const SliderButtons = () => {
       </Box>
       <Box
         position={"absolute"}
-        top={{ base: "54%", lg: "58%" }}
+        top={{ base: "50%", lg: "58%" }}
         right={{ base: "1%", lg: "2.8%" }}
       >
         <BsFillArrowRightCircleFill

@@ -34,8 +34,10 @@ const Course = ({
     <Box
       as="div"
       className="wrapper"
-      width={{ base: "87vw", md: "345px", lg: "290px" }}
-      // height={"auto"}
+      width={{ base: "88vw", md: "345px", lg: "290px" }}
+      height={"auto"}
+      // width={"100%"}
+      px={{base: 2,lg: 0}}
       cursor={"pointer"}
       key={id}
     >
@@ -100,7 +102,7 @@ const Course = ({
         </Flex>
         <Divider />
         <Box
-          display={{ base: "none", lg: "flex" }}
+          display={"flex"}
           justifyContent={"space-between"}
           alignItems={"center"}
         >
@@ -111,11 +113,11 @@ const Course = ({
             columnGap={3}
           >
             <Avatar
-              size="xs"
+              size="sm"
               name={`${userId?.firstName} ${userId.lastName}`}
               src={userId?.profilePicture}
             />
-            <Text color={"gray.600"} fontSize={"small"}>
+            <Text color={"gray.600"} >
               {`${userId?.firstName} ${userId.lastName}`}
             </Text>
           </Box>
