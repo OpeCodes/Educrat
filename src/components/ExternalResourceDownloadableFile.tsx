@@ -175,13 +175,14 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
                   <Td width={"50%"}>
                     {uploadProgress > 0 && uploadProgress < 100 && (
                       <Stack direction={"row"} align={"center"}>
-                        <Progress
-                          value={uploadProgress}
-                          size="sm"
-                          width="40%"
-                          display={{ base: "none", md: "block" }}
-                        />
-
+                        {selectedImageName?.name?.length < 40 && (
+                          <Progress
+                            value={uploadProgress}
+                            size="sm"
+                            width="40%"
+                            display={{ base: "none", md: "block" }}
+                          />
+                        )}
                         <Text>{uploadProgress}%</Text>
                       </Stack>
                     )}
