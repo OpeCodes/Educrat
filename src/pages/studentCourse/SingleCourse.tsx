@@ -97,9 +97,9 @@ const SingleCourse = () => {
   console.log(getInstructorenrolledCourse, "here brotehr");
   const handleEnrolledCourse = () => {
     if (!user) {
-      navigate("/sign-up");
+      navigate("/sign-in");
       toast({
-        title: `Sign up to purchase a course`,
+        title: `Sign in to purchase a course`,
         status: "info",
         duration: 3000,
         isClosable: true,
@@ -113,9 +113,9 @@ const SingleCourse = () => {
   };
   const handleGoToCourse = () => {
     if (!user) {
-      navigate("/sign-up");
+      navigate("/sign-in");
       toast({
-        title: `Sign up to purchase a course`,
+        title: `Sign in to purchase a course`,
         status: "info",
         duration: 3000,
         isClosable: true,
