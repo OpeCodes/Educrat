@@ -1,4 +1,4 @@
-import { FileUploadComponent,  } from "../../components";
+import { FileUploadComponent } from "../../components";
 import {
   Box,
   Stack,
@@ -20,6 +20,9 @@ import {
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
 import { useBecomeInstructor } from "../../hooks";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { Navigate } from "react-router-dom";
 const initialValues = {
   headline: "",
   biography: "",
@@ -33,14 +36,18 @@ const initialValues = {
 };
 
 const BecomeInstructor = () => {
- const {becomeInstructor,isPending} = useBecomeInstructor();
+  const { user } = useSelector((store: RootState) => store?.user);
+
+  const { becomeInstructor, isPending } = useBecomeInstructor();
+
   const handleSubmit = (values: any) => {
-    becomeInstructor(values)
+    becomeInstructor(values);
   };
-  const handleImageUpload = () => {
-  };
- 
-  return (
+  const handleImageUpload = () => {};
+
+  return !user ? (
+    <Navigate to="sign-in" />
+  ) : (
     <Stack>
       {/* <InstructorNavbar /> */}
       <Stack ml={{ base: 6, lg: 16 }} mr={{ base: 5, lg: 10 }} mt={10}>
@@ -98,12 +105,13 @@ const BecomeInstructor = () => {
                     <GridItem w="100%">
                       <FormControl isRequired>
                         <FormLabel>Biography</FormLabel>
-                       <Textarea 
-                        variant="filled"
-                        placeholder="biography"
-                        value={values.biography}
-                        name="biography"
-                        onChange={handleChange} />
+                        <Textarea
+                          variant="filled"
+                          placeholder="biography"
+                          value={values.biography}
+                          name="biography"
+                          onChange={handleChange}
+                        />
                         {errors.biography && (
                           <Text
                             style={{ color: "red", marginTop: 5 }}
@@ -130,7 +138,6 @@ const BecomeInstructor = () => {
                             value={values.socials[index].url}
                             onChange={handleChange}
                           />
-                          
                         </FormControl>
                       </GridItem>
                     ))}
@@ -174,4 +181,3 @@ const BecomeInstructor = () => {
 };
 
 export default BecomeInstructor;
-
