@@ -9,9 +9,9 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { CiPlay1, CiClock1 } from "react-icons/ci";
-import { icon3 } from "../assets/export";
 import { FaRegStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { BiSolidBarChartAlt2 } from "react-icons/bi";
 
 type Props = {
   id?: number;
@@ -79,11 +79,12 @@ const Course = ({
           as={Link}
           to={`/course/${slug}`}
           fontSize="20px"
+          _hover={{color: "blue"}}
           mt="-8px"
         >
           {title}
         </Heading>
-        <Flex justify={"space-between"}>
+        <Flex justify={"space-between"} fontSize={"19px"}>
           <Flex align="center" columnGap={"4px"} color="gray">
             <CiPlay1 />
             <Text fontSize="13px">6 Lessons</Text>
@@ -93,7 +94,7 @@ const Course = ({
             <Text fontSize="13px">6 Lessons</Text>
           </Flex>
           <Flex align="center" columnGap={"4px"} color="gray">
-            <CiClock1 />
+            <BiSolidBarChartAlt2 color={"gray"}/>
             <Text fontSize="13px">{complexityLevel}</Text>
           </Flex>
         </Flex>
