@@ -30,6 +30,7 @@ import {
   useCourseEnrollment,
   useGetCourseReview,
   useGetCourseReviewRating,
+  useGetInstructorenrolledCourse,
   useGetSingleEnrolledCourse,
   useGetStudentEnrolledCourse,
   useGetStudentSingleCourse,
@@ -50,7 +51,6 @@ const SingleCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse, "nro");
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
@@ -91,7 +91,10 @@ const SingleCourse = () => {
   const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
-
+  const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
+    getStudentSingleCourse?.userId?.id
+  );
+  console.log(getInstructorenrolledCourse, "here brotehr");
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-up");
@@ -407,7 +410,9 @@ const SingleCourse = () => {
                               <Text>
                                 <HiOutlineChat />
                               </Text>
-                              <Text>692 Students</Text>
+                              <Text>
+                                {getInstructorenrolledCourse?.length} Students
+                              </Text>
                             </Flex>
                             <Flex
                               columnGap={1}
@@ -491,7 +496,7 @@ const SingleCourse = () => {
                     borderRadius="md"
                     width={{ base: "100%", lg: "350px" }}
                     mx={{ base: 0, lg: 1 }}
-                  >                    
+                  >
                     <Box width={"100%"} h={"350px"}>
                       <PromotionalVideoPlayModal
                         imageUrl={getStudentSingleCourse?.thumbnail}
@@ -503,7 +508,7 @@ const SingleCourse = () => {
                       overflowY={{ base: "hidden", lg: "scroll" }}
                     >
                       <Stack mx={{ base: 0, lg: 4 }}>
-                        {!getSingleEnrolledCourse ? (
+                        {!getSingleEnrolledCourse || !user ? (
                           <Stack>
                             <Text mt={3} fontSize={"1.5rem"}>
                               $120
@@ -521,11 +526,6 @@ const SingleCourse = () => {
                               borderColor={"#140342"}
                               py={"25px"}
                               variant="outline"
-                              // onClick={() => {
-                              //   courseEnroll({
-                              //     courseId: getStudentSingleCourse?.id,
-                              //   });
-                              // }}
                               onClick={handleEnrolledCourse}
                             >
                               Buy Now
