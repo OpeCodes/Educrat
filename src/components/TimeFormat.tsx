@@ -43,25 +43,25 @@ export function getTimeDifference(timestamp: any) {
 
   if (difference < millisecondsInMinute) {
     const secondsAgo = Math.floor(difference / 1000);
-    return `${secondsAgo} second${secondsAgo !== 1 ? 's' : ''} ago`;
+    return `${secondsAgo} second${secondsAgo !== 1 ? "s" : ""} ago`;
   } else if (difference < millisecondsInHour) {
     const minutesAgo = Math.floor(difference / millisecondsInMinute);
-    return `${minutesAgo} minute${minutesAgo !== 1 ? 's' : ''} ago`;
+    return `${minutesAgo} minute${minutesAgo !== 1 ? "s" : ""} ago`;
   } else if (difference < millisecondsInDay) {
     const hoursAgo = Math.floor(difference / millisecondsInHour);
-    return `${hoursAgo} hour${hoursAgo !== 1 ? 's' : ''} ago`;
+    return `${hoursAgo} hour${hoursAgo !== 1 ? "s" : ""} ago`;
   } else if (difference < millisecondsInWeek) {
     const daysAgo = Math.floor(difference / millisecondsInDay);
-    return `${daysAgo} day${daysAgo !== 1 ? 's' : ''} ago`;
+    return `${daysAgo} day${daysAgo !== 1 ? "s" : ""} ago`;
   } else if (difference < millisecondsInMonth) {
     const weeksAgo = Math.floor(difference / millisecondsInWeek);
-    return `${weeksAgo} week${weeksAgo !== 1 ? 's' : ''} ago`;
+    return `${weeksAgo} week${weeksAgo !== 1 ? "s" : ""} ago`;
   } else if (difference < millisecondsInYear) {
     const monthsAgo = Math.floor(difference / millisecondsInMonth);
-    return `${monthsAgo} month${monthsAgo !== 1 ? 's' : ''} ago`;
+    return `${monthsAgo} month${monthsAgo !== 1 ? "s" : ""} ago`;
   } else {
     const yearsAgo = Math.floor(difference / millisecondsInYear);
-    return `${yearsAgo} year${yearsAgo !== 1 ? 's' : ''} ago`;
+    return `${yearsAgo} year${yearsAgo !== 1 ? "s" : ""} ago`;
   }
 }
 
@@ -69,15 +69,22 @@ export function formatEnrollDate(inputDate: string): string {
   const date = new Date(inputDate);
 
   const monthNames: string[] = [
-    "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
-    "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."
+    "Jan.",
+    "Feb.",
+    "Mar.",
+    "Apr.",
+    "May",
+    "Jun.",
+    "Jul.",
+    "Aug.",
+    "Sep.",
+    "Oct.",
+    "Nov.",
+    "Dec.",
   ];
   const year: number = date.getFullYear();
-  const monthIndex: number = date.getMonth(); 
+  const monthIndex: number = date.getMonth();
   const day: number = date.getDate();
   const formattedDate: string = `${monthNames[monthIndex]} ${day}, ${year}`;
   return formattedDate;
 }
-
-
-

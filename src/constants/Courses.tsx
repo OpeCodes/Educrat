@@ -25,7 +25,7 @@ export const Courses = () => {
     setActiveButton(buttonId === activeButton ? null : buttonId);
   };
   const { data, isPending } = useGetCourse();
-
+  console.log(data?.data, "yuu")
   const dummyArray = [1, 2, 3, 4];
   return (
     <Box

@@ -36,7 +36,6 @@ const Course = ({
       className="wrapper"
       width={{ base: "88vw", md: "345px", lg: "290px" }}
       height={"auto"}
-      // width={"100%"}
       px={{base: 2,lg: 0}}
       cursor={"pointer"}
       key={id}

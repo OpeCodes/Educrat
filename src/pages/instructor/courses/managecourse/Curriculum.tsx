@@ -1542,24 +1542,14 @@ const Curriculum = () => {
                                             >
                                               Downloadable File
                                             </Tab>
-                                            <Tab
-                                              fontWeight={"bold"}
-                                              color="black"
-                                            >
-                                              Add from library
-                                            </Tab>
+                                           
                                             <Tab
                                               fontWeight={"bold"}
                                               color="black"
                                             >
                                               External Resource
                                             </Tab>
-                                            <Tab
-                                              fontWeight={"bold"}
-                                              color="black"
-                                            >
-                                              Source code
-                                            </Tab>
+                                           
                                           </TabList>
                                           <TabPanels>
                                             <TabPanel>
@@ -1571,17 +1561,7 @@ const Curriculum = () => {
                                                   id={id}
                                                 />
                                               </Stack>
-                                            </TabPanel>
-                                            <TabPanel>
-                                              <Stack>
-                                                <Text
-                                                  fontSize={16}
-                                                  fontWeight={"bold"}
-                                                >
-                                                  Feature incoming soon.......
-                                                </Text>
-                                              </Stack>
-                                            </TabPanel>
+                                            </TabPanel>                                           
                                             <TabPanel>
                                               <Stack>
                                                 <Formik
@@ -1710,17 +1690,7 @@ const Curriculum = () => {
                                                   )}
                                                 </Formik>
                                               </Stack>
-                                            </TabPanel>
-                                            <TabPanel>
-                                              <Stack>
-                                                <Text
-                                                  fontSize={16}
-                                                  fontWeight={"bold"}
-                                                >
-                                                  Feature incoming soon.......
-                                                </Text>
-                                              </Stack>
-                                            </TabPanel>
+                                            </TabPanel>                                            
                                           </TabPanels>
                                         </Tabs>
                                       </Stack>

@@ -92,7 +92,6 @@ const SingleCourse = () => {
   const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
-  console.log(getSingleEnrolledCourse, "single")
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getStudentSingleCourse?.userId?.id
   );
