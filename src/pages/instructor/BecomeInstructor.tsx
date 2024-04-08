@@ -46,7 +46,7 @@ const BecomeInstructor = () => {
   const handleImageUpload = () => {};
 
   return !user ? (
-    <Navigate to="sign-in" />
+    <Navigate to="/sign-in" />
   ) : (
     <Stack>
       {/* <InstructorNavbar /> */}

@@ -32,7 +32,7 @@ const CreateCourse = () => {
     return <Loading />;
   }
   return !user ? (
-    <Navigate to="sign-in" />
+    <Navigate to="/sign-in" />
   ) : (
     <Stack>
       <CreateCourseNavBar step={1} progressValue={100} />
