@@ -13,25 +13,27 @@ import { CreateCourseNavBar, Loading } from "../../../components";
 import { Formik } from "formik";
 import { createCourseSchema } from "../../../schemas";
 import { useCourseCategory, useCreateCourse } from "../../../hooks/course";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
+import { Navigate } from "react-router-dom";
 
 const initialValues = {
   title: "",
   category: "",
 };
 const CreateCourse = () => {
-  const { createCourse, isPending : loading } = useCreateCourse();
+  const { user } = useSelector((store: RootState) => store?.user);
+  const { createCourse, isPending: loading } = useCreateCourse();
   const handleSubmit = (values: any): void => {
     createCourse(values);
-
   };
-  const { data, isPending } = useCourseCategory()
-  if(isPending){
-    return (
-    <Loading/>
-    )
+  const { data, isPending } = useCourseCategory();
+  if (isPending) {
+    return <Loading />;
   }
-
-  return (
+  return !user ? (
+    <Navigate to="sign-in" />
+  ) : (
     <Stack>
       <CreateCourseNavBar step={1} progressValue={100} />
       second step
@@ -64,7 +66,6 @@ const CreateCourse = () => {
                   variant="filled"
                   placeholder="e.g learn learn photoshop cs6 from photoshop"
                   value={values.title}
-
                   name="title"
                   onChange={handleChange}
                 />
@@ -97,7 +98,12 @@ const CreateCourse = () => {
                   {errors.category}
                 </Text>
               )}
-              <Box position="fixed" bottom={{base: "-4", md: 4}} right="4" p="4" >
+              <Box
+                position="fixed"
+                bottom={{ base: "-4", md: 4 }}
+                right="4"
+                p="4"
+              >
                 <Button
                   bg={"#00FF84"}
                   isLoading={loading}
