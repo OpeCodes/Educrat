@@ -64,8 +64,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           duration: 5000,
           isClosable: true,
         });
-      }
-       else {
+      } else {
         setSelectImageName(file);
 
         const duration = await getVideoDuration(file);
@@ -79,14 +78,14 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
       const video = document.createElement("video");
       video.preload = "metadata";
       video.onloadedmetadata = () => {
-
         // maxW="900px" ratio={17/10}
         const width = video.videoWidth;
         const height = video.videoHeight;
         if (width < 1200 || height < 700) {
           toast({
             title: "Video dimensions are invalid",
-            description: "Width must be 900px and height must be at least 428px",
+            description:
+              "Width must be 900px and height must be at least 428px",
             status: "error",
             duration: 5000,
             isClosable: true,
@@ -214,12 +213,14 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   <Td width={"50%"}>
                     {uploadProgress > 0 && uploadProgress < 100 && (
                       <Stack direction={"row"} align={"center"}>
-                        <Progress
-                          value={uploadProgress}
-                          size="sm"
-                          width="40%"
-                          display={{ base: "none", md: "block" }}
-                        />
+                        {selectedImageName?.name?.lengh < 40 && (
+                          <Progress
+                            value={uploadProgress}
+                            size="sm"
+                            width="40%"
+                            display={{ base: "none", md: "block" }}
+                          />
+                        )}
 
                         <Text>{uploadProgress}%</Text>
                       </Stack>
