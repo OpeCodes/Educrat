@@ -5,8 +5,12 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../../features/user/UserSlice";
 import { addUserLocalStorage } from "../../store/localStorage";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 export const useLoginUser = () => {
+  const { courseNavigate } = useSelector((store: RootState) => store?.user);
+
   const toast = useToast();
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
@@ -18,7 +22,7 @@ export const useLoginUser = () => {
     onSuccess: (user) => {
       dispatch(setUser(user.data));
       addUserLocalStorage(user.data);
-      queryClient.invalidateQueries()
+      queryClient.invalidateQueries();
       toast({
         title: `welcome ${user.data.user.firstName}`,
         status: "success",
@@ -26,13 +30,13 @@ export const useLoginUser = () => {
         isClosable: true,
       });
       setTimeout(() => {
-        // navigate("/");
-        navigate(-1);
-
+        {
+          courseNavigate === 0 ? navigate("/") : navigate(-1);
+        }
+        // navigate(-1);
       }, 1000);
     },
     onError: (error: any) => {
-      console.log(error,"here")
       if (error.response) {
         toast({
           title: `${error.response.data.error}`,

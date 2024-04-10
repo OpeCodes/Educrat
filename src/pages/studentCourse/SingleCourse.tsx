@@ -45,10 +45,13 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { PromotionalVideoPlayModal } from "../../components";
+import { setCourseAuthNavigate } from "../../features/user/UserSlice";
+import { useDispatch } from "react-redux";
 
 const SingleCourse = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
@@ -104,6 +107,8 @@ const SingleCourse = () => {
         duration: 3000,
         isClosable: true,
       });
+      dispatch(setCourseAuthNavigate(-1))
+
       return;
     } else {
       courseEnroll({
@@ -120,6 +125,8 @@ const SingleCourse = () => {
         duration: 3000,
         isClosable: true,
       });
+      // setCourseAuthNavigate
+      dispatch(setCourseAuthNavigate(-1))
       return;
     } else {
       navigate(`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.id}`);
