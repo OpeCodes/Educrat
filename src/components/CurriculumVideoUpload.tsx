@@ -244,11 +244,11 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   </Td>
                   <Td>{formattedDate}</Td>
                   <Td
-                    as={"button"}
+                    as={"button"}                  
                     disabled={!success}
                     cursor={!success ? "not-allowed" : "pointer"}
                     fontSize={15}
-                    fontWeight={"600"}
+                    fontWeight={"6003"}
                     color={"#5624D0"}
                     onClick={() => {
                       setSelectImageName(null);

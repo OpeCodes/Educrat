@@ -20,7 +20,7 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import { useEffect,} from "react";
+import { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -73,10 +73,9 @@ const Curriculum = () => {
   useEffect(() => {
     refetch();
   }, [id]);
-  const { moduleEditCourse, } = useModuleEditCourse();
+  const { moduleEditCourse } = useModuleEditCourse();
   const { deleteModule, deleteModuleLoading } = useDeleteModuleCourse();
-  const { moduleEditLectureCourse,  } =
-    useEditModuleLectureCourse();
+  const { moduleEditLectureCourse } = useEditModuleLectureCourse();
   const { deleteLectureModule, deleteLecutureModuleCourseLoading } =
     useDeleteLectureModuleCourse();
   const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
@@ -104,10 +103,6 @@ const Curriculum = () => {
     setShowSection,
     showSection,
   } = useModuleCreateCourse();
-
-
-
-
 
   const { createArticleLectureCourse } = useCreateArticleLectureCourse();
   const handleSubmit = (values: any): void => {
@@ -165,9 +160,6 @@ const Curriculum = () => {
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
   const handleUploadSuccess = () => {};
-
-
-  
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -240,7 +232,6 @@ const Curriculum = () => {
                           }
                         >
                           <MdDelete />
-                          
                         </Text>
                       </Flex>
                     </Flex>
@@ -260,15 +251,15 @@ const Curriculum = () => {
                       columnGap={4}
                       display={{ base: "none", lg: "flex" }}
                     >
-                      <Text cursor={"pointer"} onClick={() => toggleIsOpen(id)}>
-                        <MdEdit />
+                      <Text cursor={"pointer"} onClick={() => toggleIsOpen(id)} >
+                        <MdEdit /> 
                       </Text>
-                      <Text   onClick={() => deleteModule({ moduleId: id })}
-                          as={"button"}
-                          disabled={deleteModuleLoading}
-                          cursor={
-                            deleteModuleLoading ? "not-allowed" : "pointer"
-                          }>
+                      <Text
+                        onClick={() => deleteModule({ moduleId: id })}
+                        as={"button"}
+                        disabled={deleteModuleLoading}
+                        cursor={deleteModuleLoading ? "not-allowed" : "pointer"}
+                      >
                         <MdDelete />
                       </Text>
                     </Flex>
@@ -1023,7 +1014,11 @@ const Curriculum = () => {
                                                 </Box>
                                               </Flex>
                                               <Box>
-                                                <Text>{convertSecondsToTime(content?.duration)}</Text>
+                                                <Text>
+                                                  {convertSecondsToTime(
+                                                    content?.duration
+                                                  )}
+                                                </Text>
                                                 <Flex
                                                   align={"center"}
                                                   fontWeight={"600"}
@@ -1173,7 +1168,7 @@ const Curriculum = () => {
                                                       title,
                                                       id,
                                                       source,
-                                                      size
+                                                      size,
                                                     } = resource;
                                                     return (
                                                       <>
@@ -1195,7 +1190,11 @@ const Curriculum = () => {
                                                                 />
                                                               </Text>
                                                               <Text>
-                                                                {title} ({(size/1024).toFixed(1)}) kB
+                                                                {title} (
+                                                                {(
+                                                                  size / 1024
+                                                                ).toFixed(1)}
+                                                                ) kB
                                                               </Text>
                                                             </Flex>
                                                             <Text
@@ -1536,14 +1535,13 @@ const Curriculum = () => {
                                             >
                                               Downloadable File
                                             </Tab>
-                                           
+
                                             <Tab
                                               fontWeight={"bold"}
                                               color="black"
                                             >
                                               External Resource
                                             </Tab>
-                                           
                                           </TabList>
                                           <TabPanels>
                                             <TabPanel>
@@ -1555,7 +1553,7 @@ const Curriculum = () => {
                                                   id={id}
                                                 />
                                               </Stack>
-                                            </TabPanel>                                           
+                                            </TabPanel>
                                             <TabPanel>
                                               <Stack>
                                                 <Formik
@@ -1684,7 +1682,7 @@ const Curriculum = () => {
                                                   )}
                                                 </Formik>
                                               </Stack>
-                                            </TabPanel>                                            
+                                            </TabPanel>
                                           </TabPanels>
                                         </Tabs>
                                       </Stack>
@@ -1866,7 +1864,7 @@ const Curriculum = () => {
                                             color="black"
                                           >
                                             Upload Video
-                                          </Tab>                                         
+                                          </Tab>
                                         </TabList>
                                         <TabPanels>
                                           <TabPanel>
@@ -1879,7 +1877,7 @@ const Curriculum = () => {
                                                 contentId={content?.id}
                                               />
                                             </Stack>
-                                          </TabPanel>                                         
+                                          </TabPanel>
                                         </TabPanels>
                                       </Tabs>
                                     </Stack>
