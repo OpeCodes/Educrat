@@ -12,6 +12,7 @@ import { CiPlay1, CiClock1 } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
+import { convertSecondsToHMS } from "./TimeFormat";
 interface Review {
   stars: number;
 }
@@ -23,6 +24,7 @@ type Props = {
   title?: string;
   slug: string;
   reviews: Review[];
+  modules: any;
 };
 
 const Course = ({
@@ -33,8 +35,8 @@ const Course = ({
   userId,
   slug,
   reviews,
+  modules,
 }: Props) => {
-
   // Function to calculate the average stars and round up to whole number
   function calculateAverageStars(products: any) {
     let totalStars = 0;
@@ -76,6 +78,21 @@ const Course = ({
       />
     );
   }
+  // Function to calculate the total duration
+
+  const getTotalLecturesDuration = () => {
+    let totalDuration = 0;
+    modules.forEach((module: any) => {
+      if (module.lectures && Array.isArray(module.lectures)) {
+        module.lectures.forEach((lecture: any) => {
+          totalDuration += lecture?.content?.duration || 0;
+        });
+      }
+    });
+    return totalDuration;
+  };
+  const totalDuration = getTotalLecturesDuration();
+
   return (
     <Box
       as="div"
@@ -125,11 +142,11 @@ const Course = ({
         <Flex justify={"space-between"} fontSize={"19px"}>
           <Flex align="center" columnGap={"4px"} color="gray">
             <CiPlay1 />
-            <Text fontSize="13px">6 Lessons</Text>
+            <Text fontSize="13px">{modules?.length} Lessons</Text>
           </Flex>
           <Flex align="center" columnGap={"4px"} color="gray">
             <CiClock1 />
-            <Text fontSize="13px">6 Lessons</Text>
+            <Text fontSize="13px">{convertSecondsToHMS(totalDuration)}</Text>
           </Flex>
           <Flex align="center" columnGap={"4px"} color="gray">
             <BiSolidBarChartAlt2 color={"gray"} />
