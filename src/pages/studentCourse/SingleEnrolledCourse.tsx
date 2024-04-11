@@ -37,6 +37,7 @@ import { useRef } from "react";
 import {
   useCreateEnrolledCourseReview,
   useGetSingleEnrolledStudentCourse,
+  useMarkLectureCompleted,
 } from "../../hooks/studentCourse";
 
 const initialValues = {
@@ -58,6 +59,7 @@ const SingleEnrolledCourse = () => {
     });
   };
   const initialFocusRef: any = useRef();
+  useMarkLectureCompleted()
   return (
     <Stack>
       <Flex

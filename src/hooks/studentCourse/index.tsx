@@ -146,6 +146,53 @@ export const useGetInstructorenrolledCourse = (id: any) => {
 };
 
 
+export const useMarkLectureCompleted = () => {
+  const toast = useToast();
+  // const queryClient = useQueryClient();
+
+  const {
+    mutate: markLectureCompleted,
+  } = useMutation({
+    mutationFn: ( enrollId: any) => {
+      return customFetch.post(`/enrollment/${enrollId}/lecture/complete`,);
+    },
+    onSuccess: () => {
+      // queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
+      toast({
+        title: `marked`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
+  return { markLectureCompleted,  };
+};
+
 
 // ***************************************************reviews***************************************
 
