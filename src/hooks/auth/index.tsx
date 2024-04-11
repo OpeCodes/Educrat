@@ -3,7 +3,7 @@ import customFetch from "../../utils/axios";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../../features/user/UserSlice";
+import { setCourseAuthNavigate, setUser } from "../../features/user/UserSlice";
 import { addUserLocalStorage } from "../../store/localStorage";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -33,8 +33,8 @@ export const useLoginUser = () => {
         {
           courseNavigate === 0 ? navigate("/") : navigate(-1);
         }
-        // navigate(-1);
       }, 1000);
+      dispatch(setCourseAuthNavigate(0));
     },
     onError: (error: any) => {
       if (error.response) {
