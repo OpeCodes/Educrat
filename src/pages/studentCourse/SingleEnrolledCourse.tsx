@@ -93,7 +93,8 @@ const SingleEnrolledCourse = () => {
           >
             <IoMdArrowRoundBack color={"white"} fontSize={24} />
           </Text>
-          <Text fontWeight={"bold"} fontSize={14} color={"white"}>
+           
+          <Text fontWeight={"bold"} fontSize={14} color={"white"} as={Link}  to={`/course/${getSingleEnrolledCourse?.courseId?.slug}`}>
             {getSingleEnrolledCourse?.courseId?.title}
           </Text>
         </Flex>
@@ -318,7 +319,7 @@ const SingleEnrolledCourse = () => {
                               </Flex>
                               <Flex>
                                 <Text fontSize={14}>
-                                  1/ {lectures?.length} | 6 minsq
+                                  1/ {lectures?.length} | 6 mins
                                 </Text>
                               </Flex>
                             </Stack>
@@ -329,11 +330,11 @@ const SingleEnrolledCourse = () => {
                         </AccordionButton>
                       </Stack>
                       {lectures?.map((lecture: any, index: number) => {
-                        const { title,id,content } = lecture;
+                        const { title,content } = lecture;
 
                         return (
-                          <AccordionPanel  onClick={() => markLectureCompleted({lectureId: content?.lectureId})}>
-                            <Flex columnGap={3} align={"start"}>
+                          <AccordionPanel  >
+                            <Flex columnGap={3} align={"start"}  onClick={() => markLectureCompleted({lectureId: content?.lectureId})}>
                               <Checkbox
                                 mt={1}
                                 iconColor={"black"}
