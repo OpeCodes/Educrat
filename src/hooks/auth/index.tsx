@@ -34,7 +34,7 @@ export const useLoginUser = () => {
           courseNavigate === 0 ? navigate("/") : navigate(-1);
         }
       }, 1000);
-      dispatch(setCourseAuthNavigate(0));
+      dispatch(setCourseAuthNavigate(0))
     },
     onError: (error: any) => {
       if (error.response) {

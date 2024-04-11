@@ -30,7 +30,6 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
       setIsOpen(true);
     }
   };
-
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -58,7 +57,6 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
         cursor={"pointer"}
         onClick={openModal}
         as={"button"}
-        // disabled={videoUrl ? false : true}
       >
         <IoPlayOutline color="black" size="30px" />
       </Text>

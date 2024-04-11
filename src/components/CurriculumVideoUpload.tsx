@@ -65,8 +65,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
           isClosable: true,
         });
       } else {
-        setSelectImageName(file);
-
         const duration = await getVideoDuration(file);
         await uploadImage(file, duration, file?.name);
       }
@@ -78,7 +76,6 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
       const video = document.createElement("video");
       video.preload = "metadata";
       video.onloadedmetadata = () => {
-        // maxW="900px" ratio={17/10}
         const width = video.videoWidth;
         const height = video.videoHeight;
         if (width < 1200 || height < 700) {
