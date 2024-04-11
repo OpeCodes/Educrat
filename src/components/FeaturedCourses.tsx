@@ -53,6 +53,7 @@ function calculateAverageStars(products: any) {
   }
   const averageStars = totalStars / totalReviews;
   const roundedAverageStars = Math.ceil(averageStars);
+
   return roundedAverageStars;
 }
 
@@ -93,20 +94,11 @@ function calculateAverageStars(products: any) {
         </Box>
         <Box>
           <Flex justifyContent={"start"} alignItems={"center"}>
-            <Text color={"#e59819"}>{calculateAverageStars(reviews)}</Text>
+            <Text color={"#FFD700"}>{calculateAverageStars(reviews)}</Text>
             <Box color={"#e59819"} display={"flex"} ml={2} mr={3}>
-              <Box mr={1}>
-                <FaRegStar />
-              </Box>
-              <Box mr={1}>
-                <FaRegStar />
-              </Box>
-              <Box mr={1}>
-                <FaRegStar />
-              </Box>
-              <Box mr={1}>
-                <FaRegStar />
-              </Box>
+            <Text display={"flex"} columnGap={1}>
+                        {Reviewstars}
+                      </Text>
             </Box>
             <Text color={"gray.600"}>(1991)</Text>
           </Flex>
