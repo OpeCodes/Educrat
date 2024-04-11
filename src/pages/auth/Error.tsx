@@ -7,15 +7,15 @@ const Error = () => {
   const navigate = useNavigate();
 
   const error: any = useRouteError();
-  toast({
-    title: `redirecting to to previous page... `,
-    status: "info",
-    duration: 4000,
-    isClosable: true,
-  });
-  setTimeout(() => {
-    navigate(-1);
-  }, 4000);
+  // toast({
+  //   title: `redirecting to to previous page... `,
+  //   status: "info",
+  //   duration: 4000,
+  //   isClosable: true,
+  // });
+  // setTimeout(() => {
+  //   navigate(-1);
+  // }, 4000);
   if (error?.status === 404) {
     return (
       <div>

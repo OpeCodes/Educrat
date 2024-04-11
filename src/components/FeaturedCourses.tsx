@@ -13,6 +13,7 @@ import { FaRegStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
+import { AnyListenerPredicate } from "@reduxjs/toolkit";
 interface Review {
   stars: number;
 }
@@ -23,7 +24,7 @@ type Props = {
   userId?: any;
   title?: string;
   slug: string;
-  reviews: Review[]
+  reviews: Review[];
 };
 
 const Course = ({
@@ -33,38 +34,47 @@ const Course = ({
   complexityLevel,
   userId,
   slug,
-  reviews
+  reviews,
 }: Props) => {
 
-
-// Function to calculate the average stars and round up to whole number
-function calculateAverageStars(products: any) {
-  let totalStars = 0;
-  let totalReviews = 0;
-
-  products.forEach(() => {
-    reviews.forEach((review: Review) => {
-      totalStars += review?.stars || 0; 
-      totalReviews++;
+  // Function to calculate the average stars and round up to whole number
+  function calculateAverageStars(products: any) {
+    let totalStars = 0;
+    let totalReviews = 0;
+    products.forEach(() => {
+      reviews.forEach((review: Review) => {
+        totalStars += review?.stars || 0;
+        totalReviews++;
+      });
     });
-  });
-  if (totalReviews === 0) {
-    return 0; 
+    if (totalReviews === 0) {
+      return 0;
+    }
+    const averageStars = totalStars / totalReviews;
+    const roundedAverageStars = Math.round(averageStars);
+    return roundedAverageStars;
   }
-  const averageStars = totalStars / totalReviews;
-  const roundedAverageStars = Math.ceil(averageStars);
+  
+  // Function to calculate the total stars
+  function getTotalStarsSum(data: any) {
+    const allStars = data.map((review: any) => review.stars);
+    const totalStarsSum = allStars.reduce(
+      (sum: number, stars: number) => sum + stars,
+      0
+    );
 
-  return roundedAverageStars;
-}
+    return totalStarsSum;
+  }
 
-  console.log(calculateAverageStars(reviews), "herrrrrrr")
+  const totalSumOfStars = getTotalStarsSum(reviews);
+
   const Reviewstars = [];
   // Fill stars based on the rating value
   for (let i = 1; i <= 5; i++) {
     Reviewstars.push(
       <FaStar
         key={i}
-        color={i <= calculateAverageStars(reviews)? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
+        color={i <= calculateAverageStars(reviews) ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
       />
     );
   }
@@ -74,7 +84,7 @@ function calculateAverageStars(products: any) {
       className="wrapper"
       width={{ base: "88vw", md: "345px", lg: "290px" }}
       height={"auto"}
-      px={{base: 2,lg: 0}}
+      px={{ base: 2, lg: 0 }}
       cursor={"pointer"}
       key={id}
     >
@@ -96,11 +106,11 @@ function calculateAverageStars(products: any) {
           <Flex justifyContent={"start"} alignItems={"center"}>
             <Text color={"#FFD700"}>{calculateAverageStars(reviews)}</Text>
             <Box color={"#e59819"} display={"flex"} ml={2} mr={3}>
-            <Text display={"flex"} columnGap={1}>
-                        {Reviewstars}
-                      </Text>
+              <Text display={"flex"} columnGap={1}>
+                {Reviewstars}
+              </Text>
             </Box>
-            <Text color={"gray.600"}>(1991)</Text>
+            <Text color={"gray.600"}>({totalSumOfStars})</Text>
           </Flex>
         </Box>
         <Heading
@@ -109,7 +119,7 @@ function calculateAverageStars(products: any) {
           as={Link}
           to={`/course/${slug}`}
           fontSize="20px"
-          _hover={{color: "blue"}}
+          _hover={{ color: "blue" }}
           mt="-8px"
         >
           {title}
@@ -124,7 +134,7 @@ function calculateAverageStars(products: any) {
             <Text fontSize="13px">6 Lessons</Text>
           </Flex>
           <Flex align="center" columnGap={"4px"} color="gray">
-            <BiSolidBarChartAlt2 color={"gray"}/>
+            <BiSolidBarChartAlt2 color={"gray"} />
             <Text fontSize="13px">{complexityLevel}</Text>
           </Flex>
         </Flex>
@@ -145,7 +155,7 @@ function calculateAverageStars(products: any) {
               name={`${userId?.firstName} ${userId.lastName}`}
               src={userId?.profilePicture}
             />
-            <Text color={"gray.600"} >
+            <Text color={"gray.600"}>
               {`${userId?.firstName} ${userId.lastName}`}
             </Text>
           </Box>
