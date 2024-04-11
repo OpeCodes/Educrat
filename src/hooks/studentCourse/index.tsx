@@ -209,7 +209,7 @@ export const useMarkLectureCompleted = () => {
 
 export const useMarkLectureUnfinished = () => {
   const toast = useToast();
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const { mutate: markLectureUnfinshed } = useMutation({
     mutationFn: ({ enrollId, lectureId }: any) => {
@@ -218,7 +218,7 @@ export const useMarkLectureUnfinished = () => {
       });
     },
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
+      queryClient.invalidateQueries({ queryKey: ["getCourseStudentEnrollCourse"] });
       toast({
         title: `marked`,
         status: "success",

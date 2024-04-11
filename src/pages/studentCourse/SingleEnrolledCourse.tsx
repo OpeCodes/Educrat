@@ -27,6 +27,8 @@ import {
   PopoverArrow,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
+import { IoIosShareAlt } from "react-icons/io";
+
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
@@ -141,7 +143,7 @@ const SingleEnrolledCourse = () => {
                   <CircularProgress
                     value={progressValue}
                     color="green.400"
-                    thickness="4px"
+                    thickness="5px"
                   >
                     <CircularProgressLabel color={"white"} cursor={"pointer"}>
                       <Text ml={"17.5px"}>
@@ -166,7 +168,21 @@ const SingleEnrolledCourse = () => {
                 <PopoverBody>Finish course to get your certificate</PopoverBody>
               </PopoverContent>
             </Popover>
-            <Text color={"white"}> Share this course</Text>
+            <Flex
+              cursor={"pointer"}
+              align={"center"}
+              py={2}
+              px={2}
+              columnGap={2}
+              color={"white"}
+              borderColor={"white"}
+              borderWidth={1}
+            >
+              <Text>Share</Text>
+              <Text>
+                <IoIosShareAlt />
+              </Text>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
@@ -189,7 +205,6 @@ const SingleEnrolledCourse = () => {
                   "https://res.cloudinary.com/dtori4rq2/video/upload/v1712143746/educrat/r0kttd4uzsjtdp2kq938.mp4"
                 }
                 allowFullScreen
-                
               />
             </AspectRatio>
             {/* article section
