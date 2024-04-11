@@ -59,7 +59,8 @@ const SingleEnrolledCourse = () => {
     });
   };
   const initialFocusRef: any = useRef();
-  useMarkLectureCompleted()
+ const {markLectureCompleted} = useMarkLectureCompleted()
+ console.log(getSingleEnrolledCourse,";alskdjfa;slkjf")
   return (
     <Stack>
       <Flex
@@ -310,14 +311,14 @@ const SingleEnrolledCourse = () => {
                             justify={"space-between"}
                             align={"center"}
                           >
-                            <Stack>
+                            <Stack    >
                               <Flex columnGap={2} fontWeight={"bold"}>
                                 <Text>Section {index + 1}:</Text>
                                 <Text>{title}</Text>
                               </Flex>
                               <Flex>
                                 <Text fontSize={14}>
-                                  1/ {lectures?.length} | 6 mins
+                                  1/ {lectures?.length} | 6 minsq
                                 </Text>
                               </Flex>
                             </Stack>
@@ -328,9 +329,10 @@ const SingleEnrolledCourse = () => {
                         </AccordionButton>
                       </Stack>
                       {lectures?.map((lecture: any, index: number) => {
-                        const { title } = lecture;
+                        const { title,id,content } = lecture;
+
                         return (
-                          <AccordionPanel>
+                          <AccordionPanel  onClick={() => markLectureCompleted({lectureId: content?.lectureId})}>
                             <Flex columnGap={3} align={"start"}>
                               <Checkbox
                                 mt={1}
@@ -341,7 +343,7 @@ const SingleEnrolledCourse = () => {
                               />
                               <Stack>
                                 <Text>
-                                  {index + 1} {title}
+                                  {index + 1} {title}q
                                 </Text>
                                 <Flex align={"center"} color={"gray"}>
                                   <RiPlayCircleFill size={25} />1 min

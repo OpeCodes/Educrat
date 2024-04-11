@@ -153,8 +153,8 @@ export const useMarkLectureCompleted = () => {
   const {
     mutate: markLectureCompleted,
   } = useMutation({
-    mutationFn: ( enrollId: any) => {
-      return customFetch.post(`/enrollment/${enrollId}/lecture/complete`,);
+    mutationFn: ( {lectureId}: any) => {
+      return customFetch.post(`/enrollment/${lectureId}/lecture/complete`,);
     },
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
