@@ -34,7 +34,8 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
           cursor: "pointer",
           height: "300px",
           objectFit: "cover",
-        }}
+          }}
+
       />
       <Text
         position="absolute"
