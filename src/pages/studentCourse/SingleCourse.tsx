@@ -56,6 +56,7 @@ const SingleCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
+  console.log(getStudentSingleCourse?.category?.name, "ksksks");
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
@@ -209,6 +210,10 @@ const SingleCourse = () => {
                   <Flex columnGap={1} as={Link} to="/all-courses">
                     <Text>&#x2022;</Text>
                     <Text>All Courses</Text>
+                  </Flex>
+                  <Flex columnGap={1}>
+                    <Text>&#x2022;</Text>
+                    <Text>{getStudentSingleCourse?.category?.name}</Text>
                   </Flex>
                 </Flex>
               </Stack>
