@@ -54,6 +54,7 @@ const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
+  console.log(getSingleEnrolledCourse)
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
@@ -392,7 +393,7 @@ const SingleEnrolledCourse = () => {
                       </Stack>
                       {lectures?.map((lecture: any, index: number) => {
                         const { title, content } = lecture;
-
+                        console.log(content?.duration, "content")
                         return (
                           <AccordionPanel key={index}>
                             <Flex
@@ -417,7 +418,9 @@ const SingleEnrolledCourse = () => {
                                   {index + 1} {title}
                                 </Text>
                                 <Flex align={"center"} color={"gray"}>
-                                  <RiPlayCircleFill size={25} />1 min
+                                  <RiPlayCircleFill size={20} />
+                                  
+                                  <Text fontSize={14}>1 min</Text>
                                 </Flex>
                               </Stack>
                             </Flex>

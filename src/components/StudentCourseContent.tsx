@@ -175,7 +175,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                           </Button>
                         )}
                         <Text color={"#4f547b"}>
-                          {convertSecondsToTime(content?.duration)}{" "}
+                          {convertSecondsToTime(content?.duration)}
                         </Text>
                       </Flex>
                     </Flex>
