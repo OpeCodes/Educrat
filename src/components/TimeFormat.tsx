@@ -88,3 +88,24 @@ export function formatEnrollDate(inputDate: string): string {
   const formattedDate: string = `${monthNames[monthIndex]} ${day}, ${year}`;
   return formattedDate;
 }
+
+
+ export function formatEnrolledCourseDuration(seconds: number): string {
+  const hours: number = Math.floor(seconds / 3600);
+  const minutes: number = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds: number = seconds % 60;
+
+  const parts: string[] = [];
+  if (hours > 0) {
+    parts.push(`${hours}hr`);
+  }
+  if (minutes > 0) {
+    parts.push(`${minutes}min`);
+  }
+  if (remainingSeconds > 0) {
+    parts.push(`${remainingSeconds}sec`);
+  }
+  const formattedString: string = parts.join(' ');
+  return formattedString;
+}
+
