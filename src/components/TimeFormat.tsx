@@ -90,11 +90,14 @@ export function formatEnrollDate(inputDate: string): string {
 }
 
 
+
  export function formatEnrolledCourseDuration(seconds: number): string {
   const hours: number = Math.floor(seconds / 3600);
   const minutes: number = Math.floor((seconds % 3600) / 60);
-  const remainingSeconds: number = seconds % 60;
-
+  const remainingSeconds: number = Math.round(seconds % 60); 
+  if (remainingSeconds === 60) {
+    return `${hours + 1}hr`; 
+  }
   const parts: string[] = [];
   if (hours > 0) {
     parts.push(`${hours}hr`);
@@ -108,4 +111,3 @@ export function formatEnrollDate(inputDate: string): string {
   const formattedString: string = parts.join(' ');
   return formattedString;
 }
-

@@ -43,7 +43,7 @@ import {
   useGetSingleEnrolledStudentCourse,
   useMarkLectureCompleted,
 } from "../../hooks/studentCourse";
-import { convertSecondsToHMS } from "../../components/TimeFormat";
+import { convertSecondsToHMS, formatEnrolledCourseDuration } from "../../components/TimeFormat";
 
 const initialValues = {
   stars: 0,
@@ -420,7 +420,7 @@ const SingleEnrolledCourse = () => {
                                 <Flex align={"center"} color={"gray"}>
                                   <RiPlayCircleFill size={20} />
                                   
-                                  <Text fontSize={14}>1 min</Text>
+                                  <Text fontSize={14}>{formatEnrolledCourseDuration(content?.duration)}</Text>
                                 </Flex>
                               </Stack>
                             </Flex>
