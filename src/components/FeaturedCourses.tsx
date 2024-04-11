@@ -9,11 +9,9 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { CiPlay1, CiClock1 } from "react-icons/ci";
-import { FaRegStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
-import { AnyListenerPredicate } from "@reduxjs/toolkit";
 interface Review {
   stars: number;
 }
@@ -54,7 +52,7 @@ const Course = ({
     const roundedAverageStars = Math.round(averageStars);
     return roundedAverageStars;
   }
-  
+
   // Function to calculate the total stars
   function getTotalStarsSum(data: any) {
     const allStars = data.map((review: any) => review.stars);

@@ -1,21 +1,9 @@
-import { useToast } from "@chakra-ui/react";
 import { Link, useRouteError } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 const Error = () => {
-  const toast = useToast();
-  const navigate = useNavigate();
 
   const error: any = useRouteError();
-  // toast({
-  //   title: `redirecting to to previous page... `,
-  //   status: "info",
-  //   duration: 4000,
-  //   isClosable: true,
-  // });
-  // setTimeout(() => {
-  //   navigate(-1);
-  // }, 4000);
+  
   if (error?.status === 404) {
     return (
       <div>
