@@ -417,7 +417,7 @@ const SingleEnrolledCourse = () => {
                                 <Text>
                                   {index + 1} {title}
                                 </Text>
-                                <Flex align={"center"} color={"gray"}>
+                                <Flex columnGap={1} align={"center"} color={"gray"}>
                                   <RiPlayCircleFill size={20} />
                                   
                                   <Text fontSize={14}>{formatEnrolledCourseDuration(content?.duration)}</Text>

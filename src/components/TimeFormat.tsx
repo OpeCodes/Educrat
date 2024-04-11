@@ -89,14 +89,15 @@ export function formatEnrollDate(inputDate: string): string {
   return formattedDate;
 }
 
-
-
- export function formatEnrolledCourseDuration(seconds: number): string {
+export function formatEnrolledCourseDuration(seconds: number): string {
+  if (seconds < 1) {
+    return `${seconds.toFixed(1)}sec`; // Display seconds with one decimal place
+  }
   const hours: number = Math.floor(seconds / 3600);
   const minutes: number = Math.floor((seconds % 3600) / 60);
-  const remainingSeconds: number = Math.round(seconds % 60); 
+  const remainingSeconds: number = Math.round(seconds % 60);
   if (remainingSeconds === 60) {
-    return `${hours + 1}hr`; 
+    return `${hours + 1}hr`;
   }
   const parts: string[] = [];
   if (hours > 0) {
@@ -108,6 +109,6 @@ export function formatEnrollDate(inputDate: string): string {
   if (remainingSeconds > 0) {
     parts.push(`${remainingSeconds}sec`);
   }
-  const formattedString: string = parts.join(' ');
+  const formattedString: string = parts.join(" ");
   return formattedString;
 }
