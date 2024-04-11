@@ -191,6 +191,7 @@ const SingleEnrolledCourse = () => {
                   "https://res.cloudinary.com/dtori4rq2/video/upload/v1712143746/educrat/r0kttd4uzsjtdp2kq938.mp4"
                 }
                 allowFullScreen
+                
               />
             </AspectRatio>
             {/* article section
@@ -400,7 +401,7 @@ const SingleEnrolledCourse = () => {
                               />
                               <Stack>
                                 <Text>
-                                  {index + 1} {title}q
+                                  {index + 1} {title}
                                 </Text>
                                 <Flex align={"center"} color={"gray"}>
                                   <RiPlayCircleFill size={25} />1 min
