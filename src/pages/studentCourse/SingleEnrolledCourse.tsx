@@ -82,7 +82,7 @@ const SingleEnrolledCourse = () => {
 
   // Get total duration for each module
   const totalDurationPerModule = getTotalDurationPerModule();
-  console.log(totalDurationPerModule,"totalDurationPerModule")
+  console.log(totalDurationPerModule, "totalDurationPerModule");
   let progressValue = Math.round(
     (getSingleEnrolledCourse?.completedLectures?.length /
       lectureLength.length) *
@@ -360,13 +360,13 @@ const SingleEnrolledCourse = () => {
                                 <Text>Section {index + 1}:</Text>
                                 <Text>{title}</Text>
                               </Flex>
-                              <Flex>
-                                <Text fontSize={14}>
-                                  1 / {lectures?.length} 
-                                  <Text>
-
-                                    { convertSecondsToHMS(totalDurationPerModule[index])}
-
+                              <Flex fontSize={14} columnGap={1}>
+                                <Text>1 / {lectures?.length}</Text>
+                                <Text>|</Text>
+                                <Text>
+                                  {convertSecondsToHMS(
+                                    totalDurationPerModule[index]
+                                  )}
                                 </Text>
                               </Flex>
                             </Stack>
