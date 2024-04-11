@@ -41,6 +41,7 @@ import {
   useGetSingleEnrolledStudentCourse,
   useMarkLectureCompleted,
 } from "../../hooks/studentCourse";
+import { convertSecondsToHMS } from "../../components/TimeFormat";
 
 const initialValues = {
   stars: 0,
@@ -67,6 +68,21 @@ const SingleEnrolledCourse = () => {
     getSingleEnrolledCourse?.courseId?.modules ?? []
   ).flatMap((obj: any) => obj.lectures);
 
+  const getTotalDurationPerModule = () => {
+    return getSingleEnrolledCourse?.courseId?.modules?.map((module: any) => {
+      let totalDuration = 0;
+      if (module.lectures && Array.isArray(module.lectures)) {
+        module.lectures.forEach((lecture: any) => {
+          totalDuration += lecture?.content?.duration || 0;
+        });
+      }
+      return totalDuration;
+    });
+  };
+
+  // Get total duration for each module
+  const totalDurationPerModule = getTotalDurationPerModule();
+  console.log(totalDurationPerModule,"totalDurationPerModule")
   let progressValue = Math.round(
     (getSingleEnrolledCourse?.completedLectures?.length /
       lectureLength.length) *
@@ -346,7 +362,11 @@ const SingleEnrolledCourse = () => {
                               </Flex>
                               <Flex>
                                 <Text fontSize={14}>
-                                  1/ {lectures?.length} | 6 mins
+                                  1 / {lectures?.length} 
+                                  <Text>
+
+                                    { convertSecondsToHMS(totalDurationPerModule[index])}
+
                                 </Text>
                               </Flex>
                             </Stack>
