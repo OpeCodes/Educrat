@@ -37,7 +37,7 @@ export const useGetAlInstructorPublishedCourse = (id: any) => {
     queryKey: ["getAllInstructorPublishCourse", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; 
-      const { data } = await customFetch.get(`/course/instuctor/${id}`);
+      const { data } = await customFetch.get(`/course/instructor/${id}`);
       return data;
     },
   });

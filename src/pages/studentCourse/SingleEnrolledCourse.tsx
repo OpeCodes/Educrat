@@ -62,7 +62,6 @@ const SingleEnrolledCourse = () => {
   };
   const initialFocusRef: any = useRef();
   const { markLectureCompleted } = useMarkLectureCompleted();
-  console.log(getSingleEnrolledCourse, ";alskdjfa;slkjf");
   return (
     <Stack>
       <Flex
