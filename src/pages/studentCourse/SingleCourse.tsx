@@ -51,7 +51,7 @@ import { useDispatch } from "react-redux";
 const SingleCourse = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
@@ -107,7 +107,7 @@ const SingleCourse = () => {
         duration: 3000,
         isClosable: true,
       });
-      dispatch(setCourseAuthNavigate(-1))
+      dispatch(setCourseAuthNavigate(-1));
 
       return;
     } else {
@@ -126,7 +126,7 @@ const SingleCourse = () => {
         isClosable: true,
       });
       // setCourseAuthNavigate
-      dispatch(setCourseAuthNavigate(-1))
+      dispatch(setCourseAuthNavigate(-1));
       return;
     } else {
       navigate(`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.id}`);
@@ -453,7 +453,7 @@ const SingleCourse = () => {
                       {getCourseReview
                         ?.slice(0, visibleReviews)
                         ?.map((review: any) => {
-                          const { reviewer, title, content, updatedAt ,id} =
+                          const { reviewer, title, content, updatedAt, id } =
                             review;
                           return (
                             <Flex columnGap={3} mt={3} key={id}>
@@ -504,15 +504,19 @@ const SingleCourse = () => {
                     width={{ base: "100%", lg: "350px" }}
                     mx={{ base: 0, lg: 1 }}
                   >
-                    <Box width={"100%"} h={"350px"}>
+                    <Box width={"100%"}>
                       <PromotionalVideoPlayModal
                         imageUrl={getStudentSingleCourse?.thumbnail}
                         videoUrl={getStudentSingleCourse?.promotionalVideo}
                       />
                     </Box>
                     <Stack
-                      maxHeight={{ base: "100%", lg: "200px" }}
-                      overflowY={{ base: "hidden", lg: "scroll" }}
+                      maxHeight={{ base: "100%", lg: "200px", "2xl": "100%" }}
+                      overflowY={{
+                        base: "hidden",
+                        lg: "scroll",
+                        "2xl": "scroll",
+                      }}
                     >
                       <Stack mx={{ base: 0, lg: 4 }}>
                         {!getSingleEnrolledCourse || !user ? (
@@ -543,7 +547,10 @@ const SingleCourse = () => {
                             <Flex columnGap={4} align={"center"}>
                               <FcInfo size={35} />
                               <Text fontWeight={"bold"}>
-                                You purchased this course on {formatEnrollDate(getSingleEnrolledCourse?.createdAt)}
+                                You purchased this course on{" "}
+                                {formatEnrollDate(
+                                  getSingleEnrolledCourse?.createdAt
+                                )}
                               </Text>
                             </Flex>
                             <Button

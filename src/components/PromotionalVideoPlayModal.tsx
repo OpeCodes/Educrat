@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Modal, ModalOverlay, ModalContent, ModalBody } from '@chakra-ui/react';
-interface Video{
+import { useState } from "react";
+import { Modal, ModalOverlay, ModalContent, ModalBody } from "@chakra-ui/react";
+interface Video {
   imageUrl: string;
-videoUrl: string;
+  videoUrl: string;
 }
 const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,9 +17,15 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
 
   return (
     <>
-      <img src={imageUrl} width={"100%"} alt="Thumbnail" onClick={openModal} style={{ cursor: 'pointer' }} height={"70px"}/>
+      <img
+        src={imageUrl}
+        width={"100%"}
+        alt="promotional video"
+        onClick={openModal}
+        style={{ cursor: "pointer", height: "300px", objectFit: "cover" }}
+      />
 
-      <Modal isOpen={isOpen} onClose={closeModal} size="xl" >
+      <Modal isOpen={isOpen} onClose={closeModal} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalBody>
@@ -35,6 +41,5 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
 };
 
 export default PromotionalVideoPlayModal;
-
 
 //
