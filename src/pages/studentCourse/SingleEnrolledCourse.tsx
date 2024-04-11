@@ -52,7 +52,6 @@ const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  console.log(getSingleEnrolledCourse, "new");
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
@@ -82,7 +81,6 @@ const SingleEnrolledCourse = () => {
 
   // Get total duration for each module
   const totalDurationPerModule = getTotalDurationPerModule();
-  console.log(totalDurationPerModule, "totalDurationPerModule");
   let progressValue = Math.round(
     (getSingleEnrolledCourse?.completedLectures?.length /
       lectureLength.length) *

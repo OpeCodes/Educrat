@@ -100,7 +100,6 @@ const SingleCourse = () => {
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getStudentSingleCourse?.userId?.id
   );
-  console.log(getInstructorenrolledCourse, "2")
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-in");
