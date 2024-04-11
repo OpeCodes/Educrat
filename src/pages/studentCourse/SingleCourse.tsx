@@ -56,7 +56,6 @@ const SingleCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse?.category?.name, "ksksks");
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
@@ -94,7 +93,7 @@ const SingleCourse = () => {
   const totalDuration = getTotalLecturesDuration();
 
   const { courseEnroll } = useCourseEnrollment();
-  const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
+  const { getSingleEnrolledCourse,   } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
@@ -127,7 +126,6 @@ const SingleCourse = () => {
         duration: 3000,
         isClosable: true,
       });
-      // setCourseAuthNavigate
       dispatch(setCourseAuthNavigate(-1));
       return;
     } else {
@@ -486,6 +484,7 @@ const SingleCourse = () => {
                           onClick={handleShowMore}
                           variant="link"
                           color={"blue"}
+                          fontSize={"14px"}
                         >
                           Show More Reviews
                         </Button>
@@ -525,6 +524,7 @@ const SingleCourse = () => {
                       }}
                     >
                       <Stack mx={{ base: 0, lg: 4 }}>
+                      
                         {!getSingleEnrolledCourse || !user ? (
                           <Stack>
                             <Text mt={3} fontSize={"1.5rem"}>

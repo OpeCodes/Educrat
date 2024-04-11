@@ -12,7 +12,10 @@ import { CiPlay1, CiClock1 } from "react-icons/ci";
 import { FaRegStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
-
+import { FaStar } from "react-icons/fa";
+interface Review {
+  stars: number;
+}
 type Props = {
   id?: number;
   thumbnail?: string;
@@ -20,6 +23,7 @@ type Props = {
   userId?: any;
   title?: string;
   slug: string;
+  reviews: Review[]
 };
 
 const Course = ({
@@ -29,7 +33,40 @@ const Course = ({
   complexityLevel,
   userId,
   slug,
+  reviews
 }: Props) => {
+
+
+// Function to calculate the average stars and round up to whole number
+function calculateAverageStars(products: any) {
+  let totalStars = 0;
+  let totalReviews = 0;
+
+  products.forEach(() => {
+    reviews.forEach((review: Review) => {
+      totalStars += review?.stars || 0; 
+      totalReviews++;
+    });
+  });
+  if (totalReviews === 0) {
+    return 0; 
+  }
+  const averageStars = totalStars / totalReviews;
+  const roundedAverageStars = Math.ceil(averageStars);
+  return roundedAverageStars;
+}
+
+  console.log(calculateAverageStars(reviews), "herrrrrrr")
+  const Reviewstars = [];
+  // Fill stars based on the rating value
+  for (let i = 1; i <= 5; i++) {
+    Reviewstars.push(
+      <FaStar
+        key={i}
+        color={i <= calculateAverageStars(reviews)? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
+      />
+    );
+  }
   return (
     <Box
       as="div"
@@ -56,7 +93,7 @@ const Course = ({
         </Box>
         <Box>
           <Flex justifyContent={"start"} alignItems={"center"}>
-            <Text color={"#e59819"}>4.5</Text>
+            <Text color={"#e59819"}>{calculateAverageStars(reviews)}</Text>
             <Box color={"#e59819"} display={"flex"} ml={2} mr={3}>
               <Box mr={1}>
                 <FaRegStar />
