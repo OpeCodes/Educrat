@@ -29,6 +29,21 @@ export const useGetAllUserEnrolledCourse = () => {
   });
   return { data, isPending, isError, refetch };
 };
+// 
+export const useGetAlInstructorPublishedCourse = (id: any) => {
+  const {
+    data: getAlInstructorPublishedCourse,
+  } = useQuery({
+    queryKey: ["getAllInstructorPublishCourse", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; 
+      const { data } = await customFetch.get(`/course/instuctor/${id}`);
+      return data;
+    },
+  });
+
+  return { getAlInstructorPublishedCourse};
+};
 
 export const useCourseEnrollment = () => {
   const toast = useToast();
@@ -145,16 +160,15 @@ export const useGetInstructorenrolledCourse = (id: any) => {
   };
 };
 
-
 export const useMarkLectureCompleted = () => {
   const toast = useToast();
   // const queryClient = useQueryClient();
 
-  const {
-    mutate: markLectureCompleted,
-  } = useMutation({
-    mutationFn: ( {enrollId, lectureId}: any) => {
-      return customFetch.post(`/enrollment/${enrollId}/lecture/complete`, {lectureId});
+  const { mutate: markLectureCompleted } = useMutation({
+    mutationFn: ({ enrollId, lectureId }: any) => {
+      return customFetch.post(`/enrollment/${enrollId}/lecture/complete`, {
+        lectureId,
+      });
     },
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
@@ -190,20 +204,18 @@ export const useMarkLectureCompleted = () => {
       }
     },
   });
-  return { markLectureCompleted,  };
+  return { markLectureCompleted };
 };
-
-
 
 export const useMarkLectureUnfinished = () => {
   const toast = useToast();
   // const queryClient = useQueryClient();
 
-  const {
-    mutate: markLectureUnfinshed,
-  } = useMutation({
-    mutationFn: ( {enrollId, lectureId}: any) => {
-      return customFetch.post(`/enrollment/${enrollId}/lecture/unfinished`, {lectureId});
+  const { mutate: markLectureUnfinshed } = useMutation({
+    mutationFn: ({ enrollId, lectureId }: any) => {
+      return customFetch.post(`/enrollment/${enrollId}/lecture/unfinished`, {
+        lectureId,
+      });
     },
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
@@ -239,7 +251,7 @@ export const useMarkLectureUnfinished = () => {
       }
     },
   });
-  return { markLectureUnfinshed,  };
+  return { markLectureUnfinshed };
 };
 // ***************************************************reviews***************************************
 
@@ -257,7 +269,7 @@ export const useCreateEnrolledCourseReview = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
-      queryClient.invalidateQueries({ queryKey: ["courseReviewRating"] });      
+      queryClient.invalidateQueries({ queryKey: ["courseReviewRating"] });
       toast({
         title: `review submitted`,
         status: "success",
