@@ -27,13 +27,15 @@ import {
   PopoverArrow,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
-import { Link,  useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar, FaTrophy } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useRef } from "react";
+import { FaAngleDown } from "react-icons/fa6";
+
 import {
   useCreateEnrolledCourseReview,
   useGetSingleEnrolledStudentCourse,
@@ -59,8 +61,8 @@ const SingleEnrolledCourse = () => {
     });
   };
   const initialFocusRef: any = useRef();
- const {markLectureCompleted} = useMarkLectureCompleted()
- console.log(getSingleEnrolledCourse,";alskdjfa;slkjf")
+  const { markLectureCompleted } = useMarkLectureCompleted();
+  console.log(getSingleEnrolledCourse, ";alskdjfa;slkjf");
   return (
     <Stack>
       <Flex
@@ -93,8 +95,14 @@ const SingleEnrolledCourse = () => {
           >
             <IoMdArrowRoundBack color={"white"} fontSize={24} />
           </Text>
-           
-          <Text fontWeight={"bold"} fontSize={14} color={"white"} as={Link}  to={`/course/${getSingleEnrolledCourse?.courseId?.slug}`}>
+
+          <Text
+            fontWeight={"bold"}
+            fontSize={14}
+            color={"white"}
+            as={Link}
+            to={`/course/${getSingleEnrolledCourse?.courseId?.slug}`}
+          >
             {getSingleEnrolledCourse?.courseId?.title}
           </Text>
         </Flex>
@@ -113,9 +121,14 @@ const SingleEnrolledCourse = () => {
           <Flex columnGap={4}>
             <Popover initialFocusRef={initialFocusRef} placement="bottom">
               <PopoverTrigger>
-                <Text as={"button"} color={"white"} fontSize={15}>
-                  Your Progress
-                </Text>
+                <Flex align={"center"} columnGap={1}>
+                  <Text as={"button"} color={"white"} fontSize={15}>
+                    Your Progress
+                  </Text>
+                  <Text mt={1} cursor={"pointer"}>
+                    <FaAngleDown color="white" />
+                  </Text>
+                </Flex>
               </PopoverTrigger>
               <PopoverContent color="black" bg="white" borderRadius={0}>
                 <PopoverHeader pt={4} fontWeight="bold" border="0">
@@ -312,7 +325,7 @@ const SingleEnrolledCourse = () => {
                             justify={"space-between"}
                             align={"center"}
                           >
-                            <Stack    >
+                            <Stack>
                               <Flex columnGap={2} fontWeight={"bold"}>
                                 <Text>Section {index + 1}:</Text>
                                 <Text>{title}</Text>
@@ -330,11 +343,19 @@ const SingleEnrolledCourse = () => {
                         </AccordionButton>
                       </Stack>
                       {lectures?.map((lecture: any, index: number) => {
-                        const { title,content } = lecture;
+                        const { title, content } = lecture;
 
                         return (
-                          <AccordionPanel  >
-                            <Flex columnGap={3} align={"start"}  onClick={() => markLectureCompleted({lectureId: content?.lectureId})}>
+                          <AccordionPanel>
+                            <Flex
+                              columnGap={3}
+                              align={"start"}
+                              onClick={() =>
+                                markLectureCompleted({
+                                  lectureId: content?.lectureId,
+                                })
+                              }
+                            >
                               <Checkbox
                                 mt={1}
                                 iconColor={"black"}
