@@ -153,8 +153,8 @@ export const useMarkLectureCompleted = () => {
   const {
     mutate: markLectureCompleted,
   } = useMutation({
-    mutationFn: ( {lectureId}: any) => {
-      return customFetch.post(`/enrollment/${lectureId}/lecture/complete`,);
+    mutationFn: ( {enrollId, lectureId}: any) => {
+      return customFetch.post(`/enrollment/${enrollId}/lecture/complete`, {lectureId});
     },
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
@@ -194,6 +194,53 @@ export const useMarkLectureCompleted = () => {
 };
 
 
+
+export const useMarkLectureUnfinished = () => {
+  const toast = useToast();
+  // const queryClient = useQueryClient();
+
+  const {
+    mutate: markLectureUnfinshed,
+  } = useMutation({
+    mutationFn: ( {enrollId, lectureId}: any) => {
+      return customFetch.post(`/enrollment/${enrollId}/lecture/unfinished`, {lectureId});
+    },
+    onSuccess: () => {
+      // queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
+      toast({
+        title: `marked`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
+  return { markLectureUnfinshed,  };
+};
 // ***************************************************reviews***************************************
 
 export const useCreateEnrolledCourseReview = () => {

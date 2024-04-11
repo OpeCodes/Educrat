@@ -352,7 +352,8 @@ const SingleEnrolledCourse = () => {
                               align={"start"}
                               onClick={() =>
                                 markLectureCompleted({
-                                  lectureId: content?.lectureId,
+                                  enrollId: id,
+                                  lectureId: content?.lectureId
                                 })
                               }
                             >

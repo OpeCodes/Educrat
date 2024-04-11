@@ -96,6 +96,7 @@ const SingleCourse = () => {
   const { getSingleEnrolledCourse,   } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
+  console.log(getSingleEnrolledCourse, "kkkkkkk")
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getStudentSingleCourse?.userId?.id
   );
