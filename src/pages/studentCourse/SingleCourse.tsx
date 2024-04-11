@@ -97,10 +97,11 @@ const SingleCourse = () => {
   const { getSingleEnrolledCourse,   } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
-const {getAlInstructorPublishedCourse} =  useGetAlInstructorPublishedCourse(getStudentSingleCourse?.userId?.id);
+// const {getAlInstructorPublishedCourse} =  useGetAlInstructorPublishedCourse(getStudentSingleCourse?.userId?.id);
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getStudentSingleCourse?.userId?.id
   );
+  console.log(getInstructorenrolledCourse, "2")
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-in");

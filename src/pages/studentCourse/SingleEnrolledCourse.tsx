@@ -62,6 +62,9 @@ const SingleEnrolledCourse = () => {
   };
   const initialFocusRef: any = useRef();
   const { markLectureCompleted } = useMarkLectureCompleted();
+  const lectureLength: string[] = (getSingleEnrolledCourse?.courseId?.modules ?? []).flatMap(
+    (obj: any) => obj.lectures
+  );
   return (
     <Stack>
       <Flex
@@ -131,7 +134,7 @@ const SingleEnrolledCourse = () => {
               </PopoverTrigger>
               <PopoverContent color="black" bg="white" borderRadius={0}>
                 <PopoverHeader pt={4} fontWeight="bold" border="0">
-                  226 of 370 complete.
+                  1 of {lectureLength.length} completed.
                 </PopoverHeader>
                 <PopoverArrow bg="white" />
                 <PopoverBody>Finish course to get your certificate</PopoverBody>
@@ -345,7 +348,7 @@ const SingleEnrolledCourse = () => {
                         const { title, content } = lecture;
 
                         return (
-                          <AccordionPanel>
+                          <AccordionPanel key={index}>
                             <Flex
                               columnGap={3}
                               align={"start"}

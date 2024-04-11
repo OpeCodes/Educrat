@@ -21,7 +21,6 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
   const lectureLength: string[] = (SingleCourseProp?.modules ?? []).flatMap(
     (obj: any) => obj.lectures
   );
-
   const [isExpanded, setIsExpanded] = useState(true);
 
   function getLastNumberFormat(arr: any) {
