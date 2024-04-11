@@ -29,7 +29,6 @@ import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import {
   useCourseEnrollment,
-  useGetAlInstructorPublishedCourse,
   useGetCourseReview,
   useGetCourseReviewRating,
   useGetInstructorenrolledCourse,

@@ -51,7 +51,7 @@ const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  console.log(getSingleEnrolledCourse, "new")
+  console.log(getSingleEnrolledCourse, "new");
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
@@ -63,8 +63,14 @@ const SingleEnrolledCourse = () => {
   };
   const initialFocusRef: any = useRef();
   const { markLectureCompleted } = useMarkLectureCompleted();
-  const lectureLength: string[] = (getSingleEnrolledCourse?.courseId?.modules ?? []).flatMap(
-    (obj: any) => obj.lectures
+  const lectureLength: string[] = (
+    getSingleEnrolledCourse?.courseId?.modules ?? []
+  ).flatMap((obj: any) => obj.lectures);
+
+  let progressValue = Math.round(
+    (getSingleEnrolledCourse?.completedLectures?.length /
+      lectureLength.length) *
+      100
   );
   return (
     <Stack>
@@ -114,17 +120,21 @@ const SingleEnrolledCourse = () => {
           columnGap={1}
           display={{ base: "none", md: "flex" }}
         >
-          <CircularProgress value={40} color="green.400" thickness="4px">
-            <CircularProgressLabel color={"white"}>
-              <Text ml={"17.5px"}>
-                <FaTrophy color={"white"} fontSize={15} />
-              </Text>
-            </CircularProgressLabel>
-          </CircularProgress>
-          <Flex columnGap={4}>
+          <Flex columnGap={4} align={"center"}>
             <Popover initialFocusRef={initialFocusRef} placement="bottom">
               <PopoverTrigger>
                 <Flex align={"center"} columnGap={1}>
+                  <CircularProgress
+                    value={progressValue}
+                    color="green.400"
+                    thickness="4px"
+                  >
+                    <CircularProgressLabel color={"white"} cursor={"pointer"}>
+                      <Text ml={"17.5px"}>
+                        <FaTrophy color={"white"} fontSize={15} />
+                      </Text>
+                    </CircularProgressLabel>
+                  </CircularProgress>
                   <Text as={"button"} color={"white"} fontSize={15}>
                     Your Progress
                   </Text>
@@ -135,7 +145,8 @@ const SingleEnrolledCourse = () => {
               </PopoverTrigger>
               <PopoverContent color="black" bg="white" borderRadius={0}>
                 <PopoverHeader pt={4} fontWeight="bold" border="0">
-                  {getSingleEnrolledCourse?.completedLectures?.length} of {lectureLength.length} completed.
+                  {getSingleEnrolledCourse?.completedLectures?.length} of{" "}
+                  {lectureLength.length} completed.
                 </PopoverHeader>
                 <PopoverArrow bg="white" />
                 <PopoverBody>Finish course to get your certificate</PopoverBody>
@@ -356,7 +367,7 @@ const SingleEnrolledCourse = () => {
                               onClick={() =>
                                 markLectureCompleted({
                                   enrollId: id,
-                                  lectureId: content?.lectureId
+                                  lectureId: content?.lectureId,
                                 })
                               }
                             >
