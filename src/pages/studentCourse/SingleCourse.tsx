@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
+import { MdOutlinePlayCircleFilled } from "react-icons/md";
+
 import {
   MdOutlineCheckCircleOutline,
   MdOutlinePlayLesson,
@@ -504,7 +506,7 @@ const SingleCourse = () => {
                     width={{ base: "100%", lg: "350px" }}
                     mx={{ base: 0, lg: 1 }}
                   >
-                    <Box width={"100%"}>
+                    <Box width={"100%"} >
                       <PromotionalVideoPlayModal
                         imageUrl={getStudentSingleCourse?.thumbnail}
                         videoUrl={getStudentSingleCourse?.promotionalVideo}
