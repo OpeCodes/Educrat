@@ -51,6 +51,7 @@ const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
+  console.log(getSingleEnrolledCourse, "new")
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
@@ -134,7 +135,7 @@ const SingleEnrolledCourse = () => {
               </PopoverTrigger>
               <PopoverContent color="black" bg="white" borderRadius={0}>
                 <PopoverHeader pt={4} fontWeight="bold" border="0">
-                  1 of {lectureLength.length} completed.
+                  {getSingleEnrolledCourse?.completedLectures?.length} of {lectureLength.length} completed.
                 </PopoverHeader>
                 <PopoverArrow bg="white" />
                 <PopoverBody>Finish course to get your certificate</PopoverBody>
