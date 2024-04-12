@@ -569,11 +569,10 @@ const Curriculum = () => {
                                       zIndex={1}
                                       align={"center"}
                                       mx={2}
+                                      display={{base: "none", sm: "flex"}}
                                     >
                                       <Text>preview</Text>
-
                                       <Switch
-                                        // zIndex={-1}
                                         isChecked={lectureStates[id] || false}
                                         onChange={(e) =>
                                           handleTogglePreviewable(
