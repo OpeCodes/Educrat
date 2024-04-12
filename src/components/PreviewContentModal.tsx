@@ -1,4 +1,5 @@
-import { Button, Box, Flex, Text, Stack, AspectRatio } from "@chakra-ui/react";
+import {  Box, Flex, Text, Stack, AspectRatio } from "@chakra-ui/react";
+import { IoClose } from "react-icons/io5";
 
 interface ModalProps {
   isOpen: boolean;
@@ -62,16 +63,17 @@ const PreviewContentModal: React.FC<ModalProps> = ({
               <Text color={"white"}>article area</Text>
             )}
 
-            <Button
+            <Text
               position="absolute"
-              top="1"
-              right="1"
+              top="2"
+              right="3"
               size="sm"
               onClick={closeModal}
-              colorScheme="gray"
+              as={"button"}
+              color={"white"}
             >
-              Close
-            </Button>
+              <IoClose size={25} />
+            </Text>
           </Box>
         </Flex>
       )}
