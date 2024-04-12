@@ -220,7 +220,7 @@ export const useMarkLectureUnfinished = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getCourseStudentEnrollCourse"] });
       toast({
-        title: `marked`,
+        title: `un marked`,
         status: "success",
         duration: 5000,
         isClosable: true,

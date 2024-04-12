@@ -35,26 +35,32 @@ import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar, FaTrophy } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 
 import {
   useCreateEnrolledCourseReview,
   useGetSingleEnrolledStudentCourse,
   useMarkLectureCompleted,
+  useMarkLectureUnfinished,
 } from "../../hooks/studentCourse";
-import { convertSecondsToHMS, formatEnrolledCourseDuration } from "../../components/TimeFormat";
+import {
+  convertSecondsToHMS,
+  formatEnrolledCourseDuration,
+} from "../../components/TimeFormat";
 
 const initialValues = {
   stars: 0,
   title: "",
   content: "",
 };
+
+
 const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  console.log(getSingleEnrolledCourse)
+  console.log(getSingleEnrolledCourse);
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
@@ -66,6 +72,7 @@ const SingleEnrolledCourse = () => {
   };
   const initialFocusRef: any = useRef();
   const { markLectureCompleted } = useMarkLectureCompleted();
+  const { markLectureUnfinshed } = useMarkLectureUnfinished();
   const lectureLength: string[] = (
     getSingleEnrolledCourse?.courseId?.modules ?? []
   ).flatMap((obj: any) => obj.lectures);
@@ -89,6 +96,10 @@ const SingleEnrolledCourse = () => {
       lectureLength.length) *
       100
   );
+
+  //checkbok func
+  const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
+
   return (
     <Stack>
       <Flex
@@ -393,18 +404,51 @@ const SingleEnrolledCourse = () => {
                       </Stack>
                       {lectures?.map((lecture: any, index: number) => {
                         const { title, content } = lecture;
-                        console.log(content?.duration, "content")
+                        console.log(content?.duration, "content");
+
+                        const handleCheckboxChange = async (
+                          lectureId: string,
+                          isChecked: boolean
+                        ) => {
+                          try {
+                            if (isChecked) {
+                              markLectureCompleted({
+                                enrollId: id,
+                                lectureId,
+                              });
+                            } else {
+                              markLectureUnfinshed({
+                                enrollId: id,
+                                lectureId,
+                              });
+                            }
+
+                            // Update checkedItems set based on checkbox state change
+                            setCheckedItems((prevCheckedItems) => {
+                              const newCheckedItems = new Set(prevCheckedItems);
+                              if (isChecked) {
+                                newCheckedItems.add(lectureId);
+                              } else {
+                                newCheckedItems.delete(lectureId);
+                              }
+                              return newCheckedItems;
+                            });
+                          } catch (error) {
+                            console.log(error);
+                          }
+                        };
+
                         return (
                           <AccordionPanel key={index}>
                             <Flex
                               columnGap={3}
                               align={"start"}
-                              onClick={() =>
-                                markLectureCompleted({
-                                  enrollId: id,
-                                  lectureId: content?.lectureId,
-                                })
-                              }
+                              // onClick={() =>
+                              //   markLectureCompleted({
+                              //     enrollId: id,
+                              //     lectureId: content?.lectureId,
+                              //   })
+                              // }
                             >
                               <Checkbox
                                 mt={1}
@@ -412,15 +456,30 @@ const SingleEnrolledCourse = () => {
                                 size="lg"
                                 borderColor={"black"}
                                 colorScheme={"blackAlpha"}
+                                isChecked={checkedItems.has(content?.lectureId)}
+                                onChange={(e) =>
+                                  handleCheckboxChange(
+                                    content?.lectureId,
+                                    e.target.checked
+                                  )
+                                }
                               />
                               <Stack>
                                 <Text>
                                   {index + 1} {title}
                                 </Text>
-                                <Flex columnGap={1} align={"center"} color={"gray"}>
+                                <Flex
+                                  columnGap={1}
+                                  align={"center"}
+                                  color={"gray"}
+                                >
                                   <RiPlayCircleFill size={20} />
-                                  
-                                  <Text fontSize={14}>{formatEnrolledCourseDuration(content?.duration)}</Text>
+
+                                  <Text fontSize={14}>
+                                    {formatEnrolledCourseDuration(
+                                      content?.duration
+                                    )}
+                                  </Text>
                                 </Flex>
                               </Stack>
                             </Flex>
