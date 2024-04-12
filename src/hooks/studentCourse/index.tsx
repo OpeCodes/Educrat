@@ -29,20 +29,18 @@ export const useGetAllUserEnrolledCourse = () => {
   });
   return { data, isPending, isError, refetch };
 };
-// 
+//
 export const useGetAlInstructorPublishedCourse = (id: any) => {
-  const {
-    data: getAlInstructorPublishedCourse,
-  } = useQuery({
+  const { data: getAlInstructorPublishedCourse } = useQuery({
     queryKey: ["getAllInstructorPublishCourse", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
+      const [, id] = queryKey;
       const { data } = await customFetch.get(`/course/instructor/${id}`);
       return data;
     },
   });
 
-  return { getAlInstructorPublishedCourse};
+  return { getAlInstructorPublishedCourse };
 };
 
 export const useCourseEnrollment = () => {
@@ -170,38 +168,10 @@ export const useMarkLectureCompleted = () => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getCourseStudentEnrollCourse"] });
-      // toast({
-      //   title: `marked`,
-      //   status: "success",
-      //   duration: 5000,
-      //   isClosable: true,
-      // });
+      queryClient.invalidateQueries({
+        queryKey: ["getCourseStudentEnrollCourse"],
+      });
     },
-    // onError: (error: any) => {
-    //   if (error.response) {
-    //     toast({
-    //       title: `${error.response.data.error}`,
-    //       status: "error",
-    //       duration: 5000,
-    //       isClosable: true,
-    //     });
-    //   } else if (error.request) {
-    //     toast({
-    //       title: "Network error occurred. Please try again later.",
-    //       status: "error",
-    //       duration: 5000,
-    //       isClosable: true,
-    //     });
-    //   } else {
-    //     toast({
-    //       title: "An error occurred. Please try again later.",
-    //       status: "error",
-    //       duration: 5000,
-    //       isClosable: true,
-    //     });
-    //   }
-    // },
   });
   return { markLectureCompleted };
 };
@@ -216,38 +186,10 @@ export const useMarkLectureUnfinished = () => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getCourseStudentEnrollCourse"] });
-      // toast({
-      //   title: `un marked`,
-      //   status: "success",
-      //   duration: 5000,
-      //   isClosable: true,
-      // });
+      queryClient.invalidateQueries({
+        queryKey: ["getCourseStudentEnrollCourse"],
+      });
     },
-    // onError: (error: any) => {
-    //   if (error.response) {
-    //     toast({
-    //       title: `${error.response.data.error}`,
-    //       status: "error",
-    //       duration: 5000,
-    //       isClosable: true,
-    //     });
-    //   } else if (error.request) {
-    //     toast({
-    //       title: "Network error occurred. Please try again later.",
-    //       status: "error",
-    //       duration: 5000,
-    //       isClosable: true,
-    //     });
-    //   } else {
-    //     toast({
-    //       title: "An error occurred. Please try again later.",
-    //       status: "error",
-    //       duration: 5000,
-    //       isClosable: true,
-    //     });
-    //   }
-    // },
   });
   return { markLectureUnfinshed };
 };
