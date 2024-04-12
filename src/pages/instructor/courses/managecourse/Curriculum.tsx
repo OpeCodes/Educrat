@@ -416,7 +416,6 @@ const Curriculum = () => {
                       description,
                       resources,
                       contentType: contentEndPointType,
-                      contentPreviewable,
                     } = lecture;
                     const ResourcesType: string[] = (resources ?? [])
                       .flat(2)
