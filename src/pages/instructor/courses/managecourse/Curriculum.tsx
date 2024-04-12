@@ -565,10 +565,16 @@ const Curriculum = () => {
                                     </Flex>
                                   </Flex>
                                   <Flex>
-                                    <Stack>
+                                    <Stack
+                                      direction={"row"}
+                                      zIndex={1}
+                                      align={"center"}
+                                      mx={2}
+                                    >
                                       <Text>preview</Text>
 
                                       <Switch
+                                        // zIndex={-1}
                                         isChecked={lectureStates[id] || false}
                                         onChange={(e) =>
                                           handleTogglePreviewable(
@@ -576,8 +582,9 @@ const Curriculum = () => {
                                             e.target.checked
                                           )
                                         }
-                                        size="lg"
-                                        colorScheme="green"
+                                        mt={1}
+                                        size="sm"
+                                        colorScheme="blackAlpha"
                                       />
                                     </Stack>
 
@@ -703,7 +710,11 @@ const Curriculum = () => {
                                   mt={-3}
                                   pb={2}
                                 >
-                                  <Flex width="100%" justifyContent="end">
+                                  <Flex
+                                    width="100%"
+                                    justifyContent="end"
+                                    zIndex={900}
+                                  >
                                     <Flex
                                       fontSize={14}
                                       mt={-8}

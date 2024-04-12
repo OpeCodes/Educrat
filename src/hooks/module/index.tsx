@@ -850,13 +850,7 @@ export const useShowPreviewable= () => {
       );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["module"] });
-      toast({
-        title: `previewable`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
+      queryClient.invalidateQueries({ queryKey: ["module"] });      
     },
     onError: (error: any) => {
       if (error.response) {
