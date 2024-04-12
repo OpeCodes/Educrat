@@ -5,14 +5,13 @@ interface ModalProps {
   onToggleModal: () => void;
 }
 
-const CustomModal: React.FC<ModalProps> = ({ isOpen, onToggleModal }) => {
+const PreviewContentModal: React.FC<ModalProps> = ({ isOpen, onToggleModal }) => {
   const closeModal = () => {
     onToggleModal();
   };
 
   return (
     <>
-      {/* Modal overlay */}
       {isOpen && (
         <Flex
           position="fixed"
@@ -63,7 +62,7 @@ const CustomModal: React.FC<ModalProps> = ({ isOpen, onToggleModal }) => {
   );
 };
 
-export default CustomModal;
+export default PreviewContentModal;
 
 
 // PreviewContentModal;
