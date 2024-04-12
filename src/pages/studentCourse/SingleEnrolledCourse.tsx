@@ -48,6 +48,7 @@ import {
   convertSecondsToHMS,
   formatEnrolledCourseDuration,
 } from "../../components/TimeFormat";
+import { LuStickyNote } from "react-icons/lu";
 
 const initialValues = {
   stars: 0,
@@ -59,7 +60,7 @@ const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  console.log(getSingleEnrolledCourse, "here brother")
+  console.log(getSingleEnrolledCourse, "here brother");
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
@@ -457,7 +458,7 @@ const SingleEnrolledCourse = () => {
                         </AccordionButton>
                       </Stack>
                       {lectures?.map((lecture: any, index: number) => {
-                        const { title, content } = lecture;
+                        const { title, content, contentType } = lecture;
 
                         const handleCheckboxChange = async (
                           lectureId: string,
@@ -486,17 +487,12 @@ const SingleEnrolledCourse = () => {
                               }
                               return newCheckedItems;
                             });
-                          } catch (error) {
-                           
-                          }
+                          } catch (error) {}
                         };
 
                         return (
                           <AccordionPanel key={index}>
-                            <Flex
-                              columnGap={3}
-                              align={"start"}                              
-                            >
+                            <Flex columnGap={3} align={"start"}>
                               <Checkbox
                                 mt={1}
                                 iconColor={"black"}
@@ -520,7 +516,11 @@ const SingleEnrolledCourse = () => {
                                   align={"center"}
                                   color={"gray"}
                                 >
-                                  <RiPlayCircleFill size={20} />
+                                  {contentType === "lecture_video" ? (
+                                    <RiPlayCircleFill size={20} />
+                                  ) : (
+                                    <LuStickyNote size={20} />
+                                  )}
 
                                   <Text fontSize={14}>
                                     {formatEnrolledCourseDuration(
