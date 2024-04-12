@@ -19,8 +19,6 @@ const PreviewContentModal: React.FC<ModalProps> = ({
   const closeModal = () => {
     onToggleModal();
   };
-
-  console.log(Content, "one");
   return (
     <>
       {isOpen && (

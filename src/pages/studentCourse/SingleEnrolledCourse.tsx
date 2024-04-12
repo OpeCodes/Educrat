@@ -60,7 +60,6 @@ const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  console.log(getSingleEnrolledCourse, "here brother");
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 

@@ -178,7 +178,6 @@ const Curriculum = () => {
     });
     setLectureStates(initialLectureStates);
   }, [data]);
-  console.log(data);
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>

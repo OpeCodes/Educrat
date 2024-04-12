@@ -69,7 +69,6 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
       [id]: !prev[id],
     }));
   };
-  console.log(SingleCourseProp?.modules, "herkkkkke");
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
