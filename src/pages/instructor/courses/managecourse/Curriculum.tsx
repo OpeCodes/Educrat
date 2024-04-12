@@ -19,8 +19,10 @@ import {
   Th,
   Td,
   TableContainer,
+  Switch,
+  useToast,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Formik } from "formik";
@@ -47,6 +49,7 @@ import {
   useDeleteArticleLecture,
   useCreateExternalResourceLink,
   useDeleteExternalResource,
+  useShowPreviewable,
 } from "../../../../hooks/module";
 import { GoPlus } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -81,6 +84,9 @@ const Curriculum = () => {
   const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
   const { deleteExternalResource, deleteExternalResourceLoading } =
     useDeleteExternalResource();
+
+  const { showPreviewable } = useShowPreviewable();
+  const [isPreviewable, setIsPreviewable] = useState(false);
 
   const initialValues1: CurriculumInterface = {
     title: "",
@@ -160,6 +166,26 @@ const Curriculum = () => {
   // const lectureTitles: string[] = data?.flatMap((item: MyObject) => item.lectures.map((lecture: Lecture) => lecture.title));
 
   const handleUploadSuccess = () => {};
+
+  //previwable
+  const toast = useToast();
+  const [lectureStates, setLectureStates] = useState<{
+    [key: string]: boolean;
+  }>({});
+  useEffect(() => {
+    const initialLectureStates: { [key: string]: boolean } = {};
+
+    // Loop through each data item and initialize lectureStates based on lectures
+    data?.forEach((item: any) => {
+      item.lectures.forEach((lecture: any) => {
+        // initialLectureStates[lecture.id] = false; // Initialize all lectures as not previewable
+        initialLectureStates[lecture.id] = !!lecture.contentPreviewable; 
+      });
+    });
+
+    setLectureStates(initialLectureStates);
+  }, [data]);
+  console.log(data);
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -397,6 +423,7 @@ const Curriculum = () => {
                       description,
                       resources,
                       contentType: contentEndPointType,
+                      contentPreviewable: previewContent,
                     } = lecture;
                     const ResourcesType: string[] = (resources ?? [])
                       .flat(2)
@@ -422,6 +449,58 @@ const Curriculum = () => {
 
                     // Format the components into the desired format
                     const formattedDate = `${month}/${day}/${year}`;
+
+                    //show previewable
+
+                    // const handleTogglePreviewable = async (lectureId: string, isChecked: boolean) => {
+                    //   setLectureStates((prevStates) => ({
+                    //     ...prevStates,
+                    //     [lectureId]: isChecked, // Update the state for the specific lecture
+                    //   }));
+
+                    //   // Call the API mutation function when the switch state changes
+                    //   showPreviewable({ lectureId: id, contentPreviewable: isChecked })
+
+                    // };
+                    const handleTogglePreviewable = async (
+                      lectureId: string,
+                      isChecked: boolean
+                    ) => {
+                      try {
+                        showPreviewable({
+                          lectureId,
+                          contentPreviewable: isChecked,
+                        });
+
+                        // Update the local state only when the API call is successful
+                        setLectureStates((prevStates) => ({
+                          ...prevStates,
+                          [lectureId]: isChecked, // Update the state for the specific lecture
+                        }));
+
+                        // Show success toast
+                        toast({
+                          title: `Previewable status updated successfully for Lecture ${lectureId}`,
+                          status: "success",
+                          duration: 5000,
+                          isClosable: true,
+                        });
+                        //  await   showPreviewable({ lectureId, contentPreviewable: false });
+                      } catch (error) {
+                        console.error(
+                          `Error updating previewable status for Lecture ${lectureId}:`,
+                          error
+                        );
+
+                        // Show error toast
+                        toast({
+                          title: `Failed to update previewable status for Lecture ${lectureId}`,
+                          status: "error",
+                          duration: 5000,
+                          isClosable: true,
+                        });
+                      }
+                    };
                     return (
                       <Stack key={id}>
                         <Stack>
@@ -530,7 +609,24 @@ const Curriculum = () => {
                                     </Flex>
                                   </Flex>
                                   <Flex>
-                                    <Text>preview</Text>
+                                    <Stack>
+                                      <Text>preview</Text>
+
+                                      <Switch
+                                        isChecked={
+                                          lectureStates[id] ||
+                                          false
+                                        }
+                                        onChange={(e) =>
+                                          handleTogglePreviewable(
+                                            id,
+                                            e.target.checked
+                                          )
+                                        }
+                                        size="lg"
+                                        colorScheme="green"
+                                      />
+                                    </Stack>
 
                                     {!isOpenContentType[id] &&
                                       !isOpenInnerdescripRes[id] &&
