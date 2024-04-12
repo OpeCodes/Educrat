@@ -55,7 +55,6 @@ const initialValues = {
   content: "",
 };
 
-
 const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -98,18 +97,46 @@ const SingleEnrolledCourse = () => {
 
   //checkbok func
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
-console.log(getSingleEnrolledCourse)
-useEffect(() => {
-  const initialCheckedItems = new Set<string>();
-  getSingleEnrolledCourse?.completedLectures.forEach((lecture: any) => {
-    if (lecture.lectureId) {
-      initialCheckedItems.add(lecture.lectureId);
-    }
-  });
-  setCheckedItems(initialCheckedItems);
-}, [getSingleEnrolledCourse]);
+  console.log(getSingleEnrolledCourse);
+  useEffect(() => {
+    const initialCheckedItems = new Set<string>();
+    getSingleEnrolledCourse?.completedLectures.forEach((lecture: any) => {
+      if (lecture.lectureId) {
+        initialCheckedItems.add(lecture.lectureId);
+      }
+    });
+    setCheckedItems(initialCheckedItems);
+  }, [getSingleEnrolledCourse]);
 
+  // Function to count marked lectures in a ListItem based on module lectures
+  const countMarkedLectures = (item: any) => {
+    // if (!getSingleEnrolledCourse?.modules || getSingleEnrolledCourse?.modules.length === 0) {
+    //   return 0; // No modules or lectures
+    // }
+    const completedLecturesCounts: number[] = [];
+    // Iterate through each module
+    item?.courseId?.modules.forEach((module: any) => {
+      let completedLectureCount = 0;
+      // Iterate through lectures in the current module
+      module.lectures.forEach((lecture: any) => {
+        // Find corresponding completed lecture in completedLecture array
+        const isLectureCompleted = item?.completedLectures?.some(
+          (completed: any) => completed.lectureId === lecture.id
+        );
+        if (isLectureCompleted) {
+          completedLectureCount++; // Increment count if lecture is marked completed
+        }
+      });
+      completedLecturesCounts.push(completedLectureCount);
+    });
 
+    return completedLecturesCounts;
+  };
+
+  // Example usage:
+
+  const numberOfMarkedLectures = countMarkedLectures(getSingleEnrolledCourse);
+  console.log(`Number of marked lecturessss: ${numberOfMarkedLectures}`);
   return (
     <Stack>
       <Flex
@@ -397,7 +424,10 @@ useEffect(() => {
                                 <Text>{title}</Text>
                               </Flex>
                               <Flex fontSize={14} columnGap={1}>
-                                <Text>1 / {lectures?.length}</Text>
+                                <Text>
+                                  {numberOfMarkedLectures[index]} /{" "}
+                                  {lectures?.length}
+                                </Text>
                                 <Text>|</Text>
                                 <Text>
                                   {convertSecondsToHMS(
