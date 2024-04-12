@@ -21,6 +21,7 @@ import MedArticle from "./MedArticle";
 import ToastLoading from "./ToastLoading";
 import CoursePromotionalVideoUpload from "./CoursePromotionalVideoUpload";
 import PromotionalVideoPlayModal from "./PromotionalVideoPlayModal";
+import PreviewContentModal from "./PreviewContentModal";
 export {
   HomeLayout,
   Navbar,
@@ -44,5 +45,6 @@ export {
   ToastLoading,
   MedArticle,
   CoursePromotionalVideoUpload,
-  PromotionalVideoPlayModal
+  PromotionalVideoPlayModal,
+  PreviewContentModal
 };
