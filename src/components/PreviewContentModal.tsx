@@ -7,7 +7,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
 } from "@chakra-ui/react";
 
 const PreviewContentModal = ({
@@ -28,7 +27,6 @@ const PreviewContentModal = ({
           <ModalCloseButton />
           <ModalBody>body</ModalBody>
           <ModalFooter>
-            <Button onClick={contentPreviewOnClose}>Close</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

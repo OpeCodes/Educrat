@@ -44,20 +44,13 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
         </Text>
       )}
 
-      <Modal isOpen={isOpen} onClose={onClose} size="full">
+      <Modal isOpen={isOpen} onClose={onClose} size="xl"  >
         <ModalOverlay />
         <ModalContent>
-          <Text
-            cursor={"pointer"}
-            textAlign={"end"}
-            onClick={onClose}
-            opacity={0}
-          >
-            X
-          </Text>
-          <ModalCloseButton p={2} mr={2} />
+          
+          <ModalCloseButton p={0} m={0} color={"white"}  pl={3}/>
 
-          <ModalBody>
+          <ModalBody width={"100%"} bg="black">
             <video controls autoPlay style={{ width: "100%", height: "100vh" }}>
               <source src={videoUrl} type="video/mp4" />
               Your browser does not support the video tag.
