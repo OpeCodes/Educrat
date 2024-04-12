@@ -130,7 +130,6 @@ const SingleEnrolledCourse = () => {
   const completedValue =
     Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
     Math.round(lectureLength.length);
-  console.log(completedValue, "completed");
 
   return (
     <Stack>
@@ -487,7 +486,7 @@ const SingleEnrolledCourse = () => {
                               return newCheckedItems;
                             });
                           } catch (error) {
-                            console.log(error);
+                           
                           }
                         };
 
