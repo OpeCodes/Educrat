@@ -127,8 +127,10 @@ const SingleEnrolledCourse = () => {
     return completedLecturesCounts;
   };
   const numberOfMarkedLectures = countMarkedLectures(getSingleEnrolledCourse);
-  const completedValue =  Math.round(getSingleEnrolledCourse?.completedLectures?.length) === Math.round(lectureLength.length)
-  console.log(completedValue, "completed")
+  const completedValue =
+    Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
+    Math.round(lectureLength.length);
+  console.log(completedValue, "completed");
 
   return (
     <Stack>
@@ -194,9 +196,7 @@ const SingleEnrolledCourse = () => {
                     </CircularProgressLabel>
                   </CircularProgress>
                   <Text as={"button"} color={"white"} fontSize={15}>
-                    {
-                      completedValue ? "Get Certificate" : "Your Progress"
-                    }
+                    {completedValue ? "Get Certificate" : "Your Progress"}
                   </Text>
                   <Text mt={1} cursor={"pointer"}>
                     <FaAngleDown color="white" />
@@ -209,10 +209,26 @@ const SingleEnrolledCourse = () => {
                   {lectureLength.length} completed.
                 </PopoverHeader>
                 <PopoverArrow bg="white" />
-                {
-
-                }
-                <PopoverBody>Finish course to get your certificate</PopoverBody>
+                {completedValue ? (
+                  <PopoverBody>
+                    <Text
+                      backgroundColor={"black"}
+                      as={"button"}
+                      width={"100%"}
+                      color={"white"}
+                      textAlign={"center"}
+                      fontSize={13}
+                      fontWeight={"bold"}
+                      py={2}
+                    >
+                      Get Cerificate
+                    </Text>
+                  </PopoverBody>
+                ) : (
+                  <PopoverBody>
+                    Finish course to get your certificates
+                  </PopoverBody>
+                )}
               </PopoverContent>
             </Popover>
             <Flex
