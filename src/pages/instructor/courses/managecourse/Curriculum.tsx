@@ -569,7 +569,7 @@ const Curriculum = () => {
                                       zIndex={1}
                                       align={"center"}
                                       mx={2}
-                                      display={{base: "none", sm: "flex"}}
+                                      display={{ base: "none", sm: "flex" }}
                                     >
                                       <Text>preview</Text>
                                       <Switch

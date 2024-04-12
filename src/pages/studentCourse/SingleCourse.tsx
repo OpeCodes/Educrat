@@ -29,6 +29,7 @@ import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import {
   useCourseEnrollment,
+  useGetAlInstructorPublishedCourse,
   useGetCourseReview,
   useGetCourseReviewRating,
   useGetInstructorenrolledCourse,
@@ -96,7 +97,7 @@ const SingleCourse = () => {
   const { getSingleEnrolledCourse,   } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
-// const {getAlInstructorPublishedCourse} =  useGetAlInstructorPublishedCourse(getStudentSingleCourse?.userId?.id);
+const {getAlInstructorPublishedCourse} =  useGetAlInstructorPublishedCourse(getStudentSingleCourse?.userId?.id);
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getStudentSingleCourse?.userId?.id
   );
@@ -434,7 +435,7 @@ const SingleCourse = () => {
                               <Text>
                                 <LuClock3 />
                               </Text>
-                              <Text>15 Course</Text>
+                              <Text>{getAlInstructorPublishedCourse?.length} Course</Text>
                             </Flex>
                           </Flex>
                         </Stack>
