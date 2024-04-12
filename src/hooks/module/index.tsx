@@ -424,7 +424,7 @@ export const useGetModuleLectureCourse = (id: any) => {
   } = useQuery({
     queryKey: ["LectureModule", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; // Destructure the queryKey to get the 'id'
+      const [, id] = queryKey; 
       const { data } = await customFetch.get(`lecture/module/${id}`);
       return data;
     },
@@ -433,7 +433,6 @@ export const useGetModuleLectureCourse = (id: any) => {
   return {
     moduleLectureData,
     isPending,
-    // isOpenState,
     isSuccess,
   };
 };
@@ -484,6 +483,28 @@ export const useEditModuleLectureCourse = () => {
     },
   });
   return { moduleEditLectureCourse, moduleEditLectureLoading };
+};
+
+
+export const useGetSingleLectureCourse = (id: any) => {
+  const {
+    data: singleLectureData,
+    isPending,
+    isSuccess,
+  } = useQuery({
+    queryKey: ["singleLectureModule", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; 
+      const { data } = await customFetch.get(`lecture/${id}`);
+      return data;
+    },
+  });
+
+  return {
+    singleLectureData,
+    isPending,
+    isSuccess,
+  };
 };
 
 export const useDeleteLectureModuleCourse = () => {

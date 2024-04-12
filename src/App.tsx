@@ -14,7 +14,7 @@ import {
 } from "./components";
 import "./App.css";
 import Home from "./pages/Home";
-import { SingleCourse, SingleEnrolledCourse, StudentCourse } from "./pages/studentCourse";
+import { SingleCourse, SingleEnrolledCourse, StudentCourse, VideoArticleSingleEnrollCoursePage } from "./pages/studentCourse";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
 import { CourseLandingPage, CourseMessage, CourseSettings, Pricing } from "./pages/instructor/courses/managecourse";
@@ -63,6 +63,10 @@ const router = createBrowserRouter([
   {
     path: "/course/:slug/learn/lecture/:id",
     element: <SingleEnrolledCourse />,
+  },
+  {
+    path: "/course/:slug/learn/lecture/:id/:lectureId/reviews",
+    element: <VideoArticleSingleEnrollCoursePage />,
   },
   //instructor
   {

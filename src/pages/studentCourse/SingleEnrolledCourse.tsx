@@ -108,7 +108,7 @@ const SingleEnrolledCourse = () => {
     });
     setCheckedItems(initialCheckedItems);
   }, [getSingleEnrolledCourse]);
-
+console.log(getSingleEnrolledCourse, "hererqewerqwe")
   //count lectures
   const countMarkedLectures = (item: any) => {
     const completedLecturesCounts: number[] = [];
@@ -457,7 +457,7 @@ const SingleEnrolledCourse = () => {
                         </AccordionButton>
                       </Stack>
                       {lectures?.map((lecture: any, index: number) => {
-                        const { title, content, contentType } = lecture;
+                        const { title, content, contentType ,id} = lecture;
 
                         const handleCheckboxChange = async (
                           lectureId: string,
@@ -475,7 +475,6 @@ const SingleEnrolledCourse = () => {
                                 lectureId,
                               });
                             }
-
                             // Update checkedItems set based on checkbox state change
                             setCheckedItems((prevCheckedItems) => {
                               const newCheckedItems = new Set(prevCheckedItems);
@@ -506,7 +505,8 @@ const SingleEnrolledCourse = () => {
                                   )
                                 }
                               />
-                              <Stack>
+                              <Stack cursor={"pointer"} onClick={() => navigate(`/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${id}/reviews`)}>
+                                
                                 <Text>
                                   {index + 1} {title}
                                 </Text>
