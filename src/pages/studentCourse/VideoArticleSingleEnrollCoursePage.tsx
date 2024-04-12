@@ -1,558 +1,578 @@
 import {
-    Accordion,
-    AccordionButton,
-    AccordionIcon,
-    AccordionItem,
-    AccordionPanel,
-    AspectRatio,
-    Box,
-    Button,
-    Checkbox,
-    CircularProgress,
-    CircularProgressLabel,
-    Flex,
-    FormControl,
-    FormLabel,
-    IconButton,
-    Image,
-    Input,
-    Stack,
-    Text,
-    Textarea,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    PopoverHeader,
-    PopoverBody,
-    PopoverArrow,
-  } from "@chakra-ui/react";
-  import logo from "../../assets/logo-3.svg";
-  import { IoIosShareAlt } from "react-icons/io";
-  
-  import { Link, useParams, useNavigate } from "react-router-dom";
-  import { RiPlayCircleFill } from "react-icons/ri";
-  import { Formik } from "formik";
-  import { reviewCourseValidationSchema } from "../../schemas";
-  import { FaStar, FaTrophy } from "react-icons/fa";
-  import { IoMdArrowRoundBack } from "react-icons/io";
-  import { useEffect, useRef, useState } from "react";
-  import { FaAngleDown } from "react-icons/fa6";
-  
-  import {
-    useCreateEnrolledCourseReview,
-    useGetSingleEnrolledStudentCourse,
-    useMarkLectureCompleted,
-    useMarkLectureUnfinished,
-  } from "../../hooks/studentCourse";
-  import {
-    convertSecondsToHMS,
-    formatEnrolledCourseDuration,
-  } from "../../components/TimeFormat";
-  import { LuStickyNote } from "react-icons/lu";
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  AspectRatio,
+  Box,
+  Button,
+  Checkbox,
+  CircularProgress,
+  CircularProgressLabel,
+  Flex,
+  FormControl,
+  FormLabel,
+  IconButton,
+  Image,
+  Input,
+  Stack,
+  Text,
+  Textarea,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverArrow,
+} from "@chakra-ui/react";
+import logo from "../../assets/logo-3.svg";
+import { IoIosShareAlt } from "react-icons/io";
+
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { RiPlayCircleFill } from "react-icons/ri";
+import { Formik } from "formik";
+import { reviewCourseValidationSchema } from "../../schemas";
+import { FaStar, FaTrophy } from "react-icons/fa";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { useEffect, useRef, useState } from "react";
+import { FaAngleDown } from "react-icons/fa6";
+
+import {
+  useCreateEnrolledCourseReview,
+  useGetSingleEnrolledStudentCourse,
+  useMarkLectureCompleted,
+  useMarkLectureUnfinished,
+} from "../../hooks/studentCourse";
+import {
+  convertSecondsToHMS,
+  formatEnrolledCourseDuration,
+} from "../../components/TimeFormat";
+import { LuStickyNote } from "react-icons/lu";
 import { useGetSingleLectureCourse } from "../../hooks/module";
-  
-  const initialValues = {
-    stars: 0,
-    title: "",
-    content: "",
+
+const initialValues = {
+  stars: 0,
+  title: "",
+  content: "",
+};
+
+const VideoArticleSingleEnrollCoursePage = () => {
+  const { id, lectureId } = useParams();
+  const navigate = useNavigate();
+  const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
+  const { singleLectureData, refetch } = useGetSingleLectureCourse(lectureId);
+  console.log(singleLectureData, "singleLectureData");
+  console.log(singleLectureData?.content?.url);
+  const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
+    useCreateEnrolledCourseReview();
+
+    useEffect(() =>{
+        refetch()
+    },[lectureId])
+  const handleSubmit = (values: any) => {
+    createEnrolledCourseReview({
+      courseId: getSingleEnrolledCourse?.courseId?.id,
+      review: values,
+    });
   };
-  
-  const VideoArticleSingleEnrollCoursePage = () => {
-    const { id, lectureId } = useParams();
-    const navigate = useNavigate();
-    const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  const {singleLectureData} = useGetSingleLectureCourse(lectureId)
-  console.log(singleLectureData, "singleLectureData")
-  console.log(  singleLectureData?.content?.url)
-    const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
-      useCreateEnrolledCourseReview();
-  
-    const handleSubmit = (values: any) => {
-      createEnrolledCourseReview({
-        courseId: getSingleEnrolledCourse?.courseId?.id,
-        review: values,
-      });
-    };
-    const initialFocusRef: any = useRef();
-    const { markLectureCompleted } = useMarkLectureCompleted();
-    const { markLectureUnfinshed } = useMarkLectureUnfinished();
-    const lectureLength: string[] = (
-      getSingleEnrolledCourse?.courseId?.modules ?? []
-    ).flatMap((obj: any) => obj.lectures);
-  
-    const getTotalDurationPerModule = () => {
-      return getSingleEnrolledCourse?.courseId?.modules?.map((module: any) => {
-        let totalDuration = 0;
-        if (module.lectures && Array.isArray(module.lectures)) {
-          module.lectures.forEach((lecture: any) => {
-            totalDuration += lecture?.content?.duration || 0;
-          });
-        }
-        return totalDuration;
-      });
-    };
-  
-    // Get total duration for each module
-    const totalDurationPerModule = getTotalDurationPerModule();
-  
-    let progressValue = Math.round(
-      (getSingleEnrolledCourse?.completedLectures?.length /
-        lectureLength.length) *
-        100
-    );
-  
-    //checkbok func
-    const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
-    useEffect(() => {
-      const initialCheckedItems = new Set<string>();
-      getSingleEnrolledCourse?.completedLectures.forEach((lecture: any) => {
-        if (lecture.lectureId) {
-          initialCheckedItems.add(lecture.lectureId);
-        }
-      });
-      setCheckedItems(initialCheckedItems);
-    }, [getSingleEnrolledCourse]);
-  
-    //count lectures
-    const countMarkedLectures = (item: any) => {
-      const completedLecturesCounts: number[] = [];
-      item?.courseId?.modules.forEach((module: any) => {
-        let completedLectureCount = 0;
+  const initialFocusRef: any = useRef();
+  const { markLectureCompleted } = useMarkLectureCompleted();
+  const { markLectureUnfinshed } = useMarkLectureUnfinished();
+  const lectureLength: string[] = (
+    getSingleEnrolledCourse?.courseId?.modules ?? []
+  ).flatMap((obj: any) => obj.lectures);
+
+  const getTotalDurationPerModule = () => {
+    return getSingleEnrolledCourse?.courseId?.modules?.map((module: any) => {
+      let totalDuration = 0;
+      if (module.lectures && Array.isArray(module.lectures)) {
         module.lectures.forEach((lecture: any) => {
-          const isLectureCompleted = item?.completedLectures?.some(
-            (completed: any) => completed.lectureId === lecture.id
-          );
-          if (isLectureCompleted) {
-            completedLectureCount++;
-          }
+          totalDuration += lecture?.content?.duration || 0;
         });
-        completedLecturesCounts.push(completedLectureCount);
+      }
+      return totalDuration;
+    });
+  };
+
+  // Get total duration for each module
+  const totalDurationPerModule = getTotalDurationPerModule();
+
+  let progressValue = Math.round(
+    (getSingleEnrolledCourse?.completedLectures?.length /
+      lectureLength.length) *
+      100
+  );
+
+  //checkbok func
+  const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
+  useEffect(() => {
+    const initialCheckedItems = new Set<string>();
+    getSingleEnrolledCourse?.completedLectures.forEach((lecture: any) => {
+      if (lecture.lectureId) {
+        initialCheckedItems.add(lecture.lectureId);
+      }
+    });
+    setCheckedItems(initialCheckedItems);
+  }, [getSingleEnrolledCourse]);
+
+  //count lectures
+  const countMarkedLectures = (item: any) => {
+    const completedLecturesCounts: number[] = [];
+    item?.courseId?.modules.forEach((module: any) => {
+      let completedLectureCount = 0;
+      module.lectures.forEach((lecture: any) => {
+        const isLectureCompleted = item?.completedLectures?.some(
+          (completed: any) => completed.lectureId === lecture.id
+        );
+        if (isLectureCompleted) {
+          completedLectureCount++;
+        }
       });
-  
-      return completedLecturesCounts;
-    };
-    const numberOfMarkedLectures = countMarkedLectures(getSingleEnrolledCourse);
-    const completedValue =
-      Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
-      Math.round(lectureLength.length);
-  
-    return (
-      <Stack>
-        <Flex
-          justify="space-between"
-          width={"100%"}
-          align={"center"}
-          zIndex={10000}
-          p={3}
-          bg="black"
-          position="fixed"
-          right="0"
-          top="0"
-          borderBottomWidth={0.5}
-          borderColor={"white"}
-        >
-          <Flex align={"center"}>
-            <Box
-              width={"160px"}
-              as={Link}
-              to={"/"}
-              display={{ base: "none", md: "block" }}
-            >
-              <Image src={logo} alt="logo" color={"black"} />
-            </Box>
-            <Text
-              display={{ base: "block", md: "none" }}
-              mr={3}
-              as={"button"}
-              onClick={() => navigate(-1)}
-            >
-              <IoMdArrowRoundBack color={"white"} fontSize={24} />
-            </Text>
-  
-            <Text
-              fontWeight={"bold"}
-              fontSize={14}
-              color={"white"}
-              as={Link}
-              to={`/course/${getSingleEnrolledCourse?.courseId?.slug}`}
-            >
-              {getSingleEnrolledCourse?.courseId?.title}
-            </Text>
-          </Flex>
-          <Flex
-            align={"center"}
-            columnGap={1}
-            display={{ base: "none", md: "flex" }}
+      completedLecturesCounts.push(completedLectureCount);
+    });
+
+    return completedLecturesCounts;
+  };
+  const numberOfMarkedLectures = countMarkedLectures(getSingleEnrolledCourse);
+  const completedValue =
+    Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
+    Math.round(lectureLength.length);
+
+  return (
+    <Stack>
+      <Flex
+        justify="space-between"
+        width={"100%"}
+        align={"center"}
+        zIndex={10000}
+        p={3}
+        bg="black"
+        position="fixed"
+        right="0"
+        top="0"
+        borderBottomWidth={0.5}
+        borderColor={"white"}
+      >
+        <Flex align={"center"}>
+          <Box
+            width={"160px"}
+            as={Link}
+            to={"/"}
+            display={{ base: "none", md: "block" }}
           >
-            <Flex columnGap={4} align={"center"}>
-              <Popover initialFocusRef={initialFocusRef} placement="bottom">
-                <PopoverTrigger>
-                  <Flex align={"center"} columnGap={1}>
-                    <CircularProgress
-                      value={progressValue}
-                      color="green.400"
-                      thickness="5px"
-                    >
-                      <CircularProgressLabel color={"white"} cursor={"pointer"}>
-                        <Text ml={"17.5px"}>
-                          <FaTrophy color={"white"} fontSize={15} />
-                        </Text>
-                      </CircularProgressLabel>
-                    </CircularProgress>
-                    <Text as={"button"} color={"white"} fontSize={15}>
-                      {completedValue ? "Get Certificate" : "Your Progress"}
-                    </Text>
-                    <Text mt={1} cursor={"pointer"}>
-                      <FaAngleDown color="white" />
-                    </Text>
-                  </Flex>
-                </PopoverTrigger>
-                <PopoverContent color="black" bg="white" borderRadius={0}>
-                  <PopoverHeader p={3} fontWeight="bold" border="0">
-                    {getSingleEnrolledCourse?.completedLectures?.length} of{" "}
-                    {lectureLength.length} completed.
-                  </PopoverHeader>
-                  <PopoverArrow bg="white" />
-                  {completedValue ? (
-                    <PopoverBody>
-                      <Text
-                        backgroundColor={"black"}
-                        as={"button"}
-                        width={"100%"}
-                        color={"white"}
-                        textAlign={"center"}
-                        fontSize={13}
-                        fontWeight={"bold"}
-                        py={2}
-                      >
-                        Get Cerificate
+            <Image src={logo} alt="logo" color={"black"} />
+          </Box>
+          <Text
+            display={{ base: "block", md: "none" }}
+            mr={3}
+            as={"button"}
+            onClick={() => navigate(-1)}
+          >
+            <IoMdArrowRoundBack color={"white"} fontSize={24} />
+          </Text>
+
+          <Text
+            fontWeight={"bold"}
+            fontSize={14}
+            color={"white"}
+            as={Link}
+            to={`/course/${getSingleEnrolledCourse?.courseId?.slug}`}
+          >
+            {getSingleEnrolledCourse?.courseId?.title}
+          </Text>
+        </Flex>
+        <Flex
+          align={"center"}
+          columnGap={1}
+          display={{ base: "none", md: "flex" }}
+        >
+          <Flex columnGap={4} align={"center"}>
+            <Popover initialFocusRef={initialFocusRef} placement="bottom">
+              <PopoverTrigger>
+                <Flex align={"center"} columnGap={1}>
+                  <CircularProgress
+                    value={progressValue}
+                    color="green.400"
+                    thickness="5px"
+                  >
+                    <CircularProgressLabel color={"white"} cursor={"pointer"}>
+                      <Text ml={"17.5px"}>
+                        <FaTrophy color={"white"} fontSize={15} />
                       </Text>
-                    </PopoverBody>
-                  ) : (
-                    <PopoverBody>
-                      Finish course to get your certificates
-                    </PopoverBody>
-                  )}
-                </PopoverContent>
-              </Popover>
-              <Flex
-                cursor={"pointer"}
-                align={"center"}
-                py={2}
-                px={2}
-                columnGap={2}
-                color={"white"}
-                borderColor={"white"}
-                borderWidth={1}
-              >
-                <Text>Share</Text>
-                <Text>
-                  <IoIosShareAlt />
-                </Text>
-              </Flex>
+                    </CircularProgressLabel>
+                  </CircularProgress>
+                  <Text as={"button"} color={"white"} fontSize={15}>
+                    {completedValue ? "Get Certificate" : "Your Progress"}
+                  </Text>
+                  <Text mt={1} cursor={"pointer"}>
+                    <FaAngleDown color="white" />
+                  </Text>
+                </Flex>
+              </PopoverTrigger>
+              <PopoverContent color="black" bg="white" borderRadius={0}>
+                <PopoverHeader p={3} fontWeight="bold" border="0">
+                  {getSingleEnrolledCourse?.completedLectures?.length} of{" "}
+                  {lectureLength.length} completed.
+                </PopoverHeader>
+                <PopoverArrow bg="white" />
+                {completedValue ? (
+                  <PopoverBody>
+                    <Text
+                      backgroundColor={"black"}
+                      as={"button"}
+                      width={"100%"}
+                      color={"white"}
+                      textAlign={"center"}
+                      fontSize={13}
+                      fontWeight={"bold"}
+                      py={2}
+                    >
+                      Get Cerificate
+                    </Text>
+                  </PopoverBody>
+                ) : (
+                  <PopoverBody>
+                    Finish course to get your certificates
+                  </PopoverBody>
+                )}
+              </PopoverContent>
+            </Popover>
+            <Flex
+              cursor={"pointer"}
+              align={"center"}
+              py={2}
+              px={2}
+              columnGap={2}
+              color={"white"}
+              borderColor={"white"}
+              borderWidth={1}
+            >
+              <Text>Share</Text>
+              <Text>
+                <IoIosShareAlt />
+              </Text>
             </Flex>
           </Flex>
         </Flex>
-        <Stack>
-          <Flex
-            justify={"space-between"}
-            mt={{ base: "1.5rem", md: "3.1rem" }}
-            flexDirection={{ base: "column", xl: "row" }}
-          >
-            <Stack mt={6} w={"100%"}>
-              {/* video section */}
+      </Flex>
+      <Stack>
+        <Flex
+          justify={"space-between"}
+          mt={{ base: "1.5rem", md: "3.1rem" }}
+          flexDirection={{ base: "column", xl: "row" }}
+        >
+          <Stack
+           mt={6} 
+           w={"100%"}>
+            {/* video section */}
+            {singleLectureData?.contentType === "lecture_video" && (
               <AspectRatio
                 maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
                 maxH={{ base: "900px", lg: "400px" }}
                 ratio={{ base: 15 / 8, lg: 15 / 13 }}
               >
-                <iframe
+                {/* <iframe
                   title="Learn frontend development from peter"
-                  src={
-                    singleLectureData?.content?.url
-                  }
+                  src={singleLectureData?.content?.url}
                   allowFullScreen
-                />
+                
+                /> */}
+                <video controls autoPlay style={{ width: "100%", }} >
+              <source src={singleLectureData?.content.url} type="video/mp4"  />
+              Your browser does not support the video tag.
+            </video>
               </AspectRatio>
-              {/* article section
-              {/* <Stack
+            )}
+
+            {singleLectureData?.contentType === "lecture_article" && (
+              /* article section*/
+              <Stack
                 w={{ base: "100%", xl: "923px", "2xl": "1700px" }}
                 h={{ base: "900px", lg: "400px" }}
                 overflowY={{ base: "hidden", xl: "scroll" }}
                 borderBottomWidth={2}
                 borderColor={"#f1f1f1"}
               >
-                <Stack>
-                  <div dangerouslySetInnerHTML={{ __html: peter }} />
-                </Stack>
-              </Stack> */}
-              <Stack
-                maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
-                px={{ base: "2", xl: 20 }}
-              >
-                {/* review section */}
-  
-                <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
-                  <Text color={"black"} fontWeight={"bold"} fontSize={"1.1rem"}>
-                    Write a Review
-                  </Text>
-                  <Text>What is it like about the Course?</Text>
-  
-                  <Formik
-                    initialValues={initialValues}
-                    validationSchema={reviewCourseValidationSchema}
-                    onSubmit={handleSubmit}
-                  >
-                    {({
-                      handleChange,
-                      setFieldValue,
-                      handleSubmit,
-                      values,
-                      errors,
-                    }) => (
-                      <Flex
-                        rowGap={"5px"}
-                        flexDirection="column"
-                        maxHeight={{ base: "100%", lg: "530px" }}
-                        overflowY={"auto"}
-                        pb={5}
-                      >
-                        <>
-                          <Flex align="center">
-                            {Array.from({ length: 5 }, (_, index) => (
-                              <IconButton
-                                key={index}
-                                icon={
-                                  values.stars >= index + 1 ? (
-                                    index + 1 === values.stars ? (
-                                      <FaStar color="#FFE234" />
-                                    ) : (
-                                      <FaStar color="#FFE234" />
-                                    )
-                                  ) : (
-                                    <FaStar color="gray" />
-                                  )
-                                }
-                                onClick={() => setFieldValue("stars", index + 1)}
-                                variant="unstyled"
-                                aria-label={`${index + 1} stars`}
-                              />
-                            ))}
-                          </Flex>
-                          <FormControl isRequired>
-                            <FormLabel>Review Title</FormLabel>
-                            <Input
-                              type="text"
-                              variant="filled"
-                              placeholder="write your review"
-                              value={values.title}
-                              name="title"
-                              onChange={handleChange}
-                            />
-                            {errors.title && (
-                              <Text
-                                style={{ color: "red", marginTop: 5 }}
-                                fontSize="14px"
-                              >
-                                <>{errors.title}</>
-                              </Text>
-                            )}
-                          </FormControl>
-                          <FormControl isRequired mt={5}>
-                            <FormLabel>Review Content</FormLabel>
-                            <Textarea
-                              variant="filled"
-                              placeholder="Message"
-                              value={values.content}
-                              name="content"
-                              onChange={handleChange}
-                            />
-                            {errors.content && (
-                              <Text
-                                style={{ color: "red", marginTop: 5 }}
-                                fontSize="14px"
-                              >
-                                <>{errors.content}</>
-                              </Text>
-                            )}
-                          </FormControl>
-                          <Button
-                            bg={"#00FF84"}
-                            isLoading={createEnrolledCourseReviewLoading}
-                            loadingText="Loading"
-                            variant="outline"
-                            spinnerPlacement="end"
-                            width="100%"
-                            onClick={() => handleSubmit()}
-                            mt={3}
-                            borderWidth={2}
-                            py={3}
-                            borderColor={"#00FF84"}
-                            _hover={{ background: "none", color: "#00FF84" }}
-                          >
-                            Submit Review
-                          </Button>
-                        </>
-                      </Flex>
-                    )}
-                  </Formik>
+                <Stack ml={"10rem"} my={"2rem"}>
+                  <div dangerouslySetInnerHTML={{ __html: singleLectureData?.content.body }} />
                 </Stack>
               </Stack>
-            </Stack>
+            )}
+
             <Stack
-              width={{ base: "100%", xl: "30%" }}
-              position={{ base: "static", xl: "fixed" }}
-              right="12"
-              top="90px"
-              pl={{ base: 2, xl: 4 }}
-              pr={{ base: 2, xl: 0 }}
-              mt={{ base: 4, xl: 0 }}
+              maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
+              px={{ base: "2", xl: 20 }}
             >
-              <Text fontWeight={"bold"}>Course content</Text>
-              <Accordion
-                allowToggle
-                maxH={{ base: "100%", lg: "490px" }}
-                overflowY={{ base: "hidden", lg: "scroll" }}
-              >
-                {getSingleEnrolledCourse?.courseId?.modules?.map(
-                  (module: any, index: any) => {
-                    const { lectures, title } = module;
-                    return (
-                      <AccordionItem
-                        style={{ borderWidth: 1, borderRadius: 15 }}
-                        mb={4}
-                        key={index}
-                        rowGap={6}
-                      >
-                        <Stack>
-                          <AccordionButton
-                            _hover={{ backgroundColor: "none" }}
-                            py={3}
-                            borderRadius={15}
-                            backgroundColor={"#F7F8FB"}
-                          >
-                            <Flex
-                              width={"100%"}
-                              justify={"space-between"}
-                              align={"center"}
+              {/* review section */}
+
+              <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
+                <Text color={"black"} fontWeight={"bold"} fontSize={"1.1rem"}>
+                  Write a Review
+                </Text>
+                <Text>What is it like about the Course?</Text>
+
+                <Formik
+                  initialValues={initialValues}
+                  validationSchema={reviewCourseValidationSchema}
+                  onSubmit={handleSubmit}
+                >
+                  {({
+                    handleChange,
+                    setFieldValue,
+                    handleSubmit,
+                    values,
+                    errors,
+                  }) => (
+                    <Flex
+                      rowGap={"5px"}
+                      flexDirection="column"
+                      maxHeight={{ base: "100%", lg: "530px" }}
+                      overflowY={"auto"}
+                      pb={5}
+                    >
+                      <>
+                        <Flex align="center">
+                          {Array.from({ length: 5 }, (_, index) => (
+                            <IconButton
+                              key={index}
+                              icon={
+                                values.stars >= index + 1 ? (
+                                  index + 1 === values.stars ? (
+                                    <FaStar color="#FFE234" />
+                                  ) : (
+                                    <FaStar color="#FFE234" />
+                                  )
+                                ) : (
+                                  <FaStar color="gray" />
+                                )
+                              }
+                              onClick={() => setFieldValue("stars", index + 1)}
+                              variant="unstyled"
+                              aria-label={`${index + 1} stars`}
+                            />
+                          ))}
+                        </Flex>
+                        <FormControl isRequired>
+                          <FormLabel>Review Title</FormLabel>
+                          <Input
+                            type="text"
+                            variant="filled"
+                            placeholder="write your review"
+                            value={values.title}
+                            name="title"
+                            onChange={handleChange}
+                          />
+                          {errors.title && (
+                            <Text
+                              style={{ color: "red", marginTop: 5 }}
+                              fontSize="14px"
                             >
-                              <Stack>
-                                <Flex columnGap={2} fontWeight={"bold"}>
-                                  <Text>Section {index + 1}:</Text>
-                                  <Text>{title}</Text>
-                                </Flex>
-                                <Flex fontSize={14} columnGap={1}>
-                                  <Text>
-                                    {numberOfMarkedLectures[index]} /{" "}
-                                    {lectures?.length}
-                                  </Text>
-                                  <Text>|</Text>
-                                  <Text>
-                                    {convertSecondsToHMS(
-                                      totalDurationPerModule[index]
+                              <>{errors.title}</>
+                            </Text>
+                          )}
+                        </FormControl>
+                        <FormControl isRequired mt={5}>
+                          <FormLabel>Review Content</FormLabel>
+                          <Textarea
+                            variant="filled"
+                            placeholder="Message"
+                            value={values.content}
+                            name="content"
+                            onChange={handleChange}
+                          />
+                          {errors.content && (
+                            <Text
+                              style={{ color: "red", marginTop: 5 }}
+                              fontSize="14px"
+                            >
+                              <>{errors.content}</>
+                            </Text>
+                          )}
+                        </FormControl>
+                        <Button
+                          bg={"#00FF84"}
+                          isLoading={createEnrolledCourseReviewLoading}
+                          loadingText="Loading"
+                          variant="outline"
+                          spinnerPlacement="end"
+                          width="100%"
+                          onClick={() => handleSubmit()}
+                          mt={3}
+                          borderWidth={2}
+                          py={3}
+                          borderColor={"#00FF84"}
+                          _hover={{ background: "none", color: "#00FF84" }}
+                        >
+                          Submit Review
+                        </Button>
+                      </>
+                    </Flex>
+                  )}
+                </Formik>
+              </Stack>
+            </Stack>
+          </Stack>
+          <Stack
+            width={{ base: "100%", xl: "30%" }}
+            position={{ base: "static", xl: "fixed" }}
+            right="12"
+            top="90px"
+            pl={{ base: 2, xl: 4 }}
+            pr={{ base: 2, xl: 0 }}
+            mt={{ base: 4, xl: 0 }}
+          >
+            <Text fontWeight={"bold"}>Course content</Text>
+            <Accordion
+              allowToggle
+              maxH={{ base: "100%", lg: "490px" }}
+              overflowY={{ base: "hidden", lg: "scroll" }}
+            >
+              {getSingleEnrolledCourse?.courseId?.modules?.map(
+                (module: any, index: any) => {
+                  const { lectures, title } = module;
+                  return (
+                    <AccordionItem
+                      style={{ borderWidth: 1, borderRadius: 15 }}
+                      mb={4}
+                      key={index}
+                      rowGap={6}
+                    >
+                      <Stack>
+                        <AccordionButton
+                          _hover={{ backgroundColor: "none" }}
+                          py={3}
+                          borderRadius={15}
+                          backgroundColor={"#F7F8FB"}
+                        >
+                          <Flex
+                            width={"100%"}
+                            justify={"space-between"}
+                            align={"center"}
+                          >
+                            <Stack>
+                              <Flex columnGap={2} fontWeight={"bold"}>
+                                <Text>Section {index + 1}:</Text>
+                                <Text>{title}</Text>
+                              </Flex>
+                              <Flex fontSize={14} columnGap={1}>
+                                <Text>
+                                  {numberOfMarkedLectures[index]} /{" "}
+                                  {lectures?.length}
+                                </Text>
+                                <Text>|</Text>
+                                <Text>
+                                  {convertSecondsToHMS(
+                                    totalDurationPerModule[index]
+                                  )}
+                                </Text>
+                              </Flex>
+                            </Stack>
+                            <Text>
+                              <AccordionIcon fontSize={23} />
+                            </Text>
+                          </Flex>
+                        </AccordionButton>
+                      </Stack>
+                      {lectures?.map((lecture: any, index: number) => {
+                        const {
+                          title,
+                          content,
+                          contentType,
+                          id: LectureID,
+                        } = lecture;
+
+                        const handleCheckboxChange = async (
+                          lectureId: string,
+                          isChecked: boolean
+                        ) => {
+                          try {
+                            if (isChecked) {
+                              markLectureCompleted({
+                                enrollId: id,
+                                lectureId,
+                              });
+                            } else {
+                              markLectureUnfinshed({
+                                enrollId: id,
+                                lectureId,
+                              });
+                            }
+                            // Update checkedItems set based on checkbox state change
+                            setCheckedItems((prevCheckedItems) => {
+                              const newCheckedItems = new Set(prevCheckedItems);
+                              if (isChecked) {
+                                newCheckedItems.add(lectureId);
+                              } else {
+                                newCheckedItems.delete(lectureId);
+                              }
+                              return newCheckedItems;
+                            });
+                          } catch (error) {}
+                        };
+
+                        return (
+                          <AccordionPanel key={index}>
+                            <Flex columnGap={3} align={"start"}>
+                              <Checkbox
+                                mt={1}
+                                iconColor={"black"}
+                                size="lg"
+                                borderColor={"black"}
+                                colorScheme={"blackAlpha"}
+                                isChecked={checkedItems.has(content?.lectureId)}
+                                onChange={(e) =>
+                                  handleCheckboxChange(
+                                    content?.lectureId,
+                                    e.target.checked
+                                  )
+                                }
+                              />
+                              <Stack
+                                cursor={"pointer"}
+                                onClick={() =>
+                                  navigate(
+                                    `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
+                                  )
+                                }
+                              >
+                                <Text>
+                                  {index + 1} {title}
+                                </Text>
+                                <Flex
+                                  columnGap={1}
+                                  align={"center"}
+                                  color={"gray"}
+                                >
+                                  {contentType === "lecture_video" ? (
+                                    <RiPlayCircleFill size={20} />
+                                  ) : (
+                                    <LuStickyNote size={20} />
+                                  )}
+
+                                  <Text fontSize={14}>
+                                    {formatEnrolledCourseDuration(
+                                      content?.duration
                                     )}
                                   </Text>
                                 </Flex>
                               </Stack>
-                              <Text>
-                                <AccordionIcon fontSize={23} />
-                              </Text>
                             </Flex>
-                          </AccordionButton>
-                        </Stack>
-                        {lectures?.map((lecture: any, index: number) => {
-                          const { title, content, contentType , id: LectureID} = lecture;
-  
-                          const handleCheckboxChange = async (
-                            lectureId: string,
-                            isChecked: boolean
-                          ) => {
-                            try {
-                              if (isChecked) {
-                                markLectureCompleted({
-                                  enrollId: id,
-                                  lectureId,
-                                });
-                              } else {
-                                markLectureUnfinshed({
-                                  enrollId: id,
-                                  lectureId,
-                                });
-                              }
-                              // Update checkedItems set based on checkbox state change
-                              setCheckedItems((prevCheckedItems) => {
-                                const newCheckedItems = new Set(prevCheckedItems);
-                                if (isChecked) {
-                                  newCheckedItems.add(lectureId);
-                                } else {
-                                  newCheckedItems.delete(lectureId);
-                                }
-                                return newCheckedItems;
-                              });
-                            } catch (error) {}
-                          };
-  
-                          return (
-                            <AccordionPanel key={index}>
-                              <Flex columnGap={3} align={"start"}>
-                                <Checkbox
-                                  mt={1}
-                                  iconColor={"black"}
-                                  size="lg"
-                                  borderColor={"black"}
-                                  colorScheme={"blackAlpha"}
-                                  isChecked={checkedItems.has(content?.lectureId)}
-                                  onChange={(e) =>
-                                    handleCheckboxChange(
-                                      content?.lectureId,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
-                                <Stack  cursor={"pointer"} onClick={() => navigate(`/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`)}>
-                                  <Text>
-                                    {index + 1} {title}
-                                  </Text>
-                                  <Flex
-                                    columnGap={1}
-                                    align={"center"}
-                                    color={"gray"}
-                                  >
-                                    {contentType === "lecture_video" ? (
-                                      <RiPlayCircleFill size={20} />
-                                    ) : (
-                                      <LuStickyNote size={20} />
-                                    )}
-  
-                                    <Text fontSize={14}>
-                                      {formatEnrolledCourseDuration(
-                                        content?.duration
-                                      )}
-                                    </Text>
-                                  </Flex>
-                                </Stack>
-                              </Flex>
-                            </AccordionPanel>
-                          );
-                        })}
-                      </AccordionItem>
-                    );
-                  }
-                )}
-              </Accordion>
-            </Stack>
-          </Flex>
-        </Stack>
+                          </AccordionPanel>
+                        );
+                      })}
+                    </AccordionItem>
+                  );
+                }
+              )}
+            </Accordion>
+          </Stack>
+        </Flex>
       </Stack>
-    );
-  };
-  
-  export default VideoArticleSingleEnrollCoursePage;
-  
+    </Stack>
+  );
+};
 
-
-
-
-
+export default VideoArticleSingleEnrollCoursePage;
 
 // VideoArticleSingleEnrollCoursePage
