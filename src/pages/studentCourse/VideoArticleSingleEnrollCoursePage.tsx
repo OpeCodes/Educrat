@@ -263,8 +263,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
           flexDirection={{ base: "column", xl: "row" }}
         >
           <Stack
-           mt={6} 
-           w={"100%"}>
+           mt={6} w={"100%"}>
             {/* video section */}
             {singleLectureData?.contentType === "lecture_video" && (
               <AspectRatio
@@ -294,7 +293,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                 borderBottomWidth={2}
                 borderColor={"#f1f1f1"}
               >
-                <Stack ml={"10rem"} my={"2rem"}>
+                <Stack ml={{base: "2rem", md : "10rem"}} my={"2rem"}>
                   <div dangerouslySetInnerHTML={{ __html: singleLectureData?.content.body }} />
                 </Stack>
               </Stack>
