@@ -35,7 +35,7 @@ import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar, FaTrophy } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 
 import {
@@ -60,7 +60,6 @@ const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
-  console.log(getSingleEnrolledCourse);
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
@@ -99,6 +98,17 @@ const SingleEnrolledCourse = () => {
 
   //checkbok func
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
+console.log(getSingleEnrolledCourse)
+useEffect(() => {
+  const initialCheckedItems = new Set<string>();
+  getSingleEnrolledCourse?.completedLectures.forEach((lecture: any) => {
+    if (lecture.lectureId) {
+      initialCheckedItems.add(lecture.lectureId);
+    }
+  });
+  setCheckedItems(initialCheckedItems);
+}, [getSingleEnrolledCourse]);
+
 
   return (
     <Stack>
@@ -404,7 +414,6 @@ const SingleEnrolledCourse = () => {
                       </Stack>
                       {lectures?.map((lecture: any, index: number) => {
                         const { title, content } = lecture;
-                        console.log(content?.duration, "content");
 
                         const handleCheckboxChange = async (
                           lectureId: string,
