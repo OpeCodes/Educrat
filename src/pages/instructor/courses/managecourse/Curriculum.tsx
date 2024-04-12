@@ -251,8 +251,8 @@ const Curriculum = () => {
                       columnGap={4}
                       display={{ base: "none", lg: "flex" }}
                     >
-                      <Text cursor={"pointer"} onClick={() => toggleIsOpen(id)} >
-                        <MdEdit /> 
+                      <Text cursor={"pointer"} onClick={() => toggleIsOpen(id)}>
+                        <MdEdit />
                       </Text>
                       <Text
                         onClick={() => deleteModule({ moduleId: id })}
@@ -489,6 +489,7 @@ const Curriculum = () => {
                                         </Text>
                                       </Flex>
                                     </Flex>
+
                                     <Flex align={"center"} columnGap={1}>
                                       <Text
                                         display={{ base: "none", lg: "flex" }}
@@ -528,62 +529,65 @@ const Curriculum = () => {
                                       </Flex>
                                     </Flex>
                                   </Flex>
+                                  <Flex>
+                                    <Text>preview</Text>
 
-                                  {!isOpenContentType[id] &&
-                                    !isOpenInnerdescripRes[id] &&
-                                    !isOpenEditArticle[id] &&
-                                    !isOpenEditVideo[id] && (
-                                      <Flex
-                                        marginRight={"10px"}
-                                        columnGap={"15px"}
-                                        align={"center"}
-                                      >
-                                        <Stack
-                                          display={{
-                                            base: "none",
-                                            lg: "block",
-                                          }}
+                                    {!isOpenContentType[id] &&
+                                      !isOpenInnerdescripRes[id] &&
+                                      !isOpenEditArticle[id] &&
+                                      !isOpenEditVideo[id] && (
+                                        <Flex
+                                          marginRight={"10px"}
+                                          columnGap={"15px"}
+                                          align={"center"}
                                         >
-                                          {!contentEndPointType && (
-                                            <Button
-                                              borderRadius={0}
-                                              borderWidth={1}
-                                              borderColor={"black"}
-                                              color="black"
-                                              _hover={{
-                                                backgroundColor: "#F7F8FB",
-                                              }}
-                                              width={"100px"}
-                                              height={"30px"}
-                                              leftIcon={
-                                                <GoPlus fontSize={"20px"} />
-                                              }
-                                              variant="outline"
-                                              onClick={() => {
-                                                toggleIsOpenContentType(id);
-                                              }}
-                                            >
-                                              Content
-                                            </Button>
-                                          )}
-                                        </Stack>
-
-                                        <Box>
-                                          <Text
-                                            as={"button"}
-                                            onClick={() =>
-                                              toggleIsOpenDescripRes(id)
-                                            }
+                                          <Stack
+                                            display={{
+                                              base: "none",
+                                              lg: "block",
+                                            }}
                                           >
-                                            {!isOpendescripRes[id] ? (
-                                              <FaChevronDown size="12px" />
-                                            ) : (
-                                              <FaChevronUp size="12px" />
+                                            {!contentEndPointType && (
+                                              <Button
+                                                borderRadius={0}
+                                                borderWidth={1}
+                                                borderColor={"black"}
+                                                color="black"
+                                                _hover={{
+                                                  backgroundColor: "#F7F8FB",
+                                                }}
+                                                width={"100px"}
+                                                height={"30px"}
+                                                leftIcon={
+                                                  <GoPlus fontSize={"20px"} />
+                                                }
+                                                variant="outline"
+                                                onClick={() => {
+                                                  toggleIsOpenContentType(id);
+                                                }}
+                                              >
+                                                Content
+                                              </Button>
                                             )}
-                                          </Text>
-                                        </Box>
-                                      </Flex>
-                                    )}
+                                          </Stack>
+
+                                          <Box>
+                                            <Text
+                                              as={"button"}
+                                              onClick={() =>
+                                                toggleIsOpenDescripRes(id)
+                                              }
+                                            >
+                                              {!isOpendescripRes[id] ? (
+                                                <FaChevronDown size="12px" />
+                                              ) : (
+                                                <FaChevronUp size="12px" />
+                                              )}
+                                            </Text>
+                                          </Box>
+                                        </Flex>
+                                      )}
+                                  </Flex>
                                 </Flex>
                               </Stack>
                             )}
