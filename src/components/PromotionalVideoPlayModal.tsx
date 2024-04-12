@@ -6,7 +6,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalBody,
-  useToast,
 } from "@chakra-ui/react";
 import { IoPlayOutline } from "react-icons/io5";
 
@@ -16,20 +15,6 @@ interface Video {
 }
 const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
   const [isOpen, setIsOpen] = useState(false);
-  const toast = useToast();
-  const openModal = () => {
-    if (!videoUrl) {
-      toast({
-        title: `No video to display`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-      return;
-    } else {
-      setIsOpen(true);
-    }
-  };
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -41,12 +26,12 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
         width={"100%"}
         alt="promotional video"
         style={{
-          cursor: "pointer",
           height: "300px",
           objectFit: "cover",
         }}
       />
-      <Text
+      {
+        videoUrl &&<Text
         position="absolute"
         top="50%"
         left="50%"
@@ -55,11 +40,13 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
         p={"1.2rem"}
         borderRadius={"100%"}
         cursor={"pointer"}
-        onClick={openModal}
+        onClick={() =>  setIsOpen(true)}
         as={"button"}
       >
         <IoPlayOutline color="black" size="30px" />
       </Text>
+      }
+      
       <Modal isOpen={isOpen} onClose={closeModal} size="xl">
         <ModalOverlay />
         <ModalContent>
