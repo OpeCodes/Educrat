@@ -50,7 +50,7 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl, title }: Video) => {
         <ModalContent>
           <ModalCloseButton p={0} m={0} color={"white"} pl={3} />
           <ModalBody width={"100%"} bg="black">
-            <Stack color={"white"} fontWeight={"bold"}>
+            <Stack color={"white"} fontWeight={"bold"} mb={2}>
               <Text fontSize={14}>Course Review</Text>
               <Text fontSize={18}> {title}</Text>
             </Stack>

@@ -9,7 +9,6 @@ import {
   Button,
   Flex,
   Text,
-  useDisclosure
 } from "@chakra-ui/react";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { convertSecondsToHMS, convertSecondsToTime } from "./TimeFormat";
@@ -20,7 +19,6 @@ interface SingleCourse {
 }
 
 const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
-  const { isOpen: contentPreviewIsOpen, onOpen: contentPreviewOnOpen, onClose: contentPreviewOnClose } = useDisclosure()
 
   const lectureLength: string[] = (SingleCourseProp?.modules ?? []).flatMap(
     (obj: any) => obj.lectures
@@ -59,7 +57,20 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
   // Get total duration for each module
   const totalDurationPerModule =
     getTotalDurationPerModule();
-    // SingleCourseProp?.modules
+    
+    const [modalStates, setModalStates] = useState<{ [key: string]: boolean }>(
+      SingleCourseProp?.modules?.reduce((acc: any, item: any) => {
+        acc[item.id] = false; // Initialize each modal state as closed
+        return acc;
+      }, {})
+    );
+  
+    const toggleModal = (id: string) => {
+      setModalStates((prev) => ({
+        ...prev,
+        [id]: !prev[id], 
+      }));
+    };
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
@@ -150,7 +161,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                 </AccordionButton>
               </Stack>
               {module?.lectures?.map((lecture: any) => {
-                const { contentPreviewable, content, contentType } = lecture;
+                const { contentPreviewable, content, contentType , id} = lecture;
                 return (
                   <AccordionPanel key={lecture.id}>
                     <Flex align={"center"} justify={"space-between"}>
@@ -174,16 +185,17 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                             size="sm"
                             colorScheme="teal"
                             variant="link"
-               onClick={contentPreviewOnOpen}
-
+              //  onClick={contentPreviewOnOpen}
+              onClick={() => toggleModal(id)}
                           >
                             Preview
                           </Button>
                         )}
                         <PreviewContentModal
-                        contentPreviewIsOpen={contentPreviewIsOpen}
-                        contentPreviewOnOpen={contentPreviewOnOpen}
-                        contentPreviewOnClose={contentPreviewOnClose}
+                        isOpen={modalStates[id]} onToggleModal={() => toggleModal(id)}
+                        // contentPreviewIsOpen={contentPreviewIsOpen}
+                        // contentPreviewOnOpen={contentPreviewOnOpen}
+                        // contentPreviewOnClose={contentPreviewOnClose}
                         />
                         <Text color={"#4f547b"}>
                           {convertSecondsToTime(content?.duration)}
