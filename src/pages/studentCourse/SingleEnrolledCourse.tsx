@@ -59,6 +59,7 @@ const SingleEnrolledCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
+  console.log(getSingleEnrolledCourse, "here brother")
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
@@ -494,13 +495,7 @@ const SingleEnrolledCourse = () => {
                           <AccordionPanel key={index}>
                             <Flex
                               columnGap={3}
-                              align={"start"}
-                              // onClick={() =>
-                              //   markLectureCompleted({
-                              //     enrollId: id,
-                              //     lectureId: content?.lectureId,
-                              //   })
-                              // }
+                              align={"start"}                              
                             >
                               <Checkbox
                                 mt={1}
