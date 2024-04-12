@@ -19,7 +19,6 @@ interface SingleCourse {
 }
 
 const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
-
   const lectureLength: string[] = (SingleCourseProp?.modules ?? []).flatMap(
     (obj: any) => obj.lectures
   );
@@ -55,22 +54,22 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
   };
 
   // Get total duration for each module
-  const totalDurationPerModule =
-    getTotalDurationPerModule();
-    
-    const [modalStates, setModalStates] = useState<{ [key: string]: boolean }>(
-      SingleCourseProp?.modules?.reduce((acc: any, item: any) => {
-        acc[item.id] = false; // Initialize each modal state as closed
-        return acc;
-      }, {})
-    );
-  
-    const toggleModal = (id: string) => {
-      setModalStates((prev) => ({
-        ...prev,
-        [id]: !prev[id], 
-      }));
-    };
+  const totalDurationPerModule = getTotalDurationPerModule();
+
+  const [modalStates, setModalStates] = useState<{ [key: string]: boolean }>(
+    SingleCourseProp?.modules?.reduce((acc: any, item: any) => {
+      acc[item.id] = false; // Initialize each modal state as closed
+      return acc;
+    }, {})
+  );
+
+  const toggleModal = (id: string) => {
+    setModalStates((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+  console.log(SingleCourseProp?.modules, "herkkkkke");
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
@@ -161,7 +160,8 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                 </AccordionButton>
               </Stack>
               {module?.lectures?.map((lecture: any) => {
-                const { contentPreviewable, content, contentType , id} = lecture;
+                const { contentPreviewable, content, contentType, id,title } =
+                  lecture;
                 return (
                   <AccordionPanel key={lecture.id}>
                     <Flex align={"center"} justify={"space-between"}>
@@ -173,7 +173,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                             <LuStickyNote size={20} color={"#4f547b"} />
                           )}
                         </Text>
-                        <Text>{lecture.title}</Text>
+                        <Text>{title}</Text>
                       </Flex>
                       <Flex align={"center"} columnGap={4}>
                         {contentPreviewable && (
@@ -185,17 +185,17 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                             size="sm"
                             colorScheme="teal"
                             variant="link"
-              //  onClick={contentPreviewOnOpen}
-              onClick={() => toggleModal(id)}
+                            onClick={() => toggleModal(id)}
                           >
                             Preview
                           </Button>
                         )}
                         <PreviewContentModal
-                        isOpen={modalStates[id]} onToggleModal={() => toggleModal(id)}
-                        // contentPreviewIsOpen={contentPreviewIsOpen}
-                        // contentPreviewOnOpen={contentPreviewOnOpen}
-                        // contentPreviewOnClose={contentPreviewOnClose}
+                          contentType={contentType}
+                          Content={content?.url}
+                          isOpen={modalStates[id]}
+                          title= {title}
+                          onToggleModal={() => toggleModal(id)}
                         />
                         <Text color={"#4f547b"}>
                           {convertSecondsToTime(content?.duration)}
