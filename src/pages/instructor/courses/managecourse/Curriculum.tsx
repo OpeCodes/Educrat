@@ -20,7 +20,6 @@ import {
   Td,
   TableContainer,
   Switch,
-  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
@@ -86,7 +85,6 @@ const Curriculum = () => {
     useDeleteExternalResource();
 
   const { showPreviewable } = useShowPreviewable();
-  const [isPreviewable, setIsPreviewable] = useState(false);
 
   const initialValues1: CurriculumInterface = {
     title: "",
@@ -167,22 +165,17 @@ const Curriculum = () => {
 
   const handleUploadSuccess = () => {};
 
-  //previwable
-  const toast = useToast();
+  //previwable logic
   const [lectureStates, setLectureStates] = useState<{
     [key: string]: boolean;
   }>({});
   useEffect(() => {
     const initialLectureStates: { [key: string]: boolean } = {};
-
-    // Loop through each data item and initialize lectureStates based on lectures
     data?.forEach((item: any) => {
       item.lectures.forEach((lecture: any) => {
-        // initialLectureStates[lecture.id] = false; // Initialize all lectures as not previewable
-        initialLectureStates[lecture.id] = !!lecture.contentPreviewable; 
+        initialLectureStates[lecture.id] = !!lecture.contentPreviewable;
       });
     });
-
     setLectureStates(initialLectureStates);
   }, [data]);
   console.log(data);
@@ -423,7 +416,7 @@ const Curriculum = () => {
                       description,
                       resources,
                       contentType: contentEndPointType,
-                      contentPreviewable: previewContent,
+                      contentPreviewable,
                     } = lecture;
                     const ResourcesType: string[] = (resources ?? [])
                       .flat(2)
@@ -450,18 +443,6 @@ const Curriculum = () => {
                     // Format the components into the desired format
                     const formattedDate = `${month}/${day}/${year}`;
 
-                    //show previewable
-
-                    // const handleTogglePreviewable = async (lectureId: string, isChecked: boolean) => {
-                    //   setLectureStates((prevStates) => ({
-                    //     ...prevStates,
-                    //     [lectureId]: isChecked, // Update the state for the specific lecture
-                    //   }));
-
-                    //   // Call the API mutation function when the switch state changes
-                    //   showPreviewable({ lectureId: id, contentPreviewable: isChecked })
-
-                    // };
                     const handleTogglePreviewable = async (
                       lectureId: string,
                       isChecked: boolean
@@ -471,35 +452,11 @@ const Curriculum = () => {
                           lectureId,
                           contentPreviewable: isChecked,
                         });
-
-                        // Update the local state only when the API call is successful
                         setLectureStates((prevStates) => ({
                           ...prevStates,
-                          [lectureId]: isChecked, // Update the state for the specific lecture
+                          [lectureId]: isChecked,
                         }));
-
-                        // Show success toast
-                        toast({
-                          title: `Previewable status updated successfully for Lecture ${lectureId}`,
-                          status: "success",
-                          duration: 5000,
-                          isClosable: true,
-                        });
-                        //  await   showPreviewable({ lectureId, contentPreviewable: false });
-                      } catch (error) {
-                        console.error(
-                          `Error updating previewable status for Lecture ${lectureId}:`,
-                          error
-                        );
-
-                        // Show error toast
-                        toast({
-                          title: `Failed to update previewable status for Lecture ${lectureId}`,
-                          status: "error",
-                          duration: 5000,
-                          isClosable: true,
-                        });
-                      }
+                      } catch (error) {}
                     };
                     return (
                       <Stack key={id}>
@@ -613,10 +570,7 @@ const Curriculum = () => {
                                       <Text>preview</Text>
 
                                       <Switch
-                                        isChecked={
-                                          lectureStates[id] ||
-                                          false
-                                        }
+                                        isChecked={lectureStates[id] || false}
                                         onChange={(e) =>
                                           handleTogglePreviewable(
                                             id,
