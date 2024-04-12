@@ -89,6 +89,7 @@ const SingleEnrolledCourse = () => {
 
   // Get total duration for each module
   const totalDurationPerModule = getTotalDurationPerModule();
+
   let progressValue = Math.round(
     (getSingleEnrolledCourse?.completedLectures?.length /
       lectureLength.length) *
@@ -97,7 +98,6 @@ const SingleEnrolledCourse = () => {
 
   //checkbok func
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
-  console.log(getSingleEnrolledCourse);
   useEffect(() => {
     const initialCheckedItems = new Set<string>();
     getSingleEnrolledCourse?.completedLectures.forEach((lecture: any) => {
@@ -108,23 +108,17 @@ const SingleEnrolledCourse = () => {
     setCheckedItems(initialCheckedItems);
   }, [getSingleEnrolledCourse]);
 
-  // Function to count marked lectures in a ListItem based on module lectures
+  //count lectures
   const countMarkedLectures = (item: any) => {
-    // if (!getSingleEnrolledCourse?.modules || getSingleEnrolledCourse?.modules.length === 0) {
-    //   return 0; // No modules or lectures
-    // }
     const completedLecturesCounts: number[] = [];
-    // Iterate through each module
     item?.courseId?.modules.forEach((module: any) => {
       let completedLectureCount = 0;
-      // Iterate through lectures in the current module
       module.lectures.forEach((lecture: any) => {
-        // Find corresponding completed lecture in completedLecture array
         const isLectureCompleted = item?.completedLectures?.some(
           (completed: any) => completed.lectureId === lecture.id
         );
         if (isLectureCompleted) {
-          completedLectureCount++; // Increment count if lecture is marked completed
+          completedLectureCount++;
         }
       });
       completedLecturesCounts.push(completedLectureCount);
@@ -132,11 +126,10 @@ const SingleEnrolledCourse = () => {
 
     return completedLecturesCounts;
   };
-
-  // Example usage:
-
   const numberOfMarkedLectures = countMarkedLectures(getSingleEnrolledCourse);
-  console.log(`Number of marked lecturessss: ${numberOfMarkedLectures}`);
+  const completedValue =  Math.round(getSingleEnrolledCourse?.completedLectures?.length) === Math.round(lectureLength.length)
+  console.log(completedValue, "completed")
+
   return (
     <Stack>
       <Flex
@@ -201,7 +194,9 @@ const SingleEnrolledCourse = () => {
                     </CircularProgressLabel>
                   </CircularProgress>
                   <Text as={"button"} color={"white"} fontSize={15}>
-                    Your Progress
+                    {
+                      completedValue ? "Get Certificate" : "Your Progress"
+                    }
                   </Text>
                   <Text mt={1} cursor={"pointer"}>
                     <FaAngleDown color="white" />
@@ -209,11 +204,14 @@ const SingleEnrolledCourse = () => {
                 </Flex>
               </PopoverTrigger>
               <PopoverContent color="black" bg="white" borderRadius={0}>
-                <PopoverHeader pt={4} fontWeight="bold" border="0">
+                <PopoverHeader p={3} fontWeight="bold" border="0">
                   {getSingleEnrolledCourse?.completedLectures?.length} of{" "}
                   {lectureLength.length} completed.
                 </PopoverHeader>
                 <PopoverArrow bg="white" />
+                {
+
+                }
                 <PopoverBody>Finish course to get your certificate</PopoverBody>
               </PopoverContent>
             </Popover>
