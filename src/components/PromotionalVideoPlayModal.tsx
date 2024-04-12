@@ -13,8 +13,9 @@ import { IoPlayOutline } from "react-icons/io5";
 interface Video {
   imageUrl: string;
   videoUrl: string;
+  title: string;
 }
-const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
+const PromotionalVideoPlayModal = ({ imageUrl, videoUrl, title }: Video) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Stack position="relative">
@@ -44,13 +45,15 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
         </Text>
       )}
 
-      <Modal isOpen={isOpen} onClose={onClose} size="xl"  >
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
-          
-          <ModalCloseButton p={0} m={0} color={"white"}  pl={3}/>
-
+          <ModalCloseButton p={0} m={0} color={"white"} pl={3} />
           <ModalBody width={"100%"} bg="black">
+            <Stack color={"white"} fontWeight={"bold"}>
+              <Text fontSize={14}>Course Review</Text>
+              <Text fontSize={18}> {title}</Text>
+            </Stack>
             <video controls autoPlay style={{ width: "100%", height: "100vh" }}>
               <source src={videoUrl} type="video/mp4" />
               Your browser does not support the video tag.
@@ -63,5 +66,3 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
 };
 
 export default PromotionalVideoPlayModal;
-
-//

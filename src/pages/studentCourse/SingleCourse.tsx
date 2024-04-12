@@ -514,6 +514,7 @@ const SingleCourse = () => {
                       <PromotionalVideoPlayModal
                         imageUrl={getStudentSingleCourse?.thumbnail}
                         videoUrl={getStudentSingleCourse?.promotionalVideo}
+                        title= {getStudentSingleCourse?.title}
                       />
                     </Box>
                     <Stack
