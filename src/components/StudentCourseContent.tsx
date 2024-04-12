@@ -9,15 +9,19 @@ import {
   Button,
   Flex,
   Text,
+  useDisclosure
 } from "@chakra-ui/react";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { convertSecondsToHMS, convertSecondsToTime } from "./TimeFormat";
 import { LuStickyNote } from "react-icons/lu";
+import PreviewContentModal from "./PreviewContentModal";
 interface SingleCourse {
   SingleCourseProp: any;
 }
 
 const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
+  const { isOpen: contentPreviewIsOpen, onOpen: contentPreviewOnOpen, onClose: contentPreviewOnClose } = useDisclosure()
+
   const lectureLength: string[] = (SingleCourseProp?.modules ?? []).flatMap(
     (obj: any) => obj.lectures
   );
@@ -170,10 +174,17 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                             size="sm"
                             colorScheme="teal"
                             variant="link"
+               onClick={contentPreviewOnOpen}
+
                           >
                             Preview
                           </Button>
                         )}
+                        <PreviewContentModal
+                        contentPreviewIsOpen={contentPreviewIsOpen}
+                        contentPreviewOnOpen={contentPreviewOnOpen}
+                        contentPreviewOnClose={contentPreviewOnClose}
+                        />
                         <Text color={"#4f547b"}>
                           {convertSecondsToTime(content?.duration)}
                         </Text>

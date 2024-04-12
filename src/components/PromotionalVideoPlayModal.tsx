@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Modal,
   Text,
@@ -6,6 +5,8 @@ import {
   ModalOverlay,
   ModalContent,
   ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { IoPlayOutline } from "react-icons/io5";
 
@@ -14,11 +15,7 @@ interface Video {
   videoUrl: string;
 }
 const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Stack position="relative">
       <img
@@ -30,28 +27,38 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl }: Video) => {
           objectFit: "cover",
         }}
       />
-      {
-        videoUrl &&<Text
-        position="absolute"
-        top="50%"
-        left="50%"
-        transform="translate(-50%, -50%)"
-        bg="white"
-        p={"1.2rem"}
-        borderRadius={"100%"}
-        cursor={"pointer"}
-        onClick={() =>  setIsOpen(true)}
-        as={"button"}
-      >
-        <IoPlayOutline color="black" size="30px" />
-      </Text>
-      }
-      
-      <Modal isOpen={isOpen} onClose={closeModal} size="xl">
+      {videoUrl && (
+        <Text
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          bg="white"
+          p={"1.2rem"}
+          borderRadius={"100%"}
+          cursor={"pointer"}
+          as={"button"}
+          onClick={onOpen}
+        >
+          <IoPlayOutline color="black" size="30px" />
+        </Text>
+      )}
+
+      <Modal isOpen={isOpen} onClose={onClose} size="full">
         <ModalOverlay />
         <ModalContent>
+          <Text
+            cursor={"pointer"}
+            textAlign={"end"}
+            onClick={onClose}
+            opacity={0}
+          >
+            X
+          </Text>
+          <ModalCloseButton p={2} mr={2} />
+
           <ModalBody>
-            <video controls autoPlay>
+            <video controls autoPlay style={{ width: "100%", height: "100vh" }}>
               <source src={videoUrl} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
