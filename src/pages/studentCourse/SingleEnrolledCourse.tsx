@@ -147,6 +147,9 @@ const SingleEnrolledCourse = () => {
   const completedValue =
     Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
     Math.round(lectureLength.length);
+
+  const [activeLectureID, setActiveLectureID] = useState<string | null>(null);
+
   return (
     <Stack>
       <Flex
@@ -453,6 +456,7 @@ const SingleEnrolledCourse = () => {
                 {getSingleEnrolledCourse?.courseId?.modules?.map(
                   (module: any, index: any) => {
                     const { lectures, title } = module;
+
                     return (
                       <AccordionItem
                         style={{ borderWidth: 1, borderRadius: 15 }}
@@ -536,8 +540,22 @@ const SingleEnrolledCourse = () => {
                             } catch (error) {}
                           };
 
+                          const handleActiveAccordionClick = (
+                            lectureID: string
+                          ) => {
+                            navigate(
+                              `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
+                            );
+                            setActiveLectureID(lectureID);
+                          };
                           return (
-                            <AccordionPanel key={index}>
+                            <AccordionPanel
+                              key={index}
+                              backgroundColor={
+                                activeLectureID === LectureID ? "gray.200" : ""
+                              }
+                              _hover={{ backgroundColor: "gray.200" }}
+                            >
                               <Flex
                                 columnGap={3}
                                 align={"start"}
@@ -561,10 +579,13 @@ const SingleEnrolledCourse = () => {
                                 />
                                 <Stack
                                   cursor={"pointer"}
+                                  // onClick={() =>
+                                  //   navigate(
+                                  //     `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
+                                  //   )
+                                  // }
                                   onClick={() =>
-                                    navigate(
-                                      `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
-                                    )
+                                    handleActiveAccordionClick(LectureID)
                                   }
                                   width={"100%"}
                                 >
