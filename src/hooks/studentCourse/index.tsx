@@ -1,7 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
-import { useToast } from "@chakra-ui/react";
+import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { TbInfoHexagonFilled } from "react-icons/tb";
 export const useGetStudentSingleCourse = (slug: any) => {
+  const toast = useToast();
+  const [errorToastShown, setErrorToastShown] = useState(false);
   const {
     data: getStudentSingleCourse,
     isPending,
@@ -10,12 +14,49 @@ export const useGetStudentSingleCourse = (slug: any) => {
   } = useQuery({
     queryKey: ["singleCourse", slug],
     queryFn: async ({ queryKey }) => {
-      const [, slug] = queryKey; // Destructure the queryKey to get the 'id'
+      const [, slug] = queryKey;
       const { data } = await customFetch.get(`/course/slug/${slug}`);
       return data;
     },
   });
-
+  useEffect(() => {
+    if (isError && !errorToastShown) {
+      setErrorToastShown(true);
+      toast({
+        title: "Error fetching data",
+        status: "error",
+        position: "bottom-right",
+        duration: null,
+        isClosable: false,
+        render: ({ onClose }) => (
+          <Stack bg={"#FCBCA0"} py={3} px={4}>
+            <Flex align={"center"} columnGap={2}>
+              <Text>
+                <TbInfoHexagonFilled size={30} />
+              </Text>
+              <Text fontWeight={"bold"}>Network Error</Text>
+            </Flex>
+            <Flex columnGap={3} mt={4}>
+              <Text
+                as={"button"}
+                fontWeight={"bold"}
+                onClick={() => window.location.reload()}
+                color={"white"}
+                py={1}
+                px={4}
+                backgroundColor={"black"}
+              >
+                Reload page
+              </Text>
+              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
+                Dismiss
+              </Text>
+            </Flex>
+          </Stack>
+        ),
+      });
+    }
+  }, [isError, errorToastShown, toast]);
   return { getStudentSingleCourse, isPending, isError, refetch };
 };
 
