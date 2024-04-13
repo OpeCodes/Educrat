@@ -41,11 +41,11 @@ export const forgotPasswordSchema = Yup.object().shape({
 export const instructorProfileSchema = Yup.object().shape({
   headline: Yup.string().required("Pls include headline"),
   biography: Yup.string().required("Pls include biography"),
-  website: Yup.string().url("enter a valid url").required("pls enter a your website"),
-  twitter: Yup.string().url("enter a valid url").required("pls enter a your twitter url"),
-  facebook: Yup.string().url("enter a valid url").required("pls enter a your facebook url"),
-  linkedin: Yup.string().url("enter a valid url").required("pls enter a your linkedIn url"),
-  youtube: Yup.string().url("enter a valid url").required("pls enter a your youtube url"),
+  // website: Yup.string().url("enter a valid url").required("pls enter a your website"),
+  // twitter: Yup.string().url("enter a valid url").required("pls enter a your twitter url"),
+  // facebook: Yup.string().url("enter a valid url").required("pls enter a your facebook url"),
+  // linkedin: Yup.string().url("enter a valid url").required("pls enter a your linkedIn url"),
+  // youtube: Yup.string().url("enter a valid url").required("pls enter a your youtube url"),
 });
 export const createCourseSchema = Yup.object().shape({
   title: Yup.string().required("title is required"),
