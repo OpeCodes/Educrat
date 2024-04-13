@@ -104,8 +104,6 @@ const SingleCourse = () => {
     getStudentSingleCourse?.userId?.id
   );
 
-
-
   //get firstId for navigation
   const extractFirstLectureIds = (course: any) => {
     const firstLectureIds: string[] = [];
