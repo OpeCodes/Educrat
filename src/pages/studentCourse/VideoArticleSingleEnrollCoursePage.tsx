@@ -19,12 +19,14 @@ import {
   Stack,
   Text,
   Textarea,
+  PopoverAnchor,
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverHeader,
-  PopoverBody,
   PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
 import { IoIosArrowDown, IoIosShareAlt } from "react-icons/io";
@@ -293,6 +295,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                 overflowY={{ base: "hidden", xl: "scroll" }}
                 borderBottomWidth={2}
                 borderColor={"#f1f1f1"}
+                mb={53}
               >
                 <Stack ml={{ base: "2rem", md: "5rem" }} my={"2rem"}>
                   <div
@@ -483,6 +486,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                           title,
                           content,
                           contentType,
+                          resources,
                           id: LectureID,
                         } = lecture;
 
@@ -564,25 +568,48 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                         content?.duration
                                       )}
                                     </Text>
-                                    <Button
-                                      leftIcon={<FaFolderOpen />}
-                                      rightIcon={
-                                        <Text mt={1}>
-                                          <IoIosArrowDown />{" "}
-                                        </Text>
-                                      }
-                                      colorScheme="teal"
-                                      variant="outline"
-                                      borderRadius={0}
-                                      borderColor="black"
-                                      color={"black"}
-                                      height={"1.6rem"}
-                                      fontWeight={"400"}
-                                      _hover={{ backgroundColor: "none" }}
-                                      _active={{ backgrondColor: "none" }}
-                                    >
-                                      Resources
-                                    </Button>
+                                    {resources?.length === 0 ? (
+                                      ""
+                                    ) : (
+                                      <>
+                                        <Popover placement="bottom-end">
+                                          <PopoverTrigger>
+                                            <Button
+                                              leftIcon={<FaFolderOpen />}
+                                              rightIcon={
+                                                <Text mt={1}>
+                                                  <IoIosArrowDown />
+                                                </Text>
+                                              }
+                                              colorScheme="teal"
+                                              variant="outline"
+                                              borderRadius={0}
+                                              borderColor="black"
+                                              color={"black"}
+                                              height={"1.6rem"}
+                                              fontWeight={"400"}
+                                              _hover={{
+                                                backgroundColor: "none",
+                                              }}
+                                              _active={{
+                                                backgrondColor: "none",
+                                              }}
+                                            >
+                                              Resources
+                                            </Button>
+                                          </PopoverTrigger>
+                                          <PopoverContent
+                                            bg="white"
+                                            borderRadius={0}
+                                          >
+                                            <PopoverBody>
+                                              Are you sure you want to have that
+                                              milkshake?
+                                            </PopoverBody>
+                                          </PopoverContent>
+                                        </Popover>
+                                      </>
+                                    )}
                                   </Flex>
                                 </Flex>
                               </Stack>
