@@ -575,32 +575,27 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                       <>
                                         <Popover placement="bottom-end">
                                           <PopoverTrigger>
-                                            <Button
-                                              leftIcon={<FaFolderOpen />}
-                                              rightIcon={
-                                                <Text mt={1}>
-                                                  <IoIosArrowDown />
-                                                </Text>
-                                              }
-                                              colorScheme="teal"
-                                              variant="outline"
-                                              borderRadius={0}
-                                              borderColor="black"
+                                            <Flex
+                                              align={"center"}
                                               color={"black"}
-                                              height={"1.6rem"}
-                                              fontWeight={"400"}
-                                              _hover={{
-                                                backgroundColor: "none",
-                                              }}
-                                              _active={{
-                                                backgrondColor: "none",
-                                              }}
+                                              columnGap={1}
+                                              px={2}
+                                              borderWidth={1}
+                                              borderColor={"black"}
+                                              as={"button"}
                                               onClick={(e) =>
                                                 e.stopPropagation()
                                               }
                                             >
-                                              Resources
-                                            </Button>
+                                              <Text>
+                                                <FaFolderOpen />
+                                              </Text>
+                                              <Text> Resources</Text>
+                                              <Text>
+                                                {" "}
+                                                <IoIosArrowDown />
+                                              </Text>
+                                            </Flex>
                                           </PopoverTrigger>
                                           <PopoverContent
                                             bg="white"
@@ -623,7 +618,6 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                                       align={"center"}
                                                       color={"black"}
                                                       pb={3}
-                                                      _hover={{ color: "blue" }}
                                                     >
                                                       {source ===
                                                       "downloadable" ? (
@@ -643,12 +637,13 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                                         </Text>
                                                       )}
                                                       {!type ? (
-                                                        <a
+                                                        <Text
+                                                          as={"a"}
                                                           href={url}
                                                           target="_blank"
                                                         >
                                                           {title}
-                                                        </a>
+                                                        </Text>
                                                       ) : (
                                                         <VideoDownloadButton
                                                           fileUrl={url}
