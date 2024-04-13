@@ -535,8 +535,10 @@ export const useCreateEnrolledCourseReview = () => {
   });
   return { createEnrolledCourseReview, createEnrolledCourseReviewLoading };
 };
-export const useGetCourseReview = (id: any) => {
-  const { data: getCourseReview, isPending } = useQuery({
+export const useGetCourseReview = (id: any) => {  
+ const toast = useToast();
+ const [errorToastShown, setErrorToastShown] = useState(false);
+  const { data: getCourseReview, isPending,isError } = useQuery({
     queryKey: ["getCourseReview", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
@@ -544,6 +546,44 @@ export const useGetCourseReview = (id: any) => {
       return data;
     },
   });
+  useEffect(() => {
+    if (isError && !errorToastShown) {
+      setErrorToastShown(true);
+      toast({
+        title: "Error fetching data",
+        status: "error",
+        position: "bottom-right",
+        duration: null,
+        isClosable: false,
+        render: ({ onClose }) => (
+          <Stack bg={"#FCBCA0"} py={3} px={4}>
+            <Flex align={"center"} columnGap={2}>
+              <Text>
+                <TbInfoHexagonFilled size={30} />
+              </Text>
+              <Text fontWeight={"bold"}>Network Error</Text>
+            </Flex>
+            <Flex columnGap={3} mt={4}>
+              <Text
+                as={"button"}
+                fontWeight={"bold"}
+                onClick={() => window.location.reload()}
+                color={"white"}
+                py={1}
+                px={4}
+                backgroundColor={"black"}
+              >
+                Reload page
+              </Text>
+              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
+                Dismiss
+              </Text>
+            </Flex>
+          </Stack>
+        ),
+      });
+    }
+  }, [isError, errorToastShown, toast]);
   return {
     getCourseReview,
     isPending,
