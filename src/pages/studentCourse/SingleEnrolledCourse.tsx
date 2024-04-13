@@ -55,6 +55,7 @@ import { useGetSingleLectureCourse } from "../../hooks/module";
 import { HiFolderDownload } from "react-icons/hi";
 import { VscLinkExternal } from "react-icons/vsc";
 import VideoDownloadButton from "../../components/VideoDownloadButton";
+import { Loading } from "../../components";
 
 const initialValues = {
   stars: 0,
@@ -65,7 +66,8 @@ const initialValues = {
 const SingleEnrolledCourse = () => {
   const { id, lectureId } = useParams();
   const navigate = useNavigate();
-  const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
+  const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
+    useGetSingleEnrolledStudentCourse(id);
   const { singleLectureData, refetch } = useGetSingleLectureCourse(lectureId);
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
@@ -427,246 +429,258 @@ const SingleEnrolledCourse = () => {
             mt={{ base: 4, xl: 0 }}
           >
             <Text fontWeight={"bold"}>Course content</Text>
-            <Accordion
-              allowToggle
-              maxH={{ base: "100%", lg: "490px" }}
-              overflowY={{ base: "hidden", lg: "scroll" }}
-            >
-              {getSingleEnrolledCourse?.courseId?.modules?.map(
-                (module: any, index: any) => {
-                  const { lectures, title } = module;
-                  return (
-                    <AccordionItem
-                      style={{ borderWidth: 1, borderRadius: 15 }}
-                      mb={4}
-                      key={index}
-                      rowGap={6}
-                    >
-                      <Stack>
-                        <AccordionButton
-                          _hover={{ backgroundColor: "none" }}
-                          py={3}
-                          borderRadius={15}
-                          backgroundColor={"#F7F8FB"}
-                        >
-                          <Flex
-                            width={"100%"}
-                            justify={"space-between"}
-                            align={"center"}
+            {getSingleEnrolledCourseLoading ? (
+              <Loading />
+            ) : (
+              <Accordion
+                allowToggle
+                maxH={{ base: "100%", lg: "490px" }}
+                overflowY={{ base: "hidden", lg: "scroll" }}
+              >
+                {getSingleEnrolledCourse?.courseId?.modules?.map(
+                  (module: any, index: any) => {
+                    const { lectures, title } = module;
+                    return (
+                      <AccordionItem
+                        style={{ borderWidth: 1, borderRadius: 15 }}
+                        mb={4}
+                        key={index}
+                        rowGap={6}
+                      >
+                        <Stack>
+                          <AccordionButton
+                            _hover={{ backgroundColor: "none" }}
+                            py={3}
+                            borderRadius={15}
+                            backgroundColor={"#F7F8FB"}
                           >
-                            <Stack>
-                              <Flex columnGap={2} fontWeight={"bold"}>
-                                <Text>Section {index + 1}:</Text>
-                                <Text>{title}</Text>
-                              </Flex>
-                              <Flex fontSize={14} columnGap={1}>
-                                <Text>
-                                  {numberOfMarkedLectures[index]} /{" "}
-                                  {lectures?.length}
-                                </Text>
-                                <Text>|</Text>
-                                <Text>
-                                  {convertSecondsToHMS(
-                                    totalDurationPerModule[index]
-                                  )}
-                                </Text>
-                              </Flex>
-                            </Stack>
-                            <Text>
-                              <AccordionIcon fontSize={23} />
-                            </Text>
-                          </Flex>
-                        </AccordionButton>
-                      </Stack>
-                      {lectures?.map((lecture: any, index: number) => {
-                        const {
-                          title,
-                          content,
-                          contentType,
-                          resources,
-                          id: LectureID,
-                        } = lecture;
-
-                        const handleCheckboxChange = async (
-                          lectureId: string,
-                          isChecked: boolean
-                        ) => {
-                          try {
-                            if (isChecked) {
-                              markLectureCompleted({
-                                enrollId: id,
-                                lectureId,
-                              });
-                            } else {
-                              markLectureUnfinshed({
-                                enrollId: id,
-                                lectureId,
-                              });
-                            }
-                            // Update checkedItems set based on checkbox state change
-                            setCheckedItems((prevCheckedItems) => {
-                              const newCheckedItems = new Set(prevCheckedItems);
-                              if (isChecked) {
-                                newCheckedItems.add(lectureId);
-                              } else {
-                                newCheckedItems.delete(lectureId);
-                              }
-                              return newCheckedItems;
-                            });
-                          } catch (error) {}
-                        };
-
-                        return (
-                          <AccordionPanel key={index}>
-                            <Flex columnGap={3} align={"start"} width={"100%"}>
-                              <Checkbox
-                                mt={1}
-                                iconColor={"black"}
-                                size="lg"
-                                borderColor={"black"}
-                                colorScheme={"blackAlpha"}
-                                isChecked={checkedItems.has(content?.lectureId)}
-                                onChange={(e) =>
-                                  handleCheckboxChange(
-                                    content?.lectureId,
-                                    e.target.checked
-                                  )
-                                }
-                              />
-                              <Stack
-                                cursor={"pointer"}
-                                onClick={() =>
-                                  navigate(
-                                    `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
-                                  )
-                                }
-                                width={"100%"}
-                              >
-                                <Text>
-                                  {index + 1} {title}
-                                </Text>
-                                <Flex
-                                  columnGap={1}
-                                  align={"center"}
-                                  color={"gray"}
-                                >
-                                  {contentType === "lecture_video" ? (
-                                    <RiPlayCircleFill size={20} />
-                                  ) : (
-                                    <LuStickyNote size={20} />
-                                  )}
-                                  <Flex
-                                    align={"center"}
-                                    justify={"space-between"}
-                                    width={"100%"}
-                                  >
-                                    <Text fontSize={14}>
-                                      {formatEnrolledCourseDuration(
-                                        content?.duration
-                                      )}
-                                    </Text>
-                                    {resources?.length === 0 ? (
-                                      ""
-                                    ) : (
-                                      <>
-                                        <Popover placement="bottom-end">
-                                          <PopoverTrigger>
-                                            <Flex
-                                              align={"center"}
-                                              color={"black"}
-                                              columnGap={1}
-                                              px={2}
-                                              borderWidth={1}
-                                              borderColor={"black"}
-                                              as={"button"}
-                                              onClick={(e) =>
-                                                e.stopPropagation()
-                                              }
-                                            >
-                                              <Text>
-                                                <FaFolderOpen />
-                                              </Text>
-                                              <Text> Resources</Text>
-                                              <Text>
-                                                {" "}
-                                                <IoIosArrowDown />
-                                              </Text>
-                                            </Flex>
-                                          </PopoverTrigger>
-                                          <PopoverContent
-                                            bg="white"
-                                            borderRadius={0}
-                                          >
-                                            <PopoverBody>
-                                              {resources.map(
-                                                (resource: any) => {
-                                                  const {
-                                                    id,
-                                                    source,
-                                                    title,
-                                                    url,
-                                                    type,
-                                                  } = resource;
-                                                  return (
-                                                    <Flex
-                                                      key={id}
-                                                      columnGap={2}
-                                                      align={"center"}
-                                                      color={"black"}
-                                                      pb={3}
-                                                    >
-                                                      {source ===
-                                                      "downloadable" ? (
-                                                        <Text>
-                                                          <HiFolderDownload
-                                                            size={20}
-                                                          />{" "}
-                                                        </Text>
-                                                      ) : (
-                                                        <Text
-                                                          color={"black"}
-                                                          _hover={{
-                                                            color: "blue",
-                                                          }}
-                                                        >
-                                                          <VscLinkExternal />
-                                                        </Text>
-                                                      )}
-                                                      {!type ? (
-                                                        <Text
-                                                          as={"a"}
-                                                          href={url}
-                                                          target="_blank"
-                                                        >
-                                                          {title}
-                                                        </Text>
-                                                      ) : (
-                                                        <VideoDownloadButton
-                                                          fileUrl={url}
-                                                          fileName={title}
-                                                        />
-                                                      )}
-                                                    </Flex>
-                                                  );
-                                                }
-                                              )}
-                                            </PopoverBody>
-                                          </PopoverContent>
-                                        </Popover>
-                                      </>
+                            <Flex
+                              width={"100%"}
+                              justify={"space-between"}
+                              align={"center"}
+                            >
+                              <Stack>
+                                <Flex columnGap={2} fontWeight={"bold"}>
+                                  <Text>Section {index + 1}:</Text>
+                                  <Text>{title}</Text>
+                                </Flex>
+                                <Flex fontSize={14} columnGap={1}>
+                                  <Text>
+                                    {numberOfMarkedLectures[index]} /{" "}
+                                    {lectures?.length}
+                                  </Text>
+                                  <Text>|</Text>
+                                  <Text>
+                                    {convertSecondsToHMS(
+                                      totalDurationPerModule[index]
                                     )}
-                                  </Flex>
+                                  </Text>
                                 </Flex>
                               </Stack>
+                              <Text>
+                                <AccordionIcon fontSize={23} />
+                              </Text>
                             </Flex>
-                          </AccordionPanel>
-                        );
-                      })}
-                    </AccordionItem>
-                  );
-                }
-              )}
-            </Accordion>
+                          </AccordionButton>
+                        </Stack>
+                        {lectures?.map((lecture: any, index: number) => {
+                          const {
+                            title,
+                            content,
+                            contentType,
+                            resources,
+                            id: LectureID,
+                          } = lecture;
+
+                          const handleCheckboxChange = async (
+                            lectureId: string,
+                            isChecked: boolean
+                          ) => {
+                            try {
+                              if (isChecked) {
+                                markLectureCompleted({
+                                  enrollId: id,
+                                  lectureId,
+                                });
+                              } else {
+                                markLectureUnfinshed({
+                                  enrollId: id,
+                                  lectureId,
+                                });
+                              }
+                              // Update checkedItems set based on checkbox state change
+                              setCheckedItems((prevCheckedItems) => {
+                                const newCheckedItems = new Set(
+                                  prevCheckedItems
+                                );
+                                if (isChecked) {
+                                  newCheckedItems.add(lectureId);
+                                } else {
+                                  newCheckedItems.delete(lectureId);
+                                }
+                                return newCheckedItems;
+                              });
+                            } catch (error) {}
+                          };
+
+                          return (
+                            <AccordionPanel key={index}>
+                              <Flex
+                                columnGap={3}
+                                align={"start"}
+                                width={"100%"}
+                              >
+                                <Checkbox
+                                  mt={1}
+                                  iconColor={"black"}
+                                  size="lg"
+                                  borderColor={"black"}
+                                  colorScheme={"blackAlpha"}
+                                  isChecked={checkedItems.has(
+                                    content?.lectureId
+                                  )}
+                                  onChange={(e) =>
+                                    handleCheckboxChange(
+                                      content?.lectureId,
+                                      e.target.checked
+                                    )
+                                  }
+                                />
+                                <Stack
+                                  cursor={"pointer"}
+                                  onClick={() =>
+                                    navigate(
+                                      `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
+                                    )
+                                  }
+                                  width={"100%"}
+                                >
+                                  <Text>
+                                    {index + 1} {title}
+                                  </Text>
+                                  <Flex
+                                    columnGap={1}
+                                    align={"center"}
+                                    color={"gray"}
+                                  >
+                                    {contentType === "lecture_video" ? (
+                                      <RiPlayCircleFill size={20} />
+                                    ) : (
+                                      <LuStickyNote size={20} />
+                                    )}
+                                    <Flex
+                                      align={"center"}
+                                      justify={"space-between"}
+                                      width={"100%"}
+                                    >
+                                      <Text fontSize={14}>
+                                        {formatEnrolledCourseDuration(
+                                          content?.duration
+                                        )}
+                                      </Text>
+                                      {resources?.length === 0 ? (
+                                        ""
+                                      ) : (
+                                        <>
+                                          <Popover placement="bottom-end">
+                                            <PopoverTrigger>
+                                              <Flex
+                                                align={"center"}
+                                                color={"black"}
+                                                columnGap={1}
+                                                px={2}
+                                                borderWidth={1}
+                                                borderColor={"black"}
+                                                as={"button"}
+                                                onClick={(e) =>
+                                                  e.stopPropagation()
+                                                }
+                                              >
+                                                <Text>
+                                                  <FaFolderOpen />
+                                                </Text>
+                                                <Text> Resources</Text>
+                                                <Text>
+                                                  {" "}
+                                                  <IoIosArrowDown />
+                                                </Text>
+                                              </Flex>
+                                            </PopoverTrigger>
+                                            <PopoverContent
+                                              bg="white"
+                                              borderRadius={0}
+                                            >
+                                              <PopoverBody>
+                                                {resources.map(
+                                                  (resource: any) => {
+                                                    const {
+                                                      id,
+                                                      source,
+                                                      title,
+                                                      url,
+                                                      type,
+                                                    } = resource;
+                                                    return (
+                                                      <Flex
+                                                        key={id}
+                                                        columnGap={2}
+                                                        align={"center"}
+                                                        color={"black"}
+                                                        pb={3}
+                                                      >
+                                                        {source ===
+                                                        "downloadable" ? (
+                                                          <Text>
+                                                            <HiFolderDownload
+                                                              size={20}
+                                                            />{" "}
+                                                          </Text>
+                                                        ) : (
+                                                          <Text
+                                                            color={"black"}
+                                                            _hover={{
+                                                              color: "blue",
+                                                            }}
+                                                          >
+                                                            <VscLinkExternal />
+                                                          </Text>
+                                                        )}
+                                                        {!type ? (
+                                                          <Text
+                                                            as={"a"}
+                                                            href={url}
+                                                            target="_blank"
+                                                          >
+                                                            {title}
+                                                          </Text>
+                                                        ) : (
+                                                          <VideoDownloadButton
+                                                            fileUrl={url}
+                                                            fileName={title}
+                                                          />
+                                                        )}
+                                                      </Flex>
+                                                    );
+                                                  }
+                                                )}
+                                              </PopoverBody>
+                                            </PopoverContent>
+                                          </Popover>
+                                        </>
+                                      )}
+                                    </Flex>
+                                  </Flex>
+                                </Stack>
+                              </Flex>
+                            </AccordionPanel>
+                          );
+                        })}
+                      </AccordionItem>
+                    );
+                  }
+                )}
+              </Accordion>
+            )}
           </Stack>
         </Flex>
       </Stack>
@@ -675,6 +689,3 @@ const SingleEnrolledCourse = () => {
 };
 
 export default SingleEnrolledCourse;
-
-
-

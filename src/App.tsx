@@ -14,10 +14,19 @@ import {
 } from "./components";
 import "./App.css";
 import Home from "./pages/Home";
-import { SingleCourse, SingleEnrolledCourse, StudentCourse, VideoArticleSingleEnrollCoursePage } from "./pages/studentCourse";
+import {
+  SingleCourse,
+  SingleEnrolledCourse,
+  StudentCourse,
+} from "./pages/studentCourse";
 import BecomeInstructor from "./pages/instructor/BecomeInstructor";
 import { Courses, CreateCourse } from "./pages/instructor/courses";
-import { CourseLandingPage, CourseMessage, CourseSettings, Pricing } from "./pages/instructor/courses/managecourse";
+import {
+  CourseLandingPage,
+  CourseMessage,
+  CourseSettings,
+  Pricing,
+} from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 
 const router = createBrowserRouter([
@@ -37,7 +46,7 @@ const router = createBrowserRouter([
       {
         path: "/course/:slug",
         element: <SingleCourse />,
-      },      
+      },
     ],
   },
   {
@@ -61,13 +70,11 @@ const router = createBrowserRouter([
     element: <ResetPassword />,
   },
   {
-    path: "/course/:slug/learn/lecture/:id",
+    path: "/course/:slug/learn/lecture/:id/:lectureId/reviews",
+
     element: <SingleEnrolledCourse />,
   },
-  {
-    path: "/course/:slug/learn/lecture/:id/:lectureId/reviews",
-    element: <VideoArticleSingleEnrollCoursePage />,
-  },
+  
   //instructor
   {
     path: "/become-instructor",
@@ -110,19 +117,18 @@ const router = createBrowserRouter([
         element: <Pricing />,
       },
       {
-       path: "communications/messages",
-       element: <CourseMessage/>        
+        path: "communications/messages",
+        element: <CourseMessage />,
       },
       {
         path: "settings",
-        element: <CourseSettings/>        
-       }
+        element: <CourseSettings />,
+      },
     ],
   },
 ]);
 
 function App() {
-  
   return <RouterProvider router={router} />;
 }
 
