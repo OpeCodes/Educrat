@@ -1,7 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
-import { useToast } from "@chakra-ui/react";
+import { Stack, useToast, Text, Flex } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { TbInfoHexagonFilled } from "react-icons/tb";
+
 export const useCourseCategory = () => {
   const { data, isPending } = useQuery({
     queryKey: ["courseCategory"],
@@ -117,15 +120,56 @@ export const useGetSingleCourse = (id: any) => {
   return { getSingleCourse, isPending, isError, refetch };
 };
 
-export const useGetCourse = () => {
-  const { data, isPending } = useQuery({
+export const xuseGetCourse = () => {
+  const toast = useToast();
+  const [errorToastShown, setErrorToastShown] = useState(false);
+  const { data, isPending, isError } = useQuery({
     queryKey: ["course"],
     queryFn: async () => {
       const { data } = await customFetch.get("/course");
       return data;
     },
   });
-  return { data, isPending };
+  useEffect(() => {
+    if (!isError && errorToastShown) {
+      setErrorToastShown(true);
+      toast({
+        title: "Error fetching instructor course review",
+        status: "error",
+        position: "bottom-right",
+        duration: null,
+        isClosable: false,
+        render: ({ onClose }) => (
+          <Stack bg={"#FCBCA0"} py={3} px={4}>
+            <Flex align={"center"} columnGap={2}>
+              <Text>
+                <TbInfoHexagonFilled size={30} />
+              </Text>
+              <Text fontWeight={"bold"}>Network Error</Text>
+            </Flex>
+            <Flex columnGap={3} mt={4}>
+              <Text
+                as={"button"}
+                fontWeight={"bold"}
+                onClick={() => window.location.reload()}
+                color={"white"}
+                py={1}
+                px={4}
+                backgroundColor={"black"}
+              >
+                Reload page
+              </Text>
+              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
+                Dismiss
+              </Text>
+              {/* <button >Reload Page111</button> */}
+            </Flex>
+          </Stack>
+        ),
+      });
+    }
+  }, [isError, errorToastShown, toast]);
+  return { data, isPending, isError };
 };
 
 export const useGetAllUserCourse = () => {

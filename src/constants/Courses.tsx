@@ -26,6 +26,10 @@ export const Courses = () => {
   };
   const { data, isPending } = useGetCourse();
   const dummyArray = [1, 2, 3, 4];
+
+
+
+
   return (
     <Box
       as={"section"}

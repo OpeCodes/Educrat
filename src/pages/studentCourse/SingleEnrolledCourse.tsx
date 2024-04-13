@@ -278,7 +278,7 @@ const SingleEnrolledCourse = () => {
             {/* video section */}
             {singleLectureDataLoading ? (
               <Flex
-                width={"60%"}
+                width={"100%"}
                 h={"60vh"}
                 align={"center"}
                 justify={"center"}
