@@ -54,6 +54,7 @@ import { LuStickyNote } from "react-icons/lu";
 import { useGetSingleLectureCourse } from "../../hooks/module";
 import { HiFolderDownload } from "react-icons/hi";
 import { VscLinkExternal } from "react-icons/vsc";
+import VideoDownloadButton from "../../components/VideoDownloadButton";
 
 const initialValues = {
   stars: 0,
@@ -634,7 +635,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                                         </Text>
                                                       )}
                                                       {
-                                                      !type ? <a href={url} target="_blank">{title}</a> : <p>downloadable</p>
+                                                      !type ? <a href={url} target="_blank">{title}</a> :  <VideoDownloadButton fileUrl={url} fileName={title}/>
                                                       }
                                                       
                                                     </Flex>
