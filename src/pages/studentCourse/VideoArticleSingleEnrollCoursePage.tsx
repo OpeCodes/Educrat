@@ -19,14 +19,12 @@ import {
   Stack,
   Text,
   Textarea,
-  PopoverAnchor,
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverHeader,
   PopoverArrow,
   PopoverBody,
-  PopoverCloseButton,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
 import { IoIosArrowDown, IoIosShareAlt } from "react-icons/io";
@@ -54,6 +52,8 @@ import {
 } from "../../components/TimeFormat";
 import { LuStickyNote } from "react-icons/lu";
 import { useGetSingleLectureCourse } from "../../hooks/module";
+import { HiFolderDownload } from "react-icons/hi";
+import { VscLinkExternal } from "react-icons/vsc";
 
 const initialValues = {
   stars: 0,
@@ -603,8 +603,44 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                             borderRadius={0}
                                           >
                                             <PopoverBody>
-                                              Are you sure you want to have that
-                                              milkshake?
+                                              {resources.map(
+                                                (resource: any) => {
+                                                  const {
+                                                    id,
+                                                    source,
+                                                    title,
+                                                    url,
+                                                    type
+                                                  } = resource;
+                                                  return (
+                                                    <Flex
+                                                      key={id}
+                                                      columnGap={2}
+                                                      align={"center"}
+                                                      color={"black"}
+                                                      pb={3}
+                                                      _hover={{color: "blue"}}
+                                                    >
+                                                      {source ===
+                                                      "downloadable" ? (
+                                                        <Text>
+                                                          <HiFolderDownload
+                                                            size={20}
+                                                          />{" "}
+                                                        </Text>
+                                                      ) : (
+                                                        <Text color={"black"  } _hover={{color: "blue"}}>
+                                                          <VscLinkExternal />
+                                                        </Text>
+                                                      )}
+                                                      {
+                                                      !type ? <a href={url} target="_blank">{title}</a> : <p>downloadable</p>
+                                                      }
+                                                      
+                                                    </Flex>
+                                                  );
+                                                }
+                                              )}
                                             </PopoverBody>
                                           </PopoverContent>
                                         </Popover>
