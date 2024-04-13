@@ -62,7 +62,6 @@ const VideoArticleSingleEnrollCoursePage = () => {
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
   const { singleLectureData, refetch } = useGetSingleLectureCourse(lectureId);
-  console.log(singleLectureData, "singleLectureData");
   console.log(singleLectureData?.content?.url);
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
@@ -270,16 +269,16 @@ const VideoArticleSingleEnrollCoursePage = () => {
                 maxH={{ base: "900px", lg: "400px" }}
                 ratio={{ base: 15 / 8, lg: 15 / 13 }}
               >
-                {/* <iframe
+                <iframe
                   title="Learn frontend development from peter"
                   src={singleLectureData?.content?.url}
                   allowFullScreen
                 
-                /> */}
-                <video controls autoPlay style={{ width: "100%", }} >
-              <source src={singleLectureData?.content.url} type="video/mp4"  />
+                />
+                {/* <video controls autoPlay style={{ width: "100%", }} >
+              <source src={singleLectureData?.content?.url} type="video/mp4"  />
               Your browser does not support the video tag.
-            </video>
+            </video> */}
               </AspectRatio>
             )}
 
@@ -292,7 +291,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                 borderBottomWidth={2}
                 borderColor={"#f1f1f1"}
               >
-                <Stack ml={{base: "2rem", md : "10rem"}} my={"2rem"}>
+                <Stack ml={{base: "2rem", md : "5rem"}} my={"2rem"}>
                   <div dangerouslySetInnerHTML={{ __html: singleLectureData?.content.body }} />
                 </Stack>
               </Stack>
