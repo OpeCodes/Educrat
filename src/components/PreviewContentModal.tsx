@@ -5,7 +5,7 @@ interface ModalProps {
   isOpen: boolean;
   onToggleModal: () => void;
   contentType: string;
-  Content?: string;
+  Content?: any;
   title: string;
 }
 
