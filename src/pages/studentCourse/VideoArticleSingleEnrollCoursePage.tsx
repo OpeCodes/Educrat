@@ -139,6 +139,9 @@ const VideoArticleSingleEnrollCoursePage = () => {
   const completedValue =
     Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
     Math.round(lectureLength.length);
+
+  console.log(getSingleEnrolledCourse?.courseId?.modules, "111111111");
+
   return (
     <Stack>
       <Flex
@@ -513,7 +516,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                         };
 
                         return (
-                          <AccordionPanel key={index} >
+                          <AccordionPanel key={index}>
                             <Flex columnGap={3} align={"start"} width={"100%"}>
                               <Checkbox
                                 mt={1}
@@ -563,14 +566,20 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                     </Text>
                                     <Button
                                       leftIcon={<FaFolderOpen />}
-
-                                      rightIcon={ <Text mt={1}><IoIosArrowDown  /> </Text>}
+                                      rightIcon={
+                                        <Text mt={1}>
+                                          <IoIosArrowDown />{" "}
+                                        </Text>
+                                      }
                                       colorScheme="teal"
                                       variant="outline"
                                       borderRadius={0}
                                       borderColor="black"
                                       color={"black"}
                                       height={"1.6rem"}
+                                      fontWeight={"400"}
+                                      _hover={{ backgroundColor: "none" }}
+                                      _active={{ backgrondColor: "none" }}
                                     >
                                       Resources
                                     </Button>
