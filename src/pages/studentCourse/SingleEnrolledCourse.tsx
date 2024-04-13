@@ -272,7 +272,7 @@ const SingleEnrolledCourse = () => {
         >
           <Stack mt={6} w={"100%"}>
             {/* video section */}
-            {!singleLectureDataLoading ? (
+            {singleLectureDataLoading ? (
               <Flex
                 width={"60%"}
                 h={"60vh"}
@@ -614,7 +614,6 @@ const SingleEnrolledCourse = () => {
                                                 </Text>
                                                 <Text> Resources</Text>
                                                 <Text>
-                                                  {" "}
                                                   <IoIosArrowDown />
                                                 </Text>
                                               </Flex>
@@ -622,6 +621,9 @@ const SingleEnrolledCourse = () => {
                                             <PopoverContent
                                               bg="white"
                                               borderRadius={0}
+                                              onClick={(e) =>
+                                                e.stopPropagation()
+                                              }
                                             >
                                               <PopoverBody>
                                                 {resources.map(
