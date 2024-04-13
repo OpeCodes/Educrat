@@ -58,7 +58,7 @@ const PreviewContentModal: React.FC<ModalProps> = ({
               //   </AspectRatio>
               // </Stack>
               <Stack mt={10}>
-              <video controls autoPlay style={{ width: "100%",}}>
+              <video controls autoPlay style={{ width: "100%", height: "400px"}}>
               <source src={Content?.url} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
