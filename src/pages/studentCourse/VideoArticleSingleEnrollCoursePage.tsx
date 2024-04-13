@@ -484,7 +484,11 @@ const VideoArticleSingleEnrollCoursePage = () => {
                           resources,
                           id: LectureID,
                         } = lecture;
-
+                        const handleActiveLecture = (lectureID: string) => {
+                          navigate(`/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`);
+                          setActiveLectureID(lectureID);
+                        };
+                      
                         const handleCheckboxChange = async (
                           lectureId: string,
                           isChecked: boolean
@@ -516,7 +520,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
 
                         return (
                           <AccordionPanel key={index}>
-                            <Flex columnGap={3} align={"start"} width={"100%"}>
+                            <Flex columnGap={3} p={1} align={"start"} width={"100%"}  backgroundColor={activeLectureID === LectureID ? 'gray.300' : ''}>
                               <Checkbox
                                 mt={1}
                                 iconColor={"black"}
@@ -534,10 +538,11 @@ const VideoArticleSingleEnrollCoursePage = () => {
                               <Stack
                                 cursor={"pointer"}
                                 onClick={() =>
-                                  navigate(
-                                    `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
-                                  )
+                               
+                                  handleActiveLecture(LectureID)
                                 }
+                               
+
                                 width={"100%"}
                               >
                                 <Text>
