@@ -270,167 +270,167 @@ const SingleEnrolledCourse = () => {
           mt={{ base: "1.5rem", md: "3.1rem" }}
           flexDirection={{ base: "column", xl: "row" }}
         >
-          {singleLectureDataLoading ? (
-            <Flex width={"60%"} h={"60vh"} align={"center"} justify={"center"}>
-              <Loading />
-            </Flex>
-          ) : (
-            <Stack mt={6} w={"100%"}>
-              {/* video section */}
-              {singleLectureData?.contentType === "lecture_video" && (
-                <AspectRatio
-                  maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
-                  maxH={{ base: "900px", lg: "400px" }}
-                  ratio={{ base: 15 / 8, lg: 15 / 13 }}
-                >
-                  <iframe
-                    title="Learn frontend development from peter"
-                    src={singleLectureData?.content?.url}
-                    allowFullScreen
-                  />
-                  {/* <video controls autoPlay style={{ width: "100%", }} >
-              <source src={singleLectureData?.content?.url} type="video/mp4"  />
-              Your browser does not support the video tag.
-            </video> */}
-                </AspectRatio>
-              )}
-
-              {singleLectureData?.contentType === "lecture_article" && (
-                /* article section*/
-                <Stack
-                  w={{ base: "100%", xl: "923px", "2xl": "1700px" }}
-                  h={{ base: "900px", lg: "400px" }}
-                  overflowY={{ base: "hidden", xl: "scroll" }}
-                  borderBottomWidth={2}
-                  borderColor={"#f1f1f1"}
-                  mb={53}
-                >
-                  <Stack ml={{ base: "2rem", md: "5rem" }} my={"2rem"}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: singleLectureData?.content.body,
-                      }}
-                    />
-                  </Stack>
-                </Stack>
-              )}
-
-              <Stack
-                maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
-                px={{ base: "2", xl: 20 }}
+          <Stack mt={6} w={"100%"}>
+            {/* video section */}
+            {!singleLectureDataLoading ? (
+              <Flex
+                width={"60%"}
+                h={"60vh"}
+                align={"center"}
+                justify={"center"}
               >
-                {/* review section */}
-
-                <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
-                  <Text color={"black"} fontWeight={"bold"} fontSize={"1.1rem"}>
-                    Write a Review
-                  </Text>
-                  <Text>What is it like about the Course?</Text>
-
-                  <Formik
-                    initialValues={initialValues}
-                    validationSchema={reviewCourseValidationSchema}
-                    onSubmit={handleSubmit}
+                <Loading />
+              </Flex>
+            ) : (
+              <Stack>
+                {singleLectureData?.contentType === "lecture_video" && (
+                  <AspectRatio
+                    maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
+                    maxH={{ base: "900px", lg: "400px" }}
+                    ratio={{ base: 15 / 8, lg: 15 / 13 }}
                   >
-                    {({
-                      handleChange,
-                      setFieldValue,
-                      handleSubmit,
-                      values,
-                      errors,
-                    }) => (
-                      <Flex
-                        rowGap={"5px"}
-                        flexDirection="column"
-                        maxHeight={{ base: "100%", lg: "530px" }}
-                        overflowY={"auto"}
-                        pb={5}
-                      >
-                        <>
-                          <Flex align="center">
-                            {Array.from({ length: 5 }, (_, index) => (
-                              <IconButton
-                                key={index}
-                                icon={
-                                  values.stars >= index + 1 ? (
-                                    index + 1 === values.stars ? (
-                                      <FaStar color="#FFE234" />
-                                    ) : (
-                                      <FaStar color="#FFE234" />
-                                    )
+                    <iframe
+                      title="Learn frontend development from peter"
+                      src={singleLectureData?.content?.url}
+                      allowFullScreen
+                    />
+                  </AspectRatio>
+                )}
+
+                {singleLectureData?.contentType === "lecture_article" && (
+                  /* article section*/
+                  <Stack
+                    w={{ base: "100%", xl: "923px", "2xl": "1700px" }}
+                    h={{ base: "900px", lg: "400px" }}
+                    overflowY={{ base: "hidden", xl: "scroll" }}
+                    borderBottomWidth={2}
+                    borderColor={"#f1f1f1"}
+                    mb={53}
+                  >
+                    <Stack ml={{ base: "2rem", md: "5rem" }} my={"2rem"}>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: singleLectureData?.content.body,
+                        }}
+                      />
+                    </Stack>
+                  </Stack>
+                )}
+              </Stack>
+            )}
+            <Stack
+              maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
+              px={{ base: "2", xl: 20 }}
+            >
+              {/* review section */}
+
+              <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
+                <Text color={"black"} fontWeight={"bold"} fontSize={"1.1rem"}>
+                  Write a Review
+                </Text>
+                <Text>What is it like about the Course?</Text>
+
+                <Formik
+                  initialValues={initialValues}
+                  validationSchema={reviewCourseValidationSchema}
+                  onSubmit={handleSubmit}
+                >
+                  {({
+                    handleChange,
+                    setFieldValue,
+                    handleSubmit,
+                    values,
+                    errors,
+                  }) => (
+                    <Flex
+                      rowGap={"5px"}
+                      flexDirection="column"
+                      maxHeight={{ base: "100%", lg: "530px" }}
+                      overflowY={"auto"}
+                      pb={5}
+                    >
+                      <>
+                        <Flex align="center">
+                          {Array.from({ length: 5 }, (_, index) => (
+                            <IconButton
+                              key={index}
+                              icon={
+                                values.stars >= index + 1 ? (
+                                  index + 1 === values.stars ? (
+                                    <FaStar color="#FFE234" />
                                   ) : (
-                                    <FaStar color="gray" />
+                                    <FaStar color="#FFE234" />
                                   )
-                                }
-                                onClick={() =>
-                                  setFieldValue("stars", index + 1)
-                                }
-                                variant="unstyled"
-                                aria-label={`${index + 1} stars`}
-                              />
-                            ))}
-                          </Flex>
-                          <FormControl isRequired>
-                            <FormLabel>Review Title</FormLabel>
-                            <Input
-                              type="text"
-                              variant="filled"
-                              placeholder="write your review"
-                              value={values.title}
-                              name="title"
-                              onChange={handleChange}
+                                ) : (
+                                  <FaStar color="gray" />
+                                )
+                              }
+                              onClick={() => setFieldValue("stars", index + 1)}
+                              variant="unstyled"
+                              aria-label={`${index + 1} stars`}
                             />
-                            {errors.title && (
-                              <Text
-                                style={{ color: "red", marginTop: 5 }}
-                                fontSize="14px"
-                              >
-                                <>{errors.title}</>
-                              </Text>
-                            )}
-                          </FormControl>
-                          <FormControl isRequired mt={5}>
-                            <FormLabel>Review Content</FormLabel>
-                            <Textarea
-                              variant="filled"
-                              placeholder="Message"
-                              value={values.content}
-                              name="content"
-                              onChange={handleChange}
-                            />
-                            {errors.content && (
-                              <Text
-                                style={{ color: "red", marginTop: 5 }}
-                                fontSize="14px"
-                              >
-                                <>{errors.content}</>
-                              </Text>
-                            )}
-                          </FormControl>
-                          <Button
-                            bg={"#00FF84"}
-                            isLoading={createEnrolledCourseReviewLoading}
-                            loadingText="Loading"
-                            variant="outline"
-                            spinnerPlacement="end"
-                            width="100%"
-                            onClick={() => handleSubmit()}
-                            mt={3}
-                            borderWidth={2}
-                            py={3}
-                            borderColor={"#00FF84"}
-                            _hover={{ background: "none", color: "#00FF84" }}
-                          >
-                            Submit Review
-                          </Button>
-                        </>
-                      </Flex>
-                    )}
-                  </Formik>
-                </Stack>
+                          ))}
+                        </Flex>
+                        <FormControl isRequired>
+                          <FormLabel>Review Title</FormLabel>
+                          <Input
+                            type="text"
+                            variant="filled"
+                            placeholder="write your review"
+                            value={values.title}
+                            name="title"
+                            onChange={handleChange}
+                          />
+                          {errors.title && (
+                            <Text
+                              style={{ color: "red", marginTop: 5 }}
+                              fontSize="14px"
+                            >
+                              <>{errors.title}</>
+                            </Text>
+                          )}
+                        </FormControl>
+                        <FormControl isRequired mt={5}>
+                          <FormLabel>Review Content</FormLabel>
+                          <Textarea
+                            variant="filled"
+                            placeholder="Message"
+                            value={values.content}
+                            name="content"
+                            onChange={handleChange}
+                          />
+                          {errors.content && (
+                            <Text
+                              style={{ color: "red", marginTop: 5 }}
+                              fontSize="14px"
+                            >
+                              <>{errors.content}</>
+                            </Text>
+                          )}
+                        </FormControl>
+                        <Button
+                          bg={"#00FF84"}
+                          isLoading={createEnrolledCourseReviewLoading}
+                          loadingText="Loading"
+                          variant="outline"
+                          spinnerPlacement="end"
+                          width="100%"
+                          onClick={() => handleSubmit()}
+                          mt={3}
+                          borderWidth={2}
+                          py={3}
+                          borderColor={"#00FF84"}
+                          _hover={{ background: "none", color: "#00FF84" }}
+                        >
+                          Submit Review
+                        </Button>
+                      </>
+                    </Flex>
+                  )}
+                </Formik>
               </Stack>
             </Stack>
-          )}
+          </Stack>
 
           <Stack
             width={{ base: "100%", xl: "30%" }}
