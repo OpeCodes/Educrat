@@ -27,10 +27,12 @@ import {
   PopoverArrow,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
-import { IoIosShareAlt } from "react-icons/io";
+import { IoIosArrowDown, IoIosShareAlt } from "react-icons/io";
 
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
+import { FaFolderOpen } from "react-icons/fa6";
+
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar, FaTrophy } from "react-icons/fa";
@@ -66,9 +68,9 @@ const VideoArticleSingleEnrollCoursePage = () => {
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
-    useEffect(() =>{
-        refetch()
-    },[lectureId])
+  useEffect(() => {
+    refetch();
+  }, [lectureId]);
   const handleSubmit = (values: any) => {
     createEnrolledCourseReview({
       courseId: getSingleEnrolledCourse?.courseId?.id,
@@ -136,7 +138,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
   const numberOfMarkedLectures = countMarkedLectures(getSingleEnrolledCourse);
   const completedValue =
     Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
-    Math.round(lectureLength.length);    
+    Math.round(lectureLength.length);
   return (
     <Stack>
       <Flex
@@ -260,8 +262,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
           mt={{ base: "1.5rem", md: "3.1rem" }}
           flexDirection={{ base: "column", xl: "row" }}
         >
-          <Stack
-           mt={6} w={"100%"}>
+          <Stack mt={6} w={"100%"}>
             {/* video section */}
             {singleLectureData?.contentType === "lecture_video" && (
               <AspectRatio
@@ -273,7 +274,6 @@ const VideoArticleSingleEnrollCoursePage = () => {
                   title="Learn frontend development from peter"
                   src={singleLectureData?.content?.url}
                   allowFullScreen
-                
                 />
                 {/* <video controls autoPlay style={{ width: "100%", }} >
               <source src={singleLectureData?.content?.url} type="video/mp4"  />
@@ -291,8 +291,12 @@ const VideoArticleSingleEnrollCoursePage = () => {
                 borderBottomWidth={2}
                 borderColor={"#f1f1f1"}
               >
-                <Stack ml={{base: "2rem", md : "5rem"}} my={"2rem"}>
-                  <div dangerouslySetInnerHTML={{ __html: singleLectureData?.content.body }} />
+                <Stack ml={{ base: "2rem", md: "5rem" }} my={"2rem"}>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: singleLectureData?.content.body,
+                    }}
+                  />
                 </Stack>
               </Stack>
             )}
@@ -509,8 +513,8 @@ const VideoArticleSingleEnrollCoursePage = () => {
                         };
 
                         return (
-                          <AccordionPanel key={index}>
-                            <Flex columnGap={3} align={"start"}>
+                          <AccordionPanel key={index} >
+                            <Flex columnGap={3} align={"start"} width={"100%"}>
                               <Checkbox
                                 mt={1}
                                 iconColor={"black"}
@@ -532,6 +536,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                     `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
                                   )
                                 }
+                                width={"100%"}
                               >
                                 <Text>
                                   {index + 1} {title}
@@ -546,12 +551,30 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                   ) : (
                                     <LuStickyNote size={20} />
                                   )}
+                                  <Flex
+                                    align={"center"}
+                                    justify={"space-between"}
+                                    width={"100%"}
+                                  >
+                                    <Text fontSize={14}>
+                                      {formatEnrolledCourseDuration(
+                                        content?.duration
+                                      )}
+                                    </Text>
+                                    <Button
+                                      leftIcon={<FaFolderOpen />}
 
-                                  <Text fontSize={14}>
-                                    {formatEnrolledCourseDuration(
-                                      content?.duration
-                                    )}
-                                  </Text>
+                                      rightIcon={ <Text mt={1}><IoIosArrowDown  /> </Text>}
+                                      colorScheme="teal"
+                                      variant="outline"
+                                      borderRadius={0}
+                                      borderColor="black"
+                                      color={"black"}
+                                      height={"1.6rem"}
+                                    >
+                                      Resources
+                                    </Button>
+                                  </Flex>
                                 </Flex>
                               </Stack>
                             </Flex>
