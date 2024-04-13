@@ -519,8 +519,8 @@ const VideoArticleSingleEnrollCoursePage = () => {
                         };
 
                         return (
-                          <AccordionPanel key={index}>
-                            <Flex columnGap={3} p={1} align={"start"} width={"100%"}  backgroundColor={activeLectureID === LectureID ? 'gray.300' : ''} _hover={{backgroundColor: "gray.300"}}>
+                          <AccordionPanel key={index} backgroundColor={activeLectureID === LectureID ? 'gray.300' : ''} _hover={{backgroundColor: "gray.300"}}>
+                            <Flex cursor={"pointer"} columnGap={3} align={"start"} width={"100%"}  >
                               <Checkbox
                                 mt={1}
                                 iconColor={"black"}
