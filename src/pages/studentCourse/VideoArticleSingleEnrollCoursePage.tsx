@@ -67,7 +67,6 @@ const VideoArticleSingleEnrollCoursePage = () => {
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
   const { singleLectureData, refetch } = useGetSingleLectureCourse(lectureId);
-  console.log(singleLectureData?.content?.url);
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
@@ -142,9 +141,6 @@ const VideoArticleSingleEnrollCoursePage = () => {
   const completedValue =
     Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
     Math.round(lectureLength.length);
-
-  console.log(getSingleEnrolledCourse?.courseId?.modules, "111111111");
-
   return (
     <Stack>
       <Flex
