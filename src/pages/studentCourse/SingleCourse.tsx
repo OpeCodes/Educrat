@@ -94,13 +94,35 @@ const SingleCourse = () => {
   const totalDuration = getTotalLecturesDuration();
 
   const { courseEnroll } = useCourseEnrollment();
-  const { getSingleEnrolledCourse,   } = useGetSingleEnrolledCourse(
+  const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
-const {getAlInstructorPublishedCourse} =  useGetAlInstructorPublishedCourse(getStudentSingleCourse?.userId?.id);
+  const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
+    getStudentSingleCourse?.userId?.id
+  );
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getStudentSingleCourse?.userId?.id
   );
+
+
+
+  //get firstId for navigation
+  const extractFirstLectureIds = (course: any) => {
+    const firstLectureIds: string[] = [];
+
+    course?.modules.forEach((module: any) => {
+      const { lectures } = module;
+
+      if (lectures && lectures.length > 0) {
+        const firstLectureId = lectures[0].id;
+        firstLectureIds.push(firstLectureId);
+      }
+    });
+
+    return firstLectureIds;
+  };
+
+  const firstLectureIds = extractFirstLectureIds(getStudentSingleCourse);
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-in");
@@ -131,7 +153,9 @@ const {getAlInstructorPublishedCourse} =  useGetAlInstructorPublishedCourse(getS
       dispatch(setCourseAuthNavigate(-1));
       return;
     } else {
-      navigate(`/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.id}`);
+      navigate(
+        `/course/${slug}/learn/lecture/${getSingleEnrolledCourse?.id}/${firstLectureIds[0]}/reviews`
+      );
     }
   };
   let ratingFormat = parseFloat(
@@ -435,7 +459,9 @@ const {getAlInstructorPublishedCourse} =  useGetAlInstructorPublishedCourse(getS
                               <Text>
                                 <LuClock3 />
                               </Text>
-                              <Text>{getAlInstructorPublishedCourse?.length} Course</Text>
+                              <Text>
+                                {getAlInstructorPublishedCourse?.length} Course
+                              </Text>
                             </Flex>
                           </Flex>
                         </Stack>
@@ -515,7 +541,7 @@ const {getAlInstructorPublishedCourse} =  useGetAlInstructorPublishedCourse(getS
                       <PromotionalVideoPlayModal
                         imageUrl={getStudentSingleCourse?.thumbnail}
                         videoUrl={getStudentSingleCourse?.promotionalVideo}
-                        title= {getStudentSingleCourse?.title}
+                        title={getStudentSingleCourse?.title}
                       />
                     </Box>
                     <Stack
@@ -527,7 +553,6 @@ const {getAlInstructorPublishedCourse} =  useGetAlInstructorPublishedCourse(getS
                       }}
                     >
                       <Stack mx={{ base: 0, lg: 4 }}>
-                      
                         {!getSingleEnrolledCourse || !user ? (
                           <Stack>
                             <Text mt={3} fontSize={"1.5rem"}>
