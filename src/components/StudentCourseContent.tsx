@@ -191,7 +191,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                         )}
                         <PreviewContentModal
                           contentType={contentType}
-                          Content={content?.url}
+                          Content={content}
                           isOpen={modalStates[id]}
                           title= {title}
                           onToggleModal={() => toggleModal(id)}

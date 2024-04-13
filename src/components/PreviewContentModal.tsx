@@ -36,7 +36,7 @@ const PreviewContentModal: React.FC<ModalProps> = ({
         >
           <Box
             p="4"
-            bg="black"
+            bg={`${contentType === "lecture_video" ? "black" : "white"}`}
             borderRadius="md"
             boxShadow="lg"
             maxW="450px"
@@ -46,7 +46,7 @@ const PreviewContentModal: React.FC<ModalProps> = ({
             h="90vh"
           >
             {/* Modal title */}
-            <Stack color="white" fontWeight={"bold"} mb={2}>
+            <Stack color={`${contentType === "lecture_video" ? "white" : "black"}`} fontWeight={"bold"} mb={2}>
               <Text fontSize={14}>Course Review</Text>
               <Text fontSize={18}> {title}</Text>
             </Stack>
@@ -54,11 +54,13 @@ const PreviewContentModal: React.FC<ModalProps> = ({
             {contentType === "lecture_video" ? (
               <Stack w="100%">
                 <AspectRatio maxW="600px" w="100%" ratio={1}>
-                  <iframe title={title} src={Content} allowFullScreen />
+                  <iframe title={title} src={Content?.url} allowFullScreen />
                 </AspectRatio>
               </Stack>
             ) : (
-              <Text color={"white"}>article area</Text>
+              <Stack mx={3} maxH={"470px"} mb={3} overflowY={"scroll"}>
+                  <div dangerouslySetInnerHTML={{ __html: Content?.body }} />
+              </Stack>
             )}
 
             <Text
@@ -68,7 +70,7 @@ const PreviewContentModal: React.FC<ModalProps> = ({
               size="sm"
               onClick={closeModal}
               as={"button"}
-              color={"white"}
+              color={`${contentType === "lecture_video" ? "white" : "black"}`} 
             >
               <IoClose size={25} />
             </Text>
