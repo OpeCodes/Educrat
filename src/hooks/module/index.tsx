@@ -18,7 +18,7 @@ export const useModuleCreateCourse = () => {
     mutationFn: ({ courseId, user }: any) => {
       return customFetch.post(`/module/course/${courseId}`, user);
     },
-    
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["module"] });
       setSucess(false);
@@ -30,7 +30,7 @@ export const useModuleCreateCourse = () => {
         isClosable: true,
       });
     },
-    
+
     onError: (error: any) => {
       if (error.response) {
         toast({
@@ -497,19 +497,59 @@ export const useCreateModuleLectureCourse = () => {
 };
 
 export const useGetModuleLectureCourse = (id: any) => {
+  const toast = useToast();
+  const [errorToastShown, setErrorToastShown] = useState(false);
   const {
     data: moduleLectureData,
     isPending,
     isSuccess,
+    isError
   } = useQuery({
     queryKey: ["LectureModule", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
+      const [, id] = queryKey;
       const { data } = await customFetch.get(`lecture/module/${id}`);
       return data;
     },
   });
-
+  useEffect(() => {
+    if (isError && !errorToastShown) {
+      setErrorToastShown(true);
+      toast({
+        title: "Error fetching data",
+        status: "error",
+        position: "bottom-right",
+        duration: null,
+        isClosable: false,
+        render: ({ onClose }) => (
+          <Stack bg={"#FCBCA0"} py={3} px={4}>
+            <Flex align={"center"} columnGap={2}>
+              <Text>
+                <TbInfoHexagonFilled size={30} />
+              </Text>
+              <Text fontWeight={"bold"}>Network Error</Text>
+            </Flex>
+            <Flex columnGap={3} mt={4}>
+              <Text
+                as={"button"}
+                fontWeight={"bold"}
+                onClick={() => window.location.reload()}
+                color={"white"}
+                py={1}
+                px={4}
+                backgroundColor={"black"}
+              >
+                Reload page
+              </Text>
+              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
+                Dismiss
+              </Text>
+            </Flex>
+          </Stack>
+        ),
+      });
+    }
+  }, [isError, errorToastShown, toast]);
   return {
     moduleLectureData,
     isPending,
@@ -565,16 +605,15 @@ export const useEditModuleLectureCourse = () => {
   return { moduleEditLectureCourse, moduleEditLectureLoading };
 };
 
-
 export const useGetSingleLectureCourse = (id: any) => {
   const {
     data: singleLectureData,
     refetch,
-    isPending
+    isPending,
   } = useQuery({
     queryKey: ["singleLectureModule", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; 
+      const [, id] = queryKey;
       const { data } = await customFetch.get(`lecture/${id}`);
       return data;
     },
@@ -583,7 +622,7 @@ export const useGetSingleLectureCourse = (id: any) => {
   return {
     singleLectureData,
     refetch,
-    isPending
+    isPending,
   };
 };
 
@@ -648,7 +687,6 @@ export const useGetLectureModuleCourse = (id: any) => {
       const { data } = await customFetch.get(`lecture/module/${id}`);
       return data;
     },
-   
   });
 
   return {
@@ -936,10 +974,9 @@ export const useDeleteExternalResource = () => {
   return { deleteExternalResource, deleteExternalResourceLoading };
 };
 
-
 // ***********************************content previewable endpoint************
 
-export const useShowPreviewable= () => {
+export const useShowPreviewable = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const { mutate: showPreviewable } = useMutation({
@@ -947,11 +984,11 @@ export const useShowPreviewable= () => {
       return customFetch.patch(
         `/lecture/content/lecture/${lectureId}/preview
       `,
-      {contentPreviewable}
+        { contentPreviewable }
       );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["module"] });      
+      queryClient.invalidateQueries({ queryKey: ["module"] });
     },
     onError: (error: any) => {
       if (error.response) {
@@ -978,5 +1015,5 @@ export const useShowPreviewable= () => {
       }
     },
   });
-  return { showPreviewable  };
+  return { showPreviewable };
 };
