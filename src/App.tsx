@@ -71,7 +71,6 @@ const router = createBrowserRouter([
   },
   {
     path: "/course/:slug/learn/lecture/:id/:lectureId/reviews",
-
     element: <SingleEnrolledCourse />,
   },
   

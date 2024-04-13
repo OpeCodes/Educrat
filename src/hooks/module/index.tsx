@@ -489,7 +489,8 @@ export const useEditModuleLectureCourse = () => {
 export const useGetSingleLectureCourse = (id: any) => {
   const {
     data: singleLectureData,
-    refetch
+    refetch,
+    isPending
   } = useQuery({
     queryKey: ["singleLectureModule", id],
     queryFn: async ({ queryKey }) => {
@@ -501,7 +502,8 @@ export const useGetSingleLectureCourse = (id: any) => {
 
   return {
     singleLectureData,
-    refetch
+    refetch,
+    isPending
   };
 };
 
