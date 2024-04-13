@@ -595,6 +595,9 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                               _active={{
                                                 backgrondColor: "none",
                                               }}
+                                              onClick={(e) =>
+                                                e.stopPropagation()
+                                              }
                                             >
                                               Resources
                                             </Button>
@@ -611,7 +614,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                                     source,
                                                     title,
                                                     url,
-                                                    type
+                                                    type,
                                                   } = resource;
                                                   return (
                                                     <Flex
@@ -620,7 +623,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                                       align={"center"}
                                                       color={"black"}
                                                       pb={3}
-                                                      _hover={{color: "blue"}}
+                                                      _hover={{ color: "blue" }}
                                                     >
                                                       {source ===
                                                       "downloadable" ? (
@@ -630,14 +633,28 @@ const VideoArticleSingleEnrollCoursePage = () => {
                                                           />{" "}
                                                         </Text>
                                                       ) : (
-                                                        <Text color={"black"  } _hover={{color: "blue"}}>
+                                                        <Text
+                                                          color={"black"}
+                                                          _hover={{
+                                                            color: "blue",
+                                                          }}
+                                                        >
                                                           <VscLinkExternal />
                                                         </Text>
                                                       )}
-                                                      {
-                                                      !type ? <a href={url} target="_blank">{title}</a> :  <VideoDownloadButton fileUrl={url} fileName={title}/>
-                                                      }
-                                                      
+                                                      {!type ? (
+                                                        <a
+                                                          href={url}
+                                                          target="_blank"
+                                                        >
+                                                          {title}
+                                                        </a>
+                                                      ) : (
+                                                        <VideoDownloadButton
+                                                          fileUrl={url}
+                                                          fileName={title}
+                                                        />
+                                                      )}
                                                     </Flex>
                                                   );
                                                 }
