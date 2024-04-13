@@ -246,6 +246,8 @@ export const useGetCourse = () => {
         ),
       });
     }
+    // NetworkToast(toast,errorToastShown,setErrorToastShown,isError)
+    // NetworkToast(toast,errorToastShown,setErrorToastShown,isError)
   }, [isError, errorToastShown, toast]);
   return { data, isPending,  };
 };
