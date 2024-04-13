@@ -23,14 +23,16 @@ import {
   PopoverTrigger,
   PopoverContent,
   PopoverHeader,
-  PopoverBody,
   PopoverArrow,
+  PopoverBody,
 } from "@chakra-ui/react";
 import logo from "../../assets/logo-3.svg";
-import { IoIosShareAlt } from "react-icons/io";
+import { IoIosArrowDown, IoIosShareAlt } from "react-icons/io";
 
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
+import { FaFolderOpen } from "react-icons/fa6";
+
 import { Formik } from "formik";
 import { reviewCourseValidationSchema } from "../../schemas";
 import { FaStar, FaTrophy } from "react-icons/fa";
@@ -49,6 +51,10 @@ import {
   formatEnrolledCourseDuration,
 } from "../../components/TimeFormat";
 import { LuStickyNote } from "react-icons/lu";
+import { useGetSingleLectureCourse } from "../../hooks/module";
+import { HiFolderDownload } from "react-icons/hi";
+import { VscLinkExternal } from "react-icons/vsc";
+import VideoDownloadButton from "../../components/VideoDownloadButton";
 
 const initialValues = {
   stars: 0,
@@ -57,12 +63,16 @@ const initialValues = {
 };
 
 const SingleEnrolledCourse = () => {
-  const { id } = useParams();
+  const { id, lectureId } = useParams();
   const navigate = useNavigate();
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
+  const { singleLectureData, refetch } = useGetSingleLectureCourse(lectureId);
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
     useCreateEnrolledCourseReview();
 
+  useEffect(() => {
+    refetch();
+  }, [lectureId]);
   const handleSubmit = (values: any) => {
     createEnrolledCourseReview({
       courseId: getSingleEnrolledCourse?.courseId?.id,
@@ -108,6 +118,7 @@ const SingleEnrolledCourse = () => {
     });
     setCheckedItems(initialCheckedItems);
   }, [getSingleEnrolledCourse]);
+
   //count lectures
   const countMarkedLectures = (item: any) => {
     const completedLecturesCounts: number[] = [];
@@ -130,7 +141,6 @@ const SingleEnrolledCourse = () => {
   const completedValue =
     Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
     Math.round(lectureLength.length);
-
   return (
     <Stack>
       <Flex
@@ -256,31 +266,44 @@ const SingleEnrolledCourse = () => {
         >
           <Stack mt={6} w={"100%"}>
             {/* video section */}
-            <AspectRatio
-              maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
-              maxH={{ base: "900px", lg: "400px" }}
-              ratio={{ base: 15 / 8, lg: 15 / 13 }}
-            >
-              <iframe
-                title="Learn frontend development from peter"
-                src={
-                  "https://res.cloudinary.com/dtori4rq2/video/upload/v1712143746/educrat/r0kttd4uzsjtdp2kq938.mp4"
-                }
-                allowFullScreen
-              />
-            </AspectRatio>
-            {/* article section
-            {/* <Stack
-              w={{ base: "100%", xl: "923px", "2xl": "1700px" }}
-              h={{ base: "900px", lg: "400px" }}
-              overflowY={{ base: "hidden", xl: "scroll" }}
-              borderBottomWidth={2}
-              borderColor={"#f1f1f1"}
-            >
-              <Stack>
-                <div dangerouslySetInnerHTML={{ __html: peter }} />
+            {singleLectureData?.contentType === "lecture_video" && (
+              <AspectRatio
+                maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
+                maxH={{ base: "900px", lg: "400px" }}
+                ratio={{ base: 15 / 8, lg: 15 / 13 }}
+              >
+                <iframe
+                  title="Learn frontend development from peter"
+                  src={singleLectureData?.content?.url}
+                  allowFullScreen
+                />
+                {/* <video controls autoPlay style={{ width: "100%", }} >
+              <source src={singleLectureData?.content?.url} type="video/mp4"  />
+              Your browser does not support the video tag.
+            </video> */}
+              </AspectRatio>
+            )}
+
+            {singleLectureData?.contentType === "lecture_article" && (
+              /* article section*/
+              <Stack
+                w={{ base: "100%", xl: "923px", "2xl": "1700px" }}
+                h={{ base: "900px", lg: "400px" }}
+                overflowY={{ base: "hidden", xl: "scroll" }}
+                borderBottomWidth={2}
+                borderColor={"#f1f1f1"}
+                mb={53}
+              >
+                <Stack ml={{ base: "2rem", md: "5rem" }} my={"2rem"}>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: singleLectureData?.content.body,
+                    }}
+                  />
+                </Stack>
               </Stack>
-            </Stack> */}
+            )}
+
             <Stack
               maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
               px={{ base: "2", xl: 20 }}
@@ -460,6 +483,7 @@ const SingleEnrolledCourse = () => {
                           title,
                           content,
                           contentType,
+                          resources,
                           id: LectureID,
                         } = lecture;
 
@@ -494,7 +518,7 @@ const SingleEnrolledCourse = () => {
 
                         return (
                           <AccordionPanel key={index}>
-                            <Flex columnGap={3} align={"start"}>
+                            <Flex columnGap={3} align={"start"} width={"100%"}>
                               <Checkbox
                                 mt={1}
                                 iconColor={"black"}
@@ -516,6 +540,7 @@ const SingleEnrolledCourse = () => {
                                     `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
                                   )
                                 }
+                                width={"100%"}
                               >
                                 <Text>
                                   {index + 1} {title}
@@ -530,12 +555,107 @@ const SingleEnrolledCourse = () => {
                                   ) : (
                                     <LuStickyNote size={20} />
                                   )}
-
-                                  <Text fontSize={14}>
-                                    {formatEnrolledCourseDuration(
-                                      content?.duration
+                                  <Flex
+                                    align={"center"}
+                                    justify={"space-between"}
+                                    width={"100%"}
+                                  >
+                                    <Text fontSize={14}>
+                                      {formatEnrolledCourseDuration(
+                                        content?.duration
+                                      )}
+                                    </Text>
+                                    {resources?.length === 0 ? (
+                                      ""
+                                    ) : (
+                                      <>
+                                        <Popover placement="bottom-end">
+                                          <PopoverTrigger>
+                                            <Flex
+                                              align={"center"}
+                                              color={"black"}
+                                              columnGap={1}
+                                              px={2}
+                                              borderWidth={1}
+                                              borderColor={"black"}
+                                              as={"button"}
+                                              onClick={(e) =>
+                                                e.stopPropagation()
+                                              }
+                                            >
+                                              <Text>
+                                                <FaFolderOpen />
+                                              </Text>
+                                              <Text> Resources</Text>
+                                              <Text>
+                                                {" "}
+                                                <IoIosArrowDown />
+                                              </Text>
+                                            </Flex>
+                                          </PopoverTrigger>
+                                          <PopoverContent
+                                            bg="white"
+                                            borderRadius={0}
+                                          >
+                                            <PopoverBody>
+                                              {resources.map(
+                                                (resource: any) => {
+                                                  const {
+                                                    id,
+                                                    source,
+                                                    title,
+                                                    url,
+                                                    type,
+                                                  } = resource;
+                                                  return (
+                                                    <Flex
+                                                      key={id}
+                                                      columnGap={2}
+                                                      align={"center"}
+                                                      color={"black"}
+                                                      pb={3}
+                                                    >
+                                                      {source ===
+                                                      "downloadable" ? (
+                                                        <Text>
+                                                          <HiFolderDownload
+                                                            size={20}
+                                                          />{" "}
+                                                        </Text>
+                                                      ) : (
+                                                        <Text
+                                                          color={"black"}
+                                                          _hover={{
+                                                            color: "blue",
+                                                          }}
+                                                        >
+                                                          <VscLinkExternal />
+                                                        </Text>
+                                                      )}
+                                                      {!type ? (
+                                                        <Text
+                                                          as={"a"}
+                                                          href={url}
+                                                          target="_blank"
+                                                        >
+                                                          {title}
+                                                        </Text>
+                                                      ) : (
+                                                        <VideoDownloadButton
+                                                          fileUrl={url}
+                                                          fileName={title}
+                                                        />
+                                                      )}
+                                                    </Flex>
+                                                  );
+                                                }
+                                              )}
+                                            </PopoverBody>
+                                          </PopoverContent>
+                                        </Popover>
+                                      </>
                                     )}
-                                  </Text>
+                                  </Flex>
                                 </Flex>
                               </Stack>
                             </Flex>
@@ -555,3 +675,6 @@ const SingleEnrolledCourse = () => {
 };
 
 export default SingleEnrolledCourse;
+
+
+
