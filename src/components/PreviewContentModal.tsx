@@ -1,4 +1,4 @@
-import {  Box, Flex, Text, Stack, AspectRatio } from "@chakra-ui/react";
+import {  Box, Flex, Text, Stack,  } from "@chakra-ui/react";
 import { IoClose } from "react-icons/io5";
 
 interface ModalProps {
@@ -39,7 +39,7 @@ const PreviewContentModal: React.FC<ModalProps> = ({
             bg={`${contentType === "lecture_video" ? "black" : "white"}`}
             borderRadius="md"
             boxShadow="lg"
-            maxW="450px"
+            maxW="580px"
             position="relative"
             zIndex="10000"
             w="100%"
@@ -52,11 +52,17 @@ const PreviewContentModal: React.FC<ModalProps> = ({
             </Stack>
             {/* Modal body */}
             {contentType === "lecture_video" ? (
-              <Stack w="100%">
-                <AspectRatio maxW="600px" w="100%" ratio={1}>
-                  <iframe title={title} src={Content?.url} allowFullScreen />
-                </AspectRatio>
-              </Stack>
+              // <Stack w="100%" bg={"white"} >
+              //   <AspectRatio maxW="600px" w="100%" ratio={1}>
+              //     <iframe title={title} src={Content?.url} allowFullScreen />
+              //   </AspectRatio>
+              // </Stack>
+              <Stack mt={10}>
+              <video controls autoPlay style={{ width: "100%",}}>
+              <source src={Content?.url} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            </Stack>
             ) : (
               <Stack mx={3} maxH={"470px"} mb={3} overflowY={"scroll"}>
                   <div dangerouslySetInnerHTML={{ __html: Content?.body }} />
