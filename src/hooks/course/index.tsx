@@ -120,7 +120,7 @@ export const useGetSingleCourse = (id: any) => {
   return { getSingleCourse, isPending, isError, refetch };
 };
 
-export const xuseGetCourse = () => {
+export const useGetCourse = () => {
   const toast = useToast();
   const [errorToastShown, setErrorToastShown] = useState(false);
   const { data, isPending, isError } = useQuery({
@@ -131,7 +131,7 @@ export const xuseGetCourse = () => {
     },
   });
   useEffect(() => {
-    if (!isError && errorToastShown) {
+    if (isError && !errorToastShown) {
       setErrorToastShown(true);
       toast({
         title: "Error fetching instructor course review",
@@ -162,7 +162,6 @@ export const xuseGetCourse = () => {
               <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
                 Dismiss
               </Text>
-              {/* <button >Reload Page111</button> */}
             </Flex>
           </Stack>
         ),
