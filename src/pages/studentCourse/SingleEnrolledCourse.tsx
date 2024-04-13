@@ -270,10 +270,11 @@ const SingleEnrolledCourse = () => {
       <Stack>
         <Flex
           justify={"space-between"}
-          mt={{ base: "1.5rem", md: "3.1rem" }}
+          mt={{ base: "1.5rem", md: "2.3rem" }}
           flexDirection={{ base: "column", xl: "row" }}
+          
         >
-          <Stack mt={6} w={"100%"}>
+          <Stack mt={6}  width={{ base: "100%", xl: "65%" }}>
             {/* video section */}
             {singleLectureDataLoading ? (
               <Flex
@@ -303,14 +304,14 @@ const SingleEnrolledCourse = () => {
                 {singleLectureData?.contentType === "lecture_article" && (
                   /* article section*/
                   <Stack
-                    w={{ base: "100%", xl: "923px", "2xl": "1700px" }}
                     h={{ base: "900px", lg: "400px" }}
                     overflowY={{ base: "hidden", xl: "scroll" }}
                     borderBottomWidth={2}
                     borderColor={"#f1f1f1"}
-                    mb={53}
+                    mb={5}
+                    
                   >
-                    <Stack ml={{ base: "2rem", md: "5rem" }} my={"2rem"}>
+                    <Stack ml={{ base: "2rem", md: "3rem" } } mr={{md: "1rem"}} my={"2rem"}>
                       <div
                         dangerouslySetInnerHTML={{
                           __html: singleLectureData?.content.body,
@@ -323,11 +324,13 @@ const SingleEnrolledCourse = () => {
             )}
             <Stack
               maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
-              px={{ base: "2", xl: 20 }}
+              // px={{ base: "2", xl: 20 }}
+              pl={3}
+              pr={{base: 3, md: 0}}
             >
               {/* review section */}
 
-              <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
+              <Stack mb={"1.5rem"} color={"#4f547b"}>
                 <Text color={"black"} fontWeight={"bold"} fontSize={"1.1rem"}>
                   Write a Review
                 </Text>
