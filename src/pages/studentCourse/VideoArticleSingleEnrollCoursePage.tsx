@@ -65,6 +65,8 @@ const initialValues = {
 const VideoArticleSingleEnrollCoursePage = () => {
   const { id, lectureId } = useParams();
   const navigate = useNavigate();
+  const [activeLectureID, setActiveLectureID] = useState<string | null>(null);
+
   const { getSingleEnrolledCourse } = useGetSingleEnrolledStudentCourse(id);
   const { singleLectureData, refetch } = useGetSingleLectureCourse(lectureId);
   const { createEnrolledCourseReview, createEnrolledCourseReviewLoading } =
@@ -276,11 +278,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
                   title="Learn frontend development from peter"
                   src={singleLectureData?.content?.url}
                   allowFullScreen
-                />
-                {/* <video controls autoPlay style={{ width: "100%", }} >
-              <source src={singleLectureData?.content?.url} type="video/mp4"  />
-              Your browser does not support the video tag.
-            </video> */}
+                />                
               </AspectRatio>
             )}
 
