@@ -108,7 +108,6 @@ const SingleEnrolledCourse = () => {
     });
     setCheckedItems(initialCheckedItems);
   }, [getSingleEnrolledCourse]);
-  console.log(getSingleEnrolledCourse, "hererqewerqwe");
   //count lectures
   const countMarkedLectures = (item: any) => {
     const completedLecturesCounts: number[] = [];
