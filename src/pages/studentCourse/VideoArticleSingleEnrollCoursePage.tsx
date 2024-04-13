@@ -137,8 +137,7 @@ const VideoArticleSingleEnrollCoursePage = () => {
   const numberOfMarkedLectures = countMarkedLectures(getSingleEnrolledCourse);
   const completedValue =
     Math.round(getSingleEnrolledCourse?.completedLectures?.length) ===
-    Math.round(lectureLength.length);
-
+    Math.round(lectureLength.length);    
   return (
     <Stack>
       <Flex
