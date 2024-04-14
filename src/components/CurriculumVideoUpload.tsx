@@ -163,8 +163,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
     reader.readAsDataURL(file);
     refetch();
   };
-  console.log(error);
-  console.log(success);
+ 
   //date formatted code
   const currentDate = new Date();
   const day = String(currentDate.getDate()).padStart(2, "0");

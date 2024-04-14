@@ -49,6 +49,7 @@ import { RootState } from "../../store/store";
 import { PromotionalVideoPlayModal } from "../../components";
 import { setCourseAuthNavigate } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 const SingleCourse = () => {
   const { slug } = useParams();
@@ -556,14 +557,34 @@ const SingleCourse = () => {
                             <Text mt={3} fontSize={"1.5rem"}>
                               $120
                             </Text>
-                            <Button
-                              bg={"#6440FB"}
-                              py={"25px"}
-                              variant="solid"
-                              color={"white"}
-                            >
-                              Add to Cart
-                            </Button>
+                            <Flex columnGap={4}>
+                              <Button
+                                bg={"#6440FB"}
+                                py={"25px"}
+                                variant="solid"
+                                color={"white"}
+                                width={"100%"}
+                              >
+                                Add to Cart
+                              </Button>
+                              <Stack
+                                align={"center"}
+                                px={4}
+                                justify={"center"}
+                                borderColor={"black"}
+                                borderWidth={1}
+                                _hover={{ backgroundColor: "#F5F7FE" }}
+                                cursor={"pointer"}
+                              >
+                                <Text>
+                                  <IoMdHeartEmpty size={25} />
+                                </Text>
+                                {/* <Text>
+                                  <IoMdHeart size={25} />
+                                </Text> */}
+                                
+                              </Stack>
+                            </Flex>
 
                             <Button
                               borderColor={"#140342"}
