@@ -178,6 +178,7 @@ const SingleCourse = () => {
     setVisibleReviews((prev) => prev + 3);
   };
 
+  const hi = true;
   return (
     <Stack>
       {isPending && (
@@ -576,13 +577,15 @@ const SingleCourse = () => {
                                 _hover={{ backgroundColor: "#F5F7FE" }}
                                 cursor={"pointer"}
                               >
-                                <Text>
-                                  <IoMdHeartEmpty size={25} />
-                                </Text>
-                                {/* <Text>
-                                  <IoMdHeart size={25} />
-                                </Text> */}
-                                
+                                {hi ? (
+                                  <Text>
+                                    <IoMdHeartEmpty size={25} />
+                                  </Text>
+                                ) : (
+                                  <Text>
+                                    <IoMdHeart size={25} />
+                                  </Text>
+                                )}
                               </Stack>
                             </Flex>
 
