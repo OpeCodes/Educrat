@@ -13,7 +13,7 @@ import {
   Progress,
   Flex,
 } from "@chakra-ui/react";
-import { useGetAllUserEnrolledCourse } from "../../hooks/studentCourse";
+import { useGetAllUserEnrolledCourse,  } from "../../hooks/studentCourse";
 import { Link } from "react-router-dom";
 
 const MyLearning = () => {
@@ -94,7 +94,52 @@ const MyLearning = () => {
                 </Grid>
               </TabPanel>
               <TabPanel>
-                <p>two!</p>
+              <Grid
+                  templateColumns={{
+                    md: "repeat(2, 1fr)",
+                    lg: "repeat(4, 1fr)",
+                  }}
+                  gap={6}
+                  mt={6}
+                >
+                  {enrolledCourse?.map((course: any) => {
+                    const { courseId, id } = course;
+
+                    return (
+                      <GridItem
+                        w="100%"
+                        key={id}
+                        as={Link}
+                        to={`/course/${courseId.slug}`}
+                      >
+                        <Image
+                          maxHeight={"250px"}
+                          height={"100%"}
+                          width={"100%"}
+                          objectFit="cover"
+                          src={courseId.thumbnail}
+                          alt={courseId.title}
+                        />
+                        <Text mt={2} fontWeight={"bold"}>
+                          {courseId.title}
+                        </Text>
+                        <Text fontSize={"15px"} color={"gray"}>
+                          Peter Adedokun
+                        </Text>
+                        <Flex columnGap={1} fontSize={13}>
+                          <Text>4.5</Text>
+                            <Text>stars</Text>
+                            <Text color={"gray"}>(993)</Text>
+                        </Flex>
+                        <Flex columnGap={1} fontSize={13} color={"gray"}>
+                          <Text>4.5 hours</Text>
+                            <Text>444 lectures</Text>
+                        </Flex>
+                        <Text fontWeight={"bold"} color={"black"}>N40000</Text>
+                      </GridItem>
+                    );
+                  })}
+                </Grid>
               </TabPanel>
             </TabPanels>
           </Tabs>
