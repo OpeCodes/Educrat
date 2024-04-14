@@ -3,6 +3,7 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
+import GetToastErrorHandling from "../../components/GetToastErrorHandling";
 
 export const useModuleCreateCourse = () => {
   const toast = useToast();
@@ -243,54 +244,55 @@ export const useGetModuleCourse = (id: any) => {
     }));
   };
   const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
-
+  const [error, setError] = useState<string | null>(null);
   const { data, isPending, isSuccess, refetch, isError } = useQuery({
     queryKey: ["module", id],
     queryFn: async ({ queryKey }) => {
-      const [, id] = queryKey; // Destructure the queryKey to get the 'id'
-      const { data } = await customFetch.get(`module/course/${id}`);
-      return data;
+      const [, id] = queryKey;
+
+      try {
+        const { data } = await customFetch.get(`module/course/${id}`);
+        setError(null);
+        return data;
+      } catch (error: any) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          setError(error.response.data.error);
+        } else {
+          setError("An unexpected error occurred.");
+        }
+        throw error;
+      }
     },
   });
   useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
+    if (isError) {
+      if (error) {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={error} onClose={onClose} />
+          ),
+        });
+      } else {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
+          ),
+        });
+      }
     }
-  }, [isError, errorToastShown, toast]);
+  }, [isError, error, toast]);
   // **************************description and resources toggle************************
   const [isOpendescripRes, setIsOpenDescrpRes] = useState<{
     [key: number]: boolean;
@@ -503,7 +505,7 @@ export const useGetModuleLectureCourse = (id: any) => {
     data: moduleLectureData,
     isPending,
     isSuccess,
-    isError
+    isError,
   } = useQuery({
     queryKey: ["LectureModule", id],
     queryFn: async ({ queryKey }) => {
@@ -607,58 +609,59 @@ export const useEditModuleLectureCourse = () => {
 
 export const useGetSingleLectureCourse = (id: any) => {
   const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const {
     data: singleLectureData,
     refetch,
     isPending,
-    isError
+    isError,
   } = useQuery({
     queryKey: ["singleLectureModule", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
-      const { data } = await customFetch.get(`lecture/${id}`);
-      return data;
+      try {
+        const { data } = await customFetch.get(`lecture/${id}`);
+        setError(null);
+        return data;
+      } catch (error: any) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          setError(error.response.data.error);
+        } else {
+          setError("An unexpected error occurred.");
+        }
+        throw error;
+      }
     },
   });
   useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
+    if (isError) {
+      if (error) {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={error} onClose={onClose} />
+          ),
+        });
+      } else {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
+          ),
+        });
+      }
     }
-  }, [isError, errorToastShown, toast]);
+  }, [isError, error, toast]);
   return {
     singleLectureData,
     refetch,
@@ -722,7 +725,7 @@ export const useGetLectureModuleCourse = (id: any) => {
     data: getLectureModuleCourse,
     isPending,
     isSuccess,
-    isError
+    isError,
   } = useQuery({
     queryKey: ["moduleLectureCourse", id],
     queryFn: async ({ queryKey }) => {

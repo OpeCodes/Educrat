@@ -13,13 +13,15 @@ import {
   Progress,
   Flex,
 } from "@chakra-ui/react";
-import { useGetAllUserEnrolledCourse } from "../../hooks/studentCourse";
+import { useGetAllUserEnrolledCourse, useGetStudentWishList } from "../../hooks/studentCourse";
 import { Link } from "react-router-dom";
 import { Loading } from "../../components";
 
 const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
     useGetAllUserEnrolledCourse();
+   const {getStudentWishList} =  useGetStudentWishList()
+   console.log(getStudentWishList,"getStudentWishList")
   return (
     <Stack mt={"4.6rem"}>
       <Stack>
@@ -110,26 +112,26 @@ const MyLearning = () => {
                   gap={6}
                   mt={6}
                 >
-                  {enrolledCourse?.map((course: any) => {
-                    const { courseId, id } = course;
+                  {getStudentWishList?.map((course: any) => {
+                    const { thumbnail, title , id, slug} = course;
 
                     return (
                       <GridItem
                         w="100%"
                         key={id}
                         as={Link}
-                        to={`/course/${courseId.slug}`}
+                        to={`/course/${slug}`}
                       >
                         <Image
                           maxHeight={"250px"}
                           height={"100%"}
                           width={"100%"}
                           objectFit="cover"
-                          src={courseId.thumbnail}
-                          alt={courseId.title}
+                          src={thumbnail}
+                          alt={title}
                         />
                         <Text mt={2} fontWeight={"bold"}>
-                          {courseId.title}
+                          {title}
                         </Text>
                         <Text fontSize={"15px"} color={"gray"}>
                           Peter Adedokun

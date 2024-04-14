@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import { setMarkWishList } from "../../features/user/UserSlice";
+import { GetToastErrorHandling } from "../../components";
 export const useGetStudentSingleCourse = (slug: any) => {
   const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const {
     data: getStudentSingleCourse,
     isPending,
@@ -17,48 +18,49 @@ export const useGetStudentSingleCourse = (slug: any) => {
     queryKey: ["singleCourse", slug],
     queryFn: async ({ queryKey }) => {
       const [, slug] = queryKey;
-      const { data } = await customFetch.get(`/course/slug/${slug}`);
-      return data;
+      try {
+        const { data } = await customFetch.get(`/course/slug/${slug}`);
+        setError(null);
+        return data;
+      } catch (error: any) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          setError(error.response.data.error);
+        } else {
+          setError("An unexpected error occurred.");
+        }
+        throw error;
+      }
     },
   });
   useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
+    if (isError) {
+      if (error) {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={error} onClose={onClose} />
+          ),
+        });
+      } else {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
+          ),
+        });
+      }
     }
-  }, [isError, errorToastShown, toast]);
+  }, [isError, error, toast]);
   return { getStudentSingleCourse, isPending, isError, refetch };
 };
 
@@ -722,16 +724,20 @@ export const useGetCourseReviewRating = (id: any) => {
   };
 };
 
-
 // ************************************wishlist*****************************
 
 export const useGetStudentWishList = () => {
   const toast = useToast();
   const [errorToastShown, setErrorToastShown] = useState(false);
-  const { data: getStudentWishList, isError, isPending, refetch } = useQuery({
+  const {
+    data: getStudentWishList,
+    isError,
+    isPending,
+    refetch,
+  } = useQuery({
     queryKey: ["getStudentWishList"],
     queryFn: async () => {
-      const { data } = await customFetch.get("/wishlist");
+      const { data } = await customFetch.get("/wishlist/wishlist");
       return data;
     },
   });
@@ -779,18 +785,18 @@ export const useGetStudentWishList = () => {
 export const useCreateCourseWishList = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
- const dispatch= useDispatch();
-  
+  const dispatch = useDispatch();
+
   const {
     mutate: createCourseWishList,
     isPending: createCourseWishListLoading,
   } = useMutation({
-    mutationFn: ({ courseId}: any) => {
-      return customFetch.post(`/wishlist/course/${courseId}`,);
+    mutationFn: ({ courseId }: any) => {
+      return customFetch.post(`/wishlist/course/${courseId}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });    
-      dispatch(setMarkWishList())      
+      queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
+      dispatch(setMarkWishList());
     },
     onError: (error: any) => {
       if (error.response) {
@@ -823,15 +829,18 @@ export const useCreateCourseWishList = () => {
 export const useDeleteCourseWishList = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { mutate: deleteCourseWishList, isPending: deleteCourseWishListLoading } = useMutation({
+  const {
+    mutate: deleteCourseWishList,
+    isPending: deleteCourseWishListLoading,
+  } = useMutation({
     mutationFn: ({ courseId }: any) => {
       return customFetch.delete(`/wishlist/course/${courseId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
-      dispatch(setMarkWishList())
+      dispatch(setMarkWishList());
     },
     onError: (error: any) => {
       if (error.response) {

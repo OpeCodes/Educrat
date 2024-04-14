@@ -22,6 +22,8 @@ import ToastLoading from "./ToastLoading";
 import CoursePromotionalVideoUpload from "./CoursePromotionalVideoUpload";
 import PromotionalVideoPlayModal from "./PromotionalVideoPlayModal";
 import PreviewContentModal from "./PreviewContentModal";
+  
+  import GetToastErrorHandling from "./GetToastErrorHandling";
 export {
   HomeLayout,
   Navbar,
@@ -46,5 +48,6 @@ export {
   MedArticle,
   CoursePromotionalVideoUpload,
   PromotionalVideoPlayModal,
-  PreviewContentModal
+  PreviewContentModal,
+  GetToastErrorHandling
 };

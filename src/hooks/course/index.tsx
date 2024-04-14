@@ -4,55 +4,58 @@ import { Stack, useToast, Text, Flex } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
+import { GetToastErrorHandling } from "../../components";
 
 export const useCourseCategory = () => {
   const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const { data, isPending, isError } = useQuery({
     queryKey: ["courseCategory"],
     queryFn: async () => {
-      const { data } = await customFetch.get("/course/category");
-      return data;
+      try {
+        const { data } = await customFetch.get("/course/category");
+        setError(null);
+        return data;
+      } catch (error: any) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          setError(error.response.data.error);
+        } else {
+          setError("An unexpected error occurred.");
+        }
+        throw error;
+      }
     },
   });
   useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
+    if (isError) {
+      if (error) {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={error} onClose={onClose} />
+          ),
+        });
+      } else {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
+          ),
+        });
+      }
     }
-  }, [isError, errorToastShown, toast]);
+  }, [isError, error, toast]);
   return { data, isPending };
 };
 
@@ -143,8 +146,8 @@ export const useSingleCourse = () => {
 };
 
 export const useGetSingleCourse = (id: any) => {
- const toast = useToast();
- const [errorToastShown, setErrorToastShown] = useState(false);
+  const toast = useToast();
+  const [errorToastShown, setErrorToastShown] = useState(false);
   const {
     data: getSingleCourse,
     isPending,
@@ -201,55 +204,54 @@ export const useGetSingleCourse = (id: any) => {
 
 export const useGetCourse = () => {
   const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { data, isPending, isError } = useQuery({
     queryKey: ["course"],
     queryFn: async () => {
-      const { data } = await customFetch.get("/course");
-      return data;
+      try {
+        const { data } = await customFetch.get("/course");
+        setError(null);
+        return data;
+      } catch (error: any) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          setError(error.response.data.error);
+        } else {
+          setError("An unexpected error occurred.");
+        }
+        throw error;
+      }
     },
   });
   useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
+    if (isError) {
+      if (error) {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={error} onClose={onClose} />
+          ),
+        });
+      } else {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
+          ),
+        });
+      }
     }
-    // NetworkToast(toast,errorToastShown,setErrorToastShown,isError)
-    // NetworkToast(toast,errorToastShown,setErrorToastShown,isError)
-  }, [isError, errorToastShown, toast]);
-  return { data, isPending,  };
+  }, [isError, error, toast]);
+  return { data, isPending };
 };
 
 export const useGetAllUserCourse = () => {
