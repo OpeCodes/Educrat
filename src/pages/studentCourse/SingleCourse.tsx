@@ -29,6 +29,8 @@ import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import {
   useCourseEnrollment,
+  useCreateCourseWishList,
+  useDeleteCourseWishList,
   useGetAlInstructorPublishedCourse,
   useGetCourseReview,
   useGetCourseReviewRating,
@@ -103,6 +105,7 @@ const SingleCourse = () => {
   const totalDuration = getTotalLecturesDuration();
 
   const { courseEnroll } = useCourseEnrollment();
+  const [markWishList, setMarkWishList] = useState(false)
   const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
@@ -112,7 +115,8 @@ const SingleCourse = () => {
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getStudentSingleCourse?.userId?.id
   );
-
+  const {createCourseWishList, createCourseWishListLoading} = useCreateCourseWishList()
+ const {deleteModule,deleteModuleLoading} =  useDeleteCourseWishList();
   //get firstId for navigation
   const extractFirstLectureIds = (course: any) => {
     const firstLectureIds: string[] = [];
@@ -165,6 +169,25 @@ const SingleCourse = () => {
       );
     }
   };
+  const handleWishCourse = () => {
+    if (!user) {
+      navigate("/sign-in");
+      toast({
+        title: `Sign in to add a wishlist`,
+        status: "info",
+        duration: 3000,
+        isClosable: true,
+      });
+      dispatch(setCourseAuthNavigate(-1));
+      return;
+    } else {
+      createCourseWishList({
+        courseId: getStudentSingleCourse?.id,
+      });
+      setMarkWishList(true)
+    }
+  };
+
   let ratingFormat = parseFloat(
     courseReviewRating?.average === "NaN" ? "0" : courseReviewRating?.average
   );
@@ -575,6 +598,7 @@ const SingleCourse = () => {
                                 variant="solid"
                                 color={"white"}
                                 width={"100%"}
+
                               >
                                 Add to Cart
                               </Button>
@@ -587,8 +611,8 @@ const SingleCourse = () => {
                                 _hover={{ backgroundColor: "#F5F7FE" }}
                                 cursor={"pointer"}
                               >
-                                {hi ? (
-                                  <Text>
+                                {!markWishList ? (
+                                  <Text onClick={handleWishCourse}>
                                     <IoMdHeartEmpty size={25} />
                                   </Text>
                                 ) : (

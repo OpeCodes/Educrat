@@ -864,5 +864,5 @@ export const useDeleteCourseWishList = () => {
       }
     },
   });
-  return { deleteModule, deleteModuleLoading };
+  return { deleteCourseWishList, deleteCourseWishListLoading };
 };
