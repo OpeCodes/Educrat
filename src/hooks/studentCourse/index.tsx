@@ -821,3 +821,48 @@ export const useCreateCourseWishList = () => {
   });
   return { createCourseWishList, createCourseWishListLoading };
 };
+
+export const useDeleteCourseWishList = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteCourseWishList, isPending: deleteCourseWishListLoading } = useMutation({
+    mutationFn: ({ courseId }: any) => {
+      return customFetch.delete(`/wishlist/course/${courseId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
+      toast({
+        title: `course deleted successfully`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
+  return { deleteModule, deleteModuleLoading };
+};
