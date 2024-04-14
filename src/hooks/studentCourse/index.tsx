@@ -790,13 +790,7 @@ export const useCreateCourseWishList = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });    
-      dispatch(setMarkWishList())
-      toast({
-        title: `review submitted`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
+      dispatch(setMarkWishList())      
     },
     onError: (error: any) => {
       if (error.response) {
@@ -838,13 +832,6 @@ export const useDeleteCourseWishList = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
       dispatch(setMarkWishList())
-
-      toast({
-        title: `course deleted successfully`,
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
     },
     onError: (error: any) => {
       if (error.response) {
