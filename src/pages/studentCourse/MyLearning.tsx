@@ -13,10 +13,12 @@ import {
   Progress,
   Flex,
 } from "@chakra-ui/react";
-
-const dummy = [1, 2, 3, 4, 4, , 4, 44, 4];
+import { useGetAllUserEnrolledCourse } from "../../hooks/studentCourse";
+import { Link } from "react-router-dom";
 
 const MyLearning = () => {
+  const { data: enrolledCourse } = useGetAllUserEnrolledCourse();
+  console.log(enrolledCourse, "Enrollcourse");
   return (
     <Stack mt={"4.6rem"}>
       <Stack>
@@ -55,20 +57,26 @@ const MyLearning = () => {
                   gap={6}
                   mt={6}
                 >
-                  {dummy.map((dum) => {
-                    
+                  {enrolledCourse?.map((course: any) => {
+                    const { courseId, id } = course;
+
                     return (
-                      <GridItem w="100%" key={dum}>
+                      <GridItem
+                        w="100%"
+                        key={id}
+                        as={Link}
+                        to={`/course/${courseId.slug}/learn/lecture/${id}/660d3c593a19ced801d39aab/reviews`}
+                      >
                         <Image
                           maxHeight={"250px"}
                           height={"100%"}
                           width={"100%"}
-                          objectFit="fill"
-                          src="https://bit.ly/dan-abramov"
-                          alt="Dan Abramov"
+                          objectFit="cover"
+                          src={courseId.thumbnail}
+                          alt={courseId.title}
                         />
                         <Text mt={2} fontWeight={"bold"}>
-                          NodeJS Tutorial and Projects Course
+                          {courseId.title}
                         </Text>
                         <Text fontSize={"15px"} color={"gray"}>
                           Peter Adedokun
