@@ -116,7 +116,7 @@ export const useGetAllUserEnrolledCourse = () => {
 };
 //
 export const useGetAlInstructorPublishedCourse = (id: any) => {
-  const { data: getAlInstructorPublishedCourse,  } = useQuery({
+  const { data: getAlInstructorPublishedCourse } = useQuery({
     queryKey: ["getAllInstructorPublishCourse", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
@@ -239,7 +239,7 @@ export const useGetSingleEnrolledStudentCourse = (id: any) => {
 
 export const useGetSingleEnrolledCourse = (id: any) => {
   const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const {
     data: getSingleEnrolledCourse,
     isPending,
@@ -248,48 +248,49 @@ export const useGetSingleEnrolledCourse = (id: any) => {
     queryKey: ["getCourseEnroll", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
-      const { data } = await customFetch.get(`/enrollment/course/${id}`);
-      return data;
+      try {
+        const { data } = await customFetch.get(`/enrollment/course/${id}`);
+        setError(null);
+        return data;
+      } catch (error: any) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          setError(error.response.data.error);
+        } else {
+          setError("An unexpected error occurred.");
+        }
+        throw error;
+      }
     },
   });
   useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
+    if (isError) {
+      if (error) {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={error} onClose={onClose} />
+          ),
+        });
+      } else {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
+          ),
+        });
+      }
     }
-  }, [isError, errorToastShown, toast]);
+  }, [isError, error, toast]);
   return {
     getSingleEnrolledCourse,
     isPending,
@@ -297,10 +298,7 @@ export const useGetSingleEnrolledCourse = (id: any) => {
 };
 
 export const useGetStudentEnrolledCourse = (id: any) => {
-  const {
-    data: getStudentEnrolledCourse,
-    isPending,
-  } = useQuery({
+  const { data: getStudentEnrolledCourse, isPending } = useQuery({
     queryKey: ["getCourseReview111", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
@@ -309,7 +307,7 @@ export const useGetStudentEnrolledCourse = (id: any) => {
       );
       return data;
     },
-  }); 
+  });
   return {
     getStudentEnrolledCourse,
     isPending,
@@ -317,10 +315,7 @@ export const useGetStudentEnrolledCourse = (id: any) => {
 };
 
 export const useGetInstructorenrolledCourse = (id: any) => {
-  const {
-    data: getInstructorenrolledCourse,
-    isPending,
-  } = useQuery({
+  const { data: getInstructorenrolledCourse, isPending } = useQuery({
     queryKey: ["getInstructorCourseReview", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
@@ -424,10 +419,7 @@ export const useCreateEnrolledCourseReview = () => {
   return { createEnrolledCourseReview, createEnrolledCourseReviewLoading };
 };
 export const useGetCourseReview = (id: any) => {
-  const {
-    data: getCourseReview,
-    isPending,
-  } = useQuery({
+  const { data: getCourseReview, isPending } = useQuery({
     queryKey: ["getCourseReview", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
@@ -442,10 +434,7 @@ export const useGetCourseReview = (id: any) => {
 };
 
 export const useInstructorReviewRating = (id: any) => {
-  const {
-    data: instructorReviewRating,
-    isPending,
-  } = useQuery({
+  const { data: instructorReviewRating, isPending } = useQuery({
     queryKey: ["instructorReviewRating", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
@@ -462,10 +451,7 @@ export const useInstructorReviewRating = (id: any) => {
 };
 
 export const useGetCourseReviewRating = (id: any) => {
-  const {
-    data: courseReviewRating,
-    isPending,
-  } = useQuery({
+  const { data: courseReviewRating, isPending } = useQuery({
     queryKey: ["courseReviewRating", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
