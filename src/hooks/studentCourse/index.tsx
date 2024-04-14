@@ -773,3 +773,51 @@ export const useGetStudentWishList = () => {
   }, [isError, errorToastShown, toast]);
   return { getStudentWishList, isPending, isError, refetch };
 };
+
+export const useCreateCourseWishList = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const {
+    mutate: createCourseWishList,
+    isPending: createCourseWishListLoading,
+  } = useMutation({
+    mutationFn: ({ courseId}: any) => {
+      return customFetch.post(`/wishlist/course/${courseId}`,);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
+      toast({
+        title: `review submitted`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onError: (error: any) => {
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
+  return { createCourseWishList, createCourseWishListLoading };
+};
