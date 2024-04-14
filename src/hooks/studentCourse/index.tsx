@@ -3,6 +3,8 @@ import customFetch from "../../utils/axios";
 import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
+import { useDispatch } from "react-redux";
+import { setMarkWishList } from "../../features/user/UserSlice";
 export const useGetStudentSingleCourse = (slug: any) => {
   const toast = useToast();
   const [errorToastShown, setErrorToastShown] = useState(false);
@@ -777,7 +779,8 @@ export const useGetStudentWishList = () => {
 export const useCreateCourseWishList = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-
+ const dispatch= useDispatch();
+  
   const {
     mutate: createCourseWishList,
     isPending: createCourseWishListLoading,
@@ -786,7 +789,8 @@ export const useCreateCourseWishList = () => {
       return customFetch.post(`/wishlist/course/${courseId}`,);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
+      queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });    
+      dispatch(setMarkWishList())
       toast({
         title: `review submitted`,
         status: "success",
@@ -825,6 +829,7 @@ export const useCreateCourseWishList = () => {
 export const useDeleteCourseWishList = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
+  const dispatch = useDispatch()
 
   const { mutate: deleteCourseWishList, isPending: deleteCourseWishListLoading } = useMutation({
     mutationFn: ({ courseId }: any) => {
@@ -832,6 +837,8 @@ export const useDeleteCourseWishList = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
+      dispatch(setMarkWishList())
+
       toast({
         title: `course deleted successfully`,
         status: "success",

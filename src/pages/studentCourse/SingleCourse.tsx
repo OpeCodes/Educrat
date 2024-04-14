@@ -57,13 +57,13 @@ const SingleCourse = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  const { user } = useSelector((store: RootState) => store?.user);
+  const { user , markWishList} = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
@@ -76,8 +76,7 @@ const SingleCourse = () => {
   const { getStudentEnrolledCourse } = useGetStudentEnrolledCourse(
     getStudentSingleCourse?.id
   );
-  console.log(    getStudentSingleCourse?.id
-  )
+  console.log(markWishList);
 
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
@@ -105,7 +104,7 @@ const SingleCourse = () => {
   const totalDuration = getTotalLecturesDuration();
 
   const { courseEnroll } = useCourseEnrollment();
-  const [markWishList, setMarkWishList] = useState(false)
+
   const { getSingleEnrolledCourse } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
@@ -115,8 +114,10 @@ const SingleCourse = () => {
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getStudentSingleCourse?.userId?.id
   );
-  const {createCourseWishList, createCourseWishListLoading} = useCreateCourseWishList()
- const {deleteModule,deleteModuleLoading} =  useDeleteCourseWishList();
+  const { createCourseWishList, createCourseWishListLoading } =
+    useCreateCourseWishList();
+  const { deleteCourseWishList, deleteCourseWishListLoading } =
+    useDeleteCourseWishList();
   //get firstId for navigation
   const extractFirstLectureIds = (course: any) => {
     const firstLectureIds: string[] = [];
@@ -184,7 +185,7 @@ const SingleCourse = () => {
       createCourseWishList({
         courseId: getStudentSingleCourse?.id,
       });
-      setMarkWishList(true)
+     
     }
   };
 
@@ -210,7 +211,6 @@ const SingleCourse = () => {
   };
 
   const hi = true;
-
 
   return (
     <Stack>
@@ -598,7 +598,6 @@ const SingleCourse = () => {
                                 variant="solid"
                                 color={"white"}
                                 width={"100%"}
-
                               >
                                 Add to Cart
                               </Button>
@@ -616,7 +615,14 @@ const SingleCourse = () => {
                                     <IoMdHeartEmpty size={25} />
                                   </Text>
                                 ) : (
-                                  <Text>
+                                  <Text
+                                    onClick={() => {
+                                      deleteCourseWishList({
+                                        courseId: getStudentSingleCourse?.id,
+                                      });
+                                    
+                                    }}
+                                  >
                                     <IoMdHeart size={25} />
                                   </Text>
                                 )}
