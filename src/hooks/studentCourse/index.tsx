@@ -26,7 +26,7 @@ export const useGetStudentSingleCourse = (slug: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -77,7 +77,7 @@ export const useGetAllUserEnrolledCourse = () => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -129,7 +129,7 @@ export const useGetAlInstructorPublishedCourse = (id: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -235,7 +235,7 @@ export const useGetSingleEnrolledStudentCourse = (id: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -294,7 +294,7 @@ export const useGetSingleEnrolledCourse = (id: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -355,7 +355,7 @@ export const useGetStudentEnrolledCourse = (id: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -416,7 +416,7 @@ export const useGetInstructorenrolledCourse = (id: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -561,7 +561,7 @@ export const useGetCourseReview = (id: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -622,7 +622,7 @@ export const useInstructorReviewRating = (id: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -683,7 +683,7 @@ export const useGetCourseReviewRating = (id: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
