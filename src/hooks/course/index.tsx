@@ -22,7 +22,7 @@ export const useCourseCategory = () => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -165,7 +165,7 @@ export const useGetSingleCourse = (id: any) => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -216,7 +216,7 @@ export const useGetCourse = () => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
@@ -269,7 +269,7 @@ export const useGetAllUserCourse = () => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
