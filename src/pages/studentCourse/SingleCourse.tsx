@@ -74,6 +74,8 @@ const SingleCourse = () => {
   const { getStudentEnrolledCourse } = useGetStudentEnrolledCourse(
     getStudentSingleCourse?.id
   );
+  console.log(    getStudentSingleCourse?.id
+  )
 
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
