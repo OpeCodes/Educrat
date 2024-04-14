@@ -40,7 +40,9 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
 
   const [selectedImageName, setSelectImageName] = useState<any>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [error, setError] = useState(false);
   const [success, setSucess] = useState(false);
+
   const toast = useToast();
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -133,6 +135,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
         setSucess(true);
       } catch (error: any) {
         setSucess(false);
+        setError(true);
         if (error.response) {
           toast({
             title: `${error.response.data.error}`,
@@ -160,7 +163,8 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
     reader.readAsDataURL(file);
     refetch();
   };
-
+  console.log(error);
+  console.log(success);
   //date formatted code
   const currentDate = new Date();
   const day = String(currentDate.getDate()).padStart(2, "0");
@@ -206,7 +210,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   <Td>{selectedImageName?.name}</Td>
                   <Td>Video</Td>
                   <Td width={"50%"}>
-                    {uploadProgress > 0 && uploadProgress < 100 && (
+                    {uploadProgress > 0 && uploadProgress < 100 && !error && (
                       <Stack direction={"row"} align={"center"}>
                         {selectedImageName?.name?.lengh < 40 && (
                           <Progress
@@ -220,7 +224,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                         <Text>{uploadProgress}%</Text>
                       </Stack>
                     )}
-                    {uploadProgress === 0 && (
+                    {uploadProgress === 0 && !error && (
                       <Stack direction={"row"} align={"center"}>
                         <Progress
                           value={0}
@@ -232,16 +236,21 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                         <Text>0%</Text>
                       </Stack>
                     )}
-                    {uploadProgress >= 100 && !success && (
+                    {uploadProgress >= 100 && !success && !error && (
                       <Text fontWeight={"500"}>Proccessing</Text>
                     )}
-                    {uploadProgress >= 100 && success && (
+                    {uploadProgress >= 100 && success && !error && (
                       <Text fontWeight={"500"}>success</Text>
+                    )}
+                    {uploadProgress <= 100 && !success && error && (
+                      <Text fontWeight={"500"} color={"red"}>
+                        failed
+                      </Text>
                     )}
                   </Td>
                   <Td>{formattedDate}</Td>
                   <Td
-                    as={"button"}                  
+                    as={"button"}
                     disabled={!success}
                     cursor={!success ? "not-allowed" : "pointer"}
                     fontSize={15}
