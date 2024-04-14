@@ -236,6 +236,7 @@ const Navbar = () => {
                   <Divider />
                   <Box color="gray" fontSize={"15px"}>
                     <Stack p={3}>
+                      <Text as={Link} to={"home/my-courses/learning/"}>My Learning</Text>
                       <Text> My Cart</Text>
                       {hasStudentRole && hasInstructorRole && (
                         <Text
@@ -263,7 +264,6 @@ const Navbar = () => {
                       <Text>Notifications</Text>
                       <Text>Messages</Text>
                     </Stack>
-
                     <Divider />
                     <Stack p={3}>
                       <Text>Account Settings</Text>
