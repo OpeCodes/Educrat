@@ -18,7 +18,6 @@ import { Link } from "react-router-dom";
 
 const MyLearning = () => {
   const { data: enrolledCourse } = useGetAllUserEnrolledCourse();
-  console.log(enrolledCourse, "Enrollcourse");
   return (
     <Stack mt={"4.6rem"}>
       <Stack>

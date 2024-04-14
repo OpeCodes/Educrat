@@ -77,7 +77,6 @@ const SingleCourse = () => {
   const { getStudentEnrolledCourse } = useGetStudentEnrolledCourse(
     getStudentSingleCourse?.id
   );
-  console.log(markWishList);
 
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
@@ -209,8 +208,6 @@ const SingleCourse = () => {
   const handleShowMore = () => {
     setVisibleReviews((prev) => prev + 3);
   };
-
-  const hi = true;
 
   return (
     <Stack>
@@ -614,7 +611,7 @@ const SingleCourse = () => {
                                 deleteCourseWishListLoading ? (
                                   <Spinner />
                                 ) : (
-                                  <>                                
+                                  <>
                                     {!markWishList ? (
                                       <Text onClick={handleWishCourse}>
                                         <IoMdHeartEmpty size={25} />
