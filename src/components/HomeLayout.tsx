@@ -6,7 +6,7 @@ const HomeLayout = () => {
       <Navbar />
       <Outlet/>
     </>
-  );
-};
+  )
+}
 
 export default HomeLayout;
