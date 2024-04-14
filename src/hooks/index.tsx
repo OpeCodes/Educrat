@@ -23,7 +23,7 @@ export const useGetUser = () => {
         title: "Error fetching data",
         status: "error",
         position: "bottom-right",
-        duration: null,
+        duration: 5000,
         isClosable: false,
         render: ({ onClose }) => (
           <Stack bg={"#FCBCA0"} py={3} px={4}>
