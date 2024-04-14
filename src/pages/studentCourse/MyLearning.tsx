@@ -7,13 +7,14 @@ import {
   Tab,
   TabPanel,
   TabIndicator,
+  Grid,
 } from "@chakra-ui/react";
 
 const MyLearning = () => {
   return (
     <Stack mt={"4.6rem"}>
-      <Stack backgroundColor={"black"} p={"2.7rem"}>
-        <Text ml={"4rem"} color={"white"} fontSize={"2.9rem"}>
+      <Stack backgroundColor={"black"} p={"2.0rem"}>
+        <Text ml={"4rem"} color={"white"} fontSize={"2.9rem"} mb={"1.4rem"}>
           My learning
         </Text>
       </Stack>
@@ -31,7 +32,8 @@ const MyLearning = () => {
           />
           <TabPanels  color="black">
             <TabPanel>
-              <p>one!</p>
+                <Grid></Grid>
+              
             </TabPanel>
             <TabPanel>
               <p>two!</p>
