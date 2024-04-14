@@ -13,11 +13,13 @@ import {
   Progress,
   Flex,
 } from "@chakra-ui/react";
-import { useGetAllUserEnrolledCourse,  } from "../../hooks/studentCourse";
+import { useGetAllUserEnrolledCourse } from "../../hooks/studentCourse";
 import { Link } from "react-router-dom";
+import { Loading } from "../../components";
 
 const MyLearning = () => {
-  const { data: enrolledCourse } = useGetAllUserEnrolledCourse();
+  const { data: enrolledCourse, isPending: enrolledCourseLoading } =
+    useGetAllUserEnrolledCourse();
   return (
     <Stack mt={"4.6rem"}>
       <Stack>
@@ -48,53 +50,59 @@ const MyLearning = () => {
             />
             <TabPanels color="black">
               <TabPanel>
-                <Grid
-                  templateColumns={{
-                    md: "repeat(2, 1fr)",
-                    lg: "repeat(4, 1fr)",
-                  }}
-                  gap={6}
-                  mt={6}
-                >
-                  {enrolledCourse?.map((course: any) => {
-                    const { courseId, id } = course;
+                {enrolledCourseLoading ? (
+                  <Text>
+                    <Loading />
+                  </Text>
+                ) : (
+                  <Grid
+                    templateColumns={{
+                      md: "repeat(2, 1fr)",
+                      lg: "repeat(4, 1fr)",
+                    }}
+                    gap={6}
+                    mt={6}
+                  >
+                    {enrolledCourse?.map((course: any) => {
+                      const { courseId, id } = course;
 
-                    return (
-                      <GridItem
-                        w="100%"
-                        key={id}
-                        as={Link}
-                        to={`/course/${courseId.slug}/learn/lecture/${id}/660d3c593a19ced801d39aab/reviews`}
-                      >
-                        <Image
-                          maxHeight={"250px"}
-                          height={"100%"}
-                          width={"100%"}
-                          objectFit="cover"
-                          src={courseId.thumbnail}
-                          alt={courseId.title}
-                        />
-                        <Text mt={2} fontWeight={"bold"}>
-                          {courseId.title}
-                        </Text>
-                        <Text fontSize={"15px"} color={"gray"}>
-                          Peter Adedokun
-                        </Text>
-                        <Progress value={40} size="xs" mt={2} />
-                        <Flex justify={"space-between"} fontSize={13}>
-                          <Text>40% complete</Text>
-                          <Stack>
-                            <Text>stars icon</Text>
-                            <Text>Your Rating</Text>
-                          </Stack>
-                        </Flex>
-                      </GridItem>
-                    );
-                  })}
-                </Grid>
+                      return (
+                        <GridItem
+                          w="100%"
+                          key={id}
+                          as={Link}
+                          to={`/course/${courseId.slug}/learn/lecture/${id}/660d3c593a19ced801d39aab/reviews`}
+                        >
+                          <Image
+                            maxHeight={"250px"}
+                            height={"100%"}
+                            width={"100%"}
+                            objectFit="cover"
+                            src={courseId.thumbnail}
+                            alt={courseId.title}
+                          />
+                          <Text mt={2} fontWeight={"bold"}>
+                            {courseId.title}
+                          </Text>
+                          <Text fontSize={"15px"} color={"gray"}>
+                            Peter Adedokun
+                          </Text>
+                          <Progress value={40} size="xs" mt={2} />
+                          <Flex justify={"space-between"} fontSize={13}>
+                            <Text>40% complete</Text>
+                            <Stack>
+                              <Text>stars icon</Text>
+                              <Text>Your Rating</Text>
+                            </Stack>
+                          </Flex>
+                        </GridItem>
+                      );
+                    })}
+                  </Grid>
+                )}
               </TabPanel>
               <TabPanel>
-              <Grid
+                <Grid
                   templateColumns={{
                     md: "repeat(2, 1fr)",
                     lg: "repeat(4, 1fr)",
@@ -128,14 +136,16 @@ const MyLearning = () => {
                         </Text>
                         <Flex columnGap={1} fontSize={13}>
                           <Text>4.5</Text>
-                            <Text>stars</Text>
-                            <Text color={"gray"}>(993)</Text>
+                          <Text>stars</Text>
+                          <Text color={"gray"}>(993)</Text>
                         </Flex>
                         <Flex columnGap={1} fontSize={13} color={"gray"}>
                           <Text>4.5 hours</Text>
-                            <Text>444 lectures</Text>
+                          <Text>444 lectures</Text>
                         </Flex>
-                        <Text fontWeight={"bold"} color={"black"}>N40000</Text>
+                        <Text fontWeight={"bold"} color={"black"}>
+                          N40000
+                        </Text>
                       </GridItem>
                     );
                   })}
