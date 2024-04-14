@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider , } from "react-router-dom";
 import {
   Error,
   SignUp,
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
     path: "/course/:slug/learn/lecture/:id/:lectureId/reviews",
     element: <SingleEnrolledCourse />,
   },
-  
+
   //instructor
   {
     path: "/become-instructor",
@@ -128,7 +128,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />;
+    </>
+  );
 }
 
 export default App;

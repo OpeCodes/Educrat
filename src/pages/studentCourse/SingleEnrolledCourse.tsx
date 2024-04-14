@@ -29,7 +29,7 @@ import {
 import logo from "../../assets/logo-3.svg";
 import { IoIosArrowDown, IoIosShareAlt } from "react-icons/io";
 
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { FaFolderOpen } from "react-icons/fa6";
 
@@ -66,6 +66,11 @@ const initialValues = {
 const SingleEnrolledCourse = () => {
   const { id, lectureId } = useParams();
   const navigate = useNavigate();
+  
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
     useGetSingleEnrolledStudentCourse(id);
   const {

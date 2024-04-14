@@ -12,7 +12,7 @@ import {
   useToast,
   Skeleton,
 } from "@chakra-ui/react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
 
 import {
@@ -24,7 +24,7 @@ import { WiTime3 } from "react-icons/wi";
 import { FiBarChart2 } from "react-icons/fi";
 import { IoLanguage } from "react-icons/io5";
 import { FaCertificate } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import {
@@ -55,6 +55,12 @@ const SingleCourse = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
@@ -179,6 +185,8 @@ const SingleCourse = () => {
   };
 
   const hi = true;
+
+
   return (
     <Stack>
       {isPending && (
