@@ -11,6 +11,7 @@ import {
   Divider,
   useToast,
   Skeleton,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
@@ -63,7 +64,7 @@ const SingleCourse = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  const { user , markWishList} = useSelector((store: RootState) => store?.user);
+  const { user, markWishList } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
@@ -185,7 +186,6 @@ const SingleCourse = () => {
       createCourseWishList({
         courseId: getStudentSingleCourse?.id,
       });
-     
     }
   };
 
@@ -610,21 +610,28 @@ const SingleCourse = () => {
                                 _hover={{ backgroundColor: "#F5F7FE" }}
                                 cursor={"pointer"}
                               >
-                                {!markWishList ? (
-                                  <Text onClick={handleWishCourse}>
-                                    <IoMdHeartEmpty size={25} />
-                                  </Text>
+                                {createCourseWishListLoading ||
+                                deleteCourseWishListLoading ? (
+                                  <Spinner />
                                 ) : (
-                                  <Text
-                                    onClick={() => {
-                                      deleteCourseWishList({
-                                        courseId: getStudentSingleCourse?.id,
-                                      });
-                                    
-                                    }}
-                                  >
-                                    <IoMdHeart size={25} />
-                                  </Text>
+                                  <>                                
+                                    {!markWishList ? (
+                                      <Text onClick={handleWishCourse}>
+                                        <IoMdHeartEmpty size={25} />
+                                      </Text>
+                                    ) : (
+                                      <Text
+                                        onClick={() => {
+                                          deleteCourseWishList({
+                                            courseId:
+                                              getStudentSingleCourse?.id,
+                                          });
+                                        }}
+                                      >
+                                        <IoMdHeart size={25} />
+                                      </Text>
+                                    )}
+                                  </>
                                 )}
                               </Stack>
                             </Flex>
