@@ -100,7 +100,7 @@ const Navbar = () => {
         align={"center"}
       >
         <Flex justify={"space-between"} align={"center"}>
-          <Box width={"160px"} as={Link} to={"/"}>
+          <Box width={"160px"} as={Link} to={"/"} >
             <Image src={logo} alt="logo" />
           </Box>
         </Flex>
