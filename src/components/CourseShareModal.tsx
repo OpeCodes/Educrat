@@ -9,8 +9,11 @@ import {
   Button,
   IconButton,
   useClipboard,
+  ModalFooter,
+  Text,
+  Flex,
 } from '@chakra-ui/react';
-import { FaFacebook, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 interface ModalShareProps {
   isOpen: boolean;
@@ -37,44 +40,54 @@ const ModalShare: React.FC<ModalShareProps> = ({ isOpen, onClose, url }) => {
 
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size="xl" >
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Share</ModalHeader>
+      <ModalContent color={"black"} pb={"2rem"}>
+        <ModalHeader>Share this course</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <p>{url}</p>
-          <Button onClick={onCopy} mt={4} colorScheme="blue">
-            {hasCopied ? 'Copied!' : 'Copy URL'}
-          </Button>
+            <Flex align={"center"} borderWidth={1} borderColor={"black"}overflow={"hidden"} >
+            <Text mx={2} isTruncated>{url}</Text>
+          <Text p={3} px={5} cursor={"pointer"} onClick={onCopy} fontWeight={"bold"} color={"white"} bg={"black"}>
+            {hasCopied ? 'Copied!' : 'Copy'}
+          </Text>
+            </Flex>
+        <Flex align={"center"} justify={"center"} columnGap={3}>
           <IconButton
             icon={<FaFacebook />}
             aria-label="Share on Facebook"
             onClick={shareOnFacebook}
             variant="outline"
-            colorScheme="blue"
+            colorScheme="black"
             mt={4}
             borderRadius={"100%"}
+            _hover={{backgroundColor: "gray.100"}}
           />
           <IconButton
             icon={<FaTwitter />}
             aria-label="Share on Twitter"
             onClick={shareOnTwitter}
             variant="outline"
-            colorScheme="blue"
+            colorScheme="black"
+            borderRadius={"100%"}
+            _hover={{backgroundColor: "gray.100"}}
             mt={4}
           />
            <IconButton
-            icon={<FaTwitter />}
+            icon={<FaLinkedin />}
             aria-label="Share on Twitter"
             onClick={shareOnLinkedIn}
             variant="outline"
-            colorScheme="blue"
+            borderRadius={"100%"}
+            colorScheme="black"
+            _hover={{backgroundColor: "gray.100"}}
             mt={4}
           />
+          </Flex>
         </ModalBody>
       </ModalContent>
     </Modal>
+   
   );
 };
 

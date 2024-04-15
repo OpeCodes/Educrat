@@ -183,7 +183,7 @@ const SingleEnrolledCourse = () => {
     return baseUrl;
   };
 
-  const courseUrl = getCourseUrlFromCurrentUrl();
+  const url = getCourseUrlFromCurrentUrl();
   return (
     <Stack>
       <Flex
@@ -299,7 +299,7 @@ const SingleEnrolledCourse = () => {
                 <IoIosShareAlt />
               </Text>
             </Flex>
-            <ModalShare isOpen={isOpen} onClose={closeModal} url={courseUrl} />
+            <ModalShare isOpen={isOpen} onClose={closeModal} url={url} />
           </Flex>
         </Flex>
       </Flex>
