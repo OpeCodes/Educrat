@@ -17,8 +17,9 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
+import logo from "../../assets/logo.svg";
 import { SignUpSchema } from "../../schemas";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegisterUser } from "../../hooks/auth";
 
 interface User {
@@ -39,6 +40,7 @@ const initialValues: User = {
 };
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
@@ -62,7 +64,18 @@ const SignUp = () => {
             display={{ base: "none", lg: "block" }}
             position={"fixed"}
           >
-            <Image src={backgroundImg} alt="opeyemi" />
+            <Stack position={"relative"}>
+              <Image src={backgroundImg} alt="background" />
+              <Image
+                src={logo}
+                cursor={"pointer"}
+                alt="background"
+                position={"absolute"}
+                top={"18px"}
+                left={"25px"}
+                onClick={() => navigate("/")}
+              />
+            </Stack>
           </Box>
         </GridItem>
         <GridItem height="100vh" mx={{ base: "15px", lg: "20px" }}>
