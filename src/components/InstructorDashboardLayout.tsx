@@ -15,8 +15,8 @@ const InstructorDashboard: React.FC = () => {
   const toggleSidebar = () => {
     setSidebarExpanded(!isSidebarExpanded);
   };
-  return !user ? (
-    <Navigate to={"/sign-in"} />
+  return !user.profilePicture ? (
+    <Navigate to={"/"} />
   ) : (
     <Flex direction="row" h="100vh">
       {/* Sidebar (Hidden on smaller screens) */}

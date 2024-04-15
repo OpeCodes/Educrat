@@ -106,7 +106,6 @@ const router = createBrowserRouter([
     path: "/instructor/courses/:id/manage/",
     element: <CourseManageDashboardLayout />,
     errorElement: <Error />,
-
     children: [
       {
         path: "basics",
