@@ -21,7 +21,6 @@ const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
     useGetAllUserEnrolledCourse();
    const {getStudentWishList} =  useGetStudentWishList()
-   console.log(getStudentWishList,"getStudentWishList")
   return (
     <Stack mt={"4.6rem"}>
       <Stack>

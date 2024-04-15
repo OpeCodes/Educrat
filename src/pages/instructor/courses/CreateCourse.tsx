@@ -23,7 +23,6 @@ const initialValues = {
 };
 const CreateCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
-  console.log(user, "user");
   const { createCourse, isPending: loading } = useCreateCourse();
   const handleSubmit = (values: any): void => {
     createCourse(values);

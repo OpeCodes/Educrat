@@ -238,10 +238,7 @@ export const useGetSingleEnrolledStudentCourse = (id: any) => {
 };
 
 export const useGetSingleEnrolledCourse = (id: any) => {
-  const {
-    data: getSingleEnrolledCourse,
-    isPending,
-  } = useQuery({
+  const { data: getSingleEnrolledCourse, isPending } = useQuery({
     queryKey: ["getCourseEnroll", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;

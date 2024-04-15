@@ -56,6 +56,7 @@ import { HiFolderDownload } from "react-icons/hi";
 import { VscLinkExternal } from "react-icons/vsc";
 import VideoDownloadButton from "../../components/VideoDownloadButton";
 import { Loading } from "../../components";
+import ModalShare from "../../components/CourseShareModal";
 
 const initialValues = {
   stars: 0,
@@ -155,6 +156,33 @@ const SingleEnrolledCourse = () => {
 
   const [activeLectureID, setActiveLectureID] = useState<string | null>(null);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+  const getCourseUrlFromCurrentUrl = (): string => {
+    const baseUrl = window.location.origin; // Get the base URL (e.g., http://localhost:5173)
+    const currentUrl = window.location.href; // Get the current website URL
+    const urlParts = currentUrl.split('/'); // Split the URL by '/'
+    const courseIndex = urlParts.indexOf('course'); // Find the index of 'course'
+    
+    if (courseIndex !== -1 && courseIndex + 2 < urlParts.length) {
+      // If 'course' is found and there are enough parts after 'course', construct the course URL
+      const coursePath = urlParts.slice(courseIndex, courseIndex + 2).join('/'); // Get course-specific path
+      return `${baseUrl}/${coursePath}`; // Combine base URL with course path
+    }
+    
+    // Default course URL (fallback if extraction fails)
+    return baseUrl; // Return base URL if course URL extraction fails
+  };
+
+  // Get the course URL dynamically
+  const courseUrl = getCourseUrlFromCurrentUrl();
   return (
     <Stack>
       <Flex
@@ -263,12 +291,14 @@ const SingleEnrolledCourse = () => {
               color={"white"}
               borderColor={"white"}
               borderWidth={1}
+              onClick={openModal} 
             >
               <Text>Share</Text>
               <Text>
                 <IoIosShareAlt />
               </Text>
             </Flex>
+            <ModalShare isOpen={isOpen} onClose={closeModal} url={courseUrl} />
           </Flex>
         </Flex>
       </Flex>
