@@ -35,8 +35,6 @@ const ModalShare: React.FC<ModalShareProps> = ({ isOpen, onClose, url }) => {
     window.open(shareUrl, '_blank');
   };
 
-  // Extract the base part of the URL up to the first two slashes after the domain
-//   const baseURL = url.split('/', 4).join('/');
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -56,6 +54,7 @@ const ModalShare: React.FC<ModalShareProps> = ({ isOpen, onClose, url }) => {
             variant="outline"
             colorScheme="blue"
             mt={4}
+            borderRadius={"100%"}
           />
           <IconButton
             icon={<FaTwitter />}
