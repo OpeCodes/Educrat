@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  addStudenCourseWishListorage,
+  getStudenCourseWishListorage,
   getUserLocalStorage,
   removeUserFromLocalStorage,
 } from "../../store/localStorage";
@@ -13,7 +15,7 @@ interface UserState {
 const initialState: UserState = {
   user: getUserLocalStorage(),
   courseNavigate: 0,
-  markWishList: false,
+  markWishList: getStudenCourseWishListorage(),
 };
 
 const userSlice = createSlice({
@@ -33,6 +35,7 @@ const userSlice = createSlice({
     },
     setMarkWishList: (state: UserState) => {
       state.markWishList = !state.markWishList;
+      addStudenCourseWishListorage(state.markWishList);
     },
   },
 });

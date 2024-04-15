@@ -53,6 +53,7 @@ import { PromotionalVideoPlayModal } from "../../components";
 import { setCourseAuthNavigate } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import { removeStudenCourseWishListorage } from "../../store/localStorage";
 
 const SingleCourse = () => {
   const { slug } = useParams();
@@ -619,6 +620,7 @@ const SingleCourse = () => {
                                     ) : (
                                       <Text
                                         onClick={() => {
+                                          removeStudenCourseWishListorage();
                                           deleteCourseWishList({
                                             courseId:
                                               getStudentSingleCourse?.id,

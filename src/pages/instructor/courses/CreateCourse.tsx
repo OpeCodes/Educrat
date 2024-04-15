@@ -23,6 +23,7 @@ const initialValues = {
 };
 const CreateCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
+  console.log(user, "user");
   const { createCourse, isPending: loading } = useCreateCourse();
   const handleSubmit = (values: any): void => {
     createCourse(values);
@@ -31,8 +32,8 @@ const CreateCourse = () => {
   if (isPending) {
     return <Loading />;
   }
-  return !user ? (
-    <Navigate to="/sign-in" />
+  return !user.profilePicture ? (
+    <Navigate to="/" />
   ) : (
     <Stack>
       <CreateCourseNavBar step={1} progressValue={100} />
