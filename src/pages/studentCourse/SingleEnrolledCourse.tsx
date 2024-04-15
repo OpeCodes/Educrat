@@ -230,7 +230,7 @@ const SingleEnrolledCourse = () => {
         <Flex
           align={"center"}
           columnGap={1}
-          display={{ base: "none", md: "flex" }}
+          // display={{ base: "none", md: "flex" }}
         >
           <Flex columnGap={4} align={"center"}>
             <Popover initialFocusRef={initialFocusRef} placement="bottom">
