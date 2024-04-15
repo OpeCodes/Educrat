@@ -238,59 +238,17 @@ export const useGetSingleEnrolledStudentCourse = (id: any) => {
 };
 
 export const useGetSingleEnrolledCourse = (id: any) => {
-  const toast = useToast();
-  const [error, setError] = useState<string | null>(null);
   const {
     data: getSingleEnrolledCourse,
     isPending,
-    isError,
   } = useQuery({
     queryKey: ["getCourseEnroll", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
-      try {
-        const { data } = await customFetch.get(`/enrollment/course/${id}`);
-        setError(null);
-        return data;
-      } catch (error: any) {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.error
-        ) {
-          setError(error.response.data.error);
-        } else {
-          setError("An unexpected error occurred.");
-        }
-        throw error;
-      }
+      const { data } = await customFetch.get(`/enrollment/course/${id}`);
+      return data;
     },
   });
-  useEffect(() => {
-    if (isError) {
-      if (error) {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={error} onClose={onClose} />
-          ),
-        });
-      } else {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
-          ),
-        });
-      }
-    }
-  }, [isError, error, toast]);
   return {
     getSingleEnrolledCourse,
     isPending,
