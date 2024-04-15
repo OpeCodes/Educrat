@@ -15,8 +15,9 @@ import {
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
+import logo from "../../assets/logo.svg";
 import { resetPasswordSchema } from "../../schemas";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useResetPassword } from "../../hooks/auth";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { useState } from "react";
@@ -26,6 +27,7 @@ const initialValues = {
 };
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
@@ -50,7 +52,19 @@ const ResetPassword = () => {
             display={{ base: "none", lg: "block" }}
             position={"fixed"}
           >
-            <Image src={backgroundImg} alt="opeyemi" />
+          <Stack position={"relative"}>
+              <Image src={backgroundImg} alt="background" />
+              <Image
+                src={logo}
+                cursor={"pointer"}
+                alt="background"
+                position={"absolute"}
+                top={"18px"}
+                left={"25px"}
+                onClick={() => navigate("/")}
+              />
+            </Stack>
+
           </Box>
         </GridItem>
         <GridItem
