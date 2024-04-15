@@ -6,10 +6,8 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  Button,
   IconButton,
   useClipboard,
-  ModalFooter,
   Text,
   Flex,
 } from '@chakra-ui/react';
