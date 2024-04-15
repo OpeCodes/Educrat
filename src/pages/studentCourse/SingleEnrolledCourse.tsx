@@ -67,7 +67,7 @@ const initialValues = {
 const SingleEnrolledCourse = () => {
   const { id, lectureId } = useParams();
   const navigate = useNavigate();
-  
+
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -156,6 +156,10 @@ const SingleEnrolledCourse = () => {
 
   const [activeLectureID, setActiveLectureID] = useState<string | null>(null);
 
+
+
+
+  //share button func
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -166,22 +170,19 @@ const SingleEnrolledCourse = () => {
     setIsOpen(false);
   };
   const getCourseUrlFromCurrentUrl = (): string => {
-    const baseUrl = window.location.origin; // Get the base URL (e.g., http://localhost:5173)
-    const currentUrl = window.location.href; // Get the current website URL
-    const urlParts = currentUrl.split('/'); // Split the URL by '/'
-    const courseIndex = urlParts.indexOf('course'); // Find the index of 'course'
-    
+    const baseUrl = window.location.origin;
+    const currentUrl = window.location.href;
+    const urlParts = currentUrl.split("/");
+    const courseIndex = urlParts.indexOf("course");
+
     if (courseIndex !== -1 && courseIndex + 2 < urlParts.length) {
-      // If 'course' is found and there are enough parts after 'course', construct the course URL
-      const coursePath = urlParts.slice(courseIndex, courseIndex + 2).join('/'); // Get course-specific path
-      return `${baseUrl}/${coursePath}`; // Combine base URL with course path
+      const coursePath = urlParts.slice(courseIndex, courseIndex + 2).join("/");
+      return `${baseUrl}/${coursePath}`;
     }
-    
-    // Default course URL (fallback if extraction fails)
-    return baseUrl; // Return base URL if course URL extraction fails
+
+    return baseUrl;
   };
 
-  // Get the course URL dynamically
   const courseUrl = getCourseUrlFromCurrentUrl();
   return (
     <Stack>
@@ -291,7 +292,7 @@ const SingleEnrolledCourse = () => {
               color={"white"}
               borderColor={"white"}
               borderWidth={1}
-              onClick={openModal} 
+              onClick={openModal}
             >
               <Text>Share</Text>
               <Text>
@@ -307,9 +308,8 @@ const SingleEnrolledCourse = () => {
           justify={"space-between"}
           mt={{ base: "1.5rem", md: "2.3rem" }}
           flexDirection={{ base: "column", xl: "row" }}
-          
         >
-          <Stack mt={6}  width={{ base: "100%", xl: "65%" }}>
+          <Stack mt={6} width={{ base: "100%", xl: "65%" }}>
             {/* video section */}
             {singleLectureDataLoading ? (
               <Flex
@@ -344,9 +344,12 @@ const SingleEnrolledCourse = () => {
                     borderBottomWidth={2}
                     borderColor={"#f1f1f1"}
                     mb={5}
-                    
                   >
-                    <Stack ml={{ base: "2rem", md: "3rem" } } mr={{md: "1rem"}} my={"2rem"}>
+                    <Stack
+                      ml={{ base: "2rem", md: "3rem" }}
+                      mr={{ md: "1rem" }}
+                      my={"2rem"}
+                    >
                       <div
                         dangerouslySetInnerHTML={{
                           __html: singleLectureData?.content.body,
@@ -361,7 +364,7 @@ const SingleEnrolledCourse = () => {
               maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
               // px={{ base: "2", xl: 20 }}
               pl={3}
-              pr={{base: 3, md: 0}}
+              pr={{ base: 3, md: 0 }}
             >
               {/* review section */}
 
