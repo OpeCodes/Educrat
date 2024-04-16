@@ -1,5 +1,6 @@
-import { Flex, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Flex, Stack, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { AiFillStar } from "react-icons/ai";
 
 const SingleInstructorPage = () => {
   return (
@@ -24,6 +25,31 @@ const SingleInstructorPage = () => {
           <Flex columnGap={1}>
             <Text>&#x2022;</Text>
             <Text>design</Text>
+          </Flex>
+        </Flex>
+      </Stack>
+      <Stack color={"white"} mt={4} width={"100%"} bg={"#6440fb"} maxW={"70%"} mx={"auto"} borderRadius={5} py={"5rem"} px={"5rem"}>
+      <Avatar size='2xl' name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
+        <Text fontSize={30} fontWeight={"bold"}>Peter Adedokun</Text>
+        <Text>Frontend Developer</Text>
+        <Flex align={"center"} columnGap={3}>
+          <Flex align={"center"} columnGap={1}>
+
+            <Text><AiFillStar size={20}/></Text>
+            <Text>Instrutor Rating</Text>
+
+          </Flex>
+          <Flex align={"center"}>
+            <Text>1</Text>
+            <Text>Review</Text>
+          </Flex>
+          <Flex>
+            <Text>kk</Text>
+            <Text>Students</Text>
+          </Flex>
+          <Flex>
+            <Text>kk</Text>
+            <Text>course</Text>
           </Flex>
         </Flex>
       </Stack>
