@@ -65,14 +65,12 @@ const SingleInstructorPage = () => {
 
           <Flex align={"center"} columnGap={1}>
             <Text>
-              {" "}
               <IoPersonOutline />
             </Text>
             <Text>Students</Text>
           </Flex>
-          <Flex align={"center"}>
+          <Flex  align={"center"} columnGap={1}>
             <Text>
-              {" "}
               <HiOutlineChat />
             </Text>
             <Text>Review</Text>
