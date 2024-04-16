@@ -1,4 +1,15 @@
-import { Avatar, Flex, Stack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Flex,
+  Stack,
+  Text,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  TabIndicator,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
@@ -69,7 +80,7 @@ const SingleInstructorPage = () => {
             </Text>
             <Text>Students</Text>
           </Flex>
-          <Flex  align={"center"} columnGap={1}>
+          <Flex align={"center"} columnGap={1}>
             <Text>
               <HiOutlineChat />
             </Text>
@@ -82,12 +93,17 @@ const SingleInstructorPage = () => {
             <Text>course</Text>
           </Flex>
         </Flex>
-        <Flex color={"white"} align={"center"} columnGap={4} mt={4} cursor={"pointer"}>
+        <Flex
+          color={"white"}
+          align={"center"}
+          columnGap={4}
+          mt={4}
+          cursor={"pointer"}
+        >
           <Text>
             <FaFacebookF />
           </Text>
           <Text>
-            {" "}
             <FaLinkedinIn />
           </Text>
           <Text>
@@ -101,6 +117,30 @@ const SingleInstructorPage = () => {
             <TbWorld />
           </Text>
         </Flex>
+      </Stack>
+      <Stack width={"100%"} mt={12} maxW={"60%"} mx={"auto"}>
+        <Tabs position="relative">
+          <TabList fontWeight={"bold"}>
+            <Tab _selected={{ color: "#6440fb" }}>Overview </Tab>
+            <Tab>Courses</Tab>
+          </TabList>
+          <TabIndicator
+            mt="-1.5px"
+            height="2px"
+            bg="#6440fb"
+            borderRadius="1px"
+            opacity={"0.5"}
+            fontWeight={"bold"}
+          />
+          <TabPanels>
+            <TabPanel>1</TabPanel>
+            <TabPanel>
+              <Stack>
+                <Text>2</Text>
+              </Stack>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </Stack>
     </Stack>
   );
