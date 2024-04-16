@@ -6,7 +6,7 @@ const openInAppOrNewTab = (url: string, appUrlScheme: string): void => {
     if (/android/i.test(userAgent)) {
       // For Android devices, try to open the app using an intent
       window.location.href = `intent://${appUrlScheme}#Intent;package=${appUrlScheme};scheme=${appUrlScheme};end`;
-    } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+    } else if (/iPad|iPhone|iPod/.test(userAgent) && !userAgent.includes('MSIE') && !userAgent.includes('Trident')) {
       // For iOS devices, try to open the app using the custom URL scheme
       window.location.href = `${appUrlScheme}://`;
     } else {
