@@ -4,6 +4,10 @@ import { AiFillStar } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
 import { IoPersonOutline } from "react-icons/io5";
 import { LuClock3 } from "react-icons/lu";
+import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { TiSocialTwitter } from "react-icons/ti";
+import { FaYoutube } from "react-icons/fa";
+import { TbWorld } from "react-icons/tb";
 
 const SingleInstructorPage = () => {
   return (
@@ -31,30 +35,73 @@ const SingleInstructorPage = () => {
           </Flex>
         </Flex>
       </Stack>
-      <Stack color={"white"} mt={4} width={"100%"} bg={"#6440fb"} maxW={"70%"} mx={"auto"} borderRadius={5} py={"5rem"} px={"5rem"}>
-      <Avatar size='2xl' name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
-        <Text fontSize={30} fontWeight={"bold"}>Peter Adedokun</Text>
+      <Stack
+        color={"white"}
+        mt={4}
+        width={"100%"}
+        bg={"#6440fb"}
+        maxW={"70%"}
+        mx={"auto"}
+        borderRadius={5}
+        py={"5rem"}
+        px={"5rem"}
+      >
+        <Avatar
+          size="2xl"
+          name="Segun Adebayo"
+          src="https://bit.ly/sage-adebayo"
+        />
+        <Text fontSize={30} fontWeight={"bold"}>
+          Peter Adedokun
+        </Text>
         <Text>Frontend Developer</Text>
         <Flex align={"center"} columnGap={3}>
           <Flex align={"center"} columnGap={1}>
-
-            <Text><AiFillStar size={20}/></Text>
+            <Text>
+              <AiFillStar size={20} />
+            </Text>
             <Text>Instrutor Rating</Text>
-
           </Flex>
-          
+
           <Flex align={"center"} columnGap={1}>
-            <Text>   <IoPersonOutline /></Text>
+            <Text>
+              {" "}
+              <IoPersonOutline />
+            </Text>
             <Text>Students</Text>
           </Flex>
           <Flex align={"center"}>
-            <Text>    <HiOutlineChat /></Text>
+            <Text>
+              {" "}
+              <HiOutlineChat />
+            </Text>
             <Text>Review</Text>
           </Flex>
           <Flex align={"center"} columnGap={1}>
-            <Text><LuClock3 /></Text>
+            <Text>
+              <LuClock3 />
+            </Text>
             <Text>course</Text>
           </Flex>
+        </Flex>
+        <Flex color={"white"} align={"center"} columnGap={4} mt={4} cursor={"pointer"}>
+          <Text>
+            <FaFacebookF />
+          </Text>
+          <Text>
+            {" "}
+            <FaLinkedinIn />
+          </Text>
+          <Text>
+            <TiSocialTwitter />
+          </Text>
+          <Text>
+            <FaYoutube />
+          </Text>
+
+          <Text>
+            <TbWorld />
+          </Text>
         </Flex>
       </Stack>
     </Stack>

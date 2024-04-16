@@ -19,7 +19,6 @@ import { LuClock3 } from "react-icons/lu";
 import {
   MdOutlineCheckCircleOutline,
   MdOutlinePlayLesson,
-  MdPerson2,
 } from "react-icons/md";
 import { FcInfo } from "react-icons/fc";
 import { WiTime3 } from "react-icons/wi";
