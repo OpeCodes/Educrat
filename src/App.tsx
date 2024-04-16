@@ -29,6 +29,7 @@ import {
   Pricing,
 } from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
+import SingleInstructorPage from "./pages/studentCourse/SingleInstructorPage";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/home/my-courses/learning/",
         element: <MyLearning />,
+      },
+      {
+        path: "/user/:slug",
+        element: <SingleInstructorPage />,
       },
     ],
   },

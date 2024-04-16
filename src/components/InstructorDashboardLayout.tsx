@@ -15,7 +15,7 @@ const InstructorDashboard: React.FC = () => {
   const toggleSidebar = () => {
     setSidebarExpanded(!isSidebarExpanded);
   };
-  return !user.profilePicture ? (
+  return !user ? (
     <Navigate to={"/"} />
   ) : (
     <Flex direction="row" h="100vh">
