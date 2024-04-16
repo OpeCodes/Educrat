@@ -19,11 +19,12 @@ import { LuClock3 } from "react-icons/lu";
 import {
   MdOutlineCheckCircleOutline,
   MdOutlinePlayLesson,
+  MdPerson2,
 } from "react-icons/md";
 import { FcInfo } from "react-icons/fc";
 import { WiTime3 } from "react-icons/wi";
 import { FiBarChart2 } from "react-icons/fi";
-import { IoLanguage } from "react-icons/io5";
+import { IoLanguage, IoPersonOutline } from "react-icons/io5";
 import { FaCertificate } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
@@ -475,8 +476,9 @@ const SingleCourse = () => {
                               color={"#4f547b"}
                               align={"center"}
                             >
+
                               <Text>
-                                <HiOutlineChat />
+                              <IoPersonOutline />
                               </Text>
                               <Text>
                                 {getInstructorenrolledCourse?.length} Students

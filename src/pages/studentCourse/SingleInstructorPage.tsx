@@ -1,6 +1,9 @@
 import { Avatar, Flex, Stack, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
+import { HiOutlineChat } from "react-icons/hi";
+import { IoPersonOutline } from "react-icons/io5";
+import { LuClock3 } from "react-icons/lu";
 
 const SingleInstructorPage = () => {
   return (
@@ -39,16 +42,17 @@ const SingleInstructorPage = () => {
             <Text>Instrutor Rating</Text>
 
           </Flex>
-          <Flex align={"center"}>
-            <Text>1</Text>
-            <Text>Review</Text>
-          </Flex>
-          <Flex>
-            <Text>kk</Text>
+          
+          <Flex align={"center"} columnGap={1}>
+            <Text>   <IoPersonOutline /></Text>
             <Text>Students</Text>
           </Flex>
-          <Flex>
-            <Text>kk</Text>
+          <Flex align={"center"}>
+            <Text>    <HiOutlineChat /></Text>
+            <Text>Review</Text>
+          </Flex>
+          <Flex align={"center"} columnGap={1}>
+            <Text><LuClock3 /></Text>
             <Text>course</Text>
           </Flex>
         </Flex>
