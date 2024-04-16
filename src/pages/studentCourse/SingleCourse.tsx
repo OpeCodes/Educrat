@@ -41,7 +41,7 @@ import {
   useGetStudentSingleCourse,
   useInstructorReviewRating,
 } from "../../hooks/studentCourse";
-import { FaFacebookF, FaLinkedinIn, FaStar } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaStar } from "react-icons/fa";
 import {
   convertSecondsToHMS,
   formatEnrollDate,
@@ -56,7 +56,7 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { removeStudenCourseWishListorage } from "../../store/localStorage";
 import { Footer } from "../../constants";
 import { TiSocialTwitter } from "react-icons/ti";
-import { TbWorld } from "react-icons/tb";
+import { shareOnFacebook, shareOnInstagram, shareOnLinkedIn, shareOnTwitter } from "../../components/ShareFuncs";
 
 const SingleCourse = () => {
   const { slug } = useParams();
@@ -796,18 +796,19 @@ const SingleCourse = () => {
                                 cursor={"pointer"}
                                 color={"#140342"}
                               >
-                                <Text >
+                                <Text onClick={() =>shareOnFacebook(url)}>
                                   <FaFacebookF  />
                                 </Text>
-                                <Text>
+                                <Text onClick={() =>shareOnLinkedIn(url)}>
                                   <FaLinkedinIn />
                                 </Text>
-                                <Text>
+                                <Text onClick={() =>shareOnTwitter(url)}>
                                   <TiSocialTwitter />
                                 </Text>
 
-                                <Text>
-                                  <TbWorld />
+                                <Text onClick={() => shareOnInstagram(url)}>
+                                <FaInstagram />
+
                                 </Text>
                               </Flex>
                             </Stack>
