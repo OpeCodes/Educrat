@@ -7,10 +7,6 @@ import {
   category6,
   category7,
   category8,
-  instructor1,
-  instructor2,
-  instructor3,
-  instructor4,
   student1,
   student2,
   student3,
@@ -22,7 +18,6 @@ import {
   news1,
   news2,
 } from "../assets/export";
-import { FaStar } from "react-icons/fa6";
 
 export const buttonsData = [
   {
@@ -114,44 +109,7 @@ export const categoriesData = [
   },
 ];
 
-export const instructorsData = [
-  {
-    id: 1,
-    img: instructor1,
-    name: "Flyod Miles",
-    job: "President of Sales",
-    icon: <FaStar size={11} />,
-    course: 15,
-    student: 692,
-  },
-  {
-    id: 2,
-    img: instructor2,
-    name: "Cameron Williamson",
-    job: "Web Designer",
-    icon: <FaStar size={11} />,
-    course: 15,
-    student: 692,
-  },
-  {
-    id: 3,
-    img: instructor3,
-    name: "Brooklyn Simmons",
-    job: "Dog Trainer",
-    icon: <FaStar size={11} />,
-    course: 15,
-    student: 692,
-  },
-  {
-    id: 4,
-    img: instructor4,
-    name: "Wade Warren",
-    job: "Marketing Coordinator",
-    icon: <FaStar size={11} />,
-    course: 15,
-    student: 692,
-  },
-];
+
 
 export const studentsData = [
   {

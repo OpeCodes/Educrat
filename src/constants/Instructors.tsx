@@ -8,10 +8,12 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { MdArrowOutward } from "react-icons/md";
-import { instructorsData } from "../utils/data";
 import { Instructor } from "../components";
+import { useGetAllEducratInstructors } from "../hooks/studentCourse";
 
 export const Instructors = () => {
+  const {data} = useGetAllEducratInstructors()
+  console.log(data)
   return (
     <Box
       as={"section"}
@@ -66,7 +68,7 @@ export const Instructors = () => {
           mt={10}
           gap={6}
         >
-          {instructorsData.map((instructor) => {
+          {data.map((instructor: any) => {
             return <Instructor key={instructor.id} {...instructor} />;
           })}
         </Box>

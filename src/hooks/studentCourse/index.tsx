@@ -6,6 +6,19 @@ import { TbInfoHexagonFilled } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import { setMarkWishList } from "../../features/user/UserSlice";
 import { GetToastErrorHandling } from "../../components";
+
+export const useGetAllEducratInstructors = () => {
+  const { data, isPending, isError } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const { data } = await customFetch.get("/instructor");
+      return data;
+    },
+  });
+
+  return { data, isPending, isError };
+};
+
 export const useGetStudentSingleCourse = (slug: any) => {
   const toast = useToast();
   const [error, setError] = useState<string | null>(null);

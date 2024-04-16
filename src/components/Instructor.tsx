@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Flex, Stack } from "@chakra-ui/react";
+import { Box, Heading, Text, Flex, Stack, Image } from "@chakra-ui/react";
 import { CiPlay1, CiUser } from "react-icons/ci";
 import {
   FaInstagram,
@@ -8,22 +8,23 @@ import {
 } from "react-icons/fa";
 
 type Instructor = {
-  id: number;
-  img: string;
-  name: string;
+  headline: number;
+  profilePicture: string;
+  firstName: string;
+  lastName: string;
   job: string;
   icon: JSX.Element;
   course: number;
   student: number;
 };
 const Instructor = ({
-  id,
-  img,
-  name,
-  job,
+  profilePicture,
+  lastName,
+  firstName,
   icon,
   course,
   student,
+  headline
 }: Instructor) => {
   return (
     <Box
@@ -32,15 +33,18 @@ const Instructor = ({
       width={"100%"}
       height={"auto"}
       cursor={"pointer"}
-      key={id}
+  
       mb={{ base: 8 }}
     >
       <Stack>
         <Box as="div" position={"relative"}>
-          <img
-            src={img}
+          <Image
+            src={profilePicture}
             style={{ borderRadius: "10px", width: "100%" }}
-            alt={name}
+            alt={firstName}
+            maxH={"300px"}
+            height={"100%"}
+            objectFit={"cover"}
           />
           <Box
             as={"div"}
@@ -79,10 +83,10 @@ const Instructor = ({
             fontWeight={"normal"}
             my={2}
           >
-            {name}
+            {firstName}{lastName}
           </Heading>
           <Text color={"gray.600"} fontSize={"15px"} mb={2}>
-            {job}
+            {headline}
           </Text>
           <Flex justifyContent={"start"} alignItems={"center"}>
             <Flex justifyContent={"center"} alignItems={"center"}>
