@@ -24,6 +24,7 @@ import { TiSocialTwitter } from "react-icons/ti";
 import { FaYoutube } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
 import { CgNotes } from "react-icons/cg";
+import { Footer } from "../../constants";
 const dummy = [1, 2, 4, 5, 6, 8];
 const SingleInstructorPage = () => {
   return (
@@ -202,6 +203,7 @@ const SingleInstructorPage = () => {
           </TabPanels>
         </Tabs>
       </Stack>
+      <Footer/>
     </Stack>
   );
 };

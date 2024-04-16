@@ -54,6 +54,7 @@ import { setCourseAuthNavigate } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { removeStudenCourseWishListorage } from "../../store/localStorage";
+import { Footer } from "../../constants";
 
 const SingleCourse = () => {
   const { slug } = useParams();
@@ -211,6 +212,7 @@ const SingleCourse = () => {
   };
 
   return (
+    <>
     <Stack>
       {isPending && (
         <Stack mx={"4.3rem"}>
@@ -758,6 +760,8 @@ const SingleCourse = () => {
       </Stack>
       <Text>other part here</Text>
     </Stack>
+    <Footer/>
+    </>
   );
 };
 
