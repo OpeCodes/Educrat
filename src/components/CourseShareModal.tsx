@@ -12,6 +12,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { shareOnFacebook, shareOnLinkedIn, shareOnTwitter } from './ShareFuncs';
 
 interface ModalShareProps {
   isOpen: boolean;
@@ -22,19 +23,19 @@ interface ModalShareProps {
 const ModalShare: React.FC<ModalShareProps> = ({ isOpen, onClose, url }) => {
   const { hasCopied, onCopy } = useClipboard(url);
 
-  const shareOnFacebook = () => {
-    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-    window.open(shareUrl, '_blank');
-  };
+  // const shareOnFacebook = () => {
+  //   const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+  //   window.open(shareUrl, '_blank');
+  // };
 
-  const shareOnTwitter = () => {
-    const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
-    window.open(shareUrl, '_blank');
-  };
-  const shareOnLinkedIn = () => {
-    const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-    window.open(shareUrl, '_blank');
-  };
+  // const shareOnTwitter = () => {
+  //   const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+  //   window.open(shareUrl, '_blank');
+  // };
+  // const shareOnLinkedIn = () => {
+  //   const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+  //   window.open(shareUrl, '_blank');
+  // };
 
 
   return (
@@ -54,7 +55,7 @@ const ModalShare: React.FC<ModalShareProps> = ({ isOpen, onClose, url }) => {
           <IconButton
             icon={<FaFacebook />}
             aria-label="Share on Facebook"
-            onClick={shareOnFacebook}
+            onClick={() =>shareOnFacebook(url)}
             variant="outline"
             colorScheme="black"
             mt={4}
@@ -64,7 +65,7 @@ const ModalShare: React.FC<ModalShareProps> = ({ isOpen, onClose, url }) => {
           <IconButton
             icon={<FaTwitter />}
             aria-label="Share on Twitter"
-            onClick={shareOnTwitter}
+            onClick={() =>shareOnTwitter(url)}
             variant="outline"
             colorScheme="black"
             borderRadius={"100%"}
@@ -74,7 +75,7 @@ const ModalShare: React.FC<ModalShareProps> = ({ isOpen, onClose, url }) => {
            <IconButton
             icon={<FaLinkedin />}
             aria-label="Share on Twitter"
-            onClick={shareOnLinkedIn}
+            onClick={() =>shareOnLinkedIn(url)}
             variant="outline"
             borderRadius={"100%"}
             colorScheme="black"
