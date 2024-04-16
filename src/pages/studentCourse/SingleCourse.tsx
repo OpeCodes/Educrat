@@ -217,19 +217,16 @@ const SingleCourse = () => {
     const baseUrl = window.location.origin;
     const currentUrl = window.location.href;
     const urlParts = currentUrl.split("/");
-    const courseIndex = urlParts.indexOf("course");
-  
+    const courseIndex = urlParts.indexOf("course");  
     if (courseIndex !== -1 && courseIndex + 1 < urlParts.length) {
       const coursePath = urlParts.slice(courseIndex, courseIndex + 2).join("/");
       return `${baseUrl}/${coursePath}`;
     }
   
-    return baseUrl; // Return base URL if "course" segment is not found or incomplete
+    return baseUrl; 
   };
   const url = getCourseUrlFromCurrentUrl();
-  console.log(url, 
-    "url"
-  )
+
   return (
     <>
       <Stack>
