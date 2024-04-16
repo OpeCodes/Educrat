@@ -13,7 +13,6 @@ import { useGetAllEducratInstructors } from "../hooks/studentCourse";
 
 export const Instructors = () => {
   const {data} = useGetAllEducratInstructors()
-  console.log(data)
   return (
     <Box
       as={"section"}
