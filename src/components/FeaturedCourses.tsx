@@ -79,7 +79,6 @@ const Course = ({
     );
   }
   // Function to calculate the total duration
-
   const getTotalLecturesDuration = () => {
     let totalDuration = 0;
     modules.forEach((module: any) => {

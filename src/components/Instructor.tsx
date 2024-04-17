@@ -5,6 +5,7 @@ import {
   FaTwitter,
   FaFacebookF,
   FaLinkedinIn,
+  FaStar,
 } from "react-icons/fa";
 
 type Instructor = {
@@ -13,7 +14,6 @@ type Instructor = {
   firstName: string;
   lastName: string;
   job: string;
-  icon: JSX.Element;
   course: number;
   student: number;
 };
@@ -21,7 +21,6 @@ const Instructor = ({
   profilePicture,
   lastName,
   firstName,
-  icon,
   course,
   student,
   headline
@@ -54,7 +53,7 @@ const Instructor = ({
             position={"absolute"}
             bottom={"0%"}
             w={"100%"}
-            h={"30%"}
+            h={"100%"}
             opacity={"0"}
             _hover={{
               h: "100%",
@@ -83,7 +82,7 @@ const Instructor = ({
             fontWeight={"normal"}
             my={2}
           >
-            {firstName}{lastName}
+            {firstName} {lastName}
           </Heading>
           <Text color={"gray.600"} fontSize={"15px"} mb={2}>
             {headline}
@@ -91,7 +90,9 @@ const Instructor = ({
           <Flex justifyContent={"start"} alignItems={"center"}>
             <Flex justifyContent={"center"} alignItems={"center"}>
               <Box as="span" color={"#e59819"} mr={1}>
-                {icon}
+              <Text>
+                                  <FaStar color={"#FFD700"} />
+                                </Text>
               </Box>
               <Text color={"#e59819"}>4.5</Text>
             </Flex>
@@ -101,6 +102,7 @@ const Instructor = ({
               justifyContent={"start"}
               alignItems={"center"}
               mx={4}
+              columnGap={1}
             >
               <CiUser color={"gray"} size={15} />
               <Text color={"gray.600"} fontSize={"14px"}>
@@ -111,6 +113,7 @@ const Instructor = ({
               display={"flex"}
               justifyContent={"start"}
               alignItems={"center"}
+              columnGap={1}
             >
               <CiPlay1 color={"gray"} size={15} />
               <Text color={"gray.600"} fontSize={"14px"}>

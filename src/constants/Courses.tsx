@@ -11,9 +11,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Course, SliderButtons } from "../components/index";
 import {  sliderSettings } from "../utils/data";
 import { useGetCourse } from "../hooks/course";
-
-
-
 export const Courses = () => {
   const { data, isPending } = useGetCourse();
   const dummyArray = [1, 2, 3, 4];
