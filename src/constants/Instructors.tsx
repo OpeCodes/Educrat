@@ -61,7 +61,7 @@ export const Instructors = () => {
           </Box>
         </Box>
         <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-          {data?.map((instructor: any) => {
+          {data?.slice(0,4).map((instructor: any) => {
             return <Instructor key={instructor.id} {...instructor} />;
           })}
         </Grid>
