@@ -35,7 +35,7 @@ const AllInstructorPage = () => {
         <Heading as={"h1"} color={"#140342"} size={"xl"}>
           Instructors
         </Heading>
-        <Text as={"p"} color={"gray.600"} my={2}>
+        <Text as={"p"} color={"gray.600"} my={2} >
           We’re on a mission to deliver engaging, curated courses at a
           reasonable price.
         </Text>
@@ -48,7 +48,7 @@ const AllInstructorPage = () => {
         w={"100%"}
         mx={"auto"}
       >
-        {data.map((instructor: any) => {
+        {data?.map((instructor: any) => {
           return <Instructor key={instructor.id} {...instructor} />;
         })}
       </Grid>
