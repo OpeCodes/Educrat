@@ -19,24 +19,7 @@ import {
   news2,
 } from "../assets/export";
 
-export const buttonsData = [
-  {
-    id: 1,
-    name: "All",
-  },
-  {
-    id: 2,
-    name: "Trending",
-  },
-  {
-    id: 3,
-    name: "Popular",
-  },
-  {
-    id: 4,
-    name: "Featured",
-  },
-];
+
 
 export const sliderSettings = {
   slidesPerView: 1,
