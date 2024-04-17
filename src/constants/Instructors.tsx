@@ -5,6 +5,7 @@ import {
   Text,
   Button,
   Flex,
+  Grid,
 } from "@chakra-ui/react";
 import { MdArrowOutward } from "react-icons/md";
 import { Instructor } from "../components";
@@ -12,7 +13,7 @@ import { useGetAllEducratInstructors } from "../hooks/studentCourse";
 import { Link } from "react-router-dom";
 
 export const Instructors = () => {
-  const {data} = useGetAllEducratInstructors();
+  const { data } = useGetAllEducratInstructors();
   return (
     <Box
       as={"section"}
@@ -59,30 +60,27 @@ export const Instructors = () => {
             </Button>
           </Box>
         </Box>
-        <Box
-          as="div"
-          display={{ md: "grid", lg: "flex" }}
-          flexDir={{ base: "column", lg: "row" }}
-          gridTemplateColumns={{ md: "repeat(2,1fr)" }}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          mt={10}
-          gap={6}
-        >
+        <Grid templateColumns="repeat(4, 1fr)" gap={6}>
           {data?.map((instructor: any) => {
             return <Instructor key={instructor.id} {...instructor} />;
           })}
-        </Box>
+        </Grid>
         <Flex
           flexDir={{ base: "column" }}
-          justifyContent={"center"}
-          alignItems={"center"}
-          my={8}
+          justify={"center"}
+          align={"center"}
+          my={5}
         >
           <Text color={"gray.600"} fontSize={"15px"}>
             Want to help people learn, grow and achieve more in life?
           </Text>
-          <Text color={"#6440fb"}  as={Link} fontSize={"15px"} ml={1} to={"become-instructor"}>
+          <Text
+            color={"#6440fb"}
+            as={Link}
+            fontSize={"15px"}
+            ml={1}
+            to={"become-instructor"}
+          >
             Become an instructor
           </Text>
         </Flex>
