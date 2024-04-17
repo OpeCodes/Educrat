@@ -82,9 +82,9 @@ export const Instructors = () => {
           <Text color={"gray.600"} fontSize={"15px"}>
             Want to help people learn, grow and achieve more in life?
           </Text>
-          <Link color={"#6440fb"} fontSize={"15px"} ml={1}>
+          <Text color={"#6440fb"}  as={Link} fontSize={"15px"} ml={1} to={"become-instructor"}>
             Become an instructor
-          </Link>
+          </Text>
         </Flex>
       </Stack>
     </Box>
