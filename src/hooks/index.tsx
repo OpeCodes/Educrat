@@ -59,21 +59,27 @@ export const useGetUser = () => {
 
 export const useBecomeInstructor = () => {
   const toast = useToast();
-  const navigate = useNavigate();
+  const [tabIndex, setTabIndex] = useState(0);
+  const handleTabChange = (index: number) => {
+    setTabIndex(index);
+  };
   const { mutate: becomeInstructor, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.put("/instructor/become-instructor", user);
     },
     onSuccess: () => {
+    handleTabChange(1)
+
       toast({
         title: `You are now an instructor`,
         status: "success",
         duration: 5000,
         isClosable: true,
       });
-      navigate("/instructor/courses");
+    
     },
     onError: (error: any) => {
+      
       if (error.response) {
         toast({
           title: `${error.response.data.error}`,
@@ -98,7 +104,7 @@ export const useBecomeInstructor = () => {
       }
     },
   });
-  return { becomeInstructor, isPending };
+  return { becomeInstructor, isPending , tabIndex, handleTabChange};
 };
 
 //invalidate the course in the usesinglecourse

@@ -38,7 +38,7 @@ const initialValues = {
 const BecomeInstructor = () => {
   const { user } = useSelector((store: RootState) => store?.user);
 
-  const { becomeInstructor, isPending } = useBecomeInstructor();
+  const { becomeInstructor, isPending ,tabIndex,handleTabChange} = useBecomeInstructor();
 
   const handleSubmit = (values: any) => {
     becomeInstructor(values);
@@ -57,12 +57,12 @@ const BecomeInstructor = () => {
           </Text>
           <Text fontSize={"18px"}>Your impacting journey begins here!</Text>
         </Box>
-        <Tabs position="relative">
+        <Tabs position="relative"  index={tabIndex} onChange={handleTabChange}>
           <TabList fontWeight={"bold"}>
-            <Tab _selected={{ fontWeight: "bold" }} fontWeight={"bold"}>
+            <Tab _selected={{ fontWeight: "bold" }} fontWeight={"bold"} >
               Educrat Profile
             </Tab>
-            <Tab fontWeight={"bold"}>Profile Picture</Tab>
+            <Tab fontWeight={"bold"} isDisabled={ tabIndex === 0 && true}>Profile Picture</Tab>
           </TabList>
           <TabIndicator
             mt="-1.5px"
@@ -73,7 +73,9 @@ const BecomeInstructor = () => {
             fontWeight={"bold"}
           />
           <TabPanels>
+            
             <TabPanel>
+            {tabIndex === 0 && (
               <Formik
                 initialValues={initialValues}
                 validationSchema={instructorProfileSchema}
@@ -166,12 +168,15 @@ const BecomeInstructor = () => {
                   </Grid>
                 )}
               </Formik>
+               )}
             </TabPanel>
             <TabPanel>
+            {tabIndex === 1 && (
               <Stack>
                 <Text fontWeight={"bold"}>Image Preview</Text>
                 <FileUploadComponent onImageUpload={handleImageUpload} />
               </Stack>
+               )}
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import customFetch from "../utils/axios";
 import imagePlaceholder from "../assets/image-placeholder.png";
+import { useNavigate } from "react-router-dom";
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
 }
@@ -18,6 +19,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [fileToUpload, setFileToUpload] = useState<File | null>(null);
   const toast = useToast();
+  const navigate= useNavigate();
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -48,6 +50,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
       };
       reader.readAsDataURL(fileToUpload);
     }
+    navigate("/instructor/courses");
   };
 
   const sendBase64Data = async (uploadedFile: File, base64Data: string) => {
