@@ -1,17 +1,29 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Image, Stack, Text } from "@chakra-ui/react";
 import { Link, useRouteError } from "react-router-dom";
-
+import img from "../../assets/404.svg";
 const Error = () => {
   const error: any = useRouteError();
 
   if (error?.status === 404) {
     return (
-      <div>
+      <Stack>
         {/* <img src={img} alt="not found" /> */}
-        <h3>Ohh! page not found</h3>
-        <p>We can't seem to find the page you're looking for</p>
-        <Link to="/">back home</Link>
-      </div>
+        <Flex>
+          <Image src={img} alt={"404 img"} />
+          <Stack>
+            <Flex>40</Flex>
+            <Flex>4</Flex>
+
+            <Text>Oops! It looks like you're lost.</Text>
+            <Text>
+              The page you're looking for isn't available. Try to search again
+              or use the go to. Go Back{" "}
+            </Text>
+
+            <Text>Go Back to HomePage</Text>
+          </Stack>
+        </Flex>
+      </Stack>
     );
   }
   return (
