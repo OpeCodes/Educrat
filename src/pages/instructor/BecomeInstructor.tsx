@@ -16,13 +16,16 @@ import {
   Input,
   Button,
   Textarea,
+  Image
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
 import { useBecomeInstructor } from "../../hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { Navigate } from "react-router-dom";
+import {  Navigate, useNavigate } from "react-router-dom";
+import logo from "../../assets/logo-2.svg"
+
 const initialValues = {
   headline: "",
   biography: "",
@@ -37,7 +40,7 @@ const initialValues = {
 
 const BecomeInstructor = () => {
   const { user } = useSelector((store: RootState) => store?.user);
-
+  const navigate = useNavigate();
   const { becomeInstructor, isPending ,tabIndex,handleTabChange} = useBecomeInstructor();
 
   const handleSubmit = (values: any) => {
@@ -49,8 +52,9 @@ const BecomeInstructor = () => {
     <Navigate to="/sign-in" />
   ) : (
     <Stack>
-      {/* <InstructorNavbar /> */}
+      {/* <InstructorNavbar /> */}     
       <Stack ml={{ base: 6, lg: 16 }} mr={{ base: 5, lg: 10 }} mt={10}>
+      <Image src={logo} alt="Educrat logo" h={"60px"} width={"160px"}  cursor={"pointer"} onClick={() => navigate("/")}/>
         <Box mt={3}>
           <Text fontSize={"4xl"} fontWeight={"bold"}>
             Become an instructor
