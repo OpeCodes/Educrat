@@ -23,7 +23,7 @@ const Error = () => {
             </Text>
             <Text>
               The page you're looking for isn't available. Try to search again
-              or use the go to. Go Back{" "}
+              or use the go to. 
             </Text>
 
             <Text
