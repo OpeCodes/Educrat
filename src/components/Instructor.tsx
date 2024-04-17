@@ -23,7 +23,7 @@ const Instructor = ({
   firstName,
   course,
   student,
-  headline
+  headline,
 }: Instructor) => {
   return (
     <Box
@@ -32,7 +32,6 @@ const Instructor = ({
       width={"100%"}
       height={"auto"}
       cursor={"pointer"}
-  
       mb={{ base: 8 }}
     >
       <Stack>
@@ -90,11 +89,11 @@ const Instructor = ({
           <Flex justifyContent={"start"} alignItems={"center"}>
             <Flex justifyContent={"center"} alignItems={"center"}>
               <Box as="span" color={"#e59819"} mr={1}>
-              <Text>
-                                  <FaStar color={"#FFD700"} />
-                                </Text>
+                <Text>
+                  <FaStar color={"#FFD700"} />
+                </Text>
               </Box>
-              <Text color={"#e59819"}>4.5</Text>
+              <Text color={"#FFD700"}>4.5</Text>
             </Flex>
 
             <Box
