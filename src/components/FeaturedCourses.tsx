@@ -51,7 +51,7 @@ const Course = ({
       return 0;
     }
     const averageStars = totalStars / totalReviews;
-    const roundedAverageStars = Math.round(averageStars);
+    const roundedAverageStars = Math.ceil(averageStars);
     return roundedAverageStars;
   }
 
