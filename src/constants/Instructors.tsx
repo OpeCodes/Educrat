@@ -34,7 +34,7 @@ export const Instructors = () => {
               Learn From The Best Instructors
             </Heading>
             <Text as={"p"} color={"gray.600"} my={2}>
-              Lorem ipsum dolor sit amet consectetur.
+              {/* Lorem ipsum dolor sit amet consectetur. */}
             </Text>
           </Box>
           <Box>
