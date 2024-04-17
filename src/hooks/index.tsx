@@ -1,8 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import customFetch from "../utils/axios";
 import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
-
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
 
