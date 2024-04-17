@@ -1,5 +1,5 @@
 import {
-  Ads,
+  // Ads,
   Courses,
   Cta,
   Footer,
@@ -21,7 +21,7 @@ const Home = () => {
       <Instructors />
       {/* <Students /> */}
       <Cta />
-      <Ads />
+      {/* <Ads /> */}
       {/* <News /> */}
       <Recommendations />
       <Footer />
