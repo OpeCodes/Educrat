@@ -1,16 +1,4 @@
 import {
-  category1,
-  category2,
-  category3,
-  category4,
-  category5,
-  category6,
-  category7,
-  category8,
-  student1,
-  student2,
-  student3,
-  student4,
   cta1,
   cta2,
   cta3,
@@ -18,9 +6,6 @@ import {
   news1,
   news2,
 } from "../assets/export";
-
-
-
 export const sliderSettings = {
   slidesPerView: 1,
   spaceBetween: 20,
@@ -41,85 +26,7 @@ export const sliderSettings = {
 };
 
 
-export const categoriesData = [
-  {
-    id: 1,
-    img: category1,
-    title: "Digital Marketing",
-    amount: 573,
-  },
-  {
-    id: 2,
-    img: category2,
-    title: "Web Development",
-    amount: 573,
-  },
-  {
-    id: 3,
-    img: category3,
-    title: "Graphic Design",
-    amount: 573,
-  },
-  {
-    id: 4,
-    img: category4,
-    title: "Social Sciences",
-    amount: 573,
-  },
-  {
-    id: 5,
-    img: category5,
-    title: "Photography",
-    amount: 573,
-  },
-  {
-    id: 6,
-    img: category6,
-    title: "Art & Humanities",
-    amount: 573,
-  },
-  {
-    id: 7,
-    img: category7,
-    title: "Personal Development",
-    amount: 573,
-  },
-  {
-    id: 8,
-    img: category8,
-    title: "IT and Software",
-    amount: 573,
-  },
-];
 
-
-
-export const studentsData = [
-  {
-    id: 1,
-    img: student1,
-    name: "Brooklyn Simmons",
-    job: "Web Designer",
-  },
-  {
-    id: 2,
-    img: student2,
-    name: "Cody Fisher",
-    job: "Dog Trainer",
-  },
-  {
-    id: 3,
-    img: student3,
-    name: "Marvin McKinney",
-    job: "President of Sales",
-  },
-  {
-    id: 4,
-    img: student4,
-    name: "Jane Cooper",
-    job: "Marketing Coordinator",
-  },
-];
 
 export const ctaData = [
   {

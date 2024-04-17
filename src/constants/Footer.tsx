@@ -24,7 +24,8 @@ export const Footer = () => {
       px={{ base: "6", md: "12", lg: "16" }}
       pt={16}
       pb={8}
-      bgColor={"#6440fb"}
+      // bgColor={"#6440fb"}
+      bg={"#1A064F"}
     >
       <Box
         as={"div"}
@@ -46,7 +47,7 @@ export const Footer = () => {
           <Text color={"white"} fontSize={"16px"} mr={8}>
             Follow us on social media
           </Text>
-          <Flex color={"white"}>
+          <Flex color={"white"} cursor={"pointer"}>
             <FaFacebookF size={16} />
             <Box as={"span"} mx={8}>
               <FaTwitter size={16} />
