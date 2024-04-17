@@ -7,7 +7,6 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Course, SliderButtons } from "../components/index";
 import {  sliderSettings } from "../utils/data";
@@ -16,7 +15,6 @@ import { useGetCourse } from "../hooks/course";
 
 
 export const Courses = () => {
-  const [activeButton, setActiveButton] = useState<number | null>(1);  
   const { data, isPending } = useGetCourse();
   const dummyArray = [1, 2, 3, 4];
   return (
