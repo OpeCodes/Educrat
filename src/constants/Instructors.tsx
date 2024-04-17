@@ -5,14 +5,14 @@ import {
   Text,
   Button,
   Flex,
-  Link,
 } from "@chakra-ui/react";
 import { MdArrowOutward } from "react-icons/md";
 import { Instructor } from "../components";
 import { useGetAllEducratInstructors } from "../hooks/studentCourse";
+import { Link } from "react-router-dom";
 
 export const Instructors = () => {
-  const {data} = useGetAllEducratInstructors()
+  const {data} = useGetAllEducratInstructors();
   return (
     <Box
       as={"section"}
@@ -52,6 +52,8 @@ export const Instructors = () => {
                 color: "white",
               }}
               rightIcon={<MdArrowOutward size={20} />}
+              as={Link}
+              to={"/all-instructor"}
             >
               View All Instructors
             </Button>

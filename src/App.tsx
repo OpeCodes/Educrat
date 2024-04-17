@@ -15,6 +15,7 @@ import {
 import "./App.css";
 import Home from "./pages/Home";
 import {
+  AllInstructorPage,
   MyLearning,
   SingleCourse,
   SingleEnrolledCourse,
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/user/:slug",
         element: <SingleInstructorPage />,
+      },
+      {
+        path: "all-instructor",
+        element: <AllInstructorPage />,
       },
     ],
   },
