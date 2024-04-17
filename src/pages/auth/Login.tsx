@@ -23,8 +23,8 @@ import { SignInSchema } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginUser } from "../../hooks/auth";
 const initialValues = {
-  credential: "peteradedokun2003@gmail.com",
-  password: "Peter12111",
+  credential: "",
+  password: "",
 };
 // instructor
 //peteradedokun2003@gmail.com
