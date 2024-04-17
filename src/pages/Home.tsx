@@ -1,6 +1,5 @@
 import {
   Ads,
-  Categories,
   Courses,
   Cta,
   Footer,
@@ -9,7 +8,7 @@ import {
   News,
   Recommendations,
   Sponsors,
-  Students,
+  // Students,
 } from "../constants";
 
 const Home = () => {
@@ -18,14 +17,15 @@ const Home = () => {
       <Header />
       <Sponsors />
       <Courses />
-      <Categories />
+      {/* <Categories /> */}
       <Instructors />
-      <Students />
+      {/* <Students /> */}
       <Cta />
       <Ads />
       <News />
       <Recommendations />
       <Footer />
+      
     </>
   );
 };
