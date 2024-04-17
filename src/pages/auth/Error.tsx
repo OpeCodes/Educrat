@@ -7,20 +7,37 @@ const Error = () => {
   if (error?.status === 404) {
     return (
       <Stack>
-        {/* <img src={img} alt="not found" /> */}
-        <Flex>
+        <Flex
+          columnGap={20}
+          flexDirection={{ base: "column", md: "row" }}
+          px={1}
+        >
           <Image src={img} alt={"404 img"} />
           <Stack>
-            <Flex>40</Flex>
-            <Flex>4</Flex>
-
-            <Text>Oops! It looks like you're lost.</Text>
+            <Flex fontSize={"15rem"} fontWeight={"bold"}>
+              <Text color={"#140342"}>40</Text>
+              <Text color={"#6440FB"}>4</Text>
+            </Flex>
+            <Text fontSize={"2rem"} fontWeight={"bold"}>
+              Oops! It looks like you're lost.
+            </Text>
             <Text>
               The page you're looking for isn't available. Try to search again
               or use the go to. Go Back{" "}
             </Text>
 
-            <Text>Go Back to HomePage</Text>
+            <Text
+              mt={3}
+              as={Link}
+              to={"/"}
+              bg={"#6440FB"}
+              color={"white"}
+              borderRadius={5}
+              width={"fit-content"}
+              p={3}
+            >
+              Go Back to HomePage
+            </Text>
           </Stack>
         </Flex>
       </Stack>
