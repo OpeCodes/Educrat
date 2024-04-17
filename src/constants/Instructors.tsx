@@ -67,7 +67,7 @@ export const Instructors = () => {
           mt={10}
           gap={6}
         >
-          {data.map((instructor: any) => {
+          {data?.map((instructor: any) => {
             return <Instructor key={instructor.id} {...instructor} />;
           })}
         </Box>
