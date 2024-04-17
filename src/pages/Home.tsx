@@ -5,7 +5,7 @@ import {
   Footer,
   Header,
   Instructors,
-  News,
+  // News,
   Recommendations,
   Sponsors,
   // Students,
@@ -22,7 +22,7 @@ const Home = () => {
       {/* <Students /> */}
       <Cta />
       <Ads />
-      <News />
+      {/* <News /> */}
       <Recommendations />
       <Footer />
       

@@ -141,7 +141,7 @@ export const Footer = () => {
       >
         <Box as="div">
           <Text as={"p"} color={"white"} fontSize={"16px"}>
-            &copy; 2024 Educrat. All Right Reserved.
+            &copy; {new Date().getFullYear()} Educrat. All Right Reserved.
           </Text>
         </Box>
         <Flex
