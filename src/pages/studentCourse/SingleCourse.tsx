@@ -78,7 +78,7 @@ const SingleCourse = () => {
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
-  const { getStudentEnrolledCourse } = useGetStudentEnrolledCourse(
+  const { getStudentEnrolledCourse,isPending: getStudentEnrolledCourseLoading} = useGetStudentEnrolledCourse(
     getStudentSingleCourse?.id
   );
 
@@ -230,7 +230,7 @@ const SingleCourse = () => {
   return (
     <>
       <Stack>
-        {isPending && (
+        {getStudentEnrolledCourseLoading && (
           <Stack mx={"4.3rem"}>
             <Skeleton height="60px" />
             <Stack>
@@ -327,7 +327,7 @@ const SingleCourse = () => {
                           <LuClock3 />
                         </Text>
                         <Text>
-                          {getStudentEnrolledCourse?.length} enrolled on this
+                          {getStudentEnrolledCourse?.length} enrolled for this
                           course
                         </Text>
                       </Flex>
