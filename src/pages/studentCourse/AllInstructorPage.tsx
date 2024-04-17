@@ -48,7 +48,7 @@ const AllInstructorPage = () => {
         w={"100%"}
         mx={"auto"}
       >
-        {data?.map((instructor: any) => {
+        {data.map((instructor: any) => {
           return <Instructor key={instructor.id} {...instructor} />;
         })}
       </Grid>
