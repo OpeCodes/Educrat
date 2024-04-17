@@ -4,7 +4,7 @@ import { useGetAllEducratInstructors } from "../../hooks/studentCourse";
 import { Instructor } from "../../components";
 
 const AllInstructorPage = () => {
-    const { data } = useGetAllEducratInstructors();
+  const { data } = useGetAllEducratInstructors();
 
   return (
     <Stack mt={"4.3rem"}>
@@ -40,14 +40,18 @@ const AllInstructorPage = () => {
           reasonable price.
         </Text>
       </Stack>
-      <Stack>
-        result and sort here
-      </Stack>
-      <Grid mt={"1rem"} templateColumns="repeat(4, 1fr)" gap={6} maxW={"80%"} w={"100%"} mx={"auto"}>
-          {data?.map((instructor: any) => {
-            return <Instructor key={instructor.id} {...instructor} />;
-          })}
-        </Grid>
+      <Grid
+        mt={"1rem"}
+        templateColumns="repeat(4, 1fr)"
+        gap={6}
+        maxW={"80%"}
+        w={"100%"}
+        mx={"auto"}
+      >
+        {data?.map((instructor: any) => {
+          return <Instructor key={instructor.id} {...instructor} />;
+        })}
+      </Grid>
     </Stack>
   );
 };
