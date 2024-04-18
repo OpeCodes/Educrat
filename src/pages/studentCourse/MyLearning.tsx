@@ -20,6 +20,7 @@ import { Loading } from "../../components";
 const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
     useGetAllUserEnrolledCourse();
+    console.log(enrolledCourse, "enrolledCourse")
    const {getStudentWishList} =  useGetStudentWishList()
   return (
     <Stack mt={"4.6rem"}>
@@ -72,18 +73,18 @@ const MyLearning = () => {
                           w="100%"
                           key={id}
                           as={Link}
-                          to={`/course/${courseId.slug}/learn/lecture/${id}/660d3c593a19ced801d39aab/reviews`}
+                          to={`/course/${courseId?.slug}/learn/lecture/${id}/660d3c593a19ced801d39aab/reviews`}
                         >
                           <Image
                             maxHeight={"250px"}
                             height={"100%"}
                             width={"100%"}
                             objectFit="cover"
-                            src={courseId.thumbnail}
-                            alt={courseId.title}
+                            src={courseId?.thumbnail}
+                            alt={courseId?.title}
                           />
                           <Text mt={2} fontWeight={"bold"}>
-                            {courseId.title}
+                            {courseId?.title}
                           </Text>
                           <Text fontSize={"15px"} color={"gray"}>
                             Peter Adedokun
