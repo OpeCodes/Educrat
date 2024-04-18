@@ -47,6 +47,25 @@ const MyLearning = () => {
     return starElements;
   };
 
+  //get first id for each lecture in the enrolled array
+  const getFirstLectureIds = (enrolledCourses: any[]) => {
+    const firstLectureIds: string[] = [];  
+    enrolledCourses.forEach((course) => {
+      const { courseId } = course;
+      if (courseId && courseId?.modules && Array.isArray(courseId?.modules) && courseId.modules?.length > 0) {
+        const firstModule = courseId.modules[0];
+        if (firstModule.lectures && Array.isArray(firstModule.lectures) && firstModule.lectures.length > 0) {
+          const firstLectureId = firstModule.lectures[0].id;
+          firstLectureIds.push(firstLectureId);
+        }
+      }
+    });
+  
+    return firstLectureIds;
+  };  
+  const firstLectureIds = getFirstLectureIds(enrolledCourse);
+  console.log(firstLectureIds)
+
   return (
     <Stack mt="4.6rem">
       <Stack>
