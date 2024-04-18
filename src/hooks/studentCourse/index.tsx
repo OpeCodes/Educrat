@@ -502,8 +502,8 @@ export const useCreateCourseWishList = () => {
     mutate: createCourseWishList,
     isPending: createCourseWishListLoading,
   } = useMutation({
-    mutationFn: ({ courseId,wish }: any) => {
-      return customFetch.post(`/wishlist/course/${courseId}`, {wish});
+    mutationFn: ({ courseId}: any) => {
+      return customFetch.post(`/wishlist/course/${courseId}`,);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
