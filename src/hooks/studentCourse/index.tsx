@@ -448,7 +448,7 @@ export const useGetStudentWishList = () => {
   } = useQuery({
     queryKey: ["getStudentWishList"],
     queryFn: async () => {
-      const { data } = await customFetch.get("/wishlist/wishlist");
+      const { data } = await customFetch.get("/wishlist");
       return data;
     },
   });
