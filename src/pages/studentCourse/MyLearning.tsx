@@ -15,13 +15,17 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
-import { useGetAllUserEnrolledCourse, useGetStudentWishList } from "../../hooks/studentCourse";
+import {
+  useGetAllUserEnrolledCourse,
+  useGetStudentWishList,
+} from "../../hooks/studentCourse";
 import { Loading } from "../../components";
 
 const MyLearning = () => {
-  const { data: enrolledCourse, isPending: enrolledCourseLoading } = useGetAllUserEnrolledCourse();
+  const { data: enrolledCourse, isPending: enrolledCourseLoading } =
+    useGetAllUserEnrolledCourse();
   const { getStudentWishList } = useGetStudentWishList();
-
+  console.log(enrolledCourse, "enrolledCourse");
   // Function to calculate average stars for reviews of a course
   const calculateAverageStars = (reviews: { stars: number }[]) => {
     if (!reviews || reviews.length === 0) {
@@ -38,9 +42,7 @@ const MyLearning = () => {
     const starElements: JSX.Element[] = [];
     for (let i = 1; i <= 5; i++) {
       const filledColor = i <= averageStars ? "#FFD700" : "#EAEAEA";
-      starElements.push(
-        <FaStar key={`star-${i}`} color={filledColor} />
-      );
+      starElements.push(<FaStar key={`star-${i}`} color={filledColor} />);
     }
     return starElements;
   };
@@ -67,7 +69,12 @@ const MyLearning = () => {
               <Tab fontWeight="bold">All Courses</Tab>
               <Tab fontWeight="bold">Wishlist</Tab>
             </TabList>
-            <TabIndicator mt="-1.9px" height="7px" bg="white" borderRadius="1px" />
+            <TabIndicator
+              mt="-1.9px"
+              height="7px"
+              bg="white"
+              borderRadius="1px"
+            />
             <TabPanels color="black">
               <TabPanel>
                 {enrolledCourseLoading ? (
@@ -83,22 +90,18 @@ const MyLearning = () => {
                   >
                     {enrolledCourse?.map((course: any, index: number) => {
                       const { courseId, id } = course;
-
                       if (!courseId) {
                         return null; // Skip rendering if courseId is null
                       }
-
                       const { reviews, thumbnail, title } = courseId;
-
                       const averageStars = calculateAverageStars(reviews);
-
                       return (
                         <GridItem
                           w="100%"
                           key={id}
                           as={Link}
                           h={"100%"}
-                          to={`/course/${courseId.slug}/learn/lecture/${id}/660d3c593a19ced801d39aab/reviews`}
+                          to={`/course/${courseId.slug}/learn/lecture/${id}/"092834758372459329847579870934"/reviews`}
                         >
                           <Image
                             maxHeight={"250px"}
@@ -140,11 +143,7 @@ const MyLearning = () => {
                     const { thumbnail, title, id, slug } = course;
 
                     return (
-                      <GridItem
-                        key={id}
-                        as={Link}
-                        to={`/course/${slug}`}
-                      >
+                      <GridItem key={id} as={Link} to={`/course/${slug}`}>
                         <Image
                           maxHeight="250px"
                           height="100%"
