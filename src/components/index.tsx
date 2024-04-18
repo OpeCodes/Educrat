@@ -11,7 +11,6 @@ import CourseManageSidebar from "./CourseManageSidebar";
 import CourseImageFileUpload from "./CourseImageFileUpload";
 import Loading from "./Loading";
 import CourseListComponent from "./CourseListComponent";
-import Category from "./Category";
 import Course from "./FeaturedCourses";
 import SliderButtons from "./SliderButtons";
 import Instructor from "./Instructor";
@@ -38,7 +37,6 @@ export {
   CourseImageFileUpload,
   Loading,
   CourseListComponent,
-  Category,
   Course,
   SliderButtons,
   Instructor,
