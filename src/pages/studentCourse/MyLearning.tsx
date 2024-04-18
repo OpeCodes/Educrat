@@ -50,7 +50,7 @@ const MyLearning = () => {
   //get first id for each lecture in the enrolled array
   const getFirstLectureIds = (enrolledCourses: any[]) => {
     const firstLectureIds: string[] = [];  
-    enrolledCourses.forEach((course) => {
+    enrolledCourses?.forEach((course) => {
       const { courseId } = course;
       if (courseId && courseId?.modules && Array.isArray(courseId?.modules) && courseId.modules?.length > 0) {
         const firstModule = courseId.modules[0];
@@ -64,8 +64,7 @@ const MyLearning = () => {
     return firstLectureIds;
   };  
   const firstLectureIds = getFirstLectureIds(enrolledCourse);
-  console.log(firstLectureIds)
-
+ 
   return (
     <Stack mt="4.6rem">
       <Stack>
@@ -120,7 +119,7 @@ const MyLearning = () => {
                           key={id}
                           as={Link}
                           h={"100%"}
-                          to={`/course/${courseId.slug}/learn/lecture/${id}/"092834758372459329847579870934"/reviews`}
+                          to={`/course/${courseId.slug}/learn/lecture/${id}/${firstLectureIds[index]}/reviews`}
                         >
                           <Image
                             maxHeight={"250px"}
