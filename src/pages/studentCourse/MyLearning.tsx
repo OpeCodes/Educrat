@@ -114,7 +114,7 @@ const MyLearning = () => {
                           <Text fontSize={"15px"} color={"gray"}>
                             Peter Adedokun
                           </Text>
-                          <Progress value={40} size="xs" mt={2} />
+                          <Progress value={40} height={"2px"} mt={2} />
                           <Flex justify={"space-between"} fontSize={13} mt={1}>
                             <Text>40% complete</Text>
                             <Stack>
