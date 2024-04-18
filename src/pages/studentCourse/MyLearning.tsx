@@ -24,8 +24,10 @@ import { Loading } from "../../components";
 const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
     useGetAllUserEnrolledCourse();
-  const { getStudentWishList } = useGetStudentWishList();
+  const { getStudentWishList, isPending: getStudentWishListLoading } =
+    useGetStudentWishList();
   console.log(enrolledCourse, "enrolledCourse");
+  console.log(getStudentWishList, "getStudentWishList");
   // Function to calculate average stars for reviews of a course
   const calculateAverageStars = (reviews: { stars: number }[]) => {
     if (!reviews || reviews.length === 0) {
@@ -49,22 +51,31 @@ const MyLearning = () => {
 
   //get first id for each lecture in the enrolled array
   const getFirstLectureIds = (enrolledCourses: any[]) => {
-    const firstLectureIds: string[] = [];  
+    const firstLectureIds: string[] = [];
     enrolledCourses?.forEach((course) => {
       const { courseId } = course;
-      if (courseId && courseId?.modules && Array.isArray(courseId?.modules) && courseId.modules?.length > 0) {
+      if (
+        courseId &&
+        courseId?.modules &&
+        Array.isArray(courseId?.modules) &&
+        courseId.modules?.length > 0
+      ) {
         const firstModule = courseId.modules[0];
-        if (firstModule.lectures && Array.isArray(firstModule.lectures) && firstModule.lectures.length > 0) {
+        if (
+          firstModule.lectures &&
+          Array.isArray(firstModule.lectures) &&
+          firstModule.lectures.length > 0
+        ) {
           const firstLectureId = firstModule.lectures[0].id;
           firstLectureIds.push(firstLectureId);
         }
       }
     });
-  
+
     return firstLectureIds;
-  };  
+  };
   const firstLectureIds = getFirstLectureIds(enrolledCourse);
- 
+
   return (
     <Stack mt="4.6rem">
       <Stack>
@@ -149,45 +160,48 @@ const MyLearning = () => {
                 )}
               </TabPanel>
               <TabPanel>
-                <Grid
-                  templateColumns={{
-                    md: "repeat(2, 1fr)",
-                    lg: "repeat(4, 1fr)",
-                  }}
-                  gap={6}
-                  mt={6}
-                >
-                  {getStudentWishList?.map((course: any) => {
-                    const { thumbnail, title, id, slug } = course;
-
-                    return (
-                      <GridItem key={id} as={Link} to={`/course/${slug}`}>
-                        <Image
-                          maxHeight="250px"
-                          height="100%"
-                          width="100%"
-                          objectFit="cover"
-                          src={thumbnail}
-                          alt={title}
-                        />
-                        <Text mt={2} fontWeight="bold">
-                          {title}
-                        </Text>
-                        <Flex columnGap={1} fontSize={13}>
-                          <Text>4.5 stars</Text>
-                          <Text color="gray">(993)</Text>
-                        </Flex>
-                        <Flex columnGap={1} fontSize={13} color="gray">
-                          <Text>4.5 hours</Text>
-                          <Text>444 lectures</Text>
-                        </Flex>
-                        <Text fontWeight="bold" color="black">
-                          N40000
-                        </Text>
-                      </GridItem>
-                    );
-                  })}
-                </Grid>
+                {getStudentWishListLoading ? (
+                  <Loading />
+                ) : (
+                  <Grid
+                    templateColumns={{
+                      md: "repeat(2, 1fr)",
+                      lg: "repeat(4, 1fr)",
+                    }}
+                    gap={6}
+                    mt={6}
+                  >
+                    {getStudentWishList?.map((course: any) => {
+                      const { thumbnail, title, id, slug } = course;
+                      return (
+                        <GridItem key={id} as={Link} to={`/course/${slug}`}>
+                          <Image
+                            maxHeight="250px"
+                            height="100%"
+                            width="100%"
+                            objectFit="cover"
+                            src={thumbnail}
+                            alt={title}
+                          />
+                          <Text mt={2} fontWeight="bold">
+                            {title}
+                          </Text>
+                          <Flex columnGap={1} fontSize={13}>
+                            <Text>4.5 stars</Text>
+                            <Text color="gray">(993)</Text>
+                          </Flex>
+                          <Flex columnGap={1} fontSize={13} color="gray">
+                            <Text>4.5 hours</Text>
+                            <Text>444 lectures</Text>
+                          </Flex>
+                          <Text fontWeight="bold" color="black">
+                            N40000
+                          </Text>
+                        </GridItem>
+                      );
+                    })}
+                  </Grid>
+                )}
               </TabPanel>
             </TabPanels>
           </Tabs>

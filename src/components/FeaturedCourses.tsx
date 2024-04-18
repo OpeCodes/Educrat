@@ -67,7 +67,6 @@ const Course = ({
   }
 
   const totalSumOfStars = getTotalStarsSum(reviews);
-  console.log(calculateAverageStars(reviews) , "here")
   const Reviewstars = [];
   // Fill stars based on the rating value
   for (let i = 1; i <= 5; i++) {

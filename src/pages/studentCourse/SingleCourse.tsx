@@ -53,7 +53,6 @@ import { PromotionalVideoPlayModal } from "../../components";
 import { setCourseAuthNavigate } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import { removeStudenCourseWishListorage } from "../../store/localStorage";
 import { Footer } from "../../constants";
 import { TiSocialTwitter } from "react-icons/ti";
 import { shareOnFacebook, shareOnInstagram, shareOnLinkedIn, shareOnTwitter } from "../../components/ShareFuncs";
@@ -154,6 +153,7 @@ const SingleCourse = () => {
     } else {
       courseEnroll({
         courseId: getStudentSingleCourse?.id,
+        wishList: true
       });
     }
   };
@@ -644,7 +644,6 @@ const SingleCourse = () => {
                                       ) : (
                                         <Text
                                           onClick={() => {
-                                            removeStudenCourseWishListorage();
                                             deleteCourseWishList({
                                               courseId:
                                                 getStudentSingleCourse?.id,

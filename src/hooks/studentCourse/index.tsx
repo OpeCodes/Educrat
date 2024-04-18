@@ -496,18 +496,18 @@ export const useGetStudentWishList = () => {
 export const useCreateCourseWishList = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const {
     mutate: createCourseWishList,
     isPending: createCourseWishListLoading,
   } = useMutation({
-    mutationFn: ({ courseId }: any) => {
-      return customFetch.post(`/wishlist/course/${courseId}`);
+    mutationFn: ({ courseId,wish }: any) => {
+      return customFetch.post(`/wishlist/course/${courseId}`, {wish});
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
-      dispatch(setMarkWishList());
+      // dispatch(setMarkWishList());
     },
     onError: (error: any) => {
       if (error.response) {

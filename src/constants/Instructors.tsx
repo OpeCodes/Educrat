@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 
 export const Instructors = () => {
   const { data } = useGetAllEducratInstructors();
-  console.log(data)
   return (
     <Box
       as={"section"}
