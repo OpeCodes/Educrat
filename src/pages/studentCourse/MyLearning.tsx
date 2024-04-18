@@ -94,25 +94,32 @@ const MyLearning = () => {
 
                       return (
                         <GridItem
+                          w="100%"
                           key={id}
                           as={Link}
-                          to={`/course/${courseId?.slug}/learn/lecture/${id}/660d3c593a19ced801d39aab/reviews`}
+                          h={"100%"}
+                          to={`/course/${courseId.slug}/learn/lecture/${id}/660d3c593a19ced801d39aab/reviews`}
                         >
                           <Image
-                            maxHeight="250px"
-                            height="100%"
-                            width="100%"
+                            maxHeight={"250px"}
+                            height={"100%"}
+                            width={"100%"}
                             objectFit="cover"
                             src={thumbnail}
                             alt={title}
                           />
-                          <Text mt={2} fontWeight="bold">
+                          <Text mt={2} fontWeight={"bold"}>
                             {title}
                           </Text>
+                          <Text fontSize={"15px"} color={"gray"}>
+                            Peter Adedokun
+                          </Text>
                           <Progress value={40} size="xs" mt={2} />
-                          <Flex justify="space-between" fontSize={13}>
-                            <Flex>{renderStars(averageStars)}</Flex>
-                            <Text>Your Rating</Text>
+                          <Flex justify={"space-between"} fontSize={13} mt={1}>
+                            <Text>40% complete</Text>
+                            <Stack>
+                              <Flex>{renderStars(averageStars)}</Flex>
+                            </Stack>
                           </Flex>
                         </GridItem>
                       );
