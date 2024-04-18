@@ -31,7 +31,7 @@ const CreateCourse = () => {
   if (isPending) {
     return <Loading />;
   }
-  return !user.profilePicture ? (
+  return !user ? (
     <Navigate to="/" />
   ) : (
     <Stack>
