@@ -6,6 +6,8 @@ import {
   Button,
   Flex,
   Grid,
+  GridItem,
+  Skeleton,
 } from "@chakra-ui/react";
 import { MdArrowOutward } from "react-icons/md";
 import { Instructor } from "../components";
@@ -13,7 +15,9 @@ import { useGetAllEducratInstructors } from "../hooks/studentCourse";
 import { Link } from "react-router-dom";
 
 export const Instructors = () => {
-  const { data } = useGetAllEducratInstructors();
+  
+  const { data,isPending } = useGetAllEducratInstructors();
+  const dummyArray = [1, 2, 3, 4];
   return (
     <Box
       as={"section"}
@@ -60,6 +64,26 @@ export const Instructors = () => {
             </Button>
           </Box>
         </Box>
+        {isPending && (
+          <Stack>
+            <Grid
+              templateColumns={{
+                base: "repeat(1, 1fr)",
+                md: "repeat(2, 1fr)",
+                lg: "repeat(4, 1fr)",
+              }}
+              gap={6}
+            >
+              {dummyArray.map((_, index) => (
+                <GridItem w="100%" key={index}>
+                  <Skeleton height="200px" />
+                  <Skeleton height="80px" mt={1} />
+                </GridItem>
+              ))}
+            </Grid>
+          </Stack>
+        )}
+
         <Grid templateColumns={{base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)"}} gap={6}>
           {data?.slice(0,4).map((instructor: any) => {
             return <Instructor key={instructor.id} {...instructor} />;
