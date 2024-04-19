@@ -3,7 +3,6 @@ import customFetch from "../../utils/axios";
 import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
-import { useDispatch } from "react-redux";
 import { GetToastErrorHandling } from "../../components";
 
 export const useGetAllEducratInstructors = () => {
@@ -536,7 +535,6 @@ export const useCreateCourseWishList = () => {
 export const useDeleteCourseWishList = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const dispatch = useDispatch();
 
   const {
     mutate: deleteCourseWishList,
@@ -547,7 +545,6 @@ export const useDeleteCourseWishList = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
-      dispatch(setMarkWishList());
     },
     onError: (error: any) => {
       if (error.response) {
