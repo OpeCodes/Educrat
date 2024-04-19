@@ -56,7 +56,7 @@ const AddToCartButton = () => {
             <Stack maxH={"250px"} h={"100%"} overflow={"auto"} borderWidth={0}>
               {array.map(() => {
                 return (
-                  <Stack px={1} py={3}>
+                  <Stack mx={3} py={3}>
                     <Flex justify={"space-between"} columnGap={2}>
                       <Flex columnGap={2}>
                         <Image
@@ -86,24 +86,28 @@ const AddToCartButton = () => {
           </PopoverBody>
           <PopoverFooter>
             <Stack mx={3}>
-              <Flex justify={"space-between"} my={2}>
+              <Flex justify={"space-between"} my={2} fontSize={20}>
                 <Text>Total:</Text>
                 <Text>$168</Text>
               </Flex>
-              <Flex justify={"center"} columnGap={10}>
+              <Flex justify={"center"} columnGap={10} pb={5}>
                 <Button
                   bg={"#6440FB"}
                   py={"25px"}
                   variant="solid"
+                  fontWeight={400}
                   color={"white"}
+                  width={"100%"}
                 >
-                  Go to Course
+                  View Cart{" "}
                 </Button>
                 <Button
                   bg={"#6440FB"}
                   py={"25px"}
                   variant="solid"
                   color={"white"}
+                  fontWeight={400}
+                  width={"100%"}
                 >
                   Checkout
                 </Button>
