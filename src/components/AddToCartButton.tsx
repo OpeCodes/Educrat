@@ -12,6 +12,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { IoCartOutline } from "react-icons/io5";
+import { MdClose } from "react-icons/md";
 
 const AddToCartButton = () => {
   const array = [1, 2,];
@@ -54,7 +55,7 @@ const AddToCartButton = () => {
             <Stack  maxH={"250px"} h={"100%"} overflow={"auto"}     borderWidth={0} >
             {array.map(() => {
               return (
-                <Stack px={1} py={4}>
+                <Stack px={1} py={3}>
                   <Flex justify={"space-between"} columnGap={2}>
                     <Flex columnGap={2}>
                       <Image
@@ -69,7 +70,7 @@ const AddToCartButton = () => {
                         <Text>$50</Text>
                       </Stack>
                     </Flex>
-                    <Text>X</Text>
+                    <Text cursor={"pointer"} color={"blue"} fontWeight={"bold"}><MdClose fontSize={20}/></Text>
                   </Flex>
                 </Stack>
               );
