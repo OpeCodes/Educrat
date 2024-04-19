@@ -56,9 +56,14 @@ import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Footer } from "../../constants";
 import { TiSocialTwitter } from "react-icons/ti";
-import { shareOnFacebook, shareOnInstagram, shareOnLinkedIn, shareOnTwitter } from "../../components/ShareFuncs";
+import {
+  shareOnFacebook,
+  shareOnInstagram,
+  shareOnLinkedIn,
+  shareOnTwitter,
+} from "../../components/ShareFuncs";
 interface ObjectWithId {
-  id: string; 
+  id: string;
 }
 const SingleCourse = () => {
   const { slug } = useParams();
@@ -74,22 +79,22 @@ const SingleCourse = () => {
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
 
-  const { getStudentWishList,  } =
-    useGetStudentWishList();
+  const { getStudentWishList } = useGetStudentWishList();
 
+  const studentCourseId: string | undefined = getStudentSingleCourse?.id;
+  const objectToCheck: ObjectWithId = { id: studentCourseId ?? "" };
 
-    const studentCourseId: string | undefined = getStudentSingleCourse?.id;
-    const objectToCheck: ObjectWithId = { id: studentCourseId ?? '' };
-    
-    const doesIdExistInArray = (array: ObjectWithId[], objectToCheck: ObjectWithId): boolean => {
-      return array.some(item => item.id === objectToCheck.id);
-    };    
-    const studentWishList: ObjectWithId[] = getStudentWishList ?? [];    
-    const idExists = doesIdExistInArray(studentWishList, objectToCheck);
-    
+  const doesIdExistInArray = (
+    array: ObjectWithId[],
+    objectToCheck: ObjectWithId
+  ): boolean => {
+    return array.some((item) => item.id === objectToCheck.id);
+  };
+  const studentWishList: ObjectWithId[] = getStudentWishList ?? [];
+  const idExists = doesIdExistInArray(studentWishList, objectToCheck);
 
-    console.log(getStudentSingleCourse, "getStudentSingleCourse")
-    console.log(getStudentWishList, "getStudentWishList")
+  console.log(getStudentSingleCourse, "getStudentSingleCourse");
+  console.log(getStudentWishList, "getStudentWishList");
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
@@ -97,9 +102,10 @@ const SingleCourse = () => {
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
-  const { getStudentEnrolledCourse,isPending: getStudentEnrolledCourseLoading} = useGetStudentEnrolledCourse(
-    getStudentSingleCourse?.id
-  );
+  const {
+    getStudentEnrolledCourse,
+    isPending: getStudentEnrolledCourseLoading,
+  } = useGetStudentEnrolledCourse(getStudentSingleCourse?.id);
 
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
@@ -173,7 +179,7 @@ const SingleCourse = () => {
     } else {
       courseEnroll({
         courseId: getStudentSingleCourse?.id,
-        wishList: true
+        wishList: true,
       });
     }
   };
@@ -237,13 +243,13 @@ const SingleCourse = () => {
     const baseUrl = window.location.origin;
     const currentUrl = window.location.href;
     const urlParts = currentUrl.split("/");
-    const courseIndex = urlParts.indexOf("course");  
+    const courseIndex = urlParts.indexOf("course");
     if (courseIndex !== -1 && courseIndex + 1 < urlParts.length) {
       const coursePath = urlParts.slice(courseIndex, courseIndex + 2).join("/");
       return `${baseUrl}/${coursePath}`;
     }
-  
-    return baseUrl; 
+
+    return baseUrl;
   };
   const url = getCourseUrlFromCurrentUrl();
 
@@ -657,7 +663,7 @@ const SingleCourse = () => {
                                     <Spinner />
                                   ) : (
                                     <>
-                                      {!idExists  ? (
+                                      {!idExists ? (
                                         <Text onClick={handleWishCourse}>
                                           <IoMdHeartEmpty size={25} />
                                         </Text>
@@ -815,19 +821,18 @@ const SingleCourse = () => {
                                 cursor={"pointer"}
                                 color={"#140342"}
                               >
-                                <Text onClick={() =>shareOnFacebook(url)}>
-                                  <FaFacebookF  />
+                                <Text onClick={() => shareOnFacebook(url)}>
+                                  <FaFacebookF />
                                 </Text>
-                                <Text onClick={() =>shareOnLinkedIn(url)}>
+                                <Text onClick={() => shareOnLinkedIn(url)}>
                                   <FaLinkedinIn />
                                 </Text>
-                                <Text onClick={() =>shareOnTwitter(url)}>
+                                <Text onClick={() => shareOnTwitter(url)}>
                                   <TiSocialTwitter />
                                 </Text>
 
                                 <Text onClick={() => shareOnInstagram(url)}>
-                                <FaInstagram />
-
+                                  <FaInstagram />
                                 </Text>
                               </Flex>
                             </Stack>

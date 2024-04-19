@@ -4,7 +4,6 @@ import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
 import { useDispatch } from "react-redux";
-import { setMarkWishList } from "../../features/user/UserSlice";
 import { GetToastErrorHandling } from "../../components";
 
 export const useGetAllEducratInstructors = () => {

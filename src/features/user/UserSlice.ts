@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  addStudenCourseWishListorage,
-  getStudenCourseWishListorage,
   getUserLocalStorage,
   removeUserFromLocalStorage,
 } from "../../store/localStorage";
@@ -9,13 +7,11 @@ import {
 interface UserState {
   user: any;
   courseNavigate: number;
-  markWishList: boolean;
 }
 
 const initialState: UserState = {
   user: getUserLocalStorage(),
   courseNavigate: 0,
-  markWishList: getStudenCourseWishListorage(),
 };
 
 const userSlice = createSlice({
@@ -33,14 +29,11 @@ const userSlice = createSlice({
     setCourseAuthNavigate: (state: UserState, action: PayloadAction<any>) => {
       state.courseNavigate = action.payload;
     },
-    setMarkWishList: (state: UserState) => {
-      state.markWishList = !state.markWishList;
-      addStudenCourseWishListorage(state.markWishList);
-    },
+   
   },
 });
 
-export const { setUser, logoutUser, setCourseAuthNavigate, setMarkWishList } =
+export const { setUser, logoutUser, setCourseAuthNavigate,  } =
   userSlice.actions;
 export const selectData = (state: { data: UserState }) => state.data.user;
 export default userSlice.reducer;

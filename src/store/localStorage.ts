@@ -9,16 +9,5 @@ export const getUserLocalStorage = () => {
   const user = result ? JSON.parse(result) : null;
   return user;
 };
-export const addStudenCourseWishListorage = (wishlist: any) => {
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
-};
 
-export const removeStudenCourseWishListorage = () => {
-  localStorage.removeItem("wishlist");
-};
-export const getStudenCourseWishListorage  = () => {
-  const result = localStorage.getItem("wishlist");
-  const wishlist = result ? JSON.parse(result) : false;
-  return wishlist;
-};
 
