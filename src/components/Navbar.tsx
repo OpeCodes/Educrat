@@ -4,7 +4,6 @@ import {
   Stack,
   Box,
   Text,
-  Badge,
   Button,
   Drawer,
   DrawerBody,
@@ -31,7 +30,6 @@ import {
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo-2.svg";
 import { FiSearch } from "react-icons/fi";
-import { IoCartOutline } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
