@@ -93,8 +93,6 @@ const SingleCourse = () => {
   const studentWishList: ObjectWithId[] = getStudentWishList ?? [];
   const idExists = doesIdExistInArray(studentWishList, objectToCheck);
 
-  console.log(getStudentSingleCourse, "getStudentSingleCourse");
-  console.log(getStudentWishList, "getStudentWishList");
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
