@@ -31,6 +31,7 @@ import {
 } from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 import SingleInstructorPage from "./pages/studentCourse/SingleInstructorPage";
+import Cart from "./pages/Cart";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "all-instructor",
         element: <AllInstructorPage />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

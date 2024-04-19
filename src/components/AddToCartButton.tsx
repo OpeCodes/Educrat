@@ -88,7 +88,7 @@ const AddToCartButton = () => {
             <Stack mx={3}>
               <Flex justify={"space-between"} my={2} fontSize={20}>
                 <Text>Total:</Text>
-                <Text>$168</Text>
+                <Text>$100</Text>
               </Flex>
               <Flex justify={"center"} columnGap={10} pb={5}>
                 <Button
