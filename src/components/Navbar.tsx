@@ -91,7 +91,6 @@ const Navbar = () => {
         bg="white"
         shadow={"base"}
         zIndex={10}
-
         py={4}
         px={{ base: "6", md: "12", lg: "16" }}
         width={"100%"}
@@ -100,14 +99,13 @@ const Navbar = () => {
         align={"center"}
       >
         <Flex justify={"space-between"} align={"center"}>
-          <Box width={"160px"} as={Link} to={"/"} >
+          <Box width={"160px"} as={Link} to={"/"}>
             <Image src={logo} alt="logo" />
           </Box>
         </Flex>
 
         <Flex
           columnGap={4}
-          
           color={"white"}
           display={{ base: "none", lg: "flex" }}
         >
@@ -173,14 +171,21 @@ const Navbar = () => {
             </Text>
             <Badge
               position="absolute"
-              top="-4"
-              right="-3"
-              borderRadius="100%"
-              bg="#6440fb"
+              top="-3"
+              right="-2"
+              borderRadius="50%"
+              bg="red"
               color="white"
-              textAlign={"center"}
+              padding={2}
+              fontSize="xs"
+              lineHeight="none"
+              width="1.0rem"
+              height="1.0rem"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
             >
-              10
+              1
             </Badge>
           </Box>
           <Box
@@ -236,7 +241,9 @@ const Navbar = () => {
                   <Divider />
                   <Box color="gray" fontSize={"15px"}>
                     <Stack p={3}>
-                      <Text as={Link} to={"home/my-courses/learning/"}>My Learning</Text>
+                      <Text as={Link} to={"home/my-courses/learning/"}>
+                        My Learning
+                      </Text>
                       <Text> My Cart</Text>
                       {hasStudentRole && hasInstructorRole && (
                         <Text
@@ -425,7 +432,7 @@ const Navbar = () => {
                       });
                       setTimeout(() => {
                         dispatch(logoutUser());
-                        onClose()
+                        onClose();
                       }, 2000);
                     }}
                     cursor={"pointer"}
