@@ -26,8 +26,6 @@ const MyLearning = () => {
     useGetAllUserEnrolledCourse();
   const { getStudentWishList, isPending: getStudentWishListLoading } =
     useGetStudentWishList();
-  console.log(enrolledCourse, "enrolledCourse");
-  console.log(getStudentWishList, "getStudentWishList");
   // Function to calculate average stars for reviews of a course
   const calculateAverageStars = (reviews: { stars: number }[]) => {
     if (!reviews || reviews.length === 0) {

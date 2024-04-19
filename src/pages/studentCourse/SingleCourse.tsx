@@ -39,6 +39,7 @@ import {
   useGetSingleEnrolledCourse,
   useGetStudentEnrolledCourse,
   useGetStudentSingleCourse,
+  useGetStudentWishList,
   useInstructorReviewRating,
 } from "../../hooks/studentCourse";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaStar } from "react-icons/fa";
@@ -56,7 +57,10 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Footer } from "../../constants";
 import { TiSocialTwitter } from "react-icons/ti";
 import { shareOnFacebook, shareOnInstagram, shareOnLinkedIn, shareOnTwitter } from "../../components/ShareFuncs";
-
+interface ObjectWithId {
+  id: string; // Assuming id is of type string, adjust as needed
+  // Add other properties as needed
+}
 const SingleCourse = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -70,6 +74,27 @@ const SingleCourse = () => {
   const { user, markWishList } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
+
+  const { getStudentWishList,  } =
+    useGetStudentWishList();
+
+    //function to check if a wishlist exist
+
+    const studentCourseId: string | undefined = getStudentSingleCourse?.id;
+    const objectToCheck: ObjectWithId = { id: studentCourseId ?? '' };
+    
+    const doesIdExistInArray = (array: ObjectWithId[], objectToCheck: ObjectWithId): boolean => {
+      return array.some(item => item.id === objectToCheck.id);
+    };
+    
+    // Assuming getStudentWishList might be null or undefined
+    const studentWishList: ObjectWithId[] = getStudentWishList ?? [];
+    
+    const idExists = doesIdExistInArray(studentWishList, objectToCheck);
+    console.log(idExists);
+
+    console.log(getStudentSingleCourse, "getStudentSingleCourse")
+    console.log(getStudentWishList, "getStudentWishList")
   const { getCourseReview } = useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
@@ -230,7 +255,7 @@ const SingleCourse = () => {
   return (
     <>
       <Stack>
-        {getStudentEnrolledCourseLoading && (
+        {getStudentEnrolledCourseLoading && isPending && (
           <Stack mx={"4.3rem"}>
             <Skeleton height="60px" />
             <Stack>

@@ -497,7 +497,6 @@ export const useCreateCourseWishList = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
   // const dispatch = useDispatch();
-
   const {
     mutate: createCourseWishList,
     isPending: createCourseWishListLoading,
