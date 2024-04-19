@@ -159,49 +159,58 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                 </AccordionButton>
               </Stack>
               {module?.lectures?.map((lecture: any) => {
-                const { contentPreviewable, content, contentType, id,title } =
+                const { contentPreviewable, content, contentType, id, title } =
                   lecture;
                 return (
-                  <AccordionPanel key={lecture.id}>
-                    <Flex align={"center"} justify={"space-between"}>
-                      <Flex color={"#4f547b"} align={"center"} columnGap={5}>
-                        <Text>
-                          {contentType === "lecture_video" ? (
-                            <RiPlayCircleFill size={25} color={"#4f547b"} />
-                          ) : (
-                            <LuStickyNote size={20} color={"#4f547b"} />
-                          )}
-                        </Text>
-                        <Text>{title}</Text>
-                      </Flex>
-                      <Flex align={"center"} columnGap={4}>
-                        {contentPreviewable && (
-                          <Button
-                            color={"#6440fb"}
-                            textAlign={"left"}
-                            display={"flex"}
-                            justifyContent={"left"}
-                            size="sm"
-                            colorScheme="teal"
-                            variant="link"
-                            onClick={() => toggleModal(id)}
+                  <>
+                    {content?.duration && (
+                      <AccordionPanel key={lecture.id}>
+                        <Flex align={"center"} justify={"space-between"}>
+                          <Flex
+                            color={"#4f547b"}
+                            align={"center"}
+                            columnGap={5}
                           >
-                            Preview
-                          </Button>
-                        )}
-                        <PreviewContentModal
-                          contentType={contentType}
-                          Content={content}
-                          isOpen={modalStates[id]}
-                          title= {title}
-                          onToggleModal={() => toggleModal(id)}
-                        />
-                        <Text color={"#4f547b"}>
-                          {convertSecondsToTime(content?.duration)}
-                        </Text>
-                      </Flex>
-                    </Flex>
-                  </AccordionPanel>
+                            <Text>
+                              {contentType === "lecture_video" ? (
+                                <RiPlayCircleFill size={25} color={"#4f547b"} />
+                              ) : (
+                                <LuStickyNote size={20} color={"#4f547b"} />
+                              )}
+                            </Text>
+                            <Text>{title}</Text>
+                          </Flex>
+                          <Flex align={"center"} columnGap={4}>
+                            {contentPreviewable && (
+                              <Button
+                                color={"#6440fb"}
+                                textAlign={"left"}
+                                display={"flex"}
+                                justifyContent={"left"}
+                                size="sm"
+                                colorScheme="teal"
+                                variant="link"
+                                onClick={() => toggleModal(id)}
+                              >
+                                Preview
+                              </Button>
+                            )}
+                            <PreviewContentModal
+                              contentType={contentType}
+                              Content={content}
+                              isOpen={modalStates[id]}
+                              title={title}
+                              onToggleModal={() => toggleModal(id)}
+                            />
+
+                            <Text color={"#4f547b"}>
+                              {convertSecondsToTime(content?.duration)}
+                            </Text>
+                          </Flex>
+                        </Flex>
+                      </AccordionPanel>
+                    )}
+                  </>
                 );
               })}
             </AccordionItem>
