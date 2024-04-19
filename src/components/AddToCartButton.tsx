@@ -41,7 +41,7 @@ const AddToCartButton = () => {
               alignItems="center"
               justifyContent="center"
             >
-              1
+             {array.length}
             </Badge>
           </Box>
         </PopoverTrigger>
