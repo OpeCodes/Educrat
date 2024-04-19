@@ -21,8 +21,9 @@ import ToastLoading from "./ToastLoading";
 import CoursePromotionalVideoUpload from "./CoursePromotionalVideoUpload";
 import PromotionalVideoPlayModal from "./PromotionalVideoPlayModal";
 import PreviewContentModal from "./PreviewContentModal";
-  
-  import GetToastErrorHandling from "./GetToastErrorHandling";
+
+import GetToastErrorHandling from "./GetToastErrorHandling";
+import AddToCartButton from "./AddToCartButton";
 export {
   HomeLayout,
   Navbar,
@@ -47,5 +48,6 @@ export {
   CoursePromotionalVideoUpload,
   PromotionalVideoPlayModal,
   PreviewContentModal,
-  GetToastErrorHandling
+  GetToastErrorHandling,
+  AddToCartButton,
 };

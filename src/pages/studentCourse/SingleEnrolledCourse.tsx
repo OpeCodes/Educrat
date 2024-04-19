@@ -260,7 +260,7 @@ const SingleEnrolledCourse = () => {
                   {getSingleEnrolledCourse?.completedLectures?.length} of{" "}
                   {lectureLength.length} completed.
                 </PopoverHeader>
-                <PopoverArrow bg="white" />
+                <PopoverArrow bg="white"   />
                 {completedValue ? (
                   <PopoverBody>
                     <Text
@@ -619,12 +619,7 @@ const SingleEnrolledCourse = () => {
                                   }
                                 />
                                 <Stack
-                                  cursor={"pointer"}
-                                  // onClick={() =>
-                                  //   navigate(
-                                  //     `/course/${getSingleEnrolledCourse?.courseId?.slug}/learn/lecture/${getSingleEnrolledCourse.id}/${LectureID}/reviews`
-                                  //   )
-                                  // }
+                                  cursor={"pointer"}                                 
                                   onClick={() =>
                                     handleActiveAccordionClick(LectureID)
                                   }

@@ -39,6 +39,7 @@ import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
 import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
+import AddToCartButton from "./AddToCartButton";
 const links = [
   {
     id: 1,
@@ -165,29 +166,9 @@ const Navbar = () => {
           <Text cursor={"pointer"} onClick={() => onModalOpen()}>
             <FiSearch color={"#6440fb"} fontSize={"25px"} />
           </Text>
-          <Box position="relative">
-            <Text cursor={"pointer"}>
-              <IoCartOutline color={"#6440fb"} fontSize={"25px"} />
-            </Text>
-            <Badge
-              position="absolute"
-              top="-3"
-              right="-2"
-              borderRadius="50%"
-              bg="red"
-              color="white"
-              padding={2}
-              fontSize="xs"
-              lineHeight="none"
-              width="1.0rem"
-              height="1.0rem"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              1
-            </Badge>
-          </Box>
+          <Stack>
+            <AddToCartButton/>
+          </Stack>
           <Box
             fontSize={"50px"}
             color={"#6440fb"}
