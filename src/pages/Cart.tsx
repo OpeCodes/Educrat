@@ -66,15 +66,16 @@ const Cart = () => {
         </Table>
       </TableContainer>
 
-      <Stack justify={"flex-end"}>
-        <Stack bg={"red"}>
-          <Text>Cart Totals</Text>
+<Stack maxW={"350px"} w={"100%"} ml="auto" mt={9}>
+      <Stack justify={"end"}   >
+        <Stack bg={"#F4F1FE"} px={6} rowGap={8} py={4} borderRadius={8}>
+          <Text fontSize={20} fontWeight={500}>Cart Totals</Text>
           <Flex justify={"space-between"}>
             <Text>Subtotal</Text>
             <Text>$233.0</Text>
           </Flex>
           <Flex justify={"space-between"}>
-            <Text>total</Text>
+            <Text>Total</Text>
             <Text>$233.0</Text>
           </Flex>
         </Stack>
@@ -82,6 +83,7 @@ const Cart = () => {
           bg={"#6440FB"}
           py={"25px"}
           variant="solid"
+          mt={3}
           fontWeight={400}
           color={"white"}
           width={"100%"}
@@ -90,6 +92,7 @@ const Cart = () => {
         >
           Proceed to Checkout
         </Button>
+      </Stack>
       </Stack>
     </Stack>
   );
