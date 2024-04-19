@@ -14,12 +14,12 @@ const Cart = () => {
     <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
       <TableContainer mt={"9rem"}>
         <Table size="sm">
-          <Thead>
-            <Tr bg={"red"}>
-              <Th p={6}>Product</Th>
-              <Th>Price</Th>
-              <Th>Subtotal</Th>
-              <Th>Remove</Th>
+          <Thead >
+            <Tr bg={"#F5F7FE"} color={"#6440FB"} borderRadius={10}>
+              <Th color={"#6440FB"} p={6}>Product</Th>
+              <Th color={"#6440FB"} >Price</Th>
+              <Th color={"#6440FB"} >Subtotal</Th>
+              <Th color={"#6440FB"} >Remove</Th>
             </Tr>
           </Thead>
           {dummy.map(() => {
