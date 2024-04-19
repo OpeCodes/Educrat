@@ -496,7 +496,6 @@ export const useGetStudentWishList = () => {
 export const useCreateCourseWishList = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  // const dispatch = useDispatch();
   const {
     mutate: createCourseWishList,
     isPending: createCourseWishListLoading,
@@ -506,7 +505,6 @@ export const useCreateCourseWishList = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
-      // dispatch(setMarkWishList());
     },
     onError: (error: any) => {
       if (error.response) {

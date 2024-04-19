@@ -58,8 +58,7 @@ import { Footer } from "../../constants";
 import { TiSocialTwitter } from "react-icons/ti";
 import { shareOnFacebook, shareOnInstagram, shareOnLinkedIn, shareOnTwitter } from "../../components/ShareFuncs";
 interface ObjectWithId {
-  id: string; // Assuming id is of type string, adjust as needed
-  // Add other properties as needed
+  id: string; 
 }
 const SingleCourse = () => {
   const { slug } = useParams();
@@ -71,27 +70,23 @@ const SingleCourse = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  const { user, markWishList } = useSelector((store: RootState) => store?.user);
+  const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
 
   const { getStudentWishList,  } =
     useGetStudentWishList();
 
-    //function to check if a wishlist exist
 
     const studentCourseId: string | undefined = getStudentSingleCourse?.id;
     const objectToCheck: ObjectWithId = { id: studentCourseId ?? '' };
     
     const doesIdExistInArray = (array: ObjectWithId[], objectToCheck: ObjectWithId): boolean => {
       return array.some(item => item.id === objectToCheck.id);
-    };
-    
-    // Assuming getStudentWishList might be null or undefined
-    const studentWishList: ObjectWithId[] = getStudentWishList ?? [];
-    
+    };    
+    const studentWishList: ObjectWithId[] = getStudentWishList ?? [];    
     const idExists = doesIdExistInArray(studentWishList, objectToCheck);
-    console.log(idExists);
+    
 
     console.log(getStudentSingleCourse, "getStudentSingleCourse")
     console.log(getStudentWishList, "getStudentWishList")
@@ -662,7 +657,7 @@ const SingleCourse = () => {
                                     <Spinner />
                                   ) : (
                                     <>
-                                      {!markWishList ? (
+                                      {!idExists  ? (
                                         <Text onClick={handleWishCourse}>
                                           <IoMdHeartEmpty size={25} />
                                         </Text>
