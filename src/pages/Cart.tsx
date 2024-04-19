@@ -1,45 +1,72 @@
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Stack,
-} from "@chakra-ui/react";
-const Cart = () => {
-  const dummy = [1, 2];
-  return (
-    <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
-      <TableContainer mt={"9rem"}>
-        <Table size="sm">
-          <Thead >
-            <Tr bg={"#F5F7FE"} color={"#6440FB"} borderRadius={10}>
-              <Th color={"#6440FB"} p={6}>Product</Th>
-              <Th color={"#6440FB"} >Price</Th>
-              <Th color={"#6440FB"} >Subtotal</Th>
-              <Th color={"#6440FB"} >Remove</Th>
-            </Tr>
-          </Thead>
-          {dummy.map(() => {
-            return (
-              <Tbody p={6}>
-                <Tr p={6}>
-                  <Td p={6} py={10}>
-                    inches1
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    TableContainer,
+    Stack,
+    Flex,
+    Image,
+    Text,
+  } from "@chakra-ui/react";
+import { MdClose } from "react-icons/md";
+  
+  const Cart = () => {
+    const dummy = [1, 2]; // Dummy data array (replace with actual cart data)
+  
+    return (
+      <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
+        <TableContainer mt={"9rem"}>
+          <Table size="sm">
+            <Thead>
+              <Tr bg={"#F5F7FE"} color={"#6440FB"} borderRadius={10}>
+                <Th color={"#6440FB"} p={6} width={"35%"}>
+                  Product
+                </Th>
+                <Th color={"#6440FB"} width={"20%"}>
+                  Price
+                </Th>
+                <Th color={"#6440FB"} width={"20%"}>
+                  Subtotal
+                </Th>
+                <Th color={"#6440FB"} width={"15%"}>
+                  Remove
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {dummy.map((_,index) => (
+                <Tr key={index} p={6}>
+                  <Td width={"100%"} maxW={"40%"}  my={6}>
+                    <Flex align="center">
+                      <Image
+                        borderRadius="5px"
+                        boxSize="100px"
+                        src="https://bit.ly/dan-abramov"
+                        alt="Product Image"
+                        mr={4}
+                      />
+                      <Text isTruncated maxW="100%">
+                        Complete Python Bootcamp From Zero to Hero in Python
+                      </Text>
+                    </Flex>
                   </Td>
-                  <Td>millimetres (mm)</Td>
-                  <Td>millimetres (mm)</Td>
-                  <Td>millimetres (mm)</Td>
+                  <Td width={"20%"}>$18</Td>
+                  <Td width={"20%"}>$18</Td>
+                  <Td width={"10%"} cursor={"pointer"}>
+                 
+                        <MdClose fontSize={20} />
+                  </Td>
                 </Tr>
-              </Tbody>
-            );
-          })}
-        </Table>
-      </TableContainer>
-    </Stack>
-  );
-};
-
-export default Cart;
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Stack>
+    );
+  };
+  
+  export default Cart;
+  
