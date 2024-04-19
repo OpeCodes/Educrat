@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { IoCartOutline } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const AddToCartButton = () => {
   const array = [1, 2];
@@ -98,6 +99,8 @@ const AddToCartButton = () => {
                   fontWeight={400}
                   color={"white"}
                   width={"100%"}
+                  as={Link}
+                  to={"/cart"}
                 >
                   View Cart{" "}
                 </Button>

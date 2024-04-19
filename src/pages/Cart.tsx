@@ -39,7 +39,7 @@ import { MdClose } from "react-icons/md";
             <Tbody>
               {dummy.map((_,index) => (
                 <Tr key={index} p={6}>
-                  <Td width={"100%"} maxW={"40%"}  my={6}>
+                  <Td width={"100%"} maxW={"40%"}  py={6}>
                     <Flex align="center">
                       <Image
                         borderRadius="5px"
