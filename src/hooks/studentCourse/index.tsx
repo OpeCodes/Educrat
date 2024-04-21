@@ -333,6 +333,67 @@ export const useMarkLectureUnfinished = () => {
   });
   return { markLectureUnfinshed };
 };
+
+
+export const useGetSingleEducratInstructor = (slug: any) => {
+  const toast = useToast();
+  const [error, setError] = useState<string | null>(null);
+  const {
+    data: getSingleEducratInstructor,
+    isPending,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["singleCourse", slug],
+    queryFn: async ({ queryKey }) => {
+      const [, slug] = queryKey;
+      try {
+        const { data } = await customFetch.get(`/instructor/slug/${slug}`);
+        setError(null);
+        return data;
+      } catch (error: any) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          setError(error.response.data.error);
+        } else {
+          setError("An unexpected error occurred.");
+        }
+        throw error;
+      }
+    },
+  });
+  useEffect(() => {
+    if (isError) {
+      if (error) {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={error} onClose={onClose} />
+          ),
+        });
+      } else {
+        toast({
+          status: "error",
+          position: "bottom-right",
+          duration: 10000,
+          isClosable: true,
+          render: ({ onClose }) => (
+            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
+          ),
+        });
+      }
+    }
+  }, [isError, error, toast]);
+  return { getSingleEducratInstructor, isPending, isError, refetch };
+};
+
+
 // ***************************************************reviews***************************************
 
 export const useCreateEnrolledCourseReview = () => {

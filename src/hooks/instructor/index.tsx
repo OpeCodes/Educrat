@@ -12,10 +12,8 @@ export const useGetAllInstructorCourses = (id: any) => {
         const [, id] = queryKey; // Destructure the queryKey to get the 'id'
         const { data } = await customFetch.get(`course/instructor/${id}`);
         return data;
-      },
-     
-    });
-  
+      },    
+    });  
     return {
       getLectureModuleCourse,
       isPending,

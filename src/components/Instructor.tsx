@@ -14,16 +14,14 @@ type Instructor = {
   firstName: string;
   lastName: string;
   job: string;
-  course: number;
-  student: number;
+  courses: string[];
 };
 const Instructor = ({
   profilePicture,
   lastName,
   firstName,
-  course,
-  student,
   headline,
+  courses
 }: Instructor) => {
   return (
     <Box
@@ -105,7 +103,7 @@ const Instructor = ({
             >
               <CiUser color={"gray"} size={15} />
               <Text color={"gray.600"} fontSize={"14px"}>
-                {student} Students
+                {courses?.length} Students
               </Text>
             </Box>
             <Box
@@ -116,7 +114,7 @@ const Instructor = ({
             >
               <CiPlay1 color={"gray"} size={15} />
               <Text color={"gray.600"} fontSize={"14px"}>
-                {course} Courses
+              {courses?.length} Courses
               </Text>
             </Box>
           </Flex>

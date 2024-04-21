@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 export const Instructors = () => {
   
   const { data,isPending } = useGetAllEducratInstructors();
+  console.log(data,"hiii")
   const dummyArray = [1, 2, 3, 4];
   return (
     <Box
