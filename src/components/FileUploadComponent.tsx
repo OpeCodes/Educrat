@@ -19,7 +19,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [fileToUpload, setFileToUpload] = useState<File | null>(null);
   const toast = useToast();
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -50,7 +50,9 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
       };
       reader.readAsDataURL(fileToUpload);
     }
-    navigate("/instructor/courses");
+    setTimeout(() => {
+      navigate("/instructor/courses");
+    }, 2000);
   };
 
   const sendBase64Data = async (uploadedFile: File, base64Data: string) => {

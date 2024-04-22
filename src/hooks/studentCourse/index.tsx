@@ -348,7 +348,7 @@ export const useGetSingleEducratInstructor = (slug: any) => {
     queryFn: async ({ queryKey }) => {
       const [, slug] = queryKey;
       try {
-        const { data } = await customFetch.get(`/instructor/slug/${slug}`);
+        const { data } = await customFetch.get(`/instructor/slug/${slug}`,);
         setError(null);
         return data;
       } catch (error: any) {
