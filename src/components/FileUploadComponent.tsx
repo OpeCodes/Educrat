@@ -54,7 +54,6 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
       navigate("/instructor/courses");
     }, 2000);
   };
-
   const sendBase64Data = async (uploadedFile: File, base64Data: string) => {
     try {
       await customFetch.put(

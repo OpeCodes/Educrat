@@ -129,6 +129,7 @@ const Courses = () => {
         </Stack>
       ) : (
         <>
+      {data?.length === 0 && <Text>No courses available</Text>}
           {sortedItems.length > 0 && (
             <Stack>
               {sortedItems?.map((item: any) => (
