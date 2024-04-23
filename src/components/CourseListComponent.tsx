@@ -47,6 +47,7 @@ const CourseListComponent = ({ title, thumbnail,id }: any) => {
         columnGap={5}
         mb={3}
         height="130px"
+        align={"center "}
       >
         <Flex columnGap={4} w={{ base: "100%", md: "40%" }}>
           <Image
