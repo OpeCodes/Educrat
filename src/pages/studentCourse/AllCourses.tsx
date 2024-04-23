@@ -19,7 +19,7 @@ import { CgNotes } from "react-icons/cg";
 import { useGetCourse } from "../../hooks/course";
 import { CourseInterface } from "../../interface/courseInterface";
 import { Link } from "react-router-dom";
-import { getTotalLecturesDuration } from "../../components/GetTotalLecturesDuration";
+import { getTotalLecturesDuration } from "../../components/CourseCalculations";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 import { CiClock1, CiPlay1 } from "react-icons/ci";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";

@@ -14,7 +14,7 @@ import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { convertSecondsToHMS } from "./TimeFormat";
 import { LectureInterface, ModuleInterface, ReviewInterface } from "../interface/courseInterface";
-import { getTotalLecturesDuration } from "./GetTotalLecturesDuration";
+import { calculateAverageStars, getTotalLecturesDuration } from "./CourseCalculations";
 
 type Props = {
   id: number;
@@ -38,23 +38,22 @@ const Course = ({
   modules,
 }: Props) => {
   // Function to calculate the average stars and round up to whole number
-  function calculateAverageStars(products: any) {
-    let totalStars = 0;
-    let totalReviews = 0;
-    products.forEach(() => {
-      reviews.forEach((review: ReviewInterface) => {
-        totalStars += review?.stars || 0;
-        totalReviews++;
-      });
-    });
-    if (totalReviews === 0) {
-      return 0;
-    }
-    const averageStars = totalStars / totalReviews;
-    const roundedAverageStars = Math.ceil(averageStars);
-    return roundedAverageStars;
-  }
-
+  // function calculateAverageStars(review: any) {
+  //   let totalStars = 0;
+  //   let totalReviews = 0;
+  //     reviews.forEach((review: ReviewInterface) => {
+  //       totalStars += review?.stars || 0;
+  //       totalReviews++;
+  //     });
+  //   if (totalReviews === 0) {
+  //     return 0;
+  //   }
+  //   const averageStars = totalStars / totalReviews;
+  //   const roundedAverageStars = Math.ceil(averageStars);
+  //   return roundedAverageStars;
+  // }
+  // calculateAverageStars(reviews)
+  // console.log(reviews, "reviews")
   // Function to calculate the total stars
   function getTotalStarsSum(data: any) {
     const allStars = data.map((review: any) => review.stars);

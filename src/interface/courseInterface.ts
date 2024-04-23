@@ -21,6 +21,11 @@ export interface CurriculumInterface {
 
 export interface ReviewInterface {
     stars: number;
+    content: string;
+    courseId: string;
+    id: string;
+    title: string;
+    updatedAt: string | number;
   }
 interface ContentInterface {
   body: string;
