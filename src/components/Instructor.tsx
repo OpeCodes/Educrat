@@ -18,8 +18,8 @@ type Instructor = {
   job: string;
   courses: string[];
   slug: string;
-  index: number
-  arrayOfIds: number[]
+  index: number;
+  arrayOfIds: number[];
 };
 const Instructor = ({
   profilePicture,
@@ -29,18 +29,15 @@ const Instructor = ({
   courses,
   slug,
   index,
-  arrayOfIds
-
+  arrayOfIds,
 }: Instructor) => {
-  console.log(index)
   const { instructorReviewRating } = useInstructorReviewRating(
-    // getStudentSingleCourse?.userId?.id
-    // "66262d846858d95292123a82"
     arrayOfIds[index]
   );
-  console.log(instructorReviewRating, "instructorReviewRating")
-  console.log( "instructorReviewRating")
-  const averateinstructorReviewRating = instructorReviewRating.average === "NaN" ? 0 : instructorReviewRating.average 
+  const averateinstructorReviewRating =
+    instructorReviewRating.average === "NaN"
+      ? 0
+      : instructorReviewRating.average;
   return (
     <Box
       className="card"
@@ -133,7 +130,7 @@ const Instructor = ({
             >
               <CiPlay1 color={"gray"} size={15} />
               <Text color={"gray.600"} fontSize={"14px"}>
-              {courses?.length} Courses
+                {courses?.length} Courses
               </Text>
             </Box>
           </Flex>
