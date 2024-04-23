@@ -15,11 +15,10 @@ import {
   Image,
   Avatar,
 } from "@chakra-ui/react";
-import { CgNotes } from "react-icons/cg";
 import { useGetCourse } from "../../hooks/course";
 import { CourseInterface } from "../../interface/courseInterface";
 import { Link } from "react-router-dom";
-import { getTotalLecturesDuration } from "../../components/GetTotalLecturesDuration";
+import { getTotalLecturesDuration } from "../../components/CourseCalculations";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 import { CiClock1, CiPlay1 } from "react-icons/ci";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
@@ -80,7 +79,7 @@ const StudentCourse = () => {
               </Flex>
             </Flex>
             <Grid templateColumns={{base: "repeat(1, 1fr)", md:"repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
-              {data?.data?.map(({thumbnail,title,complexityLevel,userId,id, slug,description,modules}: CourseInterface) => (
+              {data?.data?.map(({thumbnail,title,complexityLevel,userId,id, slug,modules}: CourseInterface) => (
                 <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                   <Stack>
                     <Stack>
