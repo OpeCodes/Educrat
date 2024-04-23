@@ -14,6 +14,7 @@ import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { convertSecondsToHMS } from "./TimeFormat";
 import { LectureInterface, ModuleInterface } from "../interface/courseInterface";
+import { getTotalLecturesDuration } from "./GetTotalLecturesDuration";
 interface Review {
   stars: number;
 }
@@ -78,19 +79,7 @@ const Course = ({
       />
     );
   }
-  // Function to calculate the total duration
-  const getTotalLecturesDuration = () => {
-    let totalDuration = 0;
-    modules.forEach((module: ModuleInterface) => {
-      if (module.lectures && Array.isArray(module.lectures)) {
-        module.lectures.forEach((lecture: LectureInterface) => {
-          totalDuration += lecture?.content?.duration || 0;
-        });
-      }
-    });
-    return totalDuration;
-  };
-  const totalDuration = getTotalLecturesDuration();
+  const totalDuration = getTotalLecturesDuration(modules);
 
   return (
     <Box

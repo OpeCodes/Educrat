@@ -18,6 +18,7 @@ import {
 import { CgNotes } from "react-icons/cg";
 import { useGetCourse } from "../../hooks/course";
 import { CourseInterface } from "../../interface/courseInterface";
+import { Link } from "react-router-dom";
 
 
 
@@ -75,8 +76,8 @@ const StudentCourse = () => {
               </Flex>
             </Flex>
             <Grid templateColumns={{base: "repeat(1, 1fr)", md:"repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
-              {data?.data?.map(({thumbnail,title,complexityLevel,userId,id}: CourseInterface) => (
-                <GridItem w="100%" key={id}>
+              {data?.data?.map(({thumbnail,title,complexityLevel,userId,id, slug,description,modules}: CourseInterface) => (
+                <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                   <Stack>
                     <Stack>
                       <Image
@@ -92,7 +93,7 @@ const StudentCourse = () => {
                         <Flex justify={"space-between"}>
                           <Flex align="center" columnGap={"4px"} color="gray">
                             <CgNotes />
-                            <Text fontSize="13px">6 Lessons</Text>
+                            <Text fontSize="13px">{modules.length} Lessons</Text>
                           </Flex>
                           <Flex align="center" columnGap={"4px"} color="gray">
                             <CgNotes />
