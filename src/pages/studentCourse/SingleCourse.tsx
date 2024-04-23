@@ -531,7 +531,8 @@ const SingleCourse = () => {
                                   </Text>
                                   <Text>
                                     {getInstructorenrolledCourse?.length}{" "}
-                                    Students
+
+                                    Student {`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
                                   </Text>
                                 </Flex>
                                 <Flex
@@ -544,7 +545,7 @@ const SingleCourse = () => {
                                   </Text>
                                   <Text>
                                     {getAlInstructorPublishedCourse?.length}{" "}
-                                    Course
+                                    Course{`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
                                   </Text>
                                 </Flex>
                               </Flex>
