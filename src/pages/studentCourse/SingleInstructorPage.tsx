@@ -35,6 +35,7 @@ const dummy = [1, 2, 4, 5, 6, 8];
 interface Social {
   type: string;
   url: string;
+  id: number
 }
 const SingleInstructorPage = () => {
   const { slug } = useParams();
@@ -128,9 +129,9 @@ const SingleInstructorPage = () => {
           mt={4}
           cursor={"pointer"}
         >
-          {getSingleEducratInstructor?.socials?.map(({ type, url }: Social) => {
+          {getSingleEducratInstructor?.socials?.map(({ type, url , id}: Social) => {
             return (
-              <Text as={"a"} href={url} target="_blank">
+              <Text as={"a"} href={url} target="_blank" key={id}>
                 {type === "facebook" && <FaFacebookF />}
                 {type === "linkedin" && <FaLinkedinIn />}
                 {type === "twitter" && <TiSocialTwitter />}
