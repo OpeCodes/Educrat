@@ -41,7 +41,7 @@ export interface ModuleInterface {
   lectures: Lecture[];
 }
 
-export interface Course {
+export interface CourseInterface {
   id: number;
   complexityLevel: string;
   title: string;

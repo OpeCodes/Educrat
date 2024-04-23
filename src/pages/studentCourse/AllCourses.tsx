@@ -17,12 +17,13 @@ import {
 } from "@chakra-ui/react";
 import { CgNotes } from "react-icons/cg";
 import { useGetCourse } from "../../hooks/course";
+import { CourseInterface } from "../../interface/courseInterface";
 
 
 
 const StudentCourse = () => {
     
-  const { data, isPending } = useGetCourse();
+  const { data,  } = useGetCourse();
   console.log(data, "course right here")
   return (
     <Stack>
@@ -74,7 +75,7 @@ const StudentCourse = () => {
               </Flex>
             </Flex>
             <Grid templateColumns={{base: "repeat(1, 1fr)", md:"repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
-              {data?.data?.map(({thumbnail,title,complexityLevel,userId,id}: Course) => (
+              {data?.data?.map(({thumbnail,title,complexityLevel,userId,id}: CourseInterface) => (
                 <GridItem w="100%" key={id}>
                   <Stack>
                     <Stack>
