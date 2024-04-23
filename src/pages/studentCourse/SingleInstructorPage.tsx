@@ -26,6 +26,7 @@ import { TbWorld } from "react-icons/tb";
 import { CgNotes } from "react-icons/cg";
 import { Footer } from "../../constants";
 import {
+  useGetInstructorenrolledCourse,
   useGetSingleEducratInstructor,
   useInstructorReviewRating,
 } from "../../hooks/studentCourse";
@@ -39,6 +40,9 @@ interface Social {
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
+  const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
+    getSingleEducratInstructor?.id
+  );
   console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { instructorReviewRating } = useInstructorReviewRating(
     getSingleEducratInstructor?.id
@@ -106,21 +110,21 @@ const SingleInstructorPage = () => {
             <Text>
               <IoPersonOutline />
             </Text>
-            <Text>Students</Text>
+            <Text>{getInstructorenrolledCourse?.length} Student {`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}</Text>
           </Flex>
           <Flex align={"center"} columnGap={1}>
             <Text>
               <HiOutlineChat />
             </Text>
             <Text>
-              {+parseFloat(instructorReviewRating?.total).toFixed()} Review
+              {+parseFloat(instructorReviewRating?.total).toFixed()} Review{`${instructorReviewRating?.total <= 1 ? "" : "s"}`}
             </Text>
           </Flex>
           <Flex align={"center"} columnGap={1}>
             <Text>
               <LuClock3 />
             </Text>
-            <Text> {getSingleEducratInstructor?.courses.length} course</Text>
+            <Text> {getSingleEducratInstructor?.courses.length} course{`${getSingleEducratInstructor?.courses.length <= 1 ? "" : "s"}`}</Text>
           </Flex>
         </Flex>
         <Flex
