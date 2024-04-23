@@ -25,19 +25,29 @@ import { FaYoutube } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
 import { CgNotes } from "react-icons/cg";
 import { Footer } from "../../constants";
-import { useGetSingleEducratInstructor } from "../../hooks/studentCourse";
+import {
+  useGetSingleEducratInstructor,
+  useInstructorReviewRating,
+} from "../../hooks/studentCourse";
 
 const dummy = [1, 2, 4, 5, 6, 8];
 
-interface Social{
-type: string;
-url: string
+interface Social {
+  type: string;
+  url: string;
 }
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
   console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
-
+  const { instructorReviewRating } = useInstructorReviewRating(
+    getSingleEducratInstructor?.id
+  );
+  console.log(instructorReviewRating, "instructorReviewRating");
+  const averateinstructorReviewRating =
+    instructorReviewRating?.average === "NaN"
+      ? 0
+      : instructorReviewRating?.average;
   return (
     <Stack mt={"4.3rem"}>
       <Stack bg={"#f5f7fe"} py={3}>
@@ -68,7 +78,7 @@ const SingleInstructorPage = () => {
         mt={4}
         width={"100%"}
         bg={"#6440fb"}
-        maxW={{ md: "70%" }}
+        maxW={{ lg: "70%" }}
         mx={"auto"}
         borderRadius={5}
         py={"5rem"}
@@ -89,7 +99,7 @@ const SingleInstructorPage = () => {
             <Text>
               <AiFillStar size={20} />
             </Text>
-            <Text>Instrutor Rating</Text>
+            <Text>{averateinstructorReviewRating}</Text>
           </Flex>
 
           <Flex align={"center"} columnGap={1}>
@@ -102,7 +112,9 @@ const SingleInstructorPage = () => {
             <Text>
               <HiOutlineChat />
             </Text>
-            <Text>Review</Text>
+            <Text>
+              {+parseFloat(instructorReviewRating?.total).toFixed()} Review
+            </Text>
           </Flex>
           <Flex align={"center"} columnGap={1}>
             <Text>
@@ -118,15 +130,14 @@ const SingleInstructorPage = () => {
           mt={4}
           cursor={"pointer"}
         >
-          {getSingleEducratInstructor?.socials?.map(({ type,url }: Social) => {
+          {getSingleEducratInstructor?.socials?.map(({ type, url }: Social) => {
             return (
               <Text as={"a"} href={url} target="_blank">
-                
-                {type ==="facebook" && <FaFacebookF />}
-                {type ==="linkedin" && <FaLinkedinIn />}
-                {type ==="twitter" && <TiSocialTwitter />}
-                {type ==="website" &&  <TbWorld />}
-                {type ==="youtube" &&    <FaYoutube />}
+                {type === "facebook" && <FaFacebookF />}
+                {type === "linkedin" && <FaLinkedinIn />}
+                {type === "twitter" && <TiSocialTwitter />}
+                {type === "website" && <TbWorld />}
+                {type === "youtube" && <FaYoutube />}
               </Text>
             );
           })}
@@ -135,7 +146,7 @@ const SingleInstructorPage = () => {
       <Stack
         width={"100%"}
         mt={12}
-        maxW={{ base: "95%", md: "60%" }}
+        maxW={{ base: "95%", lg: "60%" }}
         mx={"auto"}
       >
         <Tabs position="relative">
