@@ -102,7 +102,7 @@ const Course = ({
       key={id}
     >
       <Stack>
-        <Box as={"div"} bg="red" overflow={"hidden"} borderRadius={"10px"}>
+        <Box as={"div"} overflow={"hidden"} borderRadius={"10px"}>
           <Image
             src={thumbnail}
             className="img"
