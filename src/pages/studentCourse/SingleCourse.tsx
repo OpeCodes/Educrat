@@ -79,7 +79,6 @@ const SingleCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-
   const { getStudentWishList } = useGetStudentWishList();
 
   const studentCourseId: string | undefined = getStudentSingleCourse?.id;
@@ -477,6 +476,8 @@ const SingleCourse = () => {
                               src={
                                 getStudentSingleCourse?.userId?.profilePicture
                               }
+                              as={Link}
+                              to={`/user/${getStudentSingleCourse?.userId?.slug}`}
                             />
                             <Stack>
                               <Text

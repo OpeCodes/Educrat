@@ -43,7 +43,6 @@ const SingleInstructorPage = () => {
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getSingleEducratInstructor?.id
   );
-  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { instructorReviewRating } = useInstructorReviewRating(
     getSingleEducratInstructor?.id
   );
@@ -110,21 +109,29 @@ const SingleInstructorPage = () => {
             <Text>
               <IoPersonOutline />
             </Text>
-            <Text>{getInstructorenrolledCourse?.length} Student {`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}</Text>
+            <Text>
+              {getInstructorenrolledCourse?.length} Student{" "}
+              {`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
+            </Text>
           </Flex>
           <Flex align={"center"} columnGap={1}>
             <Text>
               <HiOutlineChat />
             </Text>
             <Text>
-              {+parseFloat(instructorReviewRating?.total).toFixed()} Review{`${instructorReviewRating?.total <= 1 ? "" : "s"}`}
+              {+parseFloat(instructorReviewRating?.total).toFixed()} Review
+              {`${instructorReviewRating?.total <= 1 ? "" : "s"}`}
             </Text>
           </Flex>
           <Flex align={"center"} columnGap={1}>
             <Text>
               <LuClock3 />
             </Text>
-            <Text> {getSingleEducratInstructor?.courses.length} course{`${getSingleEducratInstructor?.courses.length <= 1 ? "" : "s"}`}</Text>
+            <Text>
+              {" "}
+              {getSingleEducratInstructor?.courses.length} course
+              {`${getSingleEducratInstructor?.courses.length <= 1 ? "" : "s"}`}
+            </Text>
           </Flex>
         </Flex>
         <Flex

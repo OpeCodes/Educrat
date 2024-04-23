@@ -29,7 +29,7 @@ import {
 import logo from "../../assets/logo-3.svg";
 import { IoIosArrowDown, IoIosShareAlt } from "react-icons/io";
 
-import { Link, useParams, useNavigate, } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { FaFolderOpen } from "react-icons/fa6";
 
@@ -68,7 +68,6 @@ const SingleEnrolledCourse = () => {
   const { id, lectureId } = useParams();
   const navigate = useNavigate();
 
-  
   const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
     useGetSingleEnrolledStudentCourse(id);
   const {
@@ -153,9 +152,6 @@ const SingleEnrolledCourse = () => {
 
   const [activeLectureID, setActiveLectureID] = useState<string | null>(null);
 
-
-
-
   //share button func
   const [isOpen, setIsOpen] = useState(false);
 
@@ -173,7 +169,9 @@ const SingleEnrolledCourse = () => {
     const courseIndex = urlParts.indexOf("course");
 
     if (courseIndex !== -1 && courseIndex + 2 < urlParts.length) {
-      const coursePath = urlParts?.slice(courseIndex, courseIndex + 2).join("/");
+      const coursePath = urlParts
+        ?.slice(courseIndex, courseIndex + 2)
+        .join("/");
       return `${baseUrl}/${coursePath}`;
     }
 
@@ -257,7 +255,7 @@ const SingleEnrolledCourse = () => {
                   {getSingleEnrolledCourse?.completedLectures?.length} of{" "}
                   {lectureLength.length} completed.
                 </PopoverHeader>
-                <PopoverArrow bg="white"   />
+                <PopoverArrow bg="white" />
                 {completedValue ? (
                   <PopoverBody>
                     <Text
@@ -364,8 +362,11 @@ const SingleEnrolledCourse = () => {
               pr={{ base: 3, md: 0 }}
             >
               {/* review section */}
-
-              <Stack mb={"1.5rem"} color={"#4f547b"}>
+              <Stack
+                mb={"1.5rem"}
+                color={"#4f547b"}
+                display={{ base: "none", xl: "block" }}
+              >
                 <Text color={"black"} fontWeight={"bold"} fontSize={"1.1rem"}>
                   Write a Review
                 </Text>
@@ -616,7 +617,7 @@ const SingleEnrolledCourse = () => {
                                   }
                                 />
                                 <Stack
-                                  cursor={"pointer"}                                 
+                                  cursor={"pointer"}
                                   onClick={() =>
                                     handleActiveAccordionClick(LectureID)
                                   }
@@ -750,6 +751,117 @@ const SingleEnrolledCourse = () => {
                 )}
               </Accordion>
             )}
+          </Stack>
+          {/* review section */}
+          <Stack
+            mb={"1.5rem"}
+            mx={"1rem"}
+            color={"#4f547b"}
+            display={{ base: "block", xl: "none" }}
+          >
+            <Text color={"black"} fontWeight={"bold"} fontSize={"1.1rem"}>
+              Write a Review
+            </Text>
+            <Text>What is it like about the Course?</Text>
+
+            <Formik
+              initialValues={initialValues}
+              validationSchema={reviewCourseValidationSchema}
+              onSubmit={handleSubmit}
+            >
+              {({
+                handleChange,
+                setFieldValue,
+                handleSubmit,
+                values,
+                errors,
+              }) => (
+                <Flex
+                  rowGap={"5px"}
+                  flexDirection="column"
+                  maxHeight={{ base: "100%", lg: "530px" }}
+                  overflowY={"auto"}
+                  pb={5}
+                >
+                  <>
+                    <Flex align="center">
+                      {Array.from({ length: 5 }, (_, index) => (
+                        <IconButton
+                          key={index}
+                          icon={
+                            values.stars >= index + 1 ? (
+                              index + 1 === values.stars ? (
+                                <FaStar color="#FFE234" />
+                              ) : (
+                                <FaStar color="#FFE234" />
+                              )
+                            ) : (
+                              <FaStar color="gray" />
+                            )
+                          }
+                          onClick={() => setFieldValue("stars", index + 1)}
+                          variant="unstyled"
+                          aria-label={`${index + 1} stars`}
+                        />
+                      ))}
+                    </Flex>
+                    <FormControl isRequired>
+                      <FormLabel>Review Title</FormLabel>
+                      <Input
+                        type="text"
+                        variant="filled"
+                        placeholder="write your review"
+                        value={values.title}
+                        name="title"
+                        onChange={handleChange}
+                      />
+                      {errors.title && (
+                        <Text
+                          style={{ color: "red", marginTop: 5 }}
+                          fontSize="14px"
+                        >
+                          <>{errors.title}</>
+                        </Text>
+                      )}
+                    </FormControl>
+                    <FormControl isRequired mt={5}>
+                      <FormLabel>Review Content</FormLabel>
+                      <Textarea
+                        variant="filled"
+                        placeholder="Message"
+                        value={values.content}
+                        name="content"
+                        onChange={handleChange}
+                      />
+                      {errors.content && (
+                        <Text
+                          style={{ color: "red", marginTop: 5 }}
+                          fontSize="14px"
+                        >
+                          <>{errors.content}</>
+                        </Text>
+                      )}
+                    </FormControl>
+                    <Button
+                      bg={"#00FF84"}
+                      isLoading={createEnrolledCourseReviewLoading}
+                      loadingText="Loading"
+                      variant="outline"
+                      spinnerPlacement="end"
+                      width="100%"
+                      onClick={() => handleSubmit()}
+                      mt={3}
+                      borderWidth={2}
+                      py={3}
+                      borderColor={"#00FF84"}
+                      _hover={{ background: "none", color: "#00FF84" }}
+                    >
+                      Submit Review
+                    </Button>
+                  </>
+                </Flex>
+              )}
+            </Formik>
           </Stack>
         </Flex>
       </Stack>
