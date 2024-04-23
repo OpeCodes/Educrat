@@ -56,7 +56,7 @@ export interface CourseInterface {
   complexityLevel: string;
   title: string;
   userId: UserInterface;
-  review: ReviewInterface[];
+  reviews: ReviewInterface[];
   slug: string;
   modules: ModuleInterface[];
   thumbnail: string;

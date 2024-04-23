@@ -11,25 +11,26 @@ import {
   AccordionPanel,
   AccordionIcon,
   Divider,
- 
   Image,
   Avatar,
 } from "@chakra-ui/react";
 import { useGetCourse } from "../../hooks/course";
 import { CourseInterface } from "../../interface/courseInterface";
 import { Link } from "react-router-dom";
-import { calculateAverageStars, getTotalLecturesDuration } from "../../components/CourseCalculations";
+import {
+  calculateAverageStars,
+  generateStarIcons,
+  getTotalLecturesDuration,
+  getTotalStarsSum,
+} from "../../components/CourseCalculations";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 import { CiClock1, CiPlay1 } from "react-icons/ci";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 
-
-
 const StudentCourse = () => {
-    
-  const { data,  } = useGetCourse();
-  console.log(data, "course right here")
-  
+  const { data } = useGetCourse();
+  console.log(data, "course right here");
+
   // const Reviewstars = [];
   // for (let i = 1; i <= 5; i++) {
   //   Reviewstars.push(
@@ -52,7 +53,7 @@ const StudentCourse = () => {
       </Box>
       <Stack maxW={{ base: "95%", md: "90%" }} mx="auto" w="100%">
         <Grid templateColumns="repeat(4, 1fr)" columnGap={10}>
-          <GridItem rowSpan={2}  borderWidth={0} >
+          <GridItem rowSpan={2} borderWidth={0}>
             <Accordion
               defaultIndex={[0]}
               allowMultiple
@@ -81,7 +82,7 @@ const StudentCourse = () => {
             </Accordion>
             <Divider orientation="horizontal" mt={3} />
           </GridItem>
-          <GridItem width="100%" colSpan={{base: 4, md: 3}} p={2}>
+          <GridItem width="100%" colSpan={{ base: 4, md: 3 }} p={2}>
             <Flex justify={"space-between"} mt={3} mb={10}>
               <Text>showing 30 results</Text>
               <Flex>
@@ -89,51 +90,96 @@ const StudentCourse = () => {
                 <Text>b</Text>
               </Flex>
             </Flex>
-            <Grid templateColumns={{base: "repeat(1, 1fr)", md:"repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
-              {data?.data?.map(({thumbnail,title,complexityLevel,userId,id, slug,modules}: CourseInterface) => (
-                <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
-                  <Stack>
+            <Grid
+              templateColumns={{
+                base: "repeat(1, 1fr)",
+                md: "repeat(2, 1fr)",
+                lg: "repeat(3, 1fr)",
+              }}
+              gap={6}
+            >
+              {data?.data?.map(
+                ({
+                  thumbnail,
+                  title,
+                  complexityLevel,
+                  userId,
+                  id,
+                  slug,
+                  modules,
+                  reviews,
+                }: CourseInterface) => (
+                  <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                     <Stack>
-                      <Image
-                        src={thumbnail}
-                        alt={title}
-                        borderRadius="lg"
-                      />
                       <Stack>
-                        <Text>4.3 rating</Text>
-                        <Text fontSize="20px" mt="-12px">
-                          {title}
-                        </Text>
-                        <Flex justify={"space-between"}>
-                          <Flex align="center" columnGap={"4px"} color="gray">
-                          <CiPlay1 />
-                            <Text fontSize="13px">{modules.length} Lessons</Text>
+                        <Image src={thumbnail} alt={title} borderRadius="lg" />
+                        <Stack>
+                          <Flex justifyContent={"start"} alignItems={"center"}>
+                            <Text color={"#FFD700"}>
+                              {calculateAverageStars(reviews)}
+                            </Text>
+                            <Box
+                              color={"#e59819"}
+                              display={"flex"}
+                              ml={2}
+                              mr={3}
+                            >
+                              <Text display={"flex"} columnGap={1}>
+                                {generateStarIcons(
+                                  calculateAverageStars(reviews)
+                                )}
+                              </Text>
+                            </Box>
+                            <Text color={"gray.600"}>
+                              ({getTotalStarsSum(reviews)})
+                            </Text>
                           </Flex>
-                          <Flex align="center" columnGap={"4px"} color="gray">
-                          <CiClock1 />
-                            <Text fontSize="13px"> { convertSecondsToHMS(getTotalLecturesDuration(modules))}</Text>
+                          <Text fontSize="20px" mt="-12px">
+                            {title}
+                          </Text>
+                          <Flex justify={"space-between"}>
+                            <Flex align="center" columnGap={"4px"} color="gray">
+                              <CiPlay1 />
+                              <Text fontSize="13px">
+                                {modules.length} Lessons
+                              </Text>
+                            </Flex>
+                            <Flex align="center" columnGap={"4px"} color="gray">
+                              <CiClock1 />
+                              <Text fontSize="13px">
+                                {" "}
+                                {convertSecondsToHMS(
+                                  getTotalLecturesDuration(modules)
+                                )}
+                              </Text>
+                            </Flex>
+                            <Flex align="center" columnGap={"4px"} color="gray">
+                              <BiSolidBarChartAlt2 color={"gray"} />
+                              <Text fontSize="13px">{complexityLevel}</Text>
+                            </Flex>
                           </Flex>
-                          <Flex align="center" columnGap={"4px"} color="gray">
-                          <BiSolidBarChartAlt2 color={"gray"} />
-                            <Text fontSize="13px">{complexityLevel}</Text>
-                          </Flex>
-                        </Flex>
-                        <Divider />
-
+                          <Divider />
+                        </Stack>
                       </Stack>
-                    </Stack>
-                    <Flex align={"center"} justify={"space-between"}> 
-                      <Flex align={"center"} columnGap={2}>
-                      <Avatar name={`${userId.firstName} ${userId.lastName}`} src={userId.profilePicture} size={"sm"} />
-                      <Text>{userId?.firstName} {userId.lastName}</Text>
+                      <Flex align={"center"} justify={"space-between"}>
+                        <Flex align={"center"} columnGap={2}>
+                          <Avatar
+                            name={`${userId.firstName} ${userId.lastName}`}
+                            src={userId.profilePicture}
+                            size={"sm"}
+                          />
+                          <Text>
+                            {userId?.firstName} {userId.lastName}
+                          </Text>
+                        </Flex>
+                        <Text fontWeight={"500"} fontSize={"20px"}>
+                          $99
+                        </Text>
                       </Flex>
-                      <Text fontWeight={"500"} fontSize={"20px"}>
-                        $99
-                      </Text>
-                    </Flex>
-                  </Stack>
-                </GridItem>
-              ))}
+                    </Stack>
+                  </GridItem>
+                )
+              )}
 
               <GridItem w="100%" h="10" bg="blue.500" />
             </Grid>
