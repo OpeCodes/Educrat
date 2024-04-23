@@ -18,7 +18,7 @@ import {
 import { useGetCourse } from "../../hooks/course";
 import { CourseInterface } from "../../interface/courseInterface";
 import { Link } from "react-router-dom";
-import { getTotalLecturesDuration } from "../../components/CourseCalculations";
+import { calculateAverageStars, getTotalLecturesDuration } from "../../components/CourseCalculations";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 import { CiClock1, CiPlay1 } from "react-icons/ci";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
@@ -29,6 +29,17 @@ const StudentCourse = () => {
     
   const { data,  } = useGetCourse();
   console.log(data, "course right here")
+  
+  // const Reviewstars = [];
+  // for (let i = 1; i <= 5; i++) {
+  //   Reviewstars.push(
+  //     <FaStar
+  //       key={i}
+  //       color={i <= calculateAverageStars(reviews) ? "#FFD700" : "#EAEAEA"}
+  //     />
+  //   );
+  // }
+  // const totalDuration = getTotalLecturesDuration(modules);
   return (
     <Stack>
       <Box padding={{ base: 5, lg: 20 }}>

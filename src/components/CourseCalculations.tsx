@@ -1,3 +1,4 @@
+import { FaStar } from "react-icons/fa";
 import { ModuleInterface, ReviewInterface } from "../interface/courseInterface";
 //function to calculate the totalduration lectures
 export const getTotalLecturesDuration = (modules: ModuleInterface[]): number => {
@@ -42,6 +43,23 @@ export function getTotalStarsSum(data: ReviewInterface[]) {
 
   return totalStarsSum;
 }
+//function to generatereviews
+export function generateStarIcons(averageRating: any, maxRating: number = 5): JSX.Element[] {
+  const starIcons: JSX.Element[] = [];
+  for (let i = 1; i <= maxRating; i++) {
+    const color = i <= averageRating ? "#FFD700" : "#EAEAEA";
+    starIcons.push(
+      <FaStar
+        key={i}
+        color={color}
+      />
+    );
+  }
+
+  return starIcons;
+}
+
+
   // function calculateAverageStars(products: any) {
   //   let totalStars = 0;
   //   let totalReviews = 0;

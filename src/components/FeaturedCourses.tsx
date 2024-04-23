@@ -14,7 +14,7 @@ import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { convertSecondsToHMS } from "./TimeFormat";
 import {  ModuleInterface, ReviewInterface } from "../interface/courseInterface";
-import { calculateAverageStars, getTotalLecturesDuration, getTotalStarsSum } from "./CourseCalculations";
+import { calculateAverageStars, generateStarIcons, getTotalLecturesDuration, getTotalStarsSum } from "./CourseCalculations";
 
 type Props = {
   id: number;
@@ -36,26 +36,7 @@ const Course = ({
   slug,
   reviews,
   modules,
-}: Props) => {
-
-  
-  //   let totalStars = 0;
-  //   let totalReviews = 0;
-  //     reviews.forEach((review: ReviewInterface) => {
-  //       totalStars += review?.stars || 0;
-  //       totalReviews++;
-  //     });
-  //   if (totalReviews === 0) {
-  //     return 0;
-  //   }
-  //   const averageStars = totalStars / totalReviews;
-  //   const roundedAverageStars = Math.ceil(averageStars);
-  //   return roundedAverageStars;
-  // }
-  // calculateAverageStars(reviews)
-  // console.log(reviews, "reviews")
-  // Function to calculate the total stars
-  //function to calculate the totalReviewstart
+}: Props) => { 
 
   const Reviewstars = [];
   for (let i = 1; i <= 5; i++) {
@@ -97,7 +78,7 @@ const Course = ({
             <Text color={"#FFD700"}>{calculateAverageStars(reviews)}</Text>
             <Box color={"#e59819"} display={"flex"} ml={2} mr={3}>
               <Text display={"flex"} columnGap={1}>
-                {Reviewstars}
+            {generateStarIcons(calculateAverageStars(reviews))}
               </Text>
             </Box>
             <Text color={"gray.600"}>({getTotalStarsSum(reviews)})</Text>
