@@ -31,7 +31,6 @@ import {
 } from "../../hooks/studentCourse";
 import { CourseInterface } from "../../interface/courseInterface";
 
-
 interface Social {
   type: string;
   url: string;
@@ -175,49 +174,72 @@ const SingleInstructorPage = () => {
                 }}
                 gap={6}
               >
-                {getSingleEducratInstructor?.courses.map(({complexityLevel,id,thumbnail,title,userId,}:CourseInterface) => (
-                  <GridItem w="100%" key={id}>
-                    <Stack>
+                {getSingleEducratInstructor?.courses.map(
+                  ({
+                    complexityLevel,
+                    id,
+                    thumbnail,
+                    title,
+                    slug,
+                    userId,
+                  }: CourseInterface) => (
+                    <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                       <Stack>
-                        <Image
-                          src={thumbnail}
-                          alt="Green double couch with wooden legs"
-                          borderRadius="lg"
-                        />
                         <Stack>
-                          <Text>4.3 rating</Text>
-                          <Text fontSize="20px" mt="-12px">
-                      {title}
-                          </Text>
-                          <Flex justify={"space-between"}>
-                            <Flex align="center" columnGap={"4px"} color="gray">
-                              <CgNotes />
-                              <Text fontSize="13px">6 Lessons</Text>
+                          <Image
+                            src={thumbnail}
+                            alt="Green double couch with wooden legs"
+                            borderRadius="lg"
+                          />
+                          <Stack>
+                            <Text>4.3 rating</Text>
+                            <Text fontSize="20px" mt="-12px">
+                              {title}
+                            </Text>
+                            <Flex justify={"space-between"}>
+                              <Flex
+                                align="center"
+                                columnGap={"4px"}
+                                color="gray"
+                              >
+                                <CgNotes />
+                                <Text fontSize="13px"> Lessons</Text>
+                              </Flex>
+                              <Flex
+                                align="center"
+                                columnGap={"4px"}
+                                color="gray"
+                              >
+                                <CgNotes />
+                                <Text fontSize="13px">6 Lessons</Text>
+                              </Flex>
+                              <Flex
+                                align="center"
+                                columnGap={"4px"}
+                                color="gray"
+                              >
+                                <CgNotes />
+                                <Text fontSize="13px">6 {complexityLevel}</Text>
+                              </Flex>
                             </Flex>
-                            <Flex align="center" columnGap={"4px"} color="gray">
-                              <CgNotes />
-                              <Text fontSize="13px">6 Lessons</Text>
-                            </Flex>
-                            <Flex align="center" columnGap={"4px"} color="gray">
-                              <CgNotes />
-                              <Text fontSize="13px">6 {complexityLevel}</Text>
-                            </Flex>
-                          </Flex>
-                          <Divider />
+                            <Divider />
+                          </Stack>
                         </Stack>
-                      </Stack>
-                      <Flex align={"center"} justify={"space-between"}>
-                        <Flex align={"center"} columnGap={2}>
-                          <Avatar name={userId.profilePicture} size={"sm"} />
-                          <Text>{userId.firstName} {userId.lastName}</Text>
+                        <Flex align={"center"} justify={"space-between"}>
+                          <Flex align={"center"} columnGap={2}>
+                            <Avatar name={userId.profilePicture} size={"sm"} />
+                            <Text>
+                              {userId.firstName} {userId.lastName}
+                            </Text>
+                          </Flex>
+                          <Text fontWeight={"500"} fontSize={"20px"}>
+                            $30
+                          </Text>
                         </Flex>
-                        <Text fontWeight={"500"} fontSize={"20px"}>
-                          $30
-                        </Text>
-                      </Flex>
-                    </Stack>
-                  </GridItem>
-                ))}
+                      </Stack>
+                    </GridItem>
+                  )
+                )}
 
                 <GridItem w="100%" h="10" bg="blue.500" />
               </Grid>

@@ -13,18 +13,19 @@ import { Link } from "react-router-dom";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { convertSecondsToHMS } from "./TimeFormat";
+import { LectureInterface, ModuleInterface } from "../interface/courseInterface";
 interface Review {
   stars: number;
 }
 type Props = {
-  id?: number;
-  thumbnail?: string;
+  id: number;
+  thumbnail: string;
   complexityLevel?: string;
-  userId?: any;
-  title?: string;
+  userId: any;
+  title: string;
   slug: string;
   reviews: Review[];
-  modules: any;
+  modules: ModuleInterface[];
 };
 
 const Course = ({
@@ -80,9 +81,9 @@ const Course = ({
   // Function to calculate the total duration
   const getTotalLecturesDuration = () => {
     let totalDuration = 0;
-    modules.forEach((module: any) => {
+    modules.forEach((module: ModuleInterface) => {
       if (module.lectures && Array.isArray(module.lectures)) {
-        module.lectures.forEach((lecture: any) => {
+        module.lectures.forEach((lecture: LectureInterface) => {
           totalDuration += lecture?.content?.duration || 0;
         });
       }

@@ -22,7 +22,7 @@ interface ContentInterface {
   duration: number;
   lectureId: string;
 }
-export interface Lecture {
+export interface LectureInterface {
   id: number;
   contentPreviewable: boolean;
   createdAt: string;
@@ -38,7 +38,7 @@ export interface ModuleInterface {
   courseId: string;
   id: number;
   learningObjective: string;
-  lectures: Lecture[];
+  lectures: LectureInterface[];
 }
 
 export interface CourseInterface {
