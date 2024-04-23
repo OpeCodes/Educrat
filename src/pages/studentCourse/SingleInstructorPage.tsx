@@ -26,11 +26,15 @@ import { TbWorld } from "react-icons/tb";
 import { CgNotes } from "react-icons/cg";
 import { Footer } from "../../constants";
 import { useGetSingleEducratInstructor } from "../../hooks/studentCourse";
+
 const dummy = [1, 2, 4, 5, 6, 8];
+
+
 const SingleInstructorPage = () => {
-  const {slug} = useParams()
-const {getSingleEducratInstructor} =  useGetSingleEducratInstructor(slug)
-console.log(getSingleEducratInstructor, "getSingleEducratInstructor")
+  const { slug } = useParams();
+  const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
+  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
+
   return (
     <Stack mt={"4.3rem"}>
       <Stack bg={"#f5f7fe"} py={3}>
@@ -69,13 +73,14 @@ console.log(getSingleEducratInstructor, "getSingleEducratInstructor")
       >
         <Avatar
           size="2xl"
-          name="Segun Adebayo"
-          src="https://bit.ly/sage-adebayo"
+          name={`${getSingleEducratInstructor?.firstName}${getSingleEducratInstructor?.lastName}`}
+          src={getSingleEducratInstructor?.profilePicture}
         />
         <Text fontSize={30} fontWeight={"bold"}>
-          Peter Adedokun
+          {getSingleEducratInstructor?.firstName}{" "}
+          {getSingleEducratInstructor?.lastName}
         </Text>
-        <Text>Frontend Developer</Text>
+        <Text>{getSingleEducratInstructor?.headline}</Text>
         <Flex align={"center"} columnGap={3}>
           <Flex align={"center"} columnGap={1}>
             <Text>
@@ -110,22 +115,13 @@ console.log(getSingleEducratInstructor, "getSingleEducratInstructor")
           mt={4}
           cursor={"pointer"}
         >
-          <Text>
-            <FaFacebookF />
-          </Text>
-          <Text>
-            <FaLinkedinIn />
-          </Text>
-          <Text>
-            <TiSocialTwitter />
-          </Text>
-          <Text>
-            <FaYoutube />
-          </Text>
-
-          <Text>
-            <TbWorld />
-          </Text>
+          {getSingleEducratInstructor?.socials?.map(({ type, url }) => {
+            return (
+              <Text as={"a"} href={url} target="_blank">
+                <FaFacebookF />
+              </Text>
+            );
+          })}
         </Flex>
       </Stack>
       <Stack
@@ -148,7 +144,7 @@ console.log(getSingleEducratInstructor, "getSingleEducratInstructor")
             fontWeight={"bold"}
           />
           <TabPanels>
-            <TabPanel>1</TabPanel>
+            <TabPanel>{getSingleEducratInstructor?.biography}</TabPanel>
             <TabPanel>
               <Grid
                 templateColumns={{
@@ -207,7 +203,7 @@ console.log(getSingleEducratInstructor, "getSingleEducratInstructor")
           </TabPanels>
         </Tabs>
       </Stack>
-      <Footer/>
+      <Footer />
     </Stack>
   );
 };

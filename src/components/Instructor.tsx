@@ -35,9 +35,9 @@ const Instructor = ({
     arrayOfIds[index]
   );
   const averateinstructorReviewRating =
-    instructorReviewRating.average === "NaN"
+    instructorReviewRating?.average === "NaN"
       ? 0
-      : instructorReviewRating.average;
+      : instructorReviewRating?.average;
   return (
     <Box
       className="card"
