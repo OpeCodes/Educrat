@@ -29,7 +29,10 @@ import { useGetSingleEducratInstructor } from "../../hooks/studentCourse";
 
 const dummy = [1, 2, 4, 5, 6, 8];
 
-
+interface Social{
+type: string;
+url: string
+}
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
@@ -115,10 +118,15 @@ const SingleInstructorPage = () => {
           mt={4}
           cursor={"pointer"}
         >
-          {getSingleEducratInstructor?.socials?.map(({ type, url }) => {
+          {getSingleEducratInstructor?.socials?.map(({ type,url }: Social) => {
             return (
               <Text as={"a"} href={url} target="_blank">
-                <FaFacebookF />
+                
+                {type ==="facebook" && <FaFacebookF />}
+                {type ==="linkedin" && <FaLinkedinIn />}
+                {type ==="twitter" && <TiSocialTwitter />}
+                {type ==="website" &&  <TbWorld />}
+                {type ==="youtube" &&    <FaYoutube />}
               </Text>
             );
           })}
