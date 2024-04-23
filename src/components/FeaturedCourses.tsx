@@ -60,16 +60,18 @@ const Course = ({
       key={id}
     >
       <Stack>
-        <Box as={"div"} overflow={"hidden"} borderRadius={"10px"}>
+            
+        <Box as={"div"} overflow={"hidden"} borderRadius={"10px"} >
           <Image
             src={thumbnail}
             className="img"
-            maxH={"200px"}
+            maxH="180px"
             height={"100%"}
             style={{ borderRadius: "10px" }}
             alt={title}
             w={"100%"}
-            objectFit={"cover"}
+            objectFit={"scale-down"}
+            // objectFit={"initial"}
             borderRadius="lg"
           />
         </Box>

@@ -185,6 +185,9 @@ const SingleInstructorPage = () => {
                 }}
                 gap={6}
               >
+                {getSingleEducratInstructor?.courses.length === 0 && (
+                  <Text>No course available</Text>
+                )}
                 {getSingleEducratInstructor?.courses.map(
                   ({
                     complexityLevel,
@@ -261,8 +264,6 @@ const SingleInstructorPage = () => {
                     </GridItem>
                   )
                 )}
-
-                <GridItem w="100%" h="10" bg="blue.500" />
               </Grid>
             </TabPanel>
           </TabPanels>
