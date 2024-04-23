@@ -250,7 +250,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   <Td>{formattedDate}</Td>
                   <Td
                     as={"button"}
-                    disabled={!success && !error}
+                    disabled={!success}
                   
                     cursor={!success ? "not-allowed" : "pointer"}
                     fontSize={15}
