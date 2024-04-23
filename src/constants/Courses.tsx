@@ -13,7 +13,6 @@ import {  sliderSettings } from "../utils/data";
 import { useGetCourse } from "../hooks/course";
 export const Courses = () => {
   const { data, isPending } = useGetCourse();
-  console.log(data,"data11")
   const dummyArray = [1, 2, 3, 4];
   return (
     <Box

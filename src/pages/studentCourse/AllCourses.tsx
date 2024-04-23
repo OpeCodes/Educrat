@@ -29,18 +29,7 @@ import { BiSolidBarChartAlt2 } from "react-icons/bi";
 
 const StudentCourse = () => {
   const { data } = useGetCourse();
-  console.log(data, "course right here");
 
-  // const Reviewstars = [];
-  // for (let i = 1; i <= 5; i++) {
-  //   Reviewstars.push(
-  //     <FaStar
-  //       key={i}
-  //       color={i <= calculateAverageStars(reviews) ? "#FFD700" : "#EAEAEA"}
-  //     />
-  //   );
-  // }
-  // const totalDuration = getTotalLecturesDuration(modules);
   return (
     <Stack>
       <Box padding={{ base: 5, lg: 20 }}>
