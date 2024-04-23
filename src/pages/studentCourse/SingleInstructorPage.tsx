@@ -39,11 +39,9 @@ interface Social {
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
-  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { instructorReviewRating } = useInstructorReviewRating(
     getSingleEducratInstructor?.id
   );
-  console.log(instructorReviewRating, "instructorReviewRating");
   const averateinstructorReviewRating =
     instructorReviewRating?.average === "NaN"
       ? 0
