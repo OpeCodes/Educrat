@@ -26,6 +26,7 @@ import { TbWorld } from "react-icons/tb";
 import { CgNotes } from "react-icons/cg";
 import { Footer } from "../../constants";
 import {
+  useGetAlInstructorPublishedCourse,
   useGetSingleEducratInstructor,
   useInstructorReviewRating,
 } from "../../hooks/studentCourse";
@@ -35,11 +36,16 @@ const dummy = [1, 2, 4, 5, 6, 8];
 interface Social {
   type: string;
   url: string;
-  id: number
+  id: number;
 }
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
+  console.log(getSingleEducratInstructor,"getSingleEducratInstructor")
+  const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
+    getSingleEducratInstructor?.id
+  );
+  console.log(getAlInstructorPublishedCourse, "getAlInstructorPublishedCourse")
   const { instructorReviewRating } = useInstructorReviewRating(
     getSingleEducratInstructor?.id
   );
@@ -47,6 +53,7 @@ const SingleInstructorPage = () => {
     instructorReviewRating?.average === "NaN"
       ? 0
       : instructorReviewRating?.average;
+
   return (
     <Stack mt={"4.3rem"}>
       <Stack bg={"#f5f7fe"} py={3}>
@@ -119,7 +126,7 @@ const SingleInstructorPage = () => {
             <Text>
               <LuClock3 />
             </Text>
-            <Text>course</Text>
+            <Text>{getAlInstructorPublishedCourse?.length} course</Text>
           </Flex>
         </Flex>
         <Flex
@@ -129,17 +136,19 @@ const SingleInstructorPage = () => {
           mt={4}
           cursor={"pointer"}
         >
-          {getSingleEducratInstructor?.socials?.map(({ type, url , id}: Social) => {
-            return (
-              <Text as={"a"} href={url} target="_blank" key={id}>
-                {type === "facebook" && <FaFacebookF />}
-                {type === "linkedin" && <FaLinkedinIn />}
-                {type === "twitter" && <TiSocialTwitter />}
-                {type === "website" && <TbWorld />}
-                {type === "youtube" && <FaYoutube />}
-              </Text>
-            );
-          })}
+          {getSingleEducratInstructor?.socials?.map(
+            ({ type, url, id }: Social) => {
+              return (
+                <Text as={"a"} href={url} target="_blank" key={id}>
+                  {type === "facebook" && <FaFacebookF />}
+                  {type === "linkedin" && <FaLinkedinIn />}
+                  {type === "twitter" && <TiSocialTwitter />}
+                  {type === "website" && <TbWorld />}
+                  {type === "youtube" && <FaYoutube />}
+                </Text>
+              );
+            }
+          )}
         </Flex>
       </Stack>
       <Stack

@@ -16,39 +16,14 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import { CgNotes } from "react-icons/cg";
+import { useGetCourse } from "../../hooks/course";
 
-const courses = [
-  {
-    id: 1,
-    image:
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-    titile: "Learn figma - ui/ux design Essential training",
-    category: "art",
-    instructor: "Adedokun Peter",
-    price: "77",
-    rating: 4.0,
-    courseType: "free",
-    level: "Beginner",
-    language: "English",
-    Duration: "7 hours",
-  },
-  {
-    id: 2,
-    image:
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-    titile: "Learn frontend development from peter",
-    category: "Animation",
-    instructor: "Peter Opeymi",
-    price: "77",
-    rating: 4.5,
-    courseType: "paid",
-    level: "Expert",
-    language: "French",
-    Duration: "20 hours",
-  },
-];
+
+
 const StudentCourse = () => {
     
+  const { data, isPending } = useGetCourse();
+  console.log(data, "course right here")
   return (
     <Stack>
       <Box padding={{ base: 5, lg: 20 }}>
@@ -99,19 +74,19 @@ const StudentCourse = () => {
               </Flex>
             </Flex>
             <Grid templateColumns={{base: "repeat(1, 1fr)", md:"repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={6}>
-              {courses.map((item, index) => (
-                <GridItem w="100%" key={index}>
+              {data?.data?.map(({thumbnail,title,complexityLevel,userId,id}: Course) => (
+                <GridItem w="100%" key={id}>
                   <Stack>
                     <Stack>
                       <Image
-                        src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                        alt="Green double couch with wooden legs"
+                        src={thumbnail}
+                        alt={title}
                         borderRadius="lg"
                       />
                       <Stack>
                         <Text>4.3 rating</Text>
                         <Text fontSize="20px" mt="-12px">
-                          {item.titile}
+                          {title}
                         </Text>
                         <Flex justify={"space-between"}>
                           <Flex align="center" columnGap={"4px"} color="gray">
@@ -133,11 +108,11 @@ const StudentCourse = () => {
                     </Stack>
                     <Flex align={"center"} justify={"space-between"}> 
                       <Flex align={"center"} columnGap={2}>
-                      <Avatar name='Dan Abrahmov' size={"sm"} />
-                      <Text>{item.instructor}</Text>
+                      <Avatar name={`${userId.firstName} ${userId.lastName}`} src={userId.profilePicture} size={"sm"} />
+                      <Text>{userId?.firstName} {userId.lastName}</Text>
                       </Flex>
                       <Text fontWeight={"500"} fontSize={"20px"}>
-                        ${item.price}
+                        $99
                       </Text>
                     </Flex>
                   </Stack>
