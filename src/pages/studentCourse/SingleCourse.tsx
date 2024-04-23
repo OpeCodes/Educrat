@@ -497,10 +497,14 @@ const SingleCourse = () => {
                                     <FaStar color={"#FFD700"} />
                                   </Text>
                                   <Text color={"#FFD700"}>
+
                                     {
-                                      +parseFloat(
+                                       instructorReviewRating?.average ==="NaN" ? 0 : +parseFloat(
                                         instructorReviewRating?.average
                                       ).toFixed(2)
+                                    }
+                                    {
+                                      
                                     }
                                   </Text>
                                   <Text>Instructor Rating</Text>
