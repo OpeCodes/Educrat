@@ -62,6 +62,7 @@ import {
   shareOnLinkedIn,
   shareOnTwitter,
 } from "../../components/ShareFuncs";
+import { CourseInterface } from "../../interface/courseInterface";
 interface ObjectWithId {
   id: string;
 }
@@ -145,12 +146,10 @@ const SingleCourse = () => {
   const { deleteCourseWishList, deleteCourseWishListLoading } =
     useDeleteCourseWishList();
   //get firstId for navigation
-  const extractFirstLectureIds = (course: any) => {
+  const extractFirstLectureIds = (course: CourseInterface) => {
     const firstLectureIds: string[] = [];
-
     course?.modules.forEach((module: any) => {
       const { lectures } = module;
-
       if (lectures && lectures.length > 0) {
         const firstLectureId = lectures[0].id;
         firstLectureIds.push(firstLectureId);

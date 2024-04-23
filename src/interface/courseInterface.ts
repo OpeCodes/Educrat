@@ -50,4 +50,9 @@ export interface CourseInterface {
   slug: string;
   modules: ModuleInterface[];
   thumbnail: string;
+  description: string;
+  language: string;
+  learningObjectives: string[];
+  preRequisites: string;
+  promotionalVideo: string;
 }

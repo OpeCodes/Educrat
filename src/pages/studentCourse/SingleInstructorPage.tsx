@@ -26,12 +26,11 @@ import { TbWorld } from "react-icons/tb";
 import { CgNotes } from "react-icons/cg";
 import { Footer } from "../../constants";
 import {
-  useGetAlInstructorPublishedCourse,
   useGetSingleEducratInstructor,
   useInstructorReviewRating,
 } from "../../hooks/studentCourse";
+import { CourseInterface } from "../../interface/courseInterface";
 
-const dummy = [1, 2, 4, 5, 6, 8];
 
 interface Social {
   type: string;
@@ -41,11 +40,7 @@ interface Social {
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
-  console.log(getSingleEducratInstructor,"getSingleEducratInstructor")
-  const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
-    getSingleEducratInstructor?.id
-  );
-  console.log(getAlInstructorPublishedCourse, "getAlInstructorPublishedCourse")
+  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { instructorReviewRating } = useInstructorReviewRating(
     getSingleEducratInstructor?.id
   );
@@ -126,7 +121,7 @@ const SingleInstructorPage = () => {
             <Text>
               <LuClock3 />
             </Text>
-            <Text>{getAlInstructorPublishedCourse?.length} course</Text>
+            <Text> {getSingleEducratInstructor?.courses.length} course</Text>
           </Flex>
         </Flex>
         <Flex
@@ -180,19 +175,19 @@ const SingleInstructorPage = () => {
                 }}
                 gap={6}
               >
-                {dummy.map((_, index) => (
-                  <GridItem w="100%" key={index}>
+                {getSingleEducratInstructor?.courses.map(({complexityLevel,id,thumbnail,title,userId,}:CourseInterface) => (
+                  <GridItem w="100%" key={id}>
                     <Stack>
                       <Stack>
                         <Image
-                          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                          src={thumbnail}
                           alt="Green double couch with wooden legs"
                           borderRadius="lg"
                         />
                         <Stack>
                           <Text>4.3 rating</Text>
                           <Text fontSize="20px" mt="-12px">
-                            learn node js
+                      {title}
                           </Text>
                           <Flex justify={"space-between"}>
                             <Flex align="center" columnGap={"4px"} color="gray">
@@ -205,7 +200,7 @@ const SingleInstructorPage = () => {
                             </Flex>
                             <Flex align="center" columnGap={"4px"} color="gray">
                               <CgNotes />
-                              <Text fontSize="13px">6 Lessons</Text>
+                              <Text fontSize="13px">6 {complexityLevel}</Text>
                             </Flex>
                           </Flex>
                           <Divider />
@@ -213,8 +208,8 @@ const SingleInstructorPage = () => {
                       </Stack>
                       <Flex align={"center"} justify={"space-between"}>
                         <Flex align={"center"} columnGap={2}>
-                          <Avatar name="Dan Abrahmov" size={"sm"} />
-                          <Text>Peter Adedokun</Text>
+                          <Avatar name={userId.profilePicture} size={"sm"} />
+                          <Text>{userId.firstName} {userId.lastName}</Text>
                         </Flex>
                         <Text fontWeight={"500"} fontSize={"20px"}>
                           $30
