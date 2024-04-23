@@ -13,11 +13,9 @@ import { Link } from "react-router-dom";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { convertSecondsToHMS } from "./TimeFormat";
-import { LectureInterface, ModuleInterface } from "../interface/courseInterface";
+import { LectureInterface, ModuleInterface, ReviewInterface } from "../interface/courseInterface";
 import { getTotalLecturesDuration } from "./GetTotalLecturesDuration";
-interface Review {
-  stars: number;
-}
+
 type Props = {
   id: number;
   thumbnail: string;
@@ -25,7 +23,7 @@ type Props = {
   userId: any;
   title: string;
   slug: string;
-  reviews: Review[];
+  reviews: ReviewInterface[];
   modules: ModuleInterface[];
 };
 
@@ -44,7 +42,7 @@ const Course = ({
     let totalStars = 0;
     let totalReviews = 0;
     products.forEach(() => {
-      reviews.forEach((review: Review) => {
+      reviews.forEach((review: ReviewInterface) => {
         totalStars += review?.stars || 0;
         totalReviews++;
       });
@@ -70,12 +68,11 @@ const Course = ({
 
   const totalSumOfStars = getTotalStarsSum(reviews);
   const Reviewstars = [];
-  // Fill stars based on the rating value
   for (let i = 1; i <= 5; i++) {
     Reviewstars.push(
       <FaStar
         key={i}
-        color={i <= calculateAverageStars(reviews) ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
+        color={i <= calculateAverageStars(reviews) ? "#FFD700" : "#EAEAEA"}
       />
     );
   }

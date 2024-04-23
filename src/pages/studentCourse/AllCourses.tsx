@@ -19,6 +19,10 @@ import { CgNotes } from "react-icons/cg";
 import { useGetCourse } from "../../hooks/course";
 import { CourseInterface } from "../../interface/courseInterface";
 import { Link } from "react-router-dom";
+import { getTotalLecturesDuration } from "../../components/GetTotalLecturesDuration";
+import { convertSecondsToHMS } from "../../components/TimeFormat";
+import { CiClock1, CiPlay1 } from "react-icons/ci";
+import { BiSolidBarChartAlt2 } from "react-icons/bi";
 
 
 
@@ -92,15 +96,15 @@ const StudentCourse = () => {
                         </Text>
                         <Flex justify={"space-between"}>
                           <Flex align="center" columnGap={"4px"} color="gray">
-                            <CgNotes />
+                          <CiPlay1 />
                             <Text fontSize="13px">{modules.length} Lessons</Text>
                           </Flex>
                           <Flex align="center" columnGap={"4px"} color="gray">
-                            <CgNotes />
-                            <Text fontSize="13px">6 Lessons</Text>
+                          <CiClock1 />
+                            <Text fontSize="13px"> { convertSecondsToHMS(getTotalLecturesDuration(modules))}</Text>
                           </Flex>
                           <Flex align="center" columnGap={"4px"} color="gray">
-                            <CgNotes />
+                          <BiSolidBarChartAlt2 color={"gray"} />
                             <Text fontSize="13px">{complexityLevel}</Text>
                           </Flex>
                         </Flex>

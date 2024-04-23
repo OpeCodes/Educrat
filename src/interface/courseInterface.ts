@@ -17,6 +17,11 @@ export interface CurriculumInterface {
   description?: string;
   duration?: string;
 }
+
+
+export interface ReviewInterface {
+    stars: number;
+  }
 interface ContentInterface {
   body: string;
   duration: number;
@@ -46,7 +51,7 @@ export interface CourseInterface {
   complexityLevel: string;
   title: string;
   userId: UserInterface;
-  review: (string | number)[];
+  review: ReviewInterface[];
   slug: string;
   modules: ModuleInterface[];
   thumbnail: string;
