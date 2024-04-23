@@ -9,6 +9,8 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useInstructorReviewRating } from "../hooks/studentCourse";
+import { SocialsInterface } from "../interface/UserInterface";
+import { CourseInterface } from "../interface/courseInterface";
 
 type Instructor = {
   headline: number;
@@ -16,10 +18,11 @@ type Instructor = {
   firstName: string;
   lastName: string;
   job: string;
-  courses: string[];
+  courses: CourseInterface[];
   slug: string;
   index: number;
   arrayOfIds: number[];
+  socials: SocialsInterface[]
 };
 const Instructor = ({
   profilePicture,
@@ -30,6 +33,7 @@ const Instructor = ({
   slug,
   index,
   arrayOfIds,
+  socials
 }: Instructor) => {
   const { instructorReviewRating } = useInstructorReviewRating(
     arrayOfIds[index]
@@ -76,15 +80,21 @@ const Instructor = ({
               borderRadius: "10px",
               transitionDuration: "500ms",
             }}
+            columnGap={3}
           >
-            <FaFacebookF size={22} />
-            <Box as={"span"} mx={4}>
-              <FaInstagram size={22} />
-            </Box>
-            <Box as={"span"} mr={4}>
-              <FaTwitter size={22} />
-            </Box>
-            <FaLinkedinIn size={22} />
+            {
+              socials.map(({id,type,url}: SocialsInterface) =>{
+                return <Text key={id} as={"a"} href={url} cursor={"pointer"} target="_blank"  onClick={(e) =>
+                  e.stopPropagation()
+                }>
+                {type === "facebook" && <FaFacebookF size={22} />}
+                  {type === "linkedin" &&  <FaLinkedinIn size={22} /> }
+                  {type === "twitter" &&   <FaTwitter size={22} />}
+                  {type === "website" &&   <FaInstagram size={22} />}
+                  {/* {type === "youtube" && <FaYoutube />} */}
+                  </Text>
+              })
+            }        
           </Box>
         </Box>
         <Box>
@@ -119,7 +129,7 @@ const Instructor = ({
             >
               <CiUser color={"gray"} size={15} />
               <Text color={"gray.600"} fontSize={"14px"}>
-                {courses?.length} Students
+                {courses.length} Students
               </Text>
             </Box>
             <Box
@@ -130,7 +140,7 @@ const Instructor = ({
             >
               <CiPlay1 color={"gray"} size={15} />
               <Text color={"gray.600"} fontSize={"14px"}>
-                {courses?.length} Courses
+                {courses.length} Courses
               </Text>
             </Box>
           </Flex>

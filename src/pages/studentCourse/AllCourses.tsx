@@ -100,7 +100,7 @@ const StudentCourse = () => {
                           </Flex>
                           <Flex align="center" columnGap={"4px"} color="gray">
                             <CgNotes />
-                            <Text fontSize="13px">6 Lessons</Text>
+                            <Text fontSize="13px">{complexityLevel}</Text>
                           </Flex>
                         </Flex>
                         <Divider />
