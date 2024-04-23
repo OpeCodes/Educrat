@@ -176,7 +176,7 @@ const SingleEnrolledCourse = () => {
     const courseIndex = urlParts.indexOf("course");
 
     if (courseIndex !== -1 && courseIndex + 2 < urlParts.length) {
-      const coursePath = urlParts.slice(courseIndex, courseIndex + 2).join("/");
+      const coursePath = urlParts?.slice(courseIndex, courseIndex + 2).join("/");
       return `${baseUrl}/${coursePath}`;
     }
 

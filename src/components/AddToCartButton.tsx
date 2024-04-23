@@ -55,9 +55,9 @@ const AddToCartButton = () => {
         >
           <PopoverBody>
             <Stack maxH={"250px"} h={"100%"} overflow={"auto"} borderWidth={0}>
-              {array.map(() => {
+              {array.map((_, index) => {
                 return (
-                  <Stack mx={3} py={3}>
+                  <Stack mx={3} py={3} key={index}>
                     <Flex justify={"space-between"} columnGap={2}>
                       <Flex columnGap={2}>
                         <Image

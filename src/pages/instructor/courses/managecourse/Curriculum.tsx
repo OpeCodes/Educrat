@@ -534,7 +534,7 @@ const Curriculum = () => {
                                         display={{ base: "none", lg: "flex" }}
                                       >
                                         {title.length > 60
-                                          ? `${title.slice(0, 40)}...`
+                                          ? `${title?.slice(0, 40)}...`
                                           : `${title}`}
                                       </Text>
 
@@ -661,7 +661,7 @@ const Curriculum = () => {
                               >
                                 <Text>
                                   {title.length > 60
-                                    ? `${title.slice(0, 45)}...`
+                                    ? `${title?.slice(0, 45)}...`
                                     : `${title}`}
                                 </Text>
                                 <Stack mt={1}>

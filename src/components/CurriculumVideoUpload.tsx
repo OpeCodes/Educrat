@@ -26,7 +26,7 @@ interface ImageUploadProps {
   contentId: number;
 }
 
-const MAX_FILE_SIZE_MB = 50;
+const MAX_FILE_SIZE_MB = 150;
 
 const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
   onImageUpload,
@@ -211,7 +211,7 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   <Td width={"50%"}>
                     {uploadProgress > 0 && uploadProgress < 100 && !error && (
                       <Stack direction={"row"} align={"center"}>
-                        {selectedImageName?.name?.lengh < 40 && (
+                        {selectedImageName?.name?.length <= 40 && (
                           <Progress
                             value={uploadProgress}
                             size="sm"
@@ -250,7 +250,8 @@ const CurriculumVideoUpload: React.FC<ImageUploadProps> = ({
                   <Td>{formattedDate}</Td>
                   <Td
                     as={"button"}
-                    disabled={!success}
+                    disabled={!success && !error}
+                  
                     cursor={!success ? "not-allowed" : "pointer"}
                     fontSize={15}
                     fontWeight={"6003"}

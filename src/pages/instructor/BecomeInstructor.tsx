@@ -133,7 +133,7 @@ const BecomeInstructor = () => {
                         <FormControl isRequired>
                           <FormLabel>{`${social.type
                             .charAt(0)
-                            .toUpperCase()}${social.type.slice(
+                            .toUpperCase()}${social?.type?.slice(
                             1
                           )} URL:`}</FormLabel>
                           <Input
