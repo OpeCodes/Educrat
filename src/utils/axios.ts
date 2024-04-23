@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getUserLocalStorage, } from "../store/localStorage";
+import { getUserLocalStorage, removeUserFromLocalStorage, } from "../store/localStorage";
 const customFetch = axios.create({
   baseURL: "https://educrat.onrender.com/api/v1"
 });
@@ -12,6 +12,20 @@ customFetch.interceptors.request.use((config) => {
   }
   return config;
 });
+
+customFetch.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    const { status, data } = error.response;
+    if (status === 401 && data.error === "jwt expired") {
+      removeUserFromLocalStorage();      
+      // Redirect to login or take appropriate action
+    }
+    return Promise.reject(error);
+  }
+);
 
 // customFetch.interceptors.response.use(
 //   (response) => {

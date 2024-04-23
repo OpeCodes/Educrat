@@ -248,6 +248,7 @@ const SingleCourse = () => {
   };
   const url = getCourseUrlFromCurrentUrl();
 
+
   return (
     <>
       <Stack>
@@ -533,7 +534,7 @@ const SingleCourse = () => {
                                   <Text>
                                     {getInstructorenrolledCourse?.length}{" "}
 
-                                    Student {`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
+                                    Student{`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
                                   </Text>
                                 </Flex>
                                 <Flex
