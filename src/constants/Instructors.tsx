@@ -11,14 +11,22 @@ import {
 } from "@chakra-ui/react";
 import { MdArrowOutward } from "react-icons/md";
 import { Instructor } from "../components";
-import { useGetAllEducratInstructors } from "../hooks/studentCourse";
+import {
+  useGetAllEducratInstructors,
+  useInstructorReviewRating,
+} from "../hooks/studentCourse";
 import { Link } from "react-router-dom";
 
 export const Instructors = () => {
-  
-  const { data,isPending } = useGetAllEducratInstructors();
-  console.log(data,"hiii")
+  const { data, isPending } = useGetAllEducratInstructors();
+  const { instructorReviewRating } = useInstructorReviewRating(
+    // getStudentSingleCourse?.userId?.id
+    "66262d846858d95292123a82"
+  );
+  console.log(instructorReviewRating, "instructorReviewRating");
   const dummyArray = [1, 2, 3, 4];
+  const arrayOfIds = data?.map((obj: any) => obj?.id);
+  console.log(arrayOfIds, "arrayOfIds");
   return (
     <Box
       as={"section"}
@@ -85,10 +93,25 @@ export const Instructors = () => {
           </Stack>
         )}
 
-        <Grid templateColumns={{base: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)"}} gap={6}>
-          { data && data?.map((instructor: any) => {
-            return <Instructor key={instructor.id} {...instructor} />;
-          })}
+        <Grid
+          templateColumns={{
+            base: "repeat(1, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(4, 1fr)",
+          }}
+          gap={6}
+        >
+          {data &&
+            data?.map((instructor: any, index: any) => {
+              return (
+                <Instructor
+                  key={instructor.id}
+                  {...instructor}
+                  index={index}
+                  arrayOfIds={arrayOfIds}
+                />
+              );
+            })}
         </Grid>
         <Flex
           flexDir={{ base: "column" }}

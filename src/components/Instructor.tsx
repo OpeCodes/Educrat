@@ -7,6 +7,8 @@ import {
   FaLinkedinIn,
   FaStar,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useInstructorReviewRating } from "../hooks/studentCourse";
 
 type Instructor = {
   headline: number;
@@ -15,22 +17,39 @@ type Instructor = {
   lastName: string;
   job: string;
   courses: string[];
+  slug: string;
+  index: number
+  arrayOfIds: number[]
 };
 const Instructor = ({
   profilePicture,
   lastName,
   firstName,
   headline,
-  courses
+  courses,
+  slug,
+  index,
+  arrayOfIds
+
 }: Instructor) => {
+  console.log(index)
+  const { instructorReviewRating } = useInstructorReviewRating(
+    // getStudentSingleCourse?.userId?.id
+    // "66262d846858d95292123a82"
+    arrayOfIds[index]
+  );
+  console.log(instructorReviewRating, "instructorReviewRating")
+  console.log( "instructorReviewRating")
+  const averateinstructorReviewRating = instructorReviewRating.average === "NaN" ? 0 : instructorReviewRating.average 
   return (
     <Box
-      as="div"
       className="card"
       width={"100%"}
       height={"auto"}
       cursor={"pointer"}
       mb={{ base: 8 }}
+      as={Link}
+      to={`/user/${slug}`}
     >
       <Stack>
         <Box as="div" position={"relative"}>
@@ -91,7 +110,7 @@ const Instructor = ({
                   <FaStar color={"#FFD700"} />
                 </Text>
               </Box>
-              <Text color={"#FFD700"}>4.5</Text>
+              <Text color={"#FFD700"}>{averateinstructorReviewRating}</Text>
             </Flex>
 
             <Box

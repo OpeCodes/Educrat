@@ -14,7 +14,7 @@ import {
   Image,
   Divider,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
 import { IoPersonOutline } from "react-icons/io5";
@@ -25,8 +25,12 @@ import { FaYoutube } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
 import { CgNotes } from "react-icons/cg";
 import { Footer } from "../../constants";
+import { useGetSingleEducratInstructor } from "../../hooks/studentCourse";
 const dummy = [1, 2, 4, 5, 6, 8];
 const SingleInstructorPage = () => {
+  const {slug} = useParams()
+const {getSingleEducratInstructor} =  useGetSingleEducratInstructor(slug)
+console.log(getSingleEducratInstructor, "getSingleEducratInstructor")
   return (
     <Stack mt={"4.3rem"}>
       <Stack bg={"#f5f7fe"} py={3}>

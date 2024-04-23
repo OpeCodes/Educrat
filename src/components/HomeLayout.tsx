@@ -2,11 +2,12 @@ import Navbar from "./Navbar";
 import {Outlet} from "react-router-dom"
 const HomeLayout = () => {
   return (
-    <>
+    <div>
       <Navbar />
       <Outlet/>
-    </>
+      
+    </div>
   )
 }
 
-export default HomeLayout;
+export default HomeLayout
