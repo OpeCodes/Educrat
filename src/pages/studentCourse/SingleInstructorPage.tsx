@@ -39,6 +39,7 @@ interface Social {
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
+  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { instructorReviewRating } = useInstructorReviewRating(
     getSingleEducratInstructor?.id
   );
@@ -177,12 +178,17 @@ const SingleInstructorPage = () => {
                   ({
                     complexityLevel,
                     id,
+
                     thumbnail,
                     title,
                     slug,
-                    userId,
                   }: CourseInterface) => (
-                    <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
+                    <GridItem
+                      w="100%"
+                      key={id}
+                      as={Link}
+                      to={`/course/${slug}`}
+                    >
                       <Stack>
                         <Stack>
                           <Image
@@ -226,9 +232,14 @@ const SingleInstructorPage = () => {
                         </Stack>
                         <Flex align={"center"} justify={"space-between"}>
                           <Flex align={"center"} columnGap={2}>
-                            <Avatar name={userId.profilePicture} size={"sm"} />
+                            <Avatar
+                              src={getSingleEducratInstructor?.profilePicture}
+                              name={`${getSingleEducratInstructor?.firstName} ${getSingleEducratInstructor?.lastName}`}
+                              size={"sm"}
+                            />
                             <Text>
-                              {userId.firstName} {userId.lastName}
+                              {getSingleEducratInstructor?.firstName}{" "}
+                              {getSingleEducratInstructor?.lastName}
                             </Text>
                           </Flex>
                           <Text fontWeight={"500"} fontSize={"20px"}>
