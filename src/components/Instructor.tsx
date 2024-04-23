@@ -1,11 +1,11 @@
 import { Box, Heading, Text, Flex, Stack, Image } from "@chakra-ui/react";
 import { CiPlay1, CiUser } from "react-icons/ci";
 import {
-  FaInstagram,
   FaTwitter,
   FaFacebookF,
   FaLinkedinIn,
   FaStar,
+  FaYoutube,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useInstructorReviewRating } from "../hooks/studentCourse";
@@ -22,7 +22,7 @@ type Instructor = {
   slug: string;
   index: number;
   arrayOfIds: number[];
-  socials: SocialsInterface[]
+  socials: SocialsInterface[];
 };
 const Instructor = ({
   profilePicture,
@@ -33,7 +33,7 @@ const Instructor = ({
   slug,
   index,
   arrayOfIds,
-  socials
+  socials,
 }: Instructor) => {
   const { instructorReviewRating } = useInstructorReviewRating(
     arrayOfIds[index]
@@ -82,19 +82,23 @@ const Instructor = ({
             }}
             columnGap={3}
           >
-            {
-              socials.map(({id,type,url}: SocialsInterface) =>{
-                return <Text key={id} as={"a"} href={url} cursor={"pointer"} target="_blank"  onClick={(e) =>
-                  e.stopPropagation()
-                }>
-                {type === "facebook" && <FaFacebookF size={22} />}
-                  {type === "linkedin" &&  <FaLinkedinIn size={22} /> }
-                  {type === "twitter" &&   <FaTwitter size={22} />}
-                  {type === "website" &&   <FaInstagram size={22} />}
-                  {/* {type === "youtube" && <FaYoutube />} */}
-                  </Text>
-              })
-            }        
+            {socials.map(({ id, type, url }: SocialsInterface) => {
+              return (
+                <Text
+                  key={id}
+                  as={"a"}
+                  href={url}
+                  cursor={"pointer"}
+                  target="_blank"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {type === "facebook" && <FaFacebookF size={22} />}
+                  {type === "linkedin" && <FaLinkedinIn size={22} />}
+                  {type === "twitter" && <FaTwitter size={22} />}
+                  {type === "youtube" && <FaYoutube size={22} />}
+                </Text>
+              );
+            })}
           </Box>
         </Box>
         <Box>
