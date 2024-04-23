@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { convertSecondsToHMS } from "./TimeFormat";
-import { LectureInterface, ModuleInterface, ReviewInterface } from "../interface/courseInterface";
-import { calculateAverageStars, getTotalLecturesDuration } from "./CourseCalculations";
+import {  ModuleInterface, ReviewInterface } from "../interface/courseInterface";
+import { calculateAverageStars, getTotalLecturesDuration, getTotalStarsSum } from "./CourseCalculations";
 
 type Props = {
   id: number;
@@ -37,8 +37,8 @@ const Course = ({
   reviews,
   modules,
 }: Props) => {
-  // Function to calculate the average stars and round up to whole number
-  // function calculateAverageStars(review: any) {
+
+  
   //   let totalStars = 0;
   //   let totalReviews = 0;
   //     reviews.forEach((review: ReviewInterface) => {
@@ -55,17 +55,8 @@ const Course = ({
   // calculateAverageStars(reviews)
   // console.log(reviews, "reviews")
   // Function to calculate the total stars
-  function getTotalStarsSum(data: any) {
-    const allStars = data.map((review: any) => review.stars);
-    const totalStarsSum = allStars.reduce(
-      (sum: number, stars: number) => sum + stars,
-      0
-    );
+  //function to calculate the totalReviewstart
 
-    return totalStarsSum;
-  }
-
-  const totalSumOfStars = getTotalStarsSum(reviews);
   const Reviewstars = [];
   for (let i = 1; i <= 5; i++) {
     Reviewstars.push(
@@ -109,7 +100,7 @@ const Course = ({
                 {Reviewstars}
               </Text>
             </Box>
-            <Text color={"gray.600"}>({totalSumOfStars})</Text>
+            <Text color={"gray.600"}>({getTotalStarsSum(reviews)})</Text>
           </Flex>
         </Box>
         <Heading

@@ -1,5 +1,5 @@
 import { ModuleInterface, ReviewInterface } from "../interface/courseInterface";
-
+//function to calculate the totalduration lectures
 export const getTotalLecturesDuration = (modules: ModuleInterface[]): number => {
     let totalDuration = 0;  
     modules.forEach((module) => {
@@ -16,6 +16,7 @@ export const getTotalLecturesDuration = (modules: ModuleInterface[]): number => 
   interface CalculateAverageStarsOptions {
     roundFunction?: (value: number) => number;
   }
+  //// Function to calculate the average stars and round up to whole number
  export function calculateAverageStars(reviews: ReviewInterface[], options?: CalculateAverageStarsOptions): number {
     if (!reviews || reviews.length === 0) {
       return 0; 
@@ -31,7 +32,16 @@ export const getTotalLecturesDuration = (modules: ModuleInterface[]): number => 
     return roundedAverageStars;
   }
 
+//function to calculate the totalReviewstart
+export function getTotalStarsSum(data: ReviewInterface[]) {
+  const allStars = data.map((review: any) => review.stars);
+  const totalStarsSum = allStars.reduce(
+    (sum: number, stars: number) => sum + stars,
+    0
+  );
 
+  return totalStarsSum;
+}
   // function calculateAverageStars(products: any) {
   //   let totalStars = 0;
   //   let totalReviews = 0;
