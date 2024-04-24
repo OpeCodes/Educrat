@@ -114,7 +114,6 @@ const SingleEnrolledCourse = () => {
       lectureLength.length) *
       100
   );
-
   //checkbok func
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
   useEffect(() => {

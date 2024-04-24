@@ -73,7 +73,7 @@ const MyLearning = () => {
     return firstLectureIds;
   };
   const firstLectureIds = getFirstLectureIds(enrolledCourse);
-
+const progressValue = Math.round(enrolledCourse?.progress *100);
   return (
     <Stack mt="4.6rem">
       <Stack>
@@ -116,7 +116,7 @@ const MyLearning = () => {
                     mt={6}
                   >
                     {enrolledCourse?.map((course: any, index: number) => {
-                      const { courseId, id } = course;
+                      const { courseId, id,progress } = course;
                       if (!courseId) {
                         return null; // Skip rendering if courseId is null
                       }
@@ -144,9 +144,9 @@ const MyLearning = () => {
                           <Text fontSize={"15px"} color={"gray"}>
                             Peter Adedokun
                           </Text>
-                          <Progress value={40} height={"2px"} mt={2} />
+                          <Progress value={ Math.round(progress *100)} height={"2px"} mt={2} />
                           <Flex justify={"space-between"} fontSize={13} mt={1}>
-                            <Text>40% complete</Text>
+                            <Text>{ Math.round(progress *100)}% complete</Text>
                             <Stack>
                               <Flex>{renderStars(averageStars)}</Flex>
                             </Stack>
