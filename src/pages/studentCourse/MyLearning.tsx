@@ -73,7 +73,6 @@ const MyLearning = () => {
     return firstLectureIds;
   };
   const firstLectureIds = getFirstLectureIds(enrolledCourse);
-const progressValue = Math.round(enrolledCourse?.progress *100);
   return (
     <Stack mt="4.6rem">
       <Stack>
