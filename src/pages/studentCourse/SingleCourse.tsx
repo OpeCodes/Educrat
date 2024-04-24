@@ -35,6 +35,7 @@ import {
   useGetAlInstructorPublishedCourse,
   useGetCourseReview,
   useGetCourseReviewRating,
+  useGetInstructorReview,
   useGetInstructorenrolledCourse,
   useGetSingleEnrolledCourse,
   useGetStudentEnrolledCourse,
@@ -97,6 +98,8 @@ const SingleCourse = () => {
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
   );
+  const {getInstructorReview} =useGetInstructorReview(getStudentSingleCourse?.userId?.id);
+  console.log(getInstructorReview,"getInstructorReview")
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
