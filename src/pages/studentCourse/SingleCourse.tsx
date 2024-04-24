@@ -130,9 +130,7 @@ const SingleCourse = () => {
   };
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
-
   const { courseEnroll } = useCourseEnrollment();
-
   const { getSingleEnrolledCourse,isPending: getSingleEnrolledCourseLoading } = useGetSingleEnrolledCourse(
     getStudentSingleCourse?.id
   );
@@ -146,6 +144,7 @@ const SingleCourse = () => {
     useCreateCourseWishList();
   const { deleteCourseWishList, deleteCourseWishListLoading } =
     useDeleteCourseWishList();
+
   //get firstId for navigation
   const extractFirstLectureIds = (course: CourseInterface) => {
     const firstLectureIds: string[] = [];
@@ -253,7 +252,7 @@ const SingleCourse = () => {
 
   return (
     <>
-      <Stack>
+      <Stack mb={"2rem"}>
         {getCourseReviewLoading && isPending && getSingleEnrolledCourseLoading ? (
           <Stack mx={"4.3rem"}>
             <Skeleton height="60px" />
