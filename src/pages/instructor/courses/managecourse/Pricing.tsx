@@ -3,11 +3,81 @@ import { Formik } from "formik";
 import { pricingPageValidationSchema } from "../../../../schemas";
 
 const initialValues = {
-  currency: "USD",
-  price: "",
+  currency: "NGN",
+  price: "free",
 };
+
+interface Price {
+  id: number;
+  value: string | number;
+  price: string;
+}
+
+const pricesValues: Price[] = [
+  {
+    id: 0,
+    value: "free",
+    price: "free",
+  },
+  {
+    id: 1,
+    value: 100,
+    price: "N100 (tier 1)",
+  },
+  {
+    id: 2,
+    value: 200,
+    price: "N200 (tier 2)",
+  },
+  {
+    id: 3,
+    value: 300,
+    price: "300 (tier 3)",
+  },
+  {
+    id: 4,
+    value: 400,
+    price: "N400 (tier 4)",
+  },
+  {
+    id: 5,
+    value: 500,
+    price: "N600 (tier 5)",
+  },
+  {
+    id: 6,
+    value: 600,
+    price: "N600 (tier 6)",
+  },
+  {
+    id: 7,
+    value: 700,
+    price: "N700 (tier 7)",
+  },
+  {
+    id: 8,
+    value: 800,
+    price: "N800 (tier 8)",
+  },
+  {
+    id: 9,
+    value: 900,
+    price: "N900 (tier 9)",
+  },
+  {
+    id: 10,
+    value: 1000,
+    price: "N1000 (tier 10)",
+  },
+  {
+    id: 11,
+    value: 1100,
+    price: "N1100 (tier 11)",
+  },
+];
 const Pricing = () => {
-  const handleSubmit = () => {
+  const handleSubmit = (values: any) => {
+    console.log(values);
   };
   return (
     <Stack p={5} mb={"12rem"}>
@@ -18,8 +88,8 @@ const Pricing = () => {
       <Stack pt={5} pb={2}>
         <Text fontWeight={"bold"}>Set a price for your course</Text>
         <Text fontSize={14}>
-          Please select the currency and the price tier for your course. be
-          free.
+          Please select the currency and the price tier for your course. You can
+          use to offer like to offer your course for free.
         </Text>
       </Stack>
 
@@ -41,11 +111,7 @@ const Pricing = () => {
                     value={values.currency}
                     onChange={handleChange}
                   >
-                    <option value="USD">USD</option>
                     <option value="NGN">NGN</option>
-                    <option value="GHS">GHS</option>
-                    <option value="ZAR">ZAR</option>
-                    <option value="KES">KES</option>
                   </Select>
                   {errors.currency && (
                     <Text
@@ -66,15 +132,17 @@ const Pricing = () => {
                     value={values.price}
                     onChange={handleChange}
                   >
-                    <option value="free">Free</option>
-                    <option value="tier-1">$19.99 (tier 1)</option>
-                    <option value="tier-2">$22.99 (tier 2)</option>
-                    <option value="tier-3">$24.99 (tier 3)</option>
-                    <option value="tier-4">#29.99 (tier-4)</option>
+                    {pricesValues.map(({ id, price, value }: Price) => {
+                      return (
+                        <option key={id} value={value}>
+                          {price}
+                        </option>
+                      );
+                    })}
                   </Select>
                   {errors.price && (
                     <Text
-                      style={{ color: "red", marginTop: 0 }}
+                      style={{ color: "red", marginTop: -8 }}
                       fontSize="14px"
                     >
                       <>{errors.price}</>
