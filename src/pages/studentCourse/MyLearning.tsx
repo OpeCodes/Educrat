@@ -14,39 +14,18 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
 import {
   useGetAllUserEnrolledCourse,
   useGetStudentWishList,
 } from "../../hooks/studentCourse";
 import { Loading } from "../../components";
+import { calculateAverageStars, generateStarIcons } from "../../components/CourseCalculations";
 
 const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
     useGetAllUserEnrolledCourse();
   const { getStudentWishList, isPending: getStudentWishListLoading } =
     useGetStudentWishList();
-  // Function to calculate average stars for reviews of a course
-  const calculateAverageStars = (reviews: { stars: number }[]) => {
-    if (!reviews || reviews.length === 0) {
-      return 0;
-    }
-
-    const totalStars = reviews.reduce((sum, review) => sum + review.stars, 0);
-    const averageStars = totalStars / reviews.length;
-    return Math.round(averageStars);
-  };
-
-  // Function to render star icons based on average rating
-  const renderStars = (averageStars: number) => {
-    const starElements: JSX.Element[] = [];
-    for (let i = 1; i <= 5; i++) {
-      const filledColor = i <= averageStars ? "#FFD700" : "#EAEAEA";
-      starElements.push(<FaStar key={`star-${i}`} color={filledColor} />);
-    }
-    return starElements;
-  };
-
   //get first id for each lecture in the enrolled array
   const getFirstLectureIds = (enrolledCourses: any[]) => {
     const firstLectureIds: string[] = [];
@@ -147,7 +126,7 @@ const MyLearning = () => {
                           <Flex justify={"space-between"} fontSize={13} mt={1}>
                             <Text>{ Math.round(progress *100)}% complete</Text>
                             <Stack>
-                              <Flex>{renderStars(averageStars)}</Flex>
+                              <Flex>{generateStarIcons(averageStars)}</Flex>
                             </Stack>
                           </Flex>
                         </GridItem>
