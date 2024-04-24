@@ -26,6 +26,7 @@ import { TbWorld } from "react-icons/tb";
 import { CgNotes } from "react-icons/cg";
 import { Footer } from "../../constants";
 import {
+  useGetInstructorReview,
   useGetInstructorenrolledCourse,
   useGetSingleEducratInstructor,
   useInstructorReviewRating,
@@ -40,6 +41,7 @@ interface Social {
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
+  console.log(getSingleEducratInstructor,"getSingleEducratInstructor")
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getSingleEducratInstructor?.id
   );
@@ -50,6 +52,8 @@ const SingleInstructorPage = () => {
     instructorReviewRating?.average === "NaN"
       ? 0
       : instructorReviewRating?.average;
+
+  const {getInstructorReview} =useGetInstructorReview(getSingleEducratInstructor?.id);
 
   return (
     <Stack mt={"4.3rem"}>
@@ -110,7 +114,7 @@ const SingleInstructorPage = () => {
               <IoPersonOutline />
             </Text>
             <Text>
-              {getInstructorenrolledCourse?.length} Student{" "}
+              {getInstructorenrolledCourse?.length} Student
               {`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
             </Text>
           </Flex>
@@ -119,8 +123,8 @@ const SingleInstructorPage = () => {
               <HiOutlineChat />
             </Text>
             <Text>
-              {+parseFloat(instructorReviewRating?.total).toFixed()} Review
-              {`${instructorReviewRating?.total <= 1 ? "" : "s"}`}
+              {getInstructorReview?.length} Review
+              {`${getInstructorReview?.length <= 1 ? "" : "s"}`}
             </Text>
           </Flex>
           <Flex align={"center"} columnGap={1}>

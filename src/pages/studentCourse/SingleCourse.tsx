@@ -99,7 +99,6 @@ const SingleCourse = () => {
     getStudentSingleCourse?.userId?.id
   );
   const {getInstructorReview} =useGetInstructorReview(getStudentSingleCourse?.userId?.id);
-  console.log(getInstructorReview,"getInstructorReview")
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
@@ -518,11 +517,12 @@ const SingleCourse = () => {
                                     <HiOutlineChat />
                                   </Text>
                                   <Text>
-                                    {
+                                    {/* {
                                       +parseFloat(
                                         instructorReviewRating?.total
                                       ).toFixed()
-                                    }
+                                    } */}
+                                    {getInstructorReview?.length}
                                   </Text>
                                   <Text> Reviews</Text>
                                 </Flex>
