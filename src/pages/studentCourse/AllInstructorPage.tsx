@@ -5,7 +5,7 @@ import { Instructor } from "../../components";
 
 const AllInstructorPage = () => {
   const { data } = useGetAllEducratInstructors();
-
+  const arrayOfIds = data?.map((obj: any) => obj?.id);
   return (
     <Stack mt={"4.3rem"}>
       <Stack bg={"#f5f7fe"} py={3}>
@@ -25,9 +25,13 @@ const AllInstructorPage = () => {
             <Text>&#x2022;</Text>
             <Text>All Courses</Text>
           </Flex>
+          <Flex columnGap={1} as={Link} to="/all-courses">
+            <Text>&#x2022;</Text>
+            <Text>User Experience Design</Text>
+          </Flex>
           <Flex columnGap={1}>
             <Text>&#x2022;</Text>
-            <Text>design</Text>
+            <Text>User Interface</Text>
           </Flex>
         </Flex>
       </Stack>
@@ -35,7 +39,7 @@ const AllInstructorPage = () => {
         <Heading as={"h1"} color={"#140342"} size={"xl"}>
           Instructors
         </Heading>
-        <Text as={"p"} color={"gray.600"} my={2} >
+        <Text as={"p"} color={"gray.600"} my={2}>
           We’re on a mission to deliver engaging, curated courses at a
           reasonable price.
         </Text>
@@ -48,8 +52,15 @@ const AllInstructorPage = () => {
         w={"100%"}
         mx={"auto"}
       >
-        {data?.map((instructor: any) => {
-          return <Instructor key={instructor.id} {...instructor} />;
+        {data?.map((instructor: any, index: any) => {
+          return (
+            <Instructor
+              key={instructor.id}
+              index={index}
+              {...instructor}
+              arrayOfIds={arrayOfIds}
+            />
+          );
         })}
       </Grid>
     </Stack>
