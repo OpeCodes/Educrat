@@ -20,7 +20,8 @@ import {
 } from "../../hooks/studentCourse";
 import { Loading } from "../../components";
 import { calculateAverageStars, generateStarIcons, getTotalStarsSum } from "../../components/CourseCalculations";
-import { CourseInterface, ModuleInterface } from "../../interface/courseInterface";
+import { CourseInterface, LectureInterface, ModuleInterface } from "../../interface/courseInterface";
+import { convertSecondsToHMS } from "../../components/TimeFormat";
 
 const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
@@ -30,28 +31,29 @@ const MyLearning = () => {
 console.log(getStudentWishList,"getStudentWishList")
 
 //start
-const getTotalLecturesDuration = () => {
-  let totalDuration = 0;
-  getStudentWishList.forEach((wishlist: CourseInterface) =>{
-    wishlist?.modules.forEach((module: ModuleInterface) => {
-      if (module.lectures && Array.isArray(module.lectures)) {
-        module.lectures.forEach((lecture: any) => {
-          totalDuration += lecture?.content?.duration || 0;
-        });
-      }
-    });
-  })
- 
-  return totalDuration;
+const getTotalLecturesDurationForEachCourse = (wishList: CourseInterface[]): number[] => {
+  const totalDurations: number[] = [];
+
+  wishList.forEach((course: CourseInterface) => {
+    let totalDuration = 0;
+
+    if (course && Array.isArray(course.modules)) {
+      course.modules.forEach((module: ModuleInterface) => {
+        if (module.lectures && Array.isArray(module.lectures)) {
+          module.lectures.forEach((lecture: LectureInterface) => {
+            totalDuration += lecture?.content?.duration || 0;
+          });
+        }
+      });
+    }
+
+    totalDurations.push(totalDuration);
+  });
+
+  return totalDurations;
 };
 
-// Calculate total duration
-const totalDuration = getTotalLecturesDuration();
-console.log(totalDuration,"totalDuration")
-
-//end
-    // console.log(getStudentWishList,"getStudentWishList")
-  //get first id for each lecture in the enrolled array
+const totalDurationsForEachCourse = getTotalLecturesDurationForEachCourse(getStudentWishList);
   const getFirstLectureIds = (enrolledCourses: any[]) => {
     const firstLectureIds: string[] = [];
     enrolledCourses?.forEach((course) => {
@@ -172,7 +174,7 @@ console.log(totalDuration,"totalDuration")
                     gap={6}
                     mt={6}
                   >
-                    {getStudentWishList?.map((course: CourseInterface) => {
+                    {getStudentWishList?.map((course: CourseInterface, index: number) => {
                       const { thumbnail, title, id, slug,reviews } = course;
                       return (
                         <GridItem key={id} as={Link} to={`/course/${slug}`}>
@@ -197,7 +199,7 @@ console.log(totalDuration,"totalDuration")
                             <Text color="gray">({getTotalStarsSum(reviews)})</Text>
                           </Flex>
                           <Flex columnGap={1} fontSize={13} color="gray">
-                            <Text>4.5 hours</Text>
+                            <Text> {convertSecondsToHMS(totalDurationsForEachCourse[index])}</Text>
                             <Text>444 lectures</Text>
                           </Flex>
                           <Text fontWeight="bold" color="black">
