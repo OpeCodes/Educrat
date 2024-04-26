@@ -5,7 +5,7 @@ import {
   FaFacebookF,
   FaLinkedinIn,
   FaStar,
-  FaYoutube,ins
+  FaYoutube,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useInstructorReviewRating } from "../hooks/studentCourse";
