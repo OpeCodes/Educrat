@@ -1,5 +1,5 @@
 import { FaStar } from "react-icons/fa";
-import { CourseInterface, LectureInterface, ModuleInterface, ReviewInterface } from "../interface/courseInterface";
+import { ModuleInterface, ReviewInterface } from "../interface/courseInterface";
 //function to calculate the totalduration lectures
 export const getTotalLecturesDuration = (modules: ModuleInterface[]): number => {
     let totalDuration = 0;  
@@ -60,21 +60,4 @@ export function generateStarIcons(averageRating: any, maxRating: number = 5): JS
 }
 
 
- //function to calculate the total lecture duration
-
-//  export const getTotalLecturesDuration = (courseData: CourseInterface) => {
-//   let totalDuration = 0;
-
-//   // Ensure courseData and its modules exist and are arrays
-//   if (courseData && Array.isArray(courseData.modules)) {
-//     courseData.modules.forEach((module: ModuleInterface) => {
-//       if (module.lectures && Array.isArray(module.lectures)) {
-//         module.lectures.forEach((lecture: LectureInterface) => {
-//           totalDuration += lecture?.content?.duration || 0;
-//         });
-//       }
-//     });
-//   }
-
-//   return totalDuration;
 // };
