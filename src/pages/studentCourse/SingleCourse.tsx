@@ -57,6 +57,7 @@ import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Footer } from "../../constants";
 import { TiSocialTwitter } from "react-icons/ti";
+import PaystackPop from "@paystack/inline-js";
 import {
   shareOnFacebook,
   shareOnInstagram,
@@ -94,17 +95,20 @@ const SingleCourse = () => {
   const studentWishList: ObjectWithId[] = getStudentWishList ?? [];
   const idExists = doesIdExistInArray(studentWishList, objectToCheck);
 
-  const { getCourseReview, isPending: getCourseReviewLoading } = useGetCourseReview(getStudentSingleCourse?.id);
+  const { getCourseReview, isPending: getCourseReviewLoading } =
+    useGetCourseReview(getStudentSingleCourse?.id);
   const { instructorReviewRating } = useInstructorReviewRating(
     getStudentSingleCourse?.userId?.id
   );
-  const {getInstructorReview} =useGetInstructorReview(getStudentSingleCourse?.userId?.id);
+  const { getInstructorReview } = useGetInstructorReview(
+    getStudentSingleCourse?.userId?.id
+  );
   const { courseReviewRating } = useGetCourseReviewRating(
     getStudentSingleCourse?.id
   );
-  const {
-    getStudentEnrolledCourse,
-  } = useGetStudentEnrolledCourse(getStudentSingleCourse?.id);
+  const { getStudentEnrolledCourse } = useGetStudentEnrolledCourse(
+    getStudentSingleCourse?.id
+  );
 
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
@@ -131,9 +135,8 @@ const SingleCourse = () => {
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
   const { courseEnroll } = useCourseEnrollment();
-  const { getSingleEnrolledCourse,isPending: getSingleEnrolledCourseLoading } = useGetSingleEnrolledCourse(
-    getStudentSingleCourse?.id
-  );
+  const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
+    useGetSingleEnrolledCourse(getStudentSingleCourse?.id);
   const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
     getStudentSingleCourse?.userId?.id
   );
@@ -173,9 +176,24 @@ const SingleCourse = () => {
 
       return;
     } else {
-      courseEnroll({
-        courseId: getStudentSingleCourse?.id,
-        wishList: true,
+      const paystack = new PaystackPop();
+      paystack.newTransaction({
+        // other params
+        key: "pk_live_884dbde205dbac83c7bd5e099fef5ad9f9f692dd",
+        email: "peteradedokun167@gmail.com",
+        amount: 10000,
+        onSuccess: () => {
+          toast({ title: "successful", status: "success" });
+          courseEnroll({
+            courseId: getStudentSingleCourse?.id,
+            wishList: true,
+          });
+        },
+        onCancel: () => {
+          // user closed popup
+          // toast({ title: "closed", status: "error" });
+        },
+       
       });
     }
   };
@@ -241,19 +259,23 @@ const SingleCourse = () => {
     const urlParts = currentUrl.split("/");
     const courseIndex = urlParts.indexOf("course");
     if (courseIndex !== -1 && courseIndex + 1 < urlParts.length) {
-      const coursePath = urlParts?.slice(courseIndex, courseIndex + 2).join("/");
+      const coursePath = urlParts
+        ?.slice(courseIndex, courseIndex + 2)
+        .join("/");
       return `${baseUrl}/${coursePath}`;
     }
 
     return baseUrl;
   };
   const url = getCourseUrlFromCurrentUrl();
-
+  // paystack
 
   return (
     <>
       <Stack mb={"2rem"}>
-        {getCourseReviewLoading && isPending && getSingleEnrolledCourseLoading ? (
+        {getCourseReviewLoading &&
+        isPending &&
+        getSingleEnrolledCourseLoading ? (
           <Stack mx={"4.3rem"}>
             <Skeleton height="60px" />
             <Stack>
@@ -499,11 +521,11 @@ const SingleCourse = () => {
                                     <FaStar color={"#FFD700"} />
                                   </Text>
                                   <Text color={"#FFD700"}>
-                                    {
-                                       instructorReviewRating?.average ==="NaN" ? 0 : +parseFloat(
-                                        instructorReviewRating?.average
-                                      ).toFixed(2)
-                                    }                                    
+                                    {instructorReviewRating?.average === "NaN"
+                                      ? 0
+                                      : +parseFloat(
+                                          instructorReviewRating?.average
+                                        ).toFixed(2)}
                                   </Text>
                                   <Text>Instructor Rating</Text>
                                 </Flex>
@@ -535,8 +557,12 @@ const SingleCourse = () => {
                                   </Text>
                                   <Text>
                                     {getInstructorenrolledCourse?.length}{" "}
-
-                                    Student{`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
+                                    Student
+                                    {`${
+                                      getInstructorenrolledCourse?.length <= 1
+                                        ? ""
+                                        : "s"
+                                    }`}
                                   </Text>
                                 </Flex>
                                 <Flex
@@ -549,7 +575,12 @@ const SingleCourse = () => {
                                   </Text>
                                   <Text>
                                     {getAlInstructorPublishedCourse?.length}{" "}
-                                    Course{`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
+                                    Course
+                                    {`${
+                                      getInstructorenrolledCourse?.length <= 1
+                                        ? ""
+                                        : "s"
+                                    }`}
                                   </Text>
                                 </Flex>
                               </Flex>
@@ -875,4 +906,3 @@ const SingleCourse = () => {
 };
 
 export default SingleCourse;
-
