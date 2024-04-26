@@ -19,14 +19,15 @@ import {
   useGetStudentWishList,
 } from "../../hooks/studentCourse";
 import { Loading } from "../../components";
-import { calculateAverageStars, generateStarIcons } from "../../components/CourseCalculations";
+import { calculateAverageStars, generateStarIcons, getTotalStarsSum } from "../../components/CourseCalculations";
+import { CourseInterface } from "../../interface/courseInterface";
 
 const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
     useGetAllUserEnrolledCourse();
   const { getStudentWishList, isPending: getStudentWishListLoading } =
     useGetStudentWishList();
-// console.log(getStudentWishList,"getStudentWishList")
+console.log(getStudentWishList,"getStudentWishList")
     // console.log(getStudentWishList,"getStudentWishList")
   //get first id for each lecture in the enrolled array
   const getFirstLectureIds = (enrolledCourses: any[]) => {
@@ -149,8 +150,8 @@ const MyLearning = () => {
                     gap={6}
                     mt={6}
                   >
-                    {getStudentWishList?.map((course: any) => {
-                      const { thumbnail, title, id, slug } = course;
+                    {getStudentWishList?.map((course: CourseInterface) => {
+                      const { thumbnail, title, id, slug,reviews } = course;
                       return (
                         <GridItem key={id} as={Link} to={`/course/${slug}`}>
                           <Image
@@ -165,8 +166,13 @@ const MyLearning = () => {
                             {title}
                           </Text>
                           <Flex columnGap={1} fontSize={13}>
-                            <Text>4.5 stars</Text>
-                            <Text color="gray">(993)</Text>
+                            <Text>{calculateAverageStars(reviews)}</Text>
+                            <Flex align={"center"}>
+                              {generateStarIcons(
+                                  calculateAverageStars(reviews)
+                                )}
+                            </Flex>
+                            <Text color="gray">({getTotalStarsSum(reviews)})</Text>
                           </Flex>
                           <Flex columnGap={1} fontSize={13} color="gray">
                             <Text>4.5 hours</Text>
