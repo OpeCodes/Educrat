@@ -13,6 +13,7 @@ import {
   GridItem,
   Image,
   Divider,
+  Button,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
@@ -41,9 +42,11 @@ interface Social {
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
+  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getSingleEducratInstructor?.id
   );
+  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { instructorReviewRating } = useInstructorReviewRating(
     getSingleEducratInstructor?.id
   );
@@ -52,7 +55,9 @@ const SingleInstructorPage = () => {
       ? 0
       : instructorReviewRating?.average;
 
-  const {getInstructorReview} =useGetInstructorReview(getSingleEducratInstructor?.id);
+  const { getInstructorReview } = useGetInstructorReview(
+    getSingleEducratInstructor?.id
+  );
 
   return (
     <Stack mt={"4.3rem"}>
@@ -75,7 +80,11 @@ const SingleInstructorPage = () => {
           </Flex>
           <Flex columnGap={1}>
             <Text>&#x2022;</Text>
-            <Text>design</Text>
+            <Text>User Experience Design</Text>
+          </Flex>
+          <Flex columnGap={1}>
+            <Text>&#x2022;</Text>
+            <Text>User Interface</Text>
           </Flex>
         </Flex>
       </Stack>
@@ -131,7 +140,6 @@ const SingleInstructorPage = () => {
               <LuClock3 />
             </Text>
             <Text>
-              {" "}
               {getSingleEducratInstructor?.courses.length} course
               {`${getSingleEducratInstructor?.courses.length <= 1 ? "" : "s"}`}
             </Text>
@@ -144,6 +152,14 @@ const SingleInstructorPage = () => {
           mt={4}
           cursor={"pointer"}
         >
+          <Button
+            bg={"#00FF84"}
+            as={"a"}
+            href={`mailto:${getSingleEducratInstructor?.email}`}
+          >
+            Send Message
+          </Button>
+
           {getSingleEducratInstructor?.socials?.map(
             ({ type, url, id }: Social) => {
               return (
@@ -162,7 +178,7 @@ const SingleInstructorPage = () => {
       <Stack
         width={"100%"}
         mt={12}
-        maxW={{ base: "95%", lg: "60%" }}
+        maxW={{ base: "95%", lg: "70%" }}
         mx={"auto"}
       >
         <Tabs position="relative">
@@ -191,11 +207,10 @@ const SingleInstructorPage = () => {
                 {getSingleEducratInstructor?.courses.length === 0 && (
                   <Text>No course available</Text>
                 )}
-                {getSingleEducratInstructor?.courses.map(
+                {getSingleEducratInstructor?.courses?.map(
                   ({
                     complexityLevel,
                     id,
-
                     thumbnail,
                     title,
                     slug,
@@ -214,7 +229,7 @@ const SingleInstructorPage = () => {
                             borderRadius="lg"
                           />
                           <Stack>
-                            <Text>4.3 rating</Text>
+                            {/* <Text>{getTotalStarsSum(reviews)}</Text> */}
                             <Text fontSize="20px" mt="-12px">
                               {title}
                             </Text>
