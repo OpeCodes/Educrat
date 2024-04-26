@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getUserLocalStorage, removeUserFromLocalStorage, } from "../store/localStorage";
+import { useNavigate } from "react-router-dom";
 const customFetch = axios.create({
   baseURL: "https://educrat.onrender.com/api/v1"
 });
@@ -19,8 +20,12 @@ customFetch.interceptors.response.use(
   },
   (error) => {
     const { status, data } = error.response;
-    if (status === 401 && data.error === "jwt expired") {
-      removeUserFromLocalStorage();      
+    const navigate = useNavigate()
+    console.log()
+    if (status === 500 && data.error === "jwt expired") {
+      removeUserFromLocalStorage();    
+      navigate("/sign-in")
+
       // Redirect to login or take appropriate action
     }
     return Promise.reject(error);
@@ -35,7 +40,7 @@ customFetch.interceptors.response.use(
 //     // const originalRequest = error.config;
 //     const navigate = useNavigate()
 //     const user = getUserLocalStorage();  
-//     if (error.response && error.response.status === 401) {
+//     if (error.response && error.response.status === 500) {
 //       const refreshToken = user.accessToken;
 //       if (refreshToken) {      
 //         removeUserFromLocalStorage();

@@ -26,8 +26,8 @@ const MyLearning = () => {
     useGetAllUserEnrolledCourse();
   const { getStudentWishList, isPending: getStudentWishListLoading } =
     useGetStudentWishList();
-console.log(getStudentWishList,"getStudentWishList")
-    console.log(getStudentWishList,"getStudentWishList")
+// console.log(getStudentWishList,"getStudentWishList")
+    // console.log(getStudentWishList,"getStudentWishList")
   //get first id for each lecture in the enrolled array
   const getFirstLectureIds = (enrolledCourses: any[]) => {
     const firstLectureIds: string[] = [];
