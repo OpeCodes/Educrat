@@ -19,8 +19,16 @@ import {
   useGetStudentWishList,
 } from "../../hooks/studentCourse";
 import { Loading } from "../../components";
-import { calculateAverageStars, generateStarIcons, getTotalStarsSum } from "../../components/CourseCalculations";
-import { CourseInterface, LectureInterface, ModuleInterface } from "../../interface/courseInterface";
+import {
+  calculateAverageStars,
+  generateStarIcons,
+  getTotalStarsSum,
+} from "../../components/CourseCalculations";
+import {
+  CourseInterface,
+  LectureInterface,
+  ModuleInterface,
+} from "../../interface/courseInterface";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 
 const MyLearning = () => {
@@ -28,32 +36,48 @@ const MyLearning = () => {
     useGetAllUserEnrolledCourse();
   const { getStudentWishList, isPending: getStudentWishListLoading } =
     useGetStudentWishList();
-console.log(getStudentWishList,"getStudentWishList")
+  console.log(getStudentWishList, "getStudentWishList");
 
-//start
-const getTotalLecturesDurationForEachCourse = (wishList: CourseInterface[]): number[] => {
-  const totalDurations: number[] = [];
+  //start
+  const getTotalLecturesDurationForEachCourse = (
+    wishList: CourseInterface[]
+  ): number[] => {
+    const totalDurations: number[] = [];
 
-  wishList.forEach((course: CourseInterface) => {
-    let totalDuration = 0;
+    wishList.forEach((course: CourseInterface) => {
+      let totalDuration = 0;
 
-    if (course && Array.isArray(course.modules)) {
-      course.modules.forEach((module: ModuleInterface) => {
-        if (module.lectures && Array.isArray(module.lectures)) {
-          module.lectures.forEach((lecture: LectureInterface) => {
-            totalDuration += lecture?.content?.duration || 0;
-          });
-        }
-      });
-    }
+      if (course && Array.isArray(course.modules)) {
+        course.modules.forEach((module: ModuleInterface) => {
+          if (module.lectures && Array.isArray(module.lectures)) {
+            module.lectures.forEach((lecture: LectureInterface) => {
+              totalDuration += lecture?.content?.duration || 0;
+            });
+          }
+        });
+      }
+      totalDurations.push(totalDuration);
+    });
 
-    totalDurations.push(totalDuration);
-  });
+    return totalDurations;
+  };
 
-  return totalDurations;
-};
+  // const lectureLength: number[] = (getStudentWishList.flatMap(obj => obj.modules.flatMap(module => module.lectures)) ?? []).map(lecture => lecture.length);
+  // const lectureLength: number[] = (getStudentWishList.flatMap(obj => obj.modules.flatMap(module => module.lectures)) ?? []).map((lecture: string) => lecture.length);
 
-const totalDurationsForEachCourse = getTotalLecturesDurationForEachCourse(getStudentWishList);
+  const lectureCountsForEachObject: number[] = getStudentWishList.map(
+    (obj: any) =>
+      obj.modules.reduce(
+        (total: number, module: ModuleInterface) =>
+          total + module.lectures.length,
+        0
+      )
+  );
+
+  console.log(lectureCountsForEachObject);
+
+  const totalDurationsForEachCourse =
+    getTotalLecturesDurationForEachCourse(getStudentWishList);
   const getFirstLectureIds = (enrolledCourses: any[]) => {
     const firstLectureIds: string[] = [];
     enrolledCourses?.forEach((course) => {
@@ -121,7 +145,7 @@ const totalDurationsForEachCourse = getTotalLecturesDurationForEachCourse(getStu
                     mt={6}
                   >
                     {enrolledCourse?.map((course: any, index: number) => {
-                      const { courseId, id,progress } = course;
+                      const { courseId, id, progress } = course;
                       if (!courseId) {
                         return null; // Skip rendering if courseId is null
                       }
@@ -149,9 +173,13 @@ const totalDurationsForEachCourse = getTotalLecturesDurationForEachCourse(getStu
                           <Text fontSize={"15px"} color={"gray"}>
                             Peter Adedokun
                           </Text>
-                          <Progress value={ Math.round(progress *100)} height={"2px"} mt={2} />
+                          <Progress
+                            value={Math.round(progress * 100)}
+                            height={"2px"}
+                            mt={2}
+                          />
                           <Flex justify={"space-between"} fontSize={13} mt={1}>
-                            <Text>{ Math.round(progress *100)}% complete</Text>
+                            <Text>{Math.round(progress * 100)}% complete</Text>
                             <Stack>
                               <Flex>{generateStarIcons(averageStars)}</Flex>
                             </Stack>
@@ -174,40 +202,51 @@ const totalDurationsForEachCourse = getTotalLecturesDurationForEachCourse(getStu
                     gap={6}
                     mt={6}
                   >
-                    {getStudentWishList?.map((course: CourseInterface, index: number) => {
-                      const { thumbnail, title, id, slug,reviews } = course;
-                      return (
-                        <GridItem key={id} as={Link} to={`/course/${slug}`}>
-                          <Image
-                            maxHeight="250px"
-                            height="100%"
-                            width="100%"
-                            objectFit="cover"
-                            src={thumbnail}
-                            alt={title}
-                          />
-                          <Text mt={2} fontWeight="bold">
-                            {title}
-                          </Text>
-                          <Flex columnGap={1} fontSize={13}>
-                            <Text>{calculateAverageStars(reviews)}</Text>
-                            <Flex align={"center"}>
-                              {generateStarIcons(
+                    {getStudentWishList?.map(
+                      (course: CourseInterface, index: number) => {
+                        const { thumbnail, title, id, slug, reviews } = course;
+                        return (
+                          <GridItem key={id} as={Link} to={`/course/${slug}`}>
+                            <Image
+                              maxHeight="250px"
+                              height="100%"
+                              width="100%"
+                              objectFit="cover"
+                              src={thumbnail}
+                              alt={title}
+                            />
+                            <Text mt={2} fontWeight="bold">
+                              {title}
+                            </Text>
+                            <Flex columnGap={1} fontSize={13}>
+                              <Text>{calculateAverageStars(reviews)}</Text>
+                              <Flex align={"center"}>
+                                {generateStarIcons(
                                   calculateAverageStars(reviews)
                                 )}
+                              </Flex>
+                              <Text color="gray">
+                                ({getTotalStarsSum(reviews)})
+                              </Text>
                             </Flex>
-                            <Text color="gray">({getTotalStarsSum(reviews)})</Text>
-                          </Flex>
-                          <Flex columnGap={1} fontSize={13} color="gray">
-                            <Text> {convertSecondsToHMS(totalDurationsForEachCourse[index])}</Text>
-                            <Text>444 lectures</Text>
-                          </Flex>
-                          <Text fontWeight="bold" color="black">
-                            N40000
-                          </Text>
-                        </GridItem>
-                      );
-                    })}
+                            <Flex columnGap={1} fontSize={13} color="gray">
+                              <Text>
+                                {convertSecondsToHMS(
+                                  totalDurationsForEachCourse[index]
+                                )}
+                              </Text>
+                              <Text fontSize={"0.8rem"}>&#x2022;</Text>
+                              <Text>
+                                {lectureCountsForEachObject[index]} lectures
+                              </Text>
+                            </Flex>
+                            <Text fontWeight="bold" color="black">
+                              N40000
+                            </Text>
+                          </GridItem>
+                        );
+                      }
+                    )}
                   </Grid>
                 )}
               </TabPanel>
