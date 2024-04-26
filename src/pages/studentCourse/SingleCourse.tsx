@@ -64,7 +64,7 @@ import {
   shareOnLinkedIn,
   shareOnTwitter,
 } from "../../components/ShareFuncs";
-import { CourseInterface } from "../../interface/courseInterface";
+import { CourseInterface, ModuleInterface } from "../../interface/courseInterface";
 interface ObjectWithId {
   id: string;
 }
@@ -123,7 +123,7 @@ const SingleCourse = () => {
 
   const getTotalLecturesDuration = () => {
     let totalDuration = 0;
-    getStudentSingleCourse?.modules.forEach((module: any) => {
+    getStudentSingleCourse?.modules.forEach((module: ModuleInterface) => {
       if (module.lectures && Array.isArray(module.lectures)) {
         module.lectures.forEach((lecture: any) => {
           totalDuration += lecture?.content?.duration || 0;

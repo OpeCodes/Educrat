@@ -20,7 +20,7 @@ import {
 } from "../../hooks/studentCourse";
 import { Loading } from "../../components";
 import { calculateAverageStars, generateStarIcons, getTotalStarsSum } from "../../components/CourseCalculations";
-import { CourseInterface } from "../../interface/courseInterface";
+import { CourseInterface, ModuleInterface } from "../../interface/courseInterface";
 
 const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
@@ -28,6 +28,28 @@ const MyLearning = () => {
   const { getStudentWishList, isPending: getStudentWishListLoading } =
     useGetStudentWishList();
 console.log(getStudentWishList,"getStudentWishList")
+
+//start
+const getTotalLecturesDuration = () => {
+  let totalDuration = 0;
+  getStudentWishList.forEach((wishlist: CourseInterface) =>{
+    wishlist?.modules.forEach((module: ModuleInterface) => {
+      if (module.lectures && Array.isArray(module.lectures)) {
+        module.lectures.forEach((lecture: any) => {
+          totalDuration += lecture?.content?.duration || 0;
+        });
+      }
+    });
+  })
+ 
+  return totalDuration;
+};
+
+// Calculate total duration
+const totalDuration = getTotalLecturesDuration();
+console.log(totalDuration,"totalDuration")
+
+//end
     // console.log(getStudentWishList,"getStudentWishList")
   //get first id for each lecture in the enrolled array
   const getFirstLectureIds = (enrolledCourses: any[]) => {
