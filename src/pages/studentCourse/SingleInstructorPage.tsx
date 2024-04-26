@@ -156,6 +156,7 @@ const SingleInstructorPage = () => {
             bg={"#00FF84"}
             as={"a"}
             href={`mailto:${getSingleEducratInstructor?.email}`}
+            fontWeight={"400"}
           >
             Send Message
           </Button>
