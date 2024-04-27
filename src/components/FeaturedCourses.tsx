@@ -13,8 +13,13 @@ import { Link } from "react-router-dom";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { convertSecondsToHMS } from "./TimeFormat";
-import {  ModuleInterface, ReviewInterface } from "../interface/courseInterface";
-import { calculateAverageStars, generateStarIcons, getTotalLecturesDuration, getTotalStarsSum } from "./CourseCalculations";
+import { ModuleInterface, ReviewInterface } from "../interface/courseInterface";
+import {
+  calculateAverageStars,
+  generateStarIcons,
+  getTotalLecturesDuration,
+  getTotalStarsSum,
+} from "./CourseCalculations";
 
 type Props = {
   id: number;
@@ -25,6 +30,7 @@ type Props = {
   slug: string;
   reviews: ReviewInterface[];
   modules: ModuleInterface[];
+  price: number;
 };
 
 const Course = ({
@@ -36,8 +42,8 @@ const Course = ({
   slug,
   reviews,
   modules,
-}: Props) => { 
-
+  price,
+}: Props) => {
   const Reviewstars = [];
   for (let i = 1; i <= 5; i++) {
     Reviewstars.push(
@@ -60,8 +66,7 @@ const Course = ({
       key={id}
     >
       <Stack>
-            
-        <Box as={"div"} overflow={"hidden"} borderRadius={"10px"} >
+        <Box as={"div"} overflow={"hidden"} borderRadius={"10px"}>
           <Image
             src={thumbnail}
             className="img"
@@ -80,7 +85,7 @@ const Course = ({
             <Text color={"#FFD700"}>{calculateAverageStars(reviews)}</Text>
             <Box color={"#e59819"} display={"flex"} ml={2} mr={3}>
               <Text display={"flex"} columnGap={1}>
-            {generateStarIcons(calculateAverageStars(reviews))}
+                {generateStarIcons(calculateAverageStars(reviews))}
               </Text>
             </Box>
             <Text color={"gray.600"}>({getTotalStarsSum(reviews)})</Text>
@@ -138,7 +143,7 @@ const Course = ({
             alignItems={"center"}
           >
             <Text color={"#140342"} fontSize={"xl"}>
-              $99
+              N{price}
             </Text>
           </Box>
         </Box>

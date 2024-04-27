@@ -162,7 +162,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                 const { contentPreviewable, content, contentType, id, title } =
                   lecture;
                 return (
-                  <>
+                  <div key={id}>
                     {content?.duration && (
                       <AccordionPanel key={lecture.id}>
                         <Flex align={"center"} justify={"space-between"}>
@@ -210,7 +210,7 @@ const StudentCourseContent = ({ SingleCourseProp }: SingleCourse) => {
                         </Flex>
                       </AccordionPanel>
                     )}
-                  </>
+                  </div>
                 );
               })}
             </AccordionItem>

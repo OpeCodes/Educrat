@@ -89,7 +89,8 @@ export const externalResourceSchema =  Yup.object().shape({
 })
 export const pricingPageValidationSchema  = Yup.object().shape({
   currency: Yup.string().required("pls select your currency"),
-  price: Yup.string().required("pls select price"),
+  // price: Yup.number()
+  // .string().required("pls select price"),
 
 })
 export const reviewCourseValidationSchema  = Yup.object().shape({

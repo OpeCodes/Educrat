@@ -57,7 +57,7 @@ import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Footer } from "../../constants";
 import { TiSocialTwitter } from "react-icons/ti";
-import PaystackPop from "@paystack/inline-js";
+// import PaystackPop from "@paystack/inline-js";
 import {
   shareOnFacebook,
   shareOnInstagram,
@@ -81,6 +81,7 @@ const SingleCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
+  console.log(getStudentSingleCourse,"getStudentSingleCourse")
   const { getStudentWishList } = useGetStudentWishList();
 
   const studentCourseId: string | undefined = getStudentSingleCourse?.id;
@@ -176,25 +177,11 @@ const SingleCourse = () => {
 
       return;
     } else {
-      const paystack = new PaystackPop();
-      paystack.newTransaction({
-        // other params
-        key: "pk_live_884dbde205dbac83c7bd5e099fef5ad9f9f692dd",
-        email: "peteradedokun167@gmail.com",
-        amount: 10000,
-        onSuccess: () => {
-          toast({ title: "successful", status: "success" });
-          courseEnroll({
-            courseId: getStudentSingleCourse?.id,
-            wishList: true,
-          });
-        },
-        onCancel: () => {
-          // user closed popup
-          // toast({ title: "closed", status: "error" });
-        },
-       
+      courseEnroll({
+        courseId: getStudentSingleCourse?.id,
+        wishList: true,
       });
+      
     }
   };
   const handleGoToCourse = () => {
@@ -688,7 +675,7 @@ const SingleCourse = () => {
                             {!getSingleEnrolledCourse || !user ? (
                               <Stack>
                                 <Text mt={3} fontSize={"1.5rem"}>
-                                  $120
+                                  N{getStudentSingleCourse?.price}
                                 </Text>
                                 <Flex columnGap={4}>
                                   <Button
