@@ -69,6 +69,7 @@ import {
   ModuleInterface,
 } from "../../interface/courseInterface";
 import { useCheckoutOrder, useCreateOrder } from "../../hooks/auth/price";
+import BuyNowModal from "../../components/BuyNowModal";
 interface ObjectWithId {
   id: string;
 }
@@ -85,7 +86,6 @@ const SingleCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
 
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
-  console.log(getStudentSingleCourse, "getStudentSingleCourse");
   const { getStudentWishList } = useGetStudentWishList();
 
   const studentCourseId: string | undefined = getStudentSingleCourse?.id;
@@ -169,7 +169,9 @@ const SingleCourse = () => {
 
   const firstLectureIds = extractFirstLectureIds(getStudentSingleCourse);
   const { createOrder } = useCreateOrder();
-  const {checkoutOrder, redirectToPayment} =useCheckoutOrder()
+  const { checkoutOrder,  } = useCheckoutOrder();
+  const { order } = useSelector((store: RootState) => store?.user);
+  console.log(order, "here");
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-in");
@@ -187,20 +189,35 @@ const SingleCourse = () => {
       //   courseId: getStudentSingleCourse?.id,
       //   wishList: true,
       // });
-      console.log([getStudentSingleCourse?.id])
-     
+
       createOrder({
         body: {
           totalAmount: getStudentSingleCourse?.price,
           courses: [getStudentSingleCourse?.id],
         },
       });
+
+      // if(order){
+      //   setTimeout(() => {
+      //     checkoutOrder({ id: order?.id });
+      //   }, 1000);
+      // }
+        
+    
+   
+
       try {
         // Call the checkoutOrder mutation function
-         checkoutOrder({ id: "662d463368121c40939d1836"}); // Pass the appropriate order ID
-  
+        // if(!order){
+          // return;
+        // }
+        // if (order) {
+          // checkoutOrder({ id: order?.id });
+          // redirectToPayment();
+        // }
+        // Pass the appropriate order ID
+
         // If mutation is successful, redirect to Paystack checkout
-        redirectToPayment();
       } catch (error) {
         // Handle error
         console.error("Error during checkout:", error);
@@ -286,6 +303,7 @@ const SingleCourse = () => {
   return (
     <>
       <Stack mb={"2rem"}>
+        <BuyNowModal/>
         {getCourseReviewLoading &&
         isPending &&
         getSingleEnrolledCourseLoading ? (

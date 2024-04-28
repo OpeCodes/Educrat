@@ -7,11 +7,16 @@ import {
 interface UserState {
   user: any;
   courseNavigate: number;
+  order: any;
+  orderBoolean: boolean;
 }
 
 const initialState: UserState = {
   user: getUserLocalStorage(),
   courseNavigate: 0,
+  order: null,
+  orderBoolean: false
+
 };
 
 const userSlice = createSlice({
@@ -21,11 +26,16 @@ const userSlice = createSlice({
     setUser: (state: UserState, action: PayloadAction<any>) => {
       state.user = action.payload;
     },
+    setOrder: (state: UserState, action: PayloadAction<any>) => {
+      state.order = action.payload;
+    },
     logoutUser: (state: UserState) => {
       state.user = null;
       removeUserFromLocalStorage();
     },
-
+    setToggleOrder: (state: UserState,) => {
+      state.orderBoolean = !state.orderBoolean
+    },
     setCourseAuthNavigate: (state: UserState, action: PayloadAction<any>) => {
       state.courseNavigate = action.payload;
     },
@@ -33,7 +43,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, logoutUser, setCourseAuthNavigate,  } =
+export const { setUser, logoutUser, setCourseAuthNavigate, setOrder, setToggleOrder  } =
   userSlice.actions;
 export const selectData = (state: { data: UserState }) => state.data.user;
 export default userSlice.reducer;

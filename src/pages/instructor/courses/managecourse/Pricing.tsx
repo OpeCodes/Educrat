@@ -1,16 +1,19 @@
 import { Button, Divider, Flex, Select, Stack, Text } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { pricingPageValidationSchema } from "../../../../schemas";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useGetSingleCourse, useSingleCourse } from "../../../../hooks/course";
 
 const initialValues = {
   currency: "NGN",
-  price: "free",
+  price: 200,
 };
 
 interface Price {
   id: number;
   value: string | number;
-  price: string;
+  price: number | string;
 }
 
 const pricesValues: Price[] = [
@@ -76,8 +79,29 @@ const pricesValues: Price[] = [
   },
 ];
 const Pricing = () => {
-  const handleSubmit = (values: any) => {
-    console.log(values);
+  const { id } = useParams();
+  const {
+    getSingleCourse,
+    isError,
+    isPending: singleCourseLoading,
+    refetch,
+  } = useGetSingleCourse(id);
+  useEffect(() => {
+    refetch();
+  }, [id]);
+
+
+  const { singleCourse, isPending: isLoading } = useSingleCourse();
+
+  const handleSubmit = (values: Price) => {
+    // console.log(values);
+  let {price} = values
+    price  = Number(price)
+    console.log(values)
+    singleCourse({
+      singleId: getSingleCourse?.id,
+      user: {price},
+    });
   };
   return (
     <Stack p={5} mb={"12rem"}>
@@ -108,19 +132,19 @@ const Pricing = () => {
                     variant={"filled"}
                     //   width={{ base: "100%", md: "35%" }}
                     name="currency"
-                    value={values.currency}
+                    // value={values.currency}
                     onChange={handleChange}
                   >
                     <option value="NGN">NGN</option>
                   </Select>
-                  {errors.currency && (
+                  {/* {errors.currency && (
                     <Text
                       style={{ color: "red", marginTop: 0 }}
                       fontSize="14px"
                     >
                       <>{errors.currency}</>
                     </Text>
-                  )}
+                  )} */}
                 </Stack>
                 <Stack>
                   <Text fontWeight={"bold"}>Price Tier</Text>
