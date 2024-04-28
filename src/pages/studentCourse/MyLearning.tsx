@@ -36,7 +36,6 @@ const MyLearning = () => {
     useGetAllUserEnrolledCourse();
   const { getStudentWishList, isPending: getStudentWishListLoading } =
     useGetStudentWishList();
-  console.log(getStudentWishList, "getStudentWishList");
 
   //start
   const getTotalLecturesDurationForEachCourse = (
@@ -74,7 +73,6 @@ const MyLearning = () => {
       )
   );
 
-  console.log(lectureCountsForEachObject);
 
   const totalDurationsForEachCourse =
     getTotalLecturesDurationForEachCourse(getStudentWishList);

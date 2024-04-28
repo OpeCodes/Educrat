@@ -68,7 +68,6 @@ const Pricing = () => {
       singleId: getSingleCourse?.id,
       user: {price},
     });
-    console.log({ ...values, price });
   };
 
   const handleChangePrice = (

@@ -9,9 +9,7 @@ const BuyNowModal = () => {
   const { orderBoolean, order } = useSelector(
     (store: RootState) => store?.user
   );
-  console.log(orderBoolean, "orderBoolean");
   const { checkoutOrder } = useCheckoutOrder();
-
   const dispatch = useDispatch();
   const closeModal = () => {
     dispatch(setToggleOrder());
@@ -59,7 +57,7 @@ const BuyNowModal = () => {
               <Button
                 onClick={() => {
                   checkoutOrder({ id: order?.id });
-                    closeModal();
+                  closeModal();
                 }}
                 width={"100%"}
                 bg={"black"}

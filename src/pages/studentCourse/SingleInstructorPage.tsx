@@ -42,11 +42,9 @@ interface Social {
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
-  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getSingleEducratInstructor?.id
   );
-  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { instructorReviewRating } = useInstructorReviewRating(
     getSingleEducratInstructor?.id
   );

@@ -14,7 +14,6 @@ export const useCreateOrder = () => {
         return customFetch.post(`/order`, body);
       },
       onSuccess: (data) => {
-        console.log(data.data, "Data here");
         dispatch(setToggleOrder());
         dispatch(setOrder(data.data));
         // queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });

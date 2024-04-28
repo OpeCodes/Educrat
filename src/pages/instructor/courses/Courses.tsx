@@ -20,7 +20,6 @@ import React from "react";
 
 const Courses = () => {
   const { data, isError, isPending } = useGetAllUserCourse();
-  console.log(data,"data")
   if (isError) {
     return <Error />;
   }
