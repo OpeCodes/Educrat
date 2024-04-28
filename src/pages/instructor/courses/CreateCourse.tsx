@@ -84,13 +84,10 @@ const CreateCourse = () => {
                 value={values.category}
               >
                 {data?.map((values: any) =>
-                  isPending ? (
-                    <Spinner />
-                  ) : (
+                  
                     <option key={values.id} id={values.id} value={values.id}>
                       {values.name}
                     </option>
-                  )
                 )}
               </Select>
               {errors.category && (
