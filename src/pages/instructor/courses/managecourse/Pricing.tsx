@@ -1,5 +1,6 @@
 import { Button, Divider, Flex, Select, Stack, Text } from "@chakra-ui/react";
 import { Formik } from "formik";
+import { pricingPageValidationSchema } from "../../../../schemas";
 
 interface Price {
   id: number;
@@ -79,7 +80,7 @@ const Pricing = () => {
       </Stack>
 
       <Flex>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={pricingPageValidationSchema}>
           {({ handleChange, handleSubmit, values, errors, setFieldValue }) => (
             <Flex
               rowGap={"5px"}
@@ -88,13 +89,13 @@ const Pricing = () => {
               overflowY={"auto"}
               pb={5}
             >
+              <Flex columnGap={6}>
               <Select
-                placeholder="Select Currency"
                 name="currency"
                 onChange={handleChange}
                 mt={6}
                 variant="filled"
-                value={values.currency} // Do not convert to string
+                value={values.currency} 
               >
                 {currencies.map((currency) => (
                   <option key={currency.value} value={currency.value}>
@@ -103,7 +104,6 @@ const Pricing = () => {
                 ))}
               </Select>
               <Select
-                placeholder="Select Category"
                 name="price"
                 onChange={(e) => handleChangePrice(e, setFieldValue)}
                 mt={6}
@@ -121,19 +121,25 @@ const Pricing = () => {
                   {errors.price}
                 </Text>
               )}
+              </Flex>
 
               <Button
-                bg={"#00FF84"}
-                colorScheme="teal"
+                color="#ffffff"
+                fontWeight={"500"}
+                fontSize={14}
+                as={"button"}
+                mt={3}
+                // py={6}
+                // px={6}
                 variant="outline"
                 spinnerPlacement="end"
-                width="100%"
+                // isLoading={isLoading}
                 onClick={() => handleSubmit()}
-                borderWidth={2}
-                borderColor={"#00FF84"}
-                _hover={{ background: "none", color: "#00FF84" }}
+                type="button"
+                backgroundColor={"black"}
+                width={"fit-content"}
               >
-                Create Course
+                Save
               </Button>
             </Flex>
           )}
