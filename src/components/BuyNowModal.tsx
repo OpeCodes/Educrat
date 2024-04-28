@@ -1,11 +1,17 @@
-import { Box, Flex, Text, Stack, Button } from "@chakra-ui/react";
+import { Flex, Text, Stack, Button } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { setToggleOrder } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
+import { useCheckoutOrder } from "../hooks/auth/price";
 
 const BuyNowModal = () => {
-  const { orderBoolean } = useSelector((store: RootState) => store?.user);
+  const { orderBoolean, order } = useSelector(
+    (store: RootState) => store?.user
+  );
+  console.log(orderBoolean, "orderBoolean");
+  const { checkoutOrder } = useCheckoutOrder();
+
   const dispatch = useDispatch();
   const closeModal = () => {
     dispatch(setToggleOrder());
@@ -40,10 +46,7 @@ const BuyNowModal = () => {
                 Will you like to proceed to purchase this course?
               </Text>
             </Stack>
-            <Flex
-              borderRadius="md"
-              columnGap={4}
-            >
+            <Flex borderRadius="md" columnGap={4}>
               <Button
                 onClick={closeModal}
                 width={"100%"}
@@ -54,7 +57,12 @@ const BuyNowModal = () => {
               </Button>
 
               <Button
-                onClick={closeModal}
+                onClick={() => {
+                  checkoutOrder({ id: order?.id });
+                //   dispatch(setToggleOrder());
+
+                    closeModal();
+                }}
                 width={"100%"}
                 bg={"black"}
                 color={"white"}

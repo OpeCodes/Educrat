@@ -29,7 +29,6 @@ import { useEffect, useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import {
-  useCourseEnrollment,
   useCreateCourseWishList,
   useDeleteCourseWishList,
   useGetAlInstructorPublishedCourse,
@@ -52,7 +51,7 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { PromotionalVideoPlayModal } from "../../components";
-import { setCourseAuthNavigate } from "../../features/user/UserSlice";
+import { setCourseAuthNavigate,  } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Footer } from "../../constants";
@@ -68,7 +67,7 @@ import {
   CourseInterface,
   ModuleInterface,
 } from "../../interface/courseInterface";
-import { useCheckoutOrder, useCreateOrder } from "../../hooks/auth/price";
+import {  useCreateOrder } from "../../hooks/auth/price";
 import BuyNowModal from "../../components/BuyNowModal";
 interface ObjectWithId {
   id: string;
@@ -139,7 +138,7 @@ const SingleCourse = () => {
   };
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
-  const { courseEnroll } = useCourseEnrollment();
+  // const { courseEnroll } = useCourseEnrollment();
   const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
     useGetSingleEnrolledCourse(getStudentSingleCourse?.id);
   const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
@@ -169,9 +168,6 @@ const SingleCourse = () => {
 
   const firstLectureIds = extractFirstLectureIds(getStudentSingleCourse);
   const { createOrder } = useCreateOrder();
-  const { checkoutOrder,  } = useCheckoutOrder();
-  const { order } = useSelector((store: RootState) => store?.user);
-  console.log(order, "here");
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-in");
@@ -195,36 +191,7 @@ const SingleCourse = () => {
           totalAmount: getStudentSingleCourse?.price,
           courses: [getStudentSingleCourse?.id],
         },
-      });
-
-      // if(order){
-      //   setTimeout(() => {
-      //     checkoutOrder({ id: order?.id });
-      //   }, 1000);
-      // }
-        
-    
-   
-
-      try {
-        // Call the checkoutOrder mutation function
-        // if(!order){
-          // return;
-        // }
-        // if (order) {
-          // checkoutOrder({ id: order?.id });
-          // redirectToPayment();
-        // }
-        // Pass the appropriate order ID
-
-        // If mutation is successful, redirect to Paystack checkout
-      } catch (error) {
-        // Handle error
-        console.error("Error during checkout:", error);
-      }
-      // checkoutOrder({
-      //   id: "662d463368121c40939d1836"
-      // })
+      });           
     }
   };
   const handleGoToCourse = () => {
