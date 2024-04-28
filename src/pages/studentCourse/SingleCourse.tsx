@@ -29,6 +29,7 @@ import { useEffect, useState } from "react";
 import { HiOutlineChat } from "react-icons/hi";
 import StudentCourseContent from "../../components/StudentCourseContent";
 import {
+  useCourseEnrollment,
   useCreateCourseWishList,
   useDeleteCourseWishList,
   useGetAlInstructorPublishedCourse,
@@ -51,7 +52,7 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { PromotionalVideoPlayModal } from "../../components";
-import { setCourseAuthNavigate,  } from "../../features/user/UserSlice";
+import { setCourseAuthNavigate } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Footer } from "../../constants";
@@ -67,7 +68,7 @@ import {
   CourseInterface,
   ModuleInterface,
 } from "../../interface/courseInterface";
-import {  useCreateOrder } from "../../hooks/auth/price";
+import { useCreateOrder } from "../../hooks/auth/price";
 import BuyNowModal from "../../components/BuyNowModal";
 interface ObjectWithId {
   id: string;
@@ -138,7 +139,7 @@ const SingleCourse = () => {
   };
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
-  // const { courseEnroll } = useCourseEnrollment();
+  const { courseEnroll } = useCourseEnrollment();
   const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
     useGetSingleEnrolledCourse(getStudentSingleCourse?.id);
   const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
@@ -181,17 +182,18 @@ const SingleCourse = () => {
 
       return;
     } else {
-      // courseEnroll({
-      //   courseId: getStudentSingleCourse?.id,
-      //   wishList: true,
-      // });
-
-      createOrder({
-        body: {
-          totalAmount: getStudentSingleCourse?.price,
-          courses: [getStudentSingleCourse?.id],
-        },
-      });           
+      if (getStudentSingleCourse?.price === 0) {
+        courseEnroll({
+          courseId: getStudentSingleCourse?.id,
+        });
+      } else {
+        createOrder({
+          body: {
+            totalAmount: getStudentSingleCourse?.price,
+            courses: [getStudentSingleCourse?.id],
+          },
+        });
+      }
     }
   };
   const handleGoToCourse = () => {
@@ -270,7 +272,7 @@ const SingleCourse = () => {
   return (
     <>
       <Stack mb={"2rem"}>
-        <BuyNowModal/>
+        <BuyNowModal />
         {getCourseReviewLoading &&
         isPending &&
         getSingleEnrolledCourseLoading ? (
