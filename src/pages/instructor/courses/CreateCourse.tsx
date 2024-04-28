@@ -7,7 +7,6 @@ import {
   Text,
   Box,
   Select,
-  Spinner,
 } from "@chakra-ui/react";
 import { CreateCourseNavBar, Loading } from "../../../components";
 import { Formik } from "formik";
@@ -80,15 +79,26 @@ const CreateCourse = () => {
                 name="category"
                 onChange={handleChange}
                 mt={6}
-                variant="filled"
                 value={values.category}
               >
-                {data?.map((values: any) =>
-                  
-                    <option key={values.id} id={values.id} value={values.id}>
-                      {values.name}
-                    </option>
-                )}
+                {data?.map((values: any) => (
+                  <option key={values.id} id={values.id} value={values.id}>
+                    {values.name}
+                  </option>
+                ))}
+              </Select>
+              <Select
+                placeholder="Select Category"
+                name="category"
+                onChange={handleChange}
+                mt={6}
+                value={values.category}
+              >
+                {data?.map((values: any) => (
+                  <option key={values.id} id={values.id} value={values.id}>
+                    {values.name}
+                  </option>
+                ))}
               </Select>
               {errors.category && (
                 <Text style={{ color: "red", marginTop: 5 }} fontSize="14px">
