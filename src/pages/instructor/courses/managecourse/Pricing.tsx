@@ -1,59 +1,73 @@
 import { Button, Divider, Flex, Select, Stack, Text } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { pricingPageValidationSchema } from "../../../../schemas";
+import { useGetSingleCourse, useSingleCourse } from "../../../../hooks/course";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-interface Price {
-  id: number;
-  price: number;
-  name: string;
-}
-const Pricing = () => {
-  const initialValues = {
-    currency: "NGN",
+
+const initialValues = {
+  currency: "NGN",
+  price: 0,
+};
+
+const data = [
+  {
+    id: 1,
     price: 0,
-  };
+    name: "free",
+  },
+  {
+    id: 2,
+    price: 100,
+    name: "N100 (tier 1)",
+  },
+  {
+    id: 3,
+    price: 200,
+    name: "N200 (tier 2)",
+  },
+  ,
+  {
+    id: 4,
+    price: 300,
+    name: "N300 (tier 3)",
+  },
+  {
+    id: 5,
+    price: 400,
+    name: "N400 (tier 4)",
+  },
+  {
+    id: 6,
+    price: 500,
+    name: "N500 (tier 5)",
+  },
+];
+const currencies = [
+  { value: "NGN" },
+  // { value: "USD",  },
+  // { value: "EUR",},
+];
+const Pricing = () => {
+ 
+  const { id } = useParams();
+  useEffect(() => {
+    refetch();
+  }, [id]);
 
-  const data = [
-    {
-      id: 1,
-      price: 0,
-      name: "free",
-    },
-    {
-      id: 2,
-      price: 100,
-      name: "N100 (tier 1)",
-    },
-    {
-      id: 3,
-      price: 200,
-      name: "N200 (tier 2)",
-    },
-    ,
-    {
-      id: 4,
-      price: 300,
-      name: "N300 (tier 3)",
-    },
-    {
-      id: 5,
-      price: 400,
-      name: "N400 (tier 4)",
-    },
-    {
-      id: 6,
-      price: 500,
-      name: "N500 (tier 5)",
-    },
-  ];
-  const currencies = [
-    { value: "NGN" },
-    // { value: "USD",  },
-    // { value: "EUR",},
-  ];
+  const {
+    getSingleCourse,
+    refetch,
+  } = useGetSingleCourse(id);
+  const { singleCourse, isPending: isLoading } = useSingleCourse();
 
   const handleSubmit = (values: any) => {
     const price = parseFloat(values.price);
+    singleCourse({
+      singleId: getSingleCourse?.id,
+      user: {price},
+    });
     console.log({ ...values, price });
   };
 
@@ -133,7 +147,7 @@ const Pricing = () => {
                 // px={6}
                 variant="outline"
                 spinnerPlacement="end"
-                // isLoading={isLoading}
+                isLoading={isLoading}
                 onClick={() => handleSubmit()}
                 type="button"
                 backgroundColor={"black"}

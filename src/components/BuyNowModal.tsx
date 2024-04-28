@@ -59,8 +59,6 @@ const BuyNowModal = () => {
               <Button
                 onClick={() => {
                   checkoutOrder({ id: order?.id });
-                //   dispatch(setToggleOrder());
-
                     closeModal();
                 }}
                 width={"100%"}
