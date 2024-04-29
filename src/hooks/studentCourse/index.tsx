@@ -409,6 +409,7 @@ export const useCreateEnrolledCourseReview = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
+      
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
       queryClient.invalidateQueries({ queryKey: ["courseReviewRating"] });
       toast({

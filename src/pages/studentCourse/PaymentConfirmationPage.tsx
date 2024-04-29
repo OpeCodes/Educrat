@@ -1,5 +1,6 @@
 
 const PaymentConfirmationPage = () => {
+    
   return (
     <div>
       <h1>Payment Confirmation</h1>

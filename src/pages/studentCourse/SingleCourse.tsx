@@ -70,6 +70,7 @@ import {
 } from "../../interface/courseInterface";
 import { useCreateOrder } from "../../hooks/auth/price";
 import BuyNowModal from "../../components/BuyNowModal";
+import { addCourseToCart } from "../../features/cart/CartSlice";
 interface ObjectWithId {
   id: string;
 }
@@ -84,7 +85,8 @@ const SingleCourse = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   const { user } = useSelector((store: RootState) => store?.user);
-
+  const { courses } = useSelector((store: RootState) => store?.cart);
+  console.log(courses, "sometehre here");
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getStudentWishList } = useGetStudentWishList();
 
@@ -231,6 +233,22 @@ const SingleCourse = () => {
     }
   };
 
+  const handleAddToCart = (course: any) => {
+    if (!user) {
+      navigate("/sign-in");
+      toast({
+        title: `Sign in to add course to cart`,
+        status: "info",
+        duration: 3000,
+        isClosable: true,
+      });
+      dispatch(setCourseAuthNavigate(-1));
+      return;
+    } else {
+      dispatch(addCourseToCart(course));
+      localStorage.setItem("cart", JSON.stringify(course));
+    }
+  };
   let ratingFormat = parseFloat(
     courseReviewRating?.average === "NaN" ? "0" : courseReviewRating?.average
   );
@@ -697,6 +715,16 @@ const SingleCourse = () => {
                                     variant="solid"
                                     color={"white"}
                                     width={"100%"}
+                                    onClick={() => {
+                                      handleAddToCart({
+                                        id: getStudentSingleCourse?.id,
+                                        title: getStudentSingleCourse?.title,
+                                        description:
+                                          getStudentSingleCourse?.description,
+                                        price: getStudentSingleCourse?.price,
+                                        img: getStudentSingleCourse?.thumbnail,
+                                      });
+                                    }}
                                   >
                                     Add to Cart
                                   </Button>

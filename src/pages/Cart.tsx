@@ -13,10 +13,22 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { MdClose } from "react-icons/md";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../store/store";
+import { removeCourseFromCart } from "../features/cart/CartSlice";
+import { useDispatch } from "react-redux";
 
 const Cart = () => {
-  const dummy = [1, 2]; // Dummy data array (replace with actual cart data)
+  const { courses } = useSelector((store: RootState) => store?.cart);
+  const dispatch = useDispatch()
+  const totalPrice = courses.reduce((acc: any, course: any) => acc + course.price, 0);
+  console.log(totalPrice)
+  const handleRemoveFromCart = (courseId: string) => {
+    dispatch(removeCourseFromCart(courseId));
+  };
+
+
 
   return (
     <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
@@ -39,25 +51,25 @@ const Cart = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {dummy.map((_, index) => (
+            {courses?.map((course: any, index) => (
               <Tr key={index} p={6}>
                 <Td width={"100%"} maxW={"40%"} py={6}>
                   <Flex align="center">
                     <Image
                       borderRadius="5px"
                       boxSize="100px"
-                      src="https://bit.ly/dan-abramov"
+                      src={course.img}
                       alt="Product Image"
                       mr={4}
                     />
                     <Text isTruncated maxW="100%">
-                      Complete Python Bootcamp From Zero to Hero in Python
+                      {course.title}
                     </Text>
                   </Flex>
                 </Td>
-                <Td width={"20%"}>$18</Td>
-                <Td width={"20%"}>$18</Td>
-                <Td width={"10%"} cursor={"pointer"}>
+                <Td width={"20%"}> {course.price}</Td>
+                <Td width={"20%"}>{course.price}</Td>
+                <Td width={"10%"} cursor={"pointer"} onClick={() => handleRemoveFromCart(course.id)}>
                   <MdClose fontSize={20} />
                 </Td>
               </Tr>
@@ -74,11 +86,11 @@ const Cart = () => {
             </Text>
             <Flex justify={"space-between"}>
               <Text>Subtotal</Text>
-              <Text>$233.0</Text>
+              <Text>{totalPrice}</Text>
             </Flex>
             <Flex justify={"space-between"}>
               <Text>Total</Text>
-              <Text>$233.0</Text>
+              <Text>{totalPrice}</Text>
             </Flex>
           </Stack>
           <Button

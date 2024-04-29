@@ -14,10 +14,22 @@ import {
 } from "@chakra-ui/react";
 import { IoCartOutline } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../store/store";
+import { removeCourseFromCart } from "../features/cart/CartSlice";
+import { useDispatch } from "react-redux";
 
 const AddToCartButton = () => {
-  const array = [1, 2];
+  const { courses } = useSelector((store: RootState) => store?.cart);
+  const dispatch = useDispatch();
+  const totalPrice = courses.reduce(
+    (acc: any, course: any) => acc + course.price,
+    0
+  );
+  const handleRemoveFromCart = (courseId: string) => {
+    dispatch(removeCourseFromCart(courseId));
+  };
   return (
     <>
       <Popover placement="bottom-start">
@@ -42,7 +54,7 @@ const AddToCartButton = () => {
               alignItems="center"
               justifyContent="center"
             >
-             {array.length}
+              {courses.length}
             </Badge>
           </Box>
         </PopoverTrigger>
@@ -55,7 +67,7 @@ const AddToCartButton = () => {
         >
           <PopoverBody>
             <Stack maxH={"250px"} h={"100%"} overflow={"auto"} borderWidth={0}>
-              {array.map((_, index) => {
+              {courses.map((course: any, index) => {
                 return (
                   <Stack mx={3} py={3} key={index}>
                     <Flex justify={"space-between"} columnGap={2}>
@@ -63,19 +75,20 @@ const AddToCartButton = () => {
                         <Image
                           boxSize="70px"
                           objectFit="cover"
-                          src={"https://bit.ly/dan-abramov"}
+                          src={course.img}
                         />
                         <Stack>
                           <Text width={"90%"} fontSize={16}>
-                            NodeJS Tutorial and Projects Course
+                            {course.title}
                           </Text>
-                          <Text>$50</Text>
+                          <Text>N{course.price}</Text>
                         </Stack>
                       </Flex>
                       <Text
                         cursor={"pointer"}
                         color={"blue"}
                         fontWeight={"bold"}
+                        onClick={() => handleRemoveFromCart(course.id)}
                       >
                         <MdClose fontSize={20} />
                       </Text>
@@ -89,7 +102,7 @@ const AddToCartButton = () => {
             <Stack mx={3}>
               <Flex justify={"space-between"} my={2} fontSize={20}>
                 <Text>Total:</Text>
-                <Text>$100</Text>
+                <Text>N{totalPrice}</Text>
               </Flex>
               <Flex justify={"center"} columnGap={10} pb={5}>
                 <Button
