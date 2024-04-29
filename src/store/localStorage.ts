@@ -11,3 +11,15 @@ export const getUserLocalStorage = () => {
 };
 
 
+
+export const addCourseItemToLocalStorage =(course: any) => {
+  localStorage.setItem("course", JSON.stringify(course));
+};
+export const removeCourseItemToLocalStorage  = () => {
+  localStorage.removeItem("course");
+};
+export const getCourseItemToLocalStorage  = () => {
+  const result = localStorage.getItem("course");
+  const course = result ? JSON.parse(result) : null;
+  return course;
+};

@@ -67,6 +67,11 @@ const AddToCartButton = () => {
         >
           <PopoverBody>
             <Stack maxH={"250px"} h={"100%"} overflow={"auto"} borderWidth={0}>
+              {courses.length === 0 && (
+                <Text fontSize={20} my={4}>
+                  Your Course Cart Is Empty
+                </Text>
+              )}
               {courses.map((course: any, index) => {
                 return (
                   <Stack mx={3} py={3} key={index}>
@@ -104,7 +109,7 @@ const AddToCartButton = () => {
                 <Text>Total:</Text>
                 <Text>N{totalPrice}</Text>
               </Flex>
-              <Flex justify={"center"} columnGap={10} pb={5}>
+              {courses.length === 0 ? (
                 <Button
                   bg={"#6440FB"}
                   py={"25px"}
@@ -113,21 +118,36 @@ const AddToCartButton = () => {
                   color={"white"}
                   width={"100%"}
                   as={Link}
-                  to={"/cart"}
+                  to={"/all-courses"}
                 >
-                  View Cart{" "}
+                  Continue Buying
                 </Button>
-                <Button
-                  bg={"#6440FB"}
-                  py={"25px"}
-                  variant="solid"
-                  color={"white"}
-                  fontWeight={400}
-                  width={"100%"}
-                >
-                  Checkout
-                </Button>
-              </Flex>
+              ) : (
+                <Flex justify={"center"} columnGap={10} pb={5}>
+                  <Button
+                    bg={"#6440FB"}
+                    py={"25px"}
+                    variant="solid"
+                    fontWeight={400}
+                    color={"white"}
+                    width={"100%"}
+                    as={Link}
+                    to={"/cart"}
+                  >
+                    View Cart{" "}
+                  </Button>
+                  <Button
+                    bg={"#6440FB"}
+                    py={"25px"}
+                    variant="solid"
+                    color={"white"}
+                    fontWeight={400}
+                    width={"100%"}
+                  >
+                    Checkout
+                  </Button>
+                </Flex>
+              )}
             </Stack>
           </PopoverFooter>
         </PopoverContent>

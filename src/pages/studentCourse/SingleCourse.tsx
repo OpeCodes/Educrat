@@ -555,12 +555,7 @@ const SingleCourse = () => {
                                   <Text>
                                     <HiOutlineChat />
                                   </Text>
-                                  <Text>
-                                    {/* {
-                                      +parseFloat(
-                                        instructorReviewRating?.total
-                                      ).toFixed()
-                                    } */}
+                                  <Text>                                   
                                     {getInstructorReview?.length}
                                   </Text>
                                   <Text> Reviews</Text>
