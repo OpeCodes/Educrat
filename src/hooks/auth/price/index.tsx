@@ -84,3 +84,40 @@ export const useCheckoutOrder = () => {
 
   return { checkoutOrder, createCourseWishListLoading, redirectToPayment };
 };
+
+// ****************************payment***************************
+
+export const usePaymentTransaction = () => {
+  const toast = useToast();
+  const { mutate: paymentTransaction } = useMutation({
+    mutationFn: ({ status }: any) => {
+      return customFetch.post(`/payment/transaction/status`, status);
+    },
+    onSuccess: () => {},
+    onError: (error: any) => {
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
+  return { paymentTransaction };
+};
