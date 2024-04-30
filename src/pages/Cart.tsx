@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { RootState } from "../store/store";
 import { removeCourseFromCart } from "../features/cart/CartSlice";
 import { useDispatch } from "react-redux";
@@ -24,23 +24,28 @@ const Cart = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
   const { order } = useSelector((store: RootState) => store?.user);
 
-  const dispatch = useDispatch()
-   const navigate = useNavigate()
-    let totalPrice =  courses?.reduce((acc: any, course: any) => acc + course.price, 0);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let totalPrice = courses?.reduce(
+    (acc: any, course: any) => acc + course.price,
+    0
+  );
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));
   };
-  const { createOrder } = useCreateOrder();
+  const { createOrder, createOrderLoading } = useCreateOrder();
   const idStrings = courses?.map((obj: any) => obj.id);
-  const handleCheckout = () =>{
-    // /payment/checkout
+  const handleCheckout = () => {
     createOrder({
       body: {
         totalAmount: totalPrice,
         courses: idStrings,
       },
     });
-  }
+    if (order) {
+      navigate("/payment/checkout");
+    }
+  };
   return (
     <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
       <TableContainer mt={"9rem"}>
@@ -80,7 +85,11 @@ const Cart = () => {
                 </Td>
                 <Td width={"20%"}> {course.price}</Td>
                 <Td width={"20%"}>{course.price}</Td>
-                <Td width={"10%"} cursor={"pointer"} onClick={() => handleRemoveFromCart(course.id)}>
+                <Td
+                  width={"10%"}
+                  cursor={"pointer"}
+                  onClick={() => handleRemoveFromCart(course.id)}
+                >
                   <MdClose fontSize={20} />
                 </Td>
               </Tr>
@@ -110,8 +119,10 @@ const Cart = () => {
             mt={3}
             fontWeight={400}
             color={"white"}
-            width={"100%"}          
+            width={"100%"}
+            isLoading={createOrderLoading}
             onClick={handleCheckout}
+            loadingText="Loading"
           >
             Proceed to Checkout
           </Button>
