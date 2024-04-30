@@ -23,7 +23,7 @@ import { useDispatch } from "react-redux";
 const AddToCartButton = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
   const dispatch = useDispatch();
-  let totalPrice = courses ?  courses?.reduce((acc: any, course: any) => acc + course.price, 0) : 0;
+  let totalPrice =   courses?.reduce((acc: any, course: any) => acc + course.price, 0)
 
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));

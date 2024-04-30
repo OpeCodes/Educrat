@@ -11,6 +11,7 @@ import {
   Select,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
@@ -19,9 +20,24 @@ import paystack from "../assets/paystack.png";
 
 const Checkout = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
-
+  let totalPrice = courses?.reduce(
+    (acc: any, course: any) => acc + course.price,
+    0
+  );
+  const toast = useToast();
   const [value, setValue] = useState("false");
 
+  const handleCheckout = () => {
+    if (value === "false") {
+      toast({
+        title: "Please select a payment method",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+  };
   return (
     <Stack mt={"5rem"}>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
@@ -73,7 +89,7 @@ const Checkout = () => {
               </Stack>
             </Stack>
             <Stack>
-              <Text fontSize={"1.5rem"} fontWeight={"700"}>
+              <Text fontSize={"1.5rem"} fontWeight={"700"} mt={"1.0rem"}>
                 Order details
               </Text>
               {courses?.map((course: any) => {
@@ -93,10 +109,10 @@ const Checkout = () => {
                       />
                       <Text fontWeight={"bold"}>
                         HTML&CSS Tutorial and Projects Course (Flexbox&Grid)
-                        {course.title}
+                        {/* {course.title} */}
                       </Text>
                     </Flex>
-                    <Text>100</Text>
+                    <Text>N100</Text>
                   </Flex>
                 );
               })}
@@ -120,7 +136,7 @@ const Checkout = () => {
               <Stack>
                 <Flex justify={"space-between"}>
                   <Text>Original Price</Text>
-                  <Text>N1000</Text>
+                  <Text>N{totalPrice}</Text>
                 </Flex>
                 <Flex justify={"space-between"}>
                   <Text>Discounts:</Text>
@@ -130,7 +146,7 @@ const Checkout = () => {
                 <Divider />
                 <Flex justify={"space-between"} fontWeight={"bold"}>
                   <Text>Total</Text>
-                  <Text>N1000</Text>
+                  <Text>N{totalPrice}</Text>
                 </Flex>
               </Stack>
               <Text mt={"0.6rem"} fontSize={13} color={"gray"}>
@@ -143,8 +159,13 @@ const Checkout = () => {
                 color={"white"}
                 borderRadius={0}
                 variant="solid"
+                onClick={handleCheckout}
+                isDisabled={totalPrice === 0}
               >
-                Complete Checkout
+                {
+                    value ==="true" ? "Proceed" :  "Complete Checkout"
+                }
+               
               </Button>
             </Stack>
           </Box>
