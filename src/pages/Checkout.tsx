@@ -1,10 +1,12 @@
 import {
   Box,
+  Button,
   Divider,
   Flex,
   Grid,
   GridItem,
   Image,
+  Select,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -24,13 +26,22 @@ const Checkout = () => {
           display={"flex"}
           mt={"2rem"}
         >
-          <Stack>
+          <Stack >
             <Text fontSize={"2rem"} fontWeight={"500"}>
               Checkout
             </Text>
             <Text fontSize={"1.5rem"} fontWeight={"500"}>
               Billing address
             </Text>
+            <Stack mr={"20rem"}>
+              <Flex justify={"space-between"} align={"center"}>
+                <Text fontWeight={"bold"}>Country</Text>
+                <Text color={"gray"} fontSize={12}>Required</Text>
+              </Flex>
+              <Select>
+                <option>Nigeria</option>
+              </Select>
+            </Stack>
             <Stack>
               <Text fontSize={"1.5rem"} fontWeight={"700"}>
                 Order details
@@ -72,22 +83,39 @@ const Checkout = () => {
             display={{ base: "none", lg: "block" }}
             position={"fixed"}
           >
-            <Text fontWeight={"bold"}>Summary</Text>
-            <Stack>
-              <Flex>
-                <Text>Original Price</Text>
-                <Text>N1000</Text>
-              </Flex>
-              <Flex>
-                <Text>Original Price</Text>
-                <Text>N1000</Text>
-              </Flex>
+            <Stack mt={"6rem"} mx={"10rem"}>
+              <Text fontSize={"1.6rem"} fontWeight={"bold"}>
+                Summary
+              </Text>
+              <Stack>
+                <Flex justify={"space-between"}>
+                  <Text>Original Price</Text>
+                  <Text>N1000</Text>
+                </Flex>
+                <Flex justify={"space-between"}>
+                  <Text>Discounts:</Text>
+                  <Text>N0</Text>
+                </Flex>
 
-              <Divider />
-              <Flex fontWeight={"bold"}>
-                <Text>Original Price</Text>
-                <Text>N1000</Text>
-              </Flex>
+                <Divider />
+                <Flex justify={"space-between"} fontWeight={"bold"}>
+                  <Text>Total</Text>
+                  <Text>N1000</Text>
+                </Flex>
+              </Stack>
+              <Text mt={"0.6rem"} fontSize={13} color={"gray"}>
+                By completing your purchase you agree to these Terms of Service.
+              </Text>
+              <Button
+                mt={3}
+                bg={"#A435F0"}
+                py={7}
+                color={"white"}
+                borderRadius={0}
+                variant="solid"
+              >
+                Complete Checkout
+              </Button>
             </Stack>
           </Box>
         </GridItem>
