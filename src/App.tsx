@@ -100,7 +100,7 @@ const router = createBrowserRouter([
     element: <SingleEnrolledCourse />,
   },
   {
-    path: "/payment/:id",
+    path: "/payment/:tx_ref",
     element: <PaymentConfirmationPage />,
   },
 
