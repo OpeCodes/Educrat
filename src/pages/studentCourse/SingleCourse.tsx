@@ -71,7 +71,6 @@ import {
 import { useCreateOrder } from "../../hooks/auth/price";
 import BuyNowModal from "../../components/BuyNowModal";
 import { addCourseToCart } from "../../features/cart/CartSlice";
-import { addCourseItemToLocalStorage } from "../../store/localStorage";
 interface ObjectWithId {
   id: string;
 }
