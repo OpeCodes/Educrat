@@ -23,10 +23,8 @@ import { useDispatch } from "react-redux";
 const AddToCartButton = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
   const dispatch = useDispatch();
-  const totalPrice = courses.reduce(
-    (acc: any, course: any) => acc + course.price,
-    0
-  );
+  let totalPrice = courses ?  courses?.reduce((acc: any, course: any) => acc + course.price, 0) : 0;
+
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));
   };
@@ -67,12 +65,12 @@ const AddToCartButton = () => {
         >
           <PopoverBody>
             <Stack maxH={"250px"} h={"100%"} overflow={"auto"} borderWidth={0}>
-              {courses.length === 0 && (
+              {courses?.length === 0 && (
                 <Text fontSize={20} my={4}>
                   Your Course Cart Is Empty
                 </Text>
               )}
-              {courses.map((course: any, index) => {
+              {courses?.map((course: any, index) => {
                 return (
                   <Stack mx={3} py={3} key={index}>
                     <Flex justify={"space-between"} columnGap={2}>

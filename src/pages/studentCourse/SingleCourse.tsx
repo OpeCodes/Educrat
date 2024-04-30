@@ -71,6 +71,7 @@ import {
 import { useCreateOrder } from "../../hooks/auth/price";
 import BuyNowModal from "../../components/BuyNowModal";
 import { addCourseToCart } from "../../features/cart/CartSlice";
+import { addCourseItemToLocalStorage } from "../../store/localStorage";
 interface ObjectWithId {
   id: string;
 }
@@ -86,7 +87,7 @@ const SingleCourse = () => {
   }, [pathname]);
   const { user } = useSelector((store: RootState) => store?.user);
   const { courses } = useSelector((store: RootState) => store?.cart);
-  console.log(courses, "sometehre here");
+  console.log()
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getStudentWishList } = useGetStudentWishList();
 
@@ -171,6 +172,7 @@ const SingleCourse = () => {
 
   const firstLectureIds = extractFirstLectureIds(getStudentSingleCourse);
   const { createOrder } = useCreateOrder();
+  const hi = true;
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-in");
@@ -234,6 +236,7 @@ const SingleCourse = () => {
   };
 
   const handleAddToCart = (course: any) => {
+    let cartArray = [];
     if (!user) {
       navigate("/sign-in");
       toast({
@@ -245,8 +248,11 @@ const SingleCourse = () => {
       dispatch(setCourseAuthNavigate(-1));
       return;
     } else {
+      console.log(course, "course here");
+      cartArray.push(course);
+      console.log([...cartArray], "kksks");
       dispatch(addCourseToCart(course));
-      localStorage.setItem("cart", JSON.stringify(course));
+      addCourseItemToLocalStorage(cartArray);
     }
   };
   let ratingFormat = parseFloat(
@@ -255,7 +261,6 @@ const SingleCourse = () => {
 
   //instuctor star
   const stars = [];
-  // Fill stars based on the rating value
   for (let i = 1; i <= 5; i++) {
     stars.push(
       <FaStar
@@ -285,7 +290,6 @@ const SingleCourse = () => {
     return baseUrl;
   };
   const url = getCourseUrlFromCurrentUrl();
-  // paystack
 
   return (
     <>
@@ -555,9 +559,7 @@ const SingleCourse = () => {
                                   <Text>
                                     <HiOutlineChat />
                                   </Text>
-                                  <Text>                                   
-                                    {getInstructorReview?.length}
-                                  </Text>
+                                  <Text>{getInstructorReview?.length}</Text>
                                   <Text> Reviews</Text>
                                 </Flex>
                                 <Flex
@@ -704,25 +706,38 @@ const SingleCourse = () => {
                                   N{getStudentSingleCourse?.price}
                                 </Text>
                                 <Flex columnGap={4}>
-                                  <Button
-                                    bg={"#6440FB"}
-                                    py={"25px"}
-                                    variant="solid"
-                                    color={"white"}
-                                    width={"100%"}
-                                    onClick={() => {
-                                      handleAddToCart({
-                                        id: getStudentSingleCourse?.id,
-                                        title: getStudentSingleCourse?.title,
-                                        description:
-                                          getStudentSingleCourse?.description,
-                                        price: getStudentSingleCourse?.price,
-                                        img: getStudentSingleCourse?.thumbnail,
-                                      });
-                                    }}
-                                  >
-                                    Add to Cart
-                                  </Button>
+                                  {!hi ? (
+                                    <Button
+                                      bg={"#6440FB"}
+                                      py={"25px"}
+                                      variant="solid"
+                                      color={"white"}
+                                      width={"100%"}
+                                      onClick={() => {
+                                        handleAddToCart({
+                                          id: getStudentSingleCourse?.id,
+                                          title: getStudentSingleCourse?.title,
+                                          description:
+                                            getStudentSingleCourse?.description,
+                                          price: getStudentSingleCourse?.price,
+                                          img: getStudentSingleCourse?.thumbnail,
+                                        });
+                                      }}
+                                    >
+                                      Add to Cart
+                                    </Button>
+                                  ) : (
+                                    <Button
+                                      bg={"#6440FB"}
+                                      py={"25px"}
+                                      variant="solid"
+                                      color={"white"}
+                                      width={"100%"}
+                                    >
+                                      Already Added
+                                    </Button>
+                                  )}
+
                                   <Stack
                                     align={"center"}
                                     px={4}

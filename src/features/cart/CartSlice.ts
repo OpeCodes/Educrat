@@ -16,7 +16,7 @@ const cartSlice = createSlice({
     addCourseToCart(state, action: PayloadAction<CourseInterface>) {
       state.courses.push(action.payload);
     },
-    removeCourseFromCart(state, action: PayloadAction<string | number>) {
+    removeCourseFromCart(state, action: PayloadAction<string |number>) {
       const courseId = action.payload;
       const courseIndex = state.courses.findIndex((course) => course.id === courseId);
       if (courseIndex !== -1) {

@@ -22,7 +22,8 @@ import { useDispatch } from "react-redux";
 const Cart = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
   const dispatch = useDispatch()
-  const totalPrice = courses.reduce((acc: any, course: any) => acc + course.price, 0);
+    let totalPrice = courses ?  courses?.reduce((acc: any, course: any) => acc + course.price, 0) : 0;
+// let totalPrice=0
   console.log(totalPrice)
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));
