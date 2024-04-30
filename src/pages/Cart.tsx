@@ -24,20 +24,11 @@ const Cart = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
   const dispatch = useDispatch()
     let totalPrice =  courses?.reduce((acc: any, course: any) => acc + course.price, 0);
-// let totalPrice=0
-  console.log(totalPrice)
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));
   };
-
-
   const { createOrder } = useCreateOrder();
-  
-
   const idStrings = courses?.map((obj: any) => obj.id);
-
-  console.log(idStrings);
-
   const handleCheckout = () =>{
     createOrder({
       body: {
@@ -46,7 +37,6 @@ const Cart = () => {
       },
     });
   }
-
   return (
     <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
       <TableContainer mt={"9rem"}>
@@ -94,7 +84,6 @@ const Cart = () => {
           </Tbody>
         </Table>
       </TableContainer>
-
       <Stack maxW={"350px"} w={"100%"} ml="auto" mt={9}>
         <Stack justify={"end"}>
           <Stack bg={"#F4F1FE"} px={6} rowGap={8} py={4} borderRadius={8}>
