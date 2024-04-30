@@ -28,6 +28,8 @@ const AddToCartButton = () => {
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));
   };
+  
+
   return (
     <>
       <Popover placement="bottom-start">

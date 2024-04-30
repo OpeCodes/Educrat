@@ -17,15 +17,19 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { useState } from "react";
 import paystack from "../assets/paystack.png";
+import { useCheckoutOrder } from "../hooks/auth/price";
 
 const Checkout = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
+  const { order } = useSelector((store: RootState) => store?.user);
+  console.log(courses, "courses");
   let totalPrice = courses?.reduce(
     (acc: any, course: any) => acc + course.price,
     0
   );
   const toast = useToast();
   const [value, setValue] = useState("false");
+  const { checkoutOrder } = useCheckoutOrder();
 
   const handleCheckout = () => {
     if (value === "false") {
@@ -36,6 +40,8 @@ const Checkout = () => {
         isClosable: true,
       });
       return;
+    } else {
+      checkoutOrder({ id: order?.id });
     }
   };
   return (
@@ -78,7 +84,13 @@ const Checkout = () => {
                   </Text>
                 </Stack>
               </Flex>
-              <Stack borderWidth={1} p={2} bg={"#F7F9FA"} cursor={"pointer"}>
+              <Stack
+                borderWidth={1}
+                p={2}
+                bg={"#F7F9FA"}
+                cursor={"pointer"}
+                py={3}
+              >
                 <RadioGroup onChange={setValue} value={value}>
                   <Stack direction="row">
                     <Radio value={"true"}>
@@ -99,6 +111,7 @@ const Checkout = () => {
                     columnGap={10}
                     justify={"space-between"}
                     align={"center"}
+                    my={1}
                   >
                     <Flex columnGap={2} align={"center"}>
                       <Image
@@ -162,10 +175,7 @@ const Checkout = () => {
                 onClick={handleCheckout}
                 isDisabled={totalPrice === 0}
               >
-                {
-                    value ==="true" ? "Proceed" :  "Complete Checkout"
-                }
-               
+                {value === "true" ? "Proceed" : "Complete Checkout"}
               </Button>
             </Stack>
           </Box>

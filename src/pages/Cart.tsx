@@ -18,11 +18,12 @@ import { Link } from "react-router-dom";
 import { RootState } from "../store/store";
 import { removeCourseFromCart } from "../features/cart/CartSlice";
 import { useDispatch } from "react-redux";
+import { useCreateOrder } from "../hooks/auth/price";
 
 const Cart = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
   const dispatch = useDispatch()
-    let totalPrice = courses ?  courses?.reduce((acc: any, course: any) => acc + course.price, 0) : 0;
+    let totalPrice =  courses?.reduce((acc: any, course: any) => acc + course.price, 0);
 // let totalPrice=0
   console.log(totalPrice)
   const handleRemoveFromCart = (courseId: string) => {
@@ -30,6 +31,21 @@ const Cart = () => {
   };
 
 
+  const { createOrder } = useCreateOrder();
+  
+
+  const idStrings = courses?.map((obj: any) => obj.id);
+
+  console.log(idStrings);
+
+  const handleCheckout = () =>{
+    createOrder({
+      body: {
+        totalAmount: totalPrice,
+        courses: idStrings,
+      },
+    });
+  }
 
   return (
     <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
@@ -103,7 +119,8 @@ const Cart = () => {
             color={"white"}
             width={"100%"}
             as={Link}
-            to={"/cart"}
+            to={"/payment/checkout"}
+            onClick={handleCheckout}
           >
             Proceed to Checkout
           </Button>
