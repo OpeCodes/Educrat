@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../store/store";
 import { removeCourseFromCart } from "../features/cart/CartSlice";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,10 @@ import { useCreateOrder } from "../hooks/auth/price";
 
 const Cart = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
+  const { order } = useSelector((store: RootState) => store?.user);
+
   const dispatch = useDispatch()
+   const navigate = useNavigate()
     let totalPrice =  courses?.reduce((acc: any, course: any) => acc + course.price, 0);
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));
@@ -30,6 +33,7 @@ const Cart = () => {
   const { createOrder } = useCreateOrder();
   const idStrings = courses?.map((obj: any) => obj.id);
   const handleCheckout = () =>{
+    // /payment/checkout
     createOrder({
       body: {
         totalAmount: totalPrice,
@@ -106,9 +110,7 @@ const Cart = () => {
             mt={3}
             fontWeight={400}
             color={"white"}
-            width={"100%"}
-            as={Link}
-            to={"/payment/checkout"}
+            width={"100%"}          
             onClick={handleCheckout}
           >
             Proceed to Checkout

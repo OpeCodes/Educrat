@@ -6,9 +6,8 @@ import { setOrder, setToggleOrder } from "../../../features/user/UserSlice";
 
 export const useCreateOrder = () => {
   const toast = useToast();
-  // const queryClient = useQueryClient();
   const dispatch = useDispatch();
-  const { mutate: createOrder, isPending: createCourseWishListLoading } =
+  const { mutate: createOrder, isPending: createOrderLoading } =
     useMutation({
       mutationFn: ({ body }: any) => {
         return customFetch.post(`/order`, body);
@@ -16,7 +15,6 @@ export const useCreateOrder = () => {
       onSuccess: (data) => {
         dispatch(setToggleOrder());
         dispatch(setOrder(data.data));
-        // queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
       },
       onError: (error: any) => {
         if (error.response) {
@@ -43,7 +41,7 @@ export const useCreateOrder = () => {
         }
       },
     });
-  return { createOrder, createCourseWishListLoading };
+  return { createOrder, createOrderLoading };
 };
 
 export const useCheckoutOrder = () => {

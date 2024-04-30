@@ -22,7 +22,6 @@ import { useCheckoutOrder } from "../hooks/auth/price";
 const Checkout = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
   const { order } = useSelector((store: RootState) => store?.user);
-  console.log(courses, "courses");
   let totalPrice = courses?.reduce(
     (acc: any, course: any) => acc + course.price,
     0
