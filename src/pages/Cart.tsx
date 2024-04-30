@@ -30,7 +30,7 @@ const Cart = () => {
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));
   };
-  const { createOrder,  } = useCreateOrder();
+  const { createOrder } = useCreateOrder();
   const idStrings = courses?.map((obj: any) => obj.id);
   const handleCheckout = () => {
     createOrder({

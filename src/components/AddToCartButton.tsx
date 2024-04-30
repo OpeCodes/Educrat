@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { RootState } from "../store/store";
 import { removeCourseFromCart } from "../features/cart/CartSlice";
 import { useDispatch } from "react-redux";
+import { useCreateOrder } from "../hooks/auth/price";
 
 const AddToCartButton = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
@@ -27,6 +28,16 @@ const AddToCartButton = () => {
 
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));
+  };
+  const { createOrder } = useCreateOrder();
+  const idStrings = courses?.map((obj: any) => obj.id);
+  const handleCheckout = () => {
+    createOrder({
+      body: {
+        totalAmount: totalPrice,
+        courses: idStrings,
+      },
+    });
   };
   return (
     <>
@@ -143,6 +154,7 @@ const AddToCartButton = () => {
                     width={"100%"}
                     as={Link}
                     to={"/payment/checkout"}
+                    onClick={handleCheckout}
                   >
                     Checkout
                   </Button>
