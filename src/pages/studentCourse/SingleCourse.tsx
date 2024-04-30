@@ -87,7 +87,7 @@ const SingleCourse = () => {
   }, [pathname]);
   const { user } = useSelector((store: RootState) => store?.user);
   const { courses } = useSelector((store: RootState) => store?.cart);
-  console.log()
+  console.log(courses, "001010")
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getStudentWishList } = useGetStudentWishList();
 
@@ -172,7 +172,7 @@ const SingleCourse = () => {
 
   const firstLectureIds = extractFirstLectureIds(getStudentSingleCourse);
   const { createOrder } = useCreateOrder();
-  const hi = true;
+  const hi = false;
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-in");
@@ -290,7 +290,12 @@ const SingleCourse = () => {
     return baseUrl;
   };
   const url = getCourseUrlFromCurrentUrl();
-
+//cart btn func
+const checkCourseID = (course:any, idToCheck: number) =>{
+  return courses.some((obj: any) => obj.id === idToCheck);
+}
+const exists = checkCourseID(courses, getStudentSingleCourse?.id );
+console.log(exists,"exists")
   return (
     <>
       <Stack mb={"2rem"}>
@@ -706,7 +711,7 @@ const SingleCourse = () => {
                                   N{getStudentSingleCourse?.price}
                                 </Text>
                                 <Flex columnGap={4}>
-                                  {!hi ? (
+                                  {!exists ? (
                                     <Button
                                       bg={"#6440FB"}
                                       py={"25px"}
