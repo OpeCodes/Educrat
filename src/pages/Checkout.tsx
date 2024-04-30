@@ -120,11 +120,10 @@ const Checkout = () => {
                         alt="Dan Abramov"
                       />
                       <Text fontWeight={"bold"}>
-                        HTML&CSS Tutorial and Projects Course (Flexbox&Grid)
-                        {/* {course.title} */}
+                        {course.title}
                       </Text>
                     </Flex>
-                    <Text>N100</Text>
+                    <Text>{course.price}</Text>
                   </Flex>
                 );
               })}

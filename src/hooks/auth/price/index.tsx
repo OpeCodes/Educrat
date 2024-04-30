@@ -7,41 +7,40 @@ import { setOrder, setToggleOrder } from "../../../features/user/UserSlice";
 export const useCreateOrder = () => {
   const toast = useToast();
   const dispatch = useDispatch();
-  const { mutate: createOrder, isPending: createOrderLoading } =
-    useMutation({
-      mutationFn: ({ body }: any) => {
-        return customFetch.post(`/order`, body);
-      },
-      onSuccess: (data) => {
-        dispatch(setToggleOrder());
-        dispatch(setOrder(data.data));
-      },
-      onError: (error: any) => {
-        if (error.response) {
-          toast({
-            title: `${error.response.data.error}`,
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        } else if (error.request) {
-          toast({
-            title: "Network error occurred. Please try again later.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: "An error occurred. Please try again later.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        }
-      },
-    });
-  return { createOrder, createOrderLoading };
+  const { mutate: createOrder } = useMutation({
+    mutationFn: ({ body }: any) => {
+      return customFetch.post(`/order`, body);
+    },
+    onSuccess: (data) => {
+      dispatch(setToggleOrder());
+      dispatch(setOrder(data.data));
+    },
+    onError: (error: any) => {
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
+  return { createOrder };
 };
 
 export const useCheckoutOrder = () => {
@@ -52,11 +51,9 @@ export const useCheckoutOrder = () => {
         return customFetch.post(`/order/${id}/checkout`);
       },
       onSuccess: (data) => {
-        // Redirect the user to the authorization URL returned by the checkout endpoint
         redirectToPayment(data.data.authorization_url);
       },
       onError: (error: any) => {
-        // Handle errors
         if (error.response) {
           toast({
             title: `${error.response.data.error}`,
@@ -81,8 +78,6 @@ export const useCheckoutOrder = () => {
         }
       },
     });
-
-  // Function to redirect the user to the dynamic authorization URL
   const redirectToPayment = (authorizationUrl: string) => {
     window.location.href = authorizationUrl;
   };
