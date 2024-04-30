@@ -57,7 +57,7 @@ import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Footer } from "../../constants";
 import { TiSocialTwitter } from "react-icons/ti";
-// import PaystackPop from "@paystack/inline-js";
+
 import {
   shareOnFacebook,
   shareOnInstagram,
@@ -87,7 +87,6 @@ const SingleCourse = () => {
   }, [pathname]);
   const { user } = useSelector((store: RootState) => store?.user);
   const { courses } = useSelector((store: RootState) => store?.cart);
-  console.log(courses, "001010")
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getStudentWishList } = useGetStudentWishList();
 
@@ -172,7 +171,6 @@ const SingleCourse = () => {
 
   const firstLectureIds = extractFirstLectureIds(getStudentSingleCourse);
   const { createOrder } = useCreateOrder();
-  const hi = false;
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-in");
@@ -236,7 +234,6 @@ const SingleCourse = () => {
   };
 
   const handleAddToCart = (course: any) => {
-    let cartArray = [];
     if (!user) {
       navigate("/sign-in");
       toast({
@@ -248,11 +245,8 @@ const SingleCourse = () => {
       dispatch(setCourseAuthNavigate(-1));
       return;
     } else {
-      console.log(course, "course here");
-      cartArray.push(course);
-      console.log([...cartArray], "kksks");
       dispatch(addCourseToCart(course));
-      addCourseItemToLocalStorage(cartArray);
+      // addCourseItemToLocalStorage(cartArray);
     }
   };
   let ratingFormat = parseFloat(
@@ -290,12 +284,11 @@ const SingleCourse = () => {
     return baseUrl;
   };
   const url = getCourseUrlFromCurrentUrl();
-//cart btn func
-const checkCourseID = (course:any, idToCheck: number) =>{
-  return courses.some((obj: any) => obj.id === idToCheck);
-}
-const exists = checkCourseID(courses, getStudentSingleCourse?.id );
-console.log(exists,"exists")
+  //cart btn func
+  const checkCourseID = (course: any, idToCheck: number) => {
+    return course.some((obj: any) => obj.id === idToCheck);
+  };
+  const exists = checkCourseID(courses, getStudentSingleCourse?.id);
   return (
     <>
       <Stack mb={"2rem"}>

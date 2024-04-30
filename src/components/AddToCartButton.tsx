@@ -141,6 +141,8 @@ const AddToCartButton = () => {
                     color={"white"}
                     fontWeight={400}
                     width={"100%"}
+                    as={Link}
+                    to={"/payment/checkout"}
                   >
                     Checkout
                   </Button>

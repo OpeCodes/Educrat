@@ -33,6 +33,7 @@ import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 import SingleInstructorPage from "./pages/studentCourse/SingleInstructorPage";
 import Cart from "./pages/Cart";
 import PaymentConfirmationPage from "./pages/studentCourse/PaymentConfirmationPage";
+import Checkout from "./pages/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/payment/checkout",
+        element: <Checkout />,
       },
     ],
   },
