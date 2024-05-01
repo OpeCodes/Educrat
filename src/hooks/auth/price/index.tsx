@@ -3,9 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../../utils/axios";
 import { useDispatch } from "react-redux";
 import { setOrder, setToggleOrder } from "../../../features/user/UserSlice";
-import {
-  clearCart,
-} from "../../../features/cart/CartSlice";
+import { clearCart } from "../../../features/cart/CartSlice";
 
 export const useCreateOrder = () => {
   const toast = useToast();
@@ -16,6 +14,9 @@ export const useCreateOrder = () => {
     },
     onSuccess: (data) => {
       dispatch(setToggleOrder());
+      setTimeout(() => {
+        dispatch(setToggleOrder());
+      }, 100);
       dispatch(setOrder(data.data));
     },
     onError: (error: any) => {
@@ -94,10 +95,13 @@ export const usePaymentTransaction = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
-  const checkPathExists = (path: string): boolean => {
-    return window.location.pathname.includes(path);
+  const checkParameterExists = (parameterName: string): boolean => {
+    const searchParams = new URLSearchParams(window.location.search);
+    return searchParams.has(parameterName);
   };
-  const exists = checkPathExists("/payment/checkout");
+
+  const exists = checkParameterExists("trxref");
+  console.log(exists, "exist here");
   const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
       return customFetch.post(`/payment/transaction/status`, { tx_ref });
