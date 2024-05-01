@@ -24,13 +24,13 @@ import { useCreateOrder } from "../hooks/auth/price";
 const AddToCartButton = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
   const dispatch = useDispatch();
-  let totalPrice =   courses?.reduce((acc: any, course: any) => acc + course.price, 0)
+  let totalPrice =   courses?.reduce((acc: any, course: any) => acc + course?.price, 0)
 
-  const handleRemoveFromCart = (courseId: string) => {
+  const handleRemoveFromCart = (courseId: any) => {
     dispatch(removeCourseFromCart(courseId));
   };
   const { createOrder } = useCreateOrder();
-  const idStrings = courses?.map((obj: any) => obj.id);
+  const idStrings = courses?.map((obj: any) => obj?.id);
   const handleCheckout = () => {
     createOrder({
       body: {
@@ -63,7 +63,7 @@ const AddToCartButton = () => {
               alignItems="center"
               justifyContent="center"
             >
-              {courses.length}
+              {courses?.length}
             </Badge>
           </Box>
         </PopoverTrigger>
@@ -89,20 +89,20 @@ const AddToCartButton = () => {
                         <Image
                           boxSize="70px"
                           objectFit="cover"
-                          src={course.img}
+                          src={course?.img}
                         />
                         <Stack>
                           <Text width={"90%"} fontSize={16}>
-                            {course.title}
+                            {course?.title}
                           </Text>
-                          <Text>N{course.price}</Text>
+                          <Text>N{course?.price}</Text>
                         </Stack>
                       </Flex>
                       <Text
                         cursor={"pointer"}
                         color={"blue"}
                         fontWeight={"bold"}
-                        onClick={() => handleRemoveFromCart(course.id)}
+                        onClick={() => handleRemoveFromCart(course?.id)}
                       >
                         <MdClose fontSize={20} />
                       </Text>
@@ -118,7 +118,7 @@ const AddToCartButton = () => {
                 <Text>Total:</Text>
                 <Text>N{totalPrice}</Text>
               </Flex>
-              {courses.length === 0 ? (
+              {courses?.length === 0 ? (
                 <Button
                   bg={"#6440FB"}
                   py={"25px"}

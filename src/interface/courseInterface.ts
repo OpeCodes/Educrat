@@ -66,3 +66,11 @@ export interface CourseInterface {
   preRequisites: string;
   promotionalVideo: string;
 }
+
+export interface CartInterface {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  img: string;
+}

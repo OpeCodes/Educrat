@@ -71,6 +71,7 @@ import {
 import { useCreateOrder } from "../../hooks/auth/price";
 import BuyNowModal from "../../components/BuyNowModal";
 import { addCourseToCart } from "../../features/cart/CartSlice";
+import { CourseItemToLocalStorage } from "../../store/localStorage";
 interface ObjectWithId {
   id: string;
 }
@@ -232,7 +233,7 @@ const SingleCourse = () => {
     }
   };
 
-  const handleAddToCart = (course: any) => {
+  const handleAddToCart = (cart: any) => {
     if (!user) {
       navigate("/sign-in");
       toast({
@@ -244,7 +245,8 @@ const SingleCourse = () => {
       dispatch(setCourseAuthNavigate(-1));
       return;
     } else {
-      dispatch(addCourseToCart(course));
+      dispatch(addCourseToCart(cart));
+      CourseItemToLocalStorage(cart)
       // addCourseItemToLocalStorage(cartArray);
     }
   };
@@ -285,7 +287,7 @@ const SingleCourse = () => {
   const url = getCourseUrlFromCurrentUrl();
   //cart btn func
   const checkCourseID = (course: any, idToCheck: number) => {
-    return course.some((obj: any) => obj.id === idToCheck);
+    return course.some((obj: any) => obj?.id === idToCheck);
   };
   const exists = checkCourseID(courses, getStudentSingleCourse?.id);
   return (

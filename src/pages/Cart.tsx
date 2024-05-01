@@ -22,16 +22,17 @@ import { useCreateOrder } from "../hooks/auth/price";
 
 const Cart = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
+  console.log(courses,"courses")
   const dispatch = useDispatch();
   let totalPrice = courses?.reduce(
-    (acc: any, course: any) => acc + course.price,
+    (acc: any, course: any) => acc + course?.price,
     0
   );
   const handleRemoveFromCart = (courseId: string) => {
     dispatch(removeCourseFromCart(courseId));
   };
   const { createOrder } = useCreateOrder();
-  const idStrings = courses?.map((obj: any) => obj.id);
+  const idStrings = courses?.map((obj: any) => obj?.id);
   const handleCheckout = () => {
     createOrder({
       body: {
@@ -68,21 +69,21 @@ const Cart = () => {
                     <Image
                       borderRadius="5px"
                       boxSize="100px"
-                      src={course.img}
+                      src={course?.img}
                       alt="Product Image"
                       mr={4}
                     />
                     <Text isTruncated maxW="100%">
-                      {course.title}
+                      {course?.title}
                     </Text>
                   </Flex>
                 </Td>
-                <Td width={"20%"}> {course.price}</Td>
-                <Td width={"20%"}>{course.price}</Td>
+                <Td width={"20%"}> {course?.price}</Td>
+                <Td width={"20%"}>{course?.price}</Td>
                 <Td
                   width={"10%"}
                   cursor={"pointer"}
-                  onClick={() => handleRemoveFromCart(course.id)}
+                  onClick={() => handleRemoveFromCart(course?.id)}
                 >
                   <MdClose fontSize={20} />
                 </Td>
