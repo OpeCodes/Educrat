@@ -11,8 +11,8 @@ const PaymentConfirmationPage = () => {
   return (
     <div>
       <h1>Payment Confirmation</h1>
-      {isPending ? "Verifying......" : <p>Your payment was successful!</p>}
-      
+      {isPending ? "Verifying..." : <p>Your payment was successful!</p>}
+
     </div>
   );
 };
