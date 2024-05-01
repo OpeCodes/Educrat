@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { setOrder, setToggleOrder } from "../../../features/user/UserSlice";
 import {
   clearCart,
-  removeCourseFromCart,
 } from "../../../features/cart/CartSlice";
 
 export const useCreateOrder = () => {
@@ -99,7 +98,6 @@ export const usePaymentTransaction = () => {
     return window.location.pathname.includes(path);
   };
   const exists = checkPathExists("/payment/checkout");
-  console.log(exists)
   const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
       return customFetch.post(`/payment/transaction/status`, { tx_ref });
