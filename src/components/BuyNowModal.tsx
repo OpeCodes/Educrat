@@ -75,4 +75,3 @@ const BuyNowModal = () => {
 
 export default BuyNowModal;
 
-// PreviewContentModal;
