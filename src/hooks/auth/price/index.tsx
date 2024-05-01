@@ -3,6 +3,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../../utils/axios";
 import { useDispatch } from "react-redux";
 import { setOrder, setToggleOrder } from "../../../features/user/UserSlice";
+import {
+  clearCart,
+  removeCourseFromCart,
+} from "../../../features/cart/CartSlice";
 
 export const useCreateOrder = () => {
   const toast = useToast();
@@ -90,14 +94,23 @@ export const useCheckoutOrder = () => {
 export const usePaymentTransaction = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { mutate: paymentTransaction,isPending } = useMutation({
+  const dispatch = useDispatch();
+  const checkPathExists = (path: string): boolean => {
+    return window.location.pathname.includes(path);
+  };
+  const exists = checkPathExists("/payment/checkout");
+  console.log(exists)
+  const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
-      return customFetch.post(`/payment/transaction/status`, {tx_ref});
+      return customFetch.post(`/payment/transaction/status`, { tx_ref });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["getCourseEnroll"],
       });
+      if (exists) {
+        dispatch(clearCart());
+      }
     },
     onError: (error: any) => {
       if (error.response) {

@@ -106,6 +106,7 @@ const Checkout = () => {
               {courses?.map((course: any) => {
                 return (
                   <Flex
+                  key={course.id}
                     mt={"rem"}
                     columnGap={10}
                     justify={"space-between"}

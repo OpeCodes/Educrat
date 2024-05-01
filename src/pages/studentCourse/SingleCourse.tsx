@@ -144,6 +144,7 @@ const SingleCourse = () => {
   const { courseEnroll } = useCourseEnrollment();
   const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
     useGetSingleEnrolledCourse(getStudentSingleCourse?.id);
+    console.log(getSingleEnrolledCourse," getSingleEnrolledCourse")
   const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
     getStudentSingleCourse?.userId?.id
   );
