@@ -1,5 +1,5 @@
 import { useToast } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../../utils/axios";
 import { useDispatch } from "react-redux";
 import { setOrder, setToggleOrder } from "../../../features/user/UserSlice";
@@ -89,11 +89,16 @@ export const useCheckoutOrder = () => {
 
 export const usePaymentTransaction = () => {
   const toast = useToast();
-  const { mutate: paymentTransaction } = useMutation({
-    mutationFn: ({ status }: any) => {
-      return customFetch.post(`/payment/transaction/status`, status);
+  const queryClient = useQueryClient();
+  const { mutate: paymentTransaction,isPending } = useMutation({
+    mutationFn: ({ tx_ref }: any) => {
+      return customFetch.post(`/payment/transaction/status`, {tx_ref});
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["getCourseEnroll"],
+      });
+    },
     onError: (error: any) => {
       if (error.response) {
         toast({
@@ -119,5 +124,5 @@ export const usePaymentTransaction = () => {
       }
     },
   });
-  return { paymentTransaction };
+  return { paymentTransaction, isPending };
 };
