@@ -42,6 +42,7 @@ const Cart = () => {
     });
   };
   return (
+    
     <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
       <TableContainer mt={"9rem"}>
         <Table size="sm">
@@ -61,7 +62,7 @@ const Cart = () => {
               </Th>
             </Tr>
           </Thead>
-          <Tbody>
+          <Tbody>           
             {courses?.map((course: any, index) => (
               <Tr key={index} p={6}>
                 <Td width={"100%"} maxW={"40%"} py={6}>

@@ -14,9 +14,7 @@ export const useCreateOrder = () => {
     },
     onSuccess: (data) => {
       dispatch(setToggleOrder());
-      setTimeout(() => {
-        dispatch(setToggleOrder());
-      }, 100);
+      
       dispatch(setOrder(data.data));
     },
     onError: (error: any) => {
@@ -99,7 +97,6 @@ export const usePaymentTransaction = () => {
     const searchParams = new URLSearchParams(window.location.search);
     return searchParams.has(parameterName);
   };
-
   const exists = checkParameterExists("trxref");
   console.log(exists, "exist here");
   const { mutate: paymentTransaction, isPending } = useMutation({

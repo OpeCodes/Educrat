@@ -4,10 +4,12 @@ import { getCourseItemToLocalStorage } from "../../store/localStorage";
 
 interface CartState {
   courses: CourseInterface[];
+  CheckOut: boolean;
 }
 
 const initialState: CartState = {
   courses: getCourseItemToLocalStorage(),
+  CheckOut: false
 };
 
 const cartSlice = createSlice({
@@ -30,7 +32,10 @@ const cartSlice = createSlice({
     clearCart: () => {
       localStorage.removeItem('cartItems'); 
   },
+  setToggleCheckout: (state: CartState,) => {
+    state.CheckOut = !state.CheckOut
+  },
   },
 });
-export const { addCourseToCart, removeCourseFromCart, clearCart } = cartSlice.actions;
+export const { addCourseToCart, removeCourseFromCart, clearCart , setToggleCheckout} = cartSlice.actions;
 export default cartSlice.reducer;
