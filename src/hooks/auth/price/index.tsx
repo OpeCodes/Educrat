@@ -3,7 +3,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../../utils/axios";
 import { useDispatch } from "react-redux";
 import { setOrder, } from "../../../features/user/UserSlice";
-import { clearCart } from "../../../features/cart/CartSlice";
+import {  removeCourseFromCart } from "../../../features/cart/CartSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 export const useCreateOrder = () => {
   const toast = useToast();
@@ -92,6 +94,8 @@ export const usePaymentTransaction = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
+  const { singleCartCourse } = useSelector((store: RootState) => store?.cart);
+
 
   const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
@@ -101,7 +105,10 @@ export const usePaymentTransaction = () => {
       queryClient.invalidateQueries({
         queryKey: ["getCourseEnroll"],
       });
-      dispatch(clearCart());
+      // dispatch(clearCart());
+      if(singleCartCourse){
+        dispatch(removeCourseFromCart(singleCartCourse?.id))
+      }
     },
     onError: (error: any) => {
       if (error.response) {

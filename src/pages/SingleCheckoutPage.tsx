@@ -20,9 +20,8 @@ import {
   import { useCheckoutOrder } from "../hooks/auth/price";
   
   const SingleCheckoutPage = () => {
-    const { courses,singleCartCourse } = useSelector((store: RootState) => store?.cart);
-  console.log(singleCartCourse,"singleCartCourse")
-    const { order } = useSelector((store: RootState) => store?.user);   
+    const { singleCartCourse } = useSelector((store: RootState) => store?.cart);
+    const { order } = useSelector((store: RootState) => store?.user); 
     const toast = useToast();
     const [value, setValue] = useState("false");
     const { checkoutOrder } = useCheckoutOrder();
