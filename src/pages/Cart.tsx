@@ -16,9 +16,10 @@ import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 import {  Link,  } from "react-router-dom";
 import { RootState } from "../store/store";
-import { removeCourseFromCart } from "../features/cart/CartSlice";
+import { removeCourseFromCart, setToggleCheckout } from "../features/cart/CartSlice";
 import { useDispatch } from "react-redux";
 import { useCreateOrder } from "../hooks/auth/price";
+import { addUserCheckoutValue } from "../store/localStorage";
 
 const Cart = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
@@ -40,6 +41,9 @@ const Cart = () => {
         courses: idStrings,
       },
     });
+    dispatch(setToggleCheckout(true))
+    addUserCheckoutValue(true)
+
   };
   return (
     

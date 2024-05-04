@@ -102,7 +102,6 @@ export const usePaymentTransaction = () => {
   const { singleCartCourse, CheckOut } = useSelector(
     (store: RootState) => store?.cart
   );
-
   const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
       return customFetch.post(`/payment/transaction/status`, { tx_ref });

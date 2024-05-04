@@ -18,13 +18,10 @@ import { RootState } from "../store/store";
 import { useState } from "react";
 import paystack from "../assets/paystack.png";
 import { useCheckoutOrder } from "../hooks/auth/price";
-import { useDispatch } from "react-redux";
-import { setToggleCheckout } from "../features/cart/CartSlice";
 
 const Checkout = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
   const { order } = useSelector((store: RootState) => store?.user);
-  const dispatch = useDispatch();
   let totalPrice = courses?.reduce(
     (acc: any, course: any) => acc + course.price,
     0
@@ -44,8 +41,6 @@ const Checkout = () => {
       return;
     } else {
       checkoutOrder({ id: order?.id });
-      console.log("yoooo")
-      dispatch(setToggleCheckout(true))
 
     }
   };
