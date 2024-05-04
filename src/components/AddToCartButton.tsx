@@ -17,9 +17,10 @@ import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootState } from "../store/store";
-import { removeCourseFromCart } from "../features/cart/CartSlice";
+import { removeCourseFromCart, setToggleCheckout } from "../features/cart/CartSlice";
 import { useDispatch } from "react-redux";
 import { useCreateOrder } from "../hooks/auth/price";
+import { addUserCheckoutValue } from "../store/localStorage";
 
 const AddToCartButton = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
@@ -32,6 +33,8 @@ const AddToCartButton = () => {
   const { createOrder } = useCreateOrder();
   const idStrings = courses?.map((obj: any) => obj?.id);
   const handleCheckout = () => {
+    dispatch(setToggleCheckout(true))
+    addUserCheckoutValue(true)
     createOrder({
       body: {
         totalAmount: totalPrice,
