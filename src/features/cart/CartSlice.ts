@@ -33,6 +33,8 @@ const cartSlice = createSlice({
     },
     clearCart: () => {
       localStorage.removeItem("cartItems");
+
+      
     },
     setToggleCheckout: (state: CartState, action: PayloadAction<any>) => {
       state.CheckOut = action.payload;

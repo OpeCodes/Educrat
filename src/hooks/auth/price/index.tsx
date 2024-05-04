@@ -4,12 +4,11 @@ import customFetch from "../../../utils/axios";
 import { useDispatch } from "react-redux";
 import { setOrder } from "../../../features/user/UserSlice";
 import {
-  clearCart,
   removeCourseFromCart,
 } from "../../../features/cart/CartSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-
+import { removeCourseItemToLocalStorage } from "../../../store/localStorage";
 
 export const useCreateOrder = () => {
   const toast = useToast();
@@ -109,13 +108,17 @@ export const usePaymentTransaction = () => {
       queryClient.invalidateQueries({
         queryKey: ["getCourseEnroll"],
       });
+      console.log("success 1");
       if (CheckOut) {
-        dispatch(clearCart());
+        // dispatch(clearCart());
+        console.log("success 2");
+
+        removeCourseItemToLocalStorage();
       } else {
         if (singleCartCourse) {
           dispatch(removeCourseFromCart(singleCartCourse?.id));
         }
-      }      
+      }
     },
     onError: (error: any) => {
       if (error.response) {

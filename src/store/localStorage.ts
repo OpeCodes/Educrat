@@ -21,7 +21,7 @@ export const CourseItemToLocalStorage =(course: CartInterface) => {
     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
 };
 export const removeCourseItemToLocalStorage  = () => {
-  localStorage.removeItem("course");
+  localStorage.removeItem("cartItems");
 };
 export const getCourseItemToLocalStorage = () => {
   const result = localStorage.getItem("cartItems");
