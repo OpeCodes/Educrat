@@ -30,3 +30,14 @@ export const getCourseItemToLocalStorage = () => {
 };
 
 
+export const addUserSingleCartItem= (singleCartCourseItem: any) => {
+  localStorage.setItem("singleCartItem", JSON.stringify(singleCartCourseItem));
+};
+export const removeUserSingleCartItem = () => {
+  localStorage.removeItem("singleCartItem");
+};
+export const getUserSingleCartItem = () => {
+  const result = localStorage.getItem("singleCartItem");
+  const singleCartItem = result ? JSON.parse(result) : null;
+  return singleCartItem;
+};

@@ -94,8 +94,7 @@ export const usePaymentTransaction = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
-  const { singleCartCourse } = useSelector((store: RootState) => store?.cart);
-
+  const { singleCartCourse,courses } = useSelector((store: RootState) => store?.cart);
 
   const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
@@ -107,6 +106,8 @@ export const usePaymentTransaction = () => {
       });
       // dispatch(clearCart());
         dispatch(removeCourseFromCart(singleCartCourse?.id))
+  console.log(courses)
+  console.log(singleCartCourse,"singleCartCourse")
     },
     onError: (error: any) => {
       if (error.response) {

@@ -89,7 +89,8 @@ const SingleCourse = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   const { user } = useSelector((store: RootState) => store?.user);
-  const { courses } = useSelector((store: RootState) => store?.cart);
+  const { courses, singleCartCourse } = useSelector((store: RootState) => store?.cart);
+  console.log(singleCartCourse,"singleCartCourse")
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getStudentWishList } = useGetStudentWishList();
 

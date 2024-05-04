@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CourseInterface } from "../../interface/courseInterface";
-import { getCourseItemToLocalStorage } from "../../store/localStorage";
+import { getCourseItemToLocalStorage, getUserSingleCartItem } from "../../store/localStorage";
 
 interface CartState {
   courses: CourseInterface[];
@@ -11,7 +11,7 @@ interface CartState {
 const initialState: CartState = {
   courses: getCourseItemToLocalStorage(),
   CheckOut: false,
-  singleCartCourse: null,
+  singleCartCourse: getUserSingleCartItem(),
 };
 
 const cartSlice = createSlice({
