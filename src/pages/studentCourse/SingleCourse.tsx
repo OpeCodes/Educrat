@@ -182,7 +182,6 @@ const SingleCourse = () => {
         isClosable: true,
       });
       dispatch(setCourseAuthNavigate(-1));
-
       return;
     } else {
       if (getStudentSingleCourse?.price === 0) {
@@ -190,12 +189,14 @@ const SingleCourse = () => {
           courseId: getStudentSingleCourse?.id,
         });
       } else {
+
         createOrder({
           body: {
             totalAmount: getStudentSingleCourse?.price,
             courses: [getStudentSingleCourse?.id],
           },
         });
+        navigate(`/payment/checkout/express/${getStudentSingleCourse?.id}`)
       }
     }
   };

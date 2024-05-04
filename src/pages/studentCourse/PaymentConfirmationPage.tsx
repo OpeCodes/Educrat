@@ -12,7 +12,6 @@ const PaymentConfirmationPage = () => {
   return (
     <Stack>
       <Text as={"h1"}>Payment Confirmation</Text>
-
       <Text>{isPending ? "Verifying..." : "Your payment was successful!"}</Text>
       <Button
         mt={3}

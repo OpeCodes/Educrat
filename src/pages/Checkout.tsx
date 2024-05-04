@@ -76,7 +76,6 @@ const Checkout = () => {
                 <Text fontSize={"1.5rem"} fontWeight={"500"}>
                   Payment Method
                 </Text>
-
                 <Stack>
                   <Text color={"gray"} fontSize={12}>
                     Secured connection

@@ -34,6 +34,7 @@ import SingleInstructorPage from "./pages/studentCourse/SingleInstructorPage";
 import Cart from "./pages/Cart";
 import PaymentConfirmationPage from "./pages/studentCourse/PaymentConfirmationPage";
 import Checkout from "./pages/Checkout";
+import SingleCheckoutPage from "./pages/SingleCheckoutPage";
 
 const router = createBrowserRouter([
   {
@@ -72,7 +73,10 @@ const router = createBrowserRouter([
       {
         path: "/payment/checkout",
         element: <Checkout />,
-      },
+      },{
+        path: "/payment/checkout/express/:id",
+        element: <SingleCheckoutPage/>
+      }
     ],
   },
   {

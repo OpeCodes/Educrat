@@ -13,8 +13,7 @@ export const useCreateOrder = () => {
       return customFetch.post(`/order`, body);
     },
     onSuccess: (data) => {
-      dispatch(setToggleOrder());
-      
+      // dispatch(setToggleOrder());
       dispatch(setOrder(data.data));
     },
     onError: (error: any) => {
@@ -93,12 +92,7 @@ export const usePaymentTransaction = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
-  const checkParameterExists = (parameterName: string): boolean => {
-    const searchParams = new URLSearchParams(window.location.search);
-    return searchParams.has(parameterName);
-  };
-  const exists = checkParameterExists("trxref");
-  console.log(exists, "exist here");
+
   const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
       return customFetch.post(`/payment/transaction/status`, { tx_ref });
@@ -107,9 +101,7 @@ export const usePaymentTransaction = () => {
       queryClient.invalidateQueries({
         queryKey: ["getCourseEnroll"],
       });
-      if (exists) {
-        dispatch(clearCart());
-      }
+      dispatch(clearCart());
     },
     onError: (error: any) => {
       if (error.response) {
