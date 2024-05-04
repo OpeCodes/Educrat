@@ -19,6 +19,7 @@ const PaymentConfirmationPage = () => {
     removeUserCheckoutValue();
     removeUserSingleCartItem();
     navigate("/all-courses");
+    window.location.reload();
   };
   return (
     <Stack>
