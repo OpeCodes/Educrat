@@ -2,10 +2,14 @@ import { useToast } from "@chakra-ui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../../utils/axios";
 import { useDispatch } from "react-redux";
-import { setOrder, } from "../../../features/user/UserSlice";
-import {  removeCourseFromCart } from "../../../features/cart/CartSlice";
+import { setOrder } from "../../../features/user/UserSlice";
+import {
+  clearCart,
+  removeCourseFromCart,
+} from "../../../features/cart/CartSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import { removeUserCheckoutValue, removeUserSingleCartItem } from "../../../store/localStorage";
 
 export const useCreateOrder = () => {
   const toast = useToast();
@@ -94,7 +98,10 @@ export const usePaymentTransaction = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
-  const { singleCartCourse,courses } = useSelector((store: RootState) => store?.cart);
+  //
+  const { singleCartCourse, CheckOut } = useSelector(
+    (store: RootState) => store?.cart
+  );
 
   const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
@@ -104,10 +111,63 @@ export const usePaymentTransaction = () => {
       queryClient.invalidateQueries({
         queryKey: ["getCourseEnroll"],
       });
-      // dispatch(clearCart());
-        dispatch(removeCourseFromCart(singleCartCourse?.id))
-  console.log(courses)
-  console.log(singleCartCourse,"singleCartCourse")
+      if (CheckOut) {
+        dispatch(clearCart());
+      } else {
+        if (singleCartCourse) {
+          dispatch(removeCourseFromCart(singleCartCourse?.id));
+        }
+      }
+      removeUserCheckoutValue()
+      removeUserSingleCartItem();
+
+    },
+    onError: (error: any) => {
+      if (error.response) {
+        toast({
+          title: `${error.response.data.error}`,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else if (error.request) {
+        toast({
+          title: "Network error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "An error occurred. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    },
+  });
+  return { paymentTransaction, isPending };
+};
+
+export const usePaymentSingleTransaction = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  const { singleCartCourse } = useSelector((store: RootState) => store?.cart);
+
+  const { mutate: paymentTransaction, isPending } = useMutation({
+    mutationFn: ({ tx_ref }: any) => {
+      return customFetch.post(`/payment/transaction/status`, { tx_ref });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["getCourseEnroll"],
+      });
+      if (singleCartCourse) {
+        dispatch(removeCourseFromCart(singleCartCourse?.id));
+      }
+      removeUserSingleCartItem();
     },
     onError: (error: any) => {
       if (error.response) {

@@ -74,7 +74,7 @@ import {
   addCourseToCart,
   setSingleCartCourse,
 } from "../../features/cart/CartSlice";
-import { CourseItemToLocalStorage } from "../../store/localStorage";
+import { CourseItemToLocalStorage, addUserSingleCartItem } from "../../store/localStorage";
 interface ObjectWithId {
   id: string;
 }
@@ -209,6 +209,13 @@ const SingleCourse = () => {
             img: getStudentSingleCourse?.thumbnail,
           })
         );
+        addUserSingleCartItem({
+          id: getStudentSingleCourse?.id,
+          title: getStudentSingleCourse?.title,
+          description: getStudentSingleCourse?.description,
+          price: getStudentSingleCourse?.price,
+          img: getStudentSingleCourse?.thumbnail,
+        })
       }
     }
   };

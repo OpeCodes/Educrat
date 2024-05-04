@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CourseInterface } from "../../interface/courseInterface";
-import { getCourseItemToLocalStorage, getUserSingleCartItem } from "../../store/localStorage";
+import { getCourseItemToLocalStorage, getUserSingleCartItem, getUserCheckoutValue } from "../../store/localStorage";
 
 interface CartState {
   courses: CourseInterface[];
@@ -10,7 +10,7 @@ interface CartState {
 
 const initialState: CartState = {
   courses: getCourseItemToLocalStorage(),
-  CheckOut: false,
+  CheckOut: getUserCheckoutValue(),
   singleCartCourse: getUserSingleCartItem(),
 };
 
@@ -34,8 +34,8 @@ const cartSlice = createSlice({
     clearCart: () => {
       localStorage.removeItem("cartItems");
     },
-    setToggleCheckout: (state: CartState) => {
-      state.CheckOut = !state.CheckOut;
+    setToggleCheckout: (state: CartState, action: PayloadAction<any>) => {
+      state.CheckOut = action.payload;
     },
     setSingleCartCourse: (state, action: PayloadAction<any>) => {
       state.singleCartCourse = action.payload;

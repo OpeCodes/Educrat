@@ -41,3 +41,15 @@ export const getUserSingleCartItem = () => {
   const singleCartItem = result ? JSON.parse(result) : null;
   return singleCartItem;
 };
+
+export const addUserCheckoutValue= (CheckoutValue: any) => {
+  localStorage.setItem("checkoutValue", JSON.stringify(CheckoutValue));
+};
+export const removeUserCheckoutValue = () => {
+  localStorage.removeItem("checkoutValue");
+};
+export const getUserCheckoutValue= () => {
+  const result = localStorage.getItem("checkoutValue");
+  const CheckoutValue = result ? JSON.parse(result) : false;
+  return CheckoutValue;
+};
