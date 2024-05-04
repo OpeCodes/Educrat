@@ -9,7 +9,7 @@ import {
 } from "../../../features/cart/CartSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { removeUserCheckoutValue, removeUserSingleCartItem } from "../../../store/localStorage";
+
 
 export const useCreateOrder = () => {
   const toast = useToast();
@@ -19,7 +19,6 @@ export const useCreateOrder = () => {
       return customFetch.post(`/order`, body);
     },
     onSuccess: (data) => {
-      // dispatch(setToggleOrder());
       dispatch(setOrder(data.data));
     },
     onError: (error: any) => {
@@ -102,11 +101,14 @@ export const usePaymentTransaction = () => {
   const { singleCartCourse, CheckOut } = useSelector(
     (store: RootState) => store?.cart
   );
+  console.log(CheckOut);
   const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
       return customFetch.post(`/payment/transaction/status`, { tx_ref });
     },
     onSuccess: () => {
+      console.log(CheckOut, "checkout");
+
       queryClient.invalidateQueries({
         queryKey: ["getCourseEnroll"],
       });
@@ -116,10 +118,7 @@ export const usePaymentTransaction = () => {
         if (singleCartCourse) {
           dispatch(removeCourseFromCart(singleCartCourse?.id));
         }
-      }
-      removeUserCheckoutValue()
-      removeUserSingleCartItem();
-
+      }      
     },
     onError: (error: any) => {
       if (error.response) {
@@ -148,5 +147,3 @@ export const usePaymentTransaction = () => {
   });
   return { paymentTransaction, isPending };
 };
-
-

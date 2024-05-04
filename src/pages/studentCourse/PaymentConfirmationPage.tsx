@@ -1,14 +1,25 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { usePaymentTransaction } from "../../hooks/auth/price";
 import { Button, Stack, Text } from "@chakra-ui/react";
+import {
+  removeUserCheckoutValue,
+  removeUserSingleCartItem,
+} from "../../store/localStorage";
 
 const PaymentConfirmationPage = () => {
   const { tx_ref } = useParams();
+  const navigate = useNavigate();
   const { paymentTransaction, isPending } = usePaymentTransaction();
   useEffect(() => {
     paymentTransaction({ tx_ref });
   }, [tx_ref]);
+
+  const handleClick = () => {
+    removeUserCheckoutValue();
+    removeUserSingleCartItem();
+    navigate("/all-courses");
+  };
   return (
     <Stack>
       <Text as={"h1"}>Payment Confirmation</Text>
@@ -21,8 +32,7 @@ const PaymentConfirmationPage = () => {
         borderRadius={0}
         variant="solid"
         width={"fit-content"}
-        as={Link}
-        to={"/all-courses"}
+        onClick={handleClick}
       >
         Back to Courses
       </Button>

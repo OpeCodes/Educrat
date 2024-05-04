@@ -21,7 +21,6 @@ import {
   
   const SingleCheckoutPage = () => {
     const { singleCartCourse } = useSelector((store: RootState) => store?.cart);
-    console.log(singleCartCourse,"singleCartCourse")
     const { order } = useSelector((store: RootState) => store?.user); 
     const toast = useToast();
     const [value, setValue] = useState("false");

@@ -89,8 +89,7 @@ const SingleCourse = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   const { user } = useSelector((store: RootState) => store?.user);
-  const { courses, singleCartCourse } = useSelector((store: RootState) => store?.cart);
-  console.log(singleCartCourse,"singleCartCourse")
+  const { courses,  } = useSelector((store: RootState) => store?.cart);
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getStudentWishList } = useGetStudentWishList();
 
@@ -148,7 +147,6 @@ const SingleCourse = () => {
   const { courseEnroll } = useCourseEnrollment();
   const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
     useGetSingleEnrolledCourse(getStudentSingleCourse?.id);
-  console.log(getSingleEnrolledCourse, " getSingleEnrolledCourse");
   const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
     getStudentSingleCourse?.userId?.id
   );

@@ -23,7 +23,6 @@ import { addUserCheckoutValue } from "../store/localStorage";
 
 const Cart = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
-  console.log(courses,"courses")
   const dispatch = useDispatch();
   let totalPrice = courses?.reduce(
     (acc: any, course: any) => acc + course?.price,
