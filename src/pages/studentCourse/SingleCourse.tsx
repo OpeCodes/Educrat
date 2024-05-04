@@ -69,7 +69,6 @@ import {
   ModuleInterface,
 } from "../../interface/courseInterface";
 import { useCreateOrder } from "../../hooks/auth/price";
-import BuyNowModal from "../../components/BuyNowModal";
 import {
   addCourseToCart,
   setSingleCartCourse,
@@ -312,7 +311,6 @@ const SingleCourse = () => {
   return (
     <>
       <Stack mb={"2rem"}>
-        <BuyNowModal />
         {getCourseReviewLoading &&
         isPending &&
         getSingleEnrolledCourseLoading ? (

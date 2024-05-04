@@ -101,14 +101,11 @@ export const usePaymentTransaction = () => {
   const { singleCartCourse, CheckOut } = useSelector(
     (store: RootState) => store?.cart
   );
-  console.log(CheckOut);
   const { mutate: paymentTransaction, isPending } = useMutation({
     mutationFn: ({ tx_ref }: any) => {
       return customFetch.post(`/payment/transaction/status`, { tx_ref });
     },
     onSuccess: () => {
-      console.log(CheckOut, "checkout");
-
       queryClient.invalidateQueries({
         queryKey: ["getCourseEnroll"],
       });
