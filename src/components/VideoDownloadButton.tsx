@@ -26,7 +26,6 @@ const VideoDownloadButton: React.FC<FileDownloadButtonProps> = ({
         console.error("Error fetching the file:", error);
       });
   };
-
   return (
     <>
       <a onClick={handleDownload}> {fileName}</a>

@@ -108,11 +108,7 @@ export const usePaymentTransaction = () => {
       queryClient.invalidateQueries({
         queryKey: ["getCourseEnroll"],
       });
-      console.log("success 1");
       if (CheckOut) {
-        // dispatch(clearCart());
-        console.log("success 2");
-
         removeCourseItemToLocalStorage();
       } else {
         if (singleCartCourse) {

@@ -22,7 +22,7 @@ import { useCreateOrder } from "../hooks/auth/price";
 import { addUserCheckoutValue } from "../store/localStorage";
 
 const Cart = () => {
-  const { courses , CheckOut} = useSelector((store: RootState) => store?.cart);
+  const { courses , } = useSelector((store: RootState) => store?.cart);
   const dispatch = useDispatch();
   let totalPrice = courses?.reduce(
     (acc: any, course: any) => acc + course?.price,
@@ -43,7 +43,6 @@ const Cart = () => {
     dispatch(setToggleCheckout(true))
     addUserCheckoutValue(true)
   };
-  console.log(CheckOut)
   return (    
     <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
       <TableContainer mt={"9rem"}>
