@@ -12,7 +12,6 @@ import {
   HomeLayout,
   InstructorDashboardLayout,
 } from "./components";
-import "./App.css";
 import Home from "./pages/Home";
 import {
   AllInstructorPage,

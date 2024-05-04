@@ -202,7 +202,7 @@ export const useForgotPassword = () => {
 export const useVerifyAccount = () => {
   const toast = useToast();
   const navigate = useNavigate();
-  const { mutate: verifyAccount } = useMutation({
+  const { mutate: verifyAccount, isPending } = useMutation({
     mutationFn: (user: any) => {
       return customFetch.post("auth/verification", user);
     },
@@ -242,5 +242,5 @@ export const useVerifyAccount = () => {
       }
     },
   });
-  return { verifyAccount };
+  return { verifyAccount,isPending };
 };

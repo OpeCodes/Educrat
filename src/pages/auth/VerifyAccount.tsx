@@ -1,16 +1,25 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useVerifyAccount } from "../../hooks/auth";
+import { Flex, Stack, Text } from "@chakra-ui/react";
 const VerifyAccount = () => {
   const { code, token } = useParams();
- const {verifyAccount}= useVerifyAccount();
+  const { verifyAccount, isPending } = useVerifyAccount();
   useEffect(() => {
     verifyAccount({ code, token });
   }, [code, token]);
   return (
-    <div>
-      <h1>Account Verification Page</h1>
-    </div>
+    <Stack>
+      <Flex
+        h={"100vh"}
+        flexDirection={"column"}
+        align={"center"}
+        justify={"center"}
+      >
+        <Text></Text>
+        {isPending ? <Text fontSize={"1.5rem"}>verifying...</Text> : <></>}
+      </Flex>
+    </Stack>
   );
 };
 
