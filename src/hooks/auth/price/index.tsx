@@ -106,9 +106,7 @@ export const usePaymentTransaction = () => {
         queryKey: ["getCourseEnroll"],
       });
       // dispatch(clearCart());
-      if(singleCartCourse){
         dispatch(removeCourseFromCart(singleCartCourse?.id))
-      }
     },
     onError: (error: any) => {
       if (error.response) {
