@@ -209,7 +209,7 @@ export const useGetCourse = () => {
     queryKey: ["course"],
     queryFn: async () => {
       try {
-        const { data } = await customFetch.get("/course");
+        const { data } = await customFetch.get(`/course/?limit=20`);
         setError(null);
         return data;
       } catch (error: any) {
