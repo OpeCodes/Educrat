@@ -70,7 +70,10 @@ import {
 } from "../../interface/courseInterface";
 import { useCreateOrder } from "../../hooks/auth/price";
 import BuyNowModal from "../../components/BuyNowModal";
-import { addCourseToCart } from "../../features/cart/CartSlice";
+import {
+  addCourseToCart,
+  setSingleCartCourse,
+} from "../../features/cart/CartSlice";
 import { CourseItemToLocalStorage } from "../../store/localStorage";
 interface ObjectWithId {
   id: string;
@@ -144,7 +147,7 @@ const SingleCourse = () => {
   const { courseEnroll } = useCourseEnrollment();
   const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
     useGetSingleEnrolledCourse(getStudentSingleCourse?.id);
-    console.log(getSingleEnrolledCourse," getSingleEnrolledCourse")
+  console.log(getSingleEnrolledCourse, " getSingleEnrolledCourse");
   const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
     getStudentSingleCourse?.userId?.id
   );
@@ -189,14 +192,22 @@ const SingleCourse = () => {
           courseId: getStudentSingleCourse?.id,
         });
       } else {
-
         createOrder({
           body: {
             totalAmount: getStudentSingleCourse?.price,
             courses: [getStudentSingleCourse?.id],
           },
         });
-        navigate(`/payment/checkout/express/${getStudentSingleCourse?.id}`)
+        navigate(`/payment/checkout/express/${getStudentSingleCourse?.id}`);
+        dispatch(
+          setSingleCartCourse({
+            id: getStudentSingleCourse?.id,
+            title: getStudentSingleCourse?.title,
+            description: getStudentSingleCourse?.description,
+            price: getStudentSingleCourse?.price,
+            img: getStudentSingleCourse?.thumbnail,
+          })
+        );
       }
     }
   };
@@ -248,7 +259,7 @@ const SingleCourse = () => {
       return;
     } else {
       dispatch(addCourseToCart(cart));
-      CourseItemToLocalStorage(cart)
+      CourseItemToLocalStorage(cart);
       // addCourseItemToLocalStorage(cartArray);
     }
   };

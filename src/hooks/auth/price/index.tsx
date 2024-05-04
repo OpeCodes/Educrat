@@ -2,7 +2,7 @@ import { useToast } from "@chakra-ui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../../utils/axios";
 import { useDispatch } from "react-redux";
-import { setOrder, setToggleOrder } from "../../../features/user/UserSlice";
+import { setOrder, } from "../../../features/user/UserSlice";
 import { clearCart } from "../../../features/cart/CartSlice";
 
 export const useCreateOrder = () => {

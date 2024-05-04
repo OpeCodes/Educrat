@@ -5,11 +5,13 @@ import { getCourseItemToLocalStorage } from "../../store/localStorage";
 interface CartState {
   courses: CourseInterface[];
   CheckOut: boolean;
+  singleCartCourse: any;
 }
 
 const initialState: CartState = {
   courses: getCourseItemToLocalStorage(),
-  CheckOut: false
+  CheckOut: false,
+  singleCartCourse: null,
 };
 
 const cartSlice = createSlice({
@@ -26,16 +28,25 @@ const cartSlice = createSlice({
       );
       if (courseIndex !== -1) {
         state.courses.splice(courseIndex, 1);
-        localStorage.setItem("cartItems", JSON.stringify(state.courses)); 
+        localStorage.setItem("cartItems", JSON.stringify(state.courses));
       }
     },
     clearCart: () => {
-      localStorage.removeItem('cartItems'); 
-  },
-  setToggleCheckout: (state: CartState,) => {
-    state.CheckOut = !state.CheckOut
-  },
+      localStorage.removeItem("cartItems");
+    },
+    setToggleCheckout: (state: CartState) => {
+      state.CheckOut = !state.CheckOut;
+    },
+    setSingleCartCourse: (state, action: PayloadAction<any>) => {
+      state.singleCartCourse = action.payload;
+    },
   },
 });
-export const { addCourseToCart, removeCourseFromCart, clearCart , setToggleCheckout} = cartSlice.actions;
+export const {
+  addCourseToCart,
+  removeCourseFromCart,
+  clearCart,
+  setToggleCheckout,
+  setSingleCartCourse,
+} = cartSlice.actions;
 export default cartSlice.reducer;

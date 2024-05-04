@@ -20,12 +20,9 @@ import {
   import { useCheckoutOrder } from "../hooks/auth/price";
   
   const SingleCheckoutPage = () => {
-    const { courses } = useSelector((store: RootState) => store?.cart);
-    const { order } = useSelector((store: RootState) => store?.user);
-    let totalPrice = courses?.reduce(
-      (acc: any, course: any) => acc + course.price,
-      0
-    );
+    const { courses,singleCartCourse } = useSelector((store: RootState) => store?.cart);
+  console.log(singleCartCourse,"singleCartCourse")
+    const { order } = useSelector((store: RootState) => store?.user);   
     const toast = useToast();
     const [value, setValue] = useState("false");
     const { checkoutOrder } = useCheckoutOrder();
@@ -102,10 +99,9 @@ import {
                 <Text fontSize={"1.5rem"} fontWeight={"700"} mt={"1.0rem"}>
                   Order details
                 </Text>
-                {courses?.map((course: any) => {
-                  return (
+                
                     <Flex
-                    key={course.id}
+                    key={singleCartCourse.id}
                       mt={"rem"}
                       columnGap={10}
                       justify={"space-between"}
@@ -116,17 +112,16 @@ import {
                         <Image
                           boxSize="40px"
                           objectFit="cover"
-                          src={course.img}
+                          src={singleCartCourse.img}
                           alt="Dan Abramov"
                         />
                         <Text fontWeight={"bold"}>
-                          {course.title}
+                          {singleCartCourse.title}
                         </Text>
                       </Flex>
-                      <Text>{course.price}</Text>
-                    </Flex>
-                  );
-                })}
+                      <Text>{singleCartCourse.price}</Text>
+                    </Flex>               
+           
               </Stack>
             </Stack>
           </GridItem>
@@ -147,7 +142,7 @@ import {
                 <Stack>
                   <Flex justify={"space-between"}>
                     <Text>Original Price</Text>
-                    <Text>N{totalPrice}</Text>
+                    <Text>N{singleCartCourse.price}</Text>
                   </Flex>
                   <Flex justify={"space-between"}>
                     <Text>Discounts:</Text>
@@ -157,7 +152,7 @@ import {
                   <Divider />
                   <Flex justify={"space-between"} fontWeight={"bold"}>
                     <Text>Total</Text>
-                    <Text>N{totalPrice}</Text>
+                    <Text>N{singleCartCourse.price}</Text>
                   </Flex>
                 </Stack>
                 <Text mt={"0.6rem"} fontSize={13} color={"gray"}>
@@ -171,7 +166,7 @@ import {
                   borderRadius={0}
                   variant="solid"
                   onClick={handleCheckout}
-                  isDisabled={totalPrice === 0}
+                  isDisabled={singleCartCourse.price === 0}
                 >
                   {value === "true" ? "Proceed" : "Complete Checkout"}
                 </Button>
