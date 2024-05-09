@@ -178,7 +178,7 @@ const SingleCourse = () => {
       navigate("/sign-in");
       toast({
         title: `Sign in to purchase a course`,
-        status: "info",
+        status: "error",
         duration: 3000,
         isClosable: true,
       });
@@ -221,7 +221,7 @@ const SingleCourse = () => {
       navigate("/sign-in");
       toast({
         title: `Sign in to purchase a course`,
-        status: "info",
+        status: "error",
         duration: 3000,
         isClosable: true,
       });
@@ -238,7 +238,7 @@ const SingleCourse = () => {
       navigate("/sign-in");
       toast({
         title: `Sign in to add a wishlist`,
-        status: "info",
+        status: "error",
         duration: 3000,
         isClosable: true,
       });
