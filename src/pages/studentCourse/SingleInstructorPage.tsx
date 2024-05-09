@@ -24,7 +24,6 @@ import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { TiSocialTwitter } from "react-icons/ti";
 import { FaYoutube } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
-import { CgNotes } from "react-icons/cg";
 import { Footer } from "../../constants";
 import {
   useGetInstructorReview,
@@ -36,6 +35,7 @@ import { CourseInterface } from "../../interface/courseInterface";
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { CiClock1, CiPlay1 } from "react-icons/ci";
+import { getTotalLecturesDuration } from "../../components/CourseCalculations";
 
 interface Social {
   type: string;
@@ -45,7 +45,7 @@ interface Social {
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
-  console.log(getSingleEducratInstructor,"getSingleEducratInstructor")
+  console.log(getSingleEducratInstructor, "getSingleEducratInstructor");
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getSingleEducratInstructor?.id
   );
@@ -80,11 +80,11 @@ const SingleInstructorPage = () => {
             <Text>&#x2022;</Text>
             <Text>All Courses</Text>
           </Flex>
-          <Flex columnGap={1}>
+          <Flex columnGap={1} display={{base: "none", md: "flex"}}>
             <Text>&#x2022;</Text>
             <Text>User Experience Design</Text>
           </Flex>
-          <Flex columnGap={1}>
+          <Flex columnGap={1}  display={{base: "none", md: "flex"}}>
             <Text>&#x2022;</Text>
             <Text>User Interface</Text>
           </Flex>
@@ -98,8 +98,8 @@ const SingleInstructorPage = () => {
         maxW={{ lg: "80%" }}
         mx={"auto"}
         borderRadius={5}
-        py={{base: "1rem", md: "5rem"}}
-        px={{base: "1rem", md: "5rem"}}
+        py={{ base: "1rem", md: "5rem" }}
+        px={{ base: "1rem", md: "5rem" }}
       >
         <Avatar
           size="2xl"
@@ -111,7 +111,11 @@ const SingleInstructorPage = () => {
           {getSingleEducratInstructor?.lastName}
         </Text>
         <Text>{getSingleEducratInstructor?.headline}</Text>
-        <Flex align={{md: "center"}} flexDirection={{base: "column", md: "row"}} columnGap={3}>
+        <Flex
+          align={{ md: "center" }}
+          flexDirection={{ base: "column", md: "row" }}
+          columnGap={3}
+        >
           <Flex align={"center"} columnGap={1}>
             <Text>
               <AiFillStar size={20} />
@@ -183,6 +187,7 @@ const SingleInstructorPage = () => {
         mt={12}
         maxW={{ base: "95%", lg: "80%" }}
         mx={"auto"}
+        mb={"1rem"}
       >
         <Tabs position="relative">
           <TabList fontWeight={"bold"}>
@@ -218,6 +223,8 @@ const SingleInstructorPage = () => {
                     thumbnail,
                     title,
                     slug,
+                    modules,   
+                    price               
                   }: CourseInterface) => (
                     <GridItem
                       w="100%"
@@ -231,33 +238,44 @@ const SingleInstructorPage = () => {
                             src={thumbnail}
                             alt="Green double couch with wooden legs"
                             borderRadius="lg"
-                            maxH={{base: "250px", md: "180px"}}
+                            maxH={{ base: "250px", md: "180px" }}
                             height={"100%"}
-                            objectFit={{base: "fill", lg: "scale-down"}}
+                            objectFit={{ base: "fill", lg: "scale-down" }}
                           />
                           <Stack>
                             {/* <Text>{getTotalStarsSum(reviews)}</Text> */}
-                            <Text fontSize="20px" >
-                              {title}
-                            </Text>
+                            <Text fontSize="20px">{title}</Text>
                             <Flex justify={"space-between"} fontSize={"19px"}>
-          <Flex align="center" columnGap={"4px"} color="gray">
-            <CiPlay1 />
-            <Text fontSize="13px">
-              {/* {modules?.length}  */}
-              Lessons</Text>
-          </Flex>
-          <Flex align="center" columnGap={"4px"} color="gray">
-            <CiClock1 />
-            <Text fontSize="13px">
-              {/* {convertSecondsToHMS(totalDuration)} */}
-              </Text>
-          </Flex>
-          <Flex align="center" columnGap={"4px"} color="gray">
-            <BiSolidBarChartAlt2 color={"gray"} />
-            <Text fontSize="13px">{complexityLevel}</Text>
-          </Flex>
-        </Flex>
+                              <Flex
+                                align="center"
+                                columnGap={"4px"}
+                                color="gray"
+                              >
+                                <CiPlay1 />
+                                <Text fontSize="13px">
+                                  {modules?.length} {" "}
+                                  Lessons
+                                </Text>
+                              </Flex>
+                              <Flex
+                                align="center"
+                                columnGap={"4px"}
+                                color="gray"
+                              >
+                                <CiClock1 />
+                                <Text fontSize="13px">
+                                  {convertSecondsToHMS(getTotalLecturesDuration(modules))}
+                                </Text>
+                              </Flex>
+                              <Flex
+                                align="center"
+                                columnGap={"4px"}
+                                color="gray"
+                              >
+                                <BiSolidBarChartAlt2 color={"gray"} />
+                                <Text fontSize="13px">{complexityLevel}</Text>
+                              </Flex>
+                            </Flex>
                             <Divider />
                           </Stack>
                         </Stack>
@@ -274,7 +292,7 @@ const SingleInstructorPage = () => {
                             </Text>
                           </Flex>
                           <Text fontWeight={"500"} fontSize={"20px"}>
-                            $30
+                            N{price}
                           </Text>
                         </Flex>
                       </Stack>

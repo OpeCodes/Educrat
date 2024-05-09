@@ -65,6 +65,7 @@ export interface CourseInterface {
   learningObjectives: string[];
   preRequisites: string;
   promotionalVideo: string;
+  price: number;
 }
 
 export interface CartInterface {
