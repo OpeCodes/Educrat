@@ -33,6 +33,9 @@ import {
   useInstructorReviewRating,
 } from "../../hooks/studentCourse";
 import { CourseInterface } from "../../interface/courseInterface";
+import { convertSecondsToHMS } from "../../components/TimeFormat";
+import { BiSolidBarChartAlt2 } from "react-icons/bi";
+import { CiClock1, CiPlay1 } from "react-icons/ci";
 
 interface Social {
   type: string;
@@ -42,6 +45,7 @@ interface Social {
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
+  console.log(getSingleEducratInstructor,"getSingleEducratInstructor")
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
     getSingleEducratInstructor?.id
   );
@@ -58,7 +62,7 @@ const SingleInstructorPage = () => {
   );
 
   return (
-    <Stack mt={"4.3rem"}>
+    <Stack pt={"4.3rem"}>
       <Stack bg={"#f5f7fe"} py={3}>
         <Flex
           w={"100%"}
@@ -91,11 +95,11 @@ const SingleInstructorPage = () => {
         mt={4}
         width={"100%"}
         bg={"#6440fb"}
-        maxW={{ lg: "70%" }}
+        maxW={{ lg: "80%" }}
         mx={"auto"}
         borderRadius={5}
-        py={"5rem"}
-        px={"5rem"}
+        py={{base: "1rem", md: "5rem"}}
+        px={{base: "1rem", md: "5rem"}}
       >
         <Avatar
           size="2xl"
@@ -107,7 +111,7 @@ const SingleInstructorPage = () => {
           {getSingleEducratInstructor?.lastName}
         </Text>
         <Text>{getSingleEducratInstructor?.headline}</Text>
-        <Flex align={"center"} columnGap={3}>
+        <Flex align={{md: "center"}} flexDirection={{base: "column", md: "row"}} columnGap={3}>
           <Flex align={"center"} columnGap={1}>
             <Text>
               <AiFillStar size={20} />
@@ -177,7 +181,7 @@ const SingleInstructorPage = () => {
       <Stack
         width={"100%"}
         mt={12}
-        maxW={{ base: "95%", lg: "70%" }}
+        maxW={{ base: "95%", lg: "80%" }}
         mx={"auto"}
       >
         <Tabs position="relative">
@@ -236,32 +240,24 @@ const SingleInstructorPage = () => {
                             <Text fontSize="20px" >
                               {title}
                             </Text>
-                            <Flex justify={"space-between"}>
-                              <Flex
-                                align="center"
-                                columnGap={"4px"}
-                                color="gray"
-                              >
-                                <CgNotes />
-                                <Text fontSize="13px"> Lessons</Text>
-                              </Flex>
-                              <Flex
-                                align="center"
-                                columnGap={"4px"}
-                                color="gray"
-                              >
-                                <CgNotes />
-                                <Text fontSize="13px">6 Lessons</Text>
-                              </Flex>
-                              <Flex
-                                align="center"
-                                columnGap={"4px"}
-                                color="gray"
-                              >
-                                <CgNotes />
-                                <Text fontSize="13px">6 {complexityLevel}</Text>
-                              </Flex>
-                            </Flex>
+                            <Flex justify={"space-between"} fontSize={"19px"}>
+          <Flex align="center" columnGap={"4px"} color="gray">
+            <CiPlay1 />
+            <Text fontSize="13px">
+              {/* {modules?.length}  */}
+              Lessons</Text>
+          </Flex>
+          <Flex align="center" columnGap={"4px"} color="gray">
+            <CiClock1 />
+            <Text fontSize="13px">
+              {/* {convertSecondsToHMS(totalDuration)} */}
+              </Text>
+          </Flex>
+          <Flex align="center" columnGap={"4px"} color="gray">
+            <BiSolidBarChartAlt2 color={"gray"} />
+            <Text fontSize="13px">{complexityLevel}</Text>
+          </Flex>
+        </Flex>
                             <Divider />
                           </Stack>
                         </Stack>
