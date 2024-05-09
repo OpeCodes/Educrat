@@ -14,15 +14,18 @@ import {
 } from "@chakra-ui/react";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
-import {  Link,  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RootState } from "../store/store";
-import { removeCourseFromCart, setToggleCheckout } from "../features/cart/CartSlice";
+import {
+  removeCourseFromCart,
+  setToggleCheckout,
+} from "../features/cart/CartSlice";
 import { useDispatch } from "react-redux";
 import { useCreateOrder } from "../hooks/auth/price";
 import { addUserCheckoutValue } from "../store/localStorage";
 
 const Cart = () => {
-  const { courses , } = useSelector((store: RootState) => store?.cart);
+  const { courses } = useSelector((store: RootState) => store?.cart);
   const dispatch = useDispatch();
   let totalPrice = courses?.reduce(
     (acc: any, course: any) => acc + course?.price,
@@ -40,10 +43,10 @@ const Cart = () => {
         courses: idStrings,
       },
     });
-    dispatch(setToggleCheckout(true))
-    addUserCheckoutValue(true)
+    dispatch(setToggleCheckout(true));
+    addUserCheckoutValue(true);
   };
-  return (    
+  return (
     <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
       <TableContainer mt={"9rem"}>
         <Table size="sm">
@@ -63,27 +66,25 @@ const Cart = () => {
               </Th>
             </Tr>
           </Thead>
-          <Tbody>           
+          <Tbody>
             {courses?.map((course: any, index) => (
               <Tr key={index} p={6}>
-                <Td width={"100%"} maxW={"40%"} py={6}>
+                <Td ml={"5rem"} py={6}>
                   <Flex align="center">
                     <Image
                       borderRadius="5px"
-                      boxSize="100px"
+                      boxSize="50px"
                       src={course?.img}
                       alt="Product Image"
                       mr={4}
+                      display={{ base: "none", sm: "block" }}
                     />
-                    <Text isTruncated maxW="100%">
-                      {course?.title}
-                    </Text>
+                    <Text isTruncated>{course?.title}</Text>
                   </Flex>
                 </Td>
-                <Td width={"20%"}> {course?.price}</Td>
-                <Td width={"20%"}>{course?.price}</Td>
+                <Td> {course?.price}</Td>
+                <Td>{course?.price}</Td>
                 <Td
-                  width={"10%"}
                   cursor={"pointer"}
                   onClick={() => handleRemoveFromCart(course?.id)}
                 >

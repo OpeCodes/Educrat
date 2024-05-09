@@ -18,8 +18,9 @@ const PaymentConfirmationPage = () => {
   const handleClick = () => {
     removeUserCheckoutValue();
     removeUserSingleCartItem();
-    window.location.reload();
     navigate("/all-courses");
+    window.location.reload();
+
   };
   return (
     <Stack height={"100vh"} justify={"center"} align={"center"}> 
