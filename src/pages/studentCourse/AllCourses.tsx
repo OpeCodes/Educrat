@@ -73,11 +73,11 @@ const StudentCourse = () => {
           </GridItem>
           <GridItem width="100%" colSpan={{ base: 4, md: 3 }} p={2}>
             <Flex justify={"space-between"} mt={3} mb={10}>
-              <Text>showing 30 results</Text>
-              <Flex>
+              <Text>showing {data?.data?.length} results</Text>
+              {/* <Flex>
                 <Text>a</Text>
                 <Text>b</Text>
-              </Flex>
+              </Flex> */}
             </Flex>
             <Grid
               templateColumns={{
@@ -101,7 +101,14 @@ const StudentCourse = () => {
                   <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                     <Stack>
                       <Stack>
-                        <Image src={thumbnail} alt={title} borderRadius="lg" />
+                        <Image
+                          src={thumbnail}
+                          alt={title}
+                          borderRadius="lg"
+                          maxH="180px"
+                          height={"100%"}
+                          objectFit={"scale-down"}
+                        />
                         <Stack>
                           <Flex justifyContent={"start"} alignItems={"center"}>
                             <Text color={"#FFD700"}>
@@ -169,8 +176,6 @@ const StudentCourse = () => {
                   </GridItem>
                 )
               )}
-
-              <GridItem w="100%" h="10" bg="blue.500" />
             </Grid>
           </GridItem>
         </Grid>

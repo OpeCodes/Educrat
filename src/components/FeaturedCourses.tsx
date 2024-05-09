@@ -76,7 +76,6 @@ const Course = ({
             style={{ borderRadius: "10px" }}
             alt={title}
             w={"100%"}
-            // objectFit={"initial"}
             borderRadius="lg"
           />
         </Box>
