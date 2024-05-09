@@ -58,7 +58,6 @@ export const Courses = () => {
             </Grid>
           </Stack>
         )}
-
         <Box as="div" mt={8}>
           <Swiper {...sliderSettings}>
             {!isPending && <SliderButtons />}

@@ -72,10 +72,10 @@ const Course = ({
             className="img"
             maxH="180px"
             height={"100%"}
+            objectFit={"scale-down"}
             style={{ borderRadius: "10px" }}
             alt={title}
             w={"100%"}
-            objectFit={"scale-down"}
             // objectFit={"initial"}
             borderRadius="lg"
           />

@@ -200,8 +200,9 @@ const SingleInstructorPage = () => {
                 templateColumns={{
                   base: "repeat(1, 1fr)",
                   md: "repeat(2, 1fr)",
+                  lg: "repeat(3, 1fr)",
                 }}
-                gap={6}
+                gap={"4rem"}
               >
                 {getSingleEducratInstructor?.courses.length === 0 && (
                   <Text>No course available</Text>
@@ -226,10 +227,13 @@ const SingleInstructorPage = () => {
                             src={thumbnail}
                             alt="Green double couch with wooden legs"
                             borderRadius="lg"
+                            maxH={{base: "250px", md: "180px"}}
+                            height={"100%"}
+                            objectFit={{base: "fill", lg: "scale-down"}}
                           />
                           <Stack>
                             {/* <Text>{getTotalStarsSum(reviews)}</Text> */}
-                            <Text fontSize="20px" mt="-12px">
+                            <Text fontSize="20px" >
                               {title}
                             </Text>
                             <Flex justify={"space-between"}>
