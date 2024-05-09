@@ -41,20 +41,19 @@ const Checkout = () => {
       return;
     } else {
       checkoutOrder({ id: order?.id });
-
     }
   };
   return (
-    <Stack mt={"5rem"}>
+    <Stack pt={"5rem"}>
       <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
         <GridItem
-          height="100vh"
+          height={{ lg: "100vh" }}
           justifyContent={"center"}
           alignContent={"center"}
           display={"flex"}
           mt={"2rem"}
         >
-          <Stack maxW={"70%"} w={"full"}>
+          <Stack maxW={"80%"} w={"full"}>
             <Text fontSize={"2rem"} fontWeight={"500"}>
               Checkout
             </Text>
@@ -106,7 +105,7 @@ const Checkout = () => {
               {courses?.map((course: any) => {
                 return (
                   <Flex
-                  key={course.id}
+                    key={course.id}
                     mt={"rem"}
                     columnGap={10}
                     justify={"space-between"}
@@ -120,9 +119,7 @@ const Checkout = () => {
                         src={course.img}
                         alt="Dan Abramov"
                       />
-                      <Text fontWeight={"bold"}>
-                        {course.title}
-                      </Text>
+                      <Text fontWeight={"bold"}>{course.title}</Text>
                     </Flex>
                     <Text>{course.price}</Text>
                   </Flex>
@@ -133,15 +130,16 @@ const Checkout = () => {
         </GridItem>
         <GridItem w="100%">
           <Box
-            boxSize="sm"
-            w="50%"
-            h="100vh"
+            w={{ base: "100%", lg: "50%" }}
+            h={{ base: "100%", lg: "100vh" }}
             bg={"#f7f9fa"}
-            mx={"auto"}
-            display={{ base: "none", lg: "block" }}
-            position={"fixed"}
+            mx={{ base: "0", lg: "auto" }}
+            display={"block"}
+            p={{ base: "1rem", lg: 0 }}
+            mt={{ base: "3rem", lg: 0 }}
+            position={{ base: "relative", lg: "fixed" }}
           >
-            <Stack mt={"6rem"} mx={"10rem"}>
+            <Stack mt={{ base: 0, lg: "6rem" }} mx={{ base: 0, lg: "10rem" }}>
               <Text fontSize={"1.6rem"} fontWeight={"bold"}>
                 Summary
               </Text>
