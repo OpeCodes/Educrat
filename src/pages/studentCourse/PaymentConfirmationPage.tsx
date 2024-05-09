@@ -22,13 +22,13 @@ const PaymentConfirmationPage = () => {
     navigate("/all-courses");
   };
   return (
-    <Stack>
+    <Stack height={"100vh"} justify={"center"} align={"center"}> 
       <Text as={"h1"}>Payment Confirmation</Text>
       <Text>{isPending ? "Verifying..." : "Your payment was successful!"}</Text>
       <Button
         mt={3}
         bg={"#A435F0"}
-        py={7}
+        py={6}
         color={"white"}
         borderRadius={0}
         variant="solid"
