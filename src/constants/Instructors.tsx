@@ -83,17 +83,17 @@ export const Instructors = () => {
             </Grid>
           </Stack>
         )}
-
         <Grid
           templateColumns={{
             base: "repeat(1, 1fr)",
             md: "repeat(3, 1fr)",
             lg: "repeat(4, 1fr)",
           }}
-          gap={2}
+          gap={3}
+          mt={"1.5rem"}
         >
           {data &&
-            data?.map((instructor: any, index: any) => {
+            data?.slice(0,4)?.map((instructor: any, index: any) => {
               return (
                 <Instructor
                   key={instructor.id}

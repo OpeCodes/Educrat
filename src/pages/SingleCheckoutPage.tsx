@@ -40,7 +40,7 @@ import {
       }
     };
     return (
-      <Stack mt={"5rem"}>
+      <Stack pt={"5rem"}>
         <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
           <GridItem
             height="100vh"

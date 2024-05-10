@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   getUserLocalStorage,
   removeUserFromLocalStorage,
+  removeCourseItemToLocalStorage.
+  removeUserSingleCartItem
 } from "../../store/localStorage";
 
 interface UserState {
@@ -32,6 +34,8 @@ const userSlice = createSlice({
     logoutUser: (state: UserState) => {
       state.user = null;
       removeUserFromLocalStorage();
+      removeCourseItemToLocalStorage()
+      removeUserSingleCartItem()
     },
     setToggleOrder: (state: UserState,) => {
       state.orderBoolean = !state.orderBoolean

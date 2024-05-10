@@ -133,7 +133,7 @@ const Instructor = ({
               alignItems={"center"}
               columnGap={1}
             >
-              <CiUser color={"gray"} size={13} />
+              <CiUser color={"gray"} size={14} />
               <Text color={"gray.600"} fontSize={"12px"}>
                 {courses.length} Students
               </Text>
@@ -144,7 +144,7 @@ const Instructor = ({
               alignItems={"center"}
               columnGap={1}
             >
-              <CiPlay1 color={"gray"} size={15} />
+              <CiPlay1 color={"gray"} size={14} />
               <Text color={"gray.600"} fontSize={"14px"}>
                 {courses.length} Courses
               </Text>
