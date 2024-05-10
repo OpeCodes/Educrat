@@ -1,10 +1,19 @@
-import { Flex, Grid, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Grid,
+  Heading,
+  Stack,
+  Text,
+  GridItem,
+  Skeleton,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useGetAllEducratInstructors } from "../../hooks/studentCourse";
 import { Instructor } from "../../components";
 
 const AllInstructorPage = () => {
-  const { data } = useGetAllEducratInstructors();
+  const { data, isPending } = useGetAllEducratInstructors();
+  const dummyArray = [1, 2, 3, 4];
   const arrayOfIds = data?.map((obj: any) => obj?.id);
   return (
     <Stack mt={"4.3rem"}>
@@ -44,6 +53,29 @@ const AllInstructorPage = () => {
           reasonable price.
         </Text>
       </Stack>
+      {isPending && (
+        <Stack>
+          <Grid
+            templateColumns={{
+              base: "repeat(1, 1fr)",
+              md: "repeat(2, 1fr)",
+              lg: "repeat(4, 1fr)",
+            }}
+            gap={6}
+            maxW={"80%"}
+            w={"100%"}
+            mx={"auto"}
+          >
+            {dummyArray.map((_, index) => (
+              <GridItem w="100%" key={index}>
+                <Skeleton height="200px" />
+                <Skeleton height="80px" mt={1} />
+              </GridItem>
+            ))}
+          </Grid>
+        </Stack>
+      )}
+
       <Grid
         mt={"1rem"}
         templateColumns="repeat(4, 1fr)"

@@ -54,14 +54,17 @@ const Instructor = ({
     >
       <Stack>
         <Box as="div" position={"relative"}>
+          <Box  overflow={"hidden"} >
           <Image
             src={profilePicture}
             style={{ borderRadius: "10px", width: "100%" }}
             alt={firstName}
-            maxH={"300px"}
+            maxH={"250px"}
             height={"100%"}
             objectFit={"cover"}
+            width={"100%"}
           />
+          </Box>
           <Box
             as={"div"}
             display={"flex"}
@@ -114,7 +117,7 @@ const Instructor = ({
           <Text color={"gray.600"} fontSize={"15px"} mb={2}>
             {headline}
           </Text>
-          <Flex justifyContent={"start"} alignItems={"center"}>
+          <Flex justifyContent={"start"} alignItems={"center"} >
             <Flex justifyContent={"center"} alignItems={"center"}>
               <Box as="span" color={"#e59819"} mr={1}>
                 <Text>
@@ -131,8 +134,8 @@ const Instructor = ({
               mx={4}
               columnGap={1}
             >
-              <CiUser color={"gray"} size={15} />
-              <Text color={"gray.600"} fontSize={"14px"}>
+              <CiUser color={"gray"} size={13} />
+              <Text color={"gray.600"} fontSize={"12px"}>
                 {courses.length} Students
               </Text>
             </Box>
