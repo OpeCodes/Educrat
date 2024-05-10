@@ -117,21 +117,20 @@ const Instructor = ({
           <Text color={"gray.600"} fontSize={"15px"} mb={2}>
             {headline}
           </Text>
-          <Flex justifyContent={"start"} alignItems={"center"} >
-            <Flex justifyContent={"center"} alignItems={"center"}>
-              <Box as="span" color={"#e59819"} mr={1}>
+          <Flex justifyContent={"start"} alignItems={"center"} columnGap={1} >
+            <Flex justifyContent={"center"} alignItems={"center"} columnGap={1}>
+             
+              <Box as="span" color={"#e59819"} >
                 <Text>
                   <FaStar color={"#FFD700"} />
                 </Text>
               </Box>
               <Text color={"#FFD700"}>{averateinstructorReviewRating}</Text>
             </Flex>
-
             <Box
               display={"flex"}
               justifyContent={"start"}
               alignItems={"center"}
-              mx={4}
               columnGap={1}
             >
               <CiUser color={"gray"} size={13} />

@@ -78,9 +78,14 @@ const AllInstructorPage = () => {
 
       <Grid
         mt={"1rem"}
-        templateColumns="repeat(4, 1fr)"
+        // templateColumns="repeat(4, 1fr)"
+        templateColumns={{
+          base: "repeat(1, 1fr)",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(4, 1fr)",
+        }}
         gap={6}
-        maxW={"80%"}
+        maxW={"90%"}
         w={"100%"}
         mx={"auto"}
       >
