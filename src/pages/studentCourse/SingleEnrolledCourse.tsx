@@ -64,7 +64,7 @@ import VideoDownloadButton from "../../components/VideoDownloadButton";
 import { Loading } from "../../components";
 import ModalShare from "../../components/CourseShareModal";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
+import { RootState } from "../../store/store";
 const initialValues = {
   stars: 0,
   title: "",

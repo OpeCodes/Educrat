@@ -43,7 +43,7 @@ const MyLearning = () => {
   ): number[] => {
     const totalDurations: number[] = [];
 
-    wishList.forEach((course: CourseInterface) => {
+    wishList?.forEach((course: CourseInterface) => {
       let totalDuration = 0;
 
       if (course && Array.isArray(course.modules)) {
@@ -64,7 +64,7 @@ const MyLearning = () => {
   // const lectureLength: number[] = (getStudentWishList.flatMap(obj => obj.modules.flatMap(module => module.lectures)) ?? []).map(lecture => lecture.length);
   // const lectureLength: number[] = (getStudentWishList.flatMap(obj => obj.modules.flatMap(module => module.lectures)) ?? []).map((lecture: string) => lecture.length);
 
-  const lectureCountsForEachObject: number[] = getStudentWishList.map(
+  const lectureCountsForEachObject: number[] = getStudentWishList?.map(
     (obj: any) =>
       obj.modules.reduce(
         (total: number, module: ModuleInterface) =>
