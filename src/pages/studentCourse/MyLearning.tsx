@@ -57,13 +57,8 @@ const MyLearning = () => {
       }
       totalDurations.push(totalDuration);
     });
-
     return totalDurations;
   };
-
-  // const lectureLength: number[] = (getStudentWishList.flatMap(obj => obj.modules.flatMap(module => module.lectures)) ?? []).map(lecture => lecture.length);
-  // const lectureLength: number[] = (getStudentWishList.flatMap(obj => obj.modules.flatMap(module => module.lectures)) ?? []).map((lecture: string) => lecture.length);
-
   const lectureCountsForEachObject: number[] = getStudentWishList?.map(
     (obj: any) =>
       obj.modules.reduce(
@@ -95,7 +90,6 @@ const MyLearning = () => {
         }
       }
     });
-
     return firstLectureIds;
   };
   const firstLectureIds = getFirstLectureIds(enrolledCourse);

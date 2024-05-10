@@ -311,6 +311,9 @@ export const useMarkLectureCompleted = () => {
       queryClient.invalidateQueries({
         queryKey: ["getCourseStudentEnrollCourse"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["allEnrolledCourse"],
+      });
     },
   });
   return { markLectureCompleted };
@@ -318,7 +321,6 @@ export const useMarkLectureCompleted = () => {
 
 export const useMarkLectureUnfinished = () => {
   const queryClient = useQueryClient();
-
   const { mutate: markLectureUnfinshed } = useMutation({
     mutationFn: ({ enrollId, lectureId }: any) => {
       return customFetch.post(`/enrollment/${enrollId}/lecture/unfinished`, {
@@ -328,6 +330,9 @@ export const useMarkLectureUnfinished = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["getCourseStudentEnrollCourse"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["allEnrolledCourse"],
       });
     },
   });
