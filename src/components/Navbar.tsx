@@ -12,24 +12,14 @@ import {
   DrawerContent,
   useDisclosure,
   DrawerCloseButton,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  Input,
   Divider,
   Avatar,
   useBoolean,
   useToast,
 } from "@chakra-ui/react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo-2.svg";
-import { FiSearch } from "react-icons/fi";
+// import { FiSearch } from "react-icons/fi";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
@@ -69,12 +59,13 @@ const links = [
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [hover, setHover] = useBoolean();
+  const navigate = useNavigate();
   const toast = useToast();
-  const {
-    isOpen: modalOpen,
-    onOpen: onModalOpen,
-    onClose: onModalClose,
-  } = useDisclosure();
+  // const {
+  //   isOpen: modalOpen,
+  //   onOpen: onModalOpen,
+  //   onClose: onModalClose,
+  // } = useDisclosure();
   const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store?.user);
   const hasStudentRole = user?.user?.roles.some(
@@ -113,7 +104,6 @@ const Navbar = () => {
               paddingX={"10px"}
               borderRadius={5}
               paddingY={"2px"}
-              //   _hover={{ background: "blue" ,}}
               transition={"all"}
               key={id}
             >
@@ -161,11 +151,46 @@ const Navbar = () => {
             </Box>
           )}
 
-          <Text cursor={"pointer"} onClick={() => onModalOpen()}>
+          {/* <Text cursor={"pointer"} onClick={() => onModalOpen()}>
             <FiSearch color={"#6440fb"} fontSize={"25px"} />
-          </Text>
+          </Text> */}
+          {!user && (
+            <Text
+              fontSize="15px"
+              cursor={"pointer"}
+              color={"black"}
+              onClick={() => {
+                if (!user) {
+                  toast({
+                    title: `Sign up to become an instructor`,
+                    status: "info",
+                    duration: 5000,
+                    isClosable: true,
+                  });
+                  setTimeout(() => {
+                    navigate("/sign-up");
+                  }, 1000);
+                }
+              }}
+            >
+              Teach on Educrat
+            </Text>
+          )}
+          {hasStudentRole && hasInstructorRole && (
+            <Text
+              fontSize="15px"
+              cursor={"pointer"}
+              as={Link}
+              to="/instructor/courses"
+              color={"black"}
+
+            >
+              Instructor Dashboard
+            </Text>
+          )}
+
           <Stack>
-            <AddToCartButton/>
+            <AddToCartButton />
           </Stack>
           <Box
             fontSize={"50px"}
@@ -223,7 +248,10 @@ const Navbar = () => {
                       <Text as={Link} to={"home/my-courses/learning/"}>
                         My Learning
                       </Text>
-                      <Text> My Cart</Text>
+                      <Text as={Link} to={"/cart"}>
+                        {" "}
+                        My Cart
+                      </Text>
                       {hasStudentRole && hasInstructorRole && (
                         <Text
                           fontSize="15px"
@@ -287,7 +315,6 @@ const Navbar = () => {
             </Box>
           ) : (
             <>
-            <Text color={"black"}>Teach on Educrat</Text>
               <Button
                 color={"#6440fb"}
                 variant="link"
@@ -423,19 +450,13 @@ const Navbar = () => {
               </>
             )}
           </Box>
-          <DrawerBody
-          // display={"flex"}
-          // flexDirection={"column"}
-          // justifyContent={"space-around"}
-          // mb={"-20px"}
-          >
+          <DrawerBody>
             <Box>
               {links.map(({ id, name, href }) => (
                 <Box
                   paddingX={"10px"}
                   borderRadius={5}
                   paddingY={"2px"}
-                  //   _hover={{ background: "blue" ,}}
                   transition={"all"}
                   my={1}
                   key={id}
@@ -472,7 +493,7 @@ const Navbar = () => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-      <Modal onClose={onModalClose} size={"full"} isOpen={modalOpen}>
+      {/* <Modal onClose={onModalClose} size={"full"} isOpen={modalOpen}>
         <ModalOverlay />
         <ModalContent pt={20}>
           <ModalHeader>
@@ -499,7 +520,7 @@ const Navbar = () => {
             <Text>Popular Right now</Text>
           </ModalBody>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </Stack>
   );
 };

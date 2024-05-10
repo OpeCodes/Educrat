@@ -11,11 +11,12 @@ import {
   Flex,
   Image,
   Button,
+  useToast
 } from "@chakra-ui/react";
 import { IoCartOutline } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { RootState } from "../store/store";
 import { removeCourseFromCart, setToggleCheckout } from "../features/cart/CartSlice";
 import { useDispatch } from "react-redux";
@@ -24,7 +25,10 @@ import { addUserCheckoutValue } from "../store/localStorage";
 
 const AddToCartButton = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
+  const { user } = useSelector((store: RootState) => store?.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
+ const toast = useToast();
   let totalPrice =   courses?.reduce((acc: any, course: any) => acc + course?.price, 0)
 
   const handleRemoveFromCart = (courseId: any) => {
@@ -33,6 +37,17 @@ const AddToCartButton = () => {
   const { createOrder } = useCreateOrder();
   const idStrings = courses?.map((obj: any) => obj?.id);
   const handleCheckout = () => {
+
+    if(!user) {
+      toast({
+        title: `Sign In to Proceed to checkout`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+    else{
     dispatch(setToggleCheckout(true))
     addUserCheckoutValue(true)
     createOrder({
@@ -41,6 +56,8 @@ const AddToCartButton = () => {
         courses: idStrings,
       },
     });
+    navigate("/payment/checkout")
+  }
   };
   return (
     <>
@@ -155,8 +172,6 @@ const AddToCartButton = () => {
                     color={"white"}
                     fontWeight={400}
                     width={"100%"}
-                    as={Link}
-                    to={"/payment/checkout"}
                     onClick={handleCheckout}
                   >
                     Checkout
