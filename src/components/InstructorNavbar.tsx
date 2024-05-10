@@ -3,7 +3,6 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import { useGetUser } from "../hooks";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
@@ -31,11 +30,10 @@ import { RootState } from "../store/store";
 //   },
 // ];
 const InstructorNavbar = () => {
-  const { data } = useGetUser();
   // const { isOpen, onOpen, onClose } = useDisclosure();
   // const btnRef: any = React.useRef();
   const { user} = useSelector((store: RootState) => store.user);
-
+// console.log(data?.profilePicture,"data?.profilePicture")
   return (
     <>
       <Flex
@@ -63,13 +61,12 @@ const InstructorNavbar = () => {
             <IoMdNotificationsOutline fontSize={20} />
           </Box> */}
           <Avatar
-            // name={`${data?.firstName} ${data?.lastName}`}
             name={`${user.user.firstName} ${user.user.lastName}`}
             size="sm"
             fontWeight="bold"
             bg="white"
             color="#140342"
-            src={data?.profilePicture}
+            src={user.user?.profilePicture}
             cursor="pointer"
           />
         </Flex>
