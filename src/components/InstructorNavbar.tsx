@@ -1,67 +1,52 @@
 import {
   Avatar,
   Flex,
-  Box,
   Text,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
-  Divider,
 } from "@chakra-ui/react";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { MdMenu } from "react-icons/md";
 import { useGetUser } from "../hooks";
-import React from "react";
-import { MdPayment, MdOutlineNotificationsNone } from "react-icons/md";
-import { IoSettingsOutline } from "react-icons/io5";
-import { NavItem } from "./NavItem";
-import { FaYoutube } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
-const links = [
-  {
-    name: "courses",
-    href: "courses",
-    icon: FaYoutube,
-  },
-  {
-    name: "Payment",
-    href: "/payment",
-    icon: MdPayment,
-  },
-  {
-    name: "Notification",
-    href: "/notification",
-    icon: MdOutlineNotificationsNone,
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    icon: IoSettingsOutline,
-  },
-];
+// const links = [
+//   {
+//     name: "courses",
+//     href: "courses",
+//     icon: FaYoutube,
+//   },
+//   {
+//     name: "Payment",
+//     href: "/payment",
+//     icon: MdPayment,
+//   },
+//   {
+//     name: "Notification",
+//     href: "/notification",
+//     icon: MdOutlineNotificationsNone,
+//   },
+//   {
+//     name: "Settings",
+//     href: "/settings",
+//     icon: IoSettingsOutline,
+//   },
+// ];
 const InstructorNavbar = () => {
   const { data } = useGetUser();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef: any = React.useRef();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  // const btnRef: any = React.useRef();
   const { user} = useSelector((store: RootState) => store.user);
 
   return (
     <>
       <Flex
         align={"center"}
-        justify={{ base: "space-between", md: "flex-end" }}
+        // justify={{ base: "space-between", md: "flex-end" }}
         m={4}
         pr={3}
         w={"100%"}
+        justify={"end"}
       >
-        <Box
+        {/* <Box
           cursor={"pointer"}
           as="button"
           display={{ base: "flex", md: "none" }}
@@ -69,14 +54,14 @@ const InstructorNavbar = () => {
           onClick={onOpen}
         >
           <MdMenu fontSize={35} />
-        </Box>
+        </Box> */}
         <Flex align={"center"} columnGap={4}>
           <Text as={Link} to="/" fontWeight={"500"}>
             Student
           </Text>
-          <Box cursor={"pointer"}>
+          {/* <Box cursor={"pointer"}>
             <IoMdNotificationsOutline fontSize={20} />
-          </Box>
+          </Box> */}
           <Avatar
             // name={`${data?.firstName} ${data?.lastName}`}
             name={`${user.user.firstName} ${user.user.lastName}`}
@@ -88,7 +73,7 @@ const InstructorNavbar = () => {
             cursor="pointer"
           />
         </Flex>
-        <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+        {/* <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton />
@@ -126,7 +111,7 @@ const InstructorNavbar = () => {
               </Box>
             </DrawerBody>
           </DrawerContent>
-        </Drawer>
+        </Drawer> */}
       </Flex>
     </>
   );
