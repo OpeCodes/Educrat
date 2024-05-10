@@ -11,10 +11,11 @@ import {
   Image,
   Text,
   Button,
+  useToast
 } from "@chakra-ui/react";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import {  useNavigate} from "react-router-dom";
 import { RootState } from "../store/store";
 import {
   removeCourseFromCart,
@@ -26,7 +27,10 @@ import { addUserCheckoutValue } from "../store/localStorage";
 
 const Cart = () => {
   const { courses } = useSelector((store: RootState) => store?.cart);
+  const { user } = useSelector((store: RootState) => store?.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const toast= useToast();
   let totalPrice = courses?.reduce(
     (acc: any, course: any) => acc + course?.price,
     0
@@ -37,6 +41,17 @@ const Cart = () => {
   const { createOrder } = useCreateOrder();
   const idStrings = courses?.map((obj: any) => obj?.id);
   const handleCheckout = () => {
+    if(!user){
+      toast({
+        title: "Sign In to proceed to checkout",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+    else{
+
     createOrder({
       body: {
         totalAmount: totalPrice,
@@ -45,7 +60,11 @@ const Cart = () => {
     });
     dispatch(setToggleCheckout(true));
     addUserCheckoutValue(true);
+  }
+  navigate("/payment/checkout")
+
   };
+
   return (
     <Stack maxW={"85%"} w={"100%"} mx={"auto"}>
       <TableContainer mt={"9rem"}>
@@ -118,9 +137,7 @@ const Cart = () => {
             fontWeight={400}
             color={"white"}
             width={"100%"}
-            onClick={handleCheckout}
-            as={Link}
-            to={"/payment/checkout"}
+            onClick={handleCheckout}          
           >
             Proceed to Checkout
           </Button>

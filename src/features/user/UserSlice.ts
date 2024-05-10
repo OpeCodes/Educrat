@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   getUserLocalStorage,
   removeUserFromLocalStorage,
-  removeCourseItemToLocalStorage,
   removeUserSingleCartItem,
   removeUserCheckoutValue
 } from "../../store/localStorage";
@@ -35,7 +34,6 @@ const userSlice = createSlice({
     logoutUser: (state: UserState) => {
       state.user = null;
       removeUserFromLocalStorage();
-      removeCourseItemToLocalStorage()
       removeUserSingleCartItem()
       removeUserCheckoutValue()
     },

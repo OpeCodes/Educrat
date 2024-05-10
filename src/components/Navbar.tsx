@@ -287,6 +287,7 @@ const Navbar = () => {
             </Box>
           ) : (
             <>
+            <Text color={"black"}>Teach on Educrat</Text>
               <Button
                 color={"#6440fb"}
                 variant="link"
