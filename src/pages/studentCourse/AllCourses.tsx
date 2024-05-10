@@ -31,7 +31,7 @@ const StudentCourse = () => {
   const { data } = useGetCourse();
 
   return (
-    <Stack>
+    <Stack pt={"4.3rem"}>
       <Box padding={{ base: 5, lg: 20 }}>
         <Text fontSize={"40px"} fontWeight={"bold"}>
           User Inferface Course
@@ -63,9 +63,7 @@ const StudentCourse = () => {
                 </h2>
                 <AccordionPanel pb={4}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
@@ -97,6 +95,7 @@ const StudentCourse = () => {
                   slug,
                   modules,
                   reviews,
+                  price
                 }: CourseInterface) => (
                   <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                     <Stack>
@@ -169,7 +168,7 @@ const StudentCourse = () => {
                           </Text>
                         </Flex>
                         <Text fontWeight={"500"} fontSize={"20px"}>
-                          $99
+                          N{price}
                         </Text>
                       </Flex>
                     </Stack>
