@@ -11,15 +11,16 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
   TableContainer,
+  Button,
 } from "@chakra-ui/react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
 
 const Withdrawal = () => {
+  const dummy = [1, 2, 3, 4, 5, 6];
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -35,12 +36,9 @@ const Withdrawal = () => {
             <Text>Available Balance</Text>
             <Text>N100</Text>
           </Stack>
-          <Stack fontSize={15} fontWeight={"600"}>
-            <Text>Withdraw</Text>
-            <Text>N100</Text>
-          </Stack>
+         
         </Flex>
-        <Stack my={"1rem"}>
+        <Stack mt={"1rem"}>
           <Text fontSize={18} fontWeight={"bold"}>
             Recent Transactions
           </Text>
@@ -76,39 +74,59 @@ const Withdrawal = () => {
                     <Table size="sm" variant={"simple"}>
                       <Thead>
                         <Tr>
-                          <Th>Date</Th>
-                          <Th>Name</Th>
-                          <Th isNumeric >Amount</Th>
+                          <Th color={"black"}>Date</Th>
+                          <Th color={"black"}>Amount</Th>
+                          <Th color={"black"}>Status</Th>
                         </Tr>
                       </Thead>
                       <Tbody>
-                        <Tr>
-                          <Td>inches</Td>
-                          <Td>millimetres (mm)</Td>
-                          <Td isNumeric>25.4</Td>
-                        </Tr>
-                        <Tr>
-                          <Td>feet</Td>
-                          <Td>centimetres (cm)</Td>
-                          <Td isNumeric>30.48</Td>
-                        </Tr>
-                        <Tr>
-                          <Td>yards</Td>
-                          <Td>metres (m)</Td>
-                          <Td isNumeric>0.91444</Td>
-                        </Tr>
-                      </Tbody>                     
+                        {dummy.map(() => {
+                          return (
+                            <Tr>
+                              <Td>inches</Td>
+                              <Td>millimetres (mm)</Td>
+                              <Td>Sucessful</Td>
+                            </Tr>
+                          );
+                        })}
+                      </Tbody>
                     </Table>
                   </TableContainer>
                 </TabPanel>
                 <TabPanel>
-                  <p>two!</p>
+                  <TableContainer>
+                    <Table size="sm" variant={"simple"}>
+                      <Thead>
+                        <Tr>
+                          <Th color={"black"}>Date</Th>
+                          <Th color={"black"}>Amount</Th>
+                          <Th color={"black"}>Status</Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        {dummy.map(() => {
+                          return (
+                            <Tr>
+                              <Td>inches</Td>
+                              <Td>millimetres (mm)</Td>
+                              <Td>Sucessful</Td>
+                            </Tr>
+                          );
+                        })}
+                      </Tbody>
+                    </Table>
+                  </TableContainer>
                 </TabPanel>
               </TabPanels>
             </Tabs>
           </Stack>
         </Stack>
       </Stack>
+      <Flex justify={"flex-end"} p={3}>
+        <Button bg={"black"} color={"white"} mt={3} borderWidth={2} py={3}>
+          Widthdraw
+        </Button>
+      </Flex>
     </Stack>
   );
 };
