@@ -17,7 +17,8 @@ import { Link } from "react-router-dom";
 export const Instructors = () => {
   const { data, isPending } = useGetAllEducratInstructors();
   const dummyArray = [1, 2, 3, 4];
-  const arrayOfIds = data?.map((obj: any) => obj?.id);
+  // const arrayOfIds = data?.map((obj: any) => obj?.id);
+  const arrayOfIds = Array.isArray(data) ? data.map((obj: any) => obj?.id) : [];
   return (
     <Box
       as={"section"}
@@ -93,7 +94,8 @@ export const Instructors = () => {
           mt={"1.5rem"}
         >
           {data &&
-            data?.slice(0,4)?.map((instructor: any, index: any) => {
+            Array.isArray(data) &&
+            data?.slice(0, 4)?.map((instructor: any, index: any) => {
               return (
                 <Instructor
                   key={instructor.id}

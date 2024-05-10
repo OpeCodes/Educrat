@@ -39,21 +39,21 @@ const links = [
     name: "Course",
     href: "/all-courses",
   },
-  {
-    id: 3,
-    name: "Events",
-    href: "/events",
-  },
-  {
-    id: 4,
-    name: "Page",
-    href: "/page",
-  },
-  {
-    id: 5,
-    name: "Contact",
-    href: "/contact",
-  },
+  // {
+  //   id: 3,
+  //   name: "Events",
+  //   href: "/",
+  // },
+  // {
+  //   id: 4,
+  //   name: "Page",
+  //   // href: "/",
+  // },
+  // {
+  //   id: 5,
+  //   name: "Contact",
+  //   // href: "",
+  // },
 ];
 
 const Navbar = () => {
