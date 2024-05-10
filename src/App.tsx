@@ -27,6 +27,7 @@ import {
   CourseMessage,
   CourseSettings,
   Pricing,
+  Withdrawal,
 } from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 import SingleInstructorPage from "./pages/studentCourse/SingleInstructorPage";
@@ -154,6 +155,10 @@ const router = createBrowserRouter([
       {
         path: "settings",
         element: <CourseSettings />,
+      },
+      {
+        path: "withdrawal",
+        element: <Withdrawal />,
       },
     ],
   },

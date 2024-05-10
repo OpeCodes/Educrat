@@ -28,9 +28,7 @@ const Courses = () => {
       search: "",
       sortBy: "newest",
     },
-    onSubmit: (values: any) => {
-      console.log("Submitted:", values);
-      
+    onSubmit: () => {      
     },
   });
   const filteredItems = data
@@ -38,7 +36,6 @@ const Courses = () => {
         item.title.toLowerCase().includes(formik.values.search.toLowerCase())
       )
     : [];
-
   const sortedItems = React.useMemo(() => {
     if (!data) return [];
     return filteredItems.sort((a: any, b: any) => {

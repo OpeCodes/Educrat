@@ -13,14 +13,13 @@ const CourseManageSidebar = () => {
   const links = [
     {
       id: 1,
-      name: "Curriculum",
-      href: `/instructor/courses/${getSingleCourse?.id}/manage/curriculum`,
-    },
-
-    {
-      id: 2,
       name: "Course Landing Page",
       href: `/instructor/courses/${getSingleCourse?.id}/manage/basics`,
+    },
+    {
+      id: 2,
+      name: "Curriculum",
+      href: `/instructor/courses/${getSingleCourse?.id}/manage/curriculum`,
     },
     {
       id: 3,
@@ -34,6 +33,12 @@ const CourseManageSidebar = () => {
     },
     {
       id: 5,
+      name: "Withdrawal",
+      href: `/instructor/courses/${getSingleCourse?.id}/manage/withdrawal`,
+    },
+    // withdrawal
+    {
+      id: 6,
       name: "Settings",
       href: `/instructor/courses/${getSingleCourse?.id}/manage/settings`,
     },

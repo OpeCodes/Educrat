@@ -54,7 +54,8 @@ const CourseListComponent = ({ title, thumbnail,id }: any) => {
             src={thumbnail || `${dummyImg}`}
             alt="course image here"
             w="120px"
-            h="full"
+            maxH={"125px"}
+            h={"100%"}
             objectFit={"cover"}
           />
           <Flex
