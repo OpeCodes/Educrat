@@ -16,7 +16,7 @@ const AllInstructorPage = () => {
   const dummyArray = [1, 2, 3, 4];
   const arrayOfIds = data?.map((obj: any) => obj?.id);
   return (
-    <Stack mt={"4.3rem"}>
+    <Stack pt={"4.3rem"}>
       <Stack bg={"#f5f7fe"} py={3}>
         <Flex
           w={"100%"}
@@ -34,7 +34,12 @@ const AllInstructorPage = () => {
             <Text>&#x2022;</Text>
             <Text>All Courses</Text>
           </Flex>
-          <Flex columnGap={1} as={Link} to="/all-courses">
+          <Flex
+            columnGap={1}
+            as={Link}
+            to="/all-courses"
+            display={{ base: "none", md: "flex" }}
+          >
             <Text>&#x2022;</Text>
             <Text>User Experience Design</Text>
           </Flex>
@@ -78,7 +83,6 @@ const AllInstructorPage = () => {
 
       <Grid
         mt={"1rem"}
-        // templateColumns="repeat(4, 1fr)"
         templateColumns={{
           base: "repeat(1, 1fr)",
           md: "repeat(2, 1fr)",
