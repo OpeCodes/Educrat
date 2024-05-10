@@ -33,12 +33,10 @@ const InstructorNavbar = () => {
   // const { isOpen, onOpen, onClose } = useDisclosure();
   // const btnRef: any = React.useRef();
   const { user} = useSelector((store: RootState) => store.user);
-// console.log(data?.profilePicture,"data?.profilePicture")
   return (
     <>
       <Flex
         align={"center"}
-        // justify={{ base: "space-between", md: "flex-end" }}
         m={4}
         pr={3}
         w={"100%"}

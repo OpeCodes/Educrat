@@ -183,7 +183,7 @@ const Navbar = () => {
               as={Link}
               to="/instructor/courses"
               color={"black"}
-
+              display={{base: "none", md: "flex"}}
             >
               Instructor Dashboard
             </Text>
