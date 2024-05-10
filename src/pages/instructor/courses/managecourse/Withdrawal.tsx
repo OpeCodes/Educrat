@@ -8,6 +8,14 @@ import {
   Tabs,
   Tab,
   Text,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
 } from "@chakra-ui/react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
 
@@ -64,7 +72,34 @@ const Withdrawal = () => {
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <p>one1!</p>
+                  <TableContainer>
+                    <Table size="sm" variant={"simple"}>
+                      <Thead>
+                        <Tr>
+                          <Th>Date</Th>
+                          <Th>Name</Th>
+                          <Th isNumeric >Amount</Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        <Tr>
+                          <Td>inches</Td>
+                          <Td>millimetres (mm)</Td>
+                          <Td isNumeric>25.4</Td>
+                        </Tr>
+                        <Tr>
+                          <Td>feet</Td>
+                          <Td>centimetres (cm)</Td>
+                          <Td isNumeric>30.48</Td>
+                        </Tr>
+                        <Tr>
+                          <Td>yards</Td>
+                          <Td>metres (m)</Td>
+                          <Td isNumeric>0.91444</Td>
+                        </Tr>
+                      </Tbody>                     
+                    </Table>
+                  </TableContainer>
                 </TabPanel>
                 <TabPanel>
                   <p>two!</p>
