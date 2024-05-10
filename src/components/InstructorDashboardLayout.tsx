@@ -12,10 +12,13 @@ const InstructorDashboard: React.FC = () => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
   const [isSmallerScreen] = useMediaQuery("(max-width: 100px)");
   const { user } = useSelector((store: RootState) => store?.user);
+  const hasInstructorRole = user?.user?.roles.some(
+    (role: any) => role?.name === "instructor"
+  );
   const toggleSidebar = () => {
     setSidebarExpanded(!isSidebarExpanded);
   };
-  return !user ? (
+  return !hasInstructorRole ? (
     <Navigate to={"/"} />
   ) : (
     <Flex direction="row" h="100vh">

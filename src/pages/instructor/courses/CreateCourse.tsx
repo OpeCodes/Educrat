@@ -22,6 +22,10 @@ const initialValues = {
 };
 const CreateCourse = () => {
   const { user } = useSelector((store: RootState) => store?.user);
+ 
+  const hasInstructorRole = user?.user?.roles.some(
+    (role: any) => role?.name === "instructor"
+  );
   const { createCourse, isPending: loading } = useCreateCourse();
   const handleSubmit = (values: any): void => {
     createCourse(values);
@@ -30,7 +34,7 @@ const CreateCourse = () => {
   if (isPending) {
     return <Loading />;
   }
-  return !user ? (
+  return !hasInstructorRole ? (
     <Navigate to="/" />
   ) : (
     <Stack>

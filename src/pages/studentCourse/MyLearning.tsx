@@ -72,8 +72,6 @@ const MyLearning = () => {
         0
       )
   );
-
-
   const totalDurationsForEachCourse =
     getTotalLecturesDurationForEachCourse(getStudentWishList);
   const getFirstLectureIds = (enrolledCourses: any[]) => {

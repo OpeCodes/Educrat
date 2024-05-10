@@ -6,8 +6,11 @@ import { RootState } from "../store/store";
 
 const CourseManageDashboardLayout = () => {
   const { user } = useSelector((store: RootState) => store?.user);
-  return !user ? (
-    <Navigate to={"/sign-in"} />
+  const hasInstructorRole = user?.user?.roles.some(
+    (role: any) => role?.name === "instructor"
+  );
+  return !hasInstructorRole ? (
+    <Navigate to={"/"} />
   ) : (
     <>
       <CourseManageNavbar />

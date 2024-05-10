@@ -29,7 +29,13 @@ import {
 import logo from "../../assets/logo-3.svg";
 import { IoIosArrowDown, IoIosShareAlt } from "react-icons/io";
 
-import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
+import {
+  Link,
+  useParams,
+  useNavigate,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { RiPlayCircleFill } from "react-icons/ri";
 import { FaFolderOpen } from "react-icons/fa6";
 
@@ -57,7 +63,8 @@ import { VscLinkExternal } from "react-icons/vsc";
 import VideoDownloadButton from "../../components/VideoDownloadButton";
 import { Loading } from "../../components";
 import ModalShare from "../../components/CourseShareModal";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 const initialValues = {
   stars: 0,
   title: "",
@@ -65,6 +72,11 @@ const initialValues = {
 };
 
 const SingleEnrolledCourse = () => {
+  const { user } = useSelector((store: RootState) => store?.user);
+
+  const hasStudentRole = user?.user?.roles.some(
+    (role: any) => role?.name === "student"
+  );
   const { id, lectureId } = useParams();
   const navigate = useNavigate();
 
@@ -179,11 +191,14 @@ const SingleEnrolledCourse = () => {
 
   const url = getCourseUrlFromCurrentUrl();
 
-    const { pathname } = useLocation();
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [pathname]);
-  return (
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return !hasStudentRole ? (
+    <Navigate to="/" />
+  ) : (
     <Stack>
       <Flex
         justify="space-between"
