@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Box, Text, Stack, Flex } from "@chakra-ui/react";
+import { Input, Box, Text, Stack, Flex, Button } from "@chakra-ui/react";
 import { useGetAllBanks, useValidateAccountInfo } from "../hooks/instructor";
 
 interface Bank {
@@ -13,7 +13,7 @@ const BankSearch: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [accountNumber, setAccountNumber] = useState<any>("");
   const [accountDetails, setAccountDetails] = useState<any>(null);
-  const [account_number, setAccount_number] = useState<string>("");
+  const [amount, setAmount] = useState<string>("");
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
     setIsDropdownOpen(true);
@@ -31,7 +31,15 @@ const BankSearch: React.FC = () => {
     accountDetails?.code,
     accountNumber
   );
-  console.log(validateAccountInfo, "validateAccountInfo");
+  const AcountWithdrawDetails = {
+    amount,
+    account_number: validateAccountInfo?.account_number,
+    account_name: validateAccountInfo?.account_name,
+    bank_code: validateAccountInfo?.bank_id,
+    token: "token here",
+  };
+  console.log(AcountWithdrawDetails);
+
   return (
     <Stack rowGap={1}>
       <Stack>
@@ -103,27 +111,39 @@ const BankSearch: React.FC = () => {
               </Stack>
             </Flex>
             {isSuccess && (
-              <Flex
-                width={"100%"}
-                columnGap={5}
-                mt={4}
-                flexDirection={{ base: "column", md: "row" }}
-              >
-                <Stack width={"100%"}>
-                  <Text>Account Name</Text>
-                  <Text>{validateAccountInfo?.account_name}</Text>
-                </Stack>
-                <Stack width={"100%"}>
-                  <Text>Amount</Text>
-                  <Input
-                    placeholder="Enter Amount"
-                    variant="filled"
-                    width={"100%"}
-                    value={account_number}
-                    onChange={(e) => setAccount_number(e.target.value)}
-                  />
-                </Stack>
-              </Flex>
+              <>
+                <Flex
+                  width={"100%"}
+                  columnGap={5}
+                  mt={4}
+                  flexDirection={{ base: "column", md: "row" }}
+                >
+                  <Stack width={"100%"}>
+                    <Text>Account Name</Text>
+                    <Text>{validateAccountInfo?.account_name}</Text>
+                  </Stack>
+                  <Stack width={"100%"}>
+                    <Text>Amount111</Text>
+                    <Input
+                      placeholder="Enter Amount"
+                      variant="filled"
+                      width={"100%"}
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                    />
+                  </Stack>
+                </Flex>
+                <Button
+                  bg={"black"}
+                  mr={3}
+                  mt={4}
+                  color={"white"}
+                  width={"fit-content"}
+                  spinnerPlacement="end"
+                >
+                  Withdraw Money
+                </Button>
+              </>
             )}
           </>
         )}
