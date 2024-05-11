@@ -31,3 +31,16 @@ export const useGetAllBanks = (search: string) => {
   });
   return { getAllBanks };
 }
+
+
+
+export const useValidateAccountInfo = (bankCode: string, accountNumber: string) => {
+  const { data: validateAccountInfo } = useQuery({
+    queryKey: ["validateAccountInfo", { bankCode, accountNumber }],
+    queryFn: async () => {
+      const { data } = await customFetch.get("/payment/withdrawal/resolve-account", { params: { bank_code: bankCode, account_number: accountNumber } });
+      return data;
+    },
+  });
+  return { validateAccountInfo };
+};
