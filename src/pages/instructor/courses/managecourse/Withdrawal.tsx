@@ -27,18 +27,21 @@ import {
   FormControl,
   Input,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
+import {  useNavigate } from "react-router-dom";
 
 const Withdrawal = () => {
   const dummy = [1, 2, 3, 4, 5, 6];
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [password, setPassword] = useState("");
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
-        Widthdrawal
+        Withdrawal
       </Text>
       <Divider />
       <Stack px={5}>
@@ -165,11 +168,24 @@ const Withdrawal = () => {
           </ModalHeader>
           <ModalBody pb={6}>
             <FormControl>
-              <Input ref={initialRef} placeholder="Password" />
+              <Input
+                ref={initialRef}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button bg={"black"} color={"white"} mr={3}>
+            <Button
+              bg={"black"}
+              color={"white"}
+              mr={3}
+              onClick={() => {
+                if (!password) return;
+                console.log(password, "password");
+              }}
+            >
               OK
             </Button>
             <Button onClick={onClose}>Cancel</Button>
