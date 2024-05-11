@@ -51,7 +51,7 @@ const Withdrawal = () => {
         <Flex columnGap={4}>
           <Stack fontSize={15} fontWeight={"600"}>
             <Text>Available Balance</Text>
-            <Text>N100</Text>
+            <Text fontWeight={"bold"}>N100</Text>
           </Stack>
         </Flex>
         <Stack mt={"1rem"}>
