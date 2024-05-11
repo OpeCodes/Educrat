@@ -142,8 +142,6 @@ const Pricing = () => {
                 fontSize={14}
                 as={"button"}
                 mt={3}
-                // py={6}
-                // px={6}
                 variant="outline"
                 spinnerPlacement="end"
                 isLoading={isLoading}

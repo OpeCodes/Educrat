@@ -29,7 +29,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
-import {  useNavigate } from "react-router-dom";
+import { useVerifyUserPassword } from "../../../../hooks/withdrawal";
 
 const Withdrawal = () => {
   const dummy = [1, 2, 3, 4, 5, 6];
@@ -37,7 +37,7 @@ const Withdrawal = () => {
   const [password, setPassword] = useState("");
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-
+  const { verifyUserPassword,verifyUserPasswordLoading } = useVerifyUserPassword();
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -181,9 +181,11 @@ const Withdrawal = () => {
               bg={"black"}
               color={"white"}
               mr={3}
+              spinnerPlacement="end"
+              isLoading={verifyUserPasswordLoading}
               onClick={() => {
                 if (!password) return;
-                console.log(password, "password");
+                verifyUserPassword({ password });
               }}
             >
               OK

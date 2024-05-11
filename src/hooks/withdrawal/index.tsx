@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
 
-export const useCreateModuleLectureCourse = () => {
+export const useVerifyUserPassword = () => {
     const toast = useToast();
     // const queryClient = useQueryClient();
    const navigate = useNavigate();
