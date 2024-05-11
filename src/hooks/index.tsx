@@ -109,4 +109,3 @@ export const useBecomeInstructor = () => {
   return { becomeInstructor, isPending, tabIndex, handleTabChange };
 };
 
-//invalidate the course in the usesinglecourse

@@ -21,9 +21,9 @@ import ToastLoading from "./ToastLoading";
 import CoursePromotionalVideoUpload from "./CoursePromotionalVideoUpload";
 import PromotionalVideoPlayModal from "./PromotionalVideoPlayModal";
 import PreviewContentModal from "./PreviewContentModal";
-
 import GetToastErrorHandling from "./GetToastErrorHandling";
 import AddToCartButton from "./AddToCartButton";
+import BankSearch from "./BankSearch";
 export {
   HomeLayout,
   Navbar,
@@ -49,5 +49,6 @@ export {
   PromotionalVideoPlayModal,
   PreviewContentModal,
   GetToastErrorHandling,
-  AddToCartButton,
+  AddToCartButton,  
+  BankSearch
 };

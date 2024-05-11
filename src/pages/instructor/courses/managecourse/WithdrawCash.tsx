@@ -1,4 +1,5 @@
-import { Divider, Stack, Text } from "@chakra-ui/react"
+import { Divider, Stack, Text } from "@chakra-ui/react";
+import { BankSearch } from "../../../../components";
 
 const WithdrawCash = () => {
   return (
@@ -7,8 +8,9 @@ const WithdrawCash = () => {
         Withdraw E-Cash
       </Text>
       <Divider />
-      </Stack>
-  )
-}
+      <BankSearch />
+    </Stack>
+  );
+};
 
-export default WithdrawCash
+export default WithdrawCash;

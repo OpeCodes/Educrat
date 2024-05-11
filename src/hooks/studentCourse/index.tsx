@@ -657,3 +657,6 @@ export const useDeleteCourseWishList = () => {
   });
   return { deleteCourseWishList, deleteCourseWishListLoading };
 };
+
+
+

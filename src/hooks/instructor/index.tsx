@@ -20,3 +20,14 @@ export const useGetAllInstructorCourses = (id: any) => {
       isSuccess,
     };
   };
+  export const useGetAllBanks = () => {
+    const {data: getAllBanks } = useQuery({
+      queryKey: ["getAllBanks"],
+      queryFn: async () => {
+        const { data } = await customFetch.get("/payment/withdrawal/bank");
+        return data;
+      },
+    });
+   
+    return { getAllBanks, };
+  };
