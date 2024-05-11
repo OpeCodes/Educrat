@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Input,  Box, Text, Stack } from "@chakra-ui/react";
-import { useGetAllBanks } from "../hooks/instructor";
+import { Input, Box, Text, Stack, Flex, Button } from "@chakra-ui/react";
+import { useGetAllBanks, useValidateAccountInfo } from "../hooks/instructor";
 
 interface Bank {
   id: number;
@@ -11,6 +11,11 @@ const BankSearch: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedBank, setSelectedBank] = useState<string>("");
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [accountNumber, setAccountNumber] = useState<any>("");
+  const [accountBalance, setAccountBalance] = useState<string>("");
+  const [accountDetails, setAccountDetails] = useState<any>(null);
+  const [selectedAccountNumber, SetSelectedAccountNumber] = useState<any>();
+  const [verifiedAccountName, setVerifiedAccountName] = useState<any>(null);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -21,20 +26,29 @@ const BankSearch: React.FC = () => {
     setSelectedBank(bankDetails.name);
     setSearchQuery(bankDetails.name);
     setIsDropdownOpen(false);
-    console.log(bankDetails);
   };
 
-  const { getAllBanks } = useGetAllBanks(searchQuery); // Pass searchQuery to the hook
+  const { getAllBanks } = useGetAllBanks(searchQuery);
+  const handleValidateAccount = () => {
+    SetSelectedAccountNumber(accountNumber);
 
+    setVerifiedAccountName(validateAccountInfo);
+  };
+
+  const { validateAccountInfo, isSuccess } = useValidateAccountInfo(
+    accountDetails?.code,
+    accountNumber
+  );
+  console.log(validateAccountInfo, "validateAccountInfo");
   return (
-    <Stack spacing={4}>
+    <Stack rowGap={1}>
       <Stack>
         <Input
           placeholder="Search bank names"
           value={searchQuery}
           onChange={handleSearchChange}
           variant="filled"
-          w={{ md: "30%" }}
+          w={{ md: "35%" }}
         />
       </Stack>
       <Stack width={{ md: "30%" }} maxH={"200px"} overflowY={"scroll"}>
@@ -50,7 +64,10 @@ const BankSearch: React.FC = () => {
                     key={bank.id}
                     cursor="pointer"
                     _hover={{ bg: "gray.200" }}
-                    onClick={() => handleOptionClick(bank)}
+                    onClick={() => {
+                      setAccountDetails(bank);
+                      handleOptionClick(bank);
+                    }}
                   >
                     {bank.name}
                   </Text>
@@ -58,11 +75,62 @@ const BankSearch: React.FC = () => {
           </Box>
         )}
       </Stack>
-      {selectedBank && (
-        <Text mt={2}>
-          Selected Bank: <strong>{selectedBank}</strong>
-        </Text>
-      )}
+      <>
+        {selectedBank && (
+          <>
+            <Text mt={1}>
+              Selected Bank: <strong>{selectedBank}</strong>
+            </Text>
+            <Flex
+              width={"100%"}
+              columnGap={5}
+              mt={4}
+              flexDirection={{ base: "column", md: "row" }}
+            >
+              <Stack width={"100%"}>
+                <Text>Enter Account Number</Text>
+                <Input
+                  placeholder="Enter 10 digits account number"
+                  value={accountNumber}
+                  onChange={(e) => setAccountNumber(e.target.value)}
+                  variant="filled"
+                  width={"100%"}
+                  as={"input"}
+                  type="number"
+                  color={"black"}
+                />
+              </Stack>
+              <Stack width={"100%"}>
+                <Text>Available Balance</Text>
+                <Input
+                  placeholder="N0"
+                  value={"N10"}
+                  variant="filled"
+                  width={"100%"}
+                />
+              </Stack>
+            </Flex>
+            {isSuccess && (
+              <Flex
+                width={"100%"}
+                columnGap={5}
+                mt={4}
+                flexDirection={{ base: "column", md: "row" }}
+              >
+                <Stack width={"100%"}>
+                  <Text>Account Name</Text>
+                  <Text>{validateAccountInfo?.account_name}</Text>
+                </Stack>
+                <Stack width={"100%"}>
+                  <Text>Amount</Text>
+                  <Input placeholder="N0" variant="filled" width={"100%"} />
+                </Stack>
+              </Flex>
+            )}
+          </>
+        )}
+      </>
+      <Stack></Stack>
     </Stack>
   );
 };

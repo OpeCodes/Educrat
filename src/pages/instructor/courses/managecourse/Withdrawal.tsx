@@ -30,6 +30,7 @@ import {
 import { useRef, useState } from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
 import { useVerifyUserPassword } from "../../../../hooks/withdrawal";
+import { useNavigate } from "react-router-dom";
 
 const Withdrawal = () => {
   const dummy = [1, 2, 3, 4, 5, 6];
@@ -37,6 +38,7 @@ const Withdrawal = () => {
   const [password, setPassword] = useState("");
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+  const navigate = useNavigate()
   const { verifyUserPassword,verifyUserPasswordLoading } = useVerifyUserPassword();
   return (
     <Stack>
@@ -186,6 +188,9 @@ const Withdrawal = () => {
               onClick={() => {
                 if (!password) return;
                 verifyUserPassword({ password });
+                navigate(
+                  "/instructor/courses/6636655e83b03fe5556b2667/manage/withdrawal/withdraw-ecash"
+                );
               }}
             >
               OK
