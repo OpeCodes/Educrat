@@ -16,11 +16,25 @@ import {
   Td,
   TableContainer,
   Button,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  Input,
 } from "@chakra-ui/react";
+import { useRef } from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
 
 const Withdrawal = () => {
   const dummy = [1, 2, 3, 4, 5, 6];
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -36,7 +50,6 @@ const Withdrawal = () => {
             <Text>Available Balance</Text>
             <Text>N100</Text>
           </Stack>
-         
         </Flex>
         <Stack mt={"1rem"}>
           <Text fontSize={18} fontWeight={"bold"}>
@@ -123,10 +136,46 @@ const Withdrawal = () => {
         </Stack>
       </Stack>
       <Flex justify={"flex-end"} p={3}>
-        <Button bg={"black"} color={"white"} mt={3} borderWidth={2} py={3}>
+        <Button
+          bg={"black"}
+          color={"white"}
+          mt={3}
+          borderWidth={2}
+          py={3}
+          onClick={onOpen}
+        >
           Widthdraw
         </Button>
       </Flex>
+
+      <Modal
+        // initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        closeOnOverlayClick={false}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex align={"center"}>
+              <Text>Enter your password to continue</Text>
+              <ModalCloseButton mt={2.5} />
+            </Flex>
+          </ModalHeader>
+          <ModalBody pb={6}>
+            <FormControl>
+              <Input ref={initialRef} placeholder="Password" />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button bg={"black"} color={"white"} mr={3}>
+              OK
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Stack>
   );
 };

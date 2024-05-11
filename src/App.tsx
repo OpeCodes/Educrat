@@ -28,6 +28,7 @@ import {
   CourseSettings,
   Pricing,
   Withdrawal,
+  WithdrawCash,
 } from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 import SingleInstructorPage from "./pages/studentCourse/SingleInstructorPage";
@@ -159,6 +160,10 @@ const router = createBrowserRouter([
       {
         path: "withdrawal",
         element: <Withdrawal />,
+      },
+      {
+        path: "withdrawal/withdraw-ecash",
+        element: <WithdrawCash />,
       },
     ],
   },
