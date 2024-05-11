@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Box, Text, Stack, Flex, Button } from "@chakra-ui/react";
+import { Input, Box, Text, Stack, Flex } from "@chakra-ui/react";
 import { useGetAllBanks, useValidateAccountInfo } from "../hooks/instructor";
 
 interface Bank {
@@ -12,11 +12,8 @@ const BankSearch: React.FC = () => {
   const [selectedBank, setSelectedBank] = useState<string>("");
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [accountNumber, setAccountNumber] = useState<any>("");
-  const [accountBalance, setAccountBalance] = useState<string>("");
   const [accountDetails, setAccountDetails] = useState<any>(null);
-  const [selectedAccountNumber, SetSelectedAccountNumber] = useState<any>();
-  const [verifiedAccountName, setVerifiedAccountName] = useState<any>(null);
-
+  const [account_number, setAccount_number] = useState<string>("");
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
     setIsDropdownOpen(true);
@@ -29,11 +26,6 @@ const BankSearch: React.FC = () => {
   };
 
   const { getAllBanks } = useGetAllBanks(searchQuery);
-  const handleValidateAccount = () => {
-    SetSelectedAccountNumber(accountNumber);
-
-    setVerifiedAccountName(validateAccountInfo);
-  };
 
   const { validateAccountInfo, isSuccess } = useValidateAccountInfo(
     accountDetails?.code,
@@ -123,7 +115,13 @@ const BankSearch: React.FC = () => {
                 </Stack>
                 <Stack width={"100%"}>
                   <Text>Amount</Text>
-                  <Input placeholder="N0" variant="filled" width={"100%"} />
+                  <Input
+                    placeholder="Enter Amount"
+                    variant="filled"
+                    width={"100%"}
+                    value={account_number}
+                    onChange={(e) => setAccount_number(e.target.value)}
+                  />
                 </Stack>
               </Flex>
             )}
