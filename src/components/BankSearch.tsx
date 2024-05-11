@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, VStack, Box, Text } from '@chakra-ui/react';
+import { Input, VStack, Box, Text, Stack } from '@chakra-ui/react';
 
 // Sample array of bank objects
 const bankNames = [
@@ -8,6 +8,30 @@ const bankNames = [
   { id: 3, name: 'Chase Bank' },
   { id: 4, name: 'Citibank' },
   { id: 5, name: 'HSBC' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
+  { id: 6, name: 'TD Bank' },
   { id: 6, name: 'TD Bank' },
   // Add more bank objects as needed
 ];
@@ -34,14 +58,20 @@ const BankSearch: React.FC = () => {
   };
 
   return (
-    <VStack spacing={4}>
+    <Stack spacing={4}>
+      <Stack>
+
       <Input
-        placeholder="Search bank names"
+        placeholder="Search bank names111"
         value={searchQuery}
         onChange={handleSearchChange}
+        variant="filled"
+        w={"30%"}
       />
+      </Stack>
+    <Stack width={"30%"} maxH={"200px"} overflowY={"scroll"}>
       {isDropdownOpen && searchQuery && (
-        <Box borderWidth="1px" borderRadius="md" boxShadow="md" p={2}>
+        <Box  borderRadius="md"  >
           {bankNames
             .filter((bank: Bank) =>
               bank.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -58,12 +88,13 @@ const BankSearch: React.FC = () => {
             ))}
         </Box>
       )}
+      </Stack>
       {selectedBank && (
         <Text mt={2}>
           Selected Bank: <strong>{selectedBank}</strong>
         </Text>
       )}
-    </VStack>
+    </Stack>
   );
 };
 

@@ -8,7 +8,9 @@ const WithdrawCash = () => {
         Withdraw E-Cash
       </Text>
       <Divider />
-      <BankSearch />
+      <Stack p={5}>
+        <BankSearch />
+      </Stack>
     </Stack>
   );
 };
