@@ -1,11 +1,10 @@
 import { useToast } from "@chakra-ui/react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation,  } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
 
 export const useVerifyUserPassword = () => {
     const toast = useToast();
-    // const queryClient = useQueryClient();
    const navigate = useNavigate();
     
     const { mutate: verifyUserPassword, isPending: verifyUserPasswordLoading } =
