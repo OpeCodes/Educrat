@@ -1,6 +1,16 @@
-import React, { useState } from "react";
-import { Input, Box, Text, Stack, Flex, Button } from "@chakra-ui/react";
+import React, { useRef, useState } from "react";
+import { Input, Box, Text, Stack, Flex, Button , useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  } from "@chakra-ui/react";
 import { useGetAllBanks, useValidateAccountInfo } from "../hooks/instructor";
+import { useVerifyUserPassword } from "../hooks/withdrawal";
 
 interface Bank {
   id: number;
@@ -14,6 +24,13 @@ const BankSearch: React.FC = () => {
   const [accountNumber, setAccountNumber] = useState<any>("");
   const [accountDetails, setAccountDetails] = useState<any>(null);
   const [amount, setAmount] = useState<string>("");
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [password, setPassword] = useState("");
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
+  const { verifyUserPassword,verifyUserPasswordLoading } = useVerifyUserPassword();
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
     setIsDropdownOpen(true);
@@ -38,7 +55,6 @@ const BankSearch: React.FC = () => {
     bank_code: validateAccountInfo?.bank_id,
     token: "token here",
   };
-  console.log(AcountWithdrawDetails);
 
   return (
     <Stack rowGap={1}>
@@ -84,6 +100,8 @@ const BankSearch: React.FC = () => {
             <Flex
               width={"100%"}
               columnGap={5}
+              rowGap={2}
+
               mt={4}
               flexDirection={{ base: "column", md: "row" }}
             >
@@ -115,6 +133,7 @@ const BankSearch: React.FC = () => {
                 <Flex
                   width={"100%"}
                   columnGap={5}
+                  rowGap={2}
                   mt={4}
                   flexDirection={{ base: "column", md: "row" }}
                 >
@@ -123,11 +142,12 @@ const BankSearch: React.FC = () => {
                     <Text>{validateAccountInfo?.account_name}</Text>
                   </Stack>
                   <Stack width={"100%"}>
-                    <Text>Amount111</Text>
+                    <Text>Amount</Text>
                     <Input
                       placeholder="Enter Amount"
                       variant="filled"
                       width={"100%"}
+                      type="number"
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                     />
@@ -140,6 +160,10 @@ const BankSearch: React.FC = () => {
                   color={"white"}
                   width={"fit-content"}
                   spinnerPlacement="end"
+                  onClick={() =>{
+                    console.log(AcountWithdrawDetails);
+                   onOpen()
+                  }}
                 >
                   Withdraw Money
                 </Button>
@@ -148,7 +172,50 @@ const BankSearch: React.FC = () => {
           </>
         )}
       </>
-      <Stack></Stack>
+      <Modal
+        // initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        closeOnOverlayClick={false}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex align={"center"}>
+              <Text>Enter your password to Withdraw</Text>
+              <ModalCloseButton mt={2.5} />
+            </Flex>
+          </ModalHeader>
+          <ModalBody pb={6}>
+            <FormControl>
+              <Input
+                ref={initialRef}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              bg={"black"}
+              color={"white"}
+              mr={3}
+              spinnerPlacement="end"
+              isLoading={verifyUserPasswordLoading}
+              onClick={() => {
+                if (!password) return;
+                verifyUserPassword({ password });
+              
+              }}
+            >
+              OK
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Stack>
   );
 };

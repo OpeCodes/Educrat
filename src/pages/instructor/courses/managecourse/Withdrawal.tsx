@@ -16,30 +16,12 @@ import {
   Td,
   TableContainer,
   Button,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  Input,
+
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
-import { useVerifyUserPassword } from "../../../../hooks/withdrawal";
-import { useNavigate } from "react-router-dom";
 
 const Withdrawal = () => {
   const dummy = [1, 2, 3, 4, 5, 6];
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [password, setPassword] = useState("");
-  const initialRef = useRef(null);
-  const finalRef = useRef(null);
-  const navigate = useNavigate()
-  const { verifyUserPassword,verifyUserPasswordLoading } = useVerifyUserPassword();
   return (
     <Stack>
       <Text p={5} fontSize={20} fontWeight={"bold"}>
@@ -147,58 +129,12 @@ const Withdrawal = () => {
           mt={3}
           borderWidth={2}
           py={3}
-          onClick={onOpen}
         >
           Widthdraw
         </Button>
       </Flex>
 
-      <Modal
-        // initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-        closeOnOverlayClick={false}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <Flex align={"center"}>
-              <Text>Enter your password to continue</Text>
-              <ModalCloseButton mt={2.5} />
-            </Flex>
-          </ModalHeader>
-          <ModalBody pb={6}>
-            <FormControl>
-              <Input
-                ref={initialRef}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormControl>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              bg={"black"}
-              color={"white"}
-              mr={3}
-              spinnerPlacement="end"
-              isLoading={verifyUserPasswordLoading}
-              onClick={() => {
-                if (!password) return;
-                verifyUserPassword({ password });
-                navigate(
-                  "/instructor/courses/6636655e83b03fe5556b2667/manage/withdrawal/withdraw-ecash"
-                );
-              }}
-            >
-              OK
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+     
     </Stack>
   );
 };
