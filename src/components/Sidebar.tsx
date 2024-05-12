@@ -1,37 +1,41 @@
+import { Box, Image, VStack } from "@chakra-ui/react";
 import React from "react";
+import { NavItem } from "./NavItem";
+import { FaYoutube } from "react-icons/fa";
+import logo from "../assets/logo-2.svg";
 interface SidebarProps {
   isExpanded: boolean;
   onHover: (isHovered: boolean) => void;
 }
 
-// const links = [
-//   {
-//     name: "courses",
-//     href: "courses",
-//     icon: FaYoutube,
-//   },
-//   {
-//     name: "Payment",
-//     href: "/payment",
-//     icon: MdPayment,
-//   },
-//   {
-//     name: "Notification",
-//     href: "/notification",
-//     icon: MdOutlineNotificationsNone,
-//   },
-//   {
-//     name: "Settings",
-//     href: "/settings",
-//     icon: IoSettingsOutline,
-//   },
-// ];
+const links = [
+  {
+    name: "courses",
+    href: "courses",
+    icon: FaYoutube,
+  },
+  {
+    name: "Payment",
+    href: "/payment",
+    // icon: MdPayment,
+  },
+  {
+    name: "Notification",
+    href: "/notification",
+    // icon: MdOutlineNotificationsNone,
+  },
+  {
+    name: "Settings",
+    href: "/settings",
+    // icon: IoSettingsOutline,
+  },
+];
 
-const Sidebar: React.FC<SidebarProps> = () => {
-  // { isExpanded, onHover }
+const Sidebar: React.FC<SidebarProps> = ({ isExpanded, onHover }) => {
+  //
   return (
     <>
-      {/* <Box
+      <Box
         display={{ base: "none", md: "flex" }}
         w={isExpanded ? "250px" : "50px"}
         bg="gray.200"
@@ -43,7 +47,9 @@ const Sidebar: React.FC<SidebarProps> = () => {
         onMouseEnter={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
       >
-        <VStack spacing={4} align="left" >
+        <VStack spacing={4} align="left">
+          {isExpanded && <Image src={logo} />}
+
           <Box>
             {links.map((link, i) => (
               <Box key={i}>
@@ -54,7 +60,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
             ))}
           </Box>
         </VStack>
-      </Box> */}
+      </Box>
     </>
   );
 };

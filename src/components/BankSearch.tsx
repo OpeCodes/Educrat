@@ -142,7 +142,7 @@ const BankSearch: React.FC = () => {
                 <Text>Available Balance</Text>
                 <Input
                   placeholder="N0"
-                  value={"N10"}
+                  value={"N100000"}
                   variant="filled"
                   width={"100%"}
                 />
