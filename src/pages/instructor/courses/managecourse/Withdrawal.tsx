@@ -20,10 +20,12 @@ import {
 import { useState } from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
 import WithdrawCash from "./WithdrawCash";
+import { useGetUserWallet } from "../../../../hooks/instructor";
 
 const Withdrawal = () => {
   const dummy = [1, 2, 3, 4, 5, 6];
   const [steps, setStep] = useState<number>(0);
+ const {getUserWallet}= useGetUserWallet();
   return (
     <>
       {steps === 0 && (
@@ -39,7 +41,7 @@ const Withdrawal = () => {
             <Flex columnGap={4}>
               <Stack fontSize={15} fontWeight={"600"}>
                 <Text>Available Balance</Text>
-                <Text fontWeight={"bold"}>N100</Text>
+                <Text fontWeight={"bold"}>N{getUserWallet?.balance}</Text>
               </Stack>
             </Flex>
             <Stack mt={"1rem"}>

@@ -1,6 +1,8 @@
-import {  useDisclosure, useToast } from "@chakra-ui/react";
+import { useDisclosure, useQuery, useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
+
+
 
 export const useVerifyUserPassword = () => {
   const toast = useToast();
@@ -18,7 +20,7 @@ export const useVerifyUserPassword = () => {
           duration: 5000,
           isClosable: true,
         });
-       
+        onClose();
       },
       onError: (error: any) => {
         if (error.response) {
@@ -48,19 +50,21 @@ export const useVerifyUserPassword = () => {
   return {
     verifyUserPassword,
     verifyUserPasswordLoading,
-    isOpen, onOpen, onClose
+    isOpen,
+    onOpen,
+    onClose,
   };
 };
 
-
-
 export const useWithdrawWallet = () => {
   const toast = useToast();
-
-  const { mutate: withdrawWallet , isPending: withdrawWalletLoading } =
+  const { mutate: withdrawWallet, isPending: withdrawWalletLoading } =
     useMutation({
       mutationFn: ({ AcountWithdrawDetails }: any) => {
-        return customFetch.post(`/payment/withdrawal/withdraw`,  AcountWithdrawDetails );
+        return customFetch.post(
+          `/payment/withdrawal/withdraw`,
+          AcountWithdrawDetails
+        );
       },
       onSuccess: () => {
         toast({
@@ -69,7 +73,6 @@ export const useWithdrawWallet = () => {
           duration: 5000,
           isClosable: true,
         });
-     
       },
       onError: (error: any) => {
         if (error.response) {
@@ -98,6 +101,7 @@ export const useWithdrawWallet = () => {
     });
   return {
     withdrawWallet,
-    withdrawWalletLoading
+    withdrawWalletLoading,
   };
 };
+

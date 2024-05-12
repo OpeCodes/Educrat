@@ -44,3 +44,24 @@ export const useValidateAccountInfo = (bankCode: string, accountNumber: string) 
   });
   return { validateAccountInfo,isSuccess };
 };
+
+
+export const useGetUserWallet = () => {
+  const {
+    data: getUserWallet,
+    isPending,
+  } = useQuery({
+    queryKey: ["getUserWallet"],
+    queryFn: async () => {
+      const { data } = await customFetch.get(`payment/wallet`);
+      return data;
+    },    
+  });  
+  return {
+    getUserWallet,
+    isPending,
+  };
+};
+
+
+
