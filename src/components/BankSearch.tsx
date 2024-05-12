@@ -14,6 +14,7 @@ import {
   ModalBody,
   ModalCloseButton,
   FormControl,
+  Spinner,
 } from "@chakra-ui/react";
 import { useGetAllBanks, useValidateAccountInfo } from "../hooks/instructor";
 import { useVerifyUserPassword } from "../hooks/withdrawal";
@@ -55,7 +56,7 @@ const BankSearch: React.FC = () => {
 
   const { getAllBanks } = useGetAllBanks(searchQuery);
 
-  const { validateAccountInfo, isSuccess } = useValidateAccountInfo(
+  const { validateAccountInfo, isSuccess, isPending } = useValidateAccountInfo(
     accountDetails?.code,
     accountNumber
   );
@@ -67,6 +68,13 @@ const BankSearch: React.FC = () => {
     token: "token here",
   };
 
+  const inputHandler = (e: any) => {
+    const { value } = e.target;
+    if (String(value).length >= 10) {
+      e.preventDefault();
+      return;
+    }
+  };
   return (
     <Stack rowGap={1}>
       <Stack>
@@ -126,6 +134,8 @@ const BankSearch: React.FC = () => {
                   as={"input"}
                   type="number"
                   color={"black"}
+                  // pattern="\d*"
+                  onKeyPress={inputHandler}
                 />
               </Stack>
               <Stack width={"100%"}>
@@ -149,7 +159,11 @@ const BankSearch: React.FC = () => {
                 >
                   <Stack width={"100%"}>
                     <Text>Account Name</Text>
-                    <Text>{validateAccountInfo?.account_name}</Text>
+                    {accountNumber.length === 10 && isPending ? (
+                      <Spinner />
+                    ) : (
+                      <Text>{validateAccountInfo?.account_name}</Text>
+                    )}
                   </Stack>
                   <Stack width={"100%"}>
                     <Text>Amount</Text>
@@ -204,7 +218,6 @@ const BankSearch: React.FC = () => {
                 type={"password"}
                 placeholder="Password"
                 value={password}
-
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormControl>

@@ -35,14 +35,14 @@ export const useGetAllBanks = (search: string) => {
 
 
 export const useValidateAccountInfo = (bankCode: string, accountNumber: string) => {
-  const { data: validateAccountInfo,isSuccess } = useQuery({
+  const { data: validateAccountInfo,isSuccess,isPending } = useQuery({
     queryKey: ["validateAccountInfo", { bankCode, accountNumber }],
     queryFn: async () => {
       const { data } = await customFetch.get("/payment/withdrawal/resolve-account", { params: { bank_code: bankCode, account_number: accountNumber } });
       return data;
     },
   });
-  return { validateAccountInfo,isSuccess };
+  return { validateAccountInfo,isSuccess , isPending};
 };
 
 
