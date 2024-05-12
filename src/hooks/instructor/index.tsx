@@ -65,3 +65,20 @@ export const useGetUserWallet = () => {
 
 
 
+export const useGetUserWalletLogs = (id: any) => {
+  const {
+    data: getUserWalletLogs,
+    isPending,
+  } = useQuery({
+    queryKey: ["getUserWalletLogs", id],
+    queryFn: async ({ queryKey }) => {
+      const [, id] = queryKey; 
+      const { data } = await customFetch.get(`payment/wallet/${id}/logs`);
+      return data;
+    },    
+  });  
+  return {
+    getUserWalletLogs,
+    isPending,
+  };
+};

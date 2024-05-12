@@ -1,4 +1,4 @@
-import { useDisclosure, useQuery, useToast } from "@chakra-ui/react";
+import { useDisclosure,  useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
 
@@ -104,4 +104,6 @@ export const useWithdrawWallet = () => {
     withdrawWalletLoading,
   };
 };
+
+
 
