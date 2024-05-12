@@ -22,9 +22,9 @@ export const useVerifyUserPassword = () => {
       onSuccess: (data) => {
         console.log(data.data.token)
         toast({
-          title: `successful`,
+          title: `password verified`,
           status: "success",
-          duration: 5000,
+          duration: 2000,
           isClosable: true,
         });
         onClose();
