@@ -1,5 +1,4 @@
 import {
-  Divider,
   Flex,
   Stack,
   TabList,
@@ -20,20 +19,20 @@ import {
 import { useState } from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
 import WithdrawCash from "./WithdrawCash";
-import { useGetUserWallet } from "../../../../hooks/instructor";
+import { useGetUserWallet } from "../../../hooks/instructor";
 
 const Withdrawal = () => {
   const dummy = [1, 2, 3, 4, 5, 6];
   const [steps, setStep] = useState<number>(0);
- const {getUserWallet}= useGetUserWallet();
+  const { getUserWallet } = useGetUserWallet();
   return (
     <>
       {steps === 0 && (
         <Stack>
-          <Text p={5} fontSize={20} fontWeight={"bold"}>
+          <Text fontSize={20} fontWeight={"bold"}></Text>
+          <Text fontSize={45} fontWeight={"600"}>
             Withdrawal
           </Text>
-          <Divider />
           <Stack px={5}>
             <Text fontSize={19} fontWeight={"bold"}>
               Transaction
@@ -132,7 +131,7 @@ const Withdrawal = () => {
             <Button
               bg={"black"}
               color={"white"}
-              mt={3}
+              mt={-7}
               borderWidth={2}
               py={3}
               onClick={() => setStep(1)}

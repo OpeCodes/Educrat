@@ -27,7 +27,6 @@ import {
   CourseMessage,
   CourseSettings,
   Pricing,
-  Withdrawal,
 } from "./pages/instructor/courses/managecourse";
 import Curriculum from "./pages/instructor/courses/managecourse/Curriculum";
 import SingleInstructorPage from "./pages/studentCourse/SingleInstructorPage";
@@ -35,6 +34,7 @@ import Cart from "./pages/Cart";
 import PaymentConfirmationPage from "./pages/studentCourse/PaymentConfirmationPage";
 import Checkout from "./pages/Checkout";
 import SingleCheckoutPage from "./pages/SingleCheckoutPage";
+import Withdrawal from "./pages/instructor/courses/Withdrawal";
 
 const router = createBrowserRouter([
   {
