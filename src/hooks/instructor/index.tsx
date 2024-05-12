@@ -1,7 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
-import { useToast } from "@chakra-ui/react";
-import { useState } from "react";
 
 export const useGetAllInstructorCourses = (id: any) => {
     const {
@@ -11,7 +9,7 @@ export const useGetAllInstructorCourses = (id: any) => {
     } = useQuery({
       queryKey: ["getAllInstructorCourses", id],
       queryFn: async ({ queryKey }) => {
-        const [, id] = queryKey; // Destructure the queryKey to get the 'id'
+        const [, id] = queryKey; 
         const { data } = await customFetch.get(`course/instructor/${id}`);
         return data;
       },    

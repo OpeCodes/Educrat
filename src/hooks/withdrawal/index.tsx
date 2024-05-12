@@ -1,16 +1,9 @@
 import {  useDisclosure, useToast } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
-import { useNavigate } from "react-router-dom";
-
-
-
-
-
 
 export const useVerifyUserPassword = () => {
   const toast = useToast();
-  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { mutate: verifyUserPassword, isPending: verifyUserPasswordLoading } =
