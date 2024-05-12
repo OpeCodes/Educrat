@@ -129,6 +129,10 @@ const router = createBrowserRouter([
         path: "courses",
         element: <Courses />,
       },
+      {
+        path: "payment",
+        element: <Withdrawal />,
+      },
     ],
   },
   {
@@ -156,10 +160,7 @@ const router = createBrowserRouter([
         path: "settings",
         element: <CourseSettings />,
       },
-      {
-        path: "withdrawal",
-        element: <Withdrawal />,
-      },      
+            
     ],
   },
 ]);

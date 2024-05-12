@@ -16,7 +16,7 @@ const links = [
   },
   {
     name: "Payment",
-    href: "/payment",
+    href: "payment",
     // icon: MdPayment,
   },
   {
@@ -47,8 +47,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isExpanded, onHover }) => {
         onMouseEnter={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
       >
-        <VStack spacing={4} align="left">
-          {isExpanded && <Image src={logo} />}
+        <VStack spacing={4} align="left" >
+          {isExpanded && <Image src={logo} mb={5}/>}
 
           <Box>
             {links.map((link, i) => (
