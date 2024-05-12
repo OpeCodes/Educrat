@@ -17,7 +17,11 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { useGetAllBanks, useValidateAccountInfo } from "../hooks/instructor";
-import { useVerifyUserPassword } from "../hooks/withdrawal";
+import { useVerifyUserPassword,  } from "../hooks/withdrawal";
+import { setAccountBankDetails } from "../features/user/UserSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 interface Bank {
   id: number;
@@ -31,6 +35,7 @@ const BankSearch: React.FC = () => {
   const [accountNumber, setAccountNumber] = useState<any>("");
   const [accountDetails, setAccountDetails] = useState<any>(null);
   const [amount, setAmount] = useState<string>("");
+  const { walletLoading } = useSelector((store: RootState) => store?.user);
 
   const [password, setPassword] = useState("");
   const initialRef = useRef(null);
@@ -42,7 +47,6 @@ const BankSearch: React.FC = () => {
     onOpen,
     onClose,
   } = useVerifyUserPassword();
-
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
     setIsDropdownOpen(true);
@@ -64,9 +68,8 @@ const BankSearch: React.FC = () => {
     account_number: validateAccountInfo?.account_number,
     account_name: validateAccountInfo?.account_name,
     bank_code: accountDetails?.code,
-    token: "token here",
   };
-
+ const dispatch= useDispatch();
   const inputHandler = (e: any) => {
     const { value } = e.target;
     if (String(value).length >= 10) {
@@ -85,7 +88,7 @@ const BankSearch: React.FC = () => {
           w={{ md: "35%" }}
         />
       </Stack>
-      <Stack width={{ md: "35%" }} maxH={"200px"} overflowY={"scroll"}>
+      <Stack width={{ md: "35%" }} maxH={"200px"}  overflowY={"scroll"} >
         {isDropdownOpen && searchQuery && (
           <Box borderRadius="md">
             <Text mt={1}>
@@ -187,11 +190,13 @@ const BankSearch: React.FC = () => {
                   mt={4}
                   color={"white"}
                   width={"fit-content"}
-                  spinnerPlacement="end"
                   onClick={() => {
-                    console.log(AcountWithdrawDetails);
                     onOpen();
                   }}
+                  isLoading={walletLoading}
+                  loadingText="Loading"
+                  spinnerPlacement="end"
+
                   isDisabled={
                     !accountNumber ||
                     !amount ||
@@ -240,6 +245,7 @@ const BankSearch: React.FC = () => {
               onClick={() => {
                 if (!password) return;
                 verifyUserPassword({ password });
+                dispatch(setAccountBankDetails(AcountWithdrawDetails))        
               }}
             >
               OK

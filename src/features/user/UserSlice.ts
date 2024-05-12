@@ -11,14 +11,17 @@ interface UserState {
   courseNavigate: number;
   order: any;
   orderBoolean: boolean;
+  accountDetails: any;
+  walletLoading: boolean
 }
 
 const initialState: UserState = {
   user: getUserLocalStorage(),
   courseNavigate: 0,
   order: null,
-  orderBoolean: false
-
+  orderBoolean: false,
+  accountDetails: null,
+  walletLoading: false
 };
 
 const userSlice = createSlice({
@@ -43,11 +46,17 @@ const userSlice = createSlice({
     setCourseAuthNavigate: (state: UserState, action: PayloadAction<any>) => {
       state.courseNavigate = action.payload;
     },
+    setAccountBankDetails: (state: UserState, action: PayloadAction<any>) => {
+      state.accountDetails = action.payload;
+    },
+    setWalletLoading: (state: UserState, action: PayloadAction<any>) => {
+      state.walletLoading = action.payload;
+    },
    
   },
 });
 
-export const { setUser, logoutUser, setCourseAuthNavigate, setOrder, setToggleOrder  } =
+export const { setUser, logoutUser, setCourseAuthNavigate, setOrder, setToggleOrder,setAccountBankDetails,setWalletLoading  } =
   userSlice.actions;
 export const selectData = (state: { data: UserState }) => state.data.user;
 export default userSlice.reducer;
