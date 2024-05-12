@@ -60,8 +60,6 @@ export const useGetUserWallet = () => {
   };
 };
 
-
-
 export const useGetUserWalletLogs = (id: any) => {
   const {
     data: getUserWalletLogs,

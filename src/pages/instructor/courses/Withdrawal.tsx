@@ -19,12 +19,13 @@ import {
 import { useState } from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
 import WithdrawCash from "./WithdrawCash";
-import { useGetUserWallet } from "../../../hooks/instructor";
+import { useGetUserWallet,  } from "../../../hooks/instructor";
 
 const Withdrawal = () => {
   const dummy = [1, 2, 3, 4, 5, 6];
   const [steps, setStep] = useState<number>(0);
   const { getUserWallet } = useGetUserWallet();
+  // const {getUserWalletLogs} =useGetUserWalletLogs(getUserWallet)
   return (
     <>
       {steps === 0 && (

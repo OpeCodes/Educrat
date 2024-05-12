@@ -154,21 +154,21 @@ const Navbar = () => {
           {/* <Text cursor={"pointer"} onClick={() => onModalOpen()}>
             <FiSearch color={"#6440fb"} fontSize={"25px"} />
           </Text> */}
-          {!user && (
+          {!user || hasStudentRole && (
             <Text
               fontSize="15px"
               cursor={"pointer"}
               color={"black"}
               onClick={() => {
-                if (!user) {
+                if (!user || hasStudentRole) {
                   toast({
-                    title: `Sign up to become an instructor`,
+                    title: `Sign in to become an instructor`,
                     status: "info",
                     duration: 5000,
                     isClosable: true,
                   });
                   setTimeout(() => {
-                    navigate("/sign-up");
+                    navigate("/sign-in");
                   }, 1000);
                 }
               }}

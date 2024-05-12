@@ -73,7 +73,6 @@ export const useBecomeInstructor = () => {
       dispatch(setUser(user.data));
       addUserLocalStorage(user.data);
       handleTabChange(1);
-
       toast({
         title: `You are now an instructor`,
         status: "success",
