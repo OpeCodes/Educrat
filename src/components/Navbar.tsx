@@ -154,23 +154,31 @@ const Navbar = () => {
           {/* <Text cursor={"pointer"} onClick={() => onModalOpen()}>
             <FiSearch color={"#6440fb"} fontSize={"25px"} />
           </Text> */}
-          {!user || hasStudentRole && (
+          {hasStudentRole && !hasInstructorRole && (
             <Text
               fontSize="15px"
               cursor={"pointer"}
               color={"black"}
               onClick={() => {
-                if (!user || hasStudentRole) {
-                  toast({
-                    title: `Sign in to become an instructor`,
-                    status: "info",
-                    duration: 5000,
-                    isClosable: true,
-                  });
-                  setTimeout(() => {
-                    navigate("/sign-in");
-                  }, 1000);
-                }
+                navigate("/become-instructor");
+              }}
+            >
+              Teach on Educrat
+            </Text>
+          )}
+          {!user && (
+            <Text
+              fontSize="15px"
+              cursor={"pointer"}
+              color={"black"}
+              onClick={() => {
+                navigate("/sign-in");
+                toast({
+                  title: "Sign in to become an instructor",
+                  status: "info",
+                  duration: 5000,
+                  isClosable: true,
+                });
               }}
             >
               Teach on Educrat
@@ -183,7 +191,7 @@ const Navbar = () => {
               as={Link}
               to="/instructor/courses"
               color={"black"}
-              display={{base: "none", md: "flex"}}
+              display={{ base: "none", md: "flex" }}
             >
               Instructor Dashboard
             </Text>
