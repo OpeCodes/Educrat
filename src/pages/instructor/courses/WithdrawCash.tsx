@@ -11,7 +11,6 @@ const WithdrawCash = ({ setStep }: any) => {
       <Text p={5} fontSize={40} fontWeight={"bold"}>
         Withdraw E-Cash
       </Text>
-
       <Divider />
       <Stack p={5}>
         <BankSearch />

@@ -3,6 +3,7 @@ import React from "react";
 import { NavItem } from "./NavItem";
 import { FaYoutube } from "react-icons/fa";
 import logo from "../assets/logo-2.svg";
+import { MdPayment } from "react-icons/md";
 interface SidebarProps {
   isExpanded: boolean;
   onHover: (isHovered: boolean) => void;
@@ -17,22 +18,12 @@ const links = [
   {
     name: "Payment",
     href: "payment",
-    // icon: MdPayment,
+    icon: MdPayment,
   },
-  {
-    name: "Notification",
-    href: "/notification",
-    // icon: MdOutlineNotificationsNone,
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    // icon: IoSettingsOutline,
-  },
+  
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ isExpanded, onHover }) => {
-  //
   return (
     <>
       <Box

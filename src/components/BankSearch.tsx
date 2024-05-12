@@ -54,8 +54,7 @@ const BankSearch: React.FC = () => {
     setIsDropdownOpen(false);
   };
 
-  const { getAllBanks } = useGetAllBanks(searchQuery);
-
+  const { getAllBanks ,isPending: getAllBanksLoading} = useGetAllBanks(searchQuery);
   const { validateAccountInfo,  isPending } = useValidateAccountInfo(
     accountDetails?.code,
     accountNumber
@@ -86,9 +85,14 @@ const BankSearch: React.FC = () => {
           w={{ md: "35%" }}
         />
       </Stack>
-      <Stack width={{ md: "30%" }} maxH={"200px"} overflowY={"scroll"}>
+      <Stack width={{ md: "35%" }} maxH={"200px"} overflowY={"scroll"}>
         {isDropdownOpen && searchQuery && (
           <Box borderRadius="md">
+            <Text mt={1}>
+            {
+              getAllBanksLoading && <Spinner/>
+            }
+            </Text>
             {getAllBanks &&
               getAllBanks
                 .filter((bank: Bank) =>

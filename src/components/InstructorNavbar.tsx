@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { MdMenu } from "react-icons/md";
+import { MdMenu, MdPayment } from "react-icons/md";
 import { useRef } from "react";
 import { NavItem } from "./NavItem";
 import { useGetUser } from "../hooks";
@@ -30,18 +30,8 @@ const links = [
   {
     name: "Payment",
     href: "payment",
-    // icon: MdPayment,
-  },
-  {
-    name: "Notification",
-    href: "/notification",
-    // icon: MdOutlineNotificationsNone,
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    // icon: IoSettingsOutline,
-  },
+    icon: MdPayment,
+  },  
 ];
 const InstructorNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

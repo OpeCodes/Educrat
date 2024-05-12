@@ -22,14 +22,14 @@ export const useGetAllInstructorCourses = (id: any) => {
   };
 
 export const useGetAllBanks = (search: string) => { 
-  const { data: getAllBanks } = useQuery({
+  const { data: getAllBanks,isPending } = useQuery({
     queryKey: ["getAllBanks", { search }], 
     queryFn: async () => {
       const { data } = await customFetch.get("/payment/withdrawal/bank", { params: { search } }); 
       return data;
     },
   });
-  return { getAllBanks };
+  return { getAllBanks,isPending };
 }
 
 
