@@ -44,11 +44,11 @@ const Withdrawal = () => {
               </Stack>
             </Flex>
             <Stack mt={"1rem"}>
-              <Text fontSize={18} fontWeight={"bold"}>
+              <Text fontSize={18} fontWeight={"bold"} mb={2}>
                 Recent Transactions
               </Text>
               <Stack>
-                <Tabs variant="unstyled">
+                <Tabs variant="unstyled" width={"100%"}>
                   <TabList justifyContent={"center"}>
                     <Tab
                       _selected={{ color: "white", bg: "black" }}
@@ -75,8 +75,8 @@ const Withdrawal = () => {
                   </TabList>
                   <TabPanels>
                     <TabPanel>
-                      <TableContainer>
-                        <Table size="sm" variant={"simple"}>
+                      <TableContainer  width={"100%"}>
+                        <Table size="md" variant={"simple"}  width={"100%"}>
                           <Thead>
                             <Tr>
                               <Th color={"black"}>Date</Th>
@@ -84,10 +84,10 @@ const Withdrawal = () => {
                               <Th color={"black"}>Status</Th>
                             </Tr>
                           </Thead>
-                          <Tbody>
+                          <Tbody  width={"100%"}>
                             {dummy.map(() => {
                               return (
-                                <Tr>
+                                <Tr  width={"100%"}>
                                   <Td>inches</Td>
                                   <Td>millimetres (mm)</Td>
                                   <Td>Sucessful</Td>
@@ -100,7 +100,7 @@ const Withdrawal = () => {
                     </TabPanel>
                     <TabPanel>
                       <TableContainer>
-                        <Table size="sm" variant={"simple"}>
+                        <Table size="md" variant={"simple"}>
                           <Thead>
                             <Tr>
                               <Th color={"black"}>Date</Th>
