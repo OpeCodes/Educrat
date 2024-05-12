@@ -20,11 +20,10 @@ export const useVerifyUserPassword = () => {
         return customFetch.post(`/payment/withdrawal/auth`, { password });
       },
       onSuccess: (data) => {
-        console.log(data.data.token)
         toast({
           title: `password verified`,
           status: "success",
-          duration: 2000,
+          duration: 1000,
           isClosable: true,
         });
         onClose();

@@ -64,7 +64,7 @@ const BankSearch: React.FC = () => {
     accountNumber
   );
   const AcountWithdrawDetails = {
-    amount,
+    amount: Number(amount),
     account_number: validateAccountInfo?.account_number,
     account_name: validateAccountInfo?.account_name,
     bank_code: accountDetails?.code,
