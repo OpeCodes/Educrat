@@ -29,7 +29,7 @@ const links = [
   },
   {
     name: "Payment",
-    href: "/payment",
+    href: "payment",
     // icon: MdPayment,
   },
   {
