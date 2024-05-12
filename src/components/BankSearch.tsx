@@ -1,5 +1,12 @@
 import React, { useRef, useState } from "react";
-import { Input, Box, Text, Stack, Flex, Button , useDisclosure,
+import {
+  Input,
+  Box,
+  Text,
+  Stack,
+  Flex,
+  Button,
+  useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -8,7 +15,7 @@ import { Input, Box, Text, Stack, Flex, Button , useDisclosure,
   ModalBody,
   ModalCloseButton,
   FormControl,
-  } from "@chakra-ui/react";
+} from "@chakra-ui/react";
 import { useGetAllBanks, useValidateAccountInfo } from "../hooks/instructor";
 import { useVerifyUserPassword } from "../hooks/withdrawal";
 
@@ -25,11 +32,16 @@ const BankSearch: React.FC = () => {
   const [accountDetails, setAccountDetails] = useState<any>(null);
   const [amount, setAmount] = useState<string>("");
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [password, setPassword] = useState("");
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-  const { verifyUserPassword,verifyUserPasswordLoading } = useVerifyUserPassword();
+  const {
+    verifyUserPassword,
+    verifyUserPasswordLoading,
+    isOpen,
+    onOpen,
+    onClose,
+  } = useVerifyUserPassword();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -52,7 +64,7 @@ const BankSearch: React.FC = () => {
     amount,
     account_number: validateAccountInfo?.account_number,
     account_name: validateAccountInfo?.account_name,
-    bank_code: validateAccountInfo?.bank_id,
+    bank_code: accountDetails?.code,
     token: "token here",
   };
 
@@ -101,7 +113,6 @@ const BankSearch: React.FC = () => {
               width={"100%"}
               columnGap={5}
               rowGap={2}
-
               mt={4}
               flexDirection={{ base: "column", md: "row" }}
             >
@@ -160,9 +171,9 @@ const BankSearch: React.FC = () => {
                   color={"white"}
                   width={"fit-content"}
                   spinnerPlacement="end"
-                  onClick={() =>{
+                  onClick={() => {
                     console.log(AcountWithdrawDetails);
-                   onOpen()
+                    onOpen();
                   }}
                 >
                   Withdraw Money
@@ -207,7 +218,6 @@ const BankSearch: React.FC = () => {
               onClick={() => {
                 if (!password) return;
                 verifyUserPassword({ password });
-              
               }}
             >
               OK
