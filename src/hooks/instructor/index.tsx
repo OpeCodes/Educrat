@@ -31,9 +31,6 @@ export const useGetAllBanks = (search: string) => {
   });
   return { getAllBanks,isPending };
 }
-
-
-
 export const useValidateAccountInfo = (bankCode: string, accountNumber: string) => {
   const { data: validateAccountInfo,isPending } = useQuery({
     queryKey: ["validateAccountInfo", { bankCode, accountNumber }],

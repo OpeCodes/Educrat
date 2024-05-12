@@ -16,7 +16,7 @@ import {
   FormControl,
   Spinner,
 } from "@chakra-ui/react";
-import { useGetAllBanks, useValidateAccountInfo } from "../hooks/instructor";
+import { useGetAllBanks, useGetUserWallet, useValidateAccountInfo } from "../hooks/instructor";
 import { useVerifyUserPassword,  } from "../hooks/withdrawal";
 import { setAccountBankDetails } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
@@ -63,6 +63,8 @@ const BankSearch: React.FC = () => {
     accountDetails?.code,
     accountNumber
   );
+  const { getUserWallet } = useGetUserWallet();
+
   const AcountWithdrawDetails = {
     amount: Number(amount),
     account_number: validateAccountInfo?.account_number,
@@ -141,7 +143,6 @@ const BankSearch: React.FC = () => {
                   as={"input"}
                   type="number"
                   color={"black"}
-                  // pattern="\d*"
                   onKeyPress={inputHandler}
                 />
               </Stack>
@@ -149,7 +150,7 @@ const BankSearch: React.FC = () => {
                 <Text>Available Balance</Text>
                 <Input
                   placeholder="N0"
-                  value={"N100000"}
+                  value={getUserWallet?.balance}
                   variant="filled"
                   width={"100%"}
                 />
