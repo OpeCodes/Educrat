@@ -56,7 +56,7 @@ const BankSearch: React.FC = () => {
 
   const { getAllBanks } = useGetAllBanks(searchQuery);
 
-  const { validateAccountInfo, isSuccess, isPending } = useValidateAccountInfo(
+  const { validateAccountInfo,  isPending } = useValidateAccountInfo(
     accountDetails?.code,
     accountNumber
   );
@@ -148,7 +148,7 @@ const BankSearch: React.FC = () => {
                 />
               </Stack>
             </Flex>
-            {isSuccess && (
+            {accountNumber.length === 10 && (
               <>
                 <Flex
                   width={"100%"}
@@ -188,6 +188,11 @@ const BankSearch: React.FC = () => {
                     console.log(AcountWithdrawDetails);
                     onOpen();
                   }}
+                  isDisabled={
+                    !accountNumber ||
+                    !amount ||
+                    !validateAccountInfo?.account_name
+                  }
                 >
                   Withdraw Money
                 </Button>
@@ -197,7 +202,6 @@ const BankSearch: React.FC = () => {
         )}
       </>
       <Modal
-        // initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
