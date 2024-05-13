@@ -99,16 +99,21 @@ const Withdrawal = () => {
                                           {formatEnrollDate(updatedAt)}
                                         </Td>
                                         <Td fontWeight={"500"}>{amount}</Td>
-                                        <Td
-                                          fontWeight={"500"}
-                                          color={
-                                            status === "successful"
-                                              ? "green"
-                                              : "gray"
-                                          }
-                                        >
-                                          {status}
-                                        </Td>
+                                        {status === "pending" && (
+                                          <Td fontWeight={"500"} color={"gray"}>
+                                            {status}
+                                          </Td>                                          
+                                        )}
+                                          {status === "failed" && (
+                                          <Td fontWeight={"500"} color={"red"}>
+                                            {status}
+                                          </Td>                                          
+                                        )}
+                                          {status === "successful" && (
+                                          <Td fontWeight={"500"} color={"green"}>
+                                            {status}
+                                          </Td>                                          
+                                        )}
                                       </Tr>
                                     )}
                                   </>
@@ -135,22 +140,26 @@ const Withdrawal = () => {
                                 return (
                                   <>
                                     {clerk === "debit" && (
-                                      <Tr width={"100%"}>
-                                        {" "}
+                                      <Tr width={"100%"}>                                        
                                         <Td fontWeight={"500"}>
                                           {formatEnrollDate(updatedAt)}
                                         </Td>
                                         <Td fontWeight={"500"}>{amount}</Td>
-                                        <Td
-                                          fontWeight={"500"}
-                                          color={
-                                            status === "successful"
-                                              ? "green"
-                                              : "gray"
-                                          }
-                                        >
-                                          {status}
-                                        </Td>
+                                        {status === "pending" && (
+                                          <Td fontWeight={"500"} color={"gray"}>
+                                            {status}
+                                          </Td>                                          
+                                        )}
+                                          {status === "failed" && (
+                                          <Td fontWeight={"500"} color={"red"}>
+                                            {status}
+                                          </Td>                                          
+                                        )}
+                                          {status === "successful" && (
+                                          <Td fontWeight={"500"} color={"green"}>
+                                            {status}
+                                          </Td>                                          
+                                        )}
                                       </Tr>
                                     )}
                                   </>
