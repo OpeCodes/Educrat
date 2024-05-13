@@ -3,7 +3,6 @@ import customFetch from "../utils/axios";
 import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
-import { useDispatch } from "react-redux";
 
 export const useGetUser = () => {
   const toast = useToast();
