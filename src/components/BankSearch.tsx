@@ -215,6 +215,7 @@ const BankSearch: React.FC = () => {
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
+        isCentered
         closeOnOverlayClick={false}
       >
         <ModalOverlay />

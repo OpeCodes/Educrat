@@ -90,17 +90,14 @@ const Withdrawal = () => {
                           </Thead>
                           <Tbody width={"100%"}>
                             {getUserWalletLogs?.data?.map(
-                              ({
-                                amount,
-                                clerk,
-                                status,
-                                updatedAt,
-                              }: any) => {
+                              ({ amount, clerk, status, updatedAt }: any) => {
                                 return (
                                   <>
                                     {clerk === "credit" && (
                                       <Tr width={"100%"}>
-                                        <Td fontWeight={"500"}>{formatEnrollDate(updatedAt)}</Td>
+                                        <Td fontWeight={"500"}>
+                                          {formatEnrollDate(updatedAt)}
+                                        </Td>
                                         <Td fontWeight={"500"}>{amount}</Td>
                                         <Td
                                           fontWeight={"500"}
@@ -134,16 +131,15 @@ const Withdrawal = () => {
                           </Thead>
                           <Tbody>
                             {getUserWalletLogs?.data?.map(
-                              ({
-                                amount,
-                                clerk,
-                                status,
-                                updatedAt,
-                              }: any) => {
+                              ({ amount, clerk, status, updatedAt }: any) => {
                                 return (
                                   <>
                                     {clerk === "debit" && (
-                                      <Tr width={"100%"}>                                                                           <Td fontWeight={"500"}>{formatEnrollDate(updatedAt)}</Td>
+                                      <Tr width={"100%"}>
+                                        {" "}
+                                        <Td fontWeight={"500"}>
+                                          {formatEnrollDate(updatedAt)}
+                                        </Td>
                                         <Td fontWeight={"500"}>{amount}</Td>
                                         <Td
                                           fontWeight={"500"}
