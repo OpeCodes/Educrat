@@ -31,9 +31,7 @@ export function convertSecondsToHMS(seconds: any) {
 export function getTimeDifference(timestamp: any) {
   const currentDate: any = new Date();
   const pastDate: any = new Date(timestamp);
-
   const difference = currentDate - pastDate;
-
   const millisecondsInMinute = 1000 * 60;
   const millisecondsInHour = millisecondsInMinute * 60;
   const millisecondsInDay = millisecondsInHour * 24;

@@ -68,7 +68,7 @@ export const useGetUserWalletLogs = (id: any) => {
     queryKey: ["getUserWalletLogs", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey; 
-      const { data } = await customFetch.get(`payment/wallet/${id}/logs`);
+      const { data } = await customFetch.get(`payment/wallet/${id}/log`);
       return data;
     },    
   });  

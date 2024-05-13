@@ -19,13 +19,16 @@ import {
 import { useState } from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
 import WithdrawCash from "./WithdrawCash";
-import { useGetUserWallet,  } from "../../../hooks/instructor";
+import {
+  useGetUserWallet,
+  useGetUserWalletLogs,
+} from "../../../hooks/instructor";
+import { formatEnrollDate } from "../../../components/TimeFormat";
 
 const Withdrawal = () => {
-  const dummy = [1, 2, 3, 4, 5, 6];
   const [steps, setStep] = useState<number>(0);
   const { getUserWallet } = useGetUserWallet();
-  // const {getUserWalletLogs} =useGetUserWalletLogs(getUserWallet)
+  const { getUserWalletLogs } = useGetUserWalletLogs(getUserWallet?.id);
   return (
     <>
       {steps === 0 && (
@@ -76,8 +79,8 @@ const Withdrawal = () => {
                   </TabList>
                   <TabPanels>
                     <TabPanel>
-                      <TableContainer  width={"100%"}>
-                        <Table size="md" variant={"simple"}  width={"100%"}>
+                      <TableContainer width={"100%"}>
+                        <Table size="md" variant={"simple"} width={"100%"}>
                           <Thead>
                             <Tr>
                               <Th color={"black"}>Date</Th>
@@ -85,16 +88,36 @@ const Withdrawal = () => {
                               <Th color={"black"}>Status</Th>
                             </Tr>
                           </Thead>
-                          <Tbody  width={"100%"}>
-                            {dummy.map(() => {
-                              return (
-                                <Tr  width={"100%"}>
-                                  <Td>inches</Td>
-                                  <Td>millimetres (mm)</Td>
-                                  <Td>Sucessful</Td>
-                                </Tr>
-                              );
-                            })}
+                          <Tbody width={"100%"}>
+                            {getUserWalletLogs?.data?.map(
+                              ({
+                                amount,
+                                clerk,
+                                status,
+                                updatedAt,
+                              }: any) => {
+                                return (
+                                  <>
+                                    {clerk === "credit" && (
+                                      <Tr width={"100%"}>
+                                        <Td fontWeight={"500"}>{formatEnrollDate(updatedAt)}</Td>
+                                        <Td fontWeight={"500"}>{amount}</Td>
+                                        <Td
+                                          fontWeight={"500"}
+                                          color={
+                                            status === "successful"
+                                              ? "green"
+                                              : "gray"
+                                          }
+                                        >
+                                          {status}
+                                        </Td>
+                                      </Tr>
+                                    )}
+                                  </>
+                                );
+                              }
+                            )}
                           </Tbody>
                         </Table>
                       </TableContainer>
@@ -110,15 +133,34 @@ const Withdrawal = () => {
                             </Tr>
                           </Thead>
                           <Tbody>
-                            {dummy.map(() => {
-                              return (
-                                <Tr>
-                                  <Td>inches</Td>
-                                  <Td>millimetres (mm)</Td>
-                                  <Td>Sucessful</Td>
-                                </Tr>
-                              );
-                            })}
+                            {getUserWalletLogs?.data?.map(
+                              ({
+                                amount,
+                                clerk,
+                                status,
+                                updatedAt,
+                              }: any) => {
+                                return (
+                                  <>
+                                    {clerk === "debit" && (
+                                      <Tr width={"100%"}>                                                                           <Td fontWeight={"500"}>{formatEnrollDate(updatedAt)}</Td>
+                                        <Td fontWeight={"500"}>{amount}</Td>
+                                        <Td
+                                          fontWeight={"500"}
+                                          color={
+                                            status === "successful"
+                                              ? "green"
+                                              : "gray"
+                                          }
+                                        >
+                                          {status}
+                                        </Td>
+                                      </Tr>
+                                    )}
+                                  </>
+                                );
+                              }
+                            )}
                           </Tbody>
                         </Table>
                       </TableContainer>
