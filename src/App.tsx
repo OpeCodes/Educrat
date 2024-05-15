@@ -77,7 +77,7 @@ const router = createBrowserRouter([
       },{
         path: "/payment/checkout/express/:id",
         element: <SingleCheckoutPage/>
-      }
+      },
       {
         path: "/certificate",
         element: <CertificationPage/>
