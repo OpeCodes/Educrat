@@ -5,9 +5,6 @@ import {
   removeUserSingleCartItem,
   removeUserCheckoutValue
 } from "../../store/localStorage";
-import { default as jwtDecode } from 'jwt-decode';
-
-
 interface UserState {
   user: any;
   courseNavigate: number;
@@ -15,7 +12,6 @@ interface UserState {
   orderBoolean: boolean;
   accountDetails: any;
   walletLoading: boolean;
-  isTokenExpired: boolean;
 }
 
 const initialState: UserState = {
@@ -25,8 +21,6 @@ const initialState: UserState = {
   orderBoolean: false,
   accountDetails: null,
   walletLoading: false,
-  isTokenExpired: false
-
 };
 
 const userSlice = createSlice({
@@ -35,19 +29,7 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state: UserState, action: PayloadAction<any>) => {
       state.user = action.payload;
-      state.isTokenExpired = false;
-
     },
-    checkTokenExpiration: (state) => {
-    //   // const decodedToken = jwtDecode(state.user);
-    //   // const expirationTime = decodedToken.exp * 1000;
-    //   // const currentTime = Date.now();
-
-    //   // if (currentTime > expirationTime) {
-    //   //   state.isTokenExpired = true;
-    //   // }
-    },
-
     setOrder: (state: UserState, action: PayloadAction<any>) => {
       state.order = action.payload;
     },
@@ -73,7 +55,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, logoutUser, setCourseAuthNavigate, setOrder, setToggleOrder,setAccountBankDetails,setWalletLoading ,checkTokenExpiration } =
+export const { setUser, logoutUser, setCourseAuthNavigate, setOrder, setToggleOrder,setAccountBankDetails,setWalletLoading} =
   userSlice.actions;
 export const selectData = (state: { data: UserState }) => state.data.user;
 export default userSlice.reducer;
