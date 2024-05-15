@@ -35,6 +35,7 @@ import PaymentConfirmationPage from "./pages/studentCourse/PaymentConfirmationPa
 import Checkout from "./pages/Checkout";
 import SingleCheckoutPage from "./pages/SingleCheckoutPage";
 import Withdrawal from "./pages/instructor/courses/Withdrawal";
+import CertificationPage from "./pages/certification/CertificationPage";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       },{
         path: "/payment/checkout/express/:id",
         element: <SingleCheckoutPage/>
+      }
+      {
+        path: "/certificate",
+        element: <CertificationPage/>
       }
     ],
   },
