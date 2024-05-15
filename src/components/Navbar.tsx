@@ -159,7 +159,7 @@ const Navbar = () => {
               fontSize="15px"
               cursor={"pointer"}
               color={"black"}
-              display={{base: "none", md: "none"}}
+              display={{base: "none", md: "flex"}}
               onClick={() => {
                 navigate("/become-instructor");
               }}
@@ -172,7 +172,7 @@ const Navbar = () => {
               fontSize="15px"
               cursor={"pointer"}
               color={"black"}
-              display={{base: "none", md: "none"}}
+              display={{base: "none", md: "flex"}}
               onClick={() => {
                 navigate("/sign-in");
                 toast({
