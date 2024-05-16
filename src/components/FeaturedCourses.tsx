@@ -129,11 +129,11 @@ const Course = ({
           >
             <Avatar
               size="sm"
-              name={`${userId?.firstName} ${userId.lastName}`}
+              name={`${userId?.firstName} ${userId?.lastName}`}
               src={userId?.profilePicture}
             />
             <Text color={"gray.600"}>
-              {`${userId?.firstName} ${userId.lastName}`}
+              {`${userId?.firstName} ${userId?.lastName}`}
             </Text>
           </Box>
           <Box

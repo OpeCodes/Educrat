@@ -3,6 +3,11 @@ import customFetch from "../utils/axios";
 import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
+import { setUser } from "../features/user/UserSlice";
+import { addUserLocalStorage } from "../store/localStorage";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 export const useGetUser = () => {
   const toast = useToast();
@@ -57,6 +62,8 @@ export const useGetUser = () => {
 
 export const useBecomeInstructor = () => {
   const toast = useToast();
+  const { user } = useSelector((store: RootState) => store?.user);
+  const dispatch= useDispatch();
   const [tabIndex, setTabIndex] = useState(0);
   const handleTabChange = (index: number) => {
     setTabIndex(index);
@@ -66,8 +73,8 @@ export const useBecomeInstructor = () => {
       return customFetch.put("/instructor/become-instructor", user);
     },
     onSuccess: () => {
-      // dispatch(setUser(user.data));
-      // addUserLocalStorage(user.data);
+      dispatch(setUser(user.data));
+      addUserLocalStorage(user.data);
       handleTabChange(1);
       toast({
         title: `You are now an instructor`,
