@@ -1,19 +1,15 @@
-// InstructorDashboard.tsx
 import React, { useState } from "react";
 import { Flex, Box, IconButton, useMediaQuery } from "@chakra-ui/react";
 import Sidebar from "./Sidebar";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Navigate, Outlet } from "react-router-dom";
 import { InstructorNavbar } from ".";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
 import { useGetUser } from "../hooks";
 
 const InstructorDashboard: React.FC = () => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
   const { data: getUser } = useGetUser();
   const [isSmallerScreen] = useMediaQuery("(max-width: 100px)");
-  const { user } = useSelector((store: RootState) => store?.user);
   const hasInstructorRole = getUser?.roles.some(
     (role: any) => role?.name === "instructor"
   );

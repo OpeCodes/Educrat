@@ -357,7 +357,6 @@ const Navbar = () => {
         <Box bg="white" p={5} display={{ base: "none", md: "block" }}>
           <DrawerCloseButton bg="white" borderRadius={"100%"} />
         </Box>
-
         <DrawerContent h={"100vh"}>
           <DrawerHeader
             borderBottomWidth="1px"
