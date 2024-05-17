@@ -44,7 +44,6 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
 
   const handleUploadClick = () => {
     if (fileToUpload) {
-      // Convert the image to base64
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64Data = reader.result as string;

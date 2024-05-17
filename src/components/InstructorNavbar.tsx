@@ -36,7 +36,6 @@ const links = [
 const InstructorNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {data} =useGetUser();
-  console.log(data,"data")
   const btnRef: any = useRef();
   const { user} = useSelector((store: RootState) => store.user);
   return (

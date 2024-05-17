@@ -24,11 +24,15 @@ import {
   useGetUserWalletLogs,
 } from "../../../hooks/instructor";
 import { formatEnrollDate } from "../../../components/TimeFormat";
+import { Loading } from "../../../components";
 
 const Withdrawal = () => {
   const [steps, setStep] = useState<number>(0);
-  const { getUserWallet } = useGetUserWallet();
+  const { getUserWallet,isPending } = useGetUserWallet();
   const { getUserWalletLogs } = useGetUserWalletLogs(getUserWallet?.id);
+  if (isPending) {
+    return <Loading />;
+  }
   return (
     <>
       {steps === 0 && (

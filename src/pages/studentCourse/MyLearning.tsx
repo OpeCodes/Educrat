@@ -34,7 +34,6 @@ import { convertSecondsToHMS } from "../../components/TimeFormat";
 const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
     useGetAllUserEnrolledCourse();
-    console.log(enrolledCourse,"enrolledCourse")
   const { getStudentWishList, isPending: getStudentWishListLoading } =
     useGetStudentWishList();
 

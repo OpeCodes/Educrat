@@ -17,7 +17,6 @@ import Instructor from "./Instructor";
 import Student from "./Student";
 import Article from "./Article";
 import MedArticle from "./MedArticle";
-import ToastLoading from "./ToastLoading";
 import CoursePromotionalVideoUpload from "./CoursePromotionalVideoUpload";
 import PromotionalVideoPlayModal from "./PromotionalVideoPlayModal";
 import PreviewContentModal from "./PreviewContentModal";
@@ -43,7 +42,6 @@ export {
   Instructor,
   Student,
   Article,
-  ToastLoading,
   MedArticle,
   CoursePromotionalVideoUpload,
   PromotionalVideoPlayModal,

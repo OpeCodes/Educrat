@@ -51,12 +51,7 @@ const PreviewContentModal: React.FC<ModalProps> = ({
               <Text fontSize={18}> {title}</Text>
             </Stack>
             {/* Modal body */}
-            {contentType === "lecture_video" ? (
-              // <Stack w="100%" bg={"white"} >
-              //   <AspectRatio maxW="600px" w="100%" ratio={1}>
-              //     <iframe title={title} src={Content?.url} allowFullScreen />
-              //   </AspectRatio>
-              // </Stack>
+            {contentType === "lecture_video" ? (            
               <Stack mt={10}>
               <video controls autoPlay style={{ width: "100%", height: "400px"}}>
               <source src={Content?.url} type="video/mp4" />
@@ -89,4 +84,3 @@ const PreviewContentModal: React.FC<ModalProps> = ({
 
 export default PreviewContentModal;
 
-// PreviewContentModal;

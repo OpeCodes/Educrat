@@ -46,8 +46,6 @@ const data = [
 ];
 const currencies = [
   { value: "NGN" },
-  // { value: "USD",  },
-  // { value: "EUR",},
 ];
 const Pricing = () => {
  

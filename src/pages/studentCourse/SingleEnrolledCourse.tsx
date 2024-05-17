@@ -377,7 +377,6 @@ const SingleEnrolledCourse = () => {
             )}
             <Stack
               maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
-              // px={{ base: "2", xl: 20 }}
               pl={3}
               pr={{ base: 3, md: 0 }}
             >
