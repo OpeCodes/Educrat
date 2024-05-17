@@ -22,21 +22,6 @@ interface ModalShareProps {
 
 const ModalShare: React.FC<ModalShareProps> = ({ isOpen, onClose, url }) => {
   const { hasCopied, onCopy } = useClipboard(url);
-
-  // const shareOnFacebook = () => {
-  //   const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-  //   window.open(shareUrl, '_blank');
-  // };
-
-  // const shareOnTwitter = () => {
-  //   const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
-  //   window.open(shareUrl, '_blank');
-  // };
-  // const shareOnLinkedIn = () => {
-  //   const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-  //   window.open(shareUrl, '_blank');
-  // };
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />

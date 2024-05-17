@@ -1,19 +1,15 @@
 import {  Flex, Text } from "@chakra-ui/react";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
-// import { IoMdSettings } from "react-icons/io";
 import { useGetSingleCourse } from "../hooks/course";
 import { useEffect } from "react";
 const CourseManageNavbar = () => {
   const { id } = useParams();
   const {
     getSingleCourse,
-    // isError,
     refetch,
-    // isPending: singleCourseLoading,
   } = useGetSingleCourse(id);
   useEffect(() => {
-    // Manually refetch data when the ID changes or when needed
     refetch();
   }, [id]);
 

@@ -1,9 +1,10 @@
-import { Box, Image, VStack } from "@chakra-ui/react";
+import { Box, Image, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { NavItem } from "./NavItem";
 import { FaYoutube } from "react-icons/fa";
 import logo from "../assets/logo-2.svg";
 import { MdPayment } from "react-icons/md";
+import { Link } from "react-router-dom";
 interface SidebarProps {
   isExpanded: boolean;
   onHover: (isHovered: boolean) => void;
@@ -39,8 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isExpanded, onHover }) => {
         onMouseLeave={() => onHover(false)}
       >
         <VStack spacing={4} align="left" >
-          {isExpanded && <Image src={logo} mb={5}/>}
-
+          {isExpanded && <Text as={Link} to={"/"} > <Image src={logo} mb={5} /></Text> }
           <Box>
             {links.map((link, i) => (
               <Box key={i}>
