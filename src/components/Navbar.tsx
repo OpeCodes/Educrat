@@ -56,10 +56,10 @@ const Navbar = () => {
   const { user } = useSelector((store: RootState) => store?.user);
 
   const {data: getUser} = useGetUser()
-  const hasInstructorRole =getUser?.roles.some(
+  const hasInstructorRole =getUser?.roles?.some(
     (role: any) => role?.name === "instructor"
   );
-  const hasStudentRole = getUser?.roles.some(
+  const hasStudentRole = getUser?.roles?.some(
     (role: any) => role?.name === "student"
   );
  
