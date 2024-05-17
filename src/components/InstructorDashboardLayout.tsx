@@ -7,18 +7,22 @@ import { Navigate, Outlet } from "react-router-dom";
 import { InstructorNavbar } from ".";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { useGetUser } from "../hooks";
 
 const InstructorDashboard: React.FC = () => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
+  const { data: getUser } = useGetUser();
   const [isSmallerScreen] = useMediaQuery("(max-width: 100px)");
   const { user } = useSelector((store: RootState) => store?.user);
-  const hasInstructorRole = user?.user?.roles.some(
+  const hasInstructorRole = getUser?.roles.some(
     (role: any) => role?.name === "instructor"
   );
   const toggleSidebar = () => {
     setSidebarExpanded(!isSidebarExpanded);
   };
-  return (
+  return !hasInstructorRole ? (
+    <Navigate to={"/"} />
+  ) : (
     <Flex direction="row" h="100vh">
       {/* Sidebar (Hidden on smaller screens) */}
       {!isSmallerScreen && (
@@ -27,7 +31,6 @@ const InstructorDashboard: React.FC = () => {
           onHover={(isHovered) => setSidebarExpanded(isHovered)}
         />
       )}
-
       <Box flex="1">
         <Flex align="center" justify="space-between">
           {isSmallerScreen && (
@@ -61,12 +64,6 @@ const InstructorDashboard: React.FC = () => {
       )}
     </Flex>
   );
-
-  //  !hasInstructorRole ? (
-  //   <Navigate to={"/"} />
-  // ) : (
-
-  // );
 };
 
 export default InstructorDashboard;

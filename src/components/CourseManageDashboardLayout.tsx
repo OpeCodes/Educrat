@@ -1,12 +1,11 @@
 import { Navigate, Outlet,  } from "react-router-dom";
 import { CourseManageNavbar, CourseManageSidebar } from ".";
 import { Flex, Stack,  } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useGetUser } from "../hooks";
 
 const CourseManageDashboardLayout = () => {
-  const { user } = useSelector((store: RootState) => store?.user);
-  const hasInstructorRole = user?.user?.roles.some(
+  const {data: getUser} = useGetUser()
+  const hasInstructorRole =getUser?.roles.some(
     (role: any) => role?.name === "instructor"
   );
   return !hasInstructorRole ? (
