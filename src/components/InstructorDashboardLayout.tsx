@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Flex, Box, IconButton, useMediaQuery } from "@chakra-ui/react";
 import Sidebar from "./Sidebar";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { InstructorNavbar } from ".";
 import { useGetUser } from "../hooks";
 
 const InstructorDashboard: React.FC = () => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
-  const { data: getUser } = useGetUser();
+  const { data: getUser,isPending } = useGetUser();
   const [isSmallerScreen] = useMediaQuery("(max-width: 100px)");
   const hasInstructorRole = getUser?.roles.some(
     (role: any) => role?.name === "instructor"
@@ -16,7 +16,11 @@ const InstructorDashboard: React.FC = () => {
   const toggleSidebar = () => {
     setSidebarExpanded(!isSidebarExpanded);
   };
-  return !hasInstructorRole ? (
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return (!hasInstructorRole && !isPending) ? (
     <Navigate to={"/"} />
   ) : (
     <Flex direction="row" h="100vh">

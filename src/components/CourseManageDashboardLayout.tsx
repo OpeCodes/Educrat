@@ -4,11 +4,11 @@ import { Flex, Stack,  } from "@chakra-ui/react";
 import { useGetUser } from "../hooks";
 
 const CourseManageDashboardLayout = () => {
-  const {data: getUser} = useGetUser()
+  const {data: getUser,isPending} = useGetUser()
   const hasInstructorRole =getUser?.roles.some(
     (role: any) => role?.name === "instructor"
   );
-  return !hasInstructorRole ? (
+  return (!hasInstructorRole && !isPending )? (
     <Navigate to={"/"} />
   ) : (
     <>
