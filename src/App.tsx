@@ -132,7 +132,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "courses",
-        element: <Courses />,
+        element: <Courses />,      
       },
       {
         path: "payment",

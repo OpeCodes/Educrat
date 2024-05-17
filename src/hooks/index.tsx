@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../utils/axios";
 import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import { TbInfoHexagonFilled } from "react-icons/tb";
 export const useGetUser = () => {
   const toast = useToast();
   const [errorToastShown, setErrorToastShown] = useState(false);
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending, isError,refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       const { data } = await customFetch.get("/user");
@@ -55,12 +55,14 @@ export const useGetUser = () => {
       });
     }
   }, [isError, errorToastShown, toast]);
-  return { data, isPending, isError };
+  return { data, isPending, isError,refetch };
 };
 
 export const useBecomeInstructor = () => {
   const toast = useToast();
   // const dispatch= useDispatch();
+  const queryClient = useQueryClient();
+
   const [tabIndex, setTabIndex] = useState(0);
   const handleTabChange = (index: number) => {
     setTabIndex(index);
@@ -72,6 +74,8 @@ export const useBecomeInstructor = () => {
     onSuccess: () => {
       // dispatch(setUser(user.data));
       // addUserLocalStorage(user.data);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+
       handleTabChange(1);
       toast({
         title: `You are now an instructor`,
