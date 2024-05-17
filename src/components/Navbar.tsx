@@ -28,6 +28,7 @@ import { useSelector } from "react-redux";
 import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import AddToCartButton from "./AddToCartButton";
+import { useGetUser } from "../hooks";
 const links = [
   {
     id: 1,
@@ -39,21 +40,6 @@ const links = [
     name: "Course",
     href: "/all-courses",
   },
-  // {
-  //   id: 3,
-  //   name: "Events",
-  //   href: "/",
-  // },
-  // {
-  //   id: 4,
-  //   name: "Page",
-  //   // href: "/",
-  // },
-  // {
-  //   id: 5,
-  //   name: "Contact",
-  //   // href: "",
-  // },
 ];
 
 const Navbar = () => {
@@ -68,12 +54,15 @@ const Navbar = () => {
   // } = useDisclosure();
   const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store?.user);
-  const hasStudentRole = user?.user?.roles.some(
-    (role: any) => role?.name === "student"
-  );
-  const hasInstructorRole = user?.user?.roles.some(
+
+  const {data: getUser} = useGetUser()
+  const hasInstructorRole =getUser?.roles.some(
     (role: any) => role?.name === "instructor"
   );
+  const hasStudentRole = getUser?.roles.some(
+    (role: any) => role?.name === "student"
+  );
+ 
 
   return (
     <Stack>
@@ -223,7 +212,7 @@ const Navbar = () => {
                 fontWeight="bold"
                 bg="white"
                 color="#140342"
-                src={user?.user?.profilePicture}
+                src={getUser?.profilePicture}
                 cursor="pointer"
               />
               {hover && (
@@ -242,7 +231,7 @@ const Navbar = () => {
                       fontWeight="bold"
                       bg="white"
                       color="#140342"
-                      src={user?.user?.profilePicture}
+                      src={getUser?.profilePicture}
                       cursor="pointer"
                     />
                     <Box>
@@ -368,7 +357,6 @@ const Navbar = () => {
         <Box bg="white" p={5} display={{ base: "none", md: "block" }}>
           <DrawerCloseButton bg="white" borderRadius={"100%"} />
         </Box>
-
         <DrawerContent h={"100vh"}>
           <DrawerHeader
             borderBottomWidth="1px"
@@ -386,7 +374,7 @@ const Navbar = () => {
                     fontWeight="bold"
                     bg="white"
                     color="#140342"
-                    src={user?.user?.profilePicture}
+                    src={getUser?.profilePicture}
                     cursor="pointer"
                   />
                   <Box p={0}>

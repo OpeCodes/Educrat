@@ -1,18 +1,16 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../utils/axios";
 import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { TbInfoHexagonFilled } from "react-icons/tb";
-import { setUser } from "../features/user/UserSlice";
-import { addUserLocalStorage } from "../store/localStorage";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+// import { setUser } from "../features/user/UserSlice";
+// import { addUserLocalStorage } from "../store/localStorage";
+// import { useDispatch } from "react-redux";
 
 export const useGetUser = () => {
   const toast = useToast();
   const [errorToastShown, setErrorToastShown] = useState(false);
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending, isError,refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       const { data } = await customFetch.get("/user");
@@ -57,13 +55,14 @@ export const useGetUser = () => {
       });
     }
   }, [isError, errorToastShown, toast]);
-  return { data, isPending, isError };
+  return { data, isPending, isError,refetch };
 };
 
 export const useBecomeInstructor = () => {
   const toast = useToast();
-  const { user } = useSelector((store: RootState) => store?.user);
-  const dispatch= useDispatch();
+  // const dispatch= useDispatch();
+  const queryClient = useQueryClient();
+
   const [tabIndex, setTabIndex] = useState(0);
   const handleTabChange = (index: number) => {
     setTabIndex(index);
@@ -73,8 +72,10 @@ export const useBecomeInstructor = () => {
       return customFetch.put("/instructor/become-instructor", user);
     },
     onSuccess: () => {
-      dispatch(setUser(user.data));
-      addUserLocalStorage(user.data);
+      // dispatch(setUser(user.data));
+      // addUserLocalStorage(user.data);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+
       handleTabChange(1);
       toast({
         title: `You are now an instructor`,

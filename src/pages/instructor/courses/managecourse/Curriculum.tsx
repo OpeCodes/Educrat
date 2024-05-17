@@ -83,7 +83,6 @@ const Curriculum = () => {
   const { moduleCreateLectureCourse } = useCreateModuleLectureCourse();
   const { deleteExternalResource, deleteExternalResourceLoading } =
     useDeleteExternalResource();
-
   const { showPreviewable } = useShowPreviewable();
 
   const initialValues1: CurriculumInterface = {

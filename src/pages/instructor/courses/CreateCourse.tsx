@@ -12,18 +12,16 @@ import { CreateCourseNavBar, Loading } from "../../../components";
 import { Formik } from "formik";
 import { createCourseSchema } from "../../../schemas";
 import { useCourseCategory, useCreateCourse } from "../../../hooks/course";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
 import { Navigate } from "react-router-dom";
+import { useGetUser } from "../../../hooks";
 
 const initialValues = {
   title: "",
   category: "",
 };
 const CreateCourse = () => {
-  const { user } = useSelector((store: RootState) => store?.user);
- 
-  const hasInstructorRole = user?.user?.roles.some(
+ const {data: getUser} = useGetUser()
+  const hasInstructorRole =getUser?.roles.some(
     (role: any) => role?.name === "instructor"
   );
   const { createCourse, isPending: loading } = useCreateCourse();

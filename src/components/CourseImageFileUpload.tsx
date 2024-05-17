@@ -122,7 +122,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
             height={"200px"}
             alt="Uploaded Image"
             mt={4}
-            objectFit={"cover"}
+            objectFit={"contain"}
           />
         ) : (
           <Image

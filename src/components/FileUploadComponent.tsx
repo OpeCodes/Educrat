@@ -10,6 +10,7 @@ import {
 import customFetch from "../utils/axios";
 import imagePlaceholder from "../assets/image-placeholder.png";
 import { useNavigate } from "react-router-dom";
+import { useGetUser } from "../hooks";
 interface ImageUploadProps {
   onImageUpload: (file: File) => void;
 }
@@ -20,6 +21,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const [fileToUpload, setFileToUpload] = useState<File | null>(null);
   const toast = useToast();
   const navigate = useNavigate();
+  const {refetch} =useGetUser();
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -82,6 +84,7 @@ const FileUploadComponent: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         duration: 5000,
         isClosable: true,
       });
+      refetch()
     } catch (error: any) {
       if (error.response) {
         toast({
