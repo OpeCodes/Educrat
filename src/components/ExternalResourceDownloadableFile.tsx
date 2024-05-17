@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   Progress,
   Input,
@@ -49,6 +49,7 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
           duration: 5000,
           isClosable: true,
         });
+        return;
       } else {
         setSelectImageName(file);
 
@@ -86,12 +87,7 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
             },
           }
         );
-        // toast({
-        //   title: `uploaded11`,
-        //   status: "success",
-        //   duration: 5000,
-        //   isClosable: true,
-        // });
+       
         refetch();
 
         onImageUpload(file);
@@ -123,14 +119,26 @@ const ExternalResourceDownloadableFile: React.FC<ImageUploadProps> = ({
         }
       }
     };
+    refetch();
+
     reader.readAsDataURL(file);
     refetch();
   };
 
+  useEffect(() => {
+    if (uploadProgress === 100) {
+      toast({
+        title: `uploaded`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      refetch();    }
+  }, [uploadProgress]);
   //date formatted code
   const currentDate = new Date();
   const day = String(currentDate.getDate()).padStart(2, "0");
-  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // January is 0
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); 
   const year = currentDate.getFullYear();
 
   const formattedDate = `${month}/${day}/${year}`;

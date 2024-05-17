@@ -159,12 +159,12 @@ const StudentCourse = () => {
                       <Flex align={"center"} justify={"space-between"}>
                         <Flex align={"center"} columnGap={2}>
                           <Avatar
-                            name={`${userId.firstName} ${userId.lastName}`}
-                            src={userId.profilePicture}
+                            name={`${userId?.firstName} ${userId?.lastName}`}
+                            src={userId?.profilePicture}
                             size={"sm"}
                           />
                           <Text>
-                            {userId?.firstName} {userId.lastName}
+                            {userId?.firstName} {userId?.lastName}
                           </Text>
                         </Flex>
                         <Text fontWeight={"500"} fontSize={"20px"}>

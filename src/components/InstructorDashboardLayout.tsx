@@ -18,9 +18,7 @@ const InstructorDashboard: React.FC = () => {
   const toggleSidebar = () => {
     setSidebarExpanded(!isSidebarExpanded);
   };
-  return !hasInstructorRole ? (
-    <Navigate to={"/"} />
-  ) : (
+  return (
     <Flex direction="row" h="100vh">
       {/* Sidebar (Hidden on smaller screens) */}
       {!isSmallerScreen && (
@@ -63,6 +61,12 @@ const InstructorDashboard: React.FC = () => {
       )}
     </Flex>
   );
+
+  //  !hasInstructorRole ? (
+  //   <Navigate to={"/"} />
+  // ) : (
+
+  // );
 };
 
 export default InstructorDashboard;
