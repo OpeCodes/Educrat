@@ -64,7 +64,7 @@ const InstructorNavbar = () => {
             <IoMdNotificationsOutline fontSize={20} />
           </Box> */}
           <Avatar
-            name={`${user.user.firstName} ${user.user.lastName}`}
+            name={`${user?.user?.firstName} ${user?.user?.lastName}`}
             size="sm"
             fontWeight="bold"
             bg="white"

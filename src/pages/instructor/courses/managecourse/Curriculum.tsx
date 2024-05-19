@@ -436,10 +436,8 @@ const Curriculum = () => {
                       "0"
                     ); // January is 0
                     const year = date.getUTCFullYear();
-
                     // Format the components into the desired format
                     const formattedDate = `${month}/${day}/${year}`;
-
                     const handleTogglePreviewable = async (
                       lectureId: string,
                       isChecked: boolean

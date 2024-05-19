@@ -28,6 +28,7 @@ import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import AddToCartButton from "./AddToCartButton";
 import { useGetUser } from "../hooks";
+import { useQueryClient } from "@tanstack/react-query";
 const links = [
   {
     id: 1,
@@ -46,18 +47,18 @@ const Navbar = () => {
   const [hover, setHover] = useBoolean();
   const navigate = useNavigate();
   const toast = useToast();
-  
+
   const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store?.user);
 
-  const {data: getUser} = useGetUser()
-  const hasInstructorRole =getUser?.roles?.some(
+  const { data: getUser } = useGetUser();
+  const hasInstructorRole = getUser?.roles?.some(
     (role: any) => role?.name === "instructor"
   );
   const hasStudentRole = getUser?.roles?.some(
     (role: any) => role?.name === "student"
   );
- 
+  const queryClient = useQueryClient();
 
   return (
     <Stack>
@@ -143,7 +144,7 @@ const Navbar = () => {
               fontSize="15px"
               cursor={"pointer"}
               color={"black"}
-              display={{base: "none", md: "flex"}}
+              display={{ base: "none", md: "flex" }}
               onClick={() => {
                 navigate("/become-instructor");
               }}
@@ -156,7 +157,7 @@ const Navbar = () => {
               fontSize="15px"
               cursor={"pointer"}
               color={"black"}
-              display={{base: "none", md: "flex"}}
+              display={{ base: "none", md: "flex" }}
               onClick={() => {
                 navigate("/sign-in");
                 toast({
@@ -289,12 +290,15 @@ const Navbar = () => {
                       <Text
                         cursor={"pointer"}
                         onClick={() => {
+                          queryClient.invalidateQueries();
+
                           toast({
                             title: `Logging out...`,
                             status: "success",
                             duration: 2000,
                             isClosable: true,
                           });
+
                           setTimeout(() => {
                             dispatch(logoutUser());
                           }, 2000);
@@ -430,6 +434,7 @@ const Navbar = () => {
                         duration: 2000,
                         isClosable: true,
                       });
+                      queryClient.invalidateQueries();
                       setTimeout(() => {
                         dispatch(logoutUser());
                         onClose();
