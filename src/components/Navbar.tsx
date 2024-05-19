@@ -46,18 +46,17 @@ const Navbar = () => {
   const [hover, setHover] = useBoolean();
   const navigate = useNavigate();
   const toast = useToast();
-  
+
   const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store?.user);
 
-  const {data: getUser} = useGetUser()
-  const hasInstructorRole =getUser?.roles?.some(
+  const { data: getUser } = useGetUser();
+  const hasInstructorRole = getUser?.roles?.some(
     (role: any) => role?.name === "instructor"
   );
   const hasStudentRole = getUser?.roles?.some(
     (role: any) => role?.name === "student"
   );
- 
 
   return (
     <Stack>
@@ -143,7 +142,7 @@ const Navbar = () => {
               fontSize="15px"
               cursor={"pointer"}
               color={"black"}
-              display={{base: "none", md: "flex"}}
+              display={{ base: "none", md: "flex" }}
               onClick={() => {
                 navigate("/become-instructor");
               }}
@@ -156,7 +155,7 @@ const Navbar = () => {
               fontSize="15px"
               cursor={"pointer"}
               color={"black"}
-              display={{base: "none", md: "flex"}}
+              display={{ base: "none", md: "flex" }}
               onClick={() => {
                 navigate("/sign-in");
                 toast({
@@ -170,7 +169,7 @@ const Navbar = () => {
               Teach on Educrat
             </Text>
           )}
-          {hasStudentRole && hasInstructorRole && (
+          {user && hasStudentRole && hasInstructorRole && (
             <Text
               fontSize="15px"
               cursor={"pointer"}
@@ -243,7 +242,6 @@ const Navbar = () => {
                         My Learning
                       </Text>
                       <Text as={Link} to={"/cart"}>
-                        {" "}
                         My Cart
                       </Text>
                       {hasStudentRole && hasInstructorRole && (
@@ -289,12 +287,14 @@ const Navbar = () => {
                       <Text
                         cursor={"pointer"}
                         onClick={() => {
+
                           toast({
                             title: `Logging out...`,
                             status: "success",
                             duration: 2000,
                             isClosable: true,
                           });
+
                           setTimeout(() => {
                             dispatch(logoutUser());
                           }, 2000);
@@ -430,6 +430,7 @@ const Navbar = () => {
                         duration: 2000,
                         isClosable: true,
                       });
+                        //  window.location.reload()
                       setTimeout(() => {
                         dispatch(logoutUser());
                         onClose();

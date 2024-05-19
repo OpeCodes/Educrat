@@ -62,7 +62,6 @@ const Courses = () => {
       </Text>
       <Flex
         justify={"space-between"}
-        align={"center"}
         flexWrap={"wrap"}
         rowGap={0}
         mb={4}
@@ -105,7 +104,7 @@ const Courses = () => {
           variant="outline"
           spinnerPlacement="end"
           // mt={3}
-          mt={{ base: 3, lg: 0 }}
+          mt={{ base: 3, md: 0 }}
           borderWidth={2}
           py={2}
           borderColor={"#00FF84"}
