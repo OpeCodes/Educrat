@@ -171,7 +171,7 @@ const Navbar = () => {
               Teach on Educrat
             </Text>
           )}
-          {hasStudentRole && hasInstructorRole && (
+          {user && hasStudentRole && hasInstructorRole && (
             <Text
               fontSize="15px"
               cursor={"pointer"}
@@ -244,7 +244,6 @@ const Navbar = () => {
                         My Learning
                       </Text>
                       <Text as={Link} to={"/cart"}>
-                        {" "}
                         My Cart
                       </Text>
                       {hasStudentRole && hasInstructorRole && (
@@ -290,7 +289,6 @@ const Navbar = () => {
                       <Text
                         cursor={"pointer"}
                         onClick={() => {
-                          queryClient.invalidateQueries();
 
                           toast({
                             title: `Logging out...`,
@@ -302,6 +300,7 @@ const Navbar = () => {
                           setTimeout(() => {
                             dispatch(logoutUser());
                           }, 2000);
+
                         }}
                       >
                         Logout
@@ -434,7 +433,7 @@ const Navbar = () => {
                         duration: 2000,
                         isClosable: true,
                       });
-                      queryClient.invalidateQueries();
+                        //  window.location.reload()
                       setTimeout(() => {
                         dispatch(logoutUser());
                         onClose();
