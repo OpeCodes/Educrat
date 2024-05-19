@@ -7,7 +7,7 @@ import { GetToastErrorHandling } from "../../components";
 
 export const useGetAllEducratInstructors = () => {
   const { data, isPending, isError } = useQuery({
-    queryKey: ["user"],
+    queryKey: ["allinstructorEducrat"],
     queryFn: async () => {
       const { data } = await customFetch.get("/instructor");
       return data;

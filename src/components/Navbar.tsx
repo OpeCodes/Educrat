@@ -28,7 +28,6 @@ import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import AddToCartButton from "./AddToCartButton";
 import { useGetUser } from "../hooks";
-import { useQueryClient } from "@tanstack/react-query";
 const links = [
   {
     id: 1,
@@ -58,7 +57,6 @@ const Navbar = () => {
   const hasStudentRole = getUser?.roles?.some(
     (role: any) => role?.name === "student"
   );
-  const queryClient = useQueryClient();
 
   return (
     <Stack>
@@ -300,7 +298,6 @@ const Navbar = () => {
                           setTimeout(() => {
                             dispatch(logoutUser());
                           }, 2000);
-
                         }}
                       >
                         Logout

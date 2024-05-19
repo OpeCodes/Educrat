@@ -13,7 +13,6 @@ import { Instructor } from "../../components";
 
 const AllInstructorPage = () => {
   const { data, isPending } = useGetAllEducratInstructors();
-  console.log(data,"data")
   const dummyArray = [1, 2, 3, 4];
   const arrayOfIds = Array.isArray(data) ? data?.map((obj: any) => obj?.id): [];
   return (
@@ -94,7 +93,7 @@ const AllInstructorPage = () => {
         w={"100%"}
         mx={"auto"}
       >
-        { Array.isArray(data) && data?.map((instructor: any, index: any) => {
+        {Array.isArray(data) && data?.map((instructor: any, index: any) => {
           return (
             <Instructor
               key={instructor.id}
