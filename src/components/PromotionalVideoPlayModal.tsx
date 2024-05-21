@@ -7,6 +7,8 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  Image,
+  Box,
 } from "@chakra-ui/react";
 import { IoPlayOutline } from "react-icons/io5";
 
@@ -19,15 +21,21 @@ const PromotionalVideoPlayModal = ({ imageUrl, videoUrl, title }: Video) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Stack position="relative">
-      <img
+      <Box   maxH="500px">
+      <Image
         src={imageUrl}
         width={"100%"}
         alt="promotional video"
-        style={{
-          height: "300px",
-          objectFit: "cover",
-        }}
+        // style={{
+        //   height: "300px",
+        //   objectFit: "cover",
+        // }}
+      
+        maxH={"300px"}
+        height={"100%"}
+        objectFit={"revert"}
       />
+      </Box>
       {videoUrl && (
         <Text
           position="absolute"

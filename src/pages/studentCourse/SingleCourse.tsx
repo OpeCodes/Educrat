@@ -706,7 +706,7 @@ const SingleCourse = () => {
                         <Stack
                           maxHeight={{
                             base: "100%",
-                            lg: "200px",
+                            lg: "280px",
                             "2xl": "100%",
                           }}
                           overflowY={{

@@ -192,13 +192,14 @@ const MyLearning = () => {
                   >
                     {getStudentWishList?.map(
                       (course: CourseInterface, index: number) => {
-                        const { thumbnail, title, id, slug, reviews,price } = course;
+                        const { thumbnail, title, id, slug, reviews, price } =
+                          course;
                         return (
                           <GridItem key={id} as={Link} to={`/course/${slug}`}>
                             <Image
-                                maxH="150px"
-                                height={"100%"}
-                                objectFit={"scale-down"}
+                              maxH="150px"
+                              height={"100%"}
+                              objectFit={"scale-down"}
                               width="100%"
                               src={thumbnail}
                               alt={title}
@@ -229,7 +230,7 @@ const MyLearning = () => {
                               </Text>
                             </Flex>
                             <Text fontWeight="bold" color="black">
-                             N{price}
+                              N{price}
                             </Text>
                           </GridItem>
                         );
