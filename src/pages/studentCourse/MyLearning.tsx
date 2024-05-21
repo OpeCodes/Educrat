@@ -150,16 +150,14 @@ const MyLearning = () => {
                           to={`/course/${courseId.slug}/learn/lecture/${id}/${firstLectureIds[index]}/reviews`}
                         >
                           <Image
-                            maxHeight={"250px"}
+                            maxH="150px"
                             height={"100%"}
+                            objectFit={"scale-down"}
                             width={"100%"}
-                            objectFit="cover"
                             src={thumbnail}
                             alt={title}
                           />
-                          <Text mt={2} fontWeight={"bold"}>
-                            {title}
-                          </Text>
+                          <Text fontWeight={"bold"}>{title}</Text>
                           <Text fontSize={"15px"} color={"gray"}>
                             Peter Adedokun
                           </Text>
@@ -194,14 +192,15 @@ const MyLearning = () => {
                   >
                     {getStudentWishList?.map(
                       (course: CourseInterface, index: number) => {
-                        const { thumbnail, title, id, slug, reviews } = course;
+                        const { thumbnail, title, id, slug, reviews, price } =
+                          course;
                         return (
                           <GridItem key={id} as={Link} to={`/course/${slug}`}>
                             <Image
-                              maxHeight="250px"
-                              height="100%"
+                              maxH="150px"
+                              height={"100%"}
+                              objectFit={"scale-down"}
                               width="100%"
-                              objectFit="cover"
                               src={thumbnail}
                               alt={title}
                             />
@@ -231,7 +230,7 @@ const MyLearning = () => {
                               </Text>
                             </Flex>
                             <Text fontWeight="bold" color="black">
-                              N40000
+                              N{price}
                             </Text>
                           </GridItem>
                         );
