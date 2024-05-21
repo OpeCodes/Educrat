@@ -506,7 +506,7 @@ const SingleCourse = () => {
                             in={show}
                             color={"#4f547b"}
                           ></Collapse>
-                          {getStudentSingleCourse?.description.length > 150 && (
+                          {getStudentSingleCourse?.description.length >500 && (
                             <Button
                               color={"#6440fb"}
                               textAlign={"left"}
@@ -518,7 +518,7 @@ const SingleCourse = () => {
                               colorScheme="teal"
                               variant="link"
                             >
-                              Show {show ? "Less" : "More"}
+                              Show {show ? "Lessw" : "More"}
                             </Button>
                           )}
                         </Stack>
