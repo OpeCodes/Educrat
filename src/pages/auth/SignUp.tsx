@@ -94,7 +94,7 @@ const SignUp = () => {
             <Text fontSize={"4xl"} fontWeight={"bold"}>
               Sign Up
             </Text>
-            <Text fontSize={"18px"}>Your knowledge journey begins here!</Text>
+            <Text fontSize={"18px"} mb={"0.9rem"}>Your knowledge journey begins here!</Text>
           </Box>
           <Box>
             <Formik
