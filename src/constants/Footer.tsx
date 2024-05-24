@@ -8,7 +8,7 @@ import {
   Button,
   Stack,
 } from "@chakra-ui/react";
-import logo from "../assets/footer-logo.svg";
+// import logo from "../assets/footer-logo.svg";
 import {
   FaInstagram,
   FaTwitter,

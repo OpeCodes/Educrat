@@ -17,7 +17,7 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
-import logo from "../../assets/logo.svg";
+// import logo from "../../assets/logo.svg";
 import { SignUpSchema } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { useRegisterUser } from "../../hooks/auth";
@@ -66,7 +66,7 @@ const SignUp = () => {
           >
             <Stack position={"relative"}>
               <Image src={backgroundImg} alt="background" />
-              <Image
+              {/* <Image
                 src={logo}
                 cursor={"pointer"}
                 alt="background"
@@ -74,7 +74,17 @@ const SignUp = () => {
                 top={"18px"}
                 left={"25px"}
                 onClick={() => navigate("/")}
-              />
+              /> */}
+              <Stack
+                top={"18px"}
+                left={"25px"}
+                onClick={() => navigate("/")}
+                position={"absolute"}
+              >
+                <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+                  DevUpshot
+                </Text>
+              </Stack>
             </Stack>
           </Box>
         </GridItem>

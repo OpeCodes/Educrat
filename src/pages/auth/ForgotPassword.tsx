@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
-import logo from "../../assets/logo.svg";
+// import logo from "../../assets/logo.svg";
 import { forgotPasswordSchema } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { useForgotPassword } from "../../hooks/auth";
@@ -42,7 +42,7 @@ const ForgotPassword = () => {
           >
           <Stack position={"relative"}>
               <Image src={backgroundImg} alt="background" />
-              <Image
+              {/* <Image
                 src={logo}
                 cursor={"pointer"}
                 alt="background"
@@ -50,7 +50,17 @@ const ForgotPassword = () => {
                 top={"18px"}
                 left={"25px"}
                 onClick={() => navigate("/")}
-              />
+              /> */}
+              <Stack
+                top={"18px"}
+                left={"25px"}
+                onClick={() => navigate("/")}
+                position={"absolute"}
+              >
+                <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+                  DevUpshot
+                </Text>
+              </Stack>
             </Stack>
           </Box>
         </GridItem>

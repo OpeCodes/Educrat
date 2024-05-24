@@ -16,7 +16,6 @@ import {
   Input,
   Button,
   Textarea,
-  Image,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
@@ -24,7 +23,7 @@ import { useBecomeInstructor } from "../../hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Navigate, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo-2.svg";
+// import logo from "../../assets/logo-2.svg";
 
 const initialValues = {
   headline: "",

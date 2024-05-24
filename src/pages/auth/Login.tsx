@@ -17,7 +17,7 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
-import logo from "./../../assets/logo.svg";
+// import logo from "./../../assets/logo.svg";
 
 import { SignInSchema } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";

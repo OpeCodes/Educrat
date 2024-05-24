@@ -1,6 +1,5 @@
 import {
-  Flex,
-  Image,
+  Flex,  
   Stack,
   Box,
   Text,
@@ -18,7 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import logo from "../assets/logo-2.svg";
+// import logo from "../assets/logo-2.svg";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
