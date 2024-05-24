@@ -80,6 +80,7 @@ const SignUp = () => {
                 left={"25px"}
                 onClick={() => navigate("/")}
                 position={"absolute"}
+                cursor={"pointer"}
               >
                 <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
                   DevUpshot

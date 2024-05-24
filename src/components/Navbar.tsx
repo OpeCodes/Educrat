@@ -162,13 +162,7 @@ const Navbar = () => {
               color={"black"}
               display={{ base: "none", md: "flex" }}
               onClick={() => {
-                navigate("/sign-in");
-                toast({
-                  title: "Sign in to become an instructor",
-                  status: "info",
-                  duration: 5000,
-                  isClosable: true,
-                });
+                navigate("/sign-in");               
               }}
             >
               Teach on DevUpshot

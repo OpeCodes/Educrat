@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
-import logo from "../../assets/logo.svg";
+// import logo from "../../assets/logo.svg";
 import { resetPasswordSchema } from "../../schemas";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useResetPassword } from "../../hooks/auth";
@@ -68,6 +68,7 @@ const ResetPassword = () => {
                 left={"25px"}
                 onClick={() => navigate("/")}
                 position={"absolute"}
+                cursor={"pointer"}
               >
                 <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
                   DevUpshot
