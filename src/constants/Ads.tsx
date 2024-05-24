@@ -32,7 +32,7 @@ export const Ads = () => {
             </Box>
           </Heading>
           <Text as={"p"} color={"#140342"} my={8}>
-            Take classes on the go with the educrat app. Stream or download to
+            Take classes on the go with the DevUpshot app. Stream or download to
             watch on the plane, the subway, or wherever you learn best.
           </Text>
           <Flex>

@@ -72,9 +72,15 @@ const Navbar = () => {
         align={"center"}
       >
         <Flex justify={"space-between"} align={"center"}>
-          <Box width={"160px"} as={Link} to={"/"}>
+          {/* <Box width={"160px"} as={Link} to={"/"}>
             <Image src={logo} alt="logo" />
-          </Box>
+
+          </Box> */}
+
+          <Stack>
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>DevUpshot</Text>
+          </Stack>
+
         </Flex>
 
         <Flex
@@ -115,7 +121,7 @@ const Navbar = () => {
                   as={Link}
                   to="/become-instructor"
                 >
-                  Teach on Educrat
+                  Teach on DevUpshot
                 </Text>
               )}
               {!hasStudentRole && hasInstructorRole && (
@@ -147,7 +153,7 @@ const Navbar = () => {
                 navigate("/become-instructor");
               }}
             >
-              Teach on Educrat
+              Teach on DevUpshot
             </Text>
           )}
           {!user && (
@@ -166,7 +172,7 @@ const Navbar = () => {
                 });
               }}
             >
-              Teach on Educrat
+              Teach on DevUpshot
             </Text>
           )}
           {user && hasStudentRole && hasInstructorRole && (
@@ -261,7 +267,7 @@ const Navbar = () => {
                           as={Link}
                           to="/become-instructor"
                         >
-                          Teach on Educrat
+                          Teach on DevUpshot
                         </Text>
                       )}
                     </Stack>

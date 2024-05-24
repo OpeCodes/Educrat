@@ -78,7 +78,18 @@ const SignUp = () => {
             </Stack>
           </Box>
         </GridItem>
-        <GridItem height="100vh" mx={{ base: "15px", lg: "20px" }}>
+        <GridItem height="100vh" mx={{ base: "15px", lg: "20px" }} >
+        <Stack
+            mb={"0.5rem"}
+            mt={"0.9rem"}
+            display={{ base: "block", lg: "none" }}
+            onClick={() => navigate("/")}
+            cursor={"pointer"}
+          >
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+              DevUpshot
+            </Text>
+          </Stack>
           <Box textAlign="center" mt={5}>
             <Text fontSize={"4xl"} fontWeight={"bold"}>
               Sign Up

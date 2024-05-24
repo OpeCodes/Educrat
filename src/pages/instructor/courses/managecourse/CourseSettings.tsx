@@ -23,7 +23,7 @@ const CourseSettings = () => {
         <Text>
           This course is{" "}
           {getSingleCourse?.status === "published" ? "now" : "not"} published on
-          the Educrat marketplace.
+          the DevUpshot marketplace.
         </Text>
         <Stack mt={"0.9rem"}>
           <Flex columnGap={4} align={"center"}>
