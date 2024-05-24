@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
-import logo from "../../assets/logo.svg";
+// import logo from "../../assets/logo.svg";
 import { forgotPasswordSchema } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { useForgotPassword } from "../../hooks/auth";
@@ -42,7 +42,7 @@ const ForgotPassword = () => {
           >
           <Stack position={"relative"}>
               <Image src={backgroundImg} alt="background" />
-              <Image
+              {/* <Image
                 src={logo}
                 cursor={"pointer"}
                 alt="background"
@@ -50,7 +50,18 @@ const ForgotPassword = () => {
                 top={"18px"}
                 left={"25px"}
                 onClick={() => navigate("/")}
-              />
+              /> */}
+              <Stack
+                top={"18px"}
+                left={"25px"}
+                onClick={() => navigate("/")}
+                position={"absolute"}
+                cursor={"pointer"}
+              >
+                <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+                  DevUpshot
+                </Text>
+              </Stack>
             </Stack>
           </Box>
         </GridItem>
@@ -61,11 +72,22 @@ const ForgotPassword = () => {
           flexDirection={"column"}
           justifyContent={{ base: "none", md: "center" }}
         >
+          <Stack
+            mb={"0.5rem"}
+            mt={"0.9rem"}
+            display={{ base: "block", lg: "none" }}
+            onClick={() => navigate("/")}
+            cursor={"pointer"}
+          >
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+              DevUpshot
+            </Text>
+          </Stack>
           <Box textAlign="center" mt={5}>
             <Text fontSize={"4xl"} fontWeight={"bold"}>
               Request Password Reset
             </Text>
-            <Text fontSize={"18px"}>
+            <Text fontSize={"18px"} mb={"0.9rem"}>
               Enter your email to receive reset instructions.
             </Text>
           </Box>

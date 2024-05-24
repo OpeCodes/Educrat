@@ -17,7 +17,7 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
-import logo from "./../../assets/logo.svg";
+// import logo from "./../../assets/logo.svg";
 
 import { SignInSchema } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
@@ -50,7 +50,7 @@ const Login = () => {
           >
             <Stack position={"relative"}>
               <Image src={backgroundImg} alt="background" />
-              <Image
+              {/* <Image
                 src={logo}
                 cursor={"pointer"}
                 alt="background"
@@ -58,7 +58,18 @@ const Login = () => {
                 top={"18px"}
                 left={"25px"}
                 onClick={() => navigate("/")}
-              />
+              /> */}
+              <Stack
+                top={"18px"}
+                left={"25px"}
+                onClick={() => navigate("/")}
+                position={"absolute"}
+                cursor={"pointer"}
+              >
+                <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+                  DevUpshot
+                </Text>
+              </Stack>
             </Stack>
           </Box>
         </GridItem>
@@ -69,11 +80,25 @@ const Login = () => {
           flexDirection={"column"}
           justifyContent={{ base: "none", md: "center" }}
         >
+          <Stack
+            mb={"0.5rem"}
+            mt={"0.9rem"}
+            display={{ base: "block", lg: "none" }}
+            onClick={() => navigate("/")}
+            cursor={"pointer"}
+          >
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+              DevUpshot
+            </Text>
+          </Stack>
+
           <Box textAlign="center" mt={5}>
             <Text fontSize={"4xl"} fontWeight={"bold"}>
               Welcome Back
             </Text>
-            <Text fontSize={"18px"}>Please enter your login details</Text>
+            <Text fontSize={"18px"} mb={"0.9rem"}>
+              Please enter your login details
+            </Text>
           </Box>
           <Box>
             <Formik

@@ -82,7 +82,7 @@ const CourseLandingPage = () => {
       </Text>
       <Divider />
       <Text p={5} fontSize={14}>
-        Your course landing page is crucial to your success on Educrat. If it’s
+        Your course landing page is crucial to your success on DevUpshot. If it’s
         done right, it can also help you gain visibility in search engines like
         Google. As you complete this section, think about creating a compelling
         Course Landing Page that demonstrates why someone would want to enroll

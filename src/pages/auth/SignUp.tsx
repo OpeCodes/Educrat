@@ -17,7 +17,7 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import backgroundImg from "../../assets/backimage.webp";
-import logo from "../../assets/logo.svg";
+// import logo from "../../assets/logo.svg";
 import { SignUpSchema } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { useRegisterUser } from "../../hooks/auth";
@@ -66,7 +66,7 @@ const SignUp = () => {
           >
             <Stack position={"relative"}>
               <Image src={backgroundImg} alt="background" />
-              <Image
+              {/* <Image
                 src={logo}
                 cursor={"pointer"}
                 alt="background"
@@ -74,16 +74,38 @@ const SignUp = () => {
                 top={"18px"}
                 left={"25px"}
                 onClick={() => navigate("/")}
-              />
+              /> */}
+              <Stack
+                top={"18px"}
+                left={"25px"}
+                onClick={() => navigate("/")}
+                position={"absolute"}
+                cursor={"pointer"}
+              >
+                <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+                  DevUpshot
+                </Text>
+              </Stack>
             </Stack>
           </Box>
         </GridItem>
-        <GridItem height="100vh" mx={{ base: "15px", lg: "20px" }}>
+        <GridItem height="100vh" mx={{ base: "15px", lg: "20px" }} >
+        <Stack
+            mb={"0.5rem"}
+            mt={"0.9rem"}
+            display={{ base: "block", lg: "none" }}
+            onClick={() => navigate("/")}
+            cursor={"pointer"}
+          >
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+              DevUpshot
+            </Text>
+          </Stack>
           <Box textAlign="center" mt={5}>
             <Text fontSize={"4xl"} fontWeight={"bold"}>
               Sign Up
             </Text>
-            <Text fontSize={"18px"}>Your knowledge journey begins here!</Text>
+            <Text fontSize={"18px"} mb={"0.9rem"}>Your knowledge journey begins here!</Text>
           </Box>
           <Box>
             <Formik

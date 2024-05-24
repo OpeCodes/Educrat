@@ -1,6 +1,5 @@
 import {
-  Flex,
-  Image,
+  Flex,  
   Stack,
   Box,
   Text,
@@ -18,7 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import logo from "../assets/logo-2.svg";
+// import logo from "../assets/logo-2.svg";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
@@ -72,9 +71,15 @@ const Navbar = () => {
         align={"center"}
       >
         <Flex justify={"space-between"} align={"center"}>
-          <Box width={"160px"} as={Link} to={"/"}>
+          {/* <Box width={"160px"} as={Link} to={"/"}>
             <Image src={logo} alt="logo" />
-          </Box>
+
+          </Box> */}
+
+          <Stack>
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>DevUpshot</Text>
+          </Stack>
+
         </Flex>
 
         <Flex
@@ -115,7 +120,7 @@ const Navbar = () => {
                   as={Link}
                   to="/become-instructor"
                 >
-                  Teach on Educrat
+                  Teach on DevUpshot
                 </Text>
               )}
               {!hasStudentRole && hasInstructorRole && (
@@ -147,7 +152,7 @@ const Navbar = () => {
                 navigate("/become-instructor");
               }}
             >
-              Teach on Educrat
+              Teach on DevUpshot
             </Text>
           )}
           {!user && (
@@ -157,16 +162,10 @@ const Navbar = () => {
               color={"black"}
               display={{ base: "none", md: "flex" }}
               onClick={() => {
-                navigate("/sign-in");
-                toast({
-                  title: "Sign in to become an instructor",
-                  status: "info",
-                  duration: 5000,
-                  isClosable: true,
-                });
+                navigate("/sign-in");               
               }}
             >
-              Teach on Educrat
+              Teach on DevUpshot
             </Text>
           )}
           {user && hasStudentRole && hasInstructorRole && (
@@ -261,7 +260,7 @@ const Navbar = () => {
                           as={Link}
                           to="/become-instructor"
                         >
-                          Teach on Educrat
+                          Teach on DevUpshot
                         </Text>
                       )}
                     </Stack>

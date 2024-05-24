@@ -6,8 +6,9 @@ import {
   Heading,
   Input,
   Button,
+  Stack,
 } from "@chakra-ui/react";
-import logo from "../assets/footer-logo.svg";
+// import logo from "../assets/footer-logo.svg";
 import {
   FaInstagram,
   FaTwitter,
@@ -36,7 +37,10 @@ export const Footer = () => {
         w={"full"}
       >
         <Box color={"white"}>
-          <img src={logo} alt="educrat-logo" />
+          {/* <img src={logo} alt="educrat-logo" /> */}
+          <Stack>
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>DevUpshot</Text>
+          </Stack>
         </Box>
         <Box
           display={"flex"}
@@ -142,7 +146,7 @@ export const Footer = () => {
       >
         <Box as="div">
           <Text as={"p"} color={"white"} fontSize={"16px"}>
-            &copy; {new Date().getFullYear()} Educrat. All Right Reserved.
+            &copy; {new Date().getFullYear()} DevUpshot. All Right Reserved.
           </Text>
         </Box>
         <Flex
