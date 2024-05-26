@@ -5,11 +5,6 @@ import {
   Box,
   Grid,
   GridItem,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
   Divider,
   Image,
   Avatar,
@@ -42,7 +37,7 @@ const StudentCourse = () => {
       </Box>
       <Stack maxW={{ base: "95%", md: "90%" }} mx="auto" w="100%">
         <Grid templateColumns="repeat(4, 1fr)" columnGap={10}>
-          <GridItem rowSpan={2} borderWidth={0}>
+          {/* <GridItem rowSpan={2} borderWidth={0}>
             <Accordion
               defaultIndex={[0]}
               allowMultiple
@@ -68,7 +63,7 @@ const StudentCourse = () => {
               </AccordionItem>
             </Accordion>
             <Divider orientation="horizontal" mt={3} />
-          </GridItem>
+          </GridItem> */}
           <GridItem width="100%" colSpan={{ base: 4, md: 3 }} p={2}>
             <Flex justify={"space-between"} mt={3} mb={10}>
               <Text>showing {data?.data?.length} results</Text>

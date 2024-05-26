@@ -43,7 +43,6 @@ const Instructor = ({
   const { instructorReviewRating } = useInstructorReviewRating(
     arrayOfIds[index]
   );
-  console.log(id, "id");
   const averateinstructorReviewRating =
     instructorReviewRating?.average === "NaN"
       ? 0
