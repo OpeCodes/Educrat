@@ -36,6 +36,8 @@ import { convertSecondsToHMS } from "../../components/TimeFormat";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { CiClock1, CiPlay1 } from "react-icons/ci";
 import { getTotalLecturesDuration } from "../../components/CourseCalculations";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 interface Social {
   type: string;
@@ -59,7 +61,7 @@ const SingleInstructorPage = () => {
   const { getInstructorReview } = useGetInstructorReview(
     getSingleEducratInstructor?.id
   );
-
+  const { user } = useSelector((store: RootState) => store?.user);
   return (
     <Stack pt={"4.3rem"}>
       <Stack bg={"#f5f7fe"} py={3}>
@@ -70,7 +72,7 @@ const SingleInstructorPage = () => {
           columnGap={2}
           color={"#4F547B"}
           fontSize={14}
-          mt={"0.7rem"}
+          mt={user ? "0.6rem": "1.3rem"}
         >
           <Text as={Link} to="/">
             Home
