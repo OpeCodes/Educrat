@@ -144,7 +144,10 @@ const MyLearning = () => {
                       const averageStars = calculateAverageStars(reviews);
                       return (
                         <GridItem
-                          w="100%"
+                          // w="100%"
+                          // w={"70%"}
+                          // width={{base: "100%", lg: "250px"}}
+                          w={"250px"}
                           key={id}
                           as={Link}
                           h={"100%"}
@@ -158,7 +161,14 @@ const MyLearning = () => {
                             src={thumbnail}
                             alt={title}
                           />
-                          <Text fontWeight={"bold"}>{title}</Text>
+                          <Text fontWeight={"bold"}   sx={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: 'block',
+                        width: '100%',
+                    }} 
+                    >{title}</Text>
                           <Text fontSize={"15px"} color={"gray"}>
                             {courseId?.userId?.firstName}  {courseId?.userId?.lastName}
                           </Text>

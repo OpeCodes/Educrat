@@ -70,9 +70,9 @@ const Course = ({
           <Image
             src={thumbnail}
             className="img"
-            maxH="180px"
+            maxH="150px"
             height={"100%"}
-            objectFit={"scale-down"}
+            // objectFit={"scale-down"}
             style={{ borderRadius: "10px" }}
             alt={title}
             w={"100%"}
@@ -98,6 +98,13 @@ const Course = ({
           fontSize="20px"
           _hover={{ color: "blue" }}
           mt="-8px"
+          sx={{
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: 'block',
+            width: '100%',
+        }} 
         >
           {title}
         </Heading>
