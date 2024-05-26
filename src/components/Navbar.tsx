@@ -207,7 +207,7 @@ const Navbar = () => {
                   position="absolute"
                   right="1"
                   top="20"
-                  mt={-3}
+                  mt={"-26px"}
                 >
                   <Flex align={"center"} columnGap={3} p={3} mb={2}>
                     <Avatar
@@ -279,7 +279,7 @@ const Navbar = () => {
                         cursor={"pointer"}
                         onClick={() => {
                           toast({
-                            title: `Logging out...`,
+                            title: `Logging out`,
                             status: "success",
                             duration: 2000,
                             isClosable: true,
@@ -470,7 +470,7 @@ const Navbar = () => {
                   _hover={{ textDecoration: "none" }}
                   onClick={() => {
                     toast({
-                      title: `Logging out...`,
+                      title: `Logging out`,
                       status: "success",
                       duration: 2000,
                       isClosable: true,

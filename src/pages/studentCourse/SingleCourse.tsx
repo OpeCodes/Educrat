@@ -143,7 +143,7 @@ const SingleCourse = () => {
   };
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
-  const { courseEnroll } = useCourseEnrollment();
+  const { courseEnroll,isPending: handleEnrolledCourseLoading } = useCourseEnrollment();
   const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
     useGetSingleEnrolledCourse(getStudentSingleCourse?.id);
   const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
@@ -794,6 +794,9 @@ const SingleCourse = () => {
                                   py={"25px"}
                                   variant="outline"
                                   onClick={handleEnrolledCourse}
+                                  isLoading={handleEnrolledCourseLoading}
+                                  loadingText="Loading"
+                                  spinnerPlacement="end"
                                 >
                                   Buy Now
                                 </Button>
