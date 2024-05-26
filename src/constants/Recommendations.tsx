@@ -82,7 +82,6 @@ export const Recommendations = () => {
               px={12}
               py={6}
               ml={4}
-              // mt={{ base: 4 }}
               bg="#6440fb"
               color="white"
               variant="solid"
