@@ -1,5 +1,5 @@
 import {
-  Flex,  
+  Flex,
   Stack,
   Box,
   Text,
@@ -70,16 +70,12 @@ const Navbar = () => {
         justify={"space-between"}
         align={"center"}
       >
-        <Flex justify={"space-between"} align={"center"}>
-          {/* <Box width={"160px"} as={Link} to={"/"}>
-            <Image src={logo} alt="logo" />
-
-          </Box> */}
-
+        <Flex justify={"space-between"} align={"center"}>    
           <Stack>
-            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>DevUpshot</Text>
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color="#6440fb">
+              DevUpshot
+            </Text>
           </Stack>
-
         </Flex>
 
         <Flex
@@ -162,7 +158,7 @@ const Navbar = () => {
               color={"black"}
               display={{ base: "none", md: "flex" }}
               onClick={() => {
-                navigate("/sign-in");               
+                navigate("/sign-in");
               }}
             >
               Teach on DevUpshot
@@ -286,7 +282,6 @@ const Navbar = () => {
                       <Text
                         cursor={"pointer"}
                         onClick={() => {
-
                           toast({
                             title: `Logging out...`,
                             status: "success",
@@ -429,7 +424,7 @@ const Navbar = () => {
                         duration: 2000,
                         isClosable: true,
                       });
-                        //  window.location.reload()
+                      //  window.location.reload()
                       setTimeout(() => {
                         dispatch(logoutUser());
                         onClose();
