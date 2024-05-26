@@ -13,12 +13,15 @@ import { MdArrowOutward } from "react-icons/md";
 import { Instructor } from "../components";
 import { useGetAllEducratInstructors } from "../hooks/studentCourse";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 export const Instructors = () => {
   const { data, isPending } = useGetAllEducratInstructors();
   const dummyArray = [1, 2, 3, 4];
-  // const arrayOfIds = data?.map((obj: any) => obj?.id);
   const arrayOfIds = Array.isArray(data) ? data.map((obj: any) => obj?.id) : [];
+  const { user } = useSelector((store: RootState) => store?.user);
+
   return (
     <Box
       as={"section"}
@@ -119,8 +122,8 @@ export const Instructors = () => {
             color={"#6440fb"}
             as={Link}
             fontSize={"15px"}
-            ml={1}
-            to={"become-instructor"}
+            ml={1}            
+            to={user ? "/become-instructor" : "/sign-in"}
           >
             Become an instructor
           </Text>

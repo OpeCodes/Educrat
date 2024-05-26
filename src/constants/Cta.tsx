@@ -29,8 +29,8 @@ export const Cta = () => {
         >
           Start your Learning Journey Today!
         </Heading>
-        <Text as={"p"} color={"gray.600"} my={2}>
-          Lorem ipsum dolor sit amet, consectetur.
+        <Text as={"p"} color={"gray.600"} my={2} textAlign={"center"}>
+          Begin developing new skills and knowledge now.
         </Text>
       </Flex>
       <Box
@@ -61,10 +61,17 @@ export const Cta = () => {
                 fontSize={"18px"}
                 fontWeight={"regular"}
                 mt={3}
+                textAlign={"center"}
               >
                 {title}
               </Heading>
-              <Text as={"p"} my={2} color={"gray.600"} fontSize={"15px"}>
+              <Text
+                as={"p"}
+                my={2}
+                color={"gray.600"}
+                fontSize={"15px"}
+                textAlign={"center"}
+              >
                 {desc}
               </Text>
             </Flex>

@@ -1,5 +1,5 @@
 import {
-  Flex,  
+  Flex,
   Stack,
   Box,
   Text,
@@ -71,15 +71,11 @@ const Navbar = () => {
         align={"center"}
       >
         <Flex justify={"space-between"} align={"center"}>
-          {/* <Box width={"160px"} as={Link} to={"/"}>
-            <Image src={logo} alt="logo" />
-
-          </Box> */}
-
-          <Stack>
-            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>DevUpshot</Text>
+          <Stack as={Link} to={"/"}>
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color="#6440fb">
+              DevUpshot
+            </Text>
           </Stack>
-
         </Flex>
 
         <Flex
@@ -138,10 +134,6 @@ const Navbar = () => {
               )}
             </Box>
           )}
-
-          {/* <Text cursor={"pointer"} onClick={() => onModalOpen()}>
-            <FiSearch color={"#6440fb"} fontSize={"25px"} />
-          </Text> */}
           {hasStudentRole && !hasInstructorRole && (
             <Text
               fontSize="15px"
@@ -162,7 +154,7 @@ const Navbar = () => {
               color={"black"}
               display={{ base: "none", md: "flex" }}
               onClick={() => {
-                navigate("/sign-in");               
+                navigate("/sign-in");
               }}
             >
               Teach on DevUpshot
@@ -215,7 +207,7 @@ const Navbar = () => {
                   position="absolute"
                   right="1"
                   top="20"
-                  mt={-3}
+                  mt={"-26px"}
                 >
                   <Flex align={"center"} columnGap={3} p={3} mb={2}>
                     <Avatar
@@ -286,9 +278,8 @@ const Navbar = () => {
                       <Text
                         cursor={"pointer"}
                         onClick={() => {
-
                           toast({
-                            title: `Logging out...`,
+                            title: `Logging out`,
                             status: "success",
                             duration: 2000,
                             isClosable: true,
@@ -382,7 +373,7 @@ const Navbar = () => {
                 </Flex>
               </>
             ) : (
-              <>
+              <Box ml={6}>
                 <Text
                   as={Link}
                   to="/sign-in"
@@ -390,10 +381,10 @@ const Navbar = () => {
                 >
                   Login
                 </Text>
-                <Text as={Link} to="/sign-up">
+                <Text as={Link} to="/sign-up" ml={2}>
                   Sign Up
                 </Text>
-              </>
+              </Box>
             )}
 
             <Box display={{ base: "block", md: "none" }}>
@@ -409,7 +400,7 @@ const Navbar = () => {
                     cursor={"pointer"}
                     as={Link}
                     to="/instructor/courses"
-                    color="blue"
+                    color="#6440fb"
                   >
                     Switch to instructor view
                   </Text>
@@ -417,31 +408,6 @@ const Navbar = () => {
               </>
             )}
             <br />
-            {user && (
-              <>
-                {hasStudentRole && hasInstructorRole && (
-                  <Text
-                    _hover={{ textDecoration: "none" }}
-                    onClick={() => {
-                      toast({
-                        title: `Logging out...`,
-                        status: "success",
-                        duration: 2000,
-                        isClosable: true,
-                      });
-                        //  window.location.reload()
-                      setTimeout(() => {
-                        dispatch(logoutUser());
-                        onClose();
-                      }, 2000);
-                    }}
-                    cursor={"pointer"}
-                  >
-                    Logout out
-                  </Text>
-                )}
-              </>
-            )}
           </Box>
           <DrawerBody>
             <Box>
@@ -472,48 +438,57 @@ const Navbar = () => {
             <Divider orientation="horizontal" my={5} />
             <Flex rowGap={"8px"} flexDirection={"column"}>
               <Text>Call Us</Text>
-              <Text>08145885175</Text>
-              <Text>Abule oja</Text>
+              <Text>09167647648</Text>
               <Text>Yaba lagos</Text>
               <Text>adedokunpeter11@gmail.com</Text>
             </Flex>
             <Flex my="15px" columnGap={7} cursor={"pointer"}>
               <FaFacebookF />
               <FaTwitter />
-              <FaInstagram />
-              <FaLinkedinIn />
+              <Box
+                as={"a"}
+                href="https://www.instagram.com/devupshot?igsh=MWR4Z3hxaGhmbmplMw=="
+                target="_blank"
+              >
+                <FaInstagram />
+              </Box>
+              <Box
+                as={"a"}
+                href="https://www.linkedin.com/company/devupshot/"
+                target={"_blank"}
+              >
+                <FaLinkedinIn />
+              </Box>
             </Flex>
+            {user && (
+              <>
+                <Text
+                  fontWeight={"bold"}
+                  fontSize={"16px"}
+                  color={"#6440fb"}
+                  mt={"3rem"}
+                  _hover={{ textDecoration: "none" }}
+                  onClick={() => {
+                    toast({
+                      title: `Logging out`,
+                      status: "success",
+                      duration: 2000,
+                      isClosable: true,
+                    });
+                    setTimeout(() => {
+                      dispatch(logoutUser());
+                      onClose();
+                    }, 2000);
+                  }}
+                  cursor={"pointer"}
+                >
+                  Logout
+                </Text>
+              </>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-      {/* <Modal onClose={onModalClose} size={"full"} isOpen={modalOpen}>
-        <ModalOverlay />
-        <ModalContent pt={20}>
-          <ModalHeader>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.2em"
-              >
-                <FiSearch fontSize={"25px"} />
-              </InputLeftElement>
-              <Input
-                placeholder="What do you want to learn?"
-                variant="flushed"
-              />
-              <InputRightElement pb={10}>
-                <Box bg="white">
-                  <ModalCloseButton borderRadius={"100%"} />
-                </Box>
-              </InputRightElement>
-            </InputGroup>
-          </ModalHeader>
-          <ModalBody>
-            <Text>Popular Right now</Text>
-          </ModalBody>
-        </ModalContent>
-      </Modal> */}
     </Stack>
   );
 };

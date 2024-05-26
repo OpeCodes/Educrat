@@ -33,25 +33,25 @@ export const ctaData = [
     id: 1,
     img: cta1,
     title: "Learn with Experts",
-    desc: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+    desc: "Gain skills from industry-leading professionals",
   },
   {
     id: 2,
     img: cta2,
     title: "Learn Anything",
-    desc: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+    desc: "Discover new skills and knowledge easily.",
   },
   {
     id: 3,
     img: cta3,
     title: "Flexible Learning",
-    desc: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+    desc: "Study at your own pace, anytime, anywhere.",
   },
   {
     id: 4,
     img: cta4,
     title: "Industrial Standard",
-    desc: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+    desc: "Meet the highest industry standards and practices.",
   },
 ];
 

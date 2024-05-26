@@ -203,106 +203,25 @@ export const useGetSingleCourse = (id: any) => {
 };
 
 export const useGetCourse = () => {
-  const toast = useToast();
-  const [error, setError] = useState<string | null>(null);
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ["course"],
     queryFn: async () => {
-      try {
-        const { data } = await customFetch.get(`/course/?limit=20`);
-        setError(null);
-        return data;
-      } catch (error: any) {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.error
-        ) {
-          setError(error.response.data.error);
-        } else {
-          setError("An unexpected error occurred.");
-        }
-        throw error;
-      }
+      const { data } = await customFetch.get(`/course/?limit=20`);
+      return data;
     },
   });
-  useEffect(() => {
-    if (isError) {
-      if (error) {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={error} onClose={onClose} />
-          ),
-        });
-      } else {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
-          ),
-        });
-      }
-    }
-  }, [isError, error, toast]);
   return { data, isPending };
 };
 
 export const useGetAllUserCourse = () => {
-  const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
-  const { data, isError, isPending, refetch } = useQuery({
+  const { data, refetch,isPending,isError } = useQuery({
     queryKey: ["allUserCourse"],
     queryFn: async () => {
       const { data } = await customFetch.get("/course/user");
       return data;
     },
   });
-  useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
-    }
-  }, [isError, errorToastShown, toast]);
-  return { data, isPending, isError, refetch };
+  return { data, refetch, isPending, isError };
 };
 
 export const useSingleStatusCourse = () => {

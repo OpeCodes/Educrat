@@ -172,7 +172,7 @@ const Login = () => {
                     )}
                   </FormControl>
                   <Button
-                    color={"#00FF84"}
+                    color={"#6440fb"}
                     as={Link}
                     to="/reset-password"
                     variant="link"
@@ -183,9 +183,10 @@ const Login = () => {
                     Forgot Password?
                   </Button>
                   <Button
-                    bg={"#00FF84"}
+                    bg={"#6440fb"}                   
                     isLoading={isPending}
                     loadingText="Loading"
+                    colorScheme="teal"
                     variant="outline"
                     spinnerPlacement="end"
                     width="100%"
@@ -193,8 +194,8 @@ const Login = () => {
                     mt={3}
                     borderWidth={2}
                     py={3}
-                    borderColor={"#00FF84"}
-                    _hover={{ background: "none", color: "#00FF84" }}
+                    color={"white"}
+                    _hover={{ background: "none", color: "#6440fb" }}
                   >
                     Login
                   </Button>
@@ -210,7 +211,7 @@ const Login = () => {
               <Text>Don't have an account yet?</Text>
               <Text
                 fontWeight={"600"}
-                color={"#00FF84"}
+                color={"#6440fb"}
                 as={Link}
                 to="/sign-up"
               >

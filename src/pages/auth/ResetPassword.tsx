@@ -15,7 +15,6 @@ import {
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
-// import logo from "../../assets/logo.svg";
 import { resetPasswordSchema } from "../../schemas";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useResetPassword } from "../../hooks/auth";
@@ -200,9 +199,9 @@ const ResetPassword = () => {
                         {errors.confirmPassword}
                       </Text>
                     )}
-                  </FormControl>
+                  </FormControl>                 
                   <Button
-                    bg={"#00FF84"}
+                    bg={"#6440fb"}                   
                     isLoading={isPending}
                     loadingText="Loading"
                     colorScheme="teal"
@@ -213,11 +212,12 @@ const ResetPassword = () => {
                     mt={3}
                     borderWidth={2}
                     py={3}
-                    borderColor={"#00FF84"}
-                    _hover={{ background: "none", color: "#00FF84" }}
+                    color={"white"}
+                    _hover={{ background: "none", color: "#6440fb" }}
                   >
                     Password Reset
                   </Button>
+                  
                 </Flex>
               )}
             </Formik>
@@ -225,7 +225,7 @@ const ResetPassword = () => {
               <Text>Don't have an account?</Text>
               <Text
                 fontWeight={"600"}
-                color={"#00FF84"}
+                color={"#6440fb"}
                 as={Link}
                 to="/sign-in"
               >

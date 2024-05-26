@@ -42,15 +42,7 @@ const ForgotPassword = () => {
           >
           <Stack position={"relative"}>
               <Image src={backgroundImg} alt="background" />
-              {/* <Image
-                src={logo}
-                cursor={"pointer"}
-                alt="background"
-                position={"absolute"}
-                top={"18px"}
-                left={"25px"}
-                onClick={() => navigate("/")}
-              /> */}
+              
               <Stack
                 top={"18px"}
                 left={"25px"}
@@ -124,9 +116,8 @@ const ForgotPassword = () => {
                       </Text>
                     )}
                   </FormControl>
-
                   <Button
-                    bg={"#00FF84"}
+                    bg={"#6440fb"}                   
                     isLoading={isPending}
                     loadingText="Loading"
                     colorScheme="teal"
@@ -137,8 +128,8 @@ const ForgotPassword = () => {
                     mt={3}
                     borderWidth={2}
                     py={3}
-                    borderColor={"#00FF84"}
-                    _hover={{ background: "none", color: "#00FF84" }}
+                    color={"white"}
+                    _hover={{ background: "none", color: "#6440fb" }}
                   >
                     Password Reset
                   </Button>
@@ -149,7 +140,7 @@ const ForgotPassword = () => {
               <Text>Don't have an account?</Text>
               <Text
                 fontWeight={"600"}
-                color={"#00FF84"}
+                color={"#6440fb"}
                 as={Link}
                 to="/sign-in"
               >

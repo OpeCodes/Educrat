@@ -36,17 +36,17 @@ export const Footer = () => {
         alignItems={{ base: "start", md: "center" }}
         w={"full"}
       >
-        <Box color={"white"}>
-          {/* <img src={logo} alt="educrat-logo" /> */}
+        <Box color={"white"} alignItems={"center"}>
           <Stack>
-            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>DevUpshot</Text>
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"#6440fb"}>
+              DevUpshot
+            </Text>
           </Stack>
         </Box>
         <Box
           display={"flex"}
           justifyContent={"center"}
-          alignItems={"start"}
-          mt={{ base: 6 }}
+          alignItems={"center"}
         >
           <Text color={"white"} fontSize={"16px"} mr={8}>
             Follow us on social media
@@ -56,10 +56,23 @@ export const Footer = () => {
             <Box as={"span"} mx={8}>
               <FaTwitter size={16} />
             </Box>
-            <Box as={"span"} mr={8}>
+            <Box
+              mr={8}
+              as={"a"}
+              target="_blank"
+              href={
+                "https://www.instagram.com/devupshot/?igsh=MWR4Z3hxaGhmbmplMw%3D%3D"
+              }
+            >
               <FaInstagram size={16} />
             </Box>
-            <FaLinkedinIn size={16} />
+            <Box
+              as={"a"}
+              target="_blank"
+              href="https://www.linkedin.com/company/devupshot/"
+            >
+              <FaLinkedinIn size={16} />
+            </Box>
           </Flex>
         </Box>
       </Box>

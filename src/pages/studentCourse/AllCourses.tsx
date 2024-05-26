@@ -5,11 +5,6 @@ import {
   Box,
   Grid,
   GridItem,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
   Divider,
   Image,
   Avatar,
@@ -26,13 +21,20 @@ import {
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 import { CiClock1, CiPlay1 } from "react-icons/ci";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
+import { Loading } from "../../components";
 
 const StudentCourse = () => {
-  const { data } = useGetCourse();
-
+  const { data, isPending } = useGetCourse();
+  if (isPending) {
+    return (
+      <Text mt={"6rem"}>
+        <Loading />
+      </Text>
+    );
+  }
   return (
     <Stack pt={"4.3rem"}>
-      <Box padding={{ base: 5, lg: 20 }}>
+      <Box paddingTop={10} pl={{base: 5, md: 20}}>
         <Text fontSize={"40px"} fontWeight={"bold"}>
           User Inferface Course
         </Text>
@@ -42,7 +44,7 @@ const StudentCourse = () => {
       </Box>
       <Stack maxW={{ base: "95%", md: "90%" }} mx="auto" w="100%">
         <Grid templateColumns="repeat(4, 1fr)" columnGap={10}>
-          <GridItem rowSpan={2} borderWidth={0}>
+          {/* <GridItem rowSpan={2} borderWidth={0}>
             <Accordion
               defaultIndex={[0]}
               allowMultiple
@@ -68,7 +70,7 @@ const StudentCourse = () => {
               </AccordionItem>
             </Accordion>
             <Divider orientation="horizontal" mt={3} />
-          </GridItem>
+          </GridItem> */}
           <GridItem width="100%" colSpan={{ base: 4, md: 3 }} p={2}>
             <Flex justify={"space-between"} mt={3} mb={10}>
               <Text>showing {data?.data?.length} results</Text>
@@ -81,7 +83,7 @@ const StudentCourse = () => {
               templateColumns={{
                 base: "repeat(1, 1fr)",
                 md: "repeat(2, 1fr)",
-                lg: "repeat(3, 1fr)",
+                lg: "repeat(4, 1fr)",
               }}
               gap={6}
             >
@@ -95,7 +97,7 @@ const StudentCourse = () => {
                   slug,
                   modules,
                   reviews,
-                  price
+                  price,
                 }: CourseInterface) => (
                   <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                     <Stack>
@@ -104,9 +106,11 @@ const StudentCourse = () => {
                           src={thumbnail}
                           alt={title}
                           borderRadius="lg"
-                          maxH="180px"
+                          maxH="140px"
                           height={"100%"}
-                          objectFit={"scale-down"}
+                          className="img"
+                          width={"100%"}
+                          // objectFit={"scale-down"}
                         />
                         <Stack>
                           <Flex justifyContent={"start"} alignItems={"center"}>
@@ -129,7 +133,13 @@ const StudentCourse = () => {
                               ({getTotalStarsSum(reviews)})
                             </Text>
                           </Flex>
-                          <Text fontSize="20px" mt="-12px">
+                          <Text fontSize="20px" mt="-12px" sx={{
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: 'block',
+            width: '100%',
+        }} >
                             {title}
                           </Text>
                           <Flex justify={"space-between"}>
