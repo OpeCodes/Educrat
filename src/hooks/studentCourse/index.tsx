@@ -76,14 +76,14 @@ export const useGetStudentSingleCourse = (slug: any) => {
 };
 
 export const useGetAllUserEnrolledCourse = () => {
-  const { data } = useQuery({
+  const { data ,isPending} = useQuery({
     queryKey: ["allEnrolledCourse"],
     queryFn: async () => {
       const { data } = await customFetch.get("/enrollment");
       return data;
     },
   });
-  return {data}
+  return {data, isPending}
 };
 
 export const useGetAlInstructorPublishedCourse = (id: any) => {

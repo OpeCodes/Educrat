@@ -203,66 +203,26 @@ export const useGetSingleCourse = (id: any) => {
 };
 
 export const useGetCourse = () => {
-  const toast = useToast();
-  const [error, setError] = useState<string | null>(null);
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ["course"],
     queryFn: async () => {
-      try {
-        const { data } = await customFetch.get(`/course/?limit=20`);
-        setError(null);
-        return data;
-      } catch (error: any) {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.error
-        ) {
-          setError(error.response.data.error);
-        } else {
-          setError("An unexpected error occurred.");
-        }
-        throw error;
-      }
+      const { data } = await customFetch.get(`/course/?limit=20`);
+      return data;
     },
   });
-  useEffect(() => {
-    if (isError) {
-      if (error) {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={error} onClose={onClose} />
-          ),
-        });
-      } else {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
-          ),
-        });
-      }
-    }
-  }, [isError, error, toast]);
+
   return { data, isPending };
 };
 
-export const useGetAllUserCourse = () => { 
-  const { data } = useQuery({
+export const useGetAllUserCourse = () => {
+  const { data, refetch } = useQuery({
     queryKey: ["allUserCourse"],
     queryFn: async () => {
       const { data } = await customFetch.get("/course/user");
       return data;
     },
   });
-  return { data};
+  return { data, refetch };
 };
 
 export const useSingleStatusCourse = () => {

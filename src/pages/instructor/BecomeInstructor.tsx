@@ -16,14 +16,13 @@ import {
   Input,
   Button,
   Textarea,
-  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
 import { useBecomeInstructor } from "../../hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { Navigate, useLocation,  } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 const initialValues = {
   headline: "",
@@ -39,7 +38,6 @@ const initialValues = {
 
 const BecomeInstructor = () => {
   const { user } = useSelector((store: RootState) => store?.user);
-  // const navigate = useNavigate();
   const { becomeInstructor, isPending, tabIndex, handleTabChange } =
     useBecomeInstructor();
 
@@ -52,13 +50,13 @@ const BecomeInstructor = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  const toast = useToast()
+
   return !user ? (
     <Navigate to="/" />
   ) : (
     <Stack>
       <Stack ml={{ base: 6, lg: 16 }} mr={{ base: 5, lg: 10 }} mt={10}>
-        <Box mt={5}>
+        <Box mt={{base: 10, lg: 5}}>
           <Text fontSize={"4xl"} fontWeight={"bold"}>
             Become an instructor
           </Text>
@@ -155,26 +153,19 @@ const BecomeInstructor = () => {
                       <GridItem>
                         <Box display={"block"} mt={5}>
                           <Button
-                            bg={"#00FF84"}
+                            bg={"#6440fb"}
                             isLoading={isPending}
                             loadingText="Loading"
                             colorScheme="teal"
                             variant="outline"
                             spinnerPlacement="end"
                             width="100%"
-                            // onClick={() => handleSubmit()}
-                            onClick={() =>{
-                              toast({
-                                title: "access denied",
-                                description: "Contact adedokunpeter11@gmail.com to become an instructor on DevUpshot",
-                                status: "error"
-                              })
-                            }}    
+                            onClick={() => handleSubmit()}
                             mt={3}
                             borderWidth={2}
                             py={3}
-                            borderColor={"#00FF84"}
-                            _hover={{ background: "none", color: "#00FF84" }}
+                            color={"white"}
+                            _hover={{ background: "none", color: "#6440fb" }}
                           >
                             Save
                           </Button>
