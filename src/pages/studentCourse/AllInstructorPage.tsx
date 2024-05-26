@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom";
 import { useGetAllEducratInstructors } from "../../hooks/studentCourse";
 import { Instructor } from "../../components";
-import { useGetUser } from "../../hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
