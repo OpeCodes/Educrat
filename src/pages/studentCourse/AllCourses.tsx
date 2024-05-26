@@ -34,7 +34,7 @@ const StudentCourse = () => {
   }
   return (
     <Stack pt={"4.3rem"}>
-      <Box paddingTop={10} pl={20}>
+      <Box paddingTop={10} pl={{base: 5, md: 20}}>
         <Text fontSize={"40px"} fontWeight={"bold"}>
           User Inferface Course
         </Text>
@@ -83,7 +83,7 @@ const StudentCourse = () => {
               templateColumns={{
                 base: "repeat(1, 1fr)",
                 md: "repeat(2, 1fr)",
-                lg: "repeat(3, 1fr)",
+                lg: "repeat(4, 1fr)",
               }}
               gap={6}
             >
@@ -106,9 +106,11 @@ const StudentCourse = () => {
                           src={thumbnail}
                           alt={title}
                           borderRadius="lg"
-                          maxH="180px"
+                          maxH="140px"
                           height={"100%"}
-                          objectFit={"scale-down"}
+                          className="img"
+                          width={"100%"}
+                          // objectFit={"scale-down"}
                         />
                         <Stack>
                           <Flex justifyContent={"start"} alignItems={"center"}>
@@ -131,7 +133,13 @@ const StudentCourse = () => {
                               ({getTotalStarsSum(reviews)})
                             </Text>
                           </Flex>
-                          <Text fontSize="20px" mt="-12px">
+                          <Text fontSize="20px" mt="-12px" sx={{
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: 'block',
+            width: '100%',
+        }} >
                             {title}
                           </Text>
                           <Flex justify={"space-between"}>
