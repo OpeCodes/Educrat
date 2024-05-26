@@ -104,7 +104,9 @@ const Course = ({
         <Flex justify={"space-between"} fontSize={"19px"}>
           <Flex align="center" columnGap={"4px"} color="gray">
             <CiPlay1 />
-            <Text fontSize="13px">{modules?.length} Lessons</Text>
+            <Text fontSize="13px">
+              {modules?.length} Lesson{modules?.length > 1 && "s"}
+            </Text>
           </Flex>
           <Flex align="center" columnGap={"4px"} color="gray">
             <CiClock1 />

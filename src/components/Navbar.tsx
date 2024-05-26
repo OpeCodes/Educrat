@@ -71,7 +71,7 @@ const Navbar = () => {
         align={"center"}
       >
         <Flex justify={"space-between"} align={"center"}>    
-          <Stack>
+          <Stack as={Link} to={"/"}>
             <Text fontSize={"1.7rem"} fontWeight={"bold"} color="#6440fb">
               DevUpshot
             </Text>
