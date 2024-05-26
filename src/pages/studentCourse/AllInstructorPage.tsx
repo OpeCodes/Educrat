@@ -10,11 +10,17 @@ import {
 import { Link } from "react-router-dom";
 import { useGetAllEducratInstructors } from "../../hooks/studentCourse";
 import { Instructor } from "../../components";
+import { useGetUser } from "../../hooks";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const AllInstructorPage = () => {
   const { data, isPending } = useGetAllEducratInstructors();
   const dummyArray = [1, 2, 3, 4];
   const arrayOfIds = Array.isArray(data) ? data?.map((obj: any) => obj?.id): [];
+  
+  const { user } = useSelector((store: RootState) => store?.user);
+
   return (
     <Stack pt={"4.3rem"}>
       <Stack bg={"#f5f7fe"} py={3}>
@@ -25,7 +31,7 @@ const AllInstructorPage = () => {
           columnGap={2}
           color={"#4F547B"}
           fontSize={14}
-          mt={"0.7rem"}
+          mt={user ? "0.6rem" : "1.3rem"}
         >
           <Text as={Link} to="/">
             Home

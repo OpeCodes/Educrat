@@ -8,7 +8,10 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useGetInstructorenrolledCourse, useInstructorReviewRating } from "../hooks/studentCourse";
+import {
+  useGetInstructorenrolledCourse,
+  useInstructorReviewRating,
+} from "../hooks/studentCourse";
 import { SocialsInterface } from "../interface/UserInterface";
 import { CourseInterface } from "../interface/courseInterface";
 
@@ -30,21 +33,23 @@ const Instructor = ({
   lastName,
   firstName,
   headline,
-  id,
   courses,
   slug,
   index,
   arrayOfIds,
   socials,
+  id,
 }: Instructor) => {
   const { instructorReviewRating } = useInstructorReviewRating(
     arrayOfIds[index]
   );
+  console.log(id, "id");
   const averateinstructorReviewRating =
     instructorReviewRating?.average === "NaN"
       ? 0
       : instructorReviewRating?.average;
-     
+  const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(id);
+
   return (
     <Box
       className="card"
@@ -57,16 +62,16 @@ const Instructor = ({
     >
       <Stack>
         <Box as="div" position={"relative"}>
-          <Box  overflow={"hidden"} >
-          <Image
-            src={profilePicture}
-            style={{ borderRadius: "10px", width: "100%" }}
-            alt={firstName}
-            maxH={"250px"}
-            height={"100%"}
-            objectFit={"cover"}
-            width={"100%"}
-          />
+          <Box overflow={"hidden"}>
+            <Image
+              src={profilePicture}
+              style={{ borderRadius: "10px", width: "100%" }}
+              alt={firstName}
+              maxH={"250px"}
+              height={"100%"}
+              objectFit={"cover"}
+              width={"100%"}
+            />
           </Box>
           <Box
             as={"div"}
@@ -120,10 +125,9 @@ const Instructor = ({
           <Text color={"gray.600"} fontSize={"15px"} mb={2}>
             {headline}
           </Text>
-          <Flex justifyContent={"start"} alignItems={"center"} columnGap={1} >
+          <Flex justifyContent={"start"} alignItems={"center"} columnGap={1}>
             <Flex justifyContent={"center"} alignItems={"center"} columnGap={1}>
-             
-              <Box as="span" color={"#e59819"} >
+              <Box as="span" color={"#e59819"}>
                 <Text>
                   <FaStar color={"#FFD700"} />
                 </Text>
@@ -137,8 +141,9 @@ const Instructor = ({
               columnGap={1}
             >
               <CiUser color={"gray"} size={14} />
-              <Text color={"gray.600"} fontSize={"12px"}>
-                {courses?.length} Student{courses?.length > 1  && "s"}
+              <Text color={"gray.600"} fontSize={"14px"}>
+                {getInstructorenrolledCourse?.length} student
+                {getInstructorenrolledCourse?.length > 1 && "s"}
               </Text>
             </Box>
             <Box
