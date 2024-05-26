@@ -29,7 +29,7 @@ export const Cta = () => {
         >
           Start your Learning Journey Today!
         </Heading>
-        <Text as={"p"} color={"gray.600"} my={2}>
+        <Text as={"p"} color={"gray.600"} my={2} textAlign={"center"}>
           Begin developing new skills and knowledge now.
         </Text>
       </Flex>
