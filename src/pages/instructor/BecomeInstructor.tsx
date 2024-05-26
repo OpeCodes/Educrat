@@ -16,15 +16,15 @@ import {
   Input,
   Button,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { instructorProfileSchema } from "../../schemas";
 import { useBecomeInstructor } from "../../hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { Navigate, useNavigate } from "react-router-dom";
-// import logo from "../../assets/logo-2.svg";
-
+import { Navigate, useLocation,  } from "react-router-dom";
+import { useEffect } from "react";
 const initialValues = {
   headline: "",
   biography: "",
@@ -39,7 +39,7 @@ const initialValues = {
 
 const BecomeInstructor = () => {
   const { user } = useSelector((store: RootState) => store?.user);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { becomeInstructor, isPending, tabIndex, handleTabChange } =
     useBecomeInstructor();
 
@@ -47,20 +47,18 @@ const BecomeInstructor = () => {
     becomeInstructor(values);
   };
   const handleImageUpload = () => {};
+  const { pathname } = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  const toast = useToast()
   return !user ? (
     <Navigate to="/" />
   ) : (
     <Stack>
-      {/* <InstructorNavbar /> */}
       <Stack ml={{ base: 6, lg: 16 }} mr={{ base: 5, lg: 10 }} mt={10}>
-        {/* <Image src={logo} alt="Devu logo" h={"60px"} width={"160px"}  cursor={"pointer"} onClick={() => navigate("/")}/> */}
-        <Stack cursor={"pointer"} onClick={() => navigate("/")}>
-          <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
-            DevUpshot
-          </Text>
-        </Stack>
-        <Box mt={3}>
+        <Box mt={5}>
           <Text fontSize={"4xl"} fontWeight={"bold"}>
             Become an instructor
           </Text>
@@ -164,7 +162,14 @@ const BecomeInstructor = () => {
                             variant="outline"
                             spinnerPlacement="end"
                             width="100%"
-                            onClick={() => handleSubmit()}
+                            // onClick={() => handleSubmit()}
+                            onClick={() =>{
+                              toast({
+                                title: "access denied",
+                                description: "Contact adedokunpeter11@gmail.com to become an instructor on DevUpshot",
+                                status: "error"
+                              })
+                            }}    
                             mt={3}
                             borderWidth={2}
                             py={3}

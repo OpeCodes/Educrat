@@ -68,6 +68,10 @@ const router = createBrowserRouter([
         element: <AllInstructorPage />,
       },
       {
+        path: "/become-instructor",
+        element: <BecomeInstructor />,
+      },
+      {
         path: "/cart",
         element: <Cart />,
       },
@@ -114,10 +118,7 @@ const router = createBrowserRouter([
   },
 
   //instructor
-  {
-    path: "/become-instructor",
-    element: <BecomeInstructor />,
-  },
+  
 
   {
     path: "/course/create/1",
