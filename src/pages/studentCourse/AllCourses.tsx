@@ -27,7 +27,7 @@ const StudentCourse = () => {
 
   return (
     <Stack pt={"4.3rem"}>
-      <Box padding={{ base: 5, lg: 20 }}>
+      <Box paddingTop={10} pl={20}>
         <Text fontSize={"40px"} fontWeight={"bold"}>
           User Inferface Course
         </Text>

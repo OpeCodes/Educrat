@@ -76,56 +76,16 @@ export const useGetStudentSingleCourse = (slug: any) => {
 };
 
 export const useGetAllUserEnrolledCourse = () => {
-  const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
-  const { data, isError, isPending, refetch } = useQuery({
+  const { data } = useQuery({
     queryKey: ["allEnrolledCourse"],
     queryFn: async () => {
       const { data } = await customFetch.get("/enrollment");
       return data;
     },
   });
-  useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
-    }
-  }, [isError, errorToastShown, toast]);
-  return { data, isPending, isError, refetch };
+  return {data}
 };
-//
+
 export const useGetAlInstructorPublishedCourse = (id: any) => {
   const { data: getAlInstructorPublishedCourse } = useQuery({
     queryKey: ["getAllInstructorPublishCourse", id],
@@ -189,59 +149,18 @@ export const useCourseEnrollment = () => {
 };
 
 export const useGetSingleEnrolledStudentCourse = (id: any) => {
-  const toast = useToast();
-  const [error, setError] = useState<string | null>(null);
   const {
     data: getSingleEnrolledCourse,
     isPending,
-    isError,
   } = useQuery({
     queryKey: ["getCourseStudentEnrollCourse", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
-      try {
-        const { data } = await customFetch.get(`/enrollment/${id}`);
-        setError(null);
-        return data;
-      } catch (error: any) {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.error
-        ) {
-          setError(error.response.data.error);
-        } else {
-          setError("An unexpected error occurred.");
-        }
-        throw error;
-      }
+      const { data } = await customFetch.get(`/enrollment/${id}`);
+      return data;
     },
   });
-  useEffect(() => {
-    if (isError) {
-      if (error) {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={error} onClose={onClose} />
-          ),
-        });
-      } else {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
-          ),
-        });
-      }
-    }
-  }, [isError, error, toast]);
+
   return {
     getSingleEnrolledCourse,
     isPending,
@@ -339,7 +258,6 @@ export const useMarkLectureUnfinished = () => {
   return { markLectureUnfinshed };
 };
 
-
 export const useGetSingleEducratInstructor = (slug: any) => {
   const toast = useToast();
   const [error, setError] = useState<string | null>(null);
@@ -353,7 +271,7 @@ export const useGetSingleEducratInstructor = (slug: any) => {
     queryFn: async ({ queryKey }) => {
       const [, slug] = queryKey;
       try {
-        const { data } = await customFetch.get(`/instructor/slug/${slug}`,);
+        const { data } = await customFetch.get(`/instructor/slug/${slug}`);
         setError(null);
         return data;
       } catch (error: any) {
@@ -398,7 +316,6 @@ export const useGetSingleEducratInstructor = (slug: any) => {
   return { getSingleEducratInstructor, isPending, isError, refetch };
 };
 
-
 // ***************************************************reviews***************************************
 
 export const useCreateEnrolledCourseReview = () => {
@@ -414,7 +331,7 @@ export const useCreateEnrolledCourseReview = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getCourseReview"] });
-      
+
       queryClient.invalidateQueries({ queryKey: ["singleCourse"] });
       queryClient.invalidateQueries({ queryKey: ["courseReviewRating"] });
       toast({
@@ -582,8 +499,8 @@ export const useCreateCourseWishList = () => {
     mutate: createCourseWishList,
     isPending: createCourseWishListLoading,
   } = useMutation({
-    mutationFn: ({ courseId}: any) => {
-      return customFetch.post(`/wishlist/course/${courseId}`,);
+    mutationFn: ({ courseId }: any) => {
+      return customFetch.post(`/wishlist/course/${courseId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getStudentWishList"] });
@@ -657,6 +574,3 @@ export const useDeleteCourseWishList = () => {
   });
   return { deleteCourseWishList, deleteCourseWishListLoading };
 };
-
-
-

@@ -254,55 +254,15 @@ export const useGetCourse = () => {
   return { data, isPending };
 };
 
-export const useGetAllUserCourse = () => {
-  const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
-  const { data, isError, isPending, refetch } = useQuery({
+export const useGetAllUserCourse = () => { 
+  const { data } = useQuery({
     queryKey: ["allUserCourse"],
     queryFn: async () => {
       const { data } = await customFetch.get("/course/user");
       return data;
     },
   });
-  useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
-    }
-  }, [isError, errorToastShown, toast]);
-  return { data, isPending, isError, refetch };
+  return { data};
 };
 
 export const useSingleStatusCourse = () => {
