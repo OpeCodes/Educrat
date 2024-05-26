@@ -197,7 +197,7 @@ const Login = () => {
                     color={"white"}
                     _hover={{ background: "none", color: "#6440fb" }}
                   >
-                    Register
+                    Login
                   </Button>
                 </Flex>
               )}
