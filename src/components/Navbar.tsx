@@ -70,7 +70,7 @@ const Navbar = () => {
         justify={"space-between"}
         align={"center"}
       >
-        <Flex justify={"space-between"} align={"center"}>    
+        <Flex justify={"space-between"} align={"center"}>
           <Stack as={Link} to={"/"}>
             <Text fontSize={"1.7rem"} fontWeight={"bold"} color="#6440fb">
               DevUpshot
@@ -377,7 +377,7 @@ const Navbar = () => {
                 </Flex>
               </>
             ) : (
-              <>
+              <Box ml={6}>
                 <Text
                   as={Link}
                   to="/sign-in"
@@ -385,10 +385,10 @@ const Navbar = () => {
                 >
                   Login
                 </Text>
-                <Text as={Link} to="/sign-up">
+                <Text as={Link} to="/sign-up" ml={2}>
                   Sign Up
                 </Text>
-              </>
+              </Box>
             )}
 
             <Box display={{ base: "block", md: "none" }}>
@@ -467,48 +467,31 @@ const Navbar = () => {
             <Divider orientation="horizontal" my={5} />
             <Flex rowGap={"8px"} flexDirection={"column"}>
               <Text>Call Us</Text>
-              <Text>08145885175</Text>
-              <Text>Abule oja</Text>
+              <Text>09167647648</Text>
               <Text>Yaba lagos</Text>
               <Text>adedokunpeter11@gmail.com</Text>
             </Flex>
             <Flex my="15px" columnGap={7} cursor={"pointer"}>
               <FaFacebookF />
               <FaTwitter />
-              <FaInstagram />
-              <FaLinkedinIn />
+              <Box
+                as={"a"}
+                href="https://www.instagram.com/devupshot?igsh=MWR4Z3hxaGhmbmplMw=="
+                target="_blank"
+              >
+                <FaInstagram />
+              </Box>
+              <Box
+                as={"a"}
+                href="https://www.linkedin.com/company/devupshot/"
+                target={"_blank"}
+              >
+                <FaLinkedinIn />
+              </Box>
             </Flex>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-      {/* <Modal onClose={onModalClose} size={"full"} isOpen={modalOpen}>
-        <ModalOverlay />
-        <ModalContent pt={20}>
-          <ModalHeader>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.2em"
-              >
-                <FiSearch fontSize={"25px"} />
-              </InputLeftElement>
-              <Input
-                placeholder="What do you want to learn?"
-                variant="flushed"
-              />
-              <InputRightElement pb={10}>
-                <Box bg="white">
-                  <ModalCloseButton borderRadius={"100%"} />
-                </Box>
-              </InputRightElement>
-            </InputGroup>
-          </ModalHeader>
-          <ModalBody>
-            <Text>Popular Right now</Text>
-          </ModalBody>
-        </ModalContent>
-      </Modal> */}
     </Stack>
   );
 };
