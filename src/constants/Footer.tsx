@@ -37,7 +37,6 @@ export const Footer = () => {
         w={"full"}
       >
         <Box color={"white"} alignItems={"center"}>
-          {/* <img src={logo} alt="educrat-logo" /> */}
           <Stack>
             <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"#6440fb"}>
               DevUpshot

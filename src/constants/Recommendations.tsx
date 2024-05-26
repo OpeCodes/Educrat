@@ -1,7 +1,9 @@
 import { Box, Flex, Heading, Select, Text, Button } from "@chakra-ui/react";
 import { recommendationImg } from "../assets/export";
+import { useCourseCategory } from "../hooks/course";
 
 export const Recommendations = () => {
+  const { data } = useCourseCategory();
   return (
     <Box
       as={"section"}
@@ -42,21 +44,16 @@ export const Recommendations = () => {
                 focusBorderColor="#140342"
                 fontSize={"16px"}
               >
-                <option value={"Animation"} style={{ color: "gray" }}>
-                  Animation
-                </option>
-                <option value={"Design"} style={{ color: "gray" }}>
-                  Design
-                </option>
-                <option value={"Illustration"} style={{ color: "gray" }}>
-                  Illustration
-                </option>
-                <option value={"Lifestyle"} style={{ color: "gray" }}>
-                  Lifestyle
-                </option>
-                <option value={"Business"} style={{ color: "gray" }}>
-                  Business
-                </option>
+                {data?.map((values: any) => (
+                  <option
+                    key={values.id}
+                    id={values.id}
+                    value={values.id}
+                    style={{ color: "black" }}
+                  >
+                    {values.name}
+                  </option>
+                ))}
               </Select>
               <Select
                 size={"lg"}
@@ -85,7 +82,7 @@ export const Recommendations = () => {
               px={12}
               py={6}
               ml={4}
-              mt={{ base: 4 }}
+              // mt={{ base: 4 }}
               bg="#6440fb"
               color="white"
               variant="solid"
