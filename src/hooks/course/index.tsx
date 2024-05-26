@@ -210,19 +210,18 @@ export const useGetCourse = () => {
       return data;
     },
   });
-
   return { data, isPending };
 };
 
 export const useGetAllUserCourse = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch,isPending,isError } = useQuery({
     queryKey: ["allUserCourse"],
     queryFn: async () => {
       const { data } = await customFetch.get("/course/user");
       return data;
     },
   });
-  return { data, refetch };
+  return { data, refetch, isPending, isError };
 };
 
 export const useSingleStatusCourse = () => {
