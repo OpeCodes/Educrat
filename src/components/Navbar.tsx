@@ -134,10 +134,6 @@ const Navbar = () => {
               )}
             </Box>
           )}
-
-          {/* <Text cursor={"pointer"} onClick={() => onModalOpen()}>
-            <FiSearch color={"#6440fb"} fontSize={"25px"} />
-          </Text> */}
           {hasStudentRole && !hasInstructorRole && (
             <Text
               fontSize="15px"
@@ -404,7 +400,7 @@ const Navbar = () => {
                     cursor={"pointer"}
                     as={Link}
                     to="/instructor/courses"
-                    color="blue"
+                    color="#6440fb"
                   >
                     Switch to instructor view
                   </Text>
@@ -412,31 +408,6 @@ const Navbar = () => {
               </>
             )}
             <br />
-            {user && (
-              <>
-                {hasStudentRole && hasInstructorRole && (
-                  <Text
-                    _hover={{ textDecoration: "none" }}
-                    onClick={() => {
-                      toast({
-                        title: `Logging out...`,
-                        status: "success",
-                        duration: 2000,
-                        isClosable: true,
-                      });
-                      //  window.location.reload()
-                      setTimeout(() => {
-                        dispatch(logoutUser());
-                        onClose();
-                      }, 2000);
-                    }}
-                    cursor={"pointer"}
-                  >
-                    Logout out
-                  </Text>
-                )}
-              </>
-            )}
           </Box>
           <DrawerBody>
             <Box>
@@ -489,6 +460,32 @@ const Navbar = () => {
                 <FaLinkedinIn />
               </Box>
             </Flex>
+            {user && (
+              <>
+                <Text
+                  fontWeight={"bold"}
+                  fontSize={"16px"}
+                  color={"#6440fb"}
+                  mt={"3rem"}
+                  _hover={{ textDecoration: "none" }}
+                  onClick={() => {
+                    toast({
+                      title: `Logging out...`,
+                      status: "success",
+                      duration: 2000,
+                      isClosable: true,
+                    });
+                    setTimeout(() => {
+                      dispatch(logoutUser());
+                      onClose();
+                    }, 2000);
+                  }}
+                  cursor={"pointer"}
+                >
+                  Logout
+                </Text>
+              </>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>

@@ -576,7 +576,7 @@ const SingleCourse = () => {
                                     <HiOutlineChat />
                                   </Text>
                                   <Text>{getInstructorReview?.length}</Text>
-                                  <Text> Reviews</Text>
+                                  <Text> Review{getInstructorReview?.length > 1 && "s"}</Text>
                                 </Flex>
                                 <Flex
                                   columnGap={1}
