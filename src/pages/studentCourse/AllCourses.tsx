@@ -21,10 +21,17 @@ import {
 import { convertSecondsToHMS } from "../../components/TimeFormat";
 import { CiClock1, CiPlay1 } from "react-icons/ci";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
+import { Loading } from "../../components";
 
 const StudentCourse = () => {
-  const { data } = useGetCourse();
-
+  const { data, isPending } = useGetCourse();
+  if (isPending) {
+    return (
+      <Text mt={"6rem"}>
+        <Loading />
+      </Text>
+    );
+  }
   return (
     <Stack pt={"4.3rem"}>
       <Box paddingTop={10} pl={20}>
@@ -90,7 +97,7 @@ const StudentCourse = () => {
                   slug,
                   modules,
                   reviews,
-                  price
+                  price,
                 }: CourseInterface) => (
                   <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                     <Stack>
