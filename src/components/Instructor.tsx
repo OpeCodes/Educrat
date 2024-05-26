@@ -8,7 +8,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useInstructorReviewRating } from "../hooks/studentCourse";
+import { useGetInstructorenrolledCourse, useInstructorReviewRating } from "../hooks/studentCourse";
 import { SocialsInterface } from "../interface/UserInterface";
 import { CourseInterface } from "../interface/courseInterface";
 
@@ -23,12 +23,14 @@ type Instructor = {
   index: number;
   arrayOfIds: number[];
   socials: SocialsInterface[];
+  id: number;
 };
 const Instructor = ({
   profilePicture,
   lastName,
   firstName,
   headline,
+  id,
   courses,
   slug,
   index,
@@ -42,6 +44,7 @@ const Instructor = ({
     instructorReviewRating?.average === "NaN"
       ? 0
       : instructorReviewRating?.average;
+     
   return (
     <Box
       className="card"
@@ -135,7 +138,7 @@ const Instructor = ({
             >
               <CiUser color={"gray"} size={14} />
               <Text color={"gray.600"} fontSize={"12px"}>
-                {courses.length} Students
+                {courses?.length} Student{courses?.length > 1  && "s"}
               </Text>
             </Box>
             <Box
@@ -146,7 +149,7 @@ const Instructor = ({
             >
               <CiPlay1 color={"gray"} size={14} />
               <Text color={"gray.600"} fontSize={"14px"}>
-                {courses.length} Courses
+                {courses.length} Course
               </Text>
             </Box>
           </Flex>

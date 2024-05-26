@@ -17,7 +17,6 @@ import { Link } from "react-router-dom";
 export const Instructors = () => {
   const { data, isPending } = useGetAllEducratInstructors();
   const dummyArray = [1, 2, 3, 4];
-  // const arrayOfIds = data?.map((obj: any) => obj?.id);
   const arrayOfIds = Array.isArray(data) ? data.map((obj: any) => obj?.id) : [];
   return (
     <Box
