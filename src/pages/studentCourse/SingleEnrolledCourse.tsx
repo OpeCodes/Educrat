@@ -99,7 +99,7 @@ const SingleEnrolledCourse = () => {
       review: values,
     });
   };
-  
+
   const initialFocusRef: any = useRef();
   const { markLectureCompleted } = useMarkLectureCompleted();
   const { markLectureUnfinshed } = useMarkLectureUnfinished();
@@ -354,8 +354,9 @@ const SingleEnrolledCourse = () => {
                 {singleLectureData?.contentType === "lecture_article" && (
                   /* article section*/
                   <Stack
-                    h={{ base: "900px", lg: "400px" }}
-                    overflowY={{ base: "hidden", xl: "scroll" }}
+                    // h={{ base: "900px", lg: "400px" }}
+                    h={"400px"}
+                    overflowY={{ base: "scroll", xl: "scroll" }}
                     borderBottomWidth={2}
                     borderColor={"#f1f1f1"}
                     mb={5}
@@ -470,9 +471,10 @@ const SingleEnrolledCourse = () => {
                           )}
                         </FormControl>
                         <Button
-                          bg={"#00FF84"}
+                          bg={"#6440fb"}
                           isLoading={createEnrolledCourseReviewLoading}
                           loadingText="Loading"
+                          colorScheme="teal"
                           variant="outline"
                           spinnerPlacement="end"
                           width="100%"
@@ -480,8 +482,8 @@ const SingleEnrolledCourse = () => {
                           mt={3}
                           borderWidth={2}
                           py={3}
-                          borderColor={"#00FF84"}
-                          _hover={{ background: "none", color: "#00FF84" }}
+                          color={"white"}
+                          _hover={{ background: "none", color: "#6440fb" }}
                         >
                           Submit Review
                         </Button>

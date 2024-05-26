@@ -102,6 +102,7 @@ const StudentCourse = () => {
                   <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                     <Stack>
                       <Stack>
+                        <Box>
                         <Image
                           src={thumbnail}
                           alt={title}
@@ -112,6 +113,7 @@ const StudentCourse = () => {
                           width={"100%"}
                           // objectFit={"scale-down"}
                         />
+                        </Box>
                         <Stack>
                           <Flex justifyContent={"start"} alignItems={"center"}>
                             <Text color={"#FFD700"}>
