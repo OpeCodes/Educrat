@@ -106,6 +106,7 @@ const ForgotPassword = () => {
                       value={values.email}
                       name="email"
                       onChange={handleChange}
+                      focusBorderColor='black'
                     />
                     {errors.email && (
                       <Text
