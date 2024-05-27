@@ -115,7 +115,7 @@ export const Instructors = () => {
           align={"center"}
           my={5}
         >
-          <Text color={"gray.600"} fontSize={"15px"}>
+          <Text color={"gray.600"} fontSize={"15px"} textAlign={"center"}>
             Want to help people learn, grow and achieve more in life?
           </Text>
           <Text
