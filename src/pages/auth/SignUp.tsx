@@ -123,6 +123,7 @@ const SignUp = () => {
                       value={values.firstName}
                       name="firstName"
                       onChange={handleChange}
+                      focusBorderColor='black'
                     />
                     {errors.firstName && (
                       <Text
@@ -142,6 +143,7 @@ const SignUp = () => {
                       value={values.lastName}
                       name="lastName"
                       onChange={handleChange}
+                      focusBorderColor='black'
                     />
                     {errors.lastName && (
                       <Text
@@ -161,6 +163,7 @@ const SignUp = () => {
                       value={values.username}
                       name="username"
                       onChange={handleChange}
+                      focusBorderColor='black'
                     />
                     {errors.username && (
                       <Text
@@ -180,6 +183,7 @@ const SignUp = () => {
                       value={values.email}
                       name="email"
                       onChange={handleChange}
+                      focusBorderColor='black'
                     />
                     {errors.email && (
                       <Text
@@ -201,6 +205,7 @@ const SignUp = () => {
                         value={values.password}
                         name="password"
                         onChange={handleChange}
+                        focusBorderColor='black'
                       />
                       <InputRightElement width="4.5rem">
                         <Button
@@ -240,6 +245,7 @@ const SignUp = () => {
                         value={values.confirmPassword}
                         name="confirmPassword"
                         onChange={handleChange}
+                        focusBorderColor='black'
                       />
                       <InputRightElement width="4.5rem">
                         <Button
