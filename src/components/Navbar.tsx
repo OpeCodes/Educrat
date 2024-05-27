@@ -425,7 +425,7 @@ const Navbar = () => {
               <Text>Call Us</Text>
               <Text>09167647648</Text>
               <Text>Yaba lagos</Text>
-              <Text>adedokunpeter11@gmail.com</Text>
+              <Text>devupshot@gmail.com</Text>
             </Flex>
             <Flex my="15px" columnGap={7} cursor={"pointer"}>
               <FaFacebookF />
