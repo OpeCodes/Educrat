@@ -123,6 +123,7 @@ const Login = () => {
                       value={values.credential}
                       name="credential"
                       onChange={handleChange}
+                      focusBorderColor='black'
                     />
                     {errors.credential && (
                       <Text
@@ -144,6 +145,7 @@ const Login = () => {
                         value={values.password}
                         name="password"
                         onChange={handleChange}
+                        focusBorderColor='black'
                       />
                       <InputRightElement width="4.5rem">
                         <Button
@@ -172,7 +174,7 @@ const Login = () => {
                     )}
                   </FormControl>
                   <Button
-                    color={"#6440fb"}
+                    color={"black"}
                     as={Link}
                     to="/reset-password"
                     variant="link"
@@ -183,7 +185,7 @@ const Login = () => {
                     Forgot Password?
                   </Button>
                   <Button
-                    bg={"#6440fb"}                   
+                    bg={"black"}                   
                     isLoading={isPending}
                     loadingText="Loading"
                     colorScheme="teal"
@@ -195,7 +197,7 @@ const Login = () => {
                     borderWidth={2}
                     py={3}
                     color={"white"}
-                    _hover={{ background: "none", color: "#6440fb" }}
+                    _hover={{ background: "none", color: "black" }}
                   >
                     Login
                   </Button>

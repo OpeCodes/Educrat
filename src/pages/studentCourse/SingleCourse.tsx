@@ -121,7 +121,7 @@ const SingleCourse = () => {
 
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
-  const month = date.getMonth() + 1; // Adding 1 because getMonth returns zero-based index
+  const month = date.getMonth() + 1; 
   const year = date.getFullYear() % 100;
   const formattedDate = `${month.toString().padStart(2, "0")}/${year
     .toString()
@@ -178,7 +178,7 @@ const SingleCourse = () => {
       navigate("/sign-in");
       toast({
         title: `Sign in to purchase a course`,
-        status: "error",
+        status: "info",
         duration: 3000,
         isClosable: true,
       });
@@ -238,7 +238,7 @@ const SingleCourse = () => {
       navigate("/sign-in");
       toast({
         title: `Sign in to add a wishlist`,
-        status: "error",
+        status: "info",
         duration: 3000,
         isClosable: true,
       });

@@ -165,8 +165,7 @@ const router = createBrowserRouter([
       {
         path: "settings",
         element: <CourseSettings />,
-      },
-            
+      },            
     ],
   },
 ]);
@@ -174,7 +173,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </>
   );
 }

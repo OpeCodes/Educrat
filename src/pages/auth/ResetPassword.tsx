@@ -51,7 +51,7 @@ const ResetPassword = () => {
             display={{ base: "none", lg: "block" }}
             position={"fixed"}
           >
-          <Stack position={"relative"}>
+            <Stack position={"relative"}>
               <Image src={backgroundImg} alt="background" />
               {/* <Image
                 src={logo}
@@ -74,7 +74,6 @@ const ResetPassword = () => {
                 </Text>
               </Stack>
             </Stack>
-
           </Box>
         </GridItem>
         <GridItem
@@ -117,6 +116,7 @@ const ResetPassword = () => {
                         value={values.password}
                         name="password"
                         onChange={handleChange}
+                        focusBorderColor="black"
                       />
                       <InputRightElement width="4.5rem">
                         <Button
@@ -144,25 +144,7 @@ const ResetPassword = () => {
                       </Text>
                     )}
                   </FormControl>
-                  {/* <FormControl isRequired>
-                    <FormLabel>New Password</FormLabel>
-                    <Input
-                      type="text"
-                      variant="filled"
-                      placeholder="password"
-                      value={values.password}
-                      name="password"
-                      onChange={handleChange}
-                    />
-                    {errors.password && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.password}
-                      </Text>
-                    )}
-                  </FormControl> */}
+
                   <FormControl isRequired>
                     <FormLabel>Confirm Password</FormLabel>
                     <InputGroup size="md">
@@ -174,6 +156,7 @@ const ResetPassword = () => {
                         value={values.confirmPassword}
                         name="confirmPassword"
                         onChange={handleChange}
+                        focusBorderColor="black"
                       />
                       <InputRightElement width="4.5rem">
                         <Button
@@ -199,9 +182,9 @@ const ResetPassword = () => {
                         {errors.confirmPassword}
                       </Text>
                     )}
-                  </FormControl>                 
+                  </FormControl>
                   <Button
-                    bg={"#6440fb"}                   
+                    bg={"black"}
                     isLoading={isPending}
                     loadingText="Loading"
                     colorScheme="teal"
@@ -213,11 +196,10 @@ const ResetPassword = () => {
                     borderWidth={2}
                     py={3}
                     color={"white"}
-                    _hover={{ background: "none", color: "#6440fb" }}
+                    _hover={{ background: "none", color: "black" }}
                   >
                     Password Reset
                   </Button>
-                  
                 </Flex>
               )}
             </Formik>
