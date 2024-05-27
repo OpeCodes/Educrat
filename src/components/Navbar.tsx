@@ -250,7 +250,6 @@ const Navbar = () => {
                     <Stack p={3}>
                       <Text>Account Settings</Text>
                       <Text>Payment Methods</Text>
-                      <Text>Purcase History</Text>
                     </Stack>
                     <Divider />
                     <Stack p={3}>
