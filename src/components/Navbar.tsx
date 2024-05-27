@@ -16,8 +16,7 @@ import {
   useBoolean,
   useToast,
 } from "@chakra-ui/react";
-import { NavLink, Link, useNavigate } from "react-router-dom";
-// import logo from "../assets/logo-2.svg";
+import { NavLink, Link } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
@@ -43,7 +42,6 @@ const links = [
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [hover, setHover] = useBoolean();
-  const navigate = useNavigate();
   const toast = useToast();
 
   const dispatch = useDispatch();
@@ -134,28 +132,15 @@ const Navbar = () => {
               )}
             </Box>
           )}
-          {hasStudentRole && !hasInstructorRole && (
+
+          {user && !hasInstructorRole && (
             <Text
               fontSize="15px"
               cursor={"pointer"}
               color={"black"}
               display={{ base: "none", md: "flex" }}
-              onClick={() => {
-                navigate("/become-instructor");
-              }}
-            >
-              Teach on DevUpshot
-            </Text>
-          )}
-          {!user && (
-            <Text
-              fontSize="15px"
-              cursor={"pointer"}
-              color={"black"}
-              display={{ base: "none", md: "flex" }}
-              onClick={() => {
-                navigate("/sign-in");
-              }}
+              as={Link}
+              to={!hasInstructorRole ? "/become-instructor" : "/sign-in"}
             >
               Teach on DevUpshot
             </Text>
