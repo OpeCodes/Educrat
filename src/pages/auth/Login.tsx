@@ -123,6 +123,7 @@ const Login = () => {
                       value={values.credential}
                       name="credential"
                       onChange={handleChange}
+                      focusBorderColor='black'
                     />
                     {errors.credential && (
                       <Text
@@ -144,6 +145,7 @@ const Login = () => {
                         value={values.password}
                         name="password"
                         onChange={handleChange}
+                        focusBorderColor='black'
                       />
                       <InputRightElement width="4.5rem">
                         <Button
