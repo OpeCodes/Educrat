@@ -165,8 +165,7 @@ const router = createBrowserRouter([
       {
         path: "settings",
         element: <CourseSettings />,
-      },
-            
+      },            
     ],
   },
 ]);

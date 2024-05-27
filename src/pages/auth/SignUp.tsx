@@ -267,7 +267,7 @@ const SignUp = () => {
                     )}
                   </FormControl>
                   <Button
-                    bg={"#6440fb"}                   
+                    bg={"black"}                   
                     isLoading={isPending}
                     loadingText="Loading"
                     colorScheme="teal"
@@ -279,7 +279,7 @@ const SignUp = () => {
                     borderWidth={2}
                     py={3}
                     color={"white"}
-                    _hover={{ background: "none", color: "#6440fb" }}
+                    _hover={{ background: "none", color: "black" }}
                   >
                     Register
                   </Button>
