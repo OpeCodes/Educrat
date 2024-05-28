@@ -268,7 +268,6 @@ const Navbar = () => {
                             duration: 2000,
                             isClosable: true,
                           });
-
                           setTimeout(() => {
                             dispatch(logoutUser());
                           }, 2000);
@@ -289,6 +288,7 @@ const Navbar = () => {
                 display={{ base: "none", md: "flex" }}
                 as={Link}
                 to={"/sign-in"}
+              
               >
                 Log In
               </Button>
