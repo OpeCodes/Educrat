@@ -51,7 +51,7 @@ import {
 } from "../../components/TimeFormat";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { PromotionalVideoPlayModal } from "../../components";
+import {  PromotionalVideoPlayModal } from "../../components";
 import { setCourseAuthNavigate } from "../../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
@@ -73,7 +73,10 @@ import {
   addCourseToCart,
   setSingleCartCourse,
 } from "../../features/cart/CartSlice";
-import { CourseItemToLocalStorage, addUserSingleCartItem } from "../../store/localStorage";
+import {
+  CourseItemToLocalStorage,
+  addUserSingleCartItem,
+} from "../../store/localStorage";
 interface ObjectWithId {
   id: string;
 }
@@ -88,7 +91,7 @@ const SingleCourse = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   const { user } = useSelector((store: RootState) => store?.user);
-  const { courses,  } = useSelector((store: RootState) => store?.cart);
+  const { courses } = useSelector((store: RootState) => store?.cart);
   const { getStudentSingleCourse, isPending } = useGetStudentSingleCourse(slug);
   const { getStudentWishList } = useGetStudentWishList();
 
@@ -121,7 +124,7 @@ const SingleCourse = () => {
 
   const dateString = getStudentSingleCourse?.updatedAt;
   const date = new Date(dateString);
-  const month = date.getMonth() + 1; 
+  const month = date.getMonth() + 1;
   const year = date.getFullYear() % 100;
   const formattedDate = `${month.toString().padStart(2, "0")}/${year
     .toString()
@@ -143,7 +146,8 @@ const SingleCourse = () => {
   };
   // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
-  const { courseEnroll,isPending: handleEnrolledCourseLoading } = useCourseEnrollment();
+  const { courseEnroll, isPending: handleEnrolledCourseLoading } =
+    useCourseEnrollment();
   const { getSingleEnrolledCourse, isPending: getSingleEnrolledCourseLoading } =
     useGetSingleEnrolledCourse(getStudentSingleCourse?.id);
   const { getAlInstructorPublishedCourse } = useGetAlInstructorPublishedCourse(
@@ -212,7 +216,7 @@ const SingleCourse = () => {
           description: getStudentSingleCourse?.description,
           price: getStudentSingleCourse?.price,
           img: getStudentSingleCourse?.thumbnail,
-        })
+        });
       }
     }
   };
@@ -506,7 +510,7 @@ const SingleCourse = () => {
                             in={show}
                             color={"#4f547b"}
                           ></Collapse>
-                          {getStudentSingleCourse?.description.length >500 && (
+                          {getStudentSingleCourse?.description.length > 500 && (
                             <Button
                               color={"#6440fb"}
                               textAlign={"left"}
@@ -576,7 +580,11 @@ const SingleCourse = () => {
                                     <HiOutlineChat />
                                   </Text>
                                   <Text>{getInstructorReview?.length}</Text>
-                                  <Text> Review{getInstructorReview?.length > 1 && "s"}</Text>
+                                  <Text>
+                                    {" "}
+                                    Review
+                                    {getInstructorReview?.length > 1 && "s"}
+                                  </Text>
                                 </Flex>
                                 <Flex
                                   columnGap={1}
@@ -716,112 +724,122 @@ const SingleCourse = () => {
                           }}
                         >
                           <Stack mx={{ base: 0, lg: 4 }}>
-                            {!getSingleEnrolledCourse || !user ? (
-                              <Stack>
-                                <Text mt={3} fontSize={"1.5rem"}>
-                                  N{getStudentSingleCourse?.price}
-                                </Text>
-                                <Flex columnGap={4}>
-                                  {!exists ? (
-                                    <Button
-                                      bg={"#6440FB"}
-                                      py={"25px"}
-                                      variant="solid"
-                                      color={"white"}
-                                      width={"100%"}
-                                      onClick={() => {
-                                        handleAddToCart({
-                                          id: getStudentSingleCourse?.id,
-                                          title: getStudentSingleCourse?.title,
-                                          description:
-                                            getStudentSingleCourse?.description,
-                                          price: getStudentSingleCourse?.price,
-                                          img: getStudentSingleCourse?.thumbnail,
-                                        });
-                                      }}
-                                    >
-                                      Add to Cart
-                                    </Button>
-                                  ) : (
-                                    <Button
-                                      bg={"#6440FB"}
-                                      py={"25px"}
-                                      variant="solid"
-                                      color={"white"}
-                                      width={"100%"}
-                                    >
-                                      Already Added
-                                    </Button>
-                                  )}
-
-                                  <Stack
-                                    align={"center"}
-                                    px={4}
-                                    justify={"center"}
-                                    borderColor={"black"}
-                                    borderWidth={1}
-                                    _hover={{ backgroundColor: "#F5F7FE" }}
-                                    cursor={"pointer"}
-                                  >
-                                    {createCourseWishListLoading ||
-                                    deleteCourseWishListLoading ? (
-                                      <Spinner />
-                                    ) : (
-                                      <>
-                                        {!idExists ? (
-                                          <Text onClick={handleWishCourse}>
-                                            <IoMdHeartEmpty size={25} />
-                                          </Text>
-                                        ) : (
-                                          <Text
-                                            onClick={() => {
-                                              deleteCourseWishList({
-                                                courseId:
-                                                  getStudentSingleCourse?.id,
-                                              });
-                                            }}
-                                          >
-                                            <IoMdHeart size={25} />
-                                          </Text>
-                                        )}
-                                      </>
-                                    )}
-                                  </Stack>
-                                </Flex>
-
-                                <Button
-                                  borderColor={"#140342"}
-                                  py={"25px"}
-                                  variant="outline"
-                                  onClick={handleEnrolledCourse}
-                                  isLoading={handleEnrolledCourseLoading}
-                                  loadingText="Loading"
-                                  spinnerPlacement="end"
-                                >
-                                  Buy Now
-                                </Button>
+                            {getSingleEnrolledCourseLoading ? (
+                              <Stack mt={3}>
+                                <Text fontSize={20} fontWeight={"bold"}>Loading...</Text>
                               </Stack>
                             ) : (
-                              <Stack mt={3}>
-                                <Flex columnGap={4} align={"center"}>
-                                  <FcInfo size={35} />
-                                  <Text fontWeight={"bold"}>
-                                    You purchased this course on{" "}
-                                    {formatEnrollDate(
-                                      getSingleEnrolledCourse?.createdAt
-                                    )}
-                                  </Text>
-                                </Flex>
-                                <Button
-                                  bg={"#6440FB"}
-                                  py={"25px"}
-                                  variant="solid"
-                                  color={"white"}
-                                  onClick={handleGoToCourse}
-                                >
-                                  Go to Course
-                                </Button>
-                              </Stack>
+                              <>
+                                {!getSingleEnrolledCourse || !user ? (
+                                  <Stack>
+                                    <Text mt={3} fontSize={"1.5rem"}>
+                                      N{getStudentSingleCourse?.price}
+                                    </Text>
+                                    <Flex columnGap={4}>
+                                      {!exists ? (
+                                        <Button
+                                          bg={"#6440FB"}
+                                          py={"25px"}
+                                          variant="solid"
+                                          color={"white"}
+                                          width={"100%"}
+                                          onClick={() => {
+                                            handleAddToCart({
+                                              id: getStudentSingleCourse?.id,
+                                              title:
+                                                getStudentSingleCourse?.title,
+                                              description:
+                                                getStudentSingleCourse?.description,
+                                              price:
+                                                getStudentSingleCourse?.price,
+                                              img: getStudentSingleCourse?.thumbnail,
+                                            });
+                                          }}
+                                        >
+                                          Add to Cart
+                                        </Button>
+                                      ) : (
+                                        <Button
+                                          bg={"#6440FB"}
+                                          py={"25px"}
+                                          variant="solid"
+                                          color={"white"}
+                                          width={"100%"}
+                                        >
+                                          Already Added
+                                        </Button>
+                                      )}
+
+                                      <Stack
+                                        align={"center"}
+                                        px={4}
+                                        justify={"center"}
+                                        borderColor={"black"}
+                                        borderWidth={1}
+                                        _hover={{ backgroundColor: "#F5F7FE" }}
+                                        cursor={"pointer"}
+                                      >
+                                        {createCourseWishListLoading ||
+                                        deleteCourseWishListLoading ? (
+                                          <Spinner />
+                                        ) : (
+                                          <>
+                                            {!idExists ? (
+                                              <Text onClick={handleWishCourse}>
+                                                <IoMdHeartEmpty size={25} />
+                                              </Text>
+                                            ) : (
+                                              <Text
+                                                onClick={() => {
+                                                  deleteCourseWishList({
+                                                    courseId:
+                                                      getStudentSingleCourse?.id,
+                                                  });
+                                                }}
+                                              >
+                                                <IoMdHeart size={25} />
+                                              </Text>
+                                            )}
+                                          </>
+                                        )}
+                                      </Stack>
+                                    </Flex>
+
+                                    <Button
+                                      borderColor={"#140342"}
+                                      py={"25px"}
+                                      variant="outline"
+                                      onClick={handleEnrolledCourse}
+                                      isLoading={handleEnrolledCourseLoading}
+                                      loadingText="Loading"
+                                      spinnerPlacement="end"
+                                    >
+                                      Buy Now
+                                    </Button>
+                                  </Stack>
+                                ) : (
+                                  <Stack mt={3}>
+                                    <Flex columnGap={4} align={"center"}>
+                                      <FcInfo size={35} />
+                                      <Text fontWeight={"bold"}>
+                                        You purchased this course on{" "}
+                                        {formatEnrollDate(
+                                          getSingleEnrolledCourse?.createdAt
+                                        )}
+                                      </Text>
+                                    </Flex>
+                                    <Button
+                                      bg={"#6440FB"}
+                                      py={"25px"}
+                                      variant="solid"
+                                      color={"white"}
+                                      onClick={handleGoToCourse}
+                                    >
+                                      Go to Course
+                                    </Button>
+                                  </Stack>
+                                )}
+                              </>
                             )}
 
                             <Stack>
