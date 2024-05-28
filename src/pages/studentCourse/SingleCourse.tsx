@@ -282,7 +282,7 @@ const SingleCourse = () => {
     stars.push(
       <FaStar
         key={i}
-        color={i <= Math.round(ratingFormat) ? "#FFD700" : "#EAEAEA"} // Fill color for filled stars based on rating
+        color={i <= Math.round(ratingFormat) ? "#FFD700" : "#EAEAEA"} 
       />
     );
   }
@@ -318,7 +318,7 @@ const SingleCourse = () => {
         {getCourseReviewLoading &&
         isPending &&
         getSingleEnrolledCourseLoading ? (
-          <Stack mx={"4.3rem"}>
+          <Stack mx={"41/.3rem"}>
             <Skeleton height="60px" />
             <Stack>
               <Skeleton height="60px" />
@@ -616,7 +616,7 @@ const SingleCourse = () => {
                                     {getAlInstructorPublishedCourse?.length}{" "}
                                     Course
                                     {`${
-                                      getInstructorenrolledCourse?.length <= 1
+                                      getAlInstructorPublishedCourse?.length <= 1
                                         ? ""
                                         : "s"
                                     }`}
