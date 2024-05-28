@@ -138,14 +138,14 @@ const ForgotPassword = () => {
               )}
             </Formik>
             <Flex columnGap={1} justify={"center"}>
-              <Text>Don't have an account?</Text>
+              <Text>Already have an account?</Text>
               <Text
                 fontWeight={"600"}
                 color={"#6440fb"}
                 as={Link}
                 to="/sign-in"
               >
-                Sign up for free
+                Login Here
               </Text>
             </Flex>
           </Box>
