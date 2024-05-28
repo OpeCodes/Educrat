@@ -354,7 +354,6 @@ const SingleEnrolledCourse = () => {
                 {singleLectureData?.contentType === "lecture_article" && (
                   /* article section*/
                   <Stack
-                    // h={{ base: "900px", lg: "400px" }}
                     h={"400px"}
                     overflowY={{ base: "scroll", xl: "scroll" }}
                     borderBottomWidth={2}
@@ -837,6 +836,7 @@ const SingleEnrolledCourse = () => {
                         value={values.title}
                         name="title"
                         onChange={handleChange}
+                        focusBorderColor='black'
                       />
                       {errors.title && (
                         <Text
@@ -853,8 +853,9 @@ const SingleEnrolledCourse = () => {
                         variant="filled"
                         placeholder="Message"
                         value={values.content}
-                        name="content"
+                        name="content"                        
                         onChange={handleChange}
+                        focusBorderColor='black'
                       />
                       {errors.content && (
                         <Text
@@ -866,18 +867,19 @@ const SingleEnrolledCourse = () => {
                       )}
                     </FormControl>
                     <Button
-                      bg={"#00FF84"}
+                      bg={"black"}
                       isLoading={createEnrolledCourseReviewLoading}
                       loadingText="Loading"
                       variant="outline"
+                      color={"white"}
                       spinnerPlacement="end"
                       width="100%"
                       onClick={() => handleSubmit()}
                       mt={3}
                       borderWidth={2}
                       py={3}
-                      borderColor={"#00FF84"}
-                      _hover={{ background: "none", color: "#00FF84" }}
+                      borderColor={"black"}
+                      _hover={{ background: "none", color: "black" }}
                     >
                       Submit Review
                     </Button>
