@@ -442,6 +442,7 @@ const SingleEnrolledCourse = () => {
                             value={values.title}
                             name="title"
                             onChange={handleChange}
+                            focusBorderColor='black'
                           />
                           {errors.title && (
                             <Text
@@ -460,6 +461,7 @@ const SingleEnrolledCourse = () => {
                             value={values.content}
                             name="content"
                             onChange={handleChange}
+                            focusBorderColor='black'
                           />
                           {errors.content && (
                             <Text
@@ -471,7 +473,7 @@ const SingleEnrolledCourse = () => {
                           )}
                         </FormControl>
                         <Button
-                          bg={"#6440fb"}
+                          bg={"black"}
                           isLoading={createEnrolledCourseReviewLoading}
                           loadingText="Loading"
                           colorScheme="teal"
@@ -483,7 +485,7 @@ const SingleEnrolledCourse = () => {
                           borderWidth={2}
                           py={3}
                           color={"white"}
-                          _hover={{ background: "none", color: "#6440fb" }}
+                          _hover={{ background: "none", color: "black" }}
                         >
                           Submit Review
                         </Button>
