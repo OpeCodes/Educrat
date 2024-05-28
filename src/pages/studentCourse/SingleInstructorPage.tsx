@@ -254,8 +254,8 @@ const SingleInstructorPage = () => {
                               >
                                 <CiPlay1 />
                                 <Text fontSize="13px">
-                                  {modules?.length} {" "}
-                                  Lessons
+                                  {modules?.length} {"  "}
+                                  Lesson{modules?.length > 1  && "s"}
                                 </Text>
                               </Flex>
                               <Flex
