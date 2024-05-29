@@ -101,13 +101,14 @@ const StudentCourse = () => {
                 }: CourseInterface) => (
                   <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
                     <Stack>
-                      <Stack maxW={{base: "100%", md :"300px"}}>
+                      <Stack
+                       maxW={{base: "100%", lg :"300px"}}>
                         <Box > 
                         <Image
                           src={thumbnail}
                           alt={title}
                           borderRadius="lg"
-                          maxH={{base: "250px",md: "140px" }}
+                          maxH={{base: "200px",}}
                           height={"100%"}
                           className="img"
                           width={"100%"}
