@@ -14,7 +14,6 @@ import {
   FormControl,
   FormLabel,
   IconButton,
-  Image,
   Input,
   Stack,
   Text,
@@ -26,7 +25,6 @@ import {
   PopoverArrow,
   PopoverBody,
 } from "@chakra-ui/react";
-import logo from "../../assets/logo-3.svg";
 import { IoIosArrowDown, IoIosShareAlt } from "react-icons/io";
 
 import {
@@ -221,7 +219,11 @@ const SingleEnrolledCourse = () => {
             to={"/"}
             display={{ base: "none", md: "block" }}
           >
-            <Image src={logo} alt="logo" color={"black"} />
+            <Stack as={Link} to={"/"} align={"center"} display={{ base: "none", md: "block" }}>
+            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"white"}>
+              DevUpshot
+            </Text>
+          </Stack>
           </Box>
           <Text
             display={{ base: "block", md: "none" }}
@@ -237,6 +239,7 @@ const SingleEnrolledCourse = () => {
             fontSize={14}
             color={"white"}
             as={Link}
+            mt={{base: 0, lg: 2}}
             to={`/course/${getSingleEnrolledCourse?.courseId?.slug}`}
           >
             {getSingleEnrolledCourse?.courseId?.title}
