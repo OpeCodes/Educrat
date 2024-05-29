@@ -1,8 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import customFetch from "../../utils/axios";
-import { Flex, Stack, Text, useToast } from "@chakra-ui/react";
+import {  useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { TbInfoHexagonFilled } from "react-icons/tb";
 import { GetToastErrorHandling } from "../../components";
 
 export const useGetAllEducratInstructors = () => {
@@ -18,8 +17,6 @@ export const useGetAllEducratInstructors = () => {
 };
 
 export const useGetStudentSingleCourse = (slug: any) => {
-  const toast = useToast();
-  const [error, setError] = useState<string | null>(null);
   const {
     data: getStudentSingleCourse,
     isPending,
@@ -29,61 +26,23 @@ export const useGetStudentSingleCourse = (slug: any) => {
     queryKey: ["singleCourse", slug],
     queryFn: async ({ queryKey }) => {
       const [, slug] = queryKey;
-      try {
-        const { data } = await customFetch.get(`/course/slug/${slug}`);
-        setError(null);
-        return data;
-      } catch (error: any) {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.error
-        ) {
-          setError(error.response.data.error);
-        } else {
-          setError("An unexpected error occurred.");
-        }
-        throw error;
-      }
+      const { data } = await customFetch.get(`/course/slug/${slug}`);
+      return data;
     },
   });
-  useEffect(() => {
-    if (isError) {
-      if (error) {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={error} onClose={onClose} />
-          ),
-        });
-      } else {
-        toast({
-          status: "error",
-          position: "bottom-right",
-          duration: 10000,
-          isClosable: true,
-          render: ({ onClose }) => (
-            <GetToastErrorHandling error={"Network Error"} onClose={onClose} />
-          ),
-        });
-      }
-    }
-  }, [isError, error, toast]);
+
   return { getStudentSingleCourse, isPending, isError, refetch };
 };
 
 export const useGetAllUserEnrolledCourse = () => {
-  const { data ,isPending} = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ["allEnrolledCourse"],
     queryFn: async () => {
       const { data } = await customFetch.get("/enrollment");
       return data;
     },
   });
-  return {data, isPending}
+  return { data, isPending };
 };
 
 export const useGetAlInstructorPublishedCourse = (id: any) => {
@@ -149,10 +108,7 @@ export const useCourseEnrollment = () => {
 };
 
 export const useGetSingleEnrolledStudentCourse = (id: any) => {
-  const {
-    data: getSingleEnrolledCourse,
-    isPending,
-  } = useQuery({
+  const { data: getSingleEnrolledCourse, isPending } = useQuery({
     queryKey: ["getCourseStudentEnrollCourse", id],
     queryFn: async ({ queryKey }) => {
       const [, id] = queryKey;
@@ -437,8 +393,6 @@ export const useGetInstructorReview = (id: any) => {
 // ************************************wishlist*****************************
 
 export const useGetStudentWishList = () => {
-  const toast = useToast();
-  const [errorToastShown, setErrorToastShown] = useState(false);
   const {
     data: getStudentWishList,
     isError,
@@ -451,44 +405,7 @@ export const useGetStudentWishList = () => {
       return data;
     },
   });
-  useEffect(() => {
-    if (isError && !errorToastShown) {
-      setErrorToastShown(true);
-      toast({
-        title: "Error fetching data",
-        status: "error",
-        position: "bottom-right",
-        duration: 5000,
-        isClosable: false,
-        render: ({ onClose }) => (
-          <Stack bg={"#FCBCA0"} py={3} px={4}>
-            <Flex align={"center"} columnGap={2}>
-              <Text>
-                <TbInfoHexagonFilled size={30} />
-              </Text>
-              <Text fontWeight={"bold"}>Network Error</Text>
-            </Flex>
-            <Flex columnGap={3} mt={4}>
-              <Text
-                as={"button"}
-                fontWeight={"bold"}
-                onClick={() => window.location.reload()}
-                color={"white"}
-                py={1}
-                px={4}
-                backgroundColor={"black"}
-              >
-                Reload page
-              </Text>
-              <Text as={"button"} fontWeight={"bold"} onClick={onClose}>
-                Dismiss
-              </Text>
-            </Flex>
-          </Stack>
-        ),
-      });
-    }
-  }, [isError, errorToastShown, toast]);
+  
   return { getStudentWishList, isPending, isError, refetch };
 };
 
