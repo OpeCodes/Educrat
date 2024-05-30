@@ -327,7 +327,7 @@ const SingleEnrolledCourse = () => {
           mt={{ base: "1.5rem", md: "2.3rem" }}
           flexDirection={{ base: "column", xl: "row" }}
         >
-          <Stack mt={6} width={{ base: "100%", xl: "65%" }}>
+          <Stack mt={{base: 6, lg: 9}} width={{ base: "100%", xl: "65%" }}>
             {/* video section */}
             {singleLectureDataLoading ? (
               <Flex
@@ -342,6 +342,7 @@ const SingleEnrolledCourse = () => {
               <Stack>
                 {singleLectureData?.contentType === "lecture_video" && (
                   <AspectRatio
+                 
                     maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
                     maxH={{ base: "900px", lg: "400px" }}
                     ratio={{ base: 15 / 8, lg: 15 / 13 }}
