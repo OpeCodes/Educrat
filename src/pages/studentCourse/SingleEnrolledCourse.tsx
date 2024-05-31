@@ -341,8 +341,8 @@ const SingleEnrolledCourse = () => {
             ) : (
               <Stack>
                 {singleLectureData?.contentType === "lecture_video" && (
-                  <AspectRatio
-                 
+                  <>
+                  <AspectRatio                 
                     maxW={{ base: "100%", xl: "900px", "2xl": "1700px" }}
                     maxH={{ base: "900px", lg: "400px" }}
                     ratio={{ base: 15 / 8, lg: 15 / 13 }}
@@ -352,7 +352,8 @@ const SingleEnrolledCourse = () => {
                       src={singleLectureData?.content?.url}
                       allowFullScreen
                     />
-                  </AspectRatio>
+                  </AspectRatio>                  
+                </>
                 )}
 
                 {singleLectureData?.contentType === "lecture_article" && (

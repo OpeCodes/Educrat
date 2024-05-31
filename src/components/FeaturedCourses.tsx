@@ -51,7 +51,7 @@ const Course = ({
         key={i}
         color={i <= calculateAverageStars(reviews) ? "#FFD700" : "#EAEAEA"}
       />
-    );
+    )
   }
   const totalDuration = getTotalLecturesDuration(modules);
 
