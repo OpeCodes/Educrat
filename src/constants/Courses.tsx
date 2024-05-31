@@ -7,9 +7,10 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Course, SliderButtons } from "../components/index";
-import {  sliderSettings } from "../utils/data";
+// import { Swiper, SwiperSlide } from "swiper/react";
+import { Course } from "../components/index";
+// SliderButtons in "../components/index"
+// import {  sliderSettings } from "../utils/data";
 import { useGetCourse } from "../hooks/course";
 export const Courses = () => {
   const { data, isPending } = useGetCourse();
@@ -37,7 +38,6 @@ export const Courses = () => {
               10,000+ unique online course list designs
             </Text>
           </Box>
-         
         </Box>
         {isPending && (
           <Stack>
@@ -59,16 +59,26 @@ export const Courses = () => {
           </Stack>
         )}
         <Box as="div" mt={8}>
-          <Swiper {...sliderSettings}>
-            {!isPending && <SliderButtons />}
-            {data?.data?.map((course: any, index: number) => {
+          {/* <Swiper {...sliderSettings}> */}
+          {/* {!isPending && <SliderButtons />} */}
+          <Grid
+            templateColumns={{
+              base: "repeat(1,1fr)",
+              md: "repeat(2,1fr)",
+              lg: "repeat(4,1fr)",
+            }}
+            alignItems={"center"}
+            rowGap={5}
+          >
+            {data?.data?.map((course: any,) => {
               return (
-                <SwiperSlide key={index}>
-                  <Course key={course.id} {...course}  />
-                </SwiperSlide>
+                // <SwiperSlide key={index}>
+                <Course key={course.id} {...course}/>
+                // </SwiperSlide>
               );
             })}
-          </Swiper>
+          </Grid>
+          {/* </Swiper> */}
         </Box>
       </Stack>
     </Box>
