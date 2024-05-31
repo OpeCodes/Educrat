@@ -810,7 +810,9 @@ const SingleCourse = () => {
                                     loadingText="Loading"
                                     spinnerPlacement="end"
                                   >
-                                    Buy Now
+                                    {/* Buy Now
+                                     */}
+                                     Enroll now
                                   </Button>
                                 </Stack>
                               ) : (
