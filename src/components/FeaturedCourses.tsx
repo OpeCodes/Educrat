@@ -151,7 +151,7 @@ const Course = ({
             alignItems={"center"}
           >
             <Text color={"#140342"} fontSize={"xl"}>
-              N{price}
+            ₦{price}
             </Text>
           </Box>
         </Box>
