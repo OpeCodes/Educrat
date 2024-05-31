@@ -34,7 +34,7 @@ const StudentCourse = () => {
   }
   return (
     <Stack pt={"4.3rem"}>
-      <Box paddingTop={10} pl={{base: 5, md: 20}}>
+      <Box paddingTop={10} pl={{ base: 5, md: 20 }}>
         <Text fontSize={"40px"} fontWeight={"bold"}>
           User Inferface Course
         </Text>
@@ -99,21 +99,25 @@ const StudentCourse = () => {
                   reviews,
                   price,
                 }: CourseInterface) => (
-                  <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
+                  <GridItem
+                    height={"auto"}
+                    width={{ base: "88vw", md: "345px", lg: "290px" }}
+                    key={id}
+                    as={Link}
+                    to={`/course/${slug}`}
+                  >
                     <Stack>
-                      <Stack
-                       maxW={{base: "100%", lg :"300px"}}>
-                        <Box > 
-                        <Image
-                          src={thumbnail}
-                          alt={title}
-                          borderRadius="lg"
-                          maxH={{base: "200px",}}
-                          height={"100%"}
-                          className="img"
-                          width={"100%"}
-                          // objectFit={"scale-down"}
-                        />
+                      <Stack>
+                        <Box>
+                          <Image
+                            src={thumbnail}
+                            alt={title}
+                            borderRadius="lg"
+                            className="img"
+                            width={"100%"}
+                            maxH="150px"
+                            height={"100%"}
+                          />
                         </Box>
                         <Stack>
                           <Flex justifyContent={"start"} alignItems={"center"}>
@@ -136,13 +140,17 @@ const StudentCourse = () => {
                               ({getTotalStarsSum(reviews)})
                             </Text>
                           </Flex>
-                          <Text fontSize="20px" mt="-12px" sx={{
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            display: 'block',
-            width: '100%',
-        }} >
+                          <Text
+                            fontSize="20px"
+                            mt="-12px"
+                            sx={{
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              display: "block",
+                              width: "100%",
+                            }}
+                          >
                             {title}
                           </Text>
                           <Flex justify={"space-between"}>
