@@ -293,7 +293,7 @@ const SingleInstructorPage = () => {
                             </Text>
                           </Flex>
                           <Text fontWeight={"500"} fontSize={"20px"}>
-                            N{price}
+                          ₦{price}
                           </Text>
                         </Flex>
                       </Stack>

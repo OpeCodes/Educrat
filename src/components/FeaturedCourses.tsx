@@ -57,13 +57,14 @@ const Course = ({
 
   return (
     <Box
-      as="div"
       className="wrapper"
       width={{ base: "88vw", md: "345px", lg: "290px" }}
       height={"auto"}
       px={{ base: 2, lg: 0 }}
       cursor={"pointer"}
       key={id}
+      as={Link}
+      to={`/course/${slug}`}
     >
       <Stack>
         <Box as={"div"} overflow={"hidden"} borderRadius={"10px"}>
@@ -72,7 +73,6 @@ const Course = ({
             className="img"
             maxH="150px"
             height={"100%"}
-            // objectFit={"scale-down"}
             style={{ borderRadius: "10px" }}
             alt={title}
             w={"100%"}
@@ -93,18 +93,15 @@ const Course = ({
         <Heading
           color={"#140342"}
           fontWeight={"normal"}
-          as={Link}
-          to={`/course/${slug}`}
           fontSize="20px"
-          _hover={{ color: "blue" }}
           mt="-8px"
           sx={{
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            display: 'block',
-            width: '100%',
-        }} 
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "block",
+            width: "100%",
+          }}
         >
           {title}
         </Heading>
@@ -151,7 +148,7 @@ const Course = ({
             alignItems={"center"}
           >
             <Text color={"#140342"} fontSize={"xl"}>
-            ₦{price}
+              ₦{price}
             </Text>
           </Box>
         </Box>
