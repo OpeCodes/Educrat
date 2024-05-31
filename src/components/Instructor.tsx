@@ -49,6 +49,7 @@ const Instructor = ({
       : instructorReviewRating?.average;
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(id);
 
+
   return (
     <Box
       className="card"
@@ -102,10 +103,10 @@ const Instructor = ({
                   target="_blank"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {type === "facebook" && <FaFacebookF size={22} />}
-                  {type === "linkedin" && <FaLinkedinIn size={22} />}
-                  {type === "twitter" && <FaTwitter size={22} />}
-                  {type === "youtube" && <FaYoutube size={22} />}
+                  {url && type === "facebook" && <FaFacebookF size={22} />}
+                  {url && type === "linkedin" && <FaLinkedinIn size={22} />}
+                  {url && type === "twitter" && <FaTwitter size={22} />}
+                  {url && type === "youtube" && <FaYoutube size={22} />}
                 </Text>
               );
             })}

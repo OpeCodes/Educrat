@@ -34,7 +34,7 @@ import { convertSecondsToHMS } from "../../components/TimeFormat";
 const MyLearning = () => {
   const { data: enrolledCourse, isPending: enrolledCourseLoading } =
     useGetAllUserEnrolledCourse();
-    console.log(enrolledCourse,"enrolledCourse")
+  console.log(enrolledCourse, "enrolledCourse");
   const { getStudentWishList, isPending: getStudentWishListLoading } =
     useGetStudentWishList();
 
@@ -136,9 +136,9 @@ const MyLearning = () => {
                     mt={6}
                   >
                     {enrolledCourse?.map((course: any, index: number) => {
-                      const { courseId, id, progress, } = course;
+                      const { courseId, id, progress } = course;
                       if (!courseId) {
-                        return null; 
+                        return null;
                       }
                       const { reviews, thumbnail, title } = courseId;
                       const averageStars = calculateAverageStars(reviews);
@@ -161,16 +161,21 @@ const MyLearning = () => {
                             src={thumbnail}
                             alt={title}
                           />
-                          <Text fontWeight={"bold"}   sx={{
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        display: 'block',
-                        width: '100%',
-                    }} 
-                    >{title}</Text>
+                          <Text
+                            fontWeight={"bold"}
+                            sx={{
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              display: "block",
+                              width: "100%",
+                            }}
+                          >
+                            {title}
+                          </Text>
                           <Text fontSize={"15px"} color={"gray"}>
-                            {courseId?.userId?.firstName}  {courseId?.userId?.lastName}
+                            {courseId?.userId?.firstName}{" "}
+                            {courseId?.userId?.lastName}
                           </Text>
                           <Progress
                             value={Math.round(progress * 100)}
@@ -241,7 +246,7 @@ const MyLearning = () => {
                               </Text>
                             </Flex>
                             <Text fontWeight="bold" color="black">
-                              N{price}
+                            ₦{price}
                             </Text>
                           </GridItem>
                         );

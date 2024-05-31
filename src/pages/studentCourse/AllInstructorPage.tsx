@@ -35,9 +35,9 @@ const AllInstructorPage = () => {
           <Text as={Link} to="/">
             Home
           </Text>
-          <Flex columnGap={1} as={Link} to="/all-courses">
+          <Flex columnGap={1} as={Link} to="/all-instructor">
             <Text>&#x2022;</Text>
-            <Text>All Courses</Text>
+            <Text>All Instructors</Text>
           </Flex>
           <Flex
             columnGap={1}
