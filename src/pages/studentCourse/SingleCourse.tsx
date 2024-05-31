@@ -181,7 +181,7 @@ const SingleCourse = () => {
     if (!user) {
       navigate("/sign-in");
       toast({
-        title: `Sign in to purchase a course`,
+        title: `Sign in to enroll for course`,
         status: "info",
         duration: 3000,
         isClosable: true,
