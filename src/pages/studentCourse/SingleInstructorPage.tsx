@@ -77,9 +77,9 @@ const SingleInstructorPage = () => {
           <Text as={Link} to="/">
             Home
           </Text>
-          <Flex columnGap={1} as={Link} to="/all-courses">
+          <Flex columnGap={1} as={Link} to="/all-instructor">
             <Text>&#x2022;</Text>
-            <Text>All Courses</Text>
+            <Text>All Instructors</Text>
           </Flex>
           <Flex columnGap={1} display={{base: "none", md: "flex"}}>
             <Text>&#x2022;</Text>
@@ -172,11 +172,11 @@ const SingleInstructorPage = () => {
             ({ type, url, id }: Social) => {
               return (
                 <Text as={"a"} href={url} target="_blank" key={id}>
-                  {type === "facebook" && <FaFacebookF />}
-                  {type === "linkedin" && <FaLinkedinIn />}
-                  {type === "twitter" && <TiSocialTwitter />}
-                  {type === "website" && <TbWorld />}
-                  {type === "youtube" && <FaYoutube />}
+                  {url && type === "facebook" && <FaFacebookF />}
+                  {url && type === "linkedin" && <FaLinkedinIn />}
+                  {url && type === "twitter" && <TiSocialTwitter />}
+                  {url && type === "website" && <TbWorld />}
+                  {url && type === "youtube" && <FaYoutube />}
                 </Text>
               );
             }
