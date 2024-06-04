@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import backgroundImg from "../../assets/backimage.webp";
-// import logo from "../../assets/logo.svg";
+import logo from "../../assets/devupshotLogo.png";
 import { forgotPasswordSchema } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { useForgotPassword } from "../../hooks/auth";
@@ -50,9 +50,8 @@ const ForgotPassword = () => {
                 position={"absolute"}
                 cursor={"pointer"}
               >
-                <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
-                  DevUpshot
-                </Text>
+                
+            <Image src={logo} height={"30px"}/>
               </Stack>
             </Stack>
           </Box>
