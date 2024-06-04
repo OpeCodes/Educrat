@@ -33,12 +33,6 @@ const CourseManageSidebar = () => {
     },
     {
       id: 5,
-      name: "Withdrawal",
-      href: `/instructor/courses/${getSingleCourse?.id}/manage/withdrawal`,
-    },
-    // withdrawal
-    {
-      id: 6,
       name: "Settings",
       href: `/instructor/courses/${getSingleCourse?.id}/manage/settings`,
     },
