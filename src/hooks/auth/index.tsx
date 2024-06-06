@@ -25,7 +25,7 @@ export const useLoginUser = () => {
       addUserLocalStorage(user.data);
       queryClient.invalidateQueries();
       toast({
-        title: `welcome ${user.data.user.firstName}`,
+        title: `welcome ${user.data.user.username}`,
         status: "success",
         duration: 5000,
         isClosable: true,
