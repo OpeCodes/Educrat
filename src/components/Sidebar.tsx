@@ -2,7 +2,7 @@ import { Box, Image, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { NavItem } from "./NavItem";
 import { FaYoutube } from "react-icons/fa";
-import logo from "../assets/logo-2.svg";
+import logo from "../assets/devupshotLogo.png";
 import { MdPayment } from "react-icons/md";
 import { Link } from "react-router-dom";
 interface SidebarProps {
@@ -40,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isExpanded, onHover }) => {
         onMouseLeave={() => onHover(false)}
       >
         <VStack spacing={4} align="left" >
-          {isExpanded && <Text as={Link} to={"/"} > <Image src={logo} mb={5} /></Text> }
+          {isExpanded && <Text as={Link} to={"/"} > <Image src={logo} height={"30px"} mb={5} /></Text> }
           <Box>
             {links.map((link, i) => (
               <Box key={i}>

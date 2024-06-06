@@ -353,7 +353,7 @@ const SingleCourse = () => {
           <Stack>
             <Stack>
               {!isPending && (
-                <Stack mt={"4.5rem"}>
+                <Stack mt={"4.2rem"}>
                   <Stack bg={"#f5f7fe"} py={3}>
                     <Flex
                       w={"100%"}

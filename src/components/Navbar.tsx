@@ -15,6 +15,7 @@ import {
   Avatar,
   useBoolean,
   useToast,
+  Image,
 } from "@chakra-ui/react";
 import { NavLink, Link } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
@@ -26,6 +27,7 @@ import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import AddToCartButton from "./AddToCartButton";
 import { useGetUser } from "../hooks";
+import logo from "../assets/devupshotLogo.png"
 const links = [
   {
     id: 1,
@@ -69,10 +71,8 @@ const Navbar = () => {
         align={"center"}
       >
         <Flex justify={"space-between"} align={"center"}>
-          <Stack as={Link} to={"/"}>
-            <Text fontSize={"1.7rem"} fontWeight={"bold"} color="#6440fb">
-              DevUpshot
-            </Text>
+          <Stack as={Link} to={"/"}>            
+            <Image src={logo} height={"30px"}/>
           </Stack>
         </Flex>
 

@@ -63,7 +63,7 @@ const SingleInstructorPage = () => {
   );
   const { user } = useSelector((store: RootState) => store?.user);
   return (
-    <Stack pt={"4.3rem"}>
+    <Stack pt={"4.2rem"}>
       <Stack bg={"#f5f7fe"} py={3}>
         <Flex
           w={"100%"}

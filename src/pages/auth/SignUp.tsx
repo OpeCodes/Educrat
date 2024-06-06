@@ -20,7 +20,7 @@ import backgroundImg from "../../assets/backimage.webp";
 import { SignUpSchema } from "../../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { useRegisterUser } from "../../hooks/auth";
-
+import logo from "../../assets/devupshotLogo.png"
 interface User {
   firstName: string;
   lastName: string;
@@ -81,9 +81,10 @@ const SignUp = () => {
                 position={"absolute"}
                 cursor={"pointer"}
               >
-                <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
+                {/* <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
                   DevUpshot
-                </Text>
+                </Text> */}
+                <Image src={logo} height={"30px"}/>
               </Stack>
             </Stack>
           </Box>

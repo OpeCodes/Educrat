@@ -20,6 +20,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useResetPassword } from "../../hooks/auth";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { useState } from "react";
+import logo from "../../assets/devupshotLogo.png"
 const initialValues = {
   password: "",
   confirmPassword: "",
@@ -69,9 +70,7 @@ const ResetPassword = () => {
                 position={"absolute"}
                 cursor={"pointer"}
               >
-                <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
-                  DevUpshot
-                </Text>
+                <Image src={logo} height={"30px"}/>
               </Stack>
             </Stack>
           </Box>
