@@ -27,7 +27,7 @@ import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
 import AddToCartButton from "./AddToCartButton";
 import { useGetUser } from "../hooks";
-import logo from "../assets/devupshotLogo.png"
+import logo from "../assets/devupshotLogo.png";
 const links = [
   {
     id: 1,
@@ -71,8 +71,8 @@ const Navbar = () => {
         align={"center"}
       >
         <Flex justify={"space-between"} align={"center"}>
-          <Stack as={Link} to={"/"}>            
-            <Image src={logo} height={"30px"}/>
+          <Stack as={Link} to={"/"}>
+            <Image src={logo} height={"30px"} />
           </Stack>
         </Flex>
 
@@ -288,7 +288,6 @@ const Navbar = () => {
                 display={{ base: "none", md: "flex" }}
                 as={Link}
                 to={"/sign-in"}
-              
               >
                 Log In
               </Button>
@@ -427,8 +426,21 @@ const Navbar = () => {
               <Text>devupshot@gmail.com</Text>
             </Flex>
             <Flex my="15px" columnGap={7} cursor={"pointer"}>
-              <FaFacebookF />
-              <FaTwitter />
+              <Box
+                as={"a"}
+                href="https://www.facebook.com/362944173561967"
+                target="_blank"
+              >
+                <FaFacebookF />
+              </Box>
+
+              <Box
+                as={"a"}
+                href="https://twitter.com/devupshot1"
+                target="_blank"
+              >
+                <FaTwitter />
+              </Box>
               <Box
                 as={"a"}
                 href="https://www.instagram.com/devupshot?igsh=MWR4Z3hxaGhmbmplMw=="
