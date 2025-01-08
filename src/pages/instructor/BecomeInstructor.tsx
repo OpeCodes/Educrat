@@ -56,14 +56,14 @@ const BecomeInstructor = () => {
   ) : (
     <>
       <Text
-        bg={"#6440fb"}
+        // bg={"#6440fb"}
         p={2}
         mt={{ base: "80px", md: "75px", lg: "65px" }}
         textAlign={"center"}
         color={"white"}
         fontWeight={"bold"}
       >
-        Contact devupshot@gmail.com to become an instructor on DevUpshot
+        {/* Contact devupshot@gmail.com to become an instructor on DevUpshot */}
       </Text>
       <Stack>
         <Stack ml={{ base: 6, lg: 16 }} mr={{ base: 5, lg: 10 }}>
@@ -176,7 +176,6 @@ const BecomeInstructor = () => {
                               borderWidth={2}
                               py={3}
                               color={"white"}
-                              isDisabled={true}
                               _hover={{ background: "none", color: "black" }}
                             >
                               Save
