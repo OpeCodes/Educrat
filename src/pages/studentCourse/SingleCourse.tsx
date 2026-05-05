@@ -12,17 +12,22 @@ import {
   useToast,
   Skeleton,
   Spinner,
+  Heading,
+  HStack,
+  Tag,
+  TagLabel,
+  Icon,
+  Badge,
 } from "@chakra-ui/react";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { LuClock3 } from "react-icons/lu";
-
 import {
   MdOutlineCheckCircleOutline,
   MdOutlinePlayLesson,
 } from "react-icons/md";
 import { FcInfo } from "react-icons/fc";
 import { WiTime3 } from "react-icons/wi";
-import { FiBarChart2 } from "react-icons/fi";
+import { FiBarChart2, FiUsers, FiShare2, FiAward, FiRefreshCw } from "react-icons/fi";
 import { IoLanguage, IoPersonOutline } from "react-icons/io5";
 import { FaCertificate } from "react-icons/fa6";
 import { useEffect, useState } from "react";
@@ -77,9 +82,19 @@ import {
   CourseItemToLocalStorage,
   addUserSingleCartItem,
 } from "../../store/localStorage";
+import {
+  MotionBox,
+  MotionFlex,
+  fadeUp,
+  stagger,
+  orbDrift,
+} from "../../components/motion";
+import { motion } from "framer-motion";
+
 interface ObjectWithId {
   id: string;
 }
+
 const SingleCourse = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -144,7 +159,6 @@ const SingleCourse = () => {
     });
     return totalDuration;
   };
-  // Calculate total duration
   const totalDuration = getTotalLecturesDuration();
   const { courseEnroll, isPending: handleEnrolledCourseLoading } =
     useCourseEnrollment();
@@ -161,7 +175,6 @@ const SingleCourse = () => {
   const { deleteCourseWishList, deleteCourseWishListLoading } =
     useDeleteCourseWishList();
 
-  //get firstId for navigation
   const extractFirstLectureIds = (course: CourseInterface) => {
     const firstLectureIds: string[] = [];
     course?.modules.forEach((module: any) => {
@@ -171,12 +184,12 @@ const SingleCourse = () => {
         firstLectureIds.push(firstLectureId);
       }
     });
-
     return firstLectureIds;
   };
 
   const firstLectureIds = extractFirstLectureIds(getStudentSingleCourse);
   const { createOrder } = useCreateOrder();
+
   const handleEnrolledCourse = () => {
     if (!user) {
       navigate("/sign-in");
@@ -190,9 +203,7 @@ const SingleCourse = () => {
       return;
     } else {
       if (getStudentSingleCourse?.price === 0) {
-        courseEnroll({
-          courseId: getStudentSingleCourse?.id,
-        });
+        courseEnroll({ courseId: getStudentSingleCourse?.id });
       } else {
         createOrder({
           body: {
@@ -249,9 +260,7 @@ const SingleCourse = () => {
       dispatch(setCourseAuthNavigate(-1));
       return;
     } else {
-      createCourseWishList({
-        courseId: getStudentSingleCourse?.id,
-      });
+      createCourseWishList({ courseId: getStudentSingleCourse?.id });
     }
   };
 
@@ -269,14 +278,12 @@ const SingleCourse = () => {
     } else {
       dispatch(addCourseToCart(cart));
       CourseItemToLocalStorage(cart);
-      // addCourseItemToLocalStorage(cartArray);
     }
   };
   let ratingFormat = parseFloat(
     courseReviewRating?.average === "NaN" ? "0" : courseReviewRating?.average
   );
 
-  //instuctor star
   const stars = [];
   for (let i = 1; i <= 5; i++) {
     stars.push(
@@ -303,674 +310,981 @@ const SingleCourse = () => {
         .join("/");
       return `${baseUrl}/${coursePath}`;
     }
-
     return baseUrl;
   };
   const url = getCourseUrlFromCurrentUrl();
-  //cart btn func
   const checkCourseID = (course: any, idToCheck: number) => {
     return course.some((obj: any) => obj?.id === idToCheck);
   };
   const exists = checkCourseID(courses, getStudentSingleCourse?.id);
+
+  const isLoadingPage =
+    getCourseReviewLoading && isPending && getSingleEnrolledCourseLoading;
+
+  const sectionCard = {
+    bg: "white",
+    borderRadius: "16px",
+    border: "1px solid",
+    borderColor: "blackAlpha.100",
+    p: { base: 5, md: 7 },
+    boxShadow: "0 2px 12px rgba(20,3,66,0.04)",
+  };
+
+  const detailRow = (
+    icon: any,
+    label: string,
+    value: React.ReactNode,
+    last = false
+  ) => (
+    <Box>
+      <Flex justify={"space-between"} align={"center"} py={3}>
+        <Flex columnGap={3} align={"center"} color={"#4f547b"}>
+          <Icon as={icon} color={"#6440fb"} boxSize={"18px"} />
+          <Text fontSize={"sm"}>{label}</Text>
+        </Flex>
+        <Text fontWeight={600} color={"#140342"} fontSize={"sm"}>
+          {value}
+        </Text>
+      </Flex>
+      {!last && <Divider opacity={0.5} />}
+    </Box>
+  );
+
   return (
     <>
       <Stack mb={"2rem"}>
-        {getCourseReviewLoading &&
-        isPending &&
-        getSingleEnrolledCourseLoading ? (
-          <Stack mx={"1.3rem"}>
-            <Skeleton height="60px" />
-            <Stack>
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-              <Skeleton height="60px" />
-            </Stack>
+        {isLoadingPage ? (
+          <Stack pt={"5rem"} px={{ base: 5, md: 12 }} spacing={4}>
+            <Skeleton height="220px" borderRadius={"16px"} />
+            <Grid templateColumns={{ base: "1fr", lg: "2fr 1fr" }} gap={6}>
+              <Stack spacing={3}>
+                {[...Array(8)].map((_, i) => (
+                  <Skeleton key={i} height="60px" borderRadius={"12px"} />
+                ))}
+              </Stack>
+              <Stack spacing={3}>
+                <Skeleton height="220px" borderRadius={"16px"} />
+                <Skeleton height="60px" borderRadius={"12px"} />
+                <Skeleton height="60px" borderRadius={"12px"} />
+              </Stack>
+            </Grid>
           </Stack>
         ) : (
-          <Stack>
-            <Stack>
-              {!isPending && (
-                <Stack mt={"4.2rem"}>
-                  <Stack bg={"#f5f7fe"} py={3}>
-                    <Flex
-                      w={"100%"}
-                      maxW={"90%"}
-                      mx="auto"
-                      columnGap={2}
-                      color={"#4F547B"}
-                      fontSize={14}
-                      mt={"0.7rem"}
-                    >
-                      <Text as={Link} to="/">
-                        Home
-                      </Text>
-                      <Flex columnGap={1} as={Link} to="/all-courses">
-                        <Text>&#x2022;</Text>
-                        <Text>All Courses</Text>
-                      </Flex>
-                      <Flex columnGap={1}>
-                        <Text>&#x2022;</Text>
-                        <Text>{getStudentSingleCourse?.category?.name}</Text>
-                      </Flex>
-                    </Flex>
-                  </Stack>
+          !isPending && (
+            <Box position={"relative"}>
+              {/* HERO */}
+              <Box
+                position={"relative"}
+                overflow={"hidden"}
+                bgGradient={"linear(135deg, #1A064F 0%, #2d0b8a 50%, #4c1ed4 100%)"}
+                color={"white"}
+                pt={{ base: "100px", md: "120px" }}
+                pb={{ base: 14, md: 20, lg: 28 }}
+                px={{ base: 5, md: 12, lg: 16 }}
+              >
+                <MotionBox
+                  position={"absolute"}
+                  top={"-120px"}
+                  right={"-120px"}
+                  w={"380px"}
+                  h={"380px"}
+                  borderRadius={"full"}
+                  bg={"#a78bfa"}
+                  opacity={0.25}
+                  filter={"blur(80px)"}
+                  {...orbDrift(0)}
+                />
+                <MotionBox
+                  position={"absolute"}
+                  bottom={"-160px"}
+                  left={"-100px"}
+                  w={"360px"}
+                  h={"360px"}
+                  borderRadius={"full"}
+                  bg={"#0ea5e9"}
+                  opacity={0.18}
+                  filter={"blur(90px)"}
+                  {...orbDrift(2)}
+                />
+                <Box
+                  position={"absolute"}
+                  inset={0}
+                  opacity={0.06}
+                  backgroundImage={
+                    "radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)"
+                  }
+                  backgroundSize={"22px 22px"}
+                />
 
-                  <Flex
-                    w={"100%"}
-                    maxW={"90%"}
-                    mx="auto"
-                    justify={"space-between"}
-                    mt={"1.6rem"}
-                    columnGap={20}
-                    flexDirection={{ base: "column-reverse", lg: "row" }}
+                <Box position={"relative"} zIndex={1} maxW={"900px"}>
+                  <MotionFlex
+                    columnGap={2}
+                    color={"whiteAlpha.700"}
+                    fontSize={"13px"}
+                    flexWrap={"wrap"}
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
                   >
-                    <Stack rowGap={5}>
-                      <Text fontWeight={"bold"} fontSize={"2rem"}>
+                    <Text as={Link} to="/" _hover={{ color: "white" }}>
+                      Home
+                    </Text>
+                    <Text>›</Text>
+                    <Text as={Link} to="/all-courses" _hover={{ color: "white" }}>
+                      All Courses
+                    </Text>
+                    <Text>›</Text>
+                    <Text color={"white"}>
+                      {getStudentSingleCourse?.category?.name}
+                    </Text>
+                  </MotionFlex>
+
+                  <MotionFlex
+                    flexDirection={"column"}
+                    rowGap={5}
+                    mt={6}
+                    variants={stagger(0.1)}
+                    initial={"hidden"}
+                    animate={"show"}
+                  >
+                    <MotionBox variants={fadeUp}>
+                      <Tag
+                        size={"md"}
+                        bg={"whiteAlpha.200"}
+                        color={"white"}
+                        borderRadius={"full"}
+                        px={4}
+                        py={1.5}
+                        backdropFilter={"blur(10px)"}
+                        border={"1px solid"}
+                        borderColor={"whiteAlpha.300"}
+                      >
+                        <TagLabel fontWeight={600}>
+                          {getStudentSingleCourse?.category?.name}
+                        </TagLabel>
+                      </Tag>
+                    </MotionBox>
+
+                    <MotionBox variants={fadeUp}>
+                      <Heading
+                        as={"h1"}
+                        fontSize={{ base: "30px", md: "44px", lg: "52px" }}
+                        lineHeight={1.1}
+                        letterSpacing={"-0.02em"}
+                      >
                         {getStudentSingleCourse?.title}
-                      </Text>
-                      <Text color={"#4f547b"}>
+                      </Heading>
+                    </MotionBox>
+
+                    <MotionBox variants={fadeUp}>
+                      <Text
+                        color={"whiteAlpha.800"}
+                        fontSize={{ base: "md", md: "lg" }}
+                        maxW={"720px"}
+                      >
                         {getStudentSingleCourse?.subtitle}
                       </Text>
-                      <Flex
-                        flexDirection={{ base: "column", lg: "row" }}
-                        color={"#4f547b"}
-                        align={{ base: "start", lg: "center" }}
-                        columnGap={6}
-                      >
-                        <Flex align={"center"} columnGap={1}>
-                          <Text color={"#FFD700"}>
-                            {Math.round(ratingFormat)}
-                          </Text>
-                          <Text display={"flex"} columnGap={1}>
-                            {stars}
-                          </Text>
-                          <Text>({courseReviewRating?.total})</Text>
-                        </Flex>
-                        <Flex align={"center"} columnGap={2}>
-                          <Text>
-                            <LuClock3 />
-                          </Text>
-                          <Text>
-                            {getStudentEnrolledCourse?.length} enrolled for this
-                            course
-                          </Text>
-                        </Flex>
-                        <Flex align={"center"} columnGap={2}>
-                          <Text>
-                            <LuClock3 />
-                          </Text>
-                          <Text>Last updated {formattedDate}</Text>
-                        </Flex>
+                    </MotionBox>
+
+                    <MotionFlex
+                      variants={fadeUp}
+                      flexWrap={"wrap"}
+                      align={"center"}
+                      rowGap={3}
+                      columnGap={6}
+                      color={"whiteAlpha.800"}
+                      fontSize={"sm"}
+                    >
+                      <Flex align={"center"} columnGap={2}>
+                        <Text color={"#FFD700"} fontWeight={700}>
+                          {Math.round(ratingFormat) || 0}.0
+                        </Text>
+                        <HStack spacing={0.5}>{stars}</HStack>
+                        <Text>({courseReviewRating?.total || 0} reviews)</Text>
                       </Flex>
-                      <Flex align={"center"} columnGap={2} color={"#4f547b"}>
-                        <Avatar
+                      <Flex align={"center"} columnGap={2}>
+                        <Icon as={FiUsers} />
+                        <Text>
+                          {getStudentEnrolledCourse?.length || 0} enrolled
+                        </Text>
+                      </Flex>
+                      <Flex align={"center"} columnGap={2}>
+                        <Icon as={LuClock3} />
+                        <Text>Updated {formattedDate}</Text>
+                      </Flex>
+                      <Flex align={"center"} columnGap={2}>
+                        <Icon as={IoLanguage} />
+                        <Text>{getStudentSingleCourse?.language}</Text>
+                      </Flex>
+                    </MotionFlex>
+
+                    <MotionFlex
+                      variants={fadeUp}
+                      align={"center"}
+                      columnGap={3}
+                      pt={2}
+                    >
+                      <Avatar
+                        size="md"
+                        name={`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}
+                        src={getStudentSingleCourse?.userId?.profilePicture}
+                        border={"2px solid"}
+                        borderColor={"whiteAlpha.400"}
+                      />
+                      <Box>
+                        <Text fontSize={"xs"} color={"whiteAlpha.700"}>
+                          Created by
+                        </Text>
+                        <Text fontWeight={600} fontSize={"sm"}>
+                          {`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}
+                        </Text>
+                      </Box>
+                    </MotionFlex>
+                  </MotionFlex>
+                </Box>
+              </Box>
+
+              {/* MAIN CONTENT */}
+              <Box
+                position={"relative"}
+                px={{ base: 5, md: 12, lg: 16 }}
+                mt={{ base: -10, lg: -20 }}
+                pb={16}
+              >
+                <Grid
+                  templateColumns={{ base: "1fr", lg: "1fr 380px" }}
+                  gap={{ base: 6, lg: 10 }}
+                  alignItems={"start"}
+                >
+                  <Stack spacing={6}>
+                    {/* What you'll learn */}
+                    <MotionBox
+                      {...sectionCard}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Heading
+                        as={"h2"}
+                        fontSize={"xl"}
+                        color={"#140342"}
+                        mb={4}
+                        letterSpacing={"-0.01em"}
+                      >
+                        What you'll learn
+                      </Heading>
+                      <Grid
+                        templateColumns={{ md: "repeat(2, 1fr)" }}
+                        gap={3}
+                      >
+                        {getStudentSingleCourse?.learningObjectives?.map(
+                          (learn: any, index: number) => (
+                            <GridItem w="100%" key={index}>
+                              <Flex columnGap={2} color={"#4f547b"}>
+                                <Icon
+                                  as={MdOutlineCheckCircleOutline}
+                                  color={"#10b981"}
+                                  boxSize={"20px"}
+                                  flexShrink={0}
+                                  mt={"2px"}
+                                />
+                                <Text fontSize={"sm"} lineHeight={1.6}>
+                                  {learn}
+                                </Text>
+                              </Flex>
+                            </GridItem>
+                          )
+                        )}
+                      </Grid>
+                    </MotionBox>
+
+                    {/* Course content */}
+                    <MotionBox
+                      {...sectionCard}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Flex
+                        justify={"space-between"}
+                        align={{ base: "start", md: "center" }}
+                        flexDir={{ base: "column", md: "row" }}
+                        mb={4}
+                        gap={2}
+                      >
+                        <Heading
+                          as={"h2"}
+                          fontSize={"xl"}
+                          color={"#140342"}
+                          letterSpacing={"-0.01em"}
+                        >
+                          Course content
+                        </Heading>
+                        <Text fontSize={"sm"} color={"#4f547b"}>
+                          {getStudentSingleCourse?.modules?.length} sections
+                          ·{" "}
+                          {convertSecondsToHMS(totalDuration)} total
+                        </Text>
+                      </Flex>
+                      <StudentCourseContent
+                        SingleCourseProp={getStudentSingleCourse}
+                      />
+                    </MotionBox>
+
+                    {/* Requirements */}
+                    <MotionBox
+                      {...sectionCard}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Heading
+                        as={"h2"}
+                        fontSize={"xl"}
+                        color={"#140342"}
+                        mb={4}
+                        letterSpacing={"-0.01em"}
+                      >
+                        Requirements
+                      </Heading>
+                      <Flex columnGap={2} color={"#4f547b"}>
+                        <Box
+                          w={"6px"}
+                          h={"6px"}
+                          mt={"9px"}
+                          borderRadius={"full"}
+                          bg={"#6440fb"}
+                          flexShrink={0}
+                        />
+                        <Text fontSize={"sm"} lineHeight={1.7}>
+                          {getStudentSingleCourse?.preRequisites}
+                        </Text>
+                      </Flex>
+                    </MotionBox>
+
+                    {/* Description */}
+                    <MotionBox
+                      {...sectionCard}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Heading
+                        as={"h2"}
+                        fontSize={"xl"}
+                        color={"#140342"}
+                        mb={4}
+                        letterSpacing={"-0.01em"}
+                      >
+                        Description
+                      </Heading>
+                      <Box color={"#4f547b"} lineHeight={1.7} fontSize={"sm"}>
+                        <Collapse
+                          dangerouslySetInnerHTML={{
+                            __html: getStudentSingleCourse?.description,
+                          }}
+                          startingHeight={150}
+                          in={show}
+                        />
+                      </Box>
+                      {getStudentSingleCourse?.description?.length > 500 && (
+                        <Button
+                          color={"#6440fb"}
                           size="sm"
+                          onClick={handleToggle}
+                          mt={3}
+                          variant="link"
+                          fontWeight={600}
+                        >
+                          Show {show ? "less" : "more"}
+                        </Button>
+                      )}
+                    </MotionBox>
+
+                    {/* Instructor */}
+                    <MotionBox
+                      {...sectionCard}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Heading
+                        as={"h2"}
+                        fontSize={"xl"}
+                        color={"#140342"}
+                        mb={5}
+                        letterSpacing={"-0.01em"}
+                      >
+                        Meet your instructor
+                      </Heading>
+                      <Flex
+                        columnGap={5}
+                        rowGap={4}
+                        flexDir={{ base: "column", sm: "row" }}
+                      >
+                        <Avatar
+                          size="xl"
                           name={`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}
                           src={getStudentSingleCourse?.userId?.profilePicture}
+                          as={Link}
+                          to={`/user/${getStudentSingleCourse?.userId?.slug}`}
+                          ring={2}
+                          ringColor={"#6440fb"}
                         />
-                        <Text
-                          fontWeight={"400"}
-                        >{`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}</Text>
-                      </Flex>
-                      {/* course content */}
-                      <Stack mt={"1.8rem"}>
-                        <Text fontWeight={"bold"} fontSize={"1.1rem"}>
-                          Course Content
-                        </Text>
-                        <StudentCourseContent
-                          SingleCourseProp={getStudentSingleCourse}
-                        />
-                      </Stack>
+                        <Stack flex={1} spacing={3}>
+                          <Box
+                            as={Link}
+                            to={`/user/${getStudentSingleCourse?.userId?.slug}`}
+                          >
+                            <Text fontWeight={700} color={"#140342"} fontSize={"lg"}>
+                              {`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}
+                            </Text>
+                            <Text color={"#4f547b"} fontSize={"sm"}>
+                              {getStudentSingleCourse?.userId?.headline}
+                            </Text>
+                          </Box>
 
-                      <Stack mb={"1.5rem"}>
-                        <Text fontWeight={"bold"} fontSize={"1.1rem"}>
-                          What you'll learn
-                        </Text>
-                        <Stack>
                           <Grid
-                            templateColumns={{ md: "repeat(2, 1fr)" }}
+                            templateColumns={{
+                              base: "repeat(2, 1fr)",
+                              md: "repeat(4, 1fr)",
+                            }}
                             gap={3}
                           >
-                            {getStudentSingleCourse?.learningObjectives?.map(
-                              (learn: any, index: any) => {
-                                return (
-                                  <GridItem w="100%" key={index}>
-                                    <Flex
-                                      align={"center"}
-                                      columnGap={1}
-                                      color={"#4f547b"}
-                                    >
-                                      <Text>
-                                        <MdOutlineCheckCircleOutline
-                                          color={"#4f547b"}
-                                          size={20}
-                                        />
-                                      </Text>
-                                      <Text>{learn}</Text>
-                                    </Flex>
-                                  </GridItem>
-                                );
-                              }
-                            )}
-                          </Grid>
-                        </Stack>
-                        <Stack mt={"1.8rem"} mb={"1.5rem"}>
-                          <Text fontWeight={"bold"} fontSize={"1.1rem"}>
-                            Requirements
-                          </Text>
-
-                          <Flex
-                            align={"center"}
-                            color={"#4f547b"}
-                            columnGap={1}
-                          >
-                            <Text mt={"-.2rem"} fontSize={"1.2rem"}>
-                              &#x2022;
-                            </Text>
-                            <Text>{getStudentSingleCourse?.preRequisites}</Text>
-                          </Flex>
-                        </Stack>
-                        {/* description */}
-                        <Stack mb={"1.5rem"} color={"#4f547b"}>
-                          <Text
-                            color={"black"}
-                            fontWeight={"bold"}
-                            fontSize={"1.1rem"}
-                          >
-                            Description
-                          </Text>
-                          <Collapse
-                            dangerouslySetInnerHTML={{
-                              __html: getStudentSingleCourse?.description,
-                            }}
-                            startingHeight={150}
-                            in={show}
-                            color={"#4f547b"}
-                          ></Collapse>
-                          {getStudentSingleCourse?.description.length > 500 && (
-                            <Button
-                              color={"#6440fb"}
-                              textAlign={"left"}
-                              display={"flex"}
-                              justifyContent={"left"}
-                              size="sm"
-                              onClick={handleToggle}
-                              mt="1rem"
-                              colorScheme="teal"
-                              variant="link"
+                            <Box
+                              p={3}
+                              bg={"#f4f1fe"}
+                              borderRadius={"10px"}
                             >
-                              Show {show ? "Lessw" : "More"}
-                            </Button>
-                          )}
-                        </Stack>
-                        {/* instructor profile */}
-                        <Stack>
-                          <Text
-                            color={"black"}
-                            fontWeight={"bold"}
-                            fontSize={"1.1rem"}
-                          >
-                            Instructor
-                          </Text>
-                          <Flex columnGap={5} mt={"1rem"}>
-                            <Avatar
-                              size="xl"
-                              name={`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}
-                              src={
-                                getStudentSingleCourse?.userId?.profilePicture
-                              }
-                              as={Link}
-                              to={`/user/${getStudentSingleCourse?.userId?.slug}`}
-                            />
-                            <Stack>
-                              <Text
-                                fontWeight={"bold"}
-                              >{`${getStudentSingleCourse?.userId?.firstName} ${getStudentSingleCourse?.userId.lastName}`}</Text>
-                              <Text color={"#4f547b"}>
-                                {getStudentSingleCourse?.userId?.headline}
-                              </Text>
-                              <Flex
-                                color={"#4f547b"}
-                                columnGap={5}
-                                fontSize={"0.9rem"}
-                                flexDirection={{ base: "column", lg: "row" }}
-                              >
-                                <Flex columnGap={1} align={"center"}>
-                                  <Text>
-                                    <FaStar color={"#FFD700"} />
-                                  </Text>
-                                  <Text color={"#FFD700"}>
-                                    {instructorReviewRating?.average === "NaN"
-                                      ? 0
-                                      : +parseFloat(
-                                          instructorReviewRating?.average
-                                        ).toFixed(2)}
-                                  </Text>
-                                  <Text>Instructor Rating</Text>
-                                </Flex>
-                                <Flex
-                                  columnGap={2}
-                                  color={"#4f547b"}
-                                  align={"center"}
-                                >
-                                  <Text>
-                                    <HiOutlineChat />
-                                  </Text>
-                                  <Text>{getInstructorReview?.length}</Text>
-                                  <Text>
-                                    {" "}
-                                    Review
-                                    {getInstructorReview?.length > 1 && "s"}
-                                  </Text>
-                                </Flex>
-                                <Flex
-                                  columnGap={1}
-                                  color={"#4f547b"}
-                                  align={"center"}
-                                >
-                                  <Text>
-                                    <IoPersonOutline />
-                                  </Text>
-                                  <Text>
-                                    {getInstructorenrolledCourse?.length}{" "}
-                                    Student
-                                    {`${
-                                      getInstructorenrolledCourse?.length <= 1
-                                        ? ""
-                                        : "s"
-                                    }`}
-                                  </Text>
-                                </Flex>
-                                <Flex
-                                  columnGap={1}
-                                  color={"#4f547b"}
-                                  align={"center"}
-                                >
-                                  <Text>
-                                    <LuClock3 />
-                                  </Text>
-                                  <Text>
-                                    {getAlInstructorPublishedCourse?.length}{" "}
-                                    Course
-                                    {`${
-                                      getAlInstructorPublishedCourse?.length <=
-                                      1
-                                        ? ""
-                                        : "s"
-                                    }`}
-                                  </Text>
-                                </Flex>
+                              <Flex align={"center"} columnGap={1.5} color={"#140342"}>
+                                <Icon as={FaStar} color={"#FFD700"} />
+                                <Text fontWeight={700} fontSize={"sm"}>
+                                  {instructorReviewRating?.average === "NaN"
+                                    ? 0
+                                    : +parseFloat(
+                                        instructorReviewRating?.average
+                                      ).toFixed(2)}
+                                </Text>
                               </Flex>
-                            </Stack>
-                          </Flex>
-                          <Text color={"#4f547b"} mt={"0.8rem"}>
+                              <Text fontSize={"xs"} color={"#4f547b"} mt={0.5}>
+                                Rating
+                              </Text>
+                            </Box>
+                            <Box
+                              p={3}
+                              bg={"#f4f1fe"}
+                              borderRadius={"10px"}
+                            >
+                              <Flex align={"center"} columnGap={1.5} color={"#140342"}>
+                                <Icon as={HiOutlineChat} color={"#6440fb"} />
+                                <Text fontWeight={700} fontSize={"sm"}>
+                                  {getInstructorReview?.length || 0}
+                                </Text>
+                              </Flex>
+                              <Text fontSize={"xs"} color={"#4f547b"} mt={0.5}>
+                                Review
+                                {getInstructorReview?.length === 1 ? "" : "s"}
+                              </Text>
+                            </Box>
+                            <Box
+                              p={3}
+                              bg={"#f4f1fe"}
+                              borderRadius={"10px"}
+                            >
+                              <Flex align={"center"} columnGap={1.5} color={"#140342"}>
+                                <Icon as={IoPersonOutline} color={"#6440fb"} />
+                                <Text fontWeight={700} fontSize={"sm"}>
+                                  {getInstructorenrolledCourse?.length || 0}
+                                </Text>
+                              </Flex>
+                              <Text fontSize={"xs"} color={"#4f547b"} mt={0.5}>
+                                Student
+                                {getInstructorenrolledCourse?.length === 1
+                                  ? ""
+                                  : "s"}
+                              </Text>
+                            </Box>
+                            <Box
+                              p={3}
+                              bg={"#f4f1fe"}
+                              borderRadius={"10px"}
+                            >
+                              <Flex align={"center"} columnGap={1.5} color={"#140342"}>
+                                <Icon as={LuClock3} color={"#6440fb"} />
+                                <Text fontWeight={700} fontSize={"sm"}>
+                                  {getAlInstructorPublishedCourse?.length || 0}
+                                </Text>
+                              </Flex>
+                              <Text fontSize={"xs"} color={"#4f547b"} mt={0.5}>
+                                Course
+                                {getAlInstructorPublishedCourse?.length === 1
+                                  ? ""
+                                  : "s"}
+                              </Text>
+                            </Box>
+                          </Grid>
+
+                          <Text color={"#4f547b"} fontSize={"sm"} lineHeight={1.7}>
                             {getStudentSingleCourse?.userId?.biography}
                           </Text>
                         </Stack>
-                        {/* Student review */}
-                        <Stack mt={"1.8rem"} mb={"1.5rem"} color={"#4f547b"}>
-                          <Text
-                            color={"black"}
-                            fontWeight={"bold"}
-                            fontSize={"1.1rem"}
+                      </Flex>
+                    </MotionBox>
+
+                    {/* Reviews */}
+                    <MotionBox
+                      {...sectionCard}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Flex
+                        justify={"space-between"}
+                        align={"center"}
+                        mb={5}
+                      >
+                        <Heading
+                          as={"h2"}
+                          fontSize={"xl"}
+                          color={"#140342"}
+                          letterSpacing={"-0.01em"}
+                        >
+                          Student reviews
+                        </Heading>
+                        {getCourseReview?.length > 0 && (
+                          <Flex
+                            align={"center"}
+                            columnGap={2}
+                            bg={"#fffbeb"}
+                            border={"1px solid"}
+                            borderColor={"#fde68a"}
+                            borderRadius={"full"}
+                            px={3}
+                            py={1}
                           >
-                            Reviews
+                            <Icon as={FaStar} color={"#FFD700"} />
+                            <Text fontWeight={700} color={"#92400e"} fontSize={"sm"}>
+                              {Math.round(ratingFormat) || 0}.0
+                            </Text>
+                          </Flex>
+                        )}
+                      </Flex>
+
+                      {getCourseReview?.length === 0 && (
+                        <Box
+                          p={8}
+                          textAlign={"center"}
+                          bg={"#f9f8ff"}
+                          borderRadius={"12px"}
+                          color={"#4f547b"}
+                        >
+                          <Text fontSize={"sm"}>
+                            No reviews yet. Be the first to share your
+                            experience.
                           </Text>
-                          {getCourseReview?.length === 0 && (
-                            <Text>no reivew yet</Text>
-                          )}
-                          {getCourseReview
-                            ?.slice(0, visibleReviews)
-                            ?.map((review: any) => {
-                              const {
-                                reviewer,
-                                title,
-                                content,
-                                updatedAt,
-                                id,
-                              } = review;
-                              return (
-                                <Flex columnGap={3} mt={3} key={id}>
+                        </Box>
+                      )}
+
+                      <Stack spacing={5} divider={<Divider opacity={0.5} />}>
+                        {getCourseReview
+                          ?.slice(0, visibleReviews)
+                          ?.map((review: any) => {
+                            const {
+                              reviewer,
+                              title,
+                              content,
+                              updatedAt,
+                              id,
+                            } = review;
+                            return (
+                              <motion.div
+                                key={id}
+                                initial={{ opacity: 0, y: 12 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4 }}
+                              >
+                                <Flex columnGap={4}>
                                   <Avatar
-                                    size="lg"
+                                    size="md"
                                     name={`${reviewer?.firstName} ${reviewer?.lastName}`}
-                                    src={""}
                                   />
-                                  <Stack>
-                                    <Flex columnGap={1} rowGap={3}>
-                                      <Text color={"black"}>
+                                  <Stack spacing={1.5} flex={1}>
+                                    <Flex
+                                      align={"center"}
+                                      columnGap={2}
+                                      flexWrap={"wrap"}
+                                    >
+                                      <Text
+                                        fontWeight={600}
+                                        color={"#140342"}
+                                        fontSize={"sm"}
+                                      >
                                         {reviewer?.firstName}{" "}
                                         {reviewer?.lastName}
                                       </Text>
-                                      <Text>
-                                        {getTimeDifference(updatedAt)}
+                                      <Text
+                                        fontSize={"xs"}
+                                        color={"#4f547b"}
+                                      >
+                                        · {getTimeDifference(updatedAt)}
                                       </Text>
                                     </Flex>
-                                    <Text color={"black"}>{title}</Text>
-                                    <Text>{content}</Text>
+                                    {title && (
+                                      <Text
+                                        fontWeight={600}
+                                        color={"#140342"}
+                                        fontSize={"sm"}
+                                      >
+                                        {title}
+                                      </Text>
+                                    )}
+                                    <Text
+                                      color={"#4f547b"}
+                                      fontSize={"sm"}
+                                      lineHeight={1.6}
+                                    >
+                                      {content}
+                                    </Text>
                                   </Stack>
                                 </Flex>
-                              );
-                            })}
-                          {visibleReviews < getCourseReview?.length && (
+                              </motion.div>
+                            );
+                          })}
+                      </Stack>
+
+                      {visibleReviews < getCourseReview?.length && (
+                        <Button
+                          onClick={handleShowMore}
+                          variant="link"
+                          color={"#6440fb"}
+                          fontSize={"sm"}
+                          fontWeight={600}
+                          mt={5}
+                        >
+                          Show more reviews
+                        </Button>
+                      )}
+                    </MotionBox>
+                  </Stack>
+
+                  {/* STICKY PURCHASE CARD */}
+                  <Box
+                    position={{ base: "static", lg: "sticky" }}
+                    top={"95px"}
+                    alignSelf={"start"}
+                  >
+                    <MotionBox
+                      bg={"white"}
+                      borderRadius={"16px"}
+                      border={"1px solid"}
+                      borderColor={"blackAlpha.100"}
+                      overflow={"hidden"}
+                      boxShadow={"0 18px 50px rgba(20,3,66,0.12)"}
+                      initial={{ opacity: 0, y: -16, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <Box position={"relative"}>
+                        <PromotionalVideoPlayModal
+                          imageUrl={getStudentSingleCourse?.thumbnail}
+                          videoUrl={getStudentSingleCourse?.promotionalVideo}
+                          title={getStudentSingleCourse?.title}
+                        />
+                      </Box>
+
+                      <Box p={6}>
+                        {!getSingleEnrolledCourse || !user ? (
+                          <Stack spacing={4}>
+                            <Flex align={"baseline"} columnGap={2}>
+                              <Heading
+                                as={"h3"}
+                                fontSize={"3xl"}
+                                color={"#140342"}
+                                letterSpacing={"-0.02em"}
+                              >
+                                ₦{getStudentSingleCourse?.price?.toLocaleString() || 0}
+                              </Heading>
+                              {getStudentSingleCourse?.price === 0 && (
+                                <Badge
+                                  colorScheme={"green"}
+                                  fontSize={"xs"}
+                                  borderRadius={"full"}
+                                  px={2}
+                                >
+                                  Free
+                                </Badge>
+                              )}
+                            </Flex>
+
+                            <Flex columnGap={3}>
+                              {!exists ? (
+                                <Button
+                                  as={motion.button}
+                                  whileHover={{ y: -2 }}
+                                  whileTap={{ scale: 0.97 }}
+                                  bg={"#6440FB"}
+                                  py={"25px"}
+                                  variant="solid"
+                                  color={"white"}
+                                  flex={1}
+                                  fontWeight={600}
+                                  borderRadius={"12px"}
+                                  _hover={{ bg: "#5232e8" }}
+                                  onClick={() => {
+                                    handleAddToCart({
+                                      id: getStudentSingleCourse?.id,
+                                      title: getStudentSingleCourse?.title,
+                                      description:
+                                        getStudentSingleCourse?.description,
+                                      price: getStudentSingleCourse?.price,
+                                      img: getStudentSingleCourse?.thumbnail,
+                                    });
+                                  }}
+                                >
+                                  Add to Cart
+                                </Button>
+                              ) : (
+                                <Button
+                                  bg={"#10b981"}
+                                  py={"25px"}
+                                  variant="solid"
+                                  color={"white"}
+                                  flex={1}
+                                  fontWeight={600}
+                                  borderRadius={"12px"}
+                                  _hover={{ bg: "#059669" }}
+                                  cursor={"default"}
+                                >
+                                  Already in Cart
+                                </Button>
+                              )}
+
+                              <Flex
+                                align={"center"}
+                                px={4}
+                                justify={"center"}
+                                borderColor={"blackAlpha.200"}
+                                borderWidth={1}
+                                borderRadius={"12px"}
+                                _hover={{
+                                  bg: "#fff5f5",
+                                  borderColor: "#f87171",
+                                }}
+                                cursor={"pointer"}
+                                transition={"all 0.2s"}
+                                color={idExists ? "#ef4444" : "#140342"}
+                              >
+                                {createCourseWishListLoading ||
+                                deleteCourseWishListLoading ? (
+                                  <Spinner size={"sm"} />
+                                ) : !idExists ? (
+                                  <Box onClick={handleWishCourse}>
+                                    <IoMdHeartEmpty size={22} />
+                                  </Box>
+                                ) : (
+                                  <Box
+                                    onClick={() => {
+                                      deleteCourseWishList({
+                                        courseId:
+                                          getStudentSingleCourse?.id,
+                                      });
+                                    }}
+                                  >
+                                    <IoMdHeart size={22} />
+                                  </Box>
+                                )}
+                              </Flex>
+                            </Flex>
+
                             <Button
-                              onClick={handleShowMore}
-                              variant="link"
-                              color={"blue"}
-                              fontSize={"14px"}
+                              as={motion.button}
+                              whileHover={{ y: -2 }}
+                              whileTap={{ scale: 0.97 }}
+                              borderColor={"#140342"}
+                              py={"25px"}
+                              variant="outline"
+                              fontWeight={600}
+                              borderRadius={"12px"}
+                              color={"#140342"}
+                              onClick={handleEnrolledCourse}
+                              isLoading={handleEnrolledCourseLoading}
+                              loadingText="Loading"
+                              spinnerPlacement="end"
+                              _hover={{ bg: "#140342", color: "white" }}
                             >
-                              Show More Reviews
+                              Enroll now
                             </Button>
+
+                            <Text
+                              fontSize={"xs"}
+                              color={"#4f547b"}
+                              textAlign={"center"}
+                            >
+                              30-day money-back guarantee
+                            </Text>
+                          </Stack>
+                        ) : (
+                          <Stack spacing={4}>
+                            <Flex
+                              columnGap={3}
+                              align={"center"}
+                              p={3}
+                              bg={"#f0fdf4"}
+                              borderRadius={"10px"}
+                              border={"1px solid"}
+                              borderColor={"#bbf7d0"}
+                            >
+                              <FcInfo size={28} />
+                              <Text
+                                fontSize={"sm"}
+                                color={"#140342"}
+                                fontWeight={600}
+                              >
+                                Purchased{" "}
+                                {formatEnrollDate(
+                                  getSingleEnrolledCourse?.createdAt
+                                )}
+                              </Text>
+                            </Flex>
+                            <Button
+                              as={motion.button}
+                              whileHover={{ y: -2 }}
+                              whileTap={{ scale: 0.97 }}
+                              bg={"#6440FB"}
+                              py={"25px"}
+                              variant="solid"
+                              color={"white"}
+                              fontWeight={600}
+                              borderRadius={"12px"}
+                              onClick={handleGoToCourse}
+                              _hover={{ bg: "#5232e8" }}
+                            >
+                              Go to Course
+                            </Button>
+                          </Stack>
+                        )}
+
+                        <Divider my={5} opacity={0.5} />
+
+                        <Text
+                          textTransform={"uppercase"}
+                          letterSpacing={"0.12em"}
+                          fontSize={"xs"}
+                          fontWeight={700}
+                          color={"#4f547b"}
+                          mb={2}
+                        >
+                          This course includes
+                        </Text>
+                        <Stack spacing={0}>
+                          {detailRow(
+                            MdOutlinePlayLesson,
+                            "Lessons",
+                            getStudentSingleCourse?.modules?.length
+                          )}
+                          {detailRow(
+                            WiTime3,
+                            "Duration",
+                            convertSecondsToHMS(totalDuration)
+                          )}
+                          {detailRow(
+                            FiBarChart2,
+                            "Skill level",
+                            getStudentSingleCourse?.complexityLevel
+                          )}
+                          {detailRow(
+                            IoLanguage,
+                            "Language",
+                            getStudentSingleCourse?.language
+                          )}
+                          {detailRow(
+                            FaCertificate,
+                            "Certificate",
+                            <Icon as={FiAward} color={"#10b981"} />
+                          )}
+                          {detailRow(
+                            FiRefreshCw,
+                            "Lifetime access",
+                            <Icon
+                              as={MdOutlineCheckCircleOutline}
+                              color={"#10b981"}
+                            />,
+                            true
                           )}
                         </Stack>
-                      </Stack>
-                    </Stack>
-                    <Stack
-                      bg="white"
-                      // zIndex={30}
-                      boxShadow={{
-                        base: "",
-                        lg: "0 0 1rem rgb(189 197 200 / 99%)",
-                      }}
-                    >
-                      <Box
-                        position="sticky"
-                        top="95px"
-                        zIndex="1"
-                        p="2"
-                        borderRadius="md"
-                        width={{ base: "100%", lg: "350px" }}
-                        mx={{ base: 0, lg: 1 }}
-                      >
-                        <Box width={"100%"}>
-                          <PromotionalVideoPlayModal
-                            imageUrl={getStudentSingleCourse?.thumbnail}
-                            videoUrl={getStudentSingleCourse?.promotionalVideo}
-                            title={getStudentSingleCourse?.title}
+
+                        <Divider my={5} opacity={0.5} />
+
+                        <Flex align={"center"} columnGap={3}>
+                          <Icon
+                            as={FiShare2}
+                            color={"#4f547b"}
+                            boxSize={"16px"}
                           />
-                        </Box>
-                        <Stack
-                          maxHeight={{
-                            base: "100%",
-                            lg: "280px",
-                            "2xl": "100%",
-                          }}
-                          overflowY={{
-                            base: "hidden",
-                            lg: "scroll",
-                            "2xl": "scroll",
-                          }}
-                        >
-                          <Stack mx={{ base: 0, lg: 4 }}>
-                            <>
-                              {!getSingleEnrolledCourse || !user ? (
-                                <Stack>
-                                  <Text mt={3} fontSize={"1.5rem"}>
-                                    N{getStudentSingleCourse?.price}
-                                  </Text>
-                                  <Flex columnGap={4}>
-                                    {!exists ? (
-                                      <Button
-                                        bg={"#6440FB"}
-                                        py={"25px"}
-                                        variant="solid"
-                                        color={"white"}
-                                        width={"100%"}
-                                        onClick={() => {
-                                          handleAddToCart({
-                                            id: getStudentSingleCourse?.id,
-                                            title:
-                                              getStudentSingleCourse?.title,
-                                            description:
-                                              getStudentSingleCourse?.description,
-                                            price:
-                                              getStudentSingleCourse?.price,
-                                            img: getStudentSingleCourse?.thumbnail,
-                                          });
-                                        }}
-                                      >
-                                        Add to Cart
-                                      </Button>
-                                    ) : (
-                                      <Button
-                                        bg={"#6440FB"}
-                                        py={"25px"}
-                                        variant="solid"
-                                        color={"white"}
-                                        width={"100%"}
-                                      >
-                                        Already Added
-                                      </Button>
-                                    )}
-
-                                    <Stack
-                                      align={"center"}
-                                      px={4}
-                                      justify={"center"}
-                                      borderColor={"black"}
-                                      borderWidth={1}
-                                      _hover={{ backgroundColor: "#F5F7FE" }}
-                                      cursor={"pointer"}
-                                    >
-                                      {createCourseWishListLoading ||
-                                      deleteCourseWishListLoading ? (
-                                        <Spinner />
-                                      ) : (
-                                        <>
-                                          {!idExists ? (
-                                            <Text onClick={handleWishCourse}>
-                                              <IoMdHeartEmpty size={25} />
-                                            </Text>
-                                          ) : (
-                                            <Text
-                                              onClick={() => {
-                                                deleteCourseWishList({
-                                                  courseId:
-                                                    getStudentSingleCourse?.id,
-                                                });
-                                              }}
-                                            >
-                                              <IoMdHeart size={25} />
-                                            </Text>
-                                          )}
-                                        </>
-                                      )}
-                                    </Stack>
-                                  </Flex>
-
-                                  <Button
-                                    borderColor={"#140342"}
-                                    py={"25px"}
-                                    variant="outline"
-                                    onClick={handleEnrolledCourse}
-                                    isLoading={handleEnrolledCourseLoading}
-                                    loadingText="Loading"
-                                    spinnerPlacement="end"
-                                  >
-                                    {/* Buy Now
-                                     */}
-                                     Enroll now
-                                  </Button>
-                                </Stack>
-                              ) : (
-                                <Stack mt={3}>
-                                  <Flex columnGap={4} align={"center"}>
-                                    <FcInfo size={35} />
-                                    <Text fontWeight={"bold"}>
-                                      You purchased this course on{" "}
-                                      {formatEnrollDate(
-                                        getSingleEnrolledCourse?.createdAt
-                                      )}
-                                    </Text>
-                                  </Flex>
-                                  <Button
-                                    bg={"#6440FB"}
-                                    py={"25px"}
-                                    variant="solid"
-                                    color={"white"}
-                                    onClick={handleGoToCourse}
-                                  >
-                                    Go to Course
-                                  </Button>
-                                </Stack>
-                              )}
-                            </>
-
-                            <Stack>
-                              <Stack mt={"1rem"}>
-                                {/* lessons */}
-                                <Stack fontSize={17} color={"#140342"}>
-                                  <Flex
-                                    justify={"space-between"}
-                                    align={"center"}
-                                  >
-                                    <Flex columnGap={3} align={"center"}>
-                                      <MdOutlinePlayLesson />
-                                      <Text>Lesson</Text>
-                                    </Flex>
-                                    <Text>
-                                      {getStudentSingleCourse?.modules?.length}
-                                    </Text>
-                                  </Flex>
-                                  <Divider />
-                                </Stack>
-                                {/* duration */}
-                                <Stack fontSize={17} color={"#140342"}>
-                                  <Flex
-                                    justify={"space-between"}
-                                    align={"center"}
-                                  >
-                                    <Flex columnGap={3} align={"center"}>
-                                      <WiTime3 />
-                                      <Text>Duration</Text>
-                                    </Flex>
-                                    <Text>
-                                      {convertSecondsToHMS(totalDuration)}
-                                    </Text>
-                                  </Flex>
-                                  <Divider />
-                                </Stack>
-                                {/* skill level */}
-                                <Stack fontSize={17} color={"#140342"}>
-                                  <Flex
-                                    justify={"space-between"}
-                                    align={"center"}
-                                  >
-                                    <Flex columnGap={3} align={"center"}>
-                                      <FiBarChart2 />
-
-                                      <Text>Skill level</Text>
-                                    </Flex>
-                                    <Text>
-                                      {getStudentSingleCourse?.complexityLevel}
-                                    </Text>
-                                  </Flex>
-                                  <Divider />
-                                </Stack>
-                                {/* language */}
-                                <Stack fontSize={17} color={"#140342"}>
-                                  <Flex
-                                    justify={"space-between"}
-                                    align={"center"}
-                                  >
-                                    <Flex columnGap={3} align={"center"}>
-                                      <IoLanguage />
-
-                                      <Text>Language</Text>
-                                    </Flex>
-                                    <Text>
-                                      {getStudentSingleCourse?.language}
-                                    </Text>
-                                  </Flex>
-                                  <Divider />
-                                </Stack>
-                                {/* certificate */}
-                                <Stack fontSize={17} color={"#140342"}>
-                                  <Flex
-                                    justify={"space-between"}
-                                    align={"center"}
-                                  >
-                                    <Flex columnGap={3} align={"center"}>
-                                      <FaCertificate />
-
-                                      <Text>Certificate</Text>
-                                    </Flex>
-                                    <Text>yes</Text>
-                                  </Flex>
-                                  <Divider />
-                                </Stack>
-                                {/* full lifetime access */}
-                                <Stack fontSize={17} color={"#140342"}>
-                                  <Flex
-                                    justify={"space-between"}
-                                    align={"center"}
-                                  >
-                                    <Flex columnGap={3} align={"center"}>
-                                      <MdOutlinePlayLesson />
-                                      <Text>Full lifetime access</Text>
-                                    </Flex>
-                                    <Text>yes</Text>
-                                  </Flex>
-                                  <Divider />
-                                </Stack>
-                                <Flex
-                                  align={"center"}
-                                  columnGap={4}
-                                  justify={"center"}
-                                  mt={4}
-                                  cursor={"pointer"}
-                                  color={"#140342"}
-                                >
-                                  <Text onClick={() => shareOnFacebook(url)}>
-                                    <FaFacebookF />
-                                  </Text>
-                                  <Text onClick={() => shareOnLinkedIn(url)}>
-                                    <FaLinkedinIn />
-                                  </Text>
-                                  <Text onClick={() => shareOnTwitter(url)}>
-                                    <TiSocialTwitter />
-                                  </Text>
-
-                                  <Text onClick={() => shareOnInstagram(url)}>
-                                    <FaInstagram />
-                                  </Text>
-                                </Flex>
-                              </Stack>
-                            </Stack>
-                          </Stack>
-                        </Stack>
+                          <Text
+                            fontSize={"xs"}
+                            color={"#4f547b"}
+                            fontWeight={600}
+                          >
+                            Share
+                          </Text>
+                          <Flex columnGap={2} ml={1}>
+                            {[
+                              {
+                                icon: FaFacebookF,
+                                fn: () => shareOnFacebook(url),
+                              },
+                              {
+                                icon: FaLinkedinIn,
+                                fn: () => shareOnLinkedIn(url),
+                              },
+                              {
+                                icon: TiSocialTwitter,
+                                fn: () => shareOnTwitter(url),
+                              },
+                              {
+                                icon: FaInstagram,
+                                fn: () => shareOnInstagram(url),
+                              },
+                            ].map(({ icon, fn }, i) => (
+                              <motion.button
+                                key={i}
+                                onClick={fn}
+                                whileHover={{ y: -3, scale: 1.1 }}
+                                whileTap={{ scale: 0.92 }}
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  width: 32,
+                                  height: 32,
+                                  borderRadius: 9999,
+                                  background: "#f4f1fe",
+                                  color: "#6440fb",
+                                  border: "none",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                <Icon as={icon} boxSize={"14px"} />
+                              </motion.button>
+                            ))}
+                          </Flex>
+                        </Flex>
                       </Box>
-                    </Stack>
-                  </Flex>
-                </Stack>
-              )}
-            </Stack>
-          </Stack>
+                    </MotionBox>
+                  </Box>
+                </Grid>
+              </Box>
+            </Box>
+          )
         )}
-        {/* <Text>other part here</Text> */}
       </Stack>
       <Footer />
     </>
