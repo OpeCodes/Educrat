@@ -28,7 +28,7 @@ import { Footer } from "../../constants";
 import {
   useGetInstructorReview,
   useGetInstructorenrolledCourse,
-  useGetSingleEducratInstructor,
+  useGetSingleDevupshotInstructor,
   useInstructorReviewRating,
 } from "../../hooks/studentCourse";
 import { CourseInterface } from "../../interface/courseInterface";
@@ -46,12 +46,12 @@ interface Social {
 }
 const SingleInstructorPage = () => {
   const { slug } = useParams();
-  const { getSingleEducratInstructor } = useGetSingleEducratInstructor(slug);
+  const { getSingleDevupshotInstructor } = useGetSingleDevupshotInstructor(slug);
   const { getInstructorenrolledCourse } = useGetInstructorenrolledCourse(
-    getSingleEducratInstructor?.id
+    getSingleDevupshotInstructor?.id
   );
   const { instructorReviewRating } = useInstructorReviewRating(
-    getSingleEducratInstructor?.id
+    getSingleDevupshotInstructor?.id
   );
   const averateinstructorReviewRating =
     instructorReviewRating?.average === "NaN"
@@ -59,7 +59,7 @@ const SingleInstructorPage = () => {
       : instructorReviewRating?.average;
 
   const { getInstructorReview } = useGetInstructorReview(
-    getSingleEducratInstructor?.id
+    getSingleDevupshotInstructor?.id
   );
   const { user } = useSelector((store: RootState) => store?.user);
   return (
@@ -104,14 +104,14 @@ const SingleInstructorPage = () => {
       >
         <Avatar
           size="2xl"
-          name={`${getSingleEducratInstructor?.firstName}${getSingleEducratInstructor?.lastName}`}
-          src={getSingleEducratInstructor?.profilePicture}
+          name={`${getSingleDevupshotInstructor?.firstName}${getSingleDevupshotInstructor?.lastName}`}
+          src={getSingleDevupshotInstructor?.profilePicture}
         />
         <Text fontSize={30} fontWeight={"bold"}>
-          {getSingleEducratInstructor?.firstName}{" "}
-          {getSingleEducratInstructor?.lastName}
+          {getSingleDevupshotInstructor?.firstName}{" "}
+          {getSingleDevupshotInstructor?.lastName}
         </Text>
-        <Text>{getSingleEducratInstructor?.headline}</Text>
+        <Text>{getSingleDevupshotInstructor?.headline}</Text>
         <Flex
           align={{ md: "center" }}
           flexDirection={{ base: "column", md: "row" }}
@@ -147,8 +147,8 @@ const SingleInstructorPage = () => {
               <LuClock3 />
             </Text>
             <Text>
-              {getSingleEducratInstructor?.courses.length} course
-              {`${getSingleEducratInstructor?.courses.length <= 1 ? "" : "s"}`}
+              {getSingleDevupshotInstructor?.courses.length} course
+              {`${getSingleDevupshotInstructor?.courses.length <= 1 ? "" : "s"}`}
             </Text>
           </Flex>
         </Flex>
@@ -162,13 +162,13 @@ const SingleInstructorPage = () => {
           <Button
             bg={"#00FF84"}
             as={"a"}
-            href={`mailto:${getSingleEducratInstructor?.email}`}
+            href={`mailto:${getSingleDevupshotInstructor?.email}`}
             fontWeight={"400"}
           >
             Send Message
           </Button>
 
-          {getSingleEducratInstructor?.socials?.map(
+          {getSingleDevupshotInstructor?.socials?.map(
             ({ type, url, id }: Social) => {
               return (
                 <Text as={"a"} href={url} target="_blank" key={id}>
@@ -204,7 +204,7 @@ const SingleInstructorPage = () => {
             fontWeight={"bold"}
           />
           <TabPanels>
-            <TabPanel>{getSingleEducratInstructor?.biography}</TabPanel>
+            <TabPanel>{getSingleDevupshotInstructor?.biography}</TabPanel>
             <TabPanel>
               <Grid
                 templateColumns={{
@@ -214,10 +214,10 @@ const SingleInstructorPage = () => {
                 }}
                 gap={"4rem"}
               >
-                {getSingleEducratInstructor?.courses.length === 0 && (
+                {getSingleDevupshotInstructor?.courses.length === 0 && (
                   <Text>No course available</Text>
                 )}
-                {getSingleEducratInstructor?.courses?.map(
+                {getSingleDevupshotInstructor?.courses?.map(
                   ({
                     complexityLevel,
                     id,
@@ -283,13 +283,13 @@ const SingleInstructorPage = () => {
                         <Flex align={"center"} justify={"space-between"}>
                           <Flex align={"center"} columnGap={2}>
                             <Avatar
-                              src={getSingleEducratInstructor?.profilePicture}
-                              name={`${getSingleEducratInstructor?.firstName} ${getSingleEducratInstructor?.lastName}`}
+                              src={getSingleDevupshotInstructor?.profilePicture}
+                              name={`${getSingleDevupshotInstructor?.firstName} ${getSingleDevupshotInstructor?.lastName}`}
                               size={"sm"}
                             />
                             <Text>
-                              {getSingleEducratInstructor?.firstName}{" "}
-                              {getSingleEducratInstructor?.lastName}
+                              {getSingleDevupshotInstructor?.firstName}{" "}
+                              {getSingleDevupshotInstructor?.lastName}
                             </Text>
                           </Flex>
                           <Text fontWeight={"500"} fontSize={"20px"}>

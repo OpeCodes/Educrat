@@ -8,13 +8,13 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useGetAllEducratInstructors } from "../../hooks/studentCourse";
+import { useGetAllDevupshotInstructors } from "../../hooks/studentCourse";
 import { Instructor } from "../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
 const AllInstructorPage = () => {
-  const { data, isPending } = useGetAllEducratInstructors();
+  const { data, isPending } = useGetAllDevupshotInstructors();
   const dummyArray = [1, 2, 3, 4];
   const arrayOfIds = Array.isArray(data) ? data?.map((obj: any) => obj?.id): [];
   

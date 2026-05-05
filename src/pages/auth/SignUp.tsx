@@ -1,6 +1,4 @@
 import {
-  Stack,
-  Box,
   Text,
   FormControl,
   FormLabel,
@@ -9,18 +7,21 @@ import {
   Flex,
   InputRightElement,
   InputGroup,
-  Image,
+  InputLeftElement,
+  Icon,
   Grid,
   GridItem,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import backgroundImg from "../../assets/backimage.webp";
+import { FiUser, FiAtSign, FiLock, FiMail } from "react-icons/fi";
 import { SignUpSchema } from "../../schemas";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useRegisterUser } from "../../hooks/auth";
-import logo from "../../assets/devupshotLogo.png"
+import { AuthShell, authInputStyles, authLabelStyles } from "./AuthShell";
+import { motion } from "framer-motion";
+
 interface User {
   firstName: string;
   lastName: string;
@@ -37,9 +38,9 @@ const initialValues: User = {
   password: "",
   confirmPassword: "",
 };
+
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const navigate = useNavigate();
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
@@ -51,263 +52,225 @@ const SignUp = () => {
     const { firstName, lastName, username, email, password } = values;
     registerUser({ firstName, lastName, username, email, password });
   };
+
   return (
-    <Stack>
-      <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
-        <GridItem w="100%">
-          <Box
-            boxSize="sm"
-            w="50%"
-            h="100vh"
-            bg={"#140342"}
-            display={{ base: "none", lg: "block" }}
-            position={"fixed"}
-          >
-            <Stack position={"relative"}>
-              <Image src={backgroundImg} alt="background" />
-              {/* <Image
-                src={logo}
-                cursor={"pointer"}
-                alt="background"
-                position={"absolute"}
-                top={"18px"}
-                left={"25px"}
-                onClick={() => navigate("/")}
-              /> */}
-              <Stack
-                top={"18px"}
-                left={"25px"}
-                onClick={() => navigate("/")}
-                position={"absolute"}
-                cursor={"pointer"}
-              >
-                {/* <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
-                  DevUpshot
-                </Text> */}
-                <Image src={logo} height={"30px"}/>
-              </Stack>
-            </Stack>
-          </Box>
-        </GridItem>
-        <GridItem height="100vh" mx={{ base: "15px", lg: "20px" }} >
-        <Stack
-            mb={"0.5rem"}
-            mt={"0.9rem"}
-            display={{ base: "block", lg: "none" }}
-            onClick={() => navigate("/")}
-            cursor={"pointer"}
-          >
-            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
-              DevUpshot
-            </Text>
-          </Stack>
-          <Box textAlign="center" mt={5}>
-            <Text fontSize={"4xl"} fontWeight={"bold"}>
-              Sign Up
-            </Text>
-            <Text fontSize={"18px"} mb={"0.9rem"}>Your knowledge journey begins here!</Text>
-          </Box>
-          <Box>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={SignUpSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ handleChange, handleSubmit, values, errors }) => (
-                <Flex rowGap={"5px"} flexDirection="column" pb={5}>
-                  <FormControl isRequired>
-                    <FormLabel>Firstname</FormLabel>
-                    <Input
-                      type="text"
-                      variant="filled"
-                      placeholder="Firstname"
-                      value={values.firstName}
-                      name="firstName"
-                      onChange={handleChange}
-                      focusBorderColor='black'
-                    />
-                    {errors.firstName && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.firstName}
-                      </Text>
-                    )}
-                  </FormControl>
-                  <FormControl isRequired>
-                    <FormLabel>Lastname</FormLabel>
-                    <Input
-                      type="text"
-                      variant="filled"
-                      placeholder="Lastname"
-                      value={values.lastName}
-                      name="lastName"
-                      onChange={handleChange}
-                      focusBorderColor='black'
-                    />
-                    {errors.lastName && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.lastName}
-                      </Text>
-                    )}
-                  </FormControl>
-                  <FormControl isRequired>
-                    <FormLabel>Username</FormLabel>
-                    <Input
-                      type="text"
-                      variant="filled"
-                      placeholder="username"
-                      value={values.username}
-                      name="username"
-                      onChange={handleChange}
-                      focusBorderColor='black'
-                    />
-                    {errors.username && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.username}
-                      </Text>
-                    )}
-                  </FormControl>
-                  <FormControl isRequired>
-                    <FormLabel>Email</FormLabel>
-                    <Input
-                      type="email"
-                      variant="filled"
-                      placeholder="Email"
-                      value={values.email}
-                      name="email"
-                      onChange={handleChange}
-                      focusBorderColor='black'
-                    />
-                    {errors.email && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.email}
-                      </Text>
-                    )}
-                  </FormControl>
-                  <FormControl isRequired>
-                    <FormLabel>Password</FormLabel>
-                    <InputGroup size="md">
-                      <Input
-                        pr="4.5rem"
-                        type={showPassword ? "text" : "password"}
-                        variant="filled"
-                        placeholder="password"
-                        value={values.password}
-                        name="password"
-                        onChange={handleChange}
-                        focusBorderColor='black'
-                      />
-                      <InputRightElement width="4.5rem">
-                        <Button
-                          h="1.75rem"
-                          size="sm"
-                          onClick={handlePasswordClick}
-                          backgroundColor={"none"}
-                          _hover={{ background: "none" }}
-                        >
-                          {showPassword ? (
-                            <IoIosEye fontSize="20px" />
-                          ) : (
-                            <IoIosEyeOff fontSize="20px" />
-                          )}
-                        </Button>
-                      </InputRightElement>
-                    </InputGroup>
+    <AuthShell
+      eyebrow={"Get started"}
+      title={"Create your account"}
+      subtitle={"Your knowledge journey begins here — free forever."}
+      footer={
+        <>
+          <Text>Already have an account?</Text>
+          <Text fontWeight={600} color={"#6440fb"} as={Link} to="/sign-in">
+            Sign in →
+          </Text>
+        </>
+      }
+    >
+      <Formik
+        initialValues={initialValues}
+        validationSchema={SignUpSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
+          <Flex flexDirection="column" gap={4}>
+            <Grid templateColumns={"1fr 1fr"} gap={3}>
+              <GridItem>
+                <FormControl isRequired>
+                  <FormLabel {...authLabelStyles}>First name</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Ada"
+                    value={values.firstName}
+                    name="firstName"
+                    onChange={handleChange}
+                    {...authInputStyles}
+                  />
+                  {errors.firstName && (
+                    <Text color="red.500" fontSize="13px" mt={1.5}>
+                      {errors.firstName}
+                    </Text>
+                  )}
+                </FormControl>
+              </GridItem>
+              <GridItem>
+                <FormControl isRequired>
+                  <FormLabel {...authLabelStyles}>Last name</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Lovelace"
+                    value={values.lastName}
+                    name="lastName"
+                    onChange={handleChange}
+                    {...authInputStyles}
+                  />
+                  {errors.lastName && (
+                    <Text color="red.500" fontSize="13px" mt={1.5}>
+                      {errors.lastName}
+                    </Text>
+                  )}
+                </FormControl>
+              </GridItem>
+            </Grid>
 
-                    {errors.password && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.password}
-                      </Text>
-                    )}
-                  </FormControl>
-
-                  <FormControl isRequired>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <InputGroup size="md">
-                      <Input
-                        pr="4.5rem"
-                        type={showConfirmPassword ? "text" : "password"}
-                        variant="filled"
-                        placeholder="Confirm Password"
-                        value={values.confirmPassword}
-                        name="confirmPassword"
-                        onChange={handleChange}
-                        focusBorderColor='black'
-                      />
-                      <InputRightElement width="4.5rem">
-                        <Button
-                          h="1.75rem"
-                          size="md"
-                          onClick={handleConfirmPasswordClick}
-                          _hover={{ background: "none" }}
-                        >
-                          {showConfirmPassword ? (
-                            <IoIosEye fontSize="20px" />
-                          ) : (
-                            <IoIosEyeOff fontSize="20px" />
-                          )}
-                        </Button>
-                      </InputRightElement>
-                    </InputGroup>
-
-                    {errors.confirmPassword && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.confirmPassword}
-                      </Text>
-                    )}
-                  </FormControl>
-                  <Button
-                    bg={"black"}                   
-                    isLoading={isPending}
-                    loadingText="Loading"
-                    colorScheme="teal"
-                    variant="outline"
-                    spinnerPlacement="end"
-                    width="100%"
-                    onClick={() => handleSubmit()}
-                    mt={3}
-                    borderWidth={2}
-                    py={3}
-                    color={"white"}
-                    _hover={{ background: "none", color: "black" }}
-                  >
-                    Register
-                  </Button>
-                </Flex>
+            <FormControl isRequired>
+              <FormLabel {...authLabelStyles}>Username</FormLabel>
+              <InputGroup>
+                <InputLeftElement pointerEvents={"none"} h={"100%"}>
+                  <Icon as={FiAtSign} color={"#6440fb"} />
+                </InputLeftElement>
+                <Input
+                  pl={10}
+                  type="text"
+                  placeholder="ada_dev"
+                  value={values.username}
+                  name="username"
+                  onChange={handleChange}
+                  {...authInputStyles}
+                />
+              </InputGroup>
+              {errors.username && (
+                <Text color="red.500" fontSize="13px" mt={1.5}>
+                  {errors.username}
+                </Text>
               )}
-            </Formik>
-            <Flex columnGap={1} mt={"-3"} justify={"center"} pb={4}>
-              <Text>Already have an account?</Text>
-              <Text
-                fontWeight={"600"}
-                color={"#6440fb"}
-                as={Link}
-                to="/sign-in"
-              >
-                Login Here
-              </Text>
-            </Flex>
-          </Box>
-        </GridItem>
-      </Grid>
-    </Stack>
+            </FormControl>
+
+            <FormControl isRequired>
+              <FormLabel {...authLabelStyles}>Email</FormLabel>
+              <InputGroup>
+                <InputLeftElement pointerEvents={"none"} h={"100%"}>
+                  <Icon as={FiMail} color={"#6440fb"} />
+                </InputLeftElement>
+                <Input
+                  pl={10}
+                  type="email"
+                  placeholder="you@example.com"
+                  value={values.email}
+                  name="email"
+                  onChange={handleChange}
+                  {...authInputStyles}
+                />
+              </InputGroup>
+              {errors.email && (
+                <Text color="red.500" fontSize="13px" mt={1.5}>
+                  {errors.email}
+                </Text>
+              )}
+            </FormControl>
+
+            <FormControl isRequired>
+              <FormLabel {...authLabelStyles}>Password</FormLabel>
+              <InputGroup>
+                <InputLeftElement pointerEvents={"none"} h={"100%"}>
+                  <Icon as={FiLock} color={"#6440fb"} />
+                </InputLeftElement>
+                <Input
+                  pl={10}
+                  pr={"3rem"}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Strong password"
+                  value={values.password}
+                  name="password"
+                  onChange={handleChange}
+                  {...authInputStyles}
+                />
+                <InputRightElement h={"100%"}>
+                  <Button
+                    h="1.75rem"
+                    size="sm"
+                    onClick={handlePasswordClick}
+                    bg={"transparent"}
+                    color={"gray.500"}
+                    _hover={{ bg: "transparent", color: "#6440fb" }}
+                  >
+                    {showPassword ? (
+                      <IoIosEye fontSize="20px" />
+                    ) : (
+                      <IoIosEyeOff fontSize="20px" />
+                    )}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              {errors.password && (
+                <Text color="red.500" fontSize="13px" mt={1.5}>
+                  {errors.password}
+                </Text>
+              )}
+            </FormControl>
+
+            <FormControl isRequired>
+              <FormLabel {...authLabelStyles}>Confirm password</FormLabel>
+              <InputGroup>
+                <InputLeftElement pointerEvents={"none"} h={"100%"}>
+                  <Icon as={FiLock} color={"#6440fb"} />
+                </InputLeftElement>
+                <Input
+                  pl={10}
+                  pr={"3rem"}
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Re-enter password"
+                  value={values.confirmPassword}
+                  name="confirmPassword"
+                  onChange={handleChange}
+                  {...authInputStyles}
+                />
+                <InputRightElement h={"100%"}>
+                  <Button
+                    h="1.75rem"
+                    size="sm"
+                    onClick={handleConfirmPasswordClick}
+                    bg={"transparent"}
+                    color={"gray.500"}
+                    _hover={{ bg: "transparent", color: "#6440fb" }}
+                  >
+                    {showConfirmPassword ? (
+                      <IoIosEye fontSize="20px" />
+                    ) : (
+                      <IoIosEyeOff fontSize="20px" />
+                    )}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              {errors.confirmPassword && (
+                <Text color="red.500" fontSize="13px" mt={1.5}>
+                  {errors.confirmPassword}
+                </Text>
+              )}
+            </FormControl>
+
+            <Text fontSize={"xs"} color={"gray.500"} mt={1}>
+              <Icon as={FiUser} mr={1.5} mb={"-2px"} color={"#6440fb"} />
+              By signing up, you agree to our Terms and Privacy Policy.
+            </Text>
+
+            <Button
+              as={motion.button}
+              whileHover={{
+                y: -2,
+                boxShadow: "0 14px 30px rgba(100,64,251,0.4)",
+              }}
+              whileTap={{ scale: 0.98 }}
+              isLoading={isPending}
+              loadingText="Creating account"
+              spinnerPlacement="end"
+              w="100%"
+              onClick={() => handleSubmit()}
+              mt={2}
+              py={6}
+              fontSize={"15px"}
+              fontWeight={600}
+              borderRadius={"12px"}
+              bgGradient={"linear(to-r, #6440fb, #8b5cf6)"}
+              color={"white"}
+              _hover={{ bgGradient: "linear(to-r, #5232e8, #7c3aed)" }}
+            >
+              Create account
+            </Button>
+          </Flex>
+        )}
+      </Formik>
+    </AuthShell>
   );
 };
 

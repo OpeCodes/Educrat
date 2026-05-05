@@ -4,9 +4,9 @@ import {  useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { GetToastErrorHandling } from "../../components";
 
-export const useGetAllEducratInstructors = () => {
+export const useGetAllDevupshotInstructors = () => {
   const { data, isPending, isError } = useQuery({
-    queryKey: ["allinstructorEducrat"],
+    queryKey: ["allinstructorDevupshot"],
     queryFn: async () => {
       const { data } = await customFetch.get("/instructor");
       return data;
@@ -214,11 +214,11 @@ export const useMarkLectureUnfinished = () => {
   return { markLectureUnfinshed };
 };
 
-export const useGetSingleEducratInstructor = (slug: any) => {
+export const useGetSingleDevupshotInstructor = (slug: any) => {
   const toast = useToast();
   const [error, setError] = useState<string | null>(null);
   const {
-    data: getSingleEducratInstructor,
+    data: getSingleDevupshotInstructor,
     isPending,
     isError,
     refetch,
@@ -269,7 +269,7 @@ export const useGetSingleEducratInstructor = (slug: any) => {
       }
     }
   }, [isError, error, toast]);
-  return { getSingleEducratInstructor, isPending, isError, refetch };
+  return { getSingleDevupshotInstructor, isPending, isError, refetch };
 };
 
 // ***************************************************reviews***************************************

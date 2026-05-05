@@ -1,156 +1,103 @@
 import {
-  Stack,
-  Box,
   Text,
   FormControl,
   FormLabel,
   Input,
   Button,
   Flex,
-  Image,
-  Grid,
-  GridItem,
-  
+  InputGroup,
+  InputLeftElement,
+  Icon,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
-import backgroundImg from "../../assets/backimage.webp";
-import logo from "../../assets/devupshotLogo.png";
+import { FiMail } from "react-icons/fi";
 import { forgotPasswordSchema } from "../../schemas";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForgotPassword } from "../../hooks/auth";
+import { AuthShell, authInputStyles, authLabelStyles } from "./AuthShell";
+import { motion } from "framer-motion";
 
 const initialValues = {
   email: "",
 };
+
 const ForgotPassword = () => {
   const { forgotPassword, isPending } = useForgotPassword();
-  const navigate= useNavigate();
   const handleSubmit = (values: any): void => {
     forgotPassword(values);
   };
+
   return (
-    <Stack>
-      <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
-        <GridItem w="100%">
-          <Box
-            boxSize="sm"
-            w="50%"
-            h="100vh"
-            bg={"#140342"}
-            display={{ base: "none", lg: "block" }}
-            position={"fixed"}
-          >
-          <Stack position={"relative"}>
-              <Image src={backgroundImg} alt="background" />
-              
-              <Stack
-                top={"18px"}
-                left={"25px"}
-                onClick={() => navigate("/")}
-                position={"absolute"}
-                cursor={"pointer"}
-              >
-                
-            <Image src={logo} height={"30px"}/>
-              </Stack>
-            </Stack>
-          </Box>
-        </GridItem>
-        <GridItem
-          height="100vh"
-          mx={{ base: "15px", lg: "20px" }}
-          display="flex"
-          flexDirection={"column"}
-          justifyContent={{ base: "none", md: "center" }}
-        >
-          <Stack
-            mb={"0.5rem"}
-            mt={"0.9rem"}
-            display={{ base: "block", lg: "none" }}
-            onClick={() => navigate("/")}
-            cursor={"pointer"}
-          >
-            <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"blue"}>
-              DevUpshot
-            </Text>
-          </Stack>
-          <Box textAlign="center" mt={5}>
-            <Text fontSize={"4xl"} fontWeight={"bold"}>
-              Request Password Reset
-            </Text>
-            <Text fontSize={"18px"} mb={"0.9rem"}>
-              Enter your email to receive reset instructions.
-            </Text>
-          </Box>
-          <Box>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={forgotPasswordSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ handleChange, handleSubmit, values, errors }) => (
-                <Flex
-                  rowGap={"5px"}
-                  flexDirection="column"
-                  maxHeight={{ base: "100%", lg: "530px" }}
-                  overflowY={"auto"}
-                  pb={5}
-                >
-                  <FormControl isRequired>
-                    <FormLabel>Email</FormLabel>
-                    <Input
-                      type="text"
-                      variant="filled"
-                      placeholder="email"
-                      value={values.email}
-                      name="email"
-                      onChange={handleChange}
-                      focusBorderColor='black'
-                    />
-                    {errors.email && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.email}
-                      </Text>
-                    )}
-                  </FormControl>
-                  <Button
-                    bg={"black"}                   
-                    isLoading={isPending}
-                    loadingText="Loading"
-                    colorScheme="teal"
-                    variant="outline"
-                    spinnerPlacement="end"
-                    width="100%"
-                    onClick={() => handleSubmit()}
-                    mt={3}
-                    borderWidth={2}
-                    py={3}
-                    color={"white"}
-                    _hover={{ background: "none", color: "black" }}
-                  >
-                    Password Reset
-                  </Button>
-                </Flex>
+    <AuthShell
+      eyebrow={"Account recovery"}
+      title={"Reset your password"}
+      subtitle={"Enter your email and we'll send reset instructions."}
+      footer={
+        <>
+          <Text>Remembered it?</Text>
+          <Text fontWeight={600} color={"#6440fb"} as={Link} to="/sign-in">
+            Sign in →
+          </Text>
+        </>
+      }
+    >
+      <Formik
+        initialValues={initialValues}
+        validationSchema={forgotPasswordSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
+          <Flex flexDirection="column" gap={4}>
+            <FormControl isRequired>
+              <FormLabel {...authLabelStyles}>Email</FormLabel>
+              <InputGroup>
+                <InputLeftElement pointerEvents={"none"} h={"100%"}>
+                  <Icon as={FiMail} color={"#6440fb"} />
+                </InputLeftElement>
+                <Input
+                  pl={10}
+                  type="email"
+                  placeholder="you@example.com"
+                  value={values.email}
+                  name="email"
+                  onChange={handleChange}
+                  {...authInputStyles}
+                />
+              </InputGroup>
+              {errors.email && (
+                <Text color="red.500" fontSize="13px" mt={1.5}>
+                  {errors.email}
+                </Text>
               )}
-            </Formik>
-            <Flex columnGap={1} justify={"center"}>
-              <Text>Already have an account?</Text>
-              <Text
-                fontWeight={"600"}
-                color={"#6440fb"}
-                as={Link}
-                to="/sign-in"
-              >
-                Login Here
-              </Text>
-            </Flex>
-          </Box>
-        </GridItem>
-      </Grid>
-    </Stack>
+            </FormControl>
+
+            <Button
+              as={motion.button}
+              whileHover={{
+                y: -2,
+                boxShadow: "0 14px 30px rgba(100,64,251,0.4)",
+              }}
+              whileTap={{ scale: 0.98 }}
+              isLoading={isPending}
+              loadingText="Sending"
+              spinnerPlacement="end"
+              w="100%"
+              onClick={() => handleSubmit()}
+              mt={2}
+              py={6}
+              fontSize={"15px"}
+              fontWeight={600}
+              borderRadius={"12px"}
+              bgGradient={"linear(to-r, #6440fb, #8b5cf6)"}
+              color={"white"}
+              _hover={{ bgGradient: "linear(to-r, #5232e8, #7c3aed)" }}
+            >
+              Send reset link
+            </Button>
+          </Flex>
+        )}
+      </Formik>
+    </AuthShell>
   );
 };
 

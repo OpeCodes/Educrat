@@ -1,33 +1,32 @@
 import {
-  Stack,
-  Box,
   Text,
   FormControl,
   FormLabel,
   Input,
   Button,
   Flex,
-  Image,
-  Grid,
-  GridItem,
   InputRightElement,
   InputGroup,
+  InputLeftElement,
+  Icon,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
-import backgroundImg from "../../assets/backimage.webp";
 import { resetPasswordSchema } from "../../schemas";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useResetPassword } from "../../hooks/auth";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import { FiLock } from "react-icons/fi";
 import { useState } from "react";
-import logo from "../../assets/devupshotLogo.png"
+import { AuthShell, authInputStyles, authLabelStyles } from "./AuthShell";
+import { motion } from "framer-motion";
+
 const initialValues = {
   password: "",
   confirmPassword: "",
 };
+
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const navigate = useNavigate();
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
@@ -40,183 +39,135 @@ const ResetPassword = () => {
     const { password } = values;
     resetPassword({ code, token, password });
   };
+
   return (
-    <Stack>
-      <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
-        <GridItem w="100%">
-          <Box
-            boxSize="sm"
-            w="50%"
-            h="100vh"
-            bg={"#140342"}
-            display={{ base: "none", lg: "block" }}
-            position={"fixed"}
-          >
-            <Stack position={"relative"}>
-              <Image src={backgroundImg} alt="background" />
-              {/* <Image
-                src={logo}
-                cursor={"pointer"}
-                alt="background"
-                position={"absolute"}
-                top={"18px"}
-                left={"25px"}
-                onClick={() => navigate("/")}
-              /> */}
-              <Stack
-                top={"18px"}
-                left={"25px"}
-                onClick={() => navigate("/")}
-                position={"absolute"}
-                cursor={"pointer"}
-              >
-                <Image src={logo} height={"30px"}/>
-              </Stack>
-            </Stack>
-          </Box>
-        </GridItem>
-        <GridItem
-          height="100vh"
-          mx={{ base: "15px", lg: "20px" }}
-          display="flex"
-          flexDirection={"column"}
-          justifyContent={{ base: "none", md: "center" }}
-        >
-          <Box textAlign="center" mt={5}>
-            <Text fontSize={"4xl"} fontWeight={"bold"}>
-              Password Reset
-            </Text>
-            <Text fontSize={"18px"}>
-              Please provide a secure but memorable password
-            </Text>
-          </Box>
-          <Box>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={resetPasswordSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ handleChange, handleSubmit, values, errors }) => (
-                <Flex
-                  rowGap={"5px"}
-                  flexDirection="column"
-                  maxHeight={{ base: "100%", lg: "530px" }}
-                  overflowY={"auto"}
-                  pb={5}
-                >
-                  <FormControl isRequired>
-                    <FormLabel>Password</FormLabel>
-                    <InputGroup size="md">
-                      <Input
-                        pr="4.5rem"
-                        type={showPassword ? "text" : "password"}
-                        variant="filled"
-                        placeholder="password"
-                        value={values.password}
-                        name="password"
-                        onChange={handleChange}
-                        focusBorderColor="black"
-                      />
-                      <InputRightElement width="4.5rem">
-                        <Button
-                          h="1.75rem"
-                          size="sm"
-                          onClick={handlePasswordClick}
-                          backgroundColor={"none"}
-                          _hover={{ background: "none" }}
-                        >
-                          {showPassword ? (
-                            <IoIosEye fontSize="20px" />
-                          ) : (
-                            <IoIosEyeOff fontSize="20px" />
-                          )}
-                        </Button>
-                      </InputRightElement>
-                    </InputGroup>
-
-                    {errors.password && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.password}
-                      </Text>
-                    )}
-                  </FormControl>
-
-                  <FormControl isRequired>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <InputGroup size="md">
-                      <Input
-                        pr="4.5rem"
-                        type={showConfirmPassword ? "text" : "password"}
-                        variant="filled"
-                        placeholder="Confirm Password"
-                        value={values.confirmPassword}
-                        name="confirmPassword"
-                        onChange={handleChange}
-                        focusBorderColor="black"
-                      />
-                      <InputRightElement width="4.5rem">
-                        <Button
-                          h="1.75rem"
-                          size="md"
-                          onClick={handleConfirmPasswordClick}
-                          _hover={{ background: "none" }}
-                        >
-                          {showConfirmPassword ? (
-                            <IoIosEye fontSize="20px" />
-                          ) : (
-                            <IoIosEyeOff fontSize="20px" />
-                          )}
-                        </Button>
-                      </InputRightElement>
-                    </InputGroup>
-
-                    {errors.confirmPassword && (
-                      <Text
-                        style={{ color: "red", marginTop: 5 }}
-                        fontSize="14px"
-                      >
-                        {errors.confirmPassword}
-                      </Text>
-                    )}
-                  </FormControl>
+    <AuthShell
+      eyebrow={"Almost there"}
+      title={"Set a new password"}
+      subtitle={"Choose something secure but memorable."}
+      footer={
+        <>
+          <Text>Don't have an account?</Text>
+          <Text fontWeight={600} color={"#6440fb"} as={Link} to="/sign-up">
+            Sign up for free →
+          </Text>
+        </>
+      }
+    >
+      <Formik
+        initialValues={initialValues}
+        validationSchema={resetPasswordSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
+          <Flex flexDirection="column" gap={4}>
+            <FormControl isRequired>
+              <FormLabel {...authLabelStyles}>New password</FormLabel>
+              <InputGroup>
+                <InputLeftElement pointerEvents={"none"} h={"100%"}>
+                  <Icon as={FiLock} color={"#6440fb"} />
+                </InputLeftElement>
+                <Input
+                  pl={10}
+                  pr={"3rem"}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="New password"
+                  value={values.password}
+                  name="password"
+                  onChange={handleChange}
+                  {...authInputStyles}
+                />
+                <InputRightElement h={"100%"}>
                   <Button
-                    bg={"black"}
-                    isLoading={isPending}
-                    loadingText="Loading"
-                    colorScheme="teal"
-                    variant="outline"
-                    spinnerPlacement="end"
-                    width="100%"
-                    onClick={() => handleSubmit()}
-                    mt={3}
-                    borderWidth={2}
-                    py={3}
-                    color={"white"}
-                    _hover={{ background: "none", color: "black" }}
+                    h="1.75rem"
+                    size="sm"
+                    onClick={handlePasswordClick}
+                    bg={"transparent"}
+                    color={"gray.500"}
+                    _hover={{ bg: "transparent", color: "#6440fb" }}
                   >
-                    Password Reset
+                    {showPassword ? (
+                      <IoIosEye fontSize="20px" />
+                    ) : (
+                      <IoIosEyeOff fontSize="20px" />
+                    )}
                   </Button>
-                </Flex>
+                </InputRightElement>
+              </InputGroup>
+              {errors.password && (
+                <Text color="red.500" fontSize="13px" mt={1.5}>
+                  {errors.password}
+                </Text>
               )}
-            </Formik>
-            <Flex columnGap={1} justify={"center"}>
-              <Text>Don't have an account?</Text>
-              <Text
-                fontWeight={"600"}
-                color={"#6440fb"}
-                as={Link}
-                to="/sign-in"
-              >
-                Sign up for free
-              </Text>
-            </Flex>
-          </Box>
-        </GridItem>
-      </Grid>
-    </Stack>
+            </FormControl>
+
+            <FormControl isRequired>
+              <FormLabel {...authLabelStyles}>Confirm password</FormLabel>
+              <InputGroup>
+                <InputLeftElement pointerEvents={"none"} h={"100%"}>
+                  <Icon as={FiLock} color={"#6440fb"} />
+                </InputLeftElement>
+                <Input
+                  pl={10}
+                  pr={"3rem"}
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Re-enter password"
+                  value={values.confirmPassword}
+                  name="confirmPassword"
+                  onChange={handleChange}
+                  {...authInputStyles}
+                />
+                <InputRightElement h={"100%"}>
+                  <Button
+                    h="1.75rem"
+                    size="sm"
+                    onClick={handleConfirmPasswordClick}
+                    bg={"transparent"}
+                    color={"gray.500"}
+                    _hover={{ bg: "transparent", color: "#6440fb" }}
+                  >
+                    {showConfirmPassword ? (
+                      <IoIosEye fontSize="20px" />
+                    ) : (
+                      <IoIosEyeOff fontSize="20px" />
+                    )}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              {errors.confirmPassword && (
+                <Text color="red.500" fontSize="13px" mt={1.5}>
+                  {errors.confirmPassword}
+                </Text>
+              )}
+            </FormControl>
+
+            <Button
+              as={motion.button}
+              whileHover={{
+                y: -2,
+                boxShadow: "0 14px 30px rgba(100,64,251,0.4)",
+              }}
+              whileTap={{ scale: 0.98 }}
+              isLoading={isPending}
+              loadingText="Resetting"
+              spinnerPlacement="end"
+              w="100%"
+              onClick={() => handleSubmit()}
+              mt={2}
+              py={6}
+              fontSize={"15px"}
+              fontWeight={600}
+              borderRadius={"12px"}
+              bgGradient={"linear(to-r, #6440fb, #8b5cf6)"}
+              color={"white"}
+              _hover={{ bgGradient: "linear(to-r, #5232e8, #7c3aed)" }}
+            >
+              Reset password
+            </Button>
+          </Flex>
+        )}
+      </Formik>
+    </AuthShell>
   );
 };
 

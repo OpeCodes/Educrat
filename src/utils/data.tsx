@@ -32,26 +32,26 @@ export const ctaData = [
   {
     id: 1,
     img: cta1,
-    title: "Learn with Experts",
-    desc: "Gain skills from industry-leading professionals",
+    title: "Senior engineer mentors",
+    desc: "Learn from people shipping at scale — not theory-only instructors.",
   },
   {
     id: 2,
     img: cta2,
-    title: "Learn Anything",
-    desc: "Discover new skills and knowledge easily.",
+    title: "Project-based tracks",
+    desc: "Ship real apps to your portfolio. Every course ends with something real.",
   },
   {
     id: 3,
     img: cta3,
-    title: "Flexible Learning",
-    desc: "Study at your own pace, anytime, anywhere.",
+    title: "Self-paced & live cohorts",
+    desc: "Move at your own speed, or join a cohort with weekly accountability.",
   },
   {
     id: 4,
     img: cta4,
-    title: "Industrial Standard",
-    desc: "Meet the highest industry standards and practices.",
+    title: "Verified certificates",
+    desc: "Earn credentials hiring managers actually trust and verify.",
   },
 ];
 
@@ -105,60 +105,17 @@ export const footerLinksData = [
   },
   {
     id: 2,
-    title: "Categories",
+    title: "Tracks",
     links: [
-      {
-        id: 1,
-        name: "Development",
-      },
-      {
-        id: 2,
-        name: "Business",
-      },
-      {
-        id: 3,
-        name: "Finance & Accounting",
-      },
-      {
-        id: 4,
-        name: "IT & Software",
-      },
-      {
-        id: 5,
-        name: "Office Productivity",
-      },
-      {
-        id: 6,
-        name: "Design",
-      },
-      {
-        id: 7,
-        name: "Marketing",
-      },
-      {
-        id: 8,
-        name: "Lifestyle",
-      },
-      {
-        id: 9,
-        name: "Photography & Video",
-      },
-      {
-        id: 10,
-        name: "Health & Fitness",
-      },
-      {
-        id: 11,
-        name: "Music",
-      },
-      {
-        id: 12,
-        name: "UX Design",
-      },
-      {
-        id: 13,
-        name: "Seo Optimization",
-      },
+      { id: 1, name: "Frontend Engineering" },
+      { id: 2, name: "Backend Engineering" },
+      { id: 3, name: "Full-Stack" },
+      { id: 4, name: "DevOps & Cloud" },
+      { id: 5, name: "AI / Machine Learning" },
+      { id: 6, name: "Mobile Development" },
+      { id: 7, name: "System Design" },
+      { id: 8, name: "Data Engineering" },
+      { id: 9, name: "Product Engineering" },
     ],
   },
   {

@@ -17,6 +17,8 @@ import {
 } from "react-icons/fa";
 import { BiGlobe } from "react-icons/bi";
 import { footerLinksData } from "../utils/data";
+import { MotionBox, fadeUp, popIn, stagger } from "../components/motion";
+import { motion } from "framer-motion";
 
 export const Footer = () => {
   return (
@@ -37,9 +39,12 @@ export const Footer = () => {
         w={"full"}
       >
         <Box color={"white"} alignItems={"center"}>
-          <Stack>
+          <Stack spacing={2}>
             <Text fontSize={"1.7rem"} fontWeight={"bold"} color={"#6440fb"}>
               DevUpshot
+            </Text>
+            <Text color={"whiteAlpha.700"} fontSize={"sm"} maxW={"260px"}>
+              Project-based learning for engineers who want to ship.
             </Text>
           </Stack>
         </Box>
@@ -51,44 +56,64 @@ export const Footer = () => {
           <Text color={"white"} fontSize={"16px"} mr={8}>
             Follow us on social media
           </Text>
-          <Flex color={"white"} cursor={"pointer"}>
-            <FaFacebookF size={16} />
-            <Box as={"span"} mx={8}>
-              <FaTwitter size={16} />
-            </Box>
-            <Box
-              mr={8}
-              as={"a"}
-              target="_blank"
-              href={
-                "https://www.instagram.com/devupshot/?igsh=MWR4Z3hxaGhmbmplMw%3D%3D"
-              }
-            >
-              <FaInstagram size={16} />
-            </Box>
-            <Box
-              as={"a"}
-              target="_blank"
-              href="https://www.linkedin.com/company/devupshot/"
-            >
-              <FaLinkedinIn size={16} />
-            </Box>
-          </Flex>
+          <MotionBox
+            display={"flex"}
+            color={"white"}
+            cursor={"pointer"}
+            variants={stagger(0.08)}
+            initial={"hidden"}
+            whileInView={"show"}
+            viewport={{ once: true }}
+          >
+            {[
+              { Icon: FaFacebookF, href: "#" },
+              { Icon: FaTwitter, href: "#" },
+              {
+                Icon: FaInstagram,
+                href: "https://www.instagram.com/devupshot/?igsh=MWR4Z3hxaGhmbmplMw%3D%3D",
+              },
+              {
+                Icon: FaLinkedinIn,
+                href: "https://www.linkedin.com/company/devupshot/",
+              },
+            ].map(({ Icon, href }, idx) => (
+              <motion.a
+                key={idx}
+                href={href}
+                target={"_blank"}
+                rel={"noreferrer"}
+                style={{
+                  display: "inline-flex",
+                  marginLeft: idx === 0 ? 0 : 32,
+                }}
+                variants={popIn}
+                whileHover={{ y: -4, scale: 1.2, color: "#a78bfa" }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Icon size={16} />
+              </motion.a>
+            ))}
+          </MotionBox>
         </Box>
       </Box>
       <Divider color={"rgba(255,255,255,0.15)"} opacity={0.3} my={12} />
-      <Box
+      <MotionBox
         as="div"
         display={{ base: "grid", md: "flex" }}
         gridTemplateColumns={{ base: "repeat(1,1fr)" }}
+        variants={stagger(0.1)}
+        initial={"hidden"}
+        whileInView={"show"}
+        viewport={{ once: true, amount: 0.2 }}
       >
         {footerLinksData.map(({ id, title, links }) => {
           return (
-            <Box
+            <MotionBox
               as="div"
               w={{ base: "100%", md: "25%" }}
               mb={{ base: 6 }}
               key={id}
+              variants={fadeUp}
             >
               <Heading
                 as={"h3"}
@@ -100,19 +125,22 @@ export const Footer = () => {
               </Heading>
               {links.map(({ id, name }) => {
                 return (
-                  <Text
-                    as={"p"}
-                    color={"white"}
-                    fontSize={"16px"}
-                    cursor={"pointer"}
-                    my={4}
+                  <motion.p
                     key={id}
+                    style={{
+                      color: "white",
+                      fontSize: "16px",
+                      cursor: "pointer",
+                      margin: "16px 0",
+                    }}
+                    whileHover={{ x: 6, color: "#a78bfa" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
                     {name}
-                  </Text>
+                  </motion.p>
                 );
               })}
-            </Box>
+            </MotionBox>
           );
         })}
         <Box as={"div"} w={{ base: "100%", md: "25%" }} position={"relative"}>
@@ -120,7 +148,7 @@ export const Footer = () => {
             GET IN TOUCH
           </Heading>
           <Text as={"p"} color={"white"} fontSize={"16px"} my={4}>
-            We don’t send spam so don’t worry.
+            Get new course drops and engineering tips. No spam, ever.
           </Text>
           <Input
             placeholder="Email..."
@@ -133,6 +161,9 @@ export const Footer = () => {
             py={8}
           />
           <Button
+            as={motion.button}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             position={"absolute"}
             top={{ base: "63%", md: "19%", lg: "15%" }}
             right={{ base: "3%", md: "5%" }}
@@ -148,7 +179,7 @@ export const Footer = () => {
             Submit
           </Button>
         </Box>
-      </Box>
+      </MotionBox>
       <Divider color={"rgba(255,255,255,0.15)"} opacity={0.3} my={8} />
       <Box
         as={"div"}
