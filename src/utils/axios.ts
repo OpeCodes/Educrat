@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getUserLocalStorage,  } from "../store/localStorage";
 const customFetch = axios.create({
-  baseURL: "https://educrat.onrender.com/api/v1"
+  // baseURL: "https://educrat-be.onrender.com/api/v1/"
+  baseURL: "https://educrat-be-mt8m.onrender.com/api/v1/"
 });
 
 customFetch.interceptors.request.use((config) => {  
