@@ -1,28 +1,28 @@
 import {
   Avatar,
+  Badge,
+  Box,
+  Button,
   Flex,
-  Stack,
-  Text,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  TabIndicator,
   Grid,
   GridItem,
+  Stack,
+  Tab,
+  TabIndicator,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
   Image,
-  Divider,
-  Button,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
 import { IoPersonOutline } from "react-icons/io5";
 import { LuClock3 } from "react-icons/lu";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { TiSocialTwitter } from "react-icons/ti";
-import { FaYoutube } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
 import { Footer } from "../../constants";
 import {
@@ -44,6 +44,7 @@ interface Social {
   url: string;
   id: number;
 }
+
 const SingleInstructorPage = () => {
   const { slug } = useParams();
   const { getSingleDevupshotInstructor } = useGetSingleDevupshotInstructor(slug);
@@ -54,249 +55,207 @@ const SingleInstructorPage = () => {
     getSingleDevupshotInstructor?.id
   );
   const averateinstructorReviewRating =
-    instructorReviewRating?.average === "NaN"
-      ? 0
-      : instructorReviewRating?.average;
+    instructorReviewRating?.average === "NaN" ? 0 : instructorReviewRating?.average;
 
   const { getInstructorReview } = useGetInstructorReview(
     getSingleDevupshotInstructor?.id
   );
   const { user } = useSelector((store: RootState) => store?.user);
+
   return (
-    <Stack pt={"4.2rem"}>
-      <Stack bg={"#f5f7fe"} py={3}>
-        <Flex
-          w={"100%"}
-          maxW={"90%"}
-          mx="auto"
-          columnGap={2}
-          color={"#4F547B"}
-          fontSize={14}
-          mt={user ? "0.6rem": "1.3rem"}
-        >
+    <Stack pt={{ base: "104px", md: "118px" }} spacing={10}>
+      <Box px={{ base: 5, md: 12, lg: 16 }}>
+        <Flex columnGap={2} color="#4F547B" fontSize={14} mt={user ? "0.6rem" : "1.3rem"} wrap="wrap">
           <Text as={Link} to="/">
             Home
           </Text>
-          <Flex columnGap={1} as={Link} to="/all-instructor">
-            <Text>&#x2022;</Text>
-            <Text>All Instructors</Text>
-          </Flex>
-          <Flex columnGap={1} display={{base: "none", md: "flex"}}>
-            <Text>&#x2022;</Text>
-            <Text>User Experience Design</Text>
-          </Flex>
-          <Flex columnGap={1}  display={{base: "none", md: "flex"}}>
-            <Text>&#x2022;</Text>
-            <Text>User Interface</Text>
-          </Flex>
+          <Text>&#x2022;</Text>
+          <Text as={Link} to="/all-instructor">
+            All Instructors
+          </Text>
         </Flex>
-      </Stack>
-      <Stack
-        color={"white"}
-        mt={4}
-        width={"100%"}
-        bg={"#6440fb"}
-        maxW={{ lg: "80%" }}
-        mx={"auto"}
-        borderRadius={5}
-        py={{ base: "1rem", md: "5rem" }}
-        px={{ base: "1rem", md: "5rem" }}
-      >
-        <Avatar
-          size="2xl"
-          name={`${getSingleDevupshotInstructor?.firstName}${getSingleDevupshotInstructor?.lastName}`}
-          src={getSingleDevupshotInstructor?.profilePicture}
-        />
-        <Text fontSize={30} fontWeight={"bold"}>
-          {getSingleDevupshotInstructor?.firstName}{" "}
-          {getSingleDevupshotInstructor?.lastName}
-        </Text>
-        <Text>{getSingleDevupshotInstructor?.headline}</Text>
-        <Flex
-          align={{ md: "center" }}
-          flexDirection={{ base: "column", md: "row" }}
-          columnGap={3}
-        >
-          <Flex align={"center"} columnGap={1}>
-            <Text>
-              <AiFillStar size={20} />
-            </Text>
-            <Text>{averateinstructorReviewRating}</Text>
-          </Flex>
+      </Box>
 
-          <Flex align={"center"} columnGap={1}>
-            <Text>
-              <IoPersonOutline />
-            </Text>
-            <Text>
-              {getInstructorenrolledCourse?.length} Student
-              {`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
-            </Text>
-          </Flex>
-          <Flex align={"center"} columnGap={1}>
-            <Text>
-              <HiOutlineChat />
-            </Text>
-            <Text>
-              {getInstructorReview?.length} Review
-              {`${getInstructorReview?.length <= 1 ? "" : "s"}`}
-            </Text>
-          </Flex>
-          <Flex align={"center"} columnGap={1}>
-            <Text>
-              <LuClock3 />
-            </Text>
-            <Text>
-              {getSingleDevupshotInstructor?.courses.length} course
-              {`${getSingleDevupshotInstructor?.courses.length <= 1 ? "" : "s"}`}
-            </Text>
-          </Flex>
-        </Flex>
-        <Flex
-          color={"white"}
-          align={"center"}
-          columnGap={4}
-          mt={4}
-          cursor={"pointer"}
+      <Box px={{ base: 5, md: 12, lg: 16 }}>
+        <Stack
+          color="white"
+          width="100%"
+          bgGradient="linear(135deg, #140342 0%, #2d0b8a 52%, #6440fb 100%)"
+          borderRadius="32px"
+          py={{ base: 8, md: 12 }}
+          px={{ base: 6, md: 10 }}
+          position="relative"
+          overflow="hidden"
         >
-          <Button
-            bg={"#00FF84"}
-            as={"a"}
-            href={`mailto:${getSingleDevupshotInstructor?.email}`}
-            fontWeight={"400"}
-          >
-            Send Message
-          </Button>
-
-          {getSingleDevupshotInstructor?.socials?.map(
-            ({ type, url, id }: Social) => {
-              return (
-                <Text as={"a"} href={url} target="_blank" key={id}>
-                  {url && type === "facebook" && <FaFacebookF />}
-                  {url && type === "linkedin" && <FaLinkedinIn />}
-                  {url && type === "twitter" && <TiSocialTwitter />}
-                  {url && type === "website" && <TbWorld />}
-                  {url && type === "youtube" && <FaYoutube />}
-                </Text>
-              );
-            }
-          )}
-        </Flex>
-      </Stack>
-      <Stack
-        width={"100%"}
-        mt={12}
-        maxW={{ base: "95%", lg: "80%" }}
-        mx={"auto"}
-        mb={"1rem"}
-      >
-        <Tabs position="relative">
-          <TabList fontWeight={"bold"}>
-            <Tab _selected={{ color: "#6440fb" }}>Overview </Tab>
-            <Tab>Courses</Tab>
-          </TabList>
-          <TabIndicator
-            mt="-1.5px"
-            height="2px"
-            bg="#6440fb"
-            borderRadius="1px"
-            opacity={"0.5"}
-            fontWeight={"bold"}
+          <Box
+            position="absolute"
+            top="-20px"
+            right="-20px"
+            w="180px"
+            h="180px"
+            borderRadius="full"
+            bg="whiteAlpha.100"
+            filter="blur(10px)"
           />
-          <TabPanels>
-            <TabPanel>{getSingleDevupshotInstructor?.biography}</TabPanel>
-            <TabPanel>
+          <Badge alignSelf="start" bg="whiteAlpha.200" color="white" px={3} py={1} borderRadius="full">
+            Instructor Profile
+          </Badge>
+          <Avatar
+            size="2xl"
+            name={`${getSingleDevupshotInstructor?.firstName}${getSingleDevupshotInstructor?.lastName}`}
+            src={getSingleDevupshotInstructor?.profilePicture}
+            border="3px solid rgba(255,255,255,0.2)"
+          />
+          <Text fontSize={{ base: "30px", md: "42px" }} fontWeight={700} letterSpacing="-0.03em">
+            {getSingleDevupshotInstructor?.firstName} {getSingleDevupshotInstructor?.lastName}
+          </Text>
+          <Text color="whiteAlpha.800" maxW="720px">
+            {getSingleDevupshotInstructor?.headline}
+          </Text>
+          <Flex align={{ md: "center" }} flexDirection={{ base: "column", md: "row" }} gap={4} wrap="wrap">
+            <Flex align="center" columnGap={2}>
+              <AiFillStar size={18} />
+              <Text>{averateinstructorReviewRating}</Text>
+            </Flex>
+            <Flex align="center" columnGap={2}>
+              <IoPersonOutline />
+              <Text>
+                {getInstructorenrolledCourse?.length} Student
+                {`${getInstructorenrolledCourse?.length <= 1 ? "" : "s"}`}
+              </Text>
+            </Flex>
+            <Flex align="center" columnGap={2}>
+              <HiOutlineChat />
+              <Text>
+                {getInstructorReview?.length} Review
+                {`${getInstructorReview?.length <= 1 ? "" : "s"}`}
+              </Text>
+            </Flex>
+            <Flex align="center" columnGap={2}>
+              <LuClock3 />
+              <Text>
+                {getSingleDevupshotInstructor?.courses.length} course
+                {`${getSingleDevupshotInstructor?.courses.length <= 1 ? "" : "s"}`}
+              </Text>
+            </Flex>
+          </Flex>
+          <Flex color="white" align="center" columnGap={4} mt={2} cursor="pointer" wrap="wrap">
+            <Button
+              bg="white"
+              color="#140342"
+              as="a"
+              href={`mailto:${getSingleDevupshotInstructor?.email}`}
+              fontWeight={600}
+              _hover={{ bg: "#f5f3ff" }}
+            >
+              Send Message
+            </Button>
+
+            {getSingleDevupshotInstructor?.socials?.map(({ type, url, id }: Social) => (
+              <Text
+                as="a"
+                href={url}
+                target="_blank"
+                key={id}
+                w="38px"
+                h="38px"
+                borderRadius="full"
+                bg="whiteAlpha.150"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                {url && type === "facebook" && <FaFacebookF />}
+                {url && type === "linkedin" && <FaLinkedinIn />}
+                {url && type === "twitter" && <TiSocialTwitter />}
+                {url && type === "website" && <TbWorld />}
+                {url && type === "youtube" && <FaYoutube />}
+              </Text>
+            ))}
+          </Flex>
+        </Stack>
+      </Box>
+
+      <Stack width="100%" px={{ base: 5, md: 12, lg: 16 }} mb="1rem">
+        <Tabs position="relative" variant="unstyled">
+          <TabList gap={3} flexWrap="wrap">
+            <Tab borderRadius="full" px={5} py={3} fontWeight={700} _selected={{ bg: "#6440fb", color: "white" }}>
+              Overview
+            </Tab>
+            <Tab borderRadius="full" px={5} py={3} fontWeight={700} _selected={{ bg: "#6440fb", color: "white" }}>
+              Courses
+            </Tab>
+          </TabList>
+          <TabIndicator display="none" />
+          <TabPanels px={0}>
+            <TabPanel px={0} pt={8}>
+              <Box className="surface-card" borderRadius="28px" p={{ base: 5, md: 7 }}>
+                <Text color="#4f547b" lineHeight={1.8}>
+                  {getSingleDevupshotInstructor?.biography}
+                </Text>
+              </Box>
+            </TabPanel>
+            <TabPanel px={0} pt={8}>
               <Grid
                 templateColumns={{
                   base: "repeat(1, 1fr)",
                   md: "repeat(2, 1fr)",
-                  lg: "repeat(3, 1fr)",
+                  xl: "repeat(3, 1fr)",
                 }}
-                gap={"4rem"}
+                gap={6}
               >
                 {getSingleDevupshotInstructor?.courses.length === 0 && (
                   <Text>No course available</Text>
                 )}
                 {getSingleDevupshotInstructor?.courses?.map(
-                  ({
-                    complexityLevel,
-                    id,
-                    thumbnail,
-                    title,
-                    slug,
-                    modules,   
-                    price               
-                  }: CourseInterface) => (
-                    <GridItem
-                      w="100%"
-                      key={id}
-                      as={Link}
-                      to={`/course/${slug}`}
-                    >
-                      <Stack>
-                        <Stack>
-                          <Image
-                            src={thumbnail}
-                            alt="Green double couch with wooden legs"
-                            borderRadius="lg"
-                            maxH={{ base: "250px", md: "180px" }}
-                            height={"100%"}
-                            objectFit={{ base: "fill", lg: "scale-down" }}
-                          />
-                          <Stack>
-                            {/* <Text>{getTotalStarsSum(reviews)}</Text> */}
-                            <Text fontSize="20px">{title}</Text>
-                            <Flex justify={"space-between"} fontSize={"19px"}>
-                              <Flex
-                                align="center"
-                                columnGap={"4px"}
-                                color="gray"
-                              >
-                                <CiPlay1 />
-                                <Text fontSize="13px">
-                                  {modules?.length} {"  "}
-                                  Lesson{modules?.length > 1  && "s"}
-                                </Text>
-                              </Flex>
-                              <Flex
-                                align="center"
-                                columnGap={"4px"}
-                                color="gray"
-                              >
-                                <CiClock1 />
-                                <Text fontSize="13px">
-                                  {convertSecondsToHMS(getTotalLecturesDuration(modules))}
-                                </Text>
-                              </Flex>
-                              <Flex
-                                align="center"
-                                columnGap={"4px"}
-                                color="gray"
-                              >
-                                <BiSolidBarChartAlt2 color={"gray"} />
-                                <Text fontSize="13px">{complexityLevel}</Text>
-                              </Flex>
+                  ({ complexityLevel, id, thumbnail, title, slug, modules, price }: CourseInterface) => (
+                    <GridItem w="100%" key={id} as={Link} to={`/course/${slug}`}>
+                      <Box className="surface-card wrapper" borderRadius="24px" overflow="hidden" h="100%">
+                        <Image
+                          src={thumbnail}
+                          alt={title}
+                          h="220px"
+                          w="100%"
+                          objectFit="cover"
+                          className="img"
+                        />
+                        <Stack p={5} spacing={4}>
+                          <Text fontSize="22px" fontWeight={700} color="#140342" noOfLines={2}>
+                            {title}
+                          </Text>
+                          <Flex justify="space-between" fontSize="13px" color="gray.500" wrap="wrap" gap={3}>
+                            <Flex align="center" columnGap="4px">
+                              <CiPlay1 />
+                              <Text>
+                                {modules?.length} Lesson{modules?.length > 1 && "s"}
+                              </Text>
                             </Flex>
-                            <Divider />
-                          </Stack>
-                        </Stack>
-                        <Flex align={"center"} justify={"space-between"}>
-                          <Flex align={"center"} columnGap={2}>
-                            <Avatar
-                              src={getSingleDevupshotInstructor?.profilePicture}
-                              name={`${getSingleDevupshotInstructor?.firstName} ${getSingleDevupshotInstructor?.lastName}`}
-                              size={"sm"}
-                            />
-                            <Text>
-                              {getSingleDevupshotInstructor?.firstName}{" "}
-                              {getSingleDevupshotInstructor?.lastName}
+                            <Flex align="center" columnGap="4px">
+                              <CiClock1 />
+                              <Text>{convertSecondsToHMS(getTotalLecturesDuration(modules))}</Text>
+                            </Flex>
+                            <Flex align="center" columnGap="4px">
+                              <BiSolidBarChartAlt2 color="gray" />
+                              <Text>{complexityLevel}</Text>
+                            </Flex>
+                          </Flex>
+                          <Flex align="center" justify="space-between">
+                            <Flex align="center" columnGap={2}>
+                              <Avatar
+                                src={getSingleDevupshotInstructor?.profilePicture}
+                                name={`${getSingleDevupshotInstructor?.firstName} ${getSingleDevupshotInstructor?.lastName}`}
+                                size="sm"
+                              />
+                              <Text fontSize="sm" color="#4f547b">
+                                {getSingleDevupshotInstructor?.firstName} {getSingleDevupshotInstructor?.lastName}
+                              </Text>
+                            </Flex>
+                            <Text fontWeight={700} fontSize="24px" color="#6440fb">
+                              N{price}
                             </Text>
                           </Flex>
-                          <Text fontWeight={"500"} fontSize={"20px"}>
-                          ₦{price}
-                          </Text>
-                        </Flex>
-                      </Stack>
+                        </Stack>
+                      </Box>
                     </GridItem>
                   )
                 )}

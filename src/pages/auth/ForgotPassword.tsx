@@ -8,6 +8,7 @@ import {
   InputGroup,
   InputLeftElement,
   Icon,
+  Box,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { FiMail } from "react-icons/fi";
@@ -31,12 +32,12 @@ const ForgotPassword = () => {
     <AuthShell
       eyebrow={"Account recovery"}
       title={"Reset your password"}
-      subtitle={"Enter your email and we'll send reset instructions."}
+      subtitle={"Enter your email and we will send reset instructions."}
       footer={
         <>
           <Text>Remembered it?</Text>
           <Text fontWeight={600} color={"#6440fb"} as={Link} to="/sign-in">
-            Sign in →
+            {"Sign in ->"}
           </Text>
         </>
       }
@@ -48,6 +49,15 @@ const ForgotPassword = () => {
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <Flex flexDirection="column" gap={4}>
+            <Box
+              p={4}
+              borderRadius="16px"
+              bg="rgba(100,64,251,0.06)"
+              color="#4f547b"
+              fontSize="sm"
+            >
+              We will email you a secure password reset link if this address is attached to an account.
+            </Box>
             <FormControl isRequired>
               <FormLabel {...authLabelStyles}>Email</FormLabel>
               <InputGroup>

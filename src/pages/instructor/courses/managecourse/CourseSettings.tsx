@@ -1,4 +1,4 @@
-import { Button, Divider, Flex, Stack, Text } from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
 import {
   useDeleteCourseModule,
   useGetSingleCourse,
@@ -9,32 +9,51 @@ import { useParams } from "react-router-dom";
 const CourseSettings = () => {
   const { singleStatusCourse, isPending } = useSingleStatusCourse();
   const { id } = useParams();
-  const { deleteCourseModule, deleteCourseModuleLoading } =
-    useDeleteCourseModule();
+  const { deleteCourseModule, deleteCourseModuleLoading } = useDeleteCourseModule();
   const { getSingleCourse } = useGetSingleCourse(id);
+
   return (
-    <Stack mb={"12rem"}>
-      <Text p={5} fontSize={20} fontWeight={"bold"}>
-        Settings
-      </Text>
-      <Divider />
-      <Stack p={5}>
-        <Text fontWeight={"bold"}>Course Status</Text>
-        <Text>
-          This course is{" "}
-          {getSingleCourse?.status === "published" ? "now" : "not"} published on
-          the DevUpshot marketplace.
+    <Stack spacing={6}>
+      <Stack spacing={2}>
+        <Text fontSize="2xl" fontWeight={700} color="#140342">
+          Settings
         </Text>
-        <Stack mt={"0.9rem"}>
-          <Flex columnGap={4} align={"center"}>
+        <Text color="#4f547b" maxW="820px">
+          Control the visibility of your course and manage high-impact actions like publishing or deletion.
+        </Text>
+      </Stack>
+
+      <Box className="surface-card" borderRadius="24px" p={{ base: 5, md: 6 }}>
+        <Stack spacing={4}>
+          <Flex justify="space-between" align={{ base: "start", md: "center" }} gap={4} flexWrap="wrap">
+            <Stack spacing={1}>
+              <Text fontWeight={700} color="#140342">
+                Course status
+              </Text>
+              <Text color="#4f547b">
+                This course is {getSingleCourse?.status === "published" ? "currently" : "not"} published on the DevUpshot marketplace.
+              </Text>
+            </Stack>
+            <Badge
+              borderRadius="full"
+              px={3}
+              py={1}
+              colorScheme={getSingleCourse?.status === "published" ? "green" : "purple"}
+            >
+              {(getSingleCourse?.status || "draft").toUpperCase()}
+            </Badge>
+          </Flex>
+
+          <Flex columnGap={4} rowGap={4} align={{ base: "start", md: "center" }} flexDirection={{ base: "column", md: "row" }}>
             {getSingleCourse?.status === "published" ? (
               <Button
-                borderRadius={0}
-                borderColor={"black"}
-                _hover={{ backgroundColor: "none" }}
+                borderRadius="full"
+                bg="white"
+                borderColor={"#140342"}
+                borderWidth={1}
                 variant="outline"
                 isLoading={isPending}
-                loadingText="Loading"
+                loadingText="Updating"
                 spinnerPlacement="end"
                 px={"2.7rem"}
                 onClick={() => {
@@ -45,38 +64,52 @@ const CourseSettings = () => {
               </Button>
             ) : (
               <Button
-                borderRadius={0}
-                borderColor={"black"}
-                _hover={{ backgroundColor: "none" }}
-                variant="outline"
+                borderRadius="full"
+                bgGradient="linear(to-r, #6440fb, #8b5cf6)"
+                color="white"
                 isLoading={isPending}
-                loadingText="Loading"
+                loadingText="Updating"
                 spinnerPlacement="end"
                 px={"2.7rem"}
+                boxShadow="0 16px 32px rgba(100,64,251,0.24)"
+                _hover={{ bgGradient: "linear(to-r, #5232e8, #7c3aed)" }}
                 onClick={() => {
                   singleStatusCourse({ id, status: "published" });
                 }}
               >
-                publish
+                Publish
               </Button>
             )}
 
-            <Text>
+            <Text color="#4f547b">
               New students
               {getSingleCourse?.status === "published"
-                ? " can find your course via search,"
-                : " cannot find your course via search,  but existing students can still access content."}
+                ? " can find your course via search."
+                : " cannot find your course via search, but existing students can still access content."}
             </Text>
           </Flex>
-          <Flex columnGap={4} align={"center"} mt={"1.5rem"}>
+        </Stack>
+      </Box>
+
+      <Box className="surface-card" borderRadius="24px" p={{ base: 5, md: 6 }}>
+        <Stack spacing={4}>
+          <Text fontWeight={700} color="#140342">
+            Danger zone
+          </Text>
+          <Text color="#4f547b">
+            We promise students lifetime access, so courses cannot be deleted after students have enrolled.
+          </Text>
+          <Flex columnGap={4} rowGap={4} align={{ base: "start", md: "center" }} flexDirection={{ base: "column", md: "row" }}>
             <Button
-              borderRadius={0}
-              borderColor={"black"}
-              _hover={{ backgroundColor: "none" }}
+              borderRadius="full"
+              borderColor={"#ef4444"}
+              color="#ef4444"
+              bg="white"
+              _hover={{ backgroundColor: "#fff1f2" }}
               variant="outline"
               px={"3.5rem"}
               isLoading={deleteCourseModuleLoading}
-              loadingText="Loading"
+              loadingText="Deleting"
               spinnerPlacement="end"
               onClick={() => {
                 deleteCourseModule({ courseId: id });
@@ -84,13 +117,9 @@ const CourseSettings = () => {
             >
               Delete
             </Button>
-            <Text>
-              We promise students lifetime access, so courses cannot be deleted
-              after students have enrolled.
-            </Text>
           </Flex>
         </Stack>
-      </Stack>
+      </Box>
     </Stack>
   );
 };

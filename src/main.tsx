@@ -8,6 +8,7 @@ import { store } from "./store/store.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AppWrapper } from "./pages/AuthWrapper.tsx";
+import theme from "./theme.ts";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -19,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
       <React.StrictMode>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <AppWrapper>
             <App />
           </AppWrapper>

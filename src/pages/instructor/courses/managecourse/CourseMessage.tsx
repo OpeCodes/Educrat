@@ -1,44 +1,47 @@
-import { Button, Divider, Flex, Stack, Text } from "@chakra-ui/react";
+import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 import { Formik } from "formik";
 import ReactQuill from "react-quill";
 import { courseMessageValidationSchema } from "../../../../schemas";
 import { useSingleCourse } from "../../../../hooks/course";
 import { useParams } from "react-router-dom";
+
 const initialValues = {
   welcomeMessage: "",
   completionMessage: "",
 };
+
 const CourseMessage = () => {
   const { singleCourse, isPending: isLoading } = useSingleCourse();
-
   const { id } = useParams();
+
   const handleSubmit = (values: any): void => {
     singleCourse({
       singleId: id,
       user: values,
     });
   };
+
   return (
-    <Stack>
-      <Text p={5} fontSize={20} fontWeight={"bold"}>
-        Course Messages
-      </Text>
-      <Divider />
-      <Text p={5} fontSize={14}>
-        Write messages to your students (optional) that will be sent
-        automatically when they join or complete your course to encourage
-        students to engage with course content. If you do not wish to send a
-        welcome or congratulations message, leave the text box blank.
-      </Text>
+    <Stack spacing={6}>
+      <Stack spacing={2}>
+        <Text fontSize="2xl" fontWeight={700} color="#140342">
+          Course Messages
+        </Text>
+        <Text color="#4f547b" maxW="820px">
+          Write optional messages that are automatically sent when learners join or complete your course.
+        </Text>
+      </Stack>
       <Formik
         initialValues={initialValues}
         validationSchema={courseMessageValidationSchema}
         onSubmit={handleSubmit}
       >
         {({ handleChange, handleSubmit, values, errors }) => (
-          <Stack p={5}>
-            <Stack>
-              <Text fontWeight={"bold"}>Welcome Message</Text>
+          <Stack spacing={6}>
+            <Stack spacing={3}>
+              <Text fontWeight={700} color="#140342">
+                Welcome message
+              </Text>
               <ReactQuill
                 theme="snow"
                 value={values.welcomeMessage}
@@ -46,18 +49,15 @@ const CourseMessage = () => {
                 className="reactQuillArticleCreate"
               />
               {errors.welcomeMessage && (
-                <Text
-                  style={{
-                    color: "red",
-                  }}
-                  fontSize="14px"
-                >
+                <Text color="red.500" fontSize="14px">
                   <>{errors.welcomeMessage}</>
                 </Text>
               )}
             </Stack>
-            <Stack>
-              <Text fontWeight={"bold"}>Congratulations Message</Text>
+            <Stack spacing={3}>
+              <Text fontWeight={700} color="#140342">
+                Completion message
+              </Text>
               <ReactQuill
                 theme="snow"
                 value={values.completionMessage}
@@ -65,30 +65,23 @@ const CourseMessage = () => {
                 className="reactQuillArticleCreate"
               />
               {errors.completionMessage && (
-                <Text
-                  style={{
-                    color: "red",
-                  }}
-                  fontSize="14px"
-                >
+                <Text color="red.500" fontSize="14px">
                   <>{errors.completionMessage}</>
                 </Text>
               )}
             </Stack>
-            <Flex display={"flex"} justifyContent={"end"}>
+            <Flex justifyContent={"end"}>
               <Button
-                bg={"#00FF84"}
+                bgGradient="linear(to-r, #6440fb, #8b5cf6)"
                 isLoading={isLoading}
-                loadingText="Loading"
-                variant="outline"
-                spinnerPlacement="end"
+                loadingText="Saving"
+                color="white"
                 onClick={() => handleSubmit()}
-                mt={3}
-                borderWidth={2}
                 width={"fit-content"}
-                py={3}
-                borderColor={"#00FF84"}
-                _hover={{ background: "none", color: "#00FF84" }}
+                py={6}
+                px={8}
+                boxShadow="0 16px 32px rgba(100,64,251,0.24)"
+                _hover={{ bgGradient: "linear(to-r, #5232e8, #7c3aed)" }}
               >
                 Save
               </Button>

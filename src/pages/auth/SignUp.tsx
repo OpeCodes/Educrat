@@ -30,6 +30,7 @@ interface User {
   password: string;
   confirmPassword: string;
 }
+
 const initialValues: User = {
   firstName: "",
   lastName: "",
@@ -41,8 +42,7 @@ const initialValues: User = {
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
   const handleConfirmPasswordClick = () =>
     setShowConfirmPassword(!showConfirmPassword);
@@ -57,12 +57,12 @@ const SignUp = () => {
     <AuthShell
       eyebrow={"Get started"}
       title={"Create your account"}
-      subtitle={"Your knowledge journey begins here — free forever."}
+      subtitle={"Your knowledge journey begins here, free forever."}
       footer={
         <>
           <Text>Already have an account?</Text>
           <Text fontWeight={600} color={"#6440fb"} as={Link} to="/sign-in">
-            Sign in →
+            {"Sign in ->"}
           </Text>
         </>
       }
@@ -74,7 +74,7 @@ const SignUp = () => {
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <Flex flexDirection="column" gap={4}>
-            <Grid templateColumns={"1fr 1fr"} gap={3}>
+            <Grid templateColumns={{ base: "1fr", sm: "1fr 1fr" }} gap={3}>
               <GridItem>
                 <FormControl isRequired>
                   <FormLabel {...authLabelStyles}>First name</FormLabel>
