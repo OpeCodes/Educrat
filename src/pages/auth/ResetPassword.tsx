@@ -9,6 +9,7 @@ import {
   InputGroup,
   InputLeftElement,
   Icon,
+  Box,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { resetPasswordSchema } from "../../schemas";
@@ -27,8 +28,7 @@ const initialValues = {
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
   const handleConfirmPasswordClick = () =>
     setShowConfirmPassword(!showConfirmPassword);
@@ -47,9 +47,9 @@ const ResetPassword = () => {
       subtitle={"Choose something secure but memorable."}
       footer={
         <>
-          <Text>Don't have an account?</Text>
+          <Text>Do not have an account?</Text>
           <Text fontWeight={600} color={"#6440fb"} as={Link} to="/sign-up">
-            Sign up for free →
+            {"Sign up for free ->"}
           </Text>
         </>
       }
@@ -61,6 +61,15 @@ const ResetPassword = () => {
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <Flex flexDirection="column" gap={4}>
+            <Box
+              p={4}
+              borderRadius="16px"
+              bg="rgba(100,64,251,0.06)"
+              color="#4f547b"
+              fontSize="sm"
+            >
+              Use at least one strong password you have not reused elsewhere.
+            </Box>
             <FormControl isRequired>
               <FormLabel {...authLabelStyles}>New password</FormLabel>
               <InputGroup>
