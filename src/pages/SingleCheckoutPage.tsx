@@ -19,6 +19,8 @@ import { useState } from "react";
 import paystack from "../assets/paystack.png";
 import { useCheckoutOrder } from "../hooks/auth/price";
 
+const formatPrice = (amount: number) => `N${amount?.toLocaleString?.() ?? amount}`;
+
 const SingleCheckoutPage = () => {
   const { singleCartCourse } = useSelector((store: RootState) => store?.cart);
   const { order } = useSelector((store: RootState) => store?.user);
@@ -35,136 +37,123 @@ const SingleCheckoutPage = () => {
         isClosable: true,
       });
       return;
-    } else {
-      checkoutOrder({ id: order?.id });
     }
+
+    checkoutOrder({ id: order?.id });
   };
+
   return (
-    <Stack pt={"5rem"}>
-      <Grid templateColumns={{ lg: "repeat(2, 1fr)" }} columnGap={5}>
-        <GridItem
-          height={{ lg: "100vh" }}
-          justifyContent={"center"}
-          alignContent={"center"}
-          display={"flex"}
-          mt={"2rem"}
-        >
-          <Stack maxW={"80%"} w={"full"}>
-            <Text fontSize={"2rem"} fontWeight={"500"}>
-              Checkout
-            </Text>
-            <Text fontSize={"1.5rem"} fontWeight={"500"}>
-              Billing address
-            </Text>
-            <Stack my={"0.5rem"}>
-              <Flex justify={"space-between"} align={"center"}>
-                <Text fontWeight={"bold"}>Country</Text>
-                <Text color={"gray"} fontSize={12}>
-                  Required
-                </Text>
-              </Flex>
-              <Select>
-                <option>Nigeria</option>
-              </Select>
+    <Stack pt={{ base: "104px", md: "118px" }} pb={16} px={{ base: 5, md: 12, lg: 16 }} spacing={8}>
+      <Box
+        borderRadius="32px"
+        bgGradient="linear(135deg, #140342 0%, #2d0b8a 55%, #6440fb 100%)"
+        color="white"
+        px={{ base: 6, md: 10 }}
+        py={{ base: 8, md: 10 }}
+      >
+        <Text textTransform="uppercase" letterSpacing="0.16em" fontWeight={700} fontSize="xs" color="whiteAlpha.700">
+          Express Checkout
+        </Text>
+        <Text mt={3} fontSize={{ base: "30px", md: "44px" }} fontWeight={700} letterSpacing="-0.03em">
+          You are one payment away from starting this course.
+        </Text>
+      </Box>
+
+      <Grid templateColumns={{ base: "1fr", xl: "1.2fr 0.8fr" }} gap={8}>
+        <GridItem>
+          <Stack className="surface-card" borderRadius="28px" p={{ base: 5, md: 7 }} spacing={7}>
+            <Stack spacing={2}>
+              <Text fontSize="2xl" fontWeight={700} color="#140342">
+                Billing address
+              </Text>
+              <Text color="#4f547b">Nigeria is currently the active billing region for this flow.</Text>
             </Stack>
-            <Stack>
-              <Flex align={"center"} justify={"space-between"}>
-                <Text fontSize={"1.5rem"} fontWeight={"500"}>
-                  Payment Method
+
+            <Select variant="filled">
+              <option>Nigeria</option>
+            </Select>
+
+            <Stack spacing={3}>
+              <Flex align="center" justify="space-between">
+                <Text fontSize="2xl" fontWeight={700} color="#140342">
+                  Payment method
                 </Text>
-                <Stack>
-                  <Text color={"gray"} fontSize={12}>
-                    Secured connection
-                  </Text>
-                </Stack>
+                <Text color="gray.500" fontSize="12px">
+                  Secured connection
+                </Text>
               </Flex>
-              <Stack
-                borderWidth={1}
-                p={2}
-                bg={"#F7F9FA"}
-                cursor={"pointer"}
-                py={3}
-              >
+              <Box className="surface-card" borderRadius="22px" p={4} bg="rgba(100,64,251,0.03)">
                 <RadioGroup onChange={setValue} value={value}>
-                  <Stack direction="row">
-                    <Radio value={"true"}>
-                      <Image src={paystack} width={"110px"} />
-                    </Radio>
-                  </Stack>
+                  <Radio value="true" colorScheme="purple">
+                    <Flex align="center" columnGap={3}>
+                      <Image src={paystack} width="110px" />
+                      <Text color="#4f547b" fontSize="sm">
+                        Pay securely with Paystack
+                      </Text>
+                    </Flex>
+                  </Radio>
                 </RadioGroup>
-              </Stack>
+              </Box>
             </Stack>
-            <Stack>
-              <Text fontSize={"1.5rem"} fontWeight={"700"} mt={"1.0rem"}>
+
+            <Stack spacing={4}>
+              <Text fontSize="2xl" fontWeight={700} color="#140342">
                 Order details
               </Text>
-              <Flex
-                key={singleCartCourse.id}
-                mt={"rem"}
-                columnGap={10}
-                justify={"space-between"}
-                align={"center"}
-                my={1}
-              >
-                <Flex columnGap={2} align={"center"}>
+              <Flex justify="space-between" align="center" className="surface-card" borderRadius="20px" p={4}>
+                <Flex columnGap={3} align="center">
                   <Image
-                    boxSize="40px"
+                    boxSize="56px"
                     objectFit="cover"
                     src={singleCartCourse.img}
-                    alt="Dan Abramov"
+                    alt={singleCartCourse.title}
+                    borderRadius="16px"
                   />
-                  <Text fontWeight={"bold"}>{singleCartCourse.title}</Text>
+                  <Text fontWeight={700} color="#140342">
+                    {singleCartCourse.title}
+                  </Text>
                 </Flex>
-                <Text>{singleCartCourse.price}</Text>
+                <Text color="#6440fb" fontWeight={700}>
+                  {formatPrice(singleCartCourse.price)}
+                </Text>
               </Flex>
             </Stack>
           </Stack>
         </GridItem>
-        <GridItem w="100%">
-          <Box
-            w={{ base: "100%", lg: "50%" }}
-            h={{ base: "100%", lg: "100vh" }}
-            bg={"#f7f9fa"}
-            mx={{ base: "0", lg: "auto" }}
-            display={"block"}
-            p={{ base: "1rem", lg: 0 }}
-            mt={{ base: "3rem", lg: 0 }}
-            position={{ base: "relative", lg: "fixed" }}
-          >
-            <Stack mt={{ base: 0, lg: "6rem" }} mx={{ base: 0, lg: "10rem" }}>
-              <Text fontSize={"1.6rem"} fontWeight={"bold"}>
+
+        <GridItem>
+          <Box className="surface-card" borderRadius="28px" p={{ base: 5, md: 6 }} position={{ xl: "sticky" }} top="120px">
+            <Stack spacing={5}>
+              <Text fontSize="2xl" fontWeight={700} color="#140342">
                 Summary
               </Text>
-              <Stack>
-                <Flex justify={"space-between"}>
-                  <Text>Original Price</Text>
-                  <Text>N{singleCartCourse.price}</Text>
+              <Stack spacing={3}>
+                <Flex justify="space-between">
+                  <Text color="#4f547b">Original price</Text>
+                  <Text color="#140342">{formatPrice(singleCartCourse.price || 0)}</Text>
                 </Flex>
-                <Flex justify={"space-between"}>
-                  <Text>Discounts:</Text>
-                  <Text>N0</Text>
+                <Flex justify="space-between">
+                  <Text color="#4f547b">Discounts</Text>
+                  <Text color="#140342">N0</Text>
                 </Flex>
-
                 <Divider />
-                <Flex justify={"space-between"} fontWeight={"bold"}>
-                  <Text>Total</Text>
-                  <Text>N{singleCartCourse.price}</Text>
+                <Flex justify="space-between" fontWeight="bold">
+                  <Text color="#140342">Total</Text>
+                  <Text color="#6440fb" fontSize="2xl">
+                    {formatPrice(singleCartCourse.price || 0)}
+                  </Text>
                 </Flex>
               </Stack>
-              <Text mt={"0.6rem"} fontSize={13} color={"gray"}>
-                By completing your purchase you agree to these Terms of Service.
-              </Text>
               <Button
-                mt={3}
-                bg={"#A435F0"}
+                bgGradient="linear(to-r, #6440fb, #8b5cf6)"
+                color="white"
                 py={7}
-                color={"white"}
-                borderRadius={0}
-                variant="solid"
+                boxShadow="0 16px 32px rgba(100,64,251,0.24)"
+                _hover={{ bgGradient: "linear(to-r, #5232e8, #7c3aed)" }}
                 onClick={handleCheckout}
                 isDisabled={singleCartCourse.price === 0}
               >
-                {value === "true" ? "Proceed" : "Complete Checkout"}
+                {value === "true" ? "Proceed" : "Complete checkout"}
               </Button>
             </Stack>
           </Box>

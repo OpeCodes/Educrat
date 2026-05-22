@@ -1,55 +1,49 @@
 import {
-  Flex,
-  Stack,
+  Avatar,
   Box,
-  Text,
   Button,
+  Divider,
   Drawer,
   DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
-  useDisclosure,
-  DrawerCloseButton,
-  Divider,
-  Avatar,
-  useBoolean,
-  useToast,
+  Flex,
   Image,
+  Stack,
+  Text,
+  useBoolean,
+  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import { NavLink, Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
-import { FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
-import { RootState } from "../store/store";
+import { FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { logoutUser } from "../features/user/UserSlice";
 import { useDispatch } from "react-redux";
+import { RootState } from "../store/store";
+import { logoutUser } from "../features/user/UserSlice";
 import AddToCartButton from "./AddToCartButton";
 import { useGetUser } from "../hooks";
 import logo from "../assets/devupshotLogo.png";
+
 const links = [
-  {
-    id: 1,
-    name: "Home",
-    href: ".",
-  },
-  {
-    id: 2,
-    name: "Course",
-    href: "/all-courses",
-  },
+  { id: 1, name: "Home", href: "." },
+  { id: 2, name: "Courses", href: "/all-courses" },
 ];
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [hover, setHover] = useBoolean();
+  const [isScrolled, setIsScrolled] = useState(false);
   const toast = useToast();
-
   const dispatch = useDispatch();
   const { user } = useSelector((store: RootState) => store?.user);
-
   const { data: getUser } = useGetUser();
+
   const hasInstructorRole = getUser?.roles?.some(
     (role: any) => role?.name === "instructor"
   );
@@ -57,119 +51,121 @@ const Navbar = () => {
     (role: any) => role?.name === "student"
   );
 
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 18);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleLogout = (closeAfter?: boolean) => {
+    toast({
+      title: "Logging out",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+
+    setTimeout(() => {
+      dispatch(logoutUser());
+      if (closeAfter) onClose();
+    }, 2000);
+  };
+
   return (
-    <Stack>
+    <Stack position="fixed" top={0} left={0} right={0} zIndex={30} px={{ base: 4, md: 6, lg: 8 }} pt={4}>
       <Flex
-        bg="white"
-        shadow={"base"}
-        zIndex={10}
-        py={4}
-        px={{ base: "6", md: "12", lg: "16" }}
-        width={"100%"}
-        position={"fixed"}
-        justify={"space-between"}
-        align={"center"}
+        align="center"
+        justify="space-between"
+        px={{ base: 4, md: 6, lg: 8 }}
+        py={3}
+        borderRadius="24px"
+        bg={isScrolled ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.74)"}
+        border="1px solid"
+        borderColor={isScrolled ? "rgba(100,64,251,0.12)" : "rgba(20,3,66,0.06)"}
+        boxShadow={isScrolled ? "0 20px 45px rgba(20,3,66,0.12)" : "0 12px 30px rgba(20,3,66,0.06)"}
+        backdropFilter="blur(18px)"
+        transition="all 0.25s ease"
       >
-        <Flex justify={"space-between"} align={"center"}>
-          <Stack as={Link} to={"/"}>
-            <Image src={logo} height={"30px"} />
-          </Stack>
-        </Flex>
+        <Flex align="center" columnGap={8}>
+          <Box as={Link} to="/">
+            <Image src={logo} h="32px" />
+          </Box>
 
-        <Flex
-          columnGap={4}
-          color={"white"}
-          display={{ base: "none", lg: "flex" }}
-        >
-          {links.map(({ id, name, href }) => (
-            <Box
-              paddingX={"10px"}
-              borderRadius={5}
-              paddingY={"2px"}
-              transition={"all"}
-              key={id}
-            >
-              <NavLink
-                to={href}
-                style={({ isActive }) => {
-                  return {
-                    fontWeight: isActive ? "bold" : "",
-                    color: isActive ? "#6440fb" : "#140342",
-                  };
-                }}
-              >
-                {name}
+          <Flex
+            display={{ base: "none", lg: "flex" }}
+            align="center"
+            columnGap={2}
+            p={1.5}
+            borderRadius="full"
+            bg="rgba(100,64,251,0.06)"
+            border="1px solid"
+            borderColor="rgba(100,64,251,0.08)"
+          >
+            {links.map(({ id, name, href }) => (
+              <NavLink key={id} to={href}>
+                {({ isActive }) => (
+                  <Box
+                    px={4}
+                    py={2}
+                    borderRadius="full"
+                    fontSize="sm"
+                    fontWeight={600}
+                    color={isActive ? "white" : "#140342"}
+                    bg={isActive ? "#6440fb" : "transparent"}
+                    transition="all 0.2s ease"
+                    _hover={{ bg: isActive ? "#6440fb" : "white", color: "#6440fb" }}
+                  >
+                    {name}
+                  </Box>
+                )}
               </NavLink>
-            </Box>
-          ))}
+            ))}
+          </Flex>
         </Flex>
 
-        <Flex align={"center"} columnGap={5} color="white">
-          {user && (
-            <Box display={{ base: "none", md: "flex" }}>
-              {hasStudentRole && !hasInstructorRole && (
-                <Text
-                  fontSize="15px"
-                  cursor={"pointer"}
-                  as={Link}
-                  to="/become-instructor"
-                >
-                  Teach on DevUpshot
-                </Text>
-              )}
-              {!hasStudentRole && hasInstructorRole && (
-                <p>This is content for instructors.</p>
-              )}
-              {hasStudentRole && hasInstructorRole && (
-                <Text
-                  fontSize="15px"
-                  cursor={"pointer"}
-                  as={Link}
-                  to="/instructor/courses"
-                >
-                  Instructor
-                </Text>
-              )}
-            </Box>
-          )}
-
+        <Flex align="center" columnGap={{ base: 2, md: 4 }}>
           {user && !hasInstructorRole && (
             <Text
-              fontSize="15px"
-              cursor={"pointer"}
-              color={"black"}
-              display={{ base: "none", md: "flex" }}
+              fontSize="14px"
+              fontWeight={600}
+              color="#140342"
+              display={{ base: "none", lg: "flex" }}
               as={Link}
-              to={!hasInstructorRole ? "/become-instructor" : "/sign-in"}
+              to="/become-instructor"
             >
               Teach on DevUpshot
             </Text>
           )}
+
           {user && hasStudentRole && hasInstructorRole && (
             <Text
-              fontSize="15px"
-              cursor={"pointer"}
+              fontSize="14px"
+              fontWeight={600}
+              color="#140342"
+              display={{ base: "none", lg: "flex" }}
               as={Link}
               to="/instructor/courses"
-              color={"black"}
-              display={{ base: "none", md: "flex" }}
             >
               Instructor Dashboard
             </Text>
           )}
 
-          <Stack>
+          <Box display={{ base: "none", md: "block" }}>
             <AddToCartButton />
-          </Stack>
+          </Box>
+
           <Box
-            fontSize={"50px"}
-            color={"#6440fb"}
-            cursor={"pointer"}
-            display={{ base: "black", lg: "none" }}
+            fontSize="42px"
+            color="#6440fb"
+            cursor="pointer"
+            display={{ base: "flex", lg: "none" }}
             onClick={onOpen}
           >
             <BiMenuAltRight />
           </Box>
+
           {user ? (
             <Box
               pos="relative"
@@ -184,304 +180,188 @@ const Navbar = () => {
                 color="#140342"
                 src={getUser?.profilePicture}
                 cursor="pointer"
+                border="2px solid rgba(100,64,251,0.14)"
               />
               {hover && (
                 <Box
-                  bg="white"
-                  boxShadow="0 0.75rem 1rem rgb(189 197 209 / 30%)"
+                  className="surface-card"
                   position="absolute"
-                  right="1"
-                  top="20"
-                  mt={"-26px"}
+                  right="0"
+                  top="calc(100% + 14px)"
+                  minW="310px"
+                  borderRadius="20px"
+                  overflow="hidden"
                 >
-                  <Flex align={"center"} columnGap={3} p={3} mb={2}>
+                  <Flex align="center" columnGap={3} p={4} bg="rgba(100,64,251,0.05)">
                     <Avatar
                       name={`${user.user.firstName} ${user.user.lastName}`}
                       size="md"
-                      fontWeight="bold"
-                      bg="white"
-                      color="#140342"
                       src={getUser?.profilePicture}
-                      cursor="pointer"
                     />
                     <Box>
-                      <Text color="black" fontWeight={"bold"}>
+                      <Text color="#140342" fontWeight="bold">
                         {user.user.firstName} {user.user.lastName}
                       </Text>
-                      <Text color={"gray"}>{user.user.email}</Text>
+                      <Text color="gray.500" fontSize="sm">
+                        {user.user.email}
+                      </Text>
                     </Box>
                   </Flex>
                   <Divider />
-                  <Box color="gray" fontSize={"15px"}>
-                    <Stack p={3}>
-                      <Text as={Link} to={"home/my-courses/learning/"}>
-                        My Learning
+                  <Stack p={4} spacing={3} color="#4f547b" fontSize="sm">
+                    <Text as={Link} to="home/my-courses/learning/">
+                      My Learning
+                    </Text>
+                    <Text as={Link} to="/cart">
+                      My Cart
+                    </Text>
+                    {hasStudentRole && hasInstructorRole && (
+                      <Text as={Link} to="/instructor/courses">
+                        Instructor Dashboard
                       </Text>
-                      <Text as={Link} to={"/cart"}>
-                        My Cart
+                    )}
+                    {hasStudentRole && !hasInstructorRole && (
+                      <Text as={Link} to="/become-instructor">
+                        Teach on DevUpshot
                       </Text>
-                      {hasStudentRole && hasInstructorRole && (
-                        <Text
-                          fontSize="15px"
-                          cursor={"pointer"}
-                          as={Link}
-                          to="/instructor/courses"
-                        >
-                          Instructor Dashboard
-                        </Text>
-                      )}
-                      {hasStudentRole && !hasInstructorRole && (
-                        <Text
-                          fontSize="15px"
-                          cursor={"pointer"}
-                          as={Link}
-                          to="/become-instructor"
-                        >
-                          Teach on DevUpshot
-                        </Text>
-                      )}
-                    </Stack>
+                    )}
                     <Divider />
-                    <Stack p={3}>
-                      <Text>Notifications</Text>
-                      <Text>Messages</Text>
-                    </Stack>
-                    <Divider />
-                    <Stack p={3}>
-                      <Text>Account Settings</Text>
-                      <Text>Payment Methods</Text>
-                    </Stack>
-                    <Divider />
-                    <Stack p={3}>
-                      <Text>Public Profile</Text>
-                      <Text>Edit Profile</Text>
-                    </Stack>
-                    <Divider />
-                    <Stack p={3} pb={3}>
-                      <Text>Help</Text>
-                      <Text
-                        cursor={"pointer"}
-                        onClick={() => {
-                          toast({
-                            title: `Logging out`,
-                            status: "success",
-                            duration: 2000,
-                            isClosable: true,
-                          });
-                          setTimeout(() => {
-                            dispatch(logoutUser());
-                          }, 2000);
-                        }}
-                      >
-                        Logout
-                      </Text>
-                    </Stack>
-                  </Box>
+                    <Text cursor="pointer" color="#140342" fontWeight={600} onClick={() => handleLogout()}>
+                      Logout
+                    </Text>
+                  </Stack>
                 </Box>
               )}
             </Box>
           ) : (
-            <>
-              <Button
-                color={"#6440fb"}
-                variant="link"
-                display={{ base: "none", md: "flex" }}
-                as={Link}
-                to={"/sign-in"}
-              >
+            <Flex align="center" columnGap={3} display={{ base: "none", md: "flex" }}>
+              <Button color="#6440fb" variant="ghost" as={Link} to="/sign-in">
                 Log In
               </Button>
               <Button
-                display={{ base: "none", md: "flex" }}
-                px={10}
-                py={7}
-                bg="#6440fb"
+                px={7}
+                py={6}
+                bgGradient="linear(to-r, #6440fb, #8b5cf6)"
                 color="white"
-                variant="solid"
-                borderColor={"white"}
-                borderWidth={2}
-                borderRadius={"full"}
-                _hover={{
-                  background: "white",
-                  color: "#6440fb",
-                  borderColor: "#6440fb",
-                }}
+                boxShadow="0 14px 30px rgba(100,64,251,0.28)"
+                _hover={{ bgGradient: "linear(to-r, #5232e8, #7c3aed)" }}
                 as={Link}
-                to={"/sign-up"}
+                to="/sign-up"
               >
                 Sign Up
               </Button>
-            </>
+            </Flex>
           )}
         </Flex>
       </Flex>
-      <Drawer
-        placement="left"
-        onClose={onClose}
-        isOpen={isOpen}
-        size={{ base: "full", sm: "md" }}
-      >
+
+      <Drawer placement="left" onClose={onClose} isOpen={isOpen} size={{ base: "full", sm: "md" }}>
         <DrawerOverlay />
-        <Box bg="white" p={5} display={{ base: "none", md: "block" }}>
-          <DrawerCloseButton bg="white" borderRadius={"100%"} />
-        </Box>
-        <DrawerContent h={"100vh"}>
-          <DrawerHeader
-            borderBottomWidth="1px"
-            display={"flex"}
-            columnGap={"10px"}
-            fontSize={"15px"}
-            p={2}
-          >
+        <DrawerContent bg="linear-gradient(180deg, #fbfaff 0%, #ffffff 100%)">
+          <DrawerCloseButton top={5} right={5} borderRadius="full" />
+          <DrawerHeader borderBottomWidth="1px" borderColor="blackAlpha.100" py={6}>
             {user ? (
-              <>
-                <Flex align={"center"} columnGap={3} mb={2} pr="10">
-                  <Avatar
-                    name={`${user.user.firstName} ${user.user.lastName}`}
-                    size="md"
-                    fontWeight="bold"
-                    bg="white"
-                    color="#140342"
-                    src={getUser?.profilePicture}
-                    cursor="pointer"
-                  />
-                  <Box p={0}>
-                    <Text color="black" fontWeight={"bold"}>
-                      {user.user.firstName} {user.user.lastName}
-                    </Text>
-                    <Text color={"gray"} fontSize={"14px"}>
-                      {user.user.email}
-                    </Text>
-                  </Box>
-                </Flex>
-              </>
+              <Flex align="center" columnGap={3} pr="10">
+                <Avatar
+                  name={`${user.user.firstName} ${user.user.lastName}`}
+                  size="md"
+                  src={getUser?.profilePicture}
+                />
+                <Box>
+                  <Text color="#140342" fontWeight="bold">
+                    {user.user.firstName} {user.user.lastName}
+                  </Text>
+                  <Text color="gray.500" fontSize="sm">
+                    {user.user.email}
+                  </Text>
+                </Box>
+              </Flex>
             ) : (
-              <Box ml={6}>
-                <Text
-                  as={Link}
-                  to="/sign-in"
-                  _hover={{ textDecoration: "none" }}
-                >
+              <Flex columnGap={4}>
+                <Text as={Link} to="/sign-in" onClick={onClose}>
                   Login
                 </Text>
-                <Text as={Link} to="/sign-up" ml={2}>
+                <Text as={Link} to="/sign-up" color="#6440fb" fontWeight={600} onClick={onClose}>
                   Sign Up
                 </Text>
-              </Box>
+              </Flex>
             )}
-
-            <Box display={{ base: "block", md: "none" }}>
-              <DrawerCloseButton bg="white" borderRadius={"100%"} />
-            </Box>
           </DrawerHeader>
-          <Box paddingLeft={"32px"}>
-            {user && (
-              <>
-                {hasStudentRole && hasInstructorRole && (
-                  <Text
-                    fontSize="15px"
-                    cursor={"pointer"}
-                    as={Link}
-                    to="/instructor/courses"
-                    color="#6440fb"
-                  >
-                    Switch to instructor view
-                  </Text>
-                )}
-              </>
-            )}
-            <br />
-          </Box>
-          <DrawerBody>
-            <Box>
-              {links.map(({ id, name, href }) => (
-                <Box
-                  paddingX={"10px"}
-                  borderRadius={5}
-                  paddingY={"2px"}
-                  transition={"all"}
-                  my={1}
-                  key={id}
-                >
-                  <NavLink
-                    to={href}
-                    style={({ isActive }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                        color: isActive ? "blue" : "black",
-                      };
-                    }}
-                    onClick={onClose}
-                  >
-                    {name}
+          <DrawerBody py={8}>
+            <Stack spacing={6}>
+              <Stack spacing={2}>
+                {links.map(({ id, name, href }) => (
+                  <NavLink key={id} to={href} onClick={onClose}>
+                    {({ isActive }) => (
+                      <Box
+                        px={4}
+                        py={3}
+                        borderRadius="16px"
+                        bg={isActive ? "rgba(100,64,251,0.08)" : "transparent"}
+                        color={isActive ? "#6440fb" : "#140342"}
+                        fontWeight={600}
+                      >
+                        {name}
+                      </Box>
+                    )}
                   </NavLink>
-                </Box>
-              ))}
-            </Box>
-            <Divider orientation="horizontal" my={5} />
-            <Flex rowGap={"8px"} flexDirection={"column"}>
-              <Text>Call Us</Text>
-              <Text>09167647648</Text>
-              <Text>Yaba lagos</Text>
-              <Text>devupshot@gmail.com</Text>
-            </Flex>
-            <Flex my="15px" columnGap={7} cursor={"pointer"}>
-              <Box
-                as={"a"}
-                href="https://www.facebook.com/362944173561967"
-                target="_blank"
-              >
-                <FaFacebookF />
-              </Box>
+                ))}
+              </Stack>
 
-              <Box
-                as={"a"}
-                href="https://twitter.com/devupshot1"
-                target="_blank"
-              >
-                <FaTwitter />
-              </Box>
-              <Box
-                as={"a"}
-                href="https://www.instagram.com/devupshot?igsh=MWR4Z3hxaGhmbmplMw=="
-                target="_blank"
-              >
-                <FaInstagram />
-              </Box>
-              <Box
-                as={"a"}
-                href="https://www.linkedin.com/company/devupshot/"
-                target={"_blank"}
-              >
-                <FaLinkedinIn />
-              </Box>
-            </Flex>
-            {user && (
-              <>
-                <Text
-                  fontWeight={"bold"}
-                  fontSize={"16px"}
-                  color={"#6440fb"}
-                  mt={"3rem"}
-                  _hover={{ textDecoration: "none" }}
-                  onClick={() => {
-                    toast({
-                      title: `Logging out`,
-                      status: "success",
-                      duration: 2000,
-                      isClosable: true,
-                    });
-                    setTimeout(() => {
-                      dispatch(logoutUser());
-                      onClose();
-                    }, 2000);
-                  }}
-                  cursor={"pointer"}
+              {user && hasStudentRole && hasInstructorRole && (
+                <Text as={Link} to="/instructor/courses" color="#6440fb" fontWeight={600} onClick={onClose}>
+                  Switch to instructor view
+                </Text>
+              )}
+
+              {user && !hasInstructorRole && (
+                <Text as={Link} to="/become-instructor" color="#140342" fontWeight={600} onClick={onClose}>
+                  Teach on DevUpshot
+                </Text>
+              )}
+
+              <Divider />
+
+              <Stack spacing={2} color="#4f547b">
+                <Text fontWeight={700} color="#140342">
+                  Contact
+                </Text>
+                <Text>09167647648</Text>
+                <Text>Yaba, Lagos</Text>
+                <Text>devupshot@gmail.com</Text>
+              </Stack>
+
+              <Flex columnGap={7} color="#6440fb">
+                <Box as="a" href="https://www.facebook.com/362944173561967" target="_blank">
+                  <FaFacebookF />
+                </Box>
+                <Box as="a" href="https://twitter.com/devupshot1" target="_blank">
+                  <FaTwitter />
+                </Box>
+                <Box
+                  as="a"
+                  href="https://www.instagram.com/devupshot?igsh=MWR4Z3hxaGhmbmplMw=="
+                  target="_blank"
+                >
+                  <FaInstagram />
+                </Box>
+                <Box as="a" href="https://www.linkedin.com/company/devupshot/" target="_blank">
+                  <FaLinkedinIn />
+                </Box>
+              </Flex>
+
+              {user && (
+                <Button
+                  alignSelf="start"
+                  bg="#140342"
+                  color="white"
+                  _hover={{ bg: "#24115f" }}
+                  onClick={() => handleLogout(true)}
                 >
                   Logout
-                </Text>
-              </>
-            )}
+                </Button>
+              )}
+            </Stack>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

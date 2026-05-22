@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useVerifyAccount } from "../../hooks/auth";
-import { Box, Flex, Spinner, Text, Icon } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Text, Icon, Stack } from "@chakra-ui/react";
 import { FiCheckCircle } from "react-icons/fi";
 import { AuthShell } from "./AuthShell";
 import { motion } from "framer-motion";
@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 const VerifyAccount = () => {
   const { code, token } = useParams();
   const { verifyAccount, isPending } = useVerifyAccount();
+
   useEffect(() => {
     verifyAccount({ code, token });
   }, [code, token]);
@@ -16,11 +17,11 @@ const VerifyAccount = () => {
   return (
     <AuthShell
       eyebrow={"Almost ready"}
-      title={isPending ? "Verifying your account" : "You're all set"}
+      title={isPending ? "Verifying your account" : "You are all set"}
       subtitle={
         isPending
-          ? "Hang tight — we're confirming your email."
-          : "Account verified. Redirecting you now…"
+          ? "Hang tight while we confirm your email."
+          : "Account verified. Redirecting you now..."
       }
     >
       <Flex flexDirection="column" align={"center"} justify={"center"} py={8}>
@@ -54,11 +55,16 @@ const VerifyAccount = () => {
             <Icon as={FiCheckCircle} color={"#10b981"} boxSize={"56px"} />
           </motion.div>
         )}
-        <Text mt={6} color={"gray.600"} fontSize={"sm"}>
-          {isPending
-            ? "This usually takes just a moment."
-            : "Welcome to DevUpshot."}
-        </Text>
+        <Stack mt={6} spacing={1} align="center">
+          <Text color={"gray.600"} fontSize={"sm"}>
+            {isPending ? "This usually takes just a moment." : "Welcome to DevUpshot."}
+          </Text>
+          {!isPending && (
+            <Text color={"#140342"} fontSize={"sm"} fontWeight={600}>
+              Your learning dashboard is almost ready.
+            </Text>
+          )}
+        </Stack>
       </Flex>
     </AuthShell>
   );
